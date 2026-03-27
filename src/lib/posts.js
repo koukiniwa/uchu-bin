@@ -6,34 +6,32 @@ const postsDirectory = path.join(process.cwd(), 'posts')
 
 export function getAllPosts() {
   const fileNames = fs.readdirSync(postsDirectory)
-  const allPostsData = fileNames
-    .filter(fileName => fileName.endsWith('.md'))
+  return fileNames
+    .filter(fileName => fileName.endsWith('.md') && !fileName.startsWith('~'))
     .map(fileName => {
       const slug = fileName.replace(/\.md$/, '')
       const fullPath = path.join(postsDirectory, fileName)
       const fileContents = fs.readFileSync(fullPath, 'utf8')
-      const matterResult = matter(fileContents)
-
+      const { data } = matter(fileContents)
       return {
         slug,
-        date: matterResult.data.date,
-        title: matterResult.data.title,
-        description: matterResult.data.description,
+        date: data.date || '',
+        title: data.title || slug,
+        description: data.description || '',
+        category: data.category || '未分類',
       }
     })
     .sort((a, b) => new Date(b.date) - new Date(a.date))
-
-  return allPostsData
 }
 
 export function getPostBySlug(slug) {
   const fullPath = path.join(postsDirectory, `${slug}.md`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
   const matterResult = matter(fileContents)
-
   return {
     slug,
     content: matterResult.content,
+    category: matterResult.data.category || '未分類',
     ...matterResult.data,
   }
 }

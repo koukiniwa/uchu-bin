@@ -1,40 +1,31 @@
-'use client'
-
-import { useState } from 'react'
 import Link from 'next/link'
 
 export default function Header() {
-  const [open, setOpen] = useState(false)
-
   return (
-    <header className="bg-navy py-5" style={{ backgroundColor: '#0a1628' }}>
-      <div className="max-w-4xl mx-auto px-4 flex items-center justify-between">
-        <div className="w-10" />
-        <Link href="/">
-          <h1 className="text-3xl font-bold text-white tracking-widest">宇宙便</h1>
+    <header style={{ backgroundColor: '#1a2744' }}>
+      <div style={{
+        maxWidth: '1200px',
+        margin: '0 auto',
+        padding: '0 24px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '72px',
+      }}>
+        <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '14px' }}>
+          <div style={{ width: '4px', height: '40px', backgroundColor: '#5a8fd4', flexShrink: 0 }} />
+          <div style={{
+            fontSize: '30px',
+            fontWeight: 900,
+            letterSpacing: '0.2em',
+            color: '#ffffff',
+            lineHeight: 1,
+          }}>
+            宇宙便
+          </div>
         </Link>
-        <button
-          onClick={() => setOpen(!open)}
-          className="text-white flex flex-col gap-1.5 w-10 items-end"
-          aria-label="メニュー"
-        >
-          <span className="block w-6 h-0.5 bg-white" />
-          <span className="block w-6 h-0.5 bg-white" />
-          <span className="block w-6 h-0.5 bg-white" />
-        </button>
       </div>
-
-      {open && (
-        <nav className="max-w-4xl mx-auto px-4 pt-4 pb-2">
-          <ul className="flex flex-col gap-2">
-            <li>
-              <Link href="/" onClick={() => setOpen(false)} className="block text-white py-2 border-b border-white/20 hover:opacity-70">
-                ホーム
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      )}
+      <div style={{ height: '2px', backgroundColor: '#2e4a7a' }} />
     </header>
   )
 }

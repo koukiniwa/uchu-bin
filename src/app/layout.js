@@ -1,12 +1,14 @@
 import './globals.css'
+import { Suspense } from 'react'
 import Header from './Header'
+import CategoryNav from './CategoryNav'
 
 export const metadata = {
-  title: '宇宙便 - 宇宙開発ニュース',
-  description: 'ロケット・衛星・企業の最新ニュースを見やすく',
+  title: '宇宙便 - 宇宙情報メディア',
+  description: 'ロケット・衛星・宇宙開発の最新情報をいち早くお届け',
   openGraph: {
     title: '宇宙便',
-    description: 'ロケット・衛星・企業の最新ニュースを見やすく',
+    description: 'ロケット・衛星・宇宙開発の最新情報',
     type: 'website',
   },
 }
@@ -18,14 +20,35 @@ export default function RootLayout({ children }) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <body className="bg-white text-gray-800">
+      <body style={{ backgroundColor: '#ffffff', color: '#111111' }}>
         <Header />
-        <main className="max-w-4xl mx-auto px-4 py-12">
+        <Suspense fallback={
+          <div style={{ height: '42px', backgroundColor: '#111111', borderBottom: '1px solid #1e1e1e' }} />
+        }>
+          <CategoryNav />
+        </Suspense>
+        <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '24px 16px', minHeight: 'calc(100vh - 200px)' }}>
           {children}
         </main>
-        <footer className="border-t border-gray-200 py-8 mt-16">
-          <div className="max-w-4xl mx-auto px-4 text-center text-gray-600">
-            <p>&copy; 2026 宇宙便. All rights reserved.</p>
+        <footer style={{
+          borderTop: '1px solid #e0e0e0',
+          padding: '20px 16px',
+          marginTop: '40px',
+          backgroundColor: '#f8f8f8',
+        }}>
+          <div style={{
+            maxWidth: '1200px',
+            margin: '0 auto',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}>
+            <span style={{ fontSize: '11px', color: '#999', fontFamily: 'monospace', letterSpacing: '0.1em' }}>
+              &copy; 2026 宇宙便. ALL RIGHTS RESERVED.
+            </span>
+            <span style={{ fontSize: '11px', color: '#3d6b4e', fontFamily: 'monospace' }}>
+              ▌ UCHU-BIN
+            </span>
           </div>
         </footer>
       </body>
