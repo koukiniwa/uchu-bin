@@ -2,7 +2,7 @@
 title: 'インドISRO、火星探査機「マンガルヤーン2」の概要を発表'
 description: '初号機から10年、インド宇宙研究機関（ISRO）が次世代火星探査機の詳細を公開。着陸・ローバー展開を初めて目指す野心的ミッション。'
 date: '2026-03-20'
-category: '宇宙開発'
+category: '火星探査'
 image: 'https://picsum.photos/seed/isro-mars/800/450'
 ---
 

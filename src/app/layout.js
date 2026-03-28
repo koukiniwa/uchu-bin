@@ -2,6 +2,7 @@ import './globals.css'
 import { Suspense } from 'react'
 import Header from './Header'
 import CategoryNav from './CategoryNav'
+import StickyHeader from './StickyHeader'
 
 export const metadata = {
   title: '宇宙便 - 宇宙情報メディア',
@@ -21,6 +22,9 @@ export default function RootLayout({ children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body style={{ backgroundColor: '#ffffff', color: '#111111' }}>
+        <Suspense fallback={null}>
+          <StickyHeader />
+        </Suspense>
         <Header />
         <Suspense fallback={
           <div style={{ height: '42px', backgroundColor: '#111111', borderBottom: '1px solid #1e1e1e' }} />

@@ -114,9 +114,9 @@ export default function CategoryFilter({ posts }) {
   const searchParams = useSearchParams()
   const activeCategory = searchParams.get('category')
 
-  const filtered = activeCategory
-    ? posts.filter(p => p.category === activeCategory)
-    : posts
+  const filtered = (!activeCategory || activeCategory === 'ニュース')
+    ? posts
+    : posts.filter(p => p.category === activeCategory)
 
   return (
     <div>
@@ -134,7 +134,7 @@ export default function CategoryFilter({ posts }) {
           fontWeight: 700,
           color: '#111111',
         }}>
-          {activeCategory ? activeCategory : '最新記事'}
+          {(!activeCategory || activeCategory === 'ニュース') ? 'ニュース' : activeCategory}
         </span>
         <span style={{ fontSize: '12px', color: '#aaaaaa', marginLeft: 'auto' }}>
           {filtered.length}件

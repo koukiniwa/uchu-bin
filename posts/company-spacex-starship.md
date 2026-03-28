@@ -2,7 +2,7 @@
 title: 'SpaceX、Starship第10回統合飛行試験で完全再使用を実証'
 description: 'スーパーヘビーブースターとスターシップ両機の回収に成功。火星移住計画に向けた本格的な量産フェーズが始まる。'
 date: '2026-03-22'
-category: '企業'
+category: 'ロケット'
 image: 'https://picsum.photos/seed/starship-test/800/450'
 ---
 

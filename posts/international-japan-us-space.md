@@ -2,7 +2,7 @@
 title: '日米宇宙協力協定を更新——防衛・民間の両輪で連携強化'
 description: '日本政府とアメリカ政府は宇宙利用に関する二国間協定を更新。宇宙状況認識（SSA）情報の共有を拡大し、衛星防護体制を強化する。'
 date: '2026-03-21'
-category: '国際情勢'
+category: 'ロケット'
 image: 'https://picsum.photos/seed/japan-us-space/800/450'
 ---
 

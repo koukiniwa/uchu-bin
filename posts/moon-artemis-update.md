@@ -2,7 +2,7 @@
 title: 'アルテミス計画：月面基地「ルナゲートウェイ」建設フェーズへ'
 description: 'NASAとESAは月周回拠点「ルナゲートウェイ」の第一モジュール打ち上げを2027年に設定。日本のJAXAも居住モジュールを担当する。'
 date: '2026-03-23'
-category: '月・火星'
+category: '月探査'
 image: 'https://picsum.photos/seed/moon-base/800/450'
 ---
 

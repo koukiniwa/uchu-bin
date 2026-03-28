@@ -2,7 +2,7 @@
 title: 'Starlink、日本の離島向け低遅延サービスを強化'
 description: 'SpaceXのStarlinkが日本の離島・山間地域向けに新プランを発表。遅延を従来比40%削減したGen3衛星の展開を加速する。'
 date: '2026-03-24'
-category: '衛星'
+category: '衛星・通信'
 image: 'https://picsum.photos/seed/satellite-orbit/800/450'
 ---
 

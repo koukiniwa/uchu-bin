@@ -10,12 +10,12 @@ export default function Header() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        height: '72px',
+        height: '96px',
       }}>
         <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '14px' }}>
-          <div style={{ width: '4px', height: '40px', backgroundColor: '#5a8fd4', flexShrink: 0 }} />
+          <div style={{ width: '4px', height: '48px', backgroundColor: '#5a8fd4', flexShrink: 0 }} />
           <div style={{
-            fontSize: '30px',
+            fontSize: '34px',
             fontWeight: 900,
             letterSpacing: '0.2em',
             color: '#ffffff',
