@@ -1,6 +1,7 @@
 const http = require('http')
 const fs = require('fs')
 const path = require('path')
+const { exec } = require('child_process')
 
 const PORT = 3001
 const POSTS_DIR = path.join(__dirname, 'posts')
@@ -163,6 +164,9 @@ function renderHTML(message = '') {
     header .bar { width: 3px; height: 30px; background: #5a8fd4; }
     header h1 { color: #fff; font-size: 20px; letter-spacing: 0.15em; }
     header span { color: rgba(255,255,255,0.5); font-size: 12px; margin-left: 8px; }
+    .publish-btn { margin-left: auto; padding: 8px 20px; background: #43a047; color: #fff; border: none; border-radius: 4px; font-size: 13px; font-weight: 700; cursor: pointer; letter-spacing: 0.05em; transition: background 0.15s; }
+    .publish-btn:hover { background: #2e7d32; }
+    .publish-btn:disabled { background: #aaa; cursor: not-allowed; }
     .container { max-width: 960px; margin: 36px auto; padding: 0 20px; }
     .card { background: #fff; border-radius: 8px; box-shadow: 0 1px 8px rgba(0,0,0,0.08); padding: 32px; margin-bottom: 32px; }
     .card h2 { font-size: 15px; font-weight: 700; color: #1a2744; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid #1a2744; }
@@ -209,6 +213,7 @@ function renderHTML(message = '') {
     <div class="bar"></div>
     <h1>宇宙便</h1>
     <span>管理画面</span>
+    <button class="publish-btn" id="publishBtn" onclick="publish()">🚀 公開する</button>
   </header>
   <div class="container">
 
@@ -420,6 +425,29 @@ function renderHTML(message = '') {
       }
     }
 
+    async function publish() {
+      const btn = document.getElementById('publishBtn')
+      btn.disabled = true
+      btn.textContent = '⏳ 公開中...'
+      try {
+        const res = await fetch('/publish', { method: 'POST' })
+        const json = await res.json()
+        if (json.ok) {
+          btn.textContent = '✓ 公開完了！'
+          btn.style.background = '#1565c0'
+          setTimeout(() => { btn.disabled = false; btn.textContent = '🚀 公開する'; btn.style.background = '' }, 5000)
+        } else {
+          alert('エラー: ' + json.error)
+          btn.disabled = false
+          btn.textContent = '🚀 公開する'
+        }
+      } catch(e) {
+        alert('通信エラー: ' + e.message)
+        btn.disabled = false
+        btn.textContent = '🚀 公開する'
+      }
+    }
+
     function resetPasteZone() {
       pasteZone.innerHTML = '📋 スクリーンショットをCtrl+Vで貼り付け（サムネイル用）<br><span style="font-size:11px;font-weight:400;color:#888;">本文に入れる場合は本文欄をクリックしてからCtrl+V ／ ドラッグ＆ドロップも可</span>'
       pasteZone.style.borderColor = ''
@@ -531,6 +559,26 @@ const server = http.createServer(async (req, res) => {
     return
   }
 
+  // 公開（git add → commit → push）
+  if (req.method === 'POST' && req.url === '/publish') {
+    const date = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })
+    const cmd = `git add posts/ public/images/ && git commit -m "記事更新 ${date}" && git push`
+    exec(cmd, { cwd: __dirname }, (err, stdout, stderr) => {
+      res.writeHead(200, { 'Content-Type': 'application/json' })
+      if (err) {
+        const msg = stderr || err.message
+        if (msg.includes('nothing to commit')) {
+          res.end(JSON.stringify({ ok: true }))
+        } else {
+          res.end(JSON.stringify({ ok: false, error: msg }))
+        }
+      } else {
+        res.end(JSON.stringify({ ok: true }))
+      }
+    })
+    return
+  }
+
   res.writeHead(404)
   res.end('Not Found')
 })
@@ -538,4 +586,5 @@ const server = http.createServer(async (req, res) => {
 server.listen(PORT, () => {
   console.log(`\n✓ 宇宙便 管理画面が起動しました`)
   console.log(`  → http://localhost:${PORT}\n`)
+  exec(`start http://localhost:${PORT}`)
 })
