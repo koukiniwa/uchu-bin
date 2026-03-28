@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <body style={{ backgroundColor: '#ffffff', color: '#111111' }}>
+      <body style={{ backgroundColor: '#f2f2f0', color: '#111111' }}>
         <Suspense fallback={null}>
           <StickyHeader />
         </Suspense>
