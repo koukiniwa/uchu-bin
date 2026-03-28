@@ -19,6 +19,7 @@ export function getAllPosts() {
         title: data.title || slug,
         description: data.description || '',
         category: data.category || '未分類',
+        image: data.image || '',
       }
     })
     .sort((a, b) => new Date(b.date) - new Date(a.date))
