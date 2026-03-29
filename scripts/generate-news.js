@@ -99,6 +99,43 @@ async function resolveNASAImage(nasaId, center) {
   return null
 }
 
+// Wikimedia Commonsから宇宙関連画像を取得（無料・登録不要）
+async function fetchWikimediaImages(query, count = 2) {
+  const images = []
+  try {
+    const encoded = encodeURIComponent(query)
+    const searchRes = await fetch(
+      `https://commons.wikimedia.org/w/api.php?action=query&list=search&srsearch=${encoded}&srnamespace=6&format=json&srlimit=20&origin=*`,
+      { signal: AbortSignal.timeout(10000) }
+    )
+    const searchData = await searchRes.json()
+    const results = searchData?.query?.search || []
+
+    for (const result of results) {
+      if (images.length >= count) break
+      const title = result.title
+      try {
+        const infoRes = await fetch(
+          `https://commons.wikimedia.org/w/api.php?action=query&titles=${encodeURIComponent(title)}&prop=imageinfo&iiprop=url|extmetadata&format=json&origin=*`,
+          { signal: AbortSignal.timeout(8000) }
+        )
+        const infoData = await infoRes.json()
+        const page = Object.values(infoData?.query?.pages || {})[0]
+        const info = page?.imageinfo?.[0]
+        if (!info?.url) continue
+        if (!/\.(jpg|jpeg|png)$/i.test(info.url)) continue
+        const artist = (info.extmetadata?.Artist?.value || '').replace(/<[^>]+>/g, '').trim() || 'Wikimedia Commons'
+        const license = info.extmetadata?.LicenseShortName?.value || 'CC'
+        images.push({ url: info.url, credit: `${artist} / ${license} via Wikimedia Commons` })
+      } catch {}
+    }
+    console.log(`  ✓ Wikimedia Commons「${query}」で ${images.length} 枚取得`)
+  } catch (e) {
+    console.error('  Wikimedia Commons検索失敗:', e.message)
+  }
+  return images
+}
+
 // 記事に関連したNASA画像を検索して取得（出典付き）
 async function fetchNASAImages(query, count = 3) {
   const images = []
@@ -132,7 +169,13 @@ async function fetchNASAImages(query, count = 3) {
     console.error('  NASA画像検索失敗:', e.message)
   }
 
-  // 取得できなかった分はAPODで補完
+  // 不足分をWikimedia Commonsで補完
+  if (images.length < count) {
+    const wiki = await fetchWikimediaImages(query, count - images.length)
+    images.push(...wiki)
+  }
+
+  // それでも不足分はAPODで補完
   if (images.length < count) {
     try {
       const apiKey = process.env.NASA_API_KEY || 'DEMO_KEY'
