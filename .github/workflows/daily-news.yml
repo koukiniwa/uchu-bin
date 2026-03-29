@@ -1,0 +1,43 @@
+name: 毎日宇宙ニュース記事生成
+
+on:
+  schedule:
+    - cron: '0 21 * * *'  # 毎日 JST 6:00 (UTC 21:00前日)
+  workflow_dispatch:       # GitHub画面から手動実行も可能
+
+jobs:
+  generate-article:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Node.js セットアップ
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Anthropic SDK をインストール
+        run: npm install @anthropic-ai/sdk
+
+      - name: 宇宙ニュース記事を生成
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          NASA_API_KEY: ${{ secrets.NASA_API_KEY }}
+        run: node scripts/generate-news.js
+
+      - name: 生成した記事をコミット＆プッシュ
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add posts/
+          if git diff --staged --quiet; then
+            echo "新しい記事はありませんでした"
+          else
+            git commit -m "🤖 宇宙ニュース自動記事 $(date +'%Y-%m-%d')"
+            git push
+            echo "✅ 記事をプッシュしました → Vercelが自動デプロイします"
+          fi
