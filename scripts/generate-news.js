@@ -8,14 +8,19 @@ const path = require('path')
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
 // 宇宙開発ニュースのRSSフィード
+// SpaceX・Blue Origin・Rocket Lab・NASA・JAXA等を幅広くカバー
 const RSS_FEEDS = [
   // 日本
   'https://www.jaxa.jp/rss/press.rss',
-  // 海外
-  'https://www.nasa.gov/rss/dyn/breaking_news.rss',
+  // 総合（SpaceX/Blue Origin/Rocket Lab等を広くカバー）
+  'https://www.nasaspaceflight.com/feed/',        // NASASpaceFlight.com（民間企業に強い）
+  'https://feeds.arstechnica.com/arstechnica/space', // Ars Technica宇宙面（技術解説が豊富）
   'https://spaceflightnow.com/feed/',
   'https://spacenews.com/feed/',
-  'https://www.space.com/feeds/all',
+  // NASA公式
+  'https://www.nasa.gov/rss/dyn/breaking_news.rss',
+  // 宇宙探査・科学
+  'https://www.planetary.org/rss/articles',       // 惑星協会（探査機・科学）
 ]
 
 async function fetchUrl(url) {
@@ -99,22 +104,30 @@ async function generateArticle(newsItems) {
     messages: [
       {
         role: 'user',
-        content: `以下の宇宙開発ニュースをもとに、日本語のブログ記事を作成してください。
+        content: `あなたは宇宙開発専門のブログライターです。
+SpaceX・Blue Origin・Rocket Lab・JAXA・NASAなど幅広い宇宙企業・機関のニュースを、
+宇宙に詳しくない一般読者にもわかりやすく解説するのが得意です。
+
+以下のニュースをもとに日本語のブログ記事を書いてください。
 
 ニュース一覧:
 ${newsText}
 
-ルール:
-- 本文中の ## 見出しの直後に {{IMAGE_1}}、2つ目の ## 見出しの直後に {{IMAGE_2}} を必ず入れてください
-- これらは後で実際の宇宙写真に置き換えられます
+文体・スタイルのルール:
+- 専門用語は必ず簡単な言葉で補足する（例：「フェアリング（ロケット先端の覆い）」）
+- 「なぜこれが重要なのか」を必ず説明する
+- SpaceX・Blue Origin・Rocket Labなど企業名が出たらどんな会社か一言添える
+- 難しい技術は身近なものに例えて説明する
+- 堅くなりすぎず、読んでいて面白いと感じる文体にする
+- 本文中の1つ目の ## 見出しの直後に {{IMAGE_1}}、2つ目の ## 見出しの直後に {{IMAGE_2}} を入れる
 
 以下のJSON形式のみで返してください（説明文は不要）:
 {
-  "title": "記事タイトル（日本語、35文字以内）",
+  "title": "記事タイトル（日本語、35文字以内・興味を引くタイトル）",
   "description": "記事の要約（90文字以内）",
   "category": "ロケット・衛星・通信・有人宇宙飛行・月探査・火星探査 のいずれか1つ",
-  "imageQuery": "NASA画像検索用の英語キーワード（例: SpaceX rocket launch, Moon surface, Mars rover）",
-  "body": "記事本文（マークダウン形式。## 見出しを2〜3つ、{{IMAGE_1}}と{{IMAGE_2}}を含め、500〜700文字程度）"
+  "imageQuery": "NASA画像検索用の英語キーワード（例: SpaceX Falcon 9 launch, Blue Origin rocket, Moon landing）",
+  "body": "記事本文（マークダウン形式。## 見出しを2〜3つ、{{IMAGE_1}}と{{IMAGE_2}}を含め、600〜800文字）"
 }`,
       },
     ],
