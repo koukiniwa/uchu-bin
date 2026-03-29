@@ -9,6 +9,9 @@ const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
 // 宇宙開発ニュースのRSSフィード
 const RSS_FEEDS = [
+  // 日本
+  'https://www.jaxa.jp/rss/press.rss',          // JAXA プレスリリース
+  // 海外
   'https://www.nasa.gov/rss/dyn/breaking_news.rss',
   'https://spaceflightnow.com/feed/',
   'https://spacenews.com/feed/',
