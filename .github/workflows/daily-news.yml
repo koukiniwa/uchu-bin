@@ -8,12 +8,15 @@ on:
 jobs:
   generate-article:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: リポジトリをチェックアウト
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true
 
       - name: Node.js セットアップ
         uses: actions/setup-node@v4
@@ -38,6 +41,6 @@ jobs:
             echo "新しい記事はありませんでした"
           else
             git commit -m "🤖 宇宙ニュース自動記事 $(date +'%Y-%m-%d')"
-            git push
+            git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
             echo "✅ 記事をプッシュしました → Vercelが自動デプロイします"
           fi
