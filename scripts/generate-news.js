@@ -10,7 +10,7 @@ const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 // 宇宙開発ニュースのRSSフィード
 const RSS_FEEDS = [
   // 日本
-  'https://www.jaxa.jp/rss/press.rss',          // JAXA プレスリリース
+  'https://www.jaxa.jp/rss/press.rss',
   // 海外
   'https://www.nasa.gov/rss/dyn/breaking_news.rss',
   'https://spaceflightnow.com/feed/',
@@ -41,37 +41,51 @@ function parseRSS(xml) {
   return items.slice(0, 5)
 }
 
-async function fetchNASAImage() {
-  try {
-    // NASA天文写真(APOD) - DEMO_KEYは1日50リクエスト無料
-    const apiKey = process.env.NASA_API_KEY || 'DEMO_KEY'
-    const res = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`, {
-      signal: AbortSignal.timeout(8000),
-    })
-    const apod = await res.json()
-    if (apod.media_type === 'image' && apod.url) {
-      return apod.url
-    }
-    // APODが動画の日は高解像度サムネを使う
-    if (apod.thumbnail_url) return apod.thumbnail_url
-  } catch (e) {
-    console.error('NASA APOD取得失敗:', e.message)
-  }
+// 記事内容に関連したNASA画像を検索して取得
+async function fetchNASAImages(query, count = 3) {
+  const images = []
 
   try {
-    // フォールバック: NASA画像ライブラリ（キー不要）
+    const encoded = encodeURIComponent(query)
     const res = await fetch(
-      'https://images-api.nasa.gov/search?q=space+launch&media_type=image&page_size=1',
-      { signal: AbortSignal.timeout(8000) }
+      `https://images-api.nasa.gov/search?q=${encoded}&media_type=image&page_size=20`,
+      { signal: AbortSignal.timeout(10000) }
     )
     const data = await res.json()
-    const thumb = data?.collection?.items?.[0]?.links?.[0]?.href
-    if (thumb) return thumb
+    const items = data?.collection?.items || []
+
+    for (const item of items) {
+      const nasaId = item?.data?.[0]?.nasa_id
+      if (nasaId) {
+        // ~large.jpg は通常1024px幅の高品質画像
+        images.push(`https://images-assets.nasa.gov/image/${nasaId}/${nasaId}~large.jpg`)
+      }
+      if (images.length >= count) break
+    }
+    console.log(`  ✓ NASA画像ライブラリ「${query}」で ${images.length} 枚取得`)
   } catch (e) {
-    console.error('NASA画像ライブラリ取得失敗:', e.message)
+    console.error('  NASA画像検索失敗:', e.message)
   }
 
-  return null
+  // 取得できなかった分はAPODで補完
+  if (images.length < count) {
+    try {
+      const apiKey = process.env.NASA_API_KEY || 'DEMO_KEY'
+      const res = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`, {
+        signal: AbortSignal.timeout(8000),
+      })
+      const apod = await res.json()
+      const url = apod.media_type === 'image' ? apod.url : apod.thumbnail_url
+      if (url) {
+        while (images.length < count) images.push(url)
+        console.log(`  ✓ APOD画像で補完`)
+      }
+    } catch (e) {
+      console.error('  APOD取得失敗:', e.message)
+    }
+  }
+
+  return images
 }
 
 async function generateArticle(newsItems) {
@@ -81,21 +95,26 @@ async function generateArticle(newsItems) {
 
   const message = await client.messages.create({
     model: 'claude-opus-4-6',
-    max_tokens: 1800,
+    max_tokens: 2000,
     messages: [
       {
         role: 'user',
-        content: `以下の英語の宇宙開発ニュースをもとに、日本語のブログ記事を作成してください。
+        content: `以下の宇宙開発ニュースをもとに、日本語のブログ記事を作成してください。
 
 ニュース一覧:
 ${newsText}
+
+ルール:
+- 本文中の ## 見出しの直後に {{IMAGE_1}}、2つ目の ## 見出しの直後に {{IMAGE_2}} を必ず入れてください
+- これらは後で実際の宇宙写真に置き換えられます
 
 以下のJSON形式のみで返してください（説明文は不要）:
 {
   "title": "記事タイトル（日本語、35文字以内）",
   "description": "記事の要約（90文字以内）",
   "category": "ロケット・衛星・通信・有人宇宙飛行・月探査・火星探査 のいずれか1つ",
-  "body": "記事本文（マークダウン形式。## 見出しを2〜3つ使い、500〜700文字程度。事実に基づいて書く）"
+  "imageQuery": "NASA画像検索用の英語キーワード（例: SpaceX rocket launch, Moon surface, Mars rover）",
+  "body": "記事本文（マークダウン形式。## 見出しを2〜3つ、{{IMAGE_1}}と{{IMAGE_2}}を含め、500〜700文字程度）"
 }`,
       },
     ],
@@ -131,13 +150,22 @@ async function main() {
   const article = await generateArticle(allNews.slice(0, 6))
   console.log(`  タイトル: ${article.title}`)
   console.log(`  カテゴリ: ${article.category}`)
+  console.log(`  画像検索ワード: ${article.imageQuery}`)
 
-  console.log('\n🌌 NASA画像を取得中...')
-  const imageUrl = await fetchNASAImage()
-  if (imageUrl) {
-    console.log(`  ✓ 画像URL取得: ${imageUrl.slice(0, 60)}...`)
+  console.log('\n🌌 関連NASA画像を取得中...')
+  const images = await fetchNASAImages(article.imageQuery || article.title, 3)
+
+  // 本文の {{IMAGE_1}} {{IMAGE_2}} を実際の画像に置き換え
+  let body = article.body
+  if (images[1]) {
+    body = body.replace('{{IMAGE_1}}', `\n![${article.title}](${images[1]})\n`)
   } else {
-    console.log('  画像は取得できませんでした（テキストのみで生成）')
+    body = body.replace('{{IMAGE_1}}', '')
+  }
+  if (images[2]) {
+    body = body.replace('{{IMAGE_2}}', `\n![${article.title}](${images[2]})\n`)
+  } else {
+    body = body.replace('{{IMAGE_2}}', '')
   }
 
   const date = new Date().toISOString().slice(0, 10)
@@ -150,14 +178,18 @@ async function main() {
     `date: '${date}'`,
     `category: '${article.category}'`,
   ]
-  if (imageUrl) lines.push(`image: '${imageUrl}'`)
-  lines.push(`---`, ``, article.body)
+  // カバー画像（1枚目）
+  if (images[0]) lines.push(`image: '${images[0]}'`)
+  lines.push(`---`, ``, body)
 
   const postsDir = path.join(__dirname, '..', 'posts')
   const filePath = path.join(postsDir, `${slug}.md`)
   fs.writeFileSync(filePath, lines.join('\n'), 'utf-8')
 
   console.log(`\n✅ 記事を生成しました: posts/${slug}.md`)
+  console.log(`  カバー画像: ${images[0] ? '✓' : '✗'}`)
+  console.log(`  本文内画像1: ${images[1] ? '✓' : '✗'}`)
+  console.log(`  本文内画像2: ${images[2] ? '✓' : '✗'}`)
 }
 
 main().catch((err) => {
