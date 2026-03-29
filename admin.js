@@ -10,8 +10,36 @@ const IMAGES_DIR = path.join(__dirname, 'public', 'images')
 const CATEGORIES = ['ロケット', '衛星・通信', '有人宇宙飛行', '月探査', '火星探査']
 
 if (!fs.existsSync(DRAFTS_DIR)) fs.mkdirSync(DRAFTS_DIR, { recursive: true })
-
 if (!fs.existsSync(IMAGES_DIR)) fs.mkdirSync(IMAGES_DIR, { recursive: true })
+
+// ── Helper functions ──────────────────────────────────────────────────────────
+
+function parseFrontmatter(content) {
+  const match = content.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/)
+  if (!match) return { meta: {}, body: content }
+  const meta = {}
+  for (const line of match[1].split('\n')) {
+    const m = line.match(/^(\w+):\s*['"]?(.*?)['"]?\s*$/)
+    if (m) meta[m[1]] = m[2]
+  }
+  return { meta, body: match[2].trim() }
+}
+
+function getList(dir) {
+  if (!fs.existsSync(dir)) return []
+  const files = fs.readdirSync(dir).filter(f => f.endsWith('.md') && f !== 'test.md')
+  return files.map(f => {
+    const content = fs.readFileSync(path.join(dir, f), 'utf-8')
+    const { meta } = parseFrontmatter(content)
+    return {
+      file: f,
+      title: meta.title || f,
+      date: meta.date || '',
+      category: meta.category || '',
+      description: meta.description || '',
+    }
+  }).sort((a, b) => b.date.localeCompare(a.date))
+}
 
 function generateSlug(title) {
   const date = new Date().toISOString().slice(0, 10)
@@ -25,6 +53,19 @@ function generateSlug(title) {
   return `${date}-${slug}`
 }
 
+function parseBody(req) {
+  return new Promise((resolve) => {
+    let body = ''
+    req.on('data', chunk => { body += chunk.toString() })
+    req.on('end', () => {
+      const params = new URLSearchParams(body)
+      const obj = {}
+      params.forEach((v, k) => { obj[k] = v })
+      resolve(obj)
+    })
+  })
+}
+
 function parseMultipart(req) {
   return new Promise((resolve, reject) => {
     const chunks = []
@@ -35,13 +76,11 @@ function parseMultipart(req) {
         const ct = req.headers['content-type'] || ''
         const bMatch = ct.match(/boundary="?([^";]+)"?/)
         if (!bMatch) return reject(new Error('No boundary'))
-
         const boundary = '--' + bMatch[1].trim()
         const fields = {}
         const files = {}
         let pos = 0
         const boundaryBuf = Buffer.from(boundary)
-
         while (pos < body.length) {
           const bStart = body.indexOf(boundaryBuf, pos)
           if (bStart === -1) break
@@ -61,10 +100,10 @@ function parseMultipart(req) {
           if (!nameMatch) continue
           const fieldName = nameMatch[1]
           if (filenameMatch && filenameMatch[1]) {
-            const contentTypeMatch = headerStr.match(/Content-Type:\s*(.+)/i)
+            const ctMatch = headerStr.match(/Content-Type:\s*(.+)/i)
             files[fieldName] = {
               filename: filenameMatch[1],
-              contentType: contentTypeMatch ? contentTypeMatch[1].trim() : 'application/octet-stream',
+              contentType: ctMatch ? ctMatch[1].trim() : 'application/octet-stream',
               data: content,
             }
           } else {
@@ -78,20 +117,6 @@ function parseMultipart(req) {
   })
 }
 
-function parseBody(req) {
-  return new Promise((resolve) => {
-    let body = ''
-    req.on('data', chunk => body += chunk.toString())
-    req.on('end', () => {
-      const params = new URLSearchParams(body)
-      const obj = {}
-      
-      params.forEach((v, k) => { obj[k] = v })
-      resolve(obj)
-    })
-  })
-}
-
 function readRawBody(req) {
   return new Promise((resolve) => {
     const chunks = []
@@ -100,93 +125,326 @@ function readRawBody(req) {
   })
 }
 
-function getImagesList() {
-  if (!fs.existsSync(IMAGES_DIR)) return []
-  return fs.readdirSync(IMAGES_DIR)
-    .filter(f => /\.(jpg|jpeg|png|gif|webp)$/i.test(f))
-    .sort((a, b) => b.localeCompare(a))
-}
-
-function parseFrontmatter(content) {
-  const match = content.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/)
-  if (!match) return { meta: {}, body: content }
-  const meta = {}
-  for (const line of match[1].split('\n')) {
-    const m = line.match(/^(\w+):\s*['"]?(.*?)['"]?\s*$/)
-    if (m) meta[m[1]] = m[2]
-  }
-  return { meta, body: match[2].trim() }
-}
-
-function getDraftsList() {
-  if (!fs.existsSync(DRAFTS_DIR)) return []
-  const files = fs.readdirSync(DRAFTS_DIR).filter(f => f.endsWith('.md'))
-  return files.map(f => {
-    const content = fs.readFileSync(path.join(DRAFTS_DIR, f), 'utf-8')
-    const titleMatch = content.match(/title:\s*['"](.+?)['"]/)
-    const dateMatch = content.match(/date:\s*['"](.+?)['"]/)
-    const categoryMatch = content.match(/category:\s*['"](.+?)['"]/)
-    const descMatch = content.match(/description:\s*['"](.+?)['"]/)
-    return {
-      file: f,
-      title: titleMatch ? titleMatch[1] : f,
-      date: dateMatch ? dateMatch[1] : '',
-      category: categoryMatch ? categoryMatch[1] : '',
-      description: descMatch ? descMatch[1] : '',
-    }
-  }).sort((a, b) => b.date.localeCompare(a.date))
-}
-
-function getPostsList() {
-  const files = fs.readdirSync(POSTS_DIR).filter(f => f.endsWith('.md') && f !== 'test.md')
-  return files.map(f => {
-    const content = fs.readFileSync(path.join(POSTS_DIR, f), 'utf-8')
-    const titleMatch = content.match(/title:\s*['"](.+?)['"]/)
-    const dateMatch = content.match(/date:\s*['"](.+?)['"]/)
-    const categoryMatch = content.match(/category:\s*['"](.+?)['"]/)
-    return {
-      file: f,
-      title: titleMatch ? titleMatch[1] : f,
-      date: dateMatch ? dateMatch[1] : '',
-      category: categoryMatch ? categoryMatch[1] : '',
-    }
-  }).sort((a, b) => b.date.localeCompare(a.date))
-}
-
 function saveImage(data, ext) {
-  const safeName = Date.now() + ext
-  fs.writeFileSync(path.join(IMAGES_DIR, safeName), data)
-  return safeName
+  const name = Date.now() + ext
+  fs.writeFileSync(path.join(IMAGES_DIR, name), data)
+  return name
 }
 
-function renderHTML(message = '') {
-  const posts = getPostsList()
-  const images = getImagesList()
-  const categoryOptions = CATEGORIES.map(c => `<option value="${c}">${c}</option>`).join('')
-  const today = new Date().toISOString().slice(0, 10)
+function buildFrontmatter(title, description, date, category, image) {
+  const esc = s => (s || '').replace(/'/g, "\\'")
+  let fm = `---\ntitle: '${esc(title)}'\n`
+  if (description) fm += `description: '${esc(description)}'\n`
+  fm += `date: '${date}'\ncategory: '${category}'`
+  if (image) fm += `\nimage: '${esc(image)}'`
+  fm += '\n---\n\n'
+  return fm
+}
 
-  const postRows = posts.map(p => `
-    <tr>
+// ── CSS shared across pages ───────────────────────────────────────────────────
+
+const CSS = `
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Hiragino Sans', 'Meiryo', sans-serif; background: #f4f6fb; color: #111; }
+  header { background: #1a2744; padding: 0 32px; height: 60px; display: flex; align-items: center; gap: 12px; }
+  header .bar { width: 3px; height: 30px; background: #5a8fd4; }
+  header h1 { color: #fff; font-size: 20px; letter-spacing: 0.15em; }
+  header span { color: rgba(255,255,255,0.5); font-size: 12px; margin-left: 8px; }
+  header a { color: rgba(255,255,255,0.7); font-size: 13px; text-decoration: none; margin-left: auto; }
+  header a:hover { color: #fff; }
+  .publish-btn { margin-left: auto; padding: 8px 20px; background: #43a047; color: #fff; border: none; border-radius: 4px; font-size: 13px; font-weight: 700; cursor: pointer; transition: background 0.15s; }
+  .publish-btn:hover { background: #2e7d32; }
+  .publish-btn:disabled { background: #aaa; cursor: not-allowed; }
+  .container { max-width: 960px; margin: 36px auto; padding: 0 20px; }
+  .card { background: #fff; border-radius: 8px; box-shadow: 0 1px 8px rgba(0,0,0,0.08); padding: 32px; margin-bottom: 32px; }
+  .card h2 { font-size: 15px; font-weight: 700; color: #1a2744; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid #1a2744; }
+  .card h2.edit-border { border-bottom-color: #e57373; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .form-row.full { grid-template-columns: 1fr; }
+  label { display: block; font-size: 12px; font-weight: 700; color: #555; margin-bottom: 6px; letter-spacing: 0.05em; }
+  input[type=text], input[type=date], select, textarea { width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; font-family: inherit; outline: none; transition: border 0.15s; }
+  input:focus, select:focus, textarea:focus { border-color: #1a2744; }
+  textarea { resize: vertical; min-height: 280px; line-height: 1.7; }
+  .submit-btn { display: block; width: 100%; padding: 14px; background: #1a2744; color: #fff; border: none; border-radius: 4px; font-size: 15px; font-weight: 700; letter-spacing: 0.1em; cursor: pointer; margin-top: 8px; transition: background 0.15s; }
+  .submit-btn:hover { background: #2e4a7a; }
+  .pub-btn { display: block; width: 100%; padding: 14px; background: #43a047; color: #fff; border: none; border-radius: 4px; font-size: 15px; font-weight: 700; letter-spacing: 0.1em; cursor: pointer; margin-top: 8px; transition: background 0.15s; }
+  .pub-btn:hover { background: #2e7d32; }
+  .upload-btn { display: inline-block; padding: 10px 20px; background: #2e4a7a; color: #fff; border: none; border-radius: 4px; font-size: 13px; font-weight: 700; cursor: pointer; }
+  .upload-btn:hover { background: #1a2744; }
+  .message { padding: 14px 20px; border-radius: 4px; margin-bottom: 24px; font-size: 14px; font-weight: 600; }
+  .message.success { background: #e8f5e9; color: #2e7d32; border-left: 4px solid #43a047; }
+  .message.error { background: #ffebee; color: #c62828; border-left: 4px solid #e53935; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; padding: 10px 12px; background: #f4f6fb; color: #555; font-size: 11px; letter-spacing: 0.05em; border-bottom: 2px solid #e0e0e0; }
+  td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+  tr:hover td { background: #fafafa; }
+  .del-btn { background: none; border: 1px solid #e53935; color: #e53935; padding: 4px 10px; border-radius: 3px; font-size: 11px; cursor: pointer; }
+  .del-btn:hover { background: #ffebee; }
+  .edit-btn { background: none; border: 1px solid #1a2744; color: #1a2744; padding: 4px 10px; border-radius: 3px; font-size: 11px; cursor: pointer; text-decoration: none; display: inline-block; }
+  .edit-btn:hover { background: #eef2fa; }
+  .pdraft-btn { background: #43a047; border: none; color: #fff; padding: 4px 10px; border-radius: 3px; font-size: 11px; cursor: pointer; font-weight: 700; }
+  .pdraft-btn:hover { background: #2e7d32; }
+  .upload-row { display: flex; gap: 12px; align-items: flex-end; margin-bottom: 12px; }
+  .upload-row input[type=file] { flex: 1; padding: 8px; border: 1px dashed #aaa; border-radius: 4px; font-size: 13px; background: #fafafa; }
+  .paste-zone { border: 2px dashed #5a8fd4; border-radius: 8px; padding: 20px; text-align: center; color: #5a8fd4; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.15s; margin-bottom: 16px; }
+  .paste-zone:hover, .paste-zone.drag-over { background: #eef4fc; }
+  .paste-zone.uploading { color: #aaa; border-color: #aaa; }
+  .img-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; margin-top: 16px; }
+  .img-item { border: 2px solid #e0e0e0; border-radius: 6px; overflow: hidden; cursor: pointer; transition: border-color 0.15s; }
+  .img-item:hover { border-color: #1a2744; }
+  .img-item img { width: 100%; height: 90px; object-fit: cover; display: block; }
+  .img-item span { display: block; font-size: 10px; color: #666; padding: 4px 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; background: #f8f8f8; }
+  .textarea-wrap { position: relative; }
+  .paste-hint { position: absolute; top: 8px; right: 10px; font-size: 10px; color: #aaa; pointer-events: none; }
+  .md-hint { background: #f8f9fc; border: 1px solid #e0e0e0; border-radius: 4px; padding: 12px 16px; font-size: 12px; color: #666; line-height: 1.8; margin-top: 8px; }
+  .md-hint code { background: #e8eaf0; padding: 1px 5px; border-radius: 3px; font-size: 11px; }
+  .btn-row { display: flex; gap: 12px; margin-top: 8px; }
+  .btn-row .submit-btn, .btn-row .pub-btn { margin-top: 0; }
+`
+
+const CLIENT_JS = `
+  function selectImage(imgPath) {
+    const input = document.getElementById('imageInput')
+    if (!input) return
+    input.value = imgPath
+    input.style.borderColor = '#43a047'
+    input.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  }
+
+  async function uploadBlob(blob) {
+    const ext = blob.type === 'image/png' ? '.png' : blob.type === 'image/gif' ? '.gif' : blob.type === 'image/webp' ? '.webp' : '.jpg'
+    const buf = await blob.arrayBuffer()
+    const res = await fetch('/upload-paste?ext=' + ext, {
+      method: 'POST',
+      headers: { 'Content-Type': blob.type },
+      body: buf,
+    })
+    const json = await res.json()
+    if (!json.path) throw new Error('アップロード失敗')
+    return json.path
+  }
+
+  function addImageToGrid(imgPath) {
+    const filename = imgPath.split('/').pop()
+    let grid = document.querySelector('.img-grid')
+    if (!grid) {
+      const container = document.getElementById('imgGridContainer')
+      if (container) { container.innerHTML = '<div class="img-grid"></div>'; grid = container.querySelector('.img-grid') }
+    }
+    if (!grid) return
+    const item = document.createElement('div')
+    item.className = 'img-item'
+    item.title = filename
+    item.onclick = () => selectImage(imgPath)
+    item.innerHTML = '<img src="/img/' + filename + '" alt="' + filename + '"><span>' + filename + '</span>'
+    grid.insertBefore(item, grid.firstChild)
+  }
+
+  function convertTweetUrl(text) {
+    const m = text.trim().match(/https?:\\/\\/(twitter\\.com|x\\.com)\\/\\w+\\/status\\/(\\d+)/)
+    if (!m) return null
+    return '<iframe src="https://platform.twitter.com/embed/Tweet.html?id=' + m[2] + '" width="100%" height="480" frameborder="0" scrolling="no" allowtransparency="true" style="max-width:550px;display:block;margin:16px auto;"></iframe>'
+  }
+
+  const pasteZone = document.getElementById('pasteZone')
+
+  if (pasteZone) {
+    pasteZone.addEventListener('dragover', (e) => { e.preventDefault(); pasteZone.classList.add('drag-over') })
+    pasteZone.addEventListener('dragleave', () => pasteZone.classList.remove('drag-over'))
+    pasteZone.addEventListener('drop', async (e) => {
+      e.preventDefault()
+      pasteZone.classList.remove('drag-over')
+      const file = e.dataTransfer.files[0]
+      if (!file || !file.type.startsWith('image/')) return
+      await handleImageUpload(file, 'thumbnail')
+    })
+  }
+
+  document.addEventListener('paste', async (e) => {
+    const items = e.clipboardData ? Array.from(e.clipboardData.items) : []
+    const imageItem = items.find(i => i.type.startsWith('image/'))
+
+    if (!imageItem) {
+      const textItem = items.find(i => i.type === 'text/plain')
+      if (textItem && document.activeElement && document.activeElement.id === 'contentArea') {
+        textItem.getAsString((text) => {
+          const embed = convertTweetUrl(text)
+          if (embed) {
+            e.preventDefault()
+            const ca = document.getElementById('contentArea')
+            const pos = ca.selectionStart
+            ca.value = ca.value.slice(0, pos) + '\\n' + embed + '\\n' + ca.value.slice(ca.selectionEnd)
+          }
+        })
+      }
+      return
+    }
+
+    const isInContent = document.activeElement && document.activeElement.id === 'contentArea'
+    if (isInContent) {
+      e.preventDefault()
+      const ca = document.getElementById('contentArea')
+      const pos = ca.selectionStart
+      const before = ca.value.slice(0, pos)
+      const after = ca.value.slice(ca.selectionEnd)
+      ca.value = before + '\\n![アップロード中...](uploading)\\n' + after
+      if (pasteZone) { pasteZone.innerHTML = '⏳ 本文に画像を挿入中...'; pasteZone.classList.add('uploading') }
+      try {
+        const imgPath = await uploadBlob(imageItem.getAsFile())
+        ca.value = ca.value.replace('\\n![アップロード中...](uploading)\\n', '\\n![画像](' + imgPath + ')\\n')
+        addImageToGrid(imgPath)
+        if (pasteZone) {
+          pasteZone.innerHTML = '✓ 本文に画像を挿入しました'
+          pasteZone.style.borderColor = '#43a047'
+          pasteZone.style.color = '#2e7d32'
+          setTimeout(() => resetPasteZone(), 3000)
+        }
+      } catch (err) {
+        ca.value = ca.value.replace('\\n![アップロード中...](uploading)\\n', '')
+        if (pasteZone) { pasteZone.innerHTML = 'エラー：' + err.message; pasteZone.classList.remove('uploading') }
+      }
+    } else {
+      e.preventDefault()
+      await handleImageUpload(imageItem.getAsFile(), 'thumbnail')
+    }
+  })
+
+  async function handleImageUpload(blob, target) {
+    if (!pasteZone) return
+    pasteZone.innerHTML = '⏳ アップロード中...'
+    pasteZone.classList.add('uploading')
+    try {
+      const imgPath = await uploadBlob(blob)
+      addImageToGrid(imgPath)
+      if (target === 'thumbnail') {
+        selectImage(imgPath)
+        pasteZone.innerHTML = '✓ アップロード完了！サムネイル欄に入力しました<br><span style="font-size:11px;font-weight:400;color:#2e7d32;">本文に入れる場合は本文欄をクリックしてからCtrl+V</span>'
+        pasteZone.style.borderColor = '#43a047'
+        pasteZone.style.color = '#2e7d32'
+      }
+      pasteZone.classList.remove('uploading')
+      setTimeout(() => resetPasteZone(), 4000)
+    } catch (err) {
+      pasteZone.innerHTML = 'エラー：' + err.message
+      pasteZone.classList.remove('uploading')
+      setTimeout(() => resetPasteZone(), 3000)
+    }
+  }
+
+  async function publish() {
+    const btn = document.getElementById('publishBtn')
+    btn.disabled = true
+    btn.textContent = '⏳ 公開中...'
+    try {
+      const res = await fetch('/publish', { method: 'POST' })
+      const json = await res.json()
+      if (json.ok) {
+        btn.textContent = '✓ 公開完了！'
+        btn.style.background = '#1565c0'
+        setTimeout(() => { btn.disabled = false; btn.textContent = '🚀 公開する'; btn.style.background = '' }, 5000)
+      } else {
+        alert('エラー: ' + json.error)
+        btn.disabled = false
+        btn.textContent = '🚀 公開する'
+      }
+    } catch (e) {
+      alert('通信エラー: ' + e.message)
+      btn.disabled = false
+      btn.textContent = '🚀 公開する'
+    }
+  }
+
+  function resetPasteZone() {
+    if (!pasteZone) return
+    pasteZone.innerHTML = '📋 スクリーンショットをCtrl+Vで貼り付け（サムネイル用）<br><span style="font-size:11px;font-weight:400;color:#888;">本文に入れる場合は本文欄をクリックしてからCtrl+V ／ ドラッグ＆ドロップも可</span>'
+    pasteZone.style.borderColor = ''
+    pasteZone.style.color = ''
+  }
+`
+
+// ── HTML renderers ────────────────────────────────────────────────────────────
+
+function renderMain(message) {
+  const posts = getList(POSTS_DIR)
+  const drafts = getList(DRAFTS_DIR)
+  const images = fs.existsSync(IMAGES_DIR)
+    ? fs.readdirSync(IMAGES_DIR).filter(f => /\.(jpg|jpeg|png|gif|webp)$/i.test(f)).sort((a, b) => b.localeCompare(a))
+    : []
+  const today = new Date().toISOString().slice(0, 10)
+  const categoryOptions = CATEGORIES.map(c => `<option value="${c}">${c}</option>`).join('')
+
+  // Draft rows
+  const draftRowsArr = []
+  for (const d of drafts) {
+    draftRowsArr.push(`<tr>
+      <td>${d.date}</td>
+      <td>${d.category}</td>
+      <td style="font-weight:600;">${d.title}</td>
+      <td style="font-size:12px;color:#666;max-width:200px;">${d.description}</td>
+      <td style="white-space:nowrap;">
+        <div style="display:flex;gap:6px;">
+          <a href="/edit-draft?file=${encodeURIComponent(d.file)}" class="edit-btn">編集</a>
+          <form method="POST" action="/publish-draft" style="margin:0">
+            <input type="hidden" name="file" value="${d.file}">
+            <button type="submit" class="pdraft-btn">公開する</button>
+          </form>
+          <form method="POST" action="/delete-draft" onsubmit="return confirm('削除しますか？')" style="margin:0">
+            <input type="hidden" name="file" value="${d.file}">
+            <button type="submit" class="del-btn">削除</button>
+          </form>
+        </div>
+      </td>
+    </tr>`)
+  }
+
+  let draftsSection
+  if (drafts.length === 0) {
+    draftsSection = '<p style="color:#aaa;font-size:13px;">下書きはありません（毎朝6時に自動生成されます）</p>'
+  } else {
+    draftsSection = '<table><thead><tr><th>日付</th><th>カテゴリ</th><th>タイトル</th><th>説明</th><th></th></tr></thead><tbody>'
+    draftsSection += draftRowsArr.join('')
+    draftsSection += '</tbody></table>'
+  }
+
+  // Post rows
+  const postRowsArr = []
+  for (const p of posts) {
+    postRowsArr.push(`<tr>
       <td>${p.date}</td>
       <td>${p.category}</td>
       <td>${p.title}</td>
-      <td style="white-space:nowrap;display:flex;gap:6px;">
-        <a href="/edit?file=${encodeURIComponent(p.file)}" class="edit-btn">編集</a>
-        <form method="POST" action="/delete" onsubmit="return confirm('削除しますか？')" style="margin:0">
-          <input type="hidden" name="file" value="${p.file}">
-          <button type="submit" class="del-btn">削除</button>
-        </form>
+      <td style="white-space:nowrap;">
+        <div style="display:flex;gap:6px;">
+          <a href="/edit?file=${encodeURIComponent(p.file)}" class="edit-btn">編集</a>
+          <form method="POST" action="/delete" onsubmit="return confirm('削除しますか？')" style="margin:0">
+            <input type="hidden" name="file" value="${p.file}">
+            <button type="submit" class="del-btn">削除</button>
+          </form>
+        </div>
       </td>
-    </tr>
-  `).join('')
+    </tr>`)
+  }
 
-  const imageGrid = images.length === 0
-    ? '<p style="color:#aaa;font-size:13px;margin-top:8px;">画像がありません</p>'
-    : `<div class="img-grid">${images.map(img => `
-        <div class="img-item" onclick="selectImage('/images/${img}')" title="${img}">
-          <img src="/img/${img}" alt="${img}">
-          <span>${img}</span>
-        </div>`).join('')}</div>`
+  let postsSection
+  if (posts.length === 0) {
+    postsSection = '<p style="color:#aaa;font-size:13px;">記事がありません</p>'
+  } else {
+    postsSection = '<table><thead><tr><th>日付</th><th>カテゴリ</th><th>タイトル</th><th></th></tr></thead><tbody>'
+    postsSection += postRowsArr.join('')
+    postsSection += '</tbody></table>'
+  }
+
+  // Image grid
+  let imageGrid
+  if (images.length === 0) {
+    imageGrid = '<p style="color:#aaa;font-size:13px;margin-top:8px;">画像がありません</p>'
+  } else {
+    const imgItems = []
+    for (const img of images) {
+      imgItems.push(`<div class="img-item" onclick="selectImage('/images/${img}')" title="${img}"><img src="/img/${img}" alt="${img}"><span>${img}</span></div>`)
+    }
+    imageGrid = '<div class="img-grid">' + imgItems.join('') + '</div>'
+  }
 
   return `<!DOCTYPE html>
 <html lang="ja">
@@ -194,60 +452,7 @@ function renderHTML(message = '') {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>宇宙便 管理画面</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Hiragino Sans', 'Meiryo', sans-serif; background: #f4f6fb; color: #111; }
-    header { background: #1a2744; padding: 0 32px; height: 60px; display: flex; align-items: center; gap: 12px; }
-    header .bar { width: 3px; height: 30px; background: #5a8fd4; }
-    header h1 { color: #fff; font-size: 20px; letter-spacing: 0.15em; }
-    header span { color: rgba(255,255,255,0.5); font-size: 12px; margin-left: 8px; }
-    .publish-btn { margin-left: auto; padding: 8px 20px; background: #43a047; color: #fff; border: none; border-radius: 4px; font-size: 13px; font-weight: 700; cursor: pointer; letter-spacing: 0.05em; transition: background 0.15s; }
-    .publish-btn:hover { background: #2e7d32; }
-    .publish-btn:disabled { background: #aaa; cursor: not-allowed; }
-    .container { max-width: 960px; margin: 36px auto; padding: 0 20px; }
-    .card { background: #fff; border-radius: 8px; box-shadow: 0 1px 8px rgba(0,0,0,0.08); padding: 32px; margin-bottom: 32px; }
-    .card h2 { font-size: 15px; font-weight: 700; color: #1a2744; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid #1a2744; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-    .form-row.full { grid-template-columns: 1fr; }
-    label { display: block; font-size: 12px; font-weight: 700; color: #555; margin-bottom: 6px; letter-spacing: 0.05em; }
-    input[type=text], input[type=date], select, textarea { width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; font-family: inherit; outline: none; transition: border 0.15s; }
-    input:focus, select:focus, textarea:focus { border-color: #1a2744; }
-    textarea { resize: vertical; min-height: 280px; line-height: 1.7; }
-    .submit-btn { display: block; width: 100%; padding: 14px; background: #1a2744; color: #fff; border: none; border-radius: 4px; font-size: 15px; font-weight: 700; letter-spacing: 0.1em; cursor: pointer; margin-top: 8px; transition: background 0.15s; }
-    .submit-btn:hover { background: #2e4a7a; }
-    .upload-btn { display: inline-block; padding: 10px 20px; background: #2e4a7a; color: #fff; border: none; border-radius: 4px; font-size: 13px; font-weight: 700; cursor: pointer; }
-    .upload-btn:hover { background: #1a2744; }
-    .message { padding: 14px 20px; border-radius: 4px; margin-bottom: 24px; font-size: 14px; font-weight: 600; }
-    .message.success { background: #e8f5e9; color: #2e7d32; border-left: 4px solid #43a047; }
-    .message.error { background: #ffebee; color: #c62828; border-left: 4px solid #e53935; }
-    table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    th { text-align: left; padding: 10px 12px; background: #f4f6fb; color: #555; font-size: 11px; letter-spacing: 0.05em; border-bottom: 2px solid #e0e0e0; }
-    td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
-    tr:hover td { background: #fafafa; }
-    .del-btn { background: none; border: 1px solid #e53935; color: #e53935; padding: 4px 10px; border-radius: 3px; font-size: 11px; cursor: pointer; }
-    .del-btn:hover { background: #ffebee; }
-    .edit-btn { background: none; border: 1px solid #1a2744; color: #1a2744; padding: 4px 10px; border-radius: 3px; font-size: 11px; cursor: pointer; text-decoration: none; }
-    .edit-btn:hover { background: #eef2fa; }
-    .publish-draft-btn { background: #43a047; border: none; color: #fff; padding: 4px 10px; border-radius: 3px; font-size: 11px; cursor: pointer; font-weight:700; }
-    .publish-draft-btn:hover { background: #2e7d32; }
-    .md-hint { background: #f8f9fc; border: 1px solid #e0e0e0; border-radius: 4px; padding: 12px 16px; font-size: 12px; color: #666; line-height: 1.8; margin-top: 8px; }
-    .md-hint code { background: #e8eaf0; padding: 1px 5px; border-radius: 3px; font-size: 11px; }
-    .upload-row { display: flex; gap: 12px; align-items: flex-end; margin-bottom: 12px; }
-    .upload-row input[type=file] { flex: 1; padding: 8px; border: 1px dashed #aaa; border-radius: 4px; font-size: 13px; background: #fafafa; }
-    /* ペーストゾーン */
-    .paste-zone { border: 2px dashed #5a8fd4; border-radius: 8px; padding: 20px; text-align: center; color: #5a8fd4; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.15s; margin-bottom: 16px; }
-    .paste-zone:hover, .paste-zone.drag-over { background: #eef4fc; }
-    .paste-zone.uploading { color: #aaa; border-color: #aaa; }
-    /* 画像グリッド */
-    .img-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; margin-top: 16px; }
-    .img-item { border: 2px solid #e0e0e0; border-radius: 6px; overflow: hidden; cursor: pointer; transition: border-color 0.15s; }
-    .img-item:hover { border-color: #1a2744; }
-    .img-item img { width: 100%; height: 90px; object-fit: cover; display: block; }
-    .img-item span { display: block; font-size: 10px; color: #666; padding: 4px 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; background: #f8f8f8; }
-    /* 本文エリアのペースト通知 */
-    .textarea-wrap { position: relative; }
-    .paste-hint { position: absolute; top: 8px; right: 10px; font-size: 10px; color: #aaa; pointer-events: none; }
-  </style>
+  <style>${CSS}</style>
 </head>
 <body>
   <header>
@@ -257,34 +462,15 @@ function renderHTML(message = '') {
     <button class="publish-btn" id="publishBtn" onclick="publish()">🚀 公開する</button>
   </header>
   <div class="container">
+    ${message || ''}
 
-    ${message}
-
-    <!-- 画像管理 -->
+    <!-- AI下書き -->
     <div class="card">
-      <h2>画像をアップロード</h2>
-
-      <!-- ペーストゾーン（スクリーンショット貼り付け用） -->
-      <div class="paste-zone" id="pasteZone">
-        📋 スクリーンショットをCtrl+Vで貼り付け（サムネイル用）<br>
-        <span style="font-size:11px;font-weight:400;color:#888;">本文に入れる場合は本文欄をクリックしてからCtrl+V ／ ドラッグ＆ドロップも可</span>
-      </div>
-
-      <!-- ファイル選択アップロード -->
-      <form method="POST" action="/upload" enctype="multipart/form-data">
-        <div class="upload-row">
-          <input type="file" name="image" accept="image/*">
-          <button type="submit" class="upload-btn">ファイルから追加</button>
-        </div>
-      </form>
-
-      <p style="font-size:12px;color:#999;margin-bottom:4px;">
-        ↓ 画像をクリック → 記事フォームのサムネイル欄に自動入力
-      </p>
-      <div id="imgGridContainer">${imageGrid}</div>
+      <h2>🤖 AI下書き（確認・公開待ち）</h2>
+      ${draftsSection}
     </div>
 
-    <!-- 記事作成フォーム -->
+    <!-- 新規記事作成 -->
     <div class="card">
       <h2>新規記事を作成</h2>
       <form method="POST" action="/create">
@@ -316,20 +502,16 @@ function renderHTML(message = '') {
         </div>
         <div class="form-row full">
           <div>
-            <label>本文（Markdown）*　― 画像を貼り付けたい位置にカーソルを置いてCtrl+V</label>
+            <label>本文（Markdown）* ― 画像を貼り付けたい位置にカーソルを置いてCtrl+V</label>
             <div class="textarea-wrap">
-              <textarea id="contentArea" name="content" required placeholder="## 見出し
-
-本文を書く...
-
-画像を本文に入れたい場合：カーソルをここに置いてCtrl+V"></textarea>
+              <textarea id="contentArea" name="content" required placeholder="## 見出し&#10;&#10;本文を書く..."></textarea>
               <span class="paste-hint">Ctrl+V で画像挿入</span>
             </div>
             <div class="md-hint">
               <code>## 見出し</code> &nbsp;
               <code>**太字**</code> &nbsp;
               <code>- リスト</code> &nbsp;
-              <code>> 引用</code>
+              <code>&gt; 引用</code>
             </div>
           </div>
         </div>
@@ -337,274 +519,67 @@ function renderHTML(message = '') {
       </form>
     </div>
 
-    <!-- AI下書き一覧 -->
+    <!-- 画像管理 -->
     <div class="card">
-      <h2>🤖 AI下書き（確認・公開待ち）</h2>
-      ${(() => {
-        const drafts = getDraftsList()
-        if (drafts.length === 0) return '<p style="color:#aaa;font-size:13px;">下書きはありません（毎朝6時に自動生成されます）</p>'
-        return `<table>
-          <thead><tr><th>日付</th><th>カテゴリ</th><th>タイトル</th><th>説明</th><th></th></tr></thead>
-          <tbody>${drafts.map(d => `
-            <tr>
-              <td>${d.date}</td>
-              <td>${d.category}</td>
-              <td style="font-weight:600;">${d.title}</td>
-              <td style="font-size:12px;color:#666;max-width:200px;">${d.description}</td>
-              <td style="white-space:nowrap;display:flex;gap:6px;">
-                <a href="/edit-draft?file=${encodeURIComponent(d.file)}" class="edit-btn">編集</a>
-                <form method="POST" action="/publish-draft" style="margin:0">
-                  <input type="hidden" name="file" value="${d.file}">
-                  <button type="submit" class="publish-draft-btn">公開する</button>
-                </form>
-                <form method="POST" action="/delete-draft" onsubmit="return confirm('削除しますか？')" style="margin:0">
-                  <input type="hidden" name="file" value="${d.file}">
-                  <button type="submit" class="del-btn">削除</button>
-                </form>
-              </td>
-            </tr>`).join('')}
-          </tbody>
-        </table>`
-      })()}
+      <h2>画像をアップロード</h2>
+      <div class="paste-zone" id="pasteZone">
+        📋 スクリーンショットをCtrl+Vで貼り付け（サムネイル用）<br>
+        <span style="font-size:11px;font-weight:400;color:#888;">本文に入れる場合は本文欄をクリックしてからCtrl+V ／ ドラッグ＆ドロップも可</span>
+      </div>
+      <form method="POST" action="/upload" enctype="multipart/form-data">
+        <div class="upload-row">
+          <input type="file" name="image" accept="image/*">
+          <button type="submit" class="upload-btn">ファイルから追加</button>
+        </div>
+      </form>
+      <p style="font-size:12px;color:#999;margin-bottom:4px;">↓ 画像をクリック → 記事フォームのサムネイル欄に自動入力</p>
+      <div id="imgGridContainer">${imageGrid}</div>
     </div>
 
-    <!-- 記事一覧 -->
+    <!-- 公開済み記事一覧 -->
     <div class="card">
-      <h2>記事一覧</h2>
-      ${posts.length === 0 ? '<p style="color:#aaa;font-size:13px;">記事がありません</p>' : `
-      <table>
-        <thead><tr><th>日付</th><th>カテゴリ</th><th>タイトル</th><th></th></tr></thead>
-        <tbody>${postRows}</tbody>
-      </table>`}
+      <h2>公開済み記事一覧</h2>
+      ${postsSection}
     </div>
-
   </div>
-
-  <script>
-    // 画像を選んでサムネイル欄に入力
-    function selectImage(imgPath) {
-      const input = document.getElementById('imageInput')
-      input.value = imgPath
-      input.style.borderColor = '#43a047'
-      input.scrollIntoView({ behavior: 'smooth', block: 'center' })
-    }
-
-    // 画像をサーバーにアップロードしてパスを返す
-    async function uploadBlob(blob) {
-      const ext = blob.type === 'image/png' ? '.png' : blob.type === 'image/gif' ? '.gif' : blob.type === 'image/webp' ? '.webp' : '.jpg'
-      const buf = await blob.arrayBuffer()
-      const res = await fetch('/upload-paste?ext=' + ext, {
-        method: 'POST',
-        headers: { 'Content-Type': blob.type },
-        body: buf,
-      })
-      const json = await res.json()
-      if (!json.path) throw new Error('アップロード失敗')
-      return json.path
-    }
-
-    // 画像グリッドに新しい画像を追加
-    function addImageToGrid(imgPath) {
-      const filename = imgPath.split('/').pop()
-      const grid = document.querySelector('.img-grid')
-      if (!grid) {
-        // グリッドがない場合は作成
-        const container = document.getElementById('imgGridContainer')
-        container.innerHTML = '<div class="img-grid"></div>'
-      }
-      const item = document.createElement('div')
-      item.className = 'img-item'
-      item.title = filename
-      item.onclick = () => selectImage(imgPath)
-      item.innerHTML = '<img src="/img/' + filename + '" alt="' + filename + '"><span>' + filename + '</span>'
-      const g = document.querySelector('.img-grid')
-      if (g) g.insertBefore(item, g.firstChild)
-    }
-
-    const pasteZone = document.getElementById('pasteZone')
-
-    // ドラッグ＆ドロップ対応
-    pasteZone.addEventListener('dragover', (e) => { e.preventDefault(); pasteZone.classList.add('drag-over') })
-    pasteZone.addEventListener('dragleave', () => pasteZone.classList.remove('drag-over'))
-    pasteZone.addEventListener('drop', async (e) => {
-      e.preventDefault()
-      pasteZone.classList.remove('drag-over')
-      const file = e.dataTransfer.files[0]
-      if (!file || !file.type.startsWith('image/')) return
-      await handleImageUpload(file, 'thumbnail')
-    })
-
-    // Twitter/X URLをiframe埋め込みに変換
-    function convertTweetUrl(text) {
-      const m = text.trim().match(/https?:\/\/(twitter\.com|x\.com)\/\w+\/status\/(\d+)/)
-      if (!m) return null
-      const tweetId = m[2]
-      return '<iframe src="https://platform.twitter.com/embed/Tweet.html?id=' + tweetId + '" width="100%" height="480" frameborder="0" scrolling="no" allowtransparency="true" style="max-width:550px;display:block;margin:16px auto;"></iframe>'
-    }
-
-    // ページ全体のペーストを監視
-    document.addEventListener('paste', async (e) => {
-      const items = e.clipboardData ? Array.from(e.clipboardData.items) : []
-      const imageItem = items.find(i => i.type.startsWith('image/'))
-
-      // テキストペーストの場合、Twitter URLか確認
-      if (!imageItem) {
-        const textItem = items.find(i => i.type === 'text/plain')
-        if (textItem && document.activeElement?.id === 'contentArea') {
-          textItem.getAsString((text) => {
-            const embed = convertTweetUrl(text)
-            if (embed) {
-              e.preventDefault()
-              const ca = document.getElementById('contentArea')
-              const pos = ca.selectionStart
-              ca.value = ca.value.slice(0, pos) + '\n' + embed + '\n' + ca.value.slice(ca.selectionEnd)
-            }
-          })
-        }
-        return
-      }
-      if (!imageItem) return  // 画像がなければ何もしない（テキスト貼り付けは通常通り）
-
-      const activeEl = document.activeElement
-      const isInContent = activeEl && activeEl.id === 'contentArea'
-
-      if (isInContent) {
-        // 本文エリアにフォーカスがある → 本文に画像を挿入
-        e.preventDefault()
-        const contentArea = document.getElementById('contentArea')
-        const pos = contentArea.selectionStart
-        const before = contentArea.value.slice(0, pos)
-        const after = contentArea.value.slice(contentArea.selectionEnd)
-        const placeholder = '\n![アップロード中...](uploading)\n'
-        contentArea.value = before + placeholder + after
-
-        pasteZone.innerHTML = '⏳ 本文に画像を挿入中...'
-        pasteZone.classList.add('uploading')
-        try {
-          const blob = imageItem.getAsFile()
-          const imgPath = await uploadBlob(blob)
-          contentArea.value = contentArea.value.replace('\n![アップロード中...](uploading)\n', '\n![画像](' + imgPath + ')\n')
-          addImageToGrid(imgPath)
-          pasteZone.innerHTML = '✓ 本文に画像を挿入しました<br><span style="font-size:11px;font-weight:400;color:#2e7d32;">次の貼り付けを待機中...</span>'
-          pasteZone.style.borderColor = '#43a047'
-          pasteZone.style.color = '#2e7d32'
-          setTimeout(() => resetPasteZone(), 3000)
-        } catch (err) {
-          contentArea.value = contentArea.value.replace('\n![アップロード中...](uploading)\n', '')
-          pasteZone.innerHTML = 'エラー：' + err.message
-          pasteZone.classList.remove('uploading')
-        }
-      } else {
-        // それ以外 → サムネイルとして使用
-        e.preventDefault()
-        await handleImageUpload(imageItem.getAsFile(), 'thumbnail')
-      }
-    })
-
-    async function handleImageUpload(blob, target) {
-      pasteZone.innerHTML = '⏳ アップロード中...'
-      pasteZone.classList.add('uploading')
-      try {
-        const imgPath = await uploadBlob(blob)
-        addImageToGrid(imgPath)
-        if (target === 'thumbnail') {
-          selectImage(imgPath)
-          pasteZone.innerHTML = '✓ アップロード完了！サムネイル欄に入力しました<br><span style="font-size:11px;font-weight:400;color:#2e7d32;">本文に入れる場合は本文欄をクリックしてからCtrl+V</span>'
-          pasteZone.style.borderColor = '#43a047'
-          pasteZone.style.color = '#2e7d32'
-        }
-        pasteZone.classList.remove('uploading')
-        setTimeout(() => resetPasteZone(), 4000)
-      } catch (err) {
-        pasteZone.innerHTML = 'エラー：' + err.message
-        pasteZone.classList.remove('uploading')
-        setTimeout(() => resetPasteZone(), 3000)
-      }
-    }
-
-    async function publish() {
-      const btn = document.getElementById('publishBtn')
-      btn.disabled = true
-      btn.textContent = '⏳ 公開中...'
-      try {
-        const res = await fetch('/publish', { method: 'POST' })
-        const json = await res.json()
-        if (json.ok) {
-          btn.textContent = '✓ 公開完了！'
-          btn.style.background = '#1565c0'
-          setTimeout(() => { btn.disabled = false; btn.textContent = '🚀 公開する'; btn.style.background = '' }, 5000)
-        } else {
-          alert('エラー: ' + json.error)
-          btn.disabled = false
-          btn.textContent = '🚀 公開する'
-        }
-      } catch(e) {
-        alert('通信エラー: ' + e.message)
-        btn.disabled = false
-        btn.textContent = '🚀 公開する'
-      }
-    }
-
-    function resetPasteZone() {
-      pasteZone.innerHTML = '📋 スクリーンショットをCtrl+Vで貼り付け（サムネイル用）<br><span style="font-size:11px;font-weight:400;color:#888;">本文に入れる場合は本文欄をクリックしてからCtrl+V ／ ドラッグ＆ドロップも可</span>'
-      pasteZone.style.borderColor = ''
-      pasteZone.style.color = ''
-    }
-  </script>
+  <script>${CLIENT_JS}</script>
 </body>
 </html>`
 }
 
-function renderEditHTML(file, meta, body, message = '') {
+function renderEdit(file, meta, body, message) {
   const categoryOptions = CATEGORIES.map(c =>
     `<option value="${c}"${meta.category === c ? ' selected' : ''}>${c}</option>`
   ).join('')
+  const safeTitle = (meta.title || '').replace(/"/g, '&quot;')
+  const safeImage = (meta.image || '').replace(/"/g, '&quot;')
+  const safeDesc = (meta.description || '').replace(/"/g, '&quot;')
+  const safeBody = (body || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+
   return `<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>記事編集 - 宇宙便</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Hiragino Sans', 'Meiryo', sans-serif; background: #f4f6fb; color: #111; }
-    header { background: #1a2744; padding: 0 32px; height: 60px; display: flex; align-items: center; gap: 12px; }
-    header .bar { width: 3px; height: 30px; background: #e57373; }
-    header h1 { color: #fff; font-size: 20px; letter-spacing: 0.15em; }
-    header a { margin-left: auto; color: rgba(255,255,255,0.7); font-size: 13px; text-decoration: none; }
-    header a:hover { color: #fff; }
-    .container { max-width: 960px; margin: 36px auto; padding: 0 20px; }
-    .card { background: #fff; border-radius: 8px; box-shadow: 0 1px 8px rgba(0,0,0,0.08); padding: 32px; }
-    .card h2 { font-size: 15px; font-weight: 700; color: #1a2744; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid #e57373; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-    .form-row.full { grid-template-columns: 1fr; }
-    label { display: block; font-size: 12px; font-weight: 700; color: #555; margin-bottom: 6px; }
-    input[type=text], input[type=date], select, textarea { width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; font-family: inherit; outline: none; }
-    input:focus, select:focus, textarea:focus { border-color: #1a2744; }
-    textarea { resize: vertical; min-height: 400px; line-height: 1.7; }
-    .save-btn { display: block; width: 100%; padding: 14px; background: #1a2744; color: #fff; border: none; border-radius: 4px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 16px; }
-    .save-btn:hover { background: #2e4a7a; }
-    .message { padding: 14px 20px; border-radius: 4px; margin-bottom: 24px; font-size: 14px; font-weight: 600; }
-    .message.success { background: #e8f5e9; color: #2e7d32; border-left: 4px solid #43a047; }
-    .message.error { background: #ffebee; color: #c62828; border-left: 4px solid #e53935; }
-  </style>
+  <style>${CSS}</style>
 </head>
 <body>
   <header>
-    <div class="bar"></div>
+    <div class="bar" style="background:#e57373;"></div>
     <h1>宇宙便</h1>
     <a href="/">← 記事一覧に戻る</a>
   </header>
   <div class="container">
-    ${message}
+    ${message || ''}
     <div class="card">
-      <h2>記事を編集</h2>
+      <h2 class="edit-border">記事を編集</h2>
       <form method="POST" action="/update">
         <input type="hidden" name="file" value="${file}">
         <div class="form-row">
           <div>
             <label>タイトル *</label>
-            <input type="text" name="title" value="${(meta.title || '').replace(/"/g, '&quot;')}" required>
+            <input type="text" name="title" value="${safeTitle}" required>
           </div>
           <div>
             <label>カテゴリ *</label>
@@ -618,22 +593,22 @@ function renderEditHTML(file, meta, body, message = '') {
           </div>
           <div>
             <label>サムネイル画像URL</label>
-            <input type="text" name="image" value="${(meta.image || '').replace(/"/g, '&quot;')}">
+            <input type="text" name="image" value="${safeImage}">
           </div>
         </div>
         <div class="form-row full">
           <div>
             <label>説明文</label>
-            <input type="text" name="description" value="${(meta.description || '').replace(/"/g, '&quot;')}">
+            <input type="text" name="description" value="${safeDesc}">
           </div>
         </div>
         <div class="form-row full">
           <div>
             <label>本文（Markdown）*</label>
-            <textarea name="content" required>${body.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</textarea>
+            <textarea name="content" required>${safeBody}</textarea>
           </div>
         </div>
-        <button type="submit" class="save-btn">保存する</button>
+        <button type="submit" class="submit-btn">保存する</button>
       </form>
     </div>
   </div>
@@ -641,16 +616,104 @@ function renderEditHTML(file, meta, body, message = '') {
 </html>`
 }
 
+function renderEditDraft(file, meta, body, message) {
+  const categoryOptions = CATEGORIES.map(c =>
+    `<option value="${c}"${meta.category === c ? ' selected' : ''}>${c}</option>`
+  ).join('')
+  const safeTitle = (meta.title || '').replace(/"/g, '&quot;')
+  const safeImage = (meta.image || '').replace(/"/g, '&quot;')
+  const safeDesc = (meta.description || '').replace(/"/g, '&quot;')
+  const safeBody = (body || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+
+  return `<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>下書き編集 - 宇宙便</title>
+  <style>${CSS}</style>
+</head>
+<body>
+  <header>
+    <div class="bar" style="background:#ffa726;"></div>
+    <h1>宇宙便</h1>
+    <a href="/">← 記事一覧に戻る</a>
+  </header>
+  <div class="container">
+    ${message || ''}
+    <div class="card">
+      <h2 style="border-bottom-color:#ffa726;">🤖 AI下書きを編集</h2>
+
+      <!-- Save draft form -->
+      <form method="POST" action="/update-draft">
+        <input type="hidden" name="file" value="${file}">
+        <div class="form-row">
+          <div>
+            <label>タイトル *</label>
+            <input type="text" name="title" value="${safeTitle}" required>
+          </div>
+          <div>
+            <label>カテゴリ *</label>
+            <select name="category" required>${categoryOptions}</select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div>
+            <label>公開日 *</label>
+            <input type="date" name="date" value="${meta.date || ''}" required>
+          </div>
+          <div>
+            <label>サムネイル画像URL</label>
+            <input type="text" name="image" value="${safeImage}">
+          </div>
+        </div>
+        <div class="form-row full">
+          <div>
+            <label>説明文</label>
+            <input type="text" name="description" value="${safeDesc}">
+          </div>
+        </div>
+        <div class="form-row full">
+          <div>
+            <label>本文（Markdown）*</label>
+            <textarea name="content" required>${safeBody}</textarea>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button type="submit" class="submit-btn" style="flex:1;">下書きを保存</button>
+        </div>
+      </form>
+
+      <!-- Publish draft form (separate) -->
+      <form method="POST" action="/publish-draft" style="margin-top:12px;">
+        <input type="hidden" name="file" value="${file}">
+        <button type="submit" class="pub-btn">🚀 この下書きを公開する（posts/ に移動してコミット）</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>`
+}
+
+// ── HTTP server ───────────────────────────────────────────────────────────────
+
 const server = http.createServer(async (req, res) => {
-  if (req.method === 'GET' && req.url === '/') {
+  const urlObj = new URL(req.url, 'http://localhost')
+  const pathname = urlObj.pathname
+
+  // GET /
+  if (req.method === 'GET' && pathname === '/') {
+    const msg = urlObj.searchParams.get('msg')
+      ? `<div class="message success">✓ ${urlObj.searchParams.get('msg')}</div>`
+      : ''
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-    res.end(renderHTML())
+    res.end(renderMain(msg))
     return
   }
 
-  // 画像配信
-  if (req.method === 'GET' && req.url.startsWith('/img/')) {
-    const filename = path.basename(decodeURIComponent(req.url.replace('/img/', '')))
+  // GET /img/:filename
+  if (req.method === 'GET' && pathname.startsWith('/img/')) {
+    const filename = path.basename(decodeURIComponent(pathname.replace('/img/', '')))
     const filePath = path.join(IMAGES_DIR, filename)
     if (fs.existsSync(filePath) && filePath.startsWith(IMAGES_DIR)) {
       const ext = path.extname(filename).toLowerCase()
@@ -663,17 +726,183 @@ const server = http.createServer(async (req, res) => {
     return
   }
 
-  // クリップボード/ドロップからのアップロード（JSON レスポンス）
-  if (req.method === 'POST' && req.url.startsWith('/upload-paste')) {
+  // GET /edit?file=xxx.md
+  if (req.method === 'GET' && pathname === '/edit') {
     try {
-      const urlObj = new URL(req.url, 'http://localhost')
+      const file = path.basename(urlObj.searchParams.get('file') || '')
+      const filePath = path.join(POSTS_DIR, file)
+      if (!file || !filePath.startsWith(POSTS_DIR) || !fs.existsSync(filePath)) throw new Error('記事が見つかりません')
+      const { meta, body } = parseFrontmatter(fs.readFileSync(filePath, 'utf-8'))
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
+      res.end(renderEdit(file, meta, body, ''))
+    } catch (e) {
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
+      res.end(renderEdit('', {}, '', `<div class="message error">エラー：${e.message}</div>`))
+    }
+    return
+  }
+
+  // GET /edit-draft?file=xxx.md
+  if (req.method === 'GET' && pathname === '/edit-draft') {
+    try {
+      const file = path.basename(urlObj.searchParams.get('file') || '')
+      const filePath = path.join(DRAFTS_DIR, file)
+      if (!file || !filePath.startsWith(DRAFTS_DIR) || !fs.existsSync(filePath)) throw new Error('下書きが見つかりません')
+      const { meta, body } = parseFrontmatter(fs.readFileSync(filePath, 'utf-8'))
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
+      res.end(renderEditDraft(file, meta, body, ''))
+    } catch (e) {
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
+      res.end(renderEditDraft('', {}, '', `<div class="message error">エラー：${e.message}</div>`))
+    }
+    return
+  }
+
+  // POST /create
+  if (req.method === 'POST' && pathname === '/create') {
+    const data = await parseBody(req)
+    try {
+      const { title, category, date, image, description, content } = data
+      if (!title || !category || !date || !content) throw new Error('必須項目が未入力です')
+      const slug = generateSlug(title)
+      const filePath = path.join(POSTS_DIR, slug + '.md')
+      fs.writeFileSync(filePath, buildFrontmatter(title, description, date, category, image) + content.replace(/\r\n/g, '\n'), 'utf-8')
+      res.writeHead(302, { Location: '/?msg=' + encodeURIComponent('記事「' + title + '」を作成しました') })
+      res.end()
+    } catch (e) {
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
+      res.end(renderMain(`<div class="message error">エラー：${e.message}</div>`))
+    }
+    return
+  }
+
+  // POST /update
+  if (req.method === 'POST' && pathname === '/update') {
+    const data = await parseBody(req)
+    try {
+      const { file, title, category, date, image, description, content } = data
+      if (!title || !category || !date || !content) throw new Error('必須項目が未入力です')
+      const filePath = path.join(POSTS_DIR, path.basename(file))
+      if (!filePath.startsWith(POSTS_DIR)) throw new Error('不正なリクエスト')
+      const bodyText = content.replace(/\r\n/g, '\n')
+      fs.writeFileSync(filePath, buildFrontmatter(title, description, date, category, image) + bodyText, 'utf-8')
+      const msg = `<div class="message success">✓ 記事を更新しました</div>`
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
+      res.end(renderEdit(path.basename(file), { title, category, date, image, description }, bodyText, msg))
+    } catch (e) {
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
+      res.end(renderMain(`<div class="message error">エラー：${e.message}</div>`))
+    }
+    return
+  }
+
+  // POST /update-draft
+  if (req.method === 'POST' && pathname === '/update-draft') {
+    const data = await parseBody(req)
+    try {
+      const { file, title, category, date, image, description, content } = data
+      if (!title || !category || !date || !content) throw new Error('必須項目が未入力です')
+      const filePath = path.join(DRAFTS_DIR, path.basename(file))
+      if (!filePath.startsWith(DRAFTS_DIR)) throw new Error('不正なリクエスト')
+      const bodyText = content.replace(/\r\n/g, '\n')
+      fs.writeFileSync(filePath, buildFrontmatter(title, description, date, category, image) + bodyText, 'utf-8')
+      const msg = `<div class="message success">✓ 下書きを保存しました</div>`
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
+      res.end(renderEditDraft(path.basename(file), { title, category, date, image, description }, bodyText, msg))
+    } catch (e) {
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
+      res.end(renderMain(`<div class="message error">エラー：${e.message}</div>`))
+    }
+    return
+  }
+
+  // POST /publish-draft
+  if (req.method === 'POST' && pathname === '/publish-draft') {
+    const data = await parseBody(req)
+    try {
+      const basename = path.basename(data.file || '')
+      const srcPath = path.join(DRAFTS_DIR, basename)
+      const dstPath = path.join(POSTS_DIR, basename)
+      if (!srcPath.startsWith(DRAFTS_DIR)) throw new Error('不正なリクエスト')
+      if (!fs.existsSync(srcPath)) throw new Error('下書きが見つかりません')
+      fs.copyFileSync(srcPath, dstPath)
+      fs.unlinkSync(srcPath)
+      const date = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })
+      const cmd = `git add -A posts/ drafts/ && git commit -m "記事公開 ${date}" && git pull --rebase && git push`
+      exec(cmd, { cwd: __dirname }, (err, _stdout, stderr) => {
+        if (err && stderr && !stderr.includes('nothing to commit')) {
+          res.writeHead(302, { Location: '/?msg=' + encodeURIComponent('公開しました（git警告: ' + stderr.slice(0, 80) + '）') })
+        } else {
+          res.writeHead(302, { Location: '/?msg=' + encodeURIComponent('記事を公開しました → Vercelが自動デプロイします') })
+        }
+        res.end()
+      })
+    } catch (e) {
+      res.writeHead(302, { Location: '/?msg=' + encodeURIComponent('エラー: ' + e.message) })
+      res.end()
+    }
+    return
+  }
+
+  // POST /delete-draft
+  if (req.method === 'POST' && pathname === '/delete-draft') {
+    const data = await parseBody(req)
+    try {
+      const filePath = path.join(DRAFTS_DIR, path.basename(data.file || ''))
+      if (!filePath.startsWith(DRAFTS_DIR)) throw new Error('不正なリクエスト')
+      if (fs.existsSync(filePath)) fs.unlinkSync(filePath)
+      res.writeHead(302, { Location: '/?msg=' + encodeURIComponent('下書きを削除しました') })
+      res.end()
+    } catch (e) {
+      res.writeHead(302, { Location: '/?msg=' + encodeURIComponent('エラー: ' + e.message) })
+      res.end()
+    }
+    return
+  }
+
+  // POST /delete
+  if (req.method === 'POST' && pathname === '/delete') {
+    const data = await parseBody(req)
+    try {
+      const filePath = path.join(POSTS_DIR, path.basename(data.file || ''))
+      if (!filePath.startsWith(POSTS_DIR)) throw new Error('不正なリクエスト')
+      if (fs.existsSync(filePath)) fs.unlinkSync(filePath)
+      res.writeHead(302, { Location: '/?msg=' + encodeURIComponent('記事を削除しました') })
+      res.end()
+    } catch (e) {
+      res.writeHead(302, { Location: '/?msg=' + encodeURIComponent('エラー: ' + e.message) })
+      res.end()
+    }
+    return
+  }
+
+  // POST /upload (multipart file upload)
+  if (req.method === 'POST' && pathname === '/upload') {
+    try {
+      const { files } = await parseMultipart(req)
+      const file = files['image']
+      if (!file || !file.filename) throw new Error('ファイルが選択されていません')
+      const ext = path.extname(file.filename).toLowerCase()
+      if (!['.jpg', '.jpeg', '.png', '.gif', '.webp'].includes(ext)) throw new Error('対応形式：JPG / PNG / GIF / WebP')
+      const name = saveImage(file.data, ext)
+      res.writeHead(302, { Location: '/?msg=' + encodeURIComponent('画像をアップロードしました → /images/' + name) })
+      res.end()
+    } catch (e) {
+      res.writeHead(302, { Location: '/?msg=' + encodeURIComponent('アップロードエラー: ' + e.message) })
+      res.end()
+    }
+    return
+  }
+
+  // POST /upload-paste?ext=.png (raw body, JSON response)
+  if (req.method === 'POST' && pathname === '/upload-paste') {
+    try {
       const ext = urlObj.searchParams.get('ext') || '.png'
-      const allowed = ['.jpg', '.jpeg', '.png', '.gif', '.webp']
-      if (!allowed.includes(ext)) throw new Error('対応外の形式')
+      if (!['.jpg', '.jpeg', '.png', '.gif', '.webp'].includes(ext)) throw new Error('対応外の形式')
       const data = await readRawBody(req)
-      const safeName = saveImage(data, ext)
+      const name = saveImage(data, ext)
       res.writeHead(200, { 'Content-Type': 'application/json' })
-      res.end(JSON.stringify({ path: '/images/' + safeName }))
+      res.end(JSON.stringify({ path: '/images/' + name }))
     } catch (e) {
       res.writeHead(400, { 'Content-Type': 'application/json' })
       res.end(JSON.stringify({ error: e.message }))
@@ -681,161 +910,15 @@ const server = http.createServer(async (req, res) => {
     return
   }
 
-  // ファイル選択からのアップロード（ページリロード）
-  if (req.method === 'POST' && req.url === '/upload') {
-    try {
-      const { files } = await parseMultipart(req)
-      const file = files['image']
-      if (!file || !file.filename) throw new Error('ファイルが選択されていません')
-      const ext = path.extname(file.filename).toLowerCase()
-      if (!['.jpg', '.jpeg', '.png', '.gif', '.webp'].includes(ext)) throw new Error('対応形式：JPG / PNG / GIF / WebP')
-      const safeName = saveImage(file.data, ext)
-      const msg = `<div class="message success">✓ 画像をアップロードしました → <code>/images/${safeName}</code></div>`
-      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-      res.end(renderHTML(msg))
-    } catch (e) {
-      const msg = `<div class="message error">エラー：${e.message}</div>`
-      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-      res.end(renderHTML(msg))
-    }
-    return
-  }
-
-  // 記事作成
-  if (req.method === 'POST' && req.url === '/create') {
-    const data = await parseBody(req)
-    try {
-      const { title, category, date, image, description, content } = data
-      if (!title || !category || !date || !content) throw new Error('必須項目が未入力です')
-      const slug = generateSlug(title)
-      const filePath = path.join(POSTS_DIR, `${slug}.md`)
-      const imageField = image ? `\nimage: '${image}'` : ''
-      const descField = description ? `\ndescription: '${description.replace(/'/g, "\\'")}'\n` : '\n'
-      const frontmatter = `---\ntitle: '${title.replace(/'/g, "\\'")}'\n${descField}date: '${date}'\ncategory: '${category}'${imageField}\n---\n\n`
-      fs.writeFileSync(filePath, frontmatter + content.replace(/\r\n/g, '\n'), 'utf-8')
-      const msg = `<div class="message success">✓ 記事「${title}」を作成しました（${slug}.md）</div>`
-      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-      res.end(renderHTML(msg))
-    } catch (e) {
-      const msg = `<div class="message error">エラー：${e.message}</div>`
-      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-      res.end(renderHTML(msg))
-    }
-    return
-  }
-
-  // 記事編集ページ
-  if (req.method === 'GET' && req.url.startsWith('/edit')) {
-    try {
-      const file = decodeURIComponent(new URL(req.url, 'http://localhost').searchParams.get('file') || '')
-      const filePath = path.join(POSTS_DIR, path.basename(file))
-      if (!filePath.startsWith(POSTS_DIR) || !fs.existsSync(filePath)) throw new Error('記事が見つかりません')
-      const content = fs.readFileSync(filePath, 'utf-8')
-      const { meta, body } = parseFrontmatter(content)
-      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-      res.end(renderEditHTML(path.basename(file), meta, body))
-    } catch (e) {
-      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-      res.end(renderEditHTML('', {}, '', `<div class="message error">エラー：${e.message}</div>`))
-    }
-    return
-  }
-
-  // 記事更新
-  if (req.method === 'POST' && req.url === '/update') {
-    const data = await parseBody(req)
-    try {
-      const { file, title, category, date, image, description, content } = data
-      if (!title || !category || !date || !content) throw new Error('必須項目が未入力です')
-      const filePath = path.join(POSTS_DIR, path.basename(file))
-      if (!filePath.startsWith(POSTS_DIR)) throw new Error('不正なリクエスト')
-      const imageField = image ? `\nimage: '${image}'` : ''
-      const descField = description ? `\ndescription: '${description.replace(/'/g, "\\'")}'\n` : '\n'
-      const frontmatter = `---\ntitle: '${title.replace(/'/g, "\\'")}'\n${descField}date: '${date}'\ncategory: '${category}'${imageField}\n---\n\n`
-      fs.writeFileSync(filePath, frontmatter + content.replace(/\r\n/g, '\n'), 'utf-8')
-      const msg = `<div class="message success">✓ 記事を更新しました</div>`
-      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-      res.end(renderEditHTML(path.basename(file), { title, category, date, image, description }, content.replace(/\r\n/g, '\n'), msg))
-    } catch (e) {
-      const msg = `<div class="message error">エラー：${e.message}</div>`
-      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-      res.end(renderHTML(msg))
-    }
-    return
-  }
-
-  // 記事削除
-  if (req.method === 'POST' && req.url === '/delete') {
-    const data = await parseBody(req)
-    try {
-      const filePath = path.join(POSTS_DIR, path.basename(data.file))
-      if (!filePath.startsWith(POSTS_DIR)) throw new Error('不正なリクエスト')
-      if (fs.existsSync(filePath)) fs.unlinkSync(filePath)
-      const msg = `<div class="message success">✓ 記事を削除しました</div>`
-      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-      res.end(renderHTML(msg))
-    } catch (e) {
-      const msg = `<div class="message error">エラー：${e.message}</div>`
-      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-      res.end(renderHTML(msg))
-    }
-    return
-  }
-
-  // 下書きを公開（drafts/ → posts/ に移動してコミット）
-  if (req.method === 'POST' && req.url === '/publish-draft') {
-    const data = await parseBody(req)
-    try {
-      const srcPath = path.join(DRAFTS_DIR, path.basename(data.file))
-      const dstPath = path.join(POSTS_DIR, path.basename(data.file))
-      if (!srcPath.startsWith(DRAFTS_DIR)) throw new Error('不正なリクエスト')
-      if (!fs.existsSync(srcPath)) throw new Error('下書きが見つかりません')
-      fs.copyFileSync(srcPath, dstPath)
-      fs.unlinkSync(srcPath)
-      const date = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })
-      const cmd = `git add -A posts/ drafts/ && git commit -m "記事公開 ${date}" && git pull --rebase && git push`
-      exec(cmd, { cwd: __dirname }, (err, _, stderr) => {
-        const msg = err && !stderr.includes('nothing to commit')
-          ? `<div class="message error">git エラー：${stderr || err.message}</div>`
-          : `<div class="message success">✓ 記事を公開しました → Vercelが自動デプロイします</div>`
-        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-        res.end(renderHTML(msg))
-      })
-    } catch (e) {
-      const msg = `<div class="message error">エラー：${e.message}</div>`
-      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-      res.end(renderHTML(msg))
-    }
-    return
-  }
-
-  // 下書き削除
-  if (req.method === 'POST' && req.url === '/delete-draft') {
-    const data = await parseBody(req)
-    try {
-      const filePath = path.join(DRAFTS_DIR, path.basename(data.file))
-      if (!filePath.startsWith(DRAFTS_DIR)) throw new Error('不正なリクエスト')
-      if (fs.existsSync(filePath)) fs.unlinkSync(filePath)
-      const msg = `<div class="message success">✓ 下書きを削除しました</div>`
-      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-      res.end(renderHTML(msg))
-    } catch (e) {
-      const msg = `<div class="message error">エラー：${e.message}</div>`
-      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-      res.end(renderHTML(msg))
-    }
-    return
-  }
-
-  // 公開（git add → commit → push）
-  if (req.method === 'POST' && req.url === '/publish') {
+  // POST /publish (git add/commit/push, JSON response)
+  if (req.method === 'POST' && pathname === '/publish') {
     const date = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })
-    const cmd = `git add -A posts/ public/images/ && (git diff --cached --quiet && echo "nothing to commit" || git commit -m "記事更新 ${date}") && git pull --rebase && git push`
+    const cmd = `git add -A posts/ public/images/ drafts/ && (git diff --cached --quiet && echo "nothing" || git commit -m "記事更新 ${date}") && git pull --rebase && git push`
     exec(cmd, { cwd: __dirname }, (err, stdout, stderr) => {
       res.writeHead(200, { 'Content-Type': 'application/json' })
       if (err) {
         const msg = stderr || err.message
-        if (msg.includes('nothing to commit')) {
+        if (msg.includes('nothing') || stdout.includes('nothing')) {
           res.end(JSON.stringify({ ok: true }))
         } else {
           res.end(JSON.stringify({ ok: false, error: msg }))
