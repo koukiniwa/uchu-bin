@@ -379,10 +379,35 @@ function renderHTML(message = '') {
       await handleImageUpload(file, 'thumbnail')
     })
 
+    // Twitter/X URLをiframe埋め込みに変換
+    function convertTweetUrl(text) {
+      const m = text.trim().match(/https?:\/\/(twitter\.com|x\.com)\/\w+\/status\/(\d+)/)
+      if (!m) return null
+      const tweetId = m[2]
+      return '<iframe src="https://platform.twitter.com/embed/Tweet.html?id=' + tweetId + '" width="100%" height="480" frameborder="0" scrolling="no" allowtransparency="true" style="max-width:550px;display:block;margin:16px auto;"></iframe>'
+    }
+
     // ページ全体のペーストを監視
     document.addEventListener('paste', async (e) => {
       const items = e.clipboardData ? Array.from(e.clipboardData.items) : []
       const imageItem = items.find(i => i.type.startsWith('image/'))
+
+      // テキストペーストの場合、Twitter URLか確認
+      if (!imageItem) {
+        const textItem = items.find(i => i.type === 'text/plain')
+        if (textItem && document.activeElement?.id === 'contentArea') {
+          textItem.getAsString((text) => {
+            const embed = convertTweetUrl(text)
+            if (embed) {
+              e.preventDefault()
+              const ca = document.getElementById('contentArea')
+              const pos = ca.selectionStart
+              ca.value = ca.value.slice(0, pos) + '\n' + embed + '\n' + ca.value.slice(ca.selectionEnd)
+            }
+          })
+        }
+        return
+      }
       if (!imageItem) return  // 画像がなければ何もしない（テキスト貼り付けは通常通り）
 
       const activeEl = document.activeElement

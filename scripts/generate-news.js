@@ -112,11 +112,18 @@ async function fetchNASAImages(query, count = 3) {
     const data = await res.json()
     const items = data?.collection?.items || []
 
+    // 人物写真・ポートレートを除外するキーワード
+    const PORTRAIT_WORDS = ['portrait', 'headshot', 'official photo', 'biography', 'crew photo', 'group photo', 'smiling', 'poses', 'seated']
+
     for (const item of items) {
       if (images.length >= count) break
       const nasaId = item?.data?.[0]?.nasa_id
       const center = item?.data?.[0]?.center || ''
+      const title = (item?.data?.[0]?.title || '').toLowerCase()
+      const desc = (item?.data?.[0]?.description || '').toLowerCase().slice(0, 200)
       if (!nasaId) continue
+      // 人物写真・ポートレートをスキップ
+      if (PORTRAIT_WORDS.some(w => title.includes(w) || desc.includes(w))) continue
       const result = await resolveNASAImage(nasaId, center)
       if (result) images.push(result)
     }
@@ -194,7 +201,7 @@ ${newsText}
   "title": "記事タイトル（日本語、35文字以内・事実ベース）",
   "description": "記事の要約（90文字以内）",
   "category": "ロケット・衛星・通信・有人宇宙飛行・月探査・火星探査 のいずれか1つ",
-  "imageQuery": "NASA画像検索用の英語キーワード（例: SpaceX Falcon 9 launch, Mars rover, Moon surface）",
+  "imageQuery": "NASA画像検索用の英語キーワード（必ずロケット・宇宙船・惑星・月面・基地などのハードウェアや天体を指定。人物・宇宙飛行士のポートレートは避ける。例: Artemis SLS rocket launch pad, SpaceX Starship vehicle, Mars surface landscape, lunar surface crater, ISS exterior, satellite deployment）",
   "body": "記事本文（マークダウン形式。## 見出しを3〜4つ、{{IMAGE_1}}と{{IMAGE_2}}を含め、1200〜1800文字）"
 }`,
       },
