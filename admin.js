@@ -5,8 +5,11 @@ const { exec } = require('child_process')
 
 const PORT = 3001
 const POSTS_DIR = path.join(__dirname, 'posts')
+const DRAFTS_DIR = path.join(__dirname, 'drafts')
 const IMAGES_DIR = path.join(__dirname, 'public', 'images')
 const CATEGORIES = ['ロケット', '衛星・通信', '有人宇宙飛行', '月探査', '火星探査']
+
+if (!fs.existsSync(DRAFTS_DIR)) fs.mkdirSync(DRAFTS_DIR, { recursive: true })
 
 if (!fs.existsSync(IMAGES_DIR)) fs.mkdirSync(IMAGES_DIR, { recursive: true })
 
@@ -115,6 +118,25 @@ function parseFrontmatter(content) {
   return { meta, body: match[2].trim() }
 }
 
+function getDraftsList() {
+  if (!fs.existsSync(DRAFTS_DIR)) return []
+  const files = fs.readdirSync(DRAFTS_DIR).filter(f => f.endsWith('.md'))
+  return files.map(f => {
+    const content = fs.readFileSync(path.join(DRAFTS_DIR, f), 'utf-8')
+    const titleMatch = content.match(/title:\s*['"](.+?)['"]/)
+    const dateMatch = content.match(/date:\s*['"](.+?)['"]/)
+    const categoryMatch = content.match(/category:\s*['"](.+?)['"]/)
+    const descMatch = content.match(/description:\s*['"](.+?)['"]/)
+    return {
+      file: f,
+      title: titleMatch ? titleMatch[1] : f,
+      date: dateMatch ? dateMatch[1] : '',
+      category: categoryMatch ? categoryMatch[1] : '',
+      description: descMatch ? descMatch[1] : '',
+    }
+  }).sort((a, b) => b.date.localeCompare(a.date))
+}
+
 function getPostsList() {
   const files = fs.readdirSync(POSTS_DIR).filter(f => f.endsWith('.md') && f !== 'test.md')
   return files.map(f => {
@@ -206,6 +228,8 @@ function renderHTML(message = '') {
     .del-btn:hover { background: #ffebee; }
     .edit-btn { background: none; border: 1px solid #1a2744; color: #1a2744; padding: 4px 10px; border-radius: 3px; font-size: 11px; cursor: pointer; text-decoration: none; }
     .edit-btn:hover { background: #eef2fa; }
+    .publish-draft-btn { background: #43a047; border: none; color: #fff; padding: 4px 10px; border-radius: 3px; font-size: 11px; cursor: pointer; font-weight:700; }
+    .publish-draft-btn:hover { background: #2e7d32; }
     .md-hint { background: #f8f9fc; border: 1px solid #e0e0e0; border-radius: 4px; padding: 12px 16px; font-size: 12px; color: #666; line-height: 1.8; margin-top: 8px; }
     .md-hint code { background: #e8eaf0; padding: 1px 5px; border-radius: 3px; font-size: 11px; }
     .upload-row { display: flex; gap: 12px; align-items: flex-end; margin-bottom: 12px; }
@@ -311,6 +335,37 @@ function renderHTML(message = '') {
         </div>
         <button type="submit" class="submit-btn">記事を作成する</button>
       </form>
+    </div>
+
+    <!-- AI下書き一覧 -->
+    <div class="card">
+      <h2>🤖 AI下書き（確認・公開待ち）</h2>
+      ${(() => {
+        const drafts = getDraftsList()
+        if (drafts.length === 0) return '<p style="color:#aaa;font-size:13px;">下書きはありません（毎朝6時に自動生成されます）</p>'
+        return `<table>
+          <thead><tr><th>日付</th><th>カテゴリ</th><th>タイトル</th><th>説明</th><th></th></tr></thead>
+          <tbody>${drafts.map(d => `
+            <tr>
+              <td>${d.date}</td>
+              <td>${d.category}</td>
+              <td style="font-weight:600;">${d.title}</td>
+              <td style="font-size:12px;color:#666;max-width:200px;">${d.description}</td>
+              <td style="white-space:nowrap;display:flex;gap:6px;">
+                <a href="/edit-draft?file=${encodeURIComponent(d.file)}" class="edit-btn">編集</a>
+                <form method="POST" action="/publish-draft" style="margin:0">
+                  <input type="hidden" name="file" value="${d.file}">
+                  <button type="submit" class="publish-draft-btn">公開する</button>
+                </form>
+                <form method="POST" action="/delete-draft" onsubmit="return confirm('削除しますか？')" style="margin:0">
+                  <input type="hidden" name="file" value="${d.file}">
+                  <button type="submit" class="del-btn">削除</button>
+                </form>
+              </td>
+            </tr>`).join('')}
+          </tbody>
+        </table>`
+      })()}
     </div>
 
     <!-- 記事一覧 -->
@@ -717,6 +772,51 @@ const server = http.createServer(async (req, res) => {
       if (!filePath.startsWith(POSTS_DIR)) throw new Error('不正なリクエスト')
       if (fs.existsSync(filePath)) fs.unlinkSync(filePath)
       const msg = `<div class="message success">✓ 記事を削除しました</div>`
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
+      res.end(renderHTML(msg))
+    } catch (e) {
+      const msg = `<div class="message error">エラー：${e.message}</div>`
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
+      res.end(renderHTML(msg))
+    }
+    return
+  }
+
+  // 下書きを公開（drafts/ → posts/ に移動してコミット）
+  if (req.method === 'POST' && req.url === '/publish-draft') {
+    const data = await parseBody(req)
+    try {
+      const srcPath = path.join(DRAFTS_DIR, path.basename(data.file))
+      const dstPath = path.join(POSTS_DIR, path.basename(data.file))
+      if (!srcPath.startsWith(DRAFTS_DIR)) throw new Error('不正なリクエスト')
+      if (!fs.existsSync(srcPath)) throw new Error('下書きが見つかりません')
+      fs.copyFileSync(srcPath, dstPath)
+      fs.unlinkSync(srcPath)
+      const date = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })
+      const cmd = `git add -A posts/ drafts/ && git commit -m "記事公開 ${date}" && git pull --rebase && git push`
+      exec(cmd, { cwd: __dirname }, (err, _, stderr) => {
+        const msg = err && !stderr.includes('nothing to commit')
+          ? `<div class="message error">git エラー：${stderr || err.message}</div>`
+          : `<div class="message success">✓ 記事を公開しました → Vercelが自動デプロイします</div>`
+        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
+        res.end(renderHTML(msg))
+      })
+    } catch (e) {
+      const msg = `<div class="message error">エラー：${e.message}</div>`
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
+      res.end(renderHTML(msg))
+    }
+    return
+  }
+
+  // 下書き削除
+  if (req.method === 'POST' && req.url === '/delete-draft') {
+    const data = await parseBody(req)
+    try {
+      const filePath = path.join(DRAFTS_DIR, path.basename(data.file))
+      if (!filePath.startsWith(DRAFTS_DIR)) throw new Error('不正なリクエスト')
+      if (fs.existsSync(filePath)) fs.unlinkSync(filePath)
+      const msg = `<div class="message success">✓ 下書きを削除しました</div>`
       res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
       res.end(renderHTML(msg))
     } catch (e) {

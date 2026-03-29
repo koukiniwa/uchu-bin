@@ -36,11 +36,11 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add posts/
+          git add drafts/
           if git diff --staged --quiet; then
-            echo "新しい記事はありませんでした"
+            echo "新しい下書きはありませんでした"
           else
-            git commit -m "🤖 宇宙ニュース自動記事 $(date +'%Y-%m-%d')"
+            git commit -m "📝 宇宙ニュース下書き $(date +'%Y-%m-%d')"
             git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-            echo "✅ 記事をプッシュしました → Vercelが自動デプロイします"
+            echo "✅ 下書きをプッシュしました → 管理画面で確認・公開してください"
           fi

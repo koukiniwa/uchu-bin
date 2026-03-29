@@ -198,7 +198,6 @@ async function fetchNASAImages(query, count = 3) {
 }
 
 async function generateArticle(newsByRegion, recentTitles) {
-  // 地域ラベル付きのニュースリスト作成
   const newsText = Object.entries(newsByRegion)
     .flatMap(([region, items]) =>
       items.map((item) => `[${region.toUpperCase()}] ${item.title}\n${item.description}`)
@@ -210,15 +209,24 @@ async function generateArticle(newsByRegion, recentTitles) {
       ? `\n【直近14日間に生成済みの記事タイトル（これらと同じテーマは避けること）】\n${recentTitles.map((t) => `- ${t}`).join('\n')}\n`
       : ''
 
+  // 現在の日付をJSTで渡す
+  const now = new Date()
+  const jst = new Date(now.getTime() + 9 * 60 * 60 * 1000)
+  const todayStr = `${jst.getUTCFullYear()}年${jst.getUTCMonth() + 1}月${jst.getUTCDate()}日`
+
   const message = await client.messages.create({
     model: 'claude-opus-4-6',
-    max_tokens: 3000,
+    max_tokens: 4500,
     messages: [
       {
         role: 'user',
         content: `あなたは宇宙開発専門のニュースライターです。
 「ミリレポ」のような軍事・専門系ニュースサイトのスタイルを参考に、
 宇宙開発ニュースをわかりやすく、しかし報道として正確に伝える記事を書いてください。
+
+【重要】今日の日付は ${todayStr} です。
+ニュースソースに「〇〇年に予定」などの将来の予定が含まれていても、
+その日付がすでに過去であれば「当初〇〇年に予定されていた」と正確に表現してください。
 
 以下のニュース一覧から**1つだけ**選び、そのニュースに絞って深く解説してください。
 複数のニュースを混ぜないこと。
@@ -245,7 +253,7 @@ ${newsText}
   "description": "記事の要約（90文字以内）",
   "category": "ロケット・衛星・通信・有人宇宙飛行・月探査・火星探査 のいずれか1つ",
   "imageQuery": "NASA画像検索用の英語キーワード（必ずロケット・宇宙船・惑星・月面・基地などのハードウェアや天体を指定。人物・宇宙飛行士のポートレートは避ける。例: Artemis SLS rocket launch pad, SpaceX Starship vehicle, Mars surface landscape, lunar surface crater, ISS exterior, satellite deployment）",
-  "body": "記事本文（マークダウン形式。## 見出しを3〜4つ、{{IMAGE_1}}と{{IMAGE_2}}を含め、1200〜1800文字）"
+  "body": "記事本文（マークダウン形式。## 見出しを3〜4つ、{{IMAGE_1}}と{{IMAGE_2}}を含め、1800〜2500文字）"
 }`,
       },
     ],
@@ -333,11 +341,12 @@ async function main() {
   }
   lines.push(`---`, ``, body)
 
-  const postsDir = path.join(__dirname, '..', 'posts')
-  const filePath = path.join(postsDir, `${slug}.md`)
+  const draftsDir = path.join(__dirname, '..', 'drafts')
+  if (!fs.existsSync(draftsDir)) fs.mkdirSync(draftsDir, { recursive: true })
+  const filePath = path.join(draftsDir, `${slug}.md`)
   fs.writeFileSync(filePath, lines.join('\n'), 'utf-8')
 
-  console.log(`\n✅ 記事を生成しました: posts/${slug}.md`)
+  console.log(`\n✅ 下書きを生成しました: drafts/${slug}.md`)
   console.log(`  カバー画像: ${images[0] ? `✓ (${images[0].credit})` : '✗'}`)
   console.log(`  本文内画像1: ${images[1] ? `✓ (${images[1].credit})` : '✗'}`)
   console.log(`  本文内画像2: ${images[2] ? `✓ (${images[2].credit})` : '✗'}`)
