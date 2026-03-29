@@ -631,7 +631,24 @@ function renderEditDraft(file, meta, body, message) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>下書き編集 - 宇宙便</title>
-  <style>${CSS}</style>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    ${CSS}
+    .tab-bar { display:flex; gap:0; margin-bottom:24px; border-bottom:2px solid #e0e0e0; }
+    .tab-btn { padding:10px 24px; background:none; border:none; font-size:14px; font-weight:700; color:#999; cursor:pointer; border-bottom:3px solid transparent; margin-bottom:-2px; }
+    .tab-btn.active { color:#1a2744; border-bottom-color:#ffa726; }
+    #preview-pane { display:none; }
+    #preview-pane.visible { display:block; }
+    #edit-pane.hidden { display:none; }
+    .preview-cover { width:100%; max-height:400px; object-fit:cover; display:block; margin-bottom:24px; border-radius:4px; }
+    .preview-body img { max-width:100%; height:auto; display:block; margin:16px auto; border-radius:4px; }
+    .preview-body h2 { font-size:20px; font-weight:800; margin:32px 0 12px; color:#1a2744; border-left:4px solid #ffa726; padding-left:12px; }
+    .preview-body h3 { font-size:16px; font-weight:700; margin:24px 0 8px; }
+    .preview-body p { line-height:1.85; margin-bottom:16px; color:#222; }
+    .preview-body em { color:#666; font-size:12px; }
+    .preview-body strong { font-weight:700; }
+    .preview-body blockquote { border-left:3px solid #ccc; padding-left:16px; color:#666; margin:16px 0; }
+  </style>
 </head>
 <body>
   <header>
@@ -644,53 +661,104 @@ function renderEditDraft(file, meta, body, message) {
     <div class="card">
       <h2 style="border-bottom-color:#ffa726;">🤖 AI下書きを編集</h2>
 
-      <!-- Save draft form -->
-      <form method="POST" action="/update-draft">
-        <input type="hidden" name="file" value="${file}">
-        <div class="form-row">
-          <div>
-            <label>タイトル *</label>
-            <input type="text" name="title" value="${safeTitle}" required>
-          </div>
-          <div>
-            <label>カテゴリ *</label>
-            <select name="category" required>${categoryOptions}</select>
-          </div>
-        </div>
-        <div class="form-row">
-          <div>
-            <label>公開日 *</label>
-            <input type="date" name="date" value="${meta.date || ''}" required>
-          </div>
-          <div>
-            <label>サムネイル画像URL</label>
-            <input type="text" name="image" value="${safeImage}">
-          </div>
-        </div>
-        <div class="form-row full">
-          <div>
-            <label>説明文</label>
-            <input type="text" name="description" value="${safeDesc}">
-          </div>
-        </div>
-        <div class="form-row full">
-          <div>
-            <label>本文（Markdown）*</label>
-            <textarea name="content" required>${safeBody}</textarea>
-          </div>
-        </div>
-        <div class="btn-row">
-          <button type="submit" class="submit-btn" style="flex:1;">下書きを保存</button>
-        </div>
-      </form>
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="showTab('edit')">✏️ 編集</button>
+        <button class="tab-btn" onclick="showTab('preview')">👁 プレビュー</button>
+      </div>
 
-      <!-- Publish draft form (separate) -->
-      <form method="POST" action="/publish-draft" style="margin-top:12px;">
-        <input type="hidden" name="file" value="${file}">
-        <button type="submit" class="pub-btn">🚀 この下書きを公開する（posts/ に移動してコミット）</button>
-      </form>
+      <!-- 編集タブ -->
+      <div id="edit-pane">
+        <form method="POST" action="/update-draft">
+          <input type="hidden" name="file" value="${file}">
+          <div class="form-row">
+            <div>
+              <label>タイトル *</label>
+              <input type="text" id="f-title" name="title" value="${safeTitle}" required>
+            </div>
+            <div>
+              <label>カテゴリ *</label>
+              <select name="category" required>${categoryOptions}</select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div>
+              <label>公開日 *</label>
+              <input type="date" name="date" value="${meta.date || ''}" required>
+            </div>
+            <div>
+              <label>サムネイル画像URL</label>
+              <input type="text" id="f-image" name="image" value="${safeImage}">
+            </div>
+          </div>
+          <div class="form-row full">
+            <div>
+              <label>説明文</label>
+              <input type="text" name="description" value="${safeDesc}">
+            </div>
+          </div>
+          <div class="form-row full">
+            <div>
+              <label>本文（Markdown）*</label>
+              <textarea id="f-body" name="content" required>${safeBody}</textarea>
+            </div>
+          </div>
+          <div class="btn-row">
+            <button type="submit" class="submit-btn" style="flex:1;">下書きを保存</button>
+          </div>
+        </form>
+        <form method="POST" action="/publish-draft" style="margin-top:12px;">
+          <input type="hidden" name="file" value="${file}">
+          <button type="submit" class="pub-btn">🚀 この下書きを公開する</button>
+        </form>
+      </div>
+
+      <!-- プレビュータブ -->
+      <div id="preview-pane">
+        <div id="preview-cover-wrap"></div>
+        <div style="margin-bottom:8px;">
+          <span id="preview-category" style="font-size:11px;font-weight:700;letter-spacing:0.08em;color:#1a2744;padding:3px 8px;border:1px solid #1a2744;"></span>
+        </div>
+        <h1 id="preview-title" style="font-size:24px;font-weight:800;color:#111;line-height:1.55;margin:12px 0;"></h1>
+        <div id="preview-date" style="font-size:12px;color:#999;border-top:1px solid #e0e0e0;padding-top:12px;margin-bottom:24px;"></div>
+        <div id="preview-body" class="preview-body"></div>
+        <div style="margin-top:24px;padding-top:16px;border-top:1px solid #e0e0e0;text-align:right;">
+          <form method="POST" action="/publish-draft">
+            <input type="hidden" name="file" value="${file}">
+            <button type="submit" class="pub-btn">🚀 この内容で公開する</button>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
+
+  <script>
+    function showTab(tab) {
+      document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', (tab==='edit'&&i===0)||(tab==='preview'&&i===1)))
+      document.getElementById('edit-pane').classList.toggle('hidden', tab !== 'edit')
+      const pp = document.getElementById('preview-pane')
+      pp.classList.toggle('visible', tab === 'preview')
+      if (tab === 'preview') renderPreview()
+    }
+
+    function renderPreview() {
+      const title = document.getElementById('f-title')?.value || ''
+      const image = document.getElementById('f-image')?.value || ''
+      const body  = document.getElementById('f-body')?.value  || ''
+      const cat   = document.querySelector('select[name=category]')?.value || ''
+      const date  = document.querySelector('input[name=date]')?.value || ''
+
+      const coverWrap = document.getElementById('preview-cover-wrap')
+      if (image) {
+        coverWrap.innerHTML = '<img class="preview-cover" src="' + image + '" alt="">'
+      } else {
+        coverWrap.innerHTML = ''
+      }
+      document.getElementById('preview-title').textContent = title
+      document.getElementById('preview-category').textContent = cat
+      document.getElementById('preview-date').textContent = date
+      document.getElementById('preview-body').innerHTML = marked.parse(body)
+    }
+  </script>
 </body>
 </html>`
 }
