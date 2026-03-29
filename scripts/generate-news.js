@@ -46,6 +46,25 @@ function parseRSS(xml) {
   return items.slice(0, 5)
 }
 
+// NASA画像のcollection.jsonから実在するURLを取得
+async function resolveNASAImageUrl(nasaId) {
+  try {
+    const res = await fetch(
+      `https://images-assets.nasa.gov/image/${nasaId}/collection.json`,
+      { signal: AbortSignal.timeout(8000) }
+    )
+    const urls = await res.json()
+    // large → medium → small → thumb の優先順で探す
+    for (const suffix of ['~large.jpg', '~medium.jpg', '~small.jpg', '~thumb.jpg']) {
+      const found = urls.find((u) => u.endsWith(suffix))
+      if (found) return found
+    }
+    return urls.find((u) => u.endsWith('.jpg')) || null
+  } catch {
+    return null
+  }
+}
+
 // 記事内容に関連したNASA画像を検索して取得
 async function fetchNASAImages(query, count = 3) {
   const images = []
@@ -60,12 +79,11 @@ async function fetchNASAImages(query, count = 3) {
     const items = data?.collection?.items || []
 
     for (const item of items) {
-      const nasaId = item?.data?.[0]?.nasa_id
-      if (nasaId) {
-        // ~large.jpg は通常1024px幅の高品質画像
-        images.push(`https://images-assets.nasa.gov/image/${nasaId}/${nasaId}~large.jpg`)
-      }
       if (images.length >= count) break
+      const nasaId = item?.data?.[0]?.nasa_id
+      if (!nasaId) continue
+      const url = await resolveNASAImageUrl(nasaId)
+      if (url) images.push(url)
     }
     console.log(`  ✓ NASA画像ライブラリ「${query}」で ${images.length} 枚取得`)
   } catch (e) {
@@ -104,32 +122,30 @@ async function generateArticle(newsItems) {
     messages: [
       {
         role: 'user',
-        content: `あなたは宇宙開発専門のブログライターです。
-SpaceX・Blue Origin・Rocket Lab・JAXA・NASAなど幅広い宇宙企業・機関のニュースを、
-宇宙に詳しくない一般読者にもわかりやすく解説するのが得意です。
+        content: `宇宙開発が好きで、自分のブログに記事を書いている人物として振る舞ってください。
+専門家ではないが宇宙ニュースをよく追っていて、面白いと思ったことを自分の言葉で友人に話すように書くスタイルです。
 
-以下のニュース一覧の中から、**最も読者の関心を引きそうな1つのニュース**を選び、
-そのニュース1本に絞って深く掘り下げた日本語ブログ記事を書いてください。
-複数のニュースをまとめることはしないでください。1つのトピックだけを丁寧に解説します。
+以下のニュース一覧から**1つだけ**選び、そのニュースについて日本語ブログ記事を書いてください。
+複数のニュースを混ぜないこと。1トピックを深く掘り下げます。
 
-ニュース一覧（この中から1つ選ぶ）:
+ニュース一覧:
 ${newsText}
 
-文体・スタイルのルール:
-- 専門用語は必ず簡単な言葉で補足する（例：「フェアリング（ロケット先端の覆い）」）
-- 「なぜこれが重要なのか」「私たちの生活にどう関係するか」を必ず説明する
-- SpaceX・Blue Origin・Rocket Labなど企業名が出たらどんな会社か一言添える
-- 難しい技術は身近なものに例えて説明する（例：「地球から月までの距離は東京〜ニューヨークの約10倍」）
-- 堅くなりすぎず、読んでいて面白いと感じる文体にする
-- 背景・経緯・今後の展望まで丁寧に書く
+書き方のルール:
+- 「です・ます」調だが硬くない。友人に話すような自然な口語に近い文体
+- AI感・レポート感が出る表現を避ける。「〜と言えるでしょう」「〜と感じるかもしれません」「まとめると」などは使わない
+- 見出しは体言止めや疑問形にしない。「なぜ火星に原子炉が必要なのか？」ではなく「火星で太陽光パネルが使えない理由」のように具体的に
+- 専門用語は自然な流れで一言補足（カッコ書き多用はNG）
+- 例え話は1〜2個まで。多用しない
+- 「なぜこれが重要か」は書くが、大げさに煽らない
 - 本文中の1つ目の ## 見出しの直後に {{IMAGE_1}}、2つ目の ## 見出しの直後に {{IMAGE_2}} を入れる
 
-以下のJSON形式のみで返してください（説明文は不要）:
+以下のJSON形式のみで返してください:
 {
-  "title": "記事タイトル（日本語、35文字以内・興味を引くタイトル）",
+  "title": "記事タイトル（日本語、35文字以内）",
   "description": "記事の要約（90文字以内）",
   "category": "ロケット・衛星・通信・有人宇宙飛行・月探査・火星探査 のいずれか1つ",
-  "imageQuery": "NASA画像検索用の英語キーワード（例: SpaceX Falcon 9 launch, Blue Origin rocket, Moon landing）",
+  "imageQuery": "NASA画像検索用の英語キーワード（例: SpaceX Falcon 9 launch, Mars rover, Moon surface）",
   "body": "記事本文（マークダウン形式。## 見出しを3〜4つ、{{IMAGE_1}}と{{IMAGE_2}}を含め、1200〜1800文字）"
 }`,
       },
