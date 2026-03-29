@@ -82,6 +82,7 @@ function parseBody(req) {
     req.on('end', () => {
       const params = new URLSearchParams(body)
       const obj = {}
+      
       params.forEach((v, k) => { obj[k] = v })
       resolve(obj)
     })
@@ -101,6 +102,17 @@ function getImagesList() {
   return fs.readdirSync(IMAGES_DIR)
     .filter(f => /\.(jpg|jpeg|png|gif|webp)$/i.test(f))
     .sort((a, b) => b.localeCompare(a))
+}
+
+function parseFrontmatter(content) {
+  const match = content.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/)
+  if (!match) return { meta: {}, body: content }
+  const meta = {}
+  for (const line of match[1].split('\n')) {
+    const m = line.match(/^(\w+):\s*['"]?(.*?)['"]?\s*$/)
+    if (m) meta[m[1]] = m[2]
+  }
+  return { meta, body: match[2].trim() }
 }
 
 function getPostsList() {
@@ -136,10 +148,13 @@ function renderHTML(message = '') {
       <td>${p.date}</td>
       <td>${p.category}</td>
       <td>${p.title}</td>
-      <td><form method="POST" action="/delete" onsubmit="return confirm('削除しますか？')">
-        <input type="hidden" name="file" value="${p.file}">
-        <button type="submit" class="del-btn">削除</button>
-      </form></td>
+      <td style="white-space:nowrap;display:flex;gap:6px;">
+        <a href="/edit?file=${encodeURIComponent(p.file)}" class="edit-btn">編集</a>
+        <form method="POST" action="/delete" onsubmit="return confirm('削除しますか？')" style="margin:0">
+          <input type="hidden" name="file" value="${p.file}">
+          <button type="submit" class="del-btn">削除</button>
+        </form>
+      </td>
     </tr>
   `).join('')
 
@@ -189,6 +204,8 @@ function renderHTML(message = '') {
     tr:hover td { background: #fafafa; }
     .del-btn { background: none; border: 1px solid #e53935; color: #e53935; padding: 4px 10px; border-radius: 3px; font-size: 11px; cursor: pointer; }
     .del-btn:hover { background: #ffebee; }
+    .edit-btn { background: none; border: 1px solid #1a2744; color: #1a2744; padding: 4px 10px; border-radius: 3px; font-size: 11px; cursor: pointer; text-decoration: none; }
+    .edit-btn:hover { background: #eef2fa; }
     .md-hint { background: #f8f9fc; border: 1px solid #e0e0e0; border-radius: 4px; padding: 12px 16px; font-size: 12px; color: #666; line-height: 1.8; margin-top: 8px; }
     .md-hint code { background: #e8eaf0; padding: 1px 5px; border-radius: 3px; font-size: 11px; }
     .upload-row { display: flex; gap: 12px; align-items: flex-end; margin-bottom: 12px; }
@@ -458,6 +475,92 @@ function renderHTML(message = '') {
 </html>`
 }
 
+function renderEditHTML(file, meta, body, message = '') {
+  const categoryOptions = CATEGORIES.map(c =>
+    `<option value="${c}"${meta.category === c ? ' selected' : ''}>${c}</option>`
+  ).join('')
+  return `<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>記事編集 - 宇宙便</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Hiragino Sans', 'Meiryo', sans-serif; background: #f4f6fb; color: #111; }
+    header { background: #1a2744; padding: 0 32px; height: 60px; display: flex; align-items: center; gap: 12px; }
+    header .bar { width: 3px; height: 30px; background: #e57373; }
+    header h1 { color: #fff; font-size: 20px; letter-spacing: 0.15em; }
+    header a { margin-left: auto; color: rgba(255,255,255,0.7); font-size: 13px; text-decoration: none; }
+    header a:hover { color: #fff; }
+    .container { max-width: 960px; margin: 36px auto; padding: 0 20px; }
+    .card { background: #fff; border-radius: 8px; box-shadow: 0 1px 8px rgba(0,0,0,0.08); padding: 32px; }
+    .card h2 { font-size: 15px; font-weight: 700; color: #1a2744; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid #e57373; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .form-row.full { grid-template-columns: 1fr; }
+    label { display: block; font-size: 12px; font-weight: 700; color: #555; margin-bottom: 6px; }
+    input[type=text], input[type=date], select, textarea { width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; font-family: inherit; outline: none; }
+    input:focus, select:focus, textarea:focus { border-color: #1a2744; }
+    textarea { resize: vertical; min-height: 400px; line-height: 1.7; }
+    .save-btn { display: block; width: 100%; padding: 14px; background: #1a2744; color: #fff; border: none; border-radius: 4px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 16px; }
+    .save-btn:hover { background: #2e4a7a; }
+    .message { padding: 14px 20px; border-radius: 4px; margin-bottom: 24px; font-size: 14px; font-weight: 600; }
+    .message.success { background: #e8f5e9; color: #2e7d32; border-left: 4px solid #43a047; }
+    .message.error { background: #ffebee; color: #c62828; border-left: 4px solid #e53935; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="bar"></div>
+    <h1>宇宙便</h1>
+    <a href="/">← 記事一覧に戻る</a>
+  </header>
+  <div class="container">
+    ${message}
+    <div class="card">
+      <h2>記事を編集</h2>
+      <form method="POST" action="/update">
+        <input type="hidden" name="file" value="${file}">
+        <div class="form-row">
+          <div>
+            <label>タイトル *</label>
+            <input type="text" name="title" value="${(meta.title || '').replace(/"/g, '&quot;')}" required>
+          </div>
+          <div>
+            <label>カテゴリ *</label>
+            <select name="category" required>${categoryOptions}</select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div>
+            <label>公開日 *</label>
+            <input type="date" name="date" value="${meta.date || ''}" required>
+          </div>
+          <div>
+            <label>サムネイル画像URL</label>
+            <input type="text" name="image" value="${(meta.image || '').replace(/"/g, '&quot;')}">
+          </div>
+        </div>
+        <div class="form-row full">
+          <div>
+            <label>説明文</label>
+            <input type="text" name="description" value="${(meta.description || '').replace(/"/g, '&quot;')}">
+          </div>
+        </div>
+        <div class="form-row full">
+          <div>
+            <label>本文（Markdown）*</label>
+            <textarea name="content" required>${body.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</textarea>
+          </div>
+        </div>
+        <button type="submit" class="save-btn">保存する</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>`
+}
+
 const server = http.createServer(async (req, res) => {
   if (req.method === 'GET' && req.url === '/') {
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
@@ -541,6 +644,46 @@ const server = http.createServer(async (req, res) => {
     return
   }
 
+  // 記事編集ページ
+  if (req.method === 'GET' && req.url.startsWith('/edit')) {
+    try {
+      const file = decodeURIComponent(new URL(req.url, 'http://localhost').searchParams.get('file') || '')
+      const filePath = path.join(POSTS_DIR, path.basename(file))
+      if (!filePath.startsWith(POSTS_DIR) || !fs.existsSync(filePath)) throw new Error('記事が見つかりません')
+      const content = fs.readFileSync(filePath, 'utf-8')
+      const { meta, body } = parseFrontmatter(content)
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
+      res.end(renderEditHTML(path.basename(file), meta, body))
+    } catch (e) {
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
+      res.end(renderEditHTML('', {}, '', `<div class="message error">エラー：${e.message}</div>`))
+    }
+    return
+  }
+
+  // 記事更新
+  if (req.method === 'POST' && req.url === '/update') {
+    const data = await parseBody(req)
+    try {
+      const { file, title, category, date, image, description, content } = data
+      if (!title || !category || !date || !content) throw new Error('必須項目が未入力です')
+      const filePath = path.join(POSTS_DIR, path.basename(file))
+      if (!filePath.startsWith(POSTS_DIR)) throw new Error('不正なリクエスト')
+      const imageField = image ? `\nimage: '${image}'` : ''
+      const descField = description ? `\ndescription: '${description.replace(/'/g, "\\'")}'\n` : '\n'
+      const frontmatter = `---\ntitle: '${title.replace(/'/g, "\\'")}'\n${descField}date: '${date}'\ncategory: '${category}'${imageField}\n---\n\n`
+      fs.writeFileSync(filePath, frontmatter + content.replace(/\r\n/g, '\n'), 'utf-8')
+      const msg = `<div class="message success">✓ 記事を更新しました</div>`
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
+      res.end(renderEditHTML(path.basename(file), { title, category, date, image, description }, content.replace(/\r\n/g, '\n'), msg))
+    } catch (e) {
+      const msg = `<div class="message error">エラー：${e.message}</div>`
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
+      res.end(renderHTML(msg))
+    }
+    return
+  }
+
   // 記事削除
   if (req.method === 'POST' && req.url === '/delete') {
     const data = await parseBody(req)
@@ -562,7 +705,7 @@ const server = http.createServer(async (req, res) => {
   // 公開（git add → commit → push）
   if (req.method === 'POST' && req.url === '/publish') {
     const date = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })
-    const cmd = `git add posts/ public/images/ && git commit -m "記事更新 ${date}" && git push`
+    const cmd = `git add -A posts/ public/images/ && git commit -m "記事更新 ${date}" && git push`
     exec(cmd, { cwd: __dirname }, (err, stdout, stderr) => {
       res.writeHead(200, { 'Content-Type': 'application/json' })
       if (err) {
