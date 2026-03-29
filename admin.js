@@ -688,9 +688,9 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'POST' && req.url === '/delete') {
     const data = await parseBody(req)
     try {
-      const filePath = path.join(POSTS_DIR, data.file)
+      const filePath = path.join(POSTS_DIR, path.basename(data.file))
       if (!filePath.startsWith(POSTS_DIR)) throw new Error('不正なリクエスト')
-      fs.unlinkSync(filePath)
+      if (fs.existsSync(filePath)) fs.unlinkSync(filePath)
       const msg = `<div class="message success">✓ 記事を削除しました</div>`
       res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
       res.end(renderHTML(msg))
