@@ -705,7 +705,7 @@ const server = http.createServer(async (req, res) => {
   // 公開（git add → commit → push）
   if (req.method === 'POST' && req.url === '/publish') {
     const date = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })
-    const cmd = `git add -A posts/ public/images/ && git commit -m "記事更新 ${date}" && git push`
+    const cmd = `git add -A posts/ public/images/ && (git diff --cached --quiet && echo "nothing to commit" || git commit -m "記事更新 ${date}") && git pull --rebase && git push`
     exec(cmd, { cwd: __dirname }, (err, stdout, stderr) => {
       res.writeHead(200, { 'Content-Type': 'application/json' })
       if (err) {
