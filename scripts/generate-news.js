@@ -7,21 +7,31 @@ const path = require('path')
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
-// 宇宙開発ニュースのRSSフィード
-// SpaceX・Blue Origin・Rocket Lab・NASA・JAXA等を幅広くカバー
-const RSS_FEEDS = [
-  // 日本
-  'https://www.jaxa.jp/rss/press.rss',
-  // 総合（SpaceX/Blue Origin/Rocket Lab等を広くカバー）
-  'https://www.nasaspaceflight.com/feed/',        // NASASpaceFlight.com（民間企業に強い）
-  'https://feeds.arstechnica.com/arstechnica/space', // Ars Technica宇宙面（技術解説が豊富）
-  'https://spaceflightnow.com/feed/',
-  'https://spacenews.com/feed/',
-  // NASA公式
-  'https://www.nasa.gov/rss/dyn/breaking_news.rss',
-  // 宇宙探査・科学
-  'https://www.planetary.org/rss/articles',       // 惑星協会（探査機・科学）
-]
+// 地域別RSSフィード（日本20% / 米国50% / 中国20% / 欧州10% / その他）
+const RSS_FEEDS_BY_REGION = {
+  japan: [
+    { url: 'https://www.jaxa.jp/rss/press.rss', label: '日本（JAXA）' },
+  ],
+  usa: [
+    { url: 'https://www.nasaspaceflight.com/feed/', label: '米国（NASASpaceFlight）' },
+    { url: 'https://feeds.arstechnica.com/arstechnica/space', label: '米国（Ars Technica）' },
+    { url: 'https://spaceflightnow.com/feed/', label: '米国（SpaceFlightNow）' },
+    { url: 'https://www.nasa.gov/rss/dyn/breaking_news.rss', label: '米国（NASA公式）' },
+  ],
+  china: [
+    { url: 'https://spacenews.com/section/china/feed/', label: '中国（SpaceNews China）' },
+  ],
+  europe: [
+    { url: 'https://www.esa.int/rssfeed/ESA_top_News', label: '欧州（ESA）' },
+  ],
+  global: [
+    { url: 'https://spacenews.com/feed/', label: 'グローバル（SpaceNews）' },
+    { url: 'https://www.planetary.org/rss/articles', label: 'グローバル（Planetary Society）' },
+  ],
+}
+
+// 地域ごとの取得件数（合計で約15件）
+const REGION_COUNTS = { japan: 3, usa: 5, china: 3, europe: 2, global: 2 }
 
 async function fetchUrl(url) {
   const res = await fetch(url, {
@@ -32,7 +42,7 @@ async function fetchUrl(url) {
   return await res.text()
 }
 
-function parseRSS(xml) {
+function parseRSS(xml, region) {
   const items = []
   for (const match of xml.matchAll(/<item>([\s\S]*?)<\/item>/g)) {
     const raw = match[1]
@@ -41,31 +51,55 @@ function parseRSS(xml) {
     const title = get('title')
     const desc = get('description')?.replace(/<[^>]+>/g, '').slice(0, 400)
     const link = get('link')
-    if (title) items.push({ title, description: desc || '', link })
+    const pubDate = get('pubDate')
+    const date = pubDate ? new Date(pubDate) : new Date(0)
+    if (title) items.push({ title, description: desc || '', link, date, region })
   }
-  return items.slice(0, 5)
+  // 新しい順にソートして上位5件
+  return items.sort((a, b) => b.date - a.date).slice(0, 5)
 }
 
-// NASA画像のcollection.jsonから実在するURLを取得
-async function resolveNASAImageUrl(nasaId) {
+// 直近14日の記事タイトルを取得（重複防止用）
+function getRecentTitles(days = 14) {
+  const postsDir = path.join(__dirname, '..', 'posts')
+  const cutoff = new Date(Date.now() - days * 24 * 60 * 60 * 1000)
+  const titles = []
+  try {
+    const files = fs.readdirSync(postsDir).filter((f) => f.endsWith('.md'))
+    for (const file of files) {
+      const content = fs.readFileSync(path.join(postsDir, file), 'utf-8')
+      const dateMatch = content.match(/^date:\s*['"]?(\d{4}-\d{2}-\d{2})/)
+      if (dateMatch && new Date(dateMatch[1]) >= cutoff) {
+        const titleMatch = content.match(/^title:\s*['"]?(.+?)['"]?\s*$/m)
+        if (titleMatch) titles.push(titleMatch[1])
+      }
+    }
+  } catch {}
+  return titles
+}
+
+// NASA画像のcollection.jsonから実在するURLと出典を取得
+async function resolveNASAImage(nasaId, center) {
   try {
     const res = await fetch(
       `https://images-assets.nasa.gov/image/${nasaId}/collection.json`,
       { signal: AbortSignal.timeout(8000) }
     )
     const urls = await res.json()
-    // large → medium → small → thumb の優先順で探す
     for (const suffix of ['~large.jpg', '~medium.jpg', '~small.jpg', '~thumb.jpg']) {
       const found = urls.find((u) => u.endsWith(suffix))
-      if (found) return found
+      if (found) {
+        const credit = center ? `NASA/${center}` : 'NASA'
+        return { url: found, credit }
+      }
     }
-    return urls.find((u) => u.endsWith('.jpg')) || null
-  } catch {
-    return null
-  }
+    const jpg = urls.find((u) => u.endsWith('.jpg'))
+    if (jpg) return { url: jpg, credit: center ? `NASA/${center}` : 'NASA' }
+  } catch {}
+  return null
 }
 
-// 記事内容に関連したNASA画像を検索して取得
+// 記事に関連したNASA画像を検索して取得（出典付き）
 async function fetchNASAImages(query, count = 3) {
   const images = []
 
@@ -81,9 +115,10 @@ async function fetchNASAImages(query, count = 3) {
     for (const item of items) {
       if (images.length >= count) break
       const nasaId = item?.data?.[0]?.nasa_id
+      const center = item?.data?.[0]?.center || ''
       if (!nasaId) continue
-      const url = await resolveNASAImageUrl(nasaId)
-      if (url) images.push(url)
+      const result = await resolveNASAImage(nasaId, center)
+      if (result) images.push(result)
     }
     console.log(`  ✓ NASA画像ライブラリ「${query}」で ${images.length} 枚取得`)
   } catch (e) {
@@ -100,7 +135,8 @@ async function fetchNASAImages(query, count = 3) {
       const apod = await res.json()
       const url = apod.media_type === 'image' ? apod.url : apod.thumbnail_url
       if (url) {
-        while (images.length < count) images.push(url)
+        const credit = apod.copyright ? apod.copyright.replace(/\n/g, ' ').trim() : 'NASA'
+        while (images.length < count) images.push({ url, credit })
         console.log(`  ✓ APOD画像で補完`)
       }
     } catch (e) {
@@ -111,10 +147,18 @@ async function fetchNASAImages(query, count = 3) {
   return images
 }
 
-async function generateArticle(newsItems) {
-  const newsText = newsItems
-    .map((item, i) => `${i + 1}. ${item.title}\n${item.description}`)
+async function generateArticle(newsByRegion, recentTitles) {
+  // 地域ラベル付きのニュースリスト作成
+  const newsText = Object.entries(newsByRegion)
+    .flatMap(([region, items]) =>
+      items.map((item) => `[${region.toUpperCase()}] ${item.title}\n${item.description}`)
+    )
     .join('\n\n')
+
+  const recentText =
+    recentTitles.length > 0
+      ? `\n【直近14日間に生成済みの記事タイトル（これらと同じテーマは避けること）】\n${recentTitles.map((t) => `- ${t}`).join('\n')}\n`
+      : ''
 
   const message = await client.messages.create({
     model: 'claude-opus-4-6',
@@ -128,9 +172,12 @@ async function generateArticle(newsItems) {
 
 以下のニュース一覧から**1つだけ**選び、そのニュースに絞って深く解説してください。
 複数のニュースを混ぜないこと。
-
-ニュース一覧:
+${recentText}
+ニュース一覧（地域タグ付き）:
 ${newsText}
+
+地域バランスの目安: 米国50% / 日本20% / 中国20% / 欧州10%
+毎日異なる地域・テーマになるよう、直近記事と被らないものを選ぶこと。
 
 文体・スタイルの基準（ミリレポ風）:
 - 「です・ます」調のジャーナリスティックな文体。硬すぎず、崩しすぎない
@@ -161,27 +208,39 @@ ${newsText}
 }
 
 async function main() {
-  console.log('📡 宇宙ニュースを取得中...')
+  console.log('📡 地域別に宇宙ニュースを取得中...')
 
-  const allNews = []
-  for (const feed of RSS_FEEDS) {
-    try {
-      const xml = await fetchUrl(feed)
-      const items = parseRSS(xml)
-      allNews.push(...items)
-      console.log(`  ✓ ${new URL(feed).hostname} から ${items.length} 件`)
-    } catch (e) {
-      console.error(`  ✗ ${feed}: ${e.message}`)
+  const newsByRegion = {}
+  for (const [region, feeds] of Object.entries(RSS_FEEDS_BY_REGION)) {
+    newsByRegion[region] = []
+    for (const { url, label } of feeds) {
+      try {
+        const xml = await fetchUrl(url)
+        const items = parseRSS(xml, region)
+        newsByRegion[region].push(...items)
+        console.log(`  ✓ ${label} から ${items.length} 件`)
+      } catch (e) {
+        console.error(`  ✗ ${label}: ${e.message}`)
+      }
     }
+    // 地域ごとの上限件数に絞る（新しい順）
+    newsByRegion[region] = newsByRegion[region]
+      .sort((a, b) => b.date - a.date)
+      .slice(0, REGION_COUNTS[region] || 2)
   }
 
-  if (allNews.length === 0) {
+  const totalNews = Object.values(newsByRegion).flat()
+  if (totalNews.length === 0) {
     console.error('ニュースを1件も取得できませんでした')
     process.exit(1)
   }
 
-  console.log(`\n🤖 Claude APIで記事を生成中... (${allNews.length} 件のニュースをもとに)`)
-  const article = await generateArticle(allNews.slice(0, 6))
+  console.log('\n📋 直近の記事タイトルを確認中（重複防止）...')
+  const recentTitles = getRecentTitles(14)
+  console.log(`  直近14日: ${recentTitles.length} 件`)
+
+  console.log(`\n🤖 Claude APIで記事を生成中...`)
+  const article = await generateArticle(newsByRegion, recentTitles)
   console.log(`  タイトル: ${article.title}`)
   console.log(`  カテゴリ: ${article.category}`)
   console.log(`  画像検索ワード: ${article.imageQuery}`)
@@ -189,15 +248,21 @@ async function main() {
   console.log('\n🌌 関連NASA画像を取得中...')
   const images = await fetchNASAImages(article.imageQuery || article.title, 3)
 
-  // 本文の {{IMAGE_1}} {{IMAGE_2}} を実際の画像に置き換え
+  // 本文の {{IMAGE_1}} {{IMAGE_2}} を画像＋出典付きで置き換え
   let body = article.body
   if (images[1]) {
-    body = body.replace('{{IMAGE_1}}', `\n![${article.title}](${images[1]})\n`)
+    body = body.replace(
+      '{{IMAGE_1}}',
+      `\n![${article.title}](${images[1].url})\n*出典: ${images[1].credit}*\n`
+    )
   } else {
     body = body.replace('{{IMAGE_1}}', '')
   }
   if (images[2]) {
-    body = body.replace('{{IMAGE_2}}', `\n![${article.title}](${images[2]})\n`)
+    body = body.replace(
+      '{{IMAGE_2}}',
+      `\n![${article.title}](${images[2].url})\n*出典: ${images[2].credit}*\n`
+    )
   } else {
     body = body.replace('{{IMAGE_2}}', '')
   }
@@ -212,8 +277,10 @@ async function main() {
     `date: '${date}'`,
     `category: '${article.category}'`,
   ]
-  // カバー画像（1枚目）
-  if (images[0]) lines.push(`image: '${images[0]}'`)
+  if (images[0]) {
+    lines.push(`image: '${images[0].url}'`)
+    lines.push(`imageCredit: '${images[0].credit}'`)
+  }
   lines.push(`---`, ``, body)
 
   const postsDir = path.join(__dirname, '..', 'posts')
@@ -221,9 +288,9 @@ async function main() {
   fs.writeFileSync(filePath, lines.join('\n'), 'utf-8')
 
   console.log(`\n✅ 記事を生成しました: posts/${slug}.md`)
-  console.log(`  カバー画像: ${images[0] ? '✓' : '✗'}`)
-  console.log(`  本文内画像1: ${images[1] ? '✓' : '✗'}`)
-  console.log(`  本文内画像2: ${images[2] ? '✓' : '✗'}`)
+  console.log(`  カバー画像: ${images[0] ? `✓ (${images[0].credit})` : '✗'}`)
+  console.log(`  本文内画像1: ${images[1] ? `✓ (${images[1].credit})` : '✗'}`)
+  console.log(`  本文内画像2: ${images[2] ? `✓ (${images[2].credit})` : '✗'}`)
 }
 
 main().catch((err) => {
