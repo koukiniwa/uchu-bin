@@ -38,78 +38,49 @@ export default function BlogPost({ params }) {
         ← 記事一覧へ
       </Link>
 
-      {/* 記事ヘッダーブロック */}
-      <div style={{
-        border: '1px solid #e0e0e0',
-        overflow: 'hidden',
-        marginBottom: '40px',
-      }}>
-        {/* ヒーロー画像 */}
-        {post.image && (
-          <div style={{ width: '100%', height: '420px', overflow: 'hidden', position: 'relative' }}>
-            <img
-              src={post.image}
-              alt={post.title}
-              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', opacity: 0.8 }}
-            />
-            <div style={{
-              position: 'absolute',
-              bottom: 0,
-              left: 0,
-              right: 0,
-              height: '80px',
-              background: 'linear-gradient(to top, #0f1629, transparent)',
-            }} />
-          </div>
-        )}
+      {/* タイトルエリア */}
+      <div style={{ marginBottom: '28px' }}>
+        {/* カテゴリバッジ */}
+        <div style={{ marginBottom: '14px' }}>
+          <Link
+            href={`/?category=${encodeURIComponent(post.category)}`}
+            style={{
+              fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em',
+              color: '#1565c0', padding: '3px 10px',
+              border: '1px solid #1565c0', textDecoration: 'none',
+            }}
+          >
+            {post.category}
+          </Link>
+        </div>
 
-        {/* タイトルエリア */}
-        <div style={{
-          padding: '28px 32px',
-          backgroundColor: '#ffffff',
-          borderTop: post.image ? '3px solid #1a2744' : 'none',
-          borderLeft: !post.image ? '4px solid #1a2744' : 'none',
+        {/* タイトル */}
+        <h1 style={{
+          fontSize: '28px', fontWeight: 800, color: '#111111',
+          lineHeight: 1.6, margin: '0 0 16px 0',
         }}>
-          {/* カテゴリバッジ */}
-          <div style={{ marginBottom: '16px' }}>
-            <Link
-              href={`/?category=${encodeURIComponent(post.category)}`}
-              style={{
-                fontSize: '11px',
-                fontWeight: 700,
-                letterSpacing: '0.1em',
-                color: '#1a2744',
-                padding: '3px 10px',
-                border: '1px solid #1a2744',
-                textDecoration: 'none',
-              }}
-            >
-              {post.category}
-            </Link>
-          </div>
+          {post.title}
+        </h1>
 
-          {/* タイトル */}
-          <h1 style={{
-            fontSize: '26px',
-            fontWeight: 800,
-            color: '#111111',
-            lineHeight: 1.6,
-            margin: '0 0 20px 0',
-          }}>
-            {post.title}
-          </h1>
-
-          {/* 日付 */}
-          <div style={{
-            fontSize: '12px',
-            color: '#999999',
-            borderTop: '1px solid #e0e0e0',
-            paddingTop: '14px',
-          }}>
-            {post.date}
-          </div>
+        {/* 日付 */}
+        <div style={{
+          fontSize: '12px', color: '#999999',
+          borderBottom: '1px solid #e0e0e0', paddingBottom: '20px',
+        }}>
+          {post.date}
         </div>
       </div>
+
+      {/* ヒーロー画像 */}
+      {post.image && (
+        <div style={{ width: '100%', height: '420px', overflow: 'hidden', marginBottom: '40px' }}>
+          <img
+            src={post.image}
+            alt={post.title}
+            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+          />
+        </div>
+      )}
 
       {/* 本文 */}
       <div className="post-body">
