@@ -117,90 +117,63 @@ function ArticleCard({ post }) {
       <article
         className="mil-card"
         style={{
-          position: 'relative',
           width: '100%',
-          height: '280px',
           overflow: 'hidden',
           cursor: 'pointer',
+          display: 'flex',
+          flexDirection: 'column',
+          backgroundColor: '#ffffff',
+          border: '1px solid #e8e8e8',
+          transition: 'box-shadow 0.2s, transform 0.2s',
         }}
+        onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
+        onMouseLeave={e => { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)' }}
       >
-        {/* 背景画像 */}
-        <div style={{ position: 'absolute', inset: 0, backgroundColor: '#0f1629' }}>
+        {/* 画像エリア */}
+        <div style={{ position: 'relative', height: '180px', backgroundColor: '#1a2744', flexShrink: 0 }}>
           {post.image ? (
             <img
               src={post.image}
               alt={post.title}
-              style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.75 }}
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
           ) : (
-            <div style={{
-              width: '100%',
-              height: '100%',
-              background: 'linear-gradient(135deg, #0f1629 0%, #1a2744 100%)',
-            }} />
+            <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #0f1629 0%, #1a2744 100%)' }} />
           )}
-        </div>
-
-        {/* グラデーションオーバーレイ */}
-        <div style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'linear-gradient(to top, rgba(5,8,20,0.92) 0%, rgba(5,8,20,0.2) 60%, transparent 100%)',
-        }} />
-
-        {/* カテゴリバッジ（左上） */}
-        <div style={{ position: 'absolute', top: '12px', left: '12px' }}>
+          {/* カテゴリバッジ */}
           <span style={{
-            fontSize: '10px',
-            fontWeight: 700,
-            letterSpacing: '0.1em',
-            color: '#4fc3f7',
-            padding: '2px 8px',
-            border: '1px solid rgba(79,195,247,0.55)',
-            backgroundColor: 'rgba(5,8,20,0.55)',
+            position: 'absolute', top: '10px', left: '10px',
+            fontSize: '10px', fontWeight: 700, letterSpacing: '0.08em',
+            color: '#fff', padding: '3px 8px',
+            backgroundColor: '#1565c0',
           }}>
             {post.category}
           </span>
         </div>
 
-        {/* テキスト（下部） */}
-        <div style={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          padding: '16px 18px',
-        }}>
+        {/* テキストエリア */}
+        <div style={{ padding: '14px 16px 16px', display: 'flex', flexDirection: 'column', flex: 1 }}>
           <h2 style={{
-            fontSize: '14px',
-            fontWeight: 700,
-            color: '#ffffff',
-            lineHeight: 1.6,
-            margin: '0 0 6px 0',
-            display: '-webkit-box',
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: 'vertical',
-            overflow: 'hidden',
+            fontSize: '14px', fontWeight: 700, color: '#111111',
+            lineHeight: 1.6, margin: '0 0 8px 0',
+            display: '-webkit-box', WebkitLineClamp: 2,
+            WebkitBoxOrient: 'vertical', overflow: 'hidden',
           }}>
             {post.title}
           </h2>
           {post.description && (
             <p style={{
-              fontSize: '11px',
-              color: 'rgba(255,255,255,0.55)',
-              margin: '0 0 8px 0',
-              lineHeight: 1.6,
-              display: '-webkit-box',
-              WebkitLineClamp: 2,
-              WebkitBoxOrient: 'vertical',
-              overflow: 'hidden',
+              fontSize: '12px', color: '#666666', margin: '0 0 10px 0',
+              lineHeight: 1.65, flex: 1,
+              display: '-webkit-box', WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical', overflow: 'hidden',
             }}>
               {post.description}
             </p>
           )}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.3)' }}>{post.date}</span>
-            <span style={{ fontSize: '11px', color: '#4fc3f7', fontWeight: 600 }}>続きを読む →</span>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 'auto', paddingTop: '8px', borderTop: '1px solid #f0f0f0' }}>
+            <span style={{ fontSize: '11px', color: '#aaaaaa' }}>{post.date}</span>
+            <span style={{ fontSize: '11px', color: '#1565c0', fontWeight: 600 }}>続きを読む →</span>
           </div>
         </div>
       </article>
