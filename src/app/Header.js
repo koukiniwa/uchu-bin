@@ -15,8 +15,8 @@ export default function Header() {
         <Link href="/" style={{ textDecoration: 'none' }}>
           {/* 右下の星マークをコンテナで隠す */}
           <div style={{
-            width: '270px',
-            height: '72px',
+            width: '300px',
+            height: '96px',
             overflow: 'hidden',
             position: 'relative',
           }}>
@@ -24,10 +24,11 @@ export default function Header() {
               src="/logo.jpg"
               alt="宇宙便"
               style={{
-                width: '270px',
-                height: 'auto',
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                objectPosition: 'center 30%',
                 display: 'block',
-                marginTop: '-4px',
               }}
             />
           </div>
