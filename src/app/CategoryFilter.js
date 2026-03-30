@@ -3,90 +3,93 @@
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 
-function ArticleCard({ post }) {
+function HeroCard({ post }) {
   return (
-    <Link href={`/blog/${post.slug}`} style={{ textDecoration: 'none', display: 'flex' }}>
-      <article
-        className="mil-card"
-        style={{
-          borderTop: '3px solid #1a2744',
-          display: 'flex',
-          flexDirection: 'column',
-          width: '100%',
-          overflow: 'hidden',
-        }}
+    <Link href={`/blog/${post.slug}`} style={{ textDecoration: 'none', display: 'block', marginBottom: '24px' }}>
+      <article style={{
+        position: 'relative',
+        height: '460px',
+        overflow: 'hidden',
+        cursor: 'pointer',
+        border: '1px solid #1e2a3a',
+        transition: 'border-color 0.2s',
+      }}
+      onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(79,195,247,0.4)'}
+      onMouseLeave={e => e.currentTarget.style.borderColor = '#1e2a3a'}
       >
-        {/* サムネイル画像 */}
-        <div style={{
-          width: '100%',
-          height: '190px',
-          overflow: 'hidden',
-          backgroundColor: '#f0f0f0',
-          flexShrink: 0,
-        }}>
-          {post.image ? (
+        {/* 背景画像 */}
+        <div style={{ position: 'absolute', inset: 0, backgroundColor: '#0f1629' }}>
+          {post.image && (
             <img
               src={post.image}
               alt={post.title}
-              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.65 }}
             />
-          ) : (
-            <div style={{
-              width: '100%',
-              height: '100%',
-              backgroundColor: '#e8e8e8',
-            }} />
           )}
         </div>
 
-        {/* テキストエリア */}
+        {/* グラデーションオーバーレイ */}
         <div style={{
-          padding: '14px 16px 16px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '9px',
-          flex: 1,
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(to top, rgba(5,8,20,0.97) 0%, rgba(5,8,20,0.5) 45%, rgba(5,8,20,0.05) 100%)',
+        }} />
+
+        {/* LATEST バッジ（右上） */}
+        <div style={{ position: 'absolute', top: '20px', right: '20px' }}>
+          <span style={{
+            fontSize: '10px',
+            fontWeight: 700,
+            letterSpacing: '0.2em',
+            color: '#4fc3f7',
+            padding: '4px 10px',
+            border: '1px solid rgba(79,195,247,0.5)',
+            backgroundColor: 'rgba(5,8,20,0.6)',
+          }}>
+            LATEST
+          </span>
+        </div>
+
+        {/* テキストオーバーレイ（下部） */}
+        <div style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          padding: '32px 36px',
         }}>
-          {/* カテゴリ + 日付 */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div style={{ marginBottom: '14px' }}>
             <span style={{
-              fontSize: '10px',
+              fontSize: '11px',
               fontWeight: 700,
-              letterSpacing: '0.08em',
-              color: '#1a2744',
-              padding: '2px 7px',
-              border: '1px solid #1a2744',
-              lineHeight: 1.5,
+              letterSpacing: '0.1em',
+              color: '#4fc3f7',
+              padding: '3px 10px',
+              border: '1px solid rgba(79,195,247,0.6)',
+              backgroundColor: 'rgba(5,8,20,0.5)',
             }}>
               {post.category}
             </span>
-            <span style={{
-              fontSize: '11px',
-              color: '#999999',
-            }}>
-              {post.date}
-            </span>
           </div>
 
-          {/* タイトル */}
           <h2 style={{
-            fontSize: '14px',
-            fontWeight: 700,
-            color: '#111111',
-            lineHeight: 1.6,
-            margin: 0,
-            flex: 1,
+            fontSize: '24px',
+            fontWeight: 800,
+            color: '#ffffff',
+            lineHeight: 1.5,
+            margin: '0 0 14px 0',
+            maxWidth: '720px',
           }}>
             {post.title}
           </h2>
 
-          {/* 説明文 */}
           {post.description && (
             <p style={{
-              fontSize: '12px',
-              color: '#666666',
-              lineHeight: 1.65,
-              margin: 0,
+              fontSize: '14px',
+              color: 'rgba(255,255,255,0.65)',
+              margin: '0 0 18px 0',
+              lineHeight: 1.75,
+              maxWidth: '620px',
               display: '-webkit-box',
               WebkitLineClamp: 2,
               WebkitBoxOrient: 'vertical',
@@ -96,14 +99,92 @@ function ArticleCard({ post }) {
             </p>
           )}
 
-          {/* 続きを読む */}
-          <div style={{
-            fontSize: '12px',
-            color: '#1a2744',
-            fontWeight: 600,
-          }}>
-            続きを読む →
+          <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+            <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.35)' }}>{post.date}</span>
+            <span style={{ fontSize: '13px', color: '#4fc3f7', fontWeight: 600, letterSpacing: '0.04em' }}>
+              続きを読む →
+            </span>
           </div>
+        </div>
+      </article>
+    </Link>
+  )
+}
+
+function ArticleCard({ post }) {
+  return (
+    <Link href={`/blog/${post.slug}`} style={{ textDecoration: 'none', display: 'flex' }}>
+      <article
+        className="mil-card"
+        style={{
+          position: 'relative',
+          width: '100%',
+          height: '240px',
+          overflow: 'hidden',
+          cursor: 'pointer',
+        }}
+      >
+        {/* 背景画像 */}
+        <div style={{ position: 'absolute', inset: 0, backgroundColor: '#0f1629' }}>
+          {post.image ? (
+            <img
+              src={post.image}
+              alt={post.title}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.6 }}
+            />
+          ) : (
+            <div style={{
+              width: '100%',
+              height: '100%',
+              background: 'linear-gradient(135deg, #0f1629 0%, #1a2744 100%)',
+            }} />
+          )}
+        </div>
+
+        {/* グラデーションオーバーレイ */}
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(to top, rgba(5,8,20,0.95) 0%, rgba(5,8,20,0.35) 55%, transparent 100%)',
+        }} />
+
+        {/* カテゴリバッジ（左上） */}
+        <div style={{ position: 'absolute', top: '12px', left: '12px' }}>
+          <span style={{
+            fontSize: '10px',
+            fontWeight: 700,
+            letterSpacing: '0.1em',
+            color: '#4fc3f7',
+            padding: '2px 8px',
+            border: '1px solid rgba(79,195,247,0.55)',
+            backgroundColor: 'rgba(5,8,20,0.55)',
+          }}>
+            {post.category}
+          </span>
+        </div>
+
+        {/* テキスト（下部） */}
+        <div style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          padding: '14px 16px',
+        }}>
+          <h2 style={{
+            fontSize: '13px',
+            fontWeight: 700,
+            color: '#ffffff',
+            lineHeight: 1.6,
+            margin: '0 0 7px 0',
+            display: '-webkit-box',
+            WebkitLineClamp: 3,
+            WebkitBoxOrient: 'vertical',
+            overflow: 'hidden',
+          }}>
+            {post.title}
+          </h2>
+          <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.35)' }}>{post.date}</span>
         </div>
       </article>
     </Link>
@@ -118,6 +199,9 @@ export default function CategoryFilter({ posts }) {
     ? posts
     : posts.filter(p => p.category === activeCategory)
 
+  const heroPost = filtered[0]
+  const restPosts = filtered.slice(1)
+
   return (
     <div>
       {/* セクションヘッダー */}
@@ -127,29 +211,33 @@ export default function CategoryFilter({ posts }) {
         gap: '10px',
         marginBottom: '20px',
         paddingBottom: '10px',
-        borderBottom: '2px solid #111111',
+        borderBottom: '1px solid #1e2a3a',
       }}>
         <span style={{
-          fontSize: '14px',
+          fontSize: '13px',
           fontWeight: 700,
-          color: '#111111',
+          color: '#e8eaf0',
+          letterSpacing: '0.06em',
         }}>
           {(!activeCategory || activeCategory === 'ニュース') ? 'ニュース' : activeCategory}
         </span>
-        <span style={{ fontSize: '12px', color: '#aaaaaa', marginLeft: 'auto' }}>
+        <span style={{ fontSize: '11px', color: '#3a4a5c', marginLeft: 'auto' }}>
           {filtered.length}件
         </span>
       </div>
 
-      {/* 記事グリッド */}
+      {/* ヒーロー（最新記事） */}
+      {heroPost && <HeroCard post={heroPost} />}
+
+      {/* 残りの記事グリッド */}
       <div className="article-grid">
-        {filtered.map(post => (
+        {restPosts.map(post => (
           <ArticleCard key={post.slug} post={post} />
         ))}
       </div>
 
       {filtered.length === 0 && (
-        <div style={{ textAlign: 'center', padding: '80px 0', color: '#aaaaaa' }}>
+        <div style={{ textAlign: 'center', padding: '80px 0', color: '#3a4a5c' }}>
           記事がありません
         </div>
       )}

@@ -25,8 +25,8 @@ export default function StickyHeader() {
       left: 0,
       right: 0,
       zIndex: 1000,
-      backgroundColor: '#1a2744',
-      borderBottom: '2px solid #2e4a7a',
+      backgroundColor: '#070d1a',
+      borderBottom: '1px solid #1e2a3a',
       boxShadow: '0 2px 12px rgba(0,0,0,0.3)',
       transform: visible ? 'translateY(0)' : 'translateY(-100%)',
       transition: 'transform 0.25s ease',
@@ -43,7 +43,7 @@ export default function StickyHeader() {
       }}>
         {/* ロゴ */}
         <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
-          <div style={{ width: '3px', height: '28px', backgroundColor: '#5a8fd4' }} />
+          <div style={{ width: '3px', height: '28px', backgroundColor: '#4fc3f7' }} />
           <span style={{
             fontSize: '18px',
             fontWeight: 900,
@@ -73,7 +73,7 @@ export default function StickyHeader() {
                   textDecoration: 'none',
                   whiteSpace: 'nowrap',
                   color: isActive ? '#ffffff' : 'rgba(255,255,255,0.6)',
-                  borderBottom: isActive ? '2px solid #5a8fd4' : '2px solid transparent',
+                  borderBottom: isActive ? '2px solid #4fc3f7' : '2px solid transparent',
                   transition: 'color 0.15s',
                 }}
               >

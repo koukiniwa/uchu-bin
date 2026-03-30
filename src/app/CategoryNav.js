@@ -9,7 +9,7 @@ export default function CategoryNav() {
   const currentCategory = searchParams.get('category')
 
   return (
-    <nav style={{ backgroundColor: '#1a2744', borderBottom: '2px solid #2e4a7a' }}>
+    <nav style={{ backgroundColor: '#070d1a', borderBottom: '1px solid #1e2a3a' }}>
       <div
         className="cat-nav"
         style={{
@@ -38,7 +38,7 @@ export default function CategoryNav() {
                 textDecoration: 'none',
                 whiteSpace: 'nowrap',
                 color: isActive ? '#ffffff' : 'rgba(255,255,255,0.65)',
-                borderBottom: isActive ? '3px solid #5a8fd4' : '3px solid transparent',
+                borderBottom: isActive ? '3px solid #4fc3f7' : '3px solid transparent',
                 marginBottom: '-2px',
                 transition: 'color 0.15s',
               }}
