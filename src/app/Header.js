@@ -20,6 +20,7 @@ export default function Header() {
               height: '80px',
               width: 'auto',
               display: 'block',
+              mixBlendMode: 'screen',
             }}
           />
         </Link>

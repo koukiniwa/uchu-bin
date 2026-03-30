@@ -46,7 +46,7 @@ export default function StickyHeader() {
           <img
             src="/logo.png"
             alt="宇宙便"
-            style={{ height: '36px', width: 'auto', display: 'block' }}
+            style={{ height: '36px', width: 'auto', display: 'block', mixBlendMode: 'screen' }}
           />
         </Link>
 
