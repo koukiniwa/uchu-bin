@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export default function Header() {
   return (
-    <header style={{ backgroundColor: '#050814', borderBottom: '1px solid #1e2a3a' }}>
+    <header style={{ backgroundColor: '#1a2744', borderBottom: '2px solid #2e4a7a' }}>
       <div style={{
         maxWidth: '1200px',
         margin: '0 auto',
@@ -10,28 +10,28 @@ export default function Header() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        height: '96px',
+        height: '100px',
       }}>
-        <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <div style={{ width: '4px', height: '52px', backgroundColor: '#4fc3f7', flexShrink: 0 }} />
-          <div>
-            <div style={{
-              fontSize: '34px',
-              fontWeight: 900,
-              letterSpacing: '0.2em',
-              color: '#ffffff',
-              lineHeight: 1,
-            }}>
-              宇宙便
-            </div>
-            <div style={{
-              fontSize: '11px',
-              color: 'rgba(255,255,255,0.35)',
-              letterSpacing: '0.15em',
-              marginTop: '6px',
-            }}>
-              ロケット・衛星・宇宙開発の最新情報
-            </div>
+        <Link href="/" style={{ textDecoration: 'none' }}>
+          {/* 右下のマークをclip-pathで隠す */}
+          <div style={{
+            width: '280px',
+            height: '70px',
+            overflow: 'hidden',
+            position: 'relative',
+          }}>
+            <img
+              src="/logo.jpg"
+              alt="宇宙便"
+              style={{
+                width: '105%',
+                height: '115%',
+                objectFit: 'cover',
+                objectPosition: 'left top',
+                display: 'block',
+                marginLeft: '-2%',
+              }}
+            />
           </div>
         </Link>
       </div>

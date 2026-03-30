@@ -42,17 +42,21 @@ export default function StickyHeader() {
         gap: '24px',
       }}>
         {/* ロゴ */}
-        <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
-          <div style={{ width: '3px', height: '28px', backgroundColor: '#4fc3f7' }} />
-          <span style={{
-            fontSize: '18px',
-            fontWeight: 900,
-            letterSpacing: '0.2em',
-            color: '#ffffff',
-            lineHeight: 1,
-          }}>
-            宇宙便
-          </span>
+        <Link href="/" style={{ textDecoration: 'none', flexShrink: 0 }}>
+          <div style={{ width: '140px', height: '36px', overflow: 'hidden', position: 'relative' }}>
+            <img
+              src="/logo.jpg"
+              alt="宇宙便"
+              style={{
+                width: '105%',
+                height: '115%',
+                objectFit: 'cover',
+                objectPosition: 'left top',
+                display: 'block',
+                marginLeft: '-2%',
+              }}
+            />
+          </div>
         </Link>
 
         {/* カテゴリリンク */}
