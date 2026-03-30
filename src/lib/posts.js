@@ -26,7 +26,8 @@ export function getAllPosts() {
 }
 
 export function getPostBySlug(slug) {
-  const fullPath = path.join(postsDirectory, `${slug}.md`)
+  const decoded = decodeURIComponent(slug)
+  const fullPath = path.join(postsDirectory, `${decoded}.md`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
   const matterResult = matter(fileContents)
   return {
