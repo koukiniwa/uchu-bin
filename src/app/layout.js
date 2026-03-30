@@ -26,12 +26,14 @@ export default function RootLayout({ children }) {
         <Suspense fallback={null}>
           <StickyHeader />
         </Suspense>
-        <Header />
-        <Suspense fallback={
-          <div style={{ height: '42px', backgroundColor: '#111111', borderBottom: '1px solid #1e1e1e' }} />
-        }>
-          <CategoryNav />
-        </Suspense>
+        <div className="space-banner">
+          <Header />
+          <Suspense fallback={
+            <div style={{ height: '46px' }} />
+          }>
+            <CategoryNav />
+          </Suspense>
+        </div>
         <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '24px 16px', minHeight: 'calc(100vh - 200px)' }}>
           {children}
         </main>

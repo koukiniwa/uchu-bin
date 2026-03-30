@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export default function Header() {
   return (
-    <header style={{ backgroundColor: '#1a2744', borderBottom: '2px solid #2e4a7a' }}>
+    <header style={{ backgroundColor: 'transparent' }}>
       <div style={{
         maxWidth: '1200px',
         margin: '0 auto',
@@ -13,10 +13,10 @@ export default function Header() {
         height: '100px',
       }}>
         <Link href="/" style={{ textDecoration: 'none' }}>
-          {/* 右下のマークをclip-pathで隠す */}
+          {/* 右下の星マークをコンテナで隠す */}
           <div style={{
-            width: '280px',
-            height: '70px',
+            width: '270px',
+            height: '72px',
             overflow: 'hidden',
             position: 'relative',
           }}>
@@ -24,12 +24,10 @@ export default function Header() {
               src="/logo.jpg"
               alt="宇宙便"
               style={{
-                width: '105%',
-                height: '115%',
-                objectFit: 'cover',
-                objectPosition: 'left top',
+                width: '270px',
+                height: 'auto',
                 display: 'block',
-                marginLeft: '-2%',
+                marginTop: '-4px',
               }}
             />
           </div>

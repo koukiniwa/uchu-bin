@@ -9,7 +9,7 @@ export default function CategoryNav() {
   const currentCategory = searchParams.get('category')
 
   return (
-    <nav style={{ backgroundColor: '#070d1a', borderBottom: '1px solid #1e2a3a' }}>
+    <nav style={{ backgroundColor: 'transparent', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
       <div
         className="cat-nav"
         style={{

@@ -20,6 +20,28 @@ html, body {
 ::-webkit-scrollbar-track { background: #f0f0f0; }
 ::-webkit-scrollbar-thumb { background: #cccccc; border-radius: 3px; }
 
+/* 星空ヘッダー帯（ヘッダー＋カテゴリナビ共通背景） */
+.space-banner {
+  background-color: #0f1c3d;
+  background-image:
+    radial-gradient(1.5px 1.5px at  4%  18%, rgba(255,255,255,0.85), transparent),
+    radial-gradient(1px   1px   at 12%  72%, rgba(255,255,255,0.60), transparent),
+    radial-gradient(2px   2px   at 21%  38%, rgba(255,255,255,0.90), transparent),
+    radial-gradient(1px   1px   at 28%  85%, rgba(255,255,255,0.50), transparent),
+    radial-gradient(1.5px 1.5px at 36%  12%, rgba(255,255,255,0.75), transparent),
+    radial-gradient(1px   1px   at 44%  60%, rgba(255,255,255,0.55), transparent),
+    radial-gradient(2px   2px   at 52%  28%, rgba(255,255,255,0.80), transparent),
+    radial-gradient(1px   1px   at 61%  78%, rgba(255,255,255,0.45), transparent),
+    radial-gradient(1.5px 1.5px at 68%  45%, rgba(255,255,255,0.70), transparent),
+    radial-gradient(1px   1px   at 76%  10%, rgba(255,255,255,0.65), transparent),
+    radial-gradient(2px   2px   at 83%  58%, rgba(255,255,255,0.85), transparent),
+    radial-gradient(1px   1px   at 91%  30%, rgba(255,255,255,0.50), transparent),
+    radial-gradient(1.5px 1.5px at 97%  82%, rgba(255,255,255,0.70), transparent),
+    radial-gradient(1px   1px   at  8%  50%, rgba(255,255,255,0.40), transparent),
+    radial-gradient(1px   1px   at 57%  92%, rgba(255,255,255,0.55), transparent);
+  background-size: 100% 100%;
+}
+
 /* カテゴリナビ スクロール非表示 */
 .cat-nav::-webkit-scrollbar { display: none; }
 .cat-nav { -ms-overflow-style: none; scrollbar-width: none; }
