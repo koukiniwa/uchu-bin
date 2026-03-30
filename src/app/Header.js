@@ -15,8 +15,8 @@ export default function Header() {
         <Link href="/" style={{ textDecoration: 'none' }}>
           {/* 右下の星マークをコンテナで隠す */}
           <div style={{
-            width: '240px',
-            height: '78px',
+            width: '220px',
+            height: '88px',
             overflow: 'hidden',
             position: 'relative',
           }}>
@@ -27,7 +27,7 @@ export default function Header() {
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
-                objectPosition: 'center 42%',
+                objectPosition: 'center 36%',
                 display: 'block',
               }}
             />
