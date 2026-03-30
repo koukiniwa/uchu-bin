@@ -7,10 +7,19 @@ import StickyHeader from './StickyHeader'
 export const metadata = {
   title: '宇宙便 - 宇宙情報メディア',
   description: 'ロケット・衛星・宇宙開発の最新情報をいち早くお届け',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '32x32' },
+      { url: '/icon-192.png', sizes: '192x192' },
+      { url: '/icon-512.png', sizes: '512x512' },
+    ],
+    apple: '/icon-192.png',
+  },
   openGraph: {
     title: '宇宙便',
     description: 'ロケット・衛星・宇宙開発の最新情報',
     type: 'website',
+    images: [{ url: '/icon-512.png' }],
   },
 }
 
