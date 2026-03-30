@@ -25,7 +25,7 @@ export default function StickyHeader() {
       left: 0,
       right: 0,
       zIndex: 1000,
-      background: 'linear-gradient(to right, #080e22 0%, #111a38 20%, #162040 50%, #1a2744 100%)',
+      background: 'linear-gradient(to right, #0c1530 0%, #131e3c 25%, #182844 55%, #1d2f52 100%)',
       borderBottom: '1px solid rgba(255,255,255,0.1)',
       boxShadow: '0 2px 12px rgba(0,0,0,0.3)',
       transform: visible ? 'translateY(0)' : 'translateY(-100%)',

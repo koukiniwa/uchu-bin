@@ -39,7 +39,7 @@ html, body {
     radial-gradient(1.5px 1.5px at 97%  82%, rgba(255,255,255,0.70), transparent),
     radial-gradient(1px   1px   at  8%  50%, rgba(255,255,255,0.40), transparent),
     radial-gradient(1px   1px   at 57%  92%, rgba(255,255,255,0.55), transparent),
-    linear-gradient(to right, #080e22 0%, #111a38 20%, #162040 50%, #1a2744 100%);
+    linear-gradient(to right, #0c1530 0%, #131e3c 25%, #182844 55%, #1d2f52 100%);
   background-size: 100% 100%;
 }
 
