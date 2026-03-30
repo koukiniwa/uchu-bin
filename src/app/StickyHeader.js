@@ -43,20 +43,11 @@ export default function StickyHeader() {
       }}>
         {/* ロゴ */}
         <Link href="/" style={{ textDecoration: 'none', flexShrink: 0 }}>
-          <div style={{ width: '140px', height: '36px', overflow: 'hidden', position: 'relative' }}>
-            <img
-              src="/logo.jpg"
-              alt="宇宙便"
-              style={{
-                width: '105%',
-                height: '115%',
-                objectFit: 'cover',
-                objectPosition: 'left top',
-                display: 'block',
-                marginLeft: '-2%',
-              }}
-            />
-          </div>
+          <img
+            src="/logo.png"
+            alt="宇宙便"
+            style={{ height: '36px', width: 'auto', display: 'block' }}
+          />
         </Link>
 
         {/* カテゴリリンク */}
