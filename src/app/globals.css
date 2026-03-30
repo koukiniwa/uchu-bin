@@ -63,7 +63,7 @@ html, body {
 .article-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 20px;
 }
 @media (max-width: 900px) {
   .article-grid { grid-template-columns: repeat(2, 1fr); }

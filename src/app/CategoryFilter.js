@@ -119,7 +119,7 @@ function ArticleCard({ post }) {
         style={{
           position: 'relative',
           width: '100%',
-          height: '240px',
+          height: '280px',
           overflow: 'hidden',
           cursor: 'pointer',
         }}
@@ -130,7 +130,7 @@ function ArticleCard({ post }) {
             <img
               src={post.image}
               alt={post.title}
-              style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.6 }}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.75 }}
             />
           ) : (
             <div style={{
@@ -145,7 +145,7 @@ function ArticleCard({ post }) {
         <div style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(to top, rgba(5,8,20,0.95) 0%, rgba(5,8,20,0.35) 55%, transparent 100%)',
+          background: 'linear-gradient(to top, rgba(5,8,20,0.92) 0%, rgba(5,8,20,0.2) 60%, transparent 100%)',
         }} />
 
         {/* カテゴリバッジ（左上） */}
@@ -169,22 +169,39 @@ function ArticleCard({ post }) {
           bottom: 0,
           left: 0,
           right: 0,
-          padding: '14px 16px',
+          padding: '16px 18px',
         }}>
           <h2 style={{
-            fontSize: '13px',
+            fontSize: '14px',
             fontWeight: 700,
             color: '#ffffff',
             lineHeight: 1.6,
-            margin: '0 0 7px 0',
+            margin: '0 0 6px 0',
             display: '-webkit-box',
-            WebkitLineClamp: 3,
+            WebkitLineClamp: 2,
             WebkitBoxOrient: 'vertical',
             overflow: 'hidden',
           }}>
             {post.title}
           </h2>
-          <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.35)' }}>{post.date}</span>
+          {post.description && (
+            <p style={{
+              fontSize: '11px',
+              color: 'rgba(255,255,255,0.55)',
+              margin: '0 0 8px 0',
+              lineHeight: 1.6,
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden',
+            }}>
+              {post.description}
+            </p>
+          )}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.3)' }}>{post.date}</span>
+            <span style={{ fontSize: '11px', color: '#4fc3f7', fontWeight: 600 }}>続きを読む →</span>
+          </div>
         </div>
       </article>
     </Link>
