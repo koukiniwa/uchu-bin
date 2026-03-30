@@ -25,7 +25,7 @@ export default function StickyHeader() {
       left: 0,
       right: 0,
       zIndex: 1000,
-      backgroundColor: '#0f1c3d',
+      backgroundColor: '#1a2a50',
       borderBottom: '1px solid rgba(255,255,255,0.1)',
       boxShadow: '0 2px 12px rgba(0,0,0,0.3)',
       transform: visible ? 'translateY(0)' : 'translateY(-100%)',
