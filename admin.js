@@ -464,6 +464,12 @@ function renderMain(message) {
   <div class="container">
     ${message || ''}
 
+    <!-- 公開済み記事一覧（上部に移動） -->
+    <div class="card" id="posts-section">
+      <h2>公開済み記事一覧</h2>
+      ${postsSection}
+    </div>
+
     <!-- AI下書き -->
     <div class="card">
       <h2>🤖 AI下書き（確認・公開待ち）</h2>
@@ -471,7 +477,7 @@ function renderMain(message) {
     </div>
 
     <!-- 新規記事作成 -->
-    <div class="card">
+    <div class="card" id="create-section">
       <h2>新規記事を作成</h2>
       <form method="POST" action="/create">
         <div class="form-row">
@@ -536,11 +542,6 @@ function renderMain(message) {
       <div id="imgGridContainer">${imageGrid}</div>
     </div>
 
-    <!-- 公開済み記事一覧 -->
-    <div class="card">
-      <h2>公開済み記事一覧</h2>
-      ${postsSection}
-    </div>
   </div>
   <script>${CLIENT_JS}</script>
 </body>
@@ -835,7 +836,7 @@ const server = http.createServer(async (req, res) => {
       const slug = generateSlug(title)
       const filePath = path.join(POSTS_DIR, slug + '.md')
       fs.writeFileSync(filePath, buildFrontmatter(title, description, date, category, image) + content.replace(/\r\n/g, '\n'), 'utf-8')
-      res.writeHead(302, { Location: '/?msg=' + encodeURIComponent('記事「' + title + '」を作成しました') })
+      res.writeHead(302, { Location: '/?msg=' + encodeURIComponent('記事「' + title + '」を作成しました') + '#posts-section' })
       res.end()
     } catch (e) {
       res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
@@ -896,7 +897,7 @@ const server = http.createServer(async (req, res) => {
       fs.copyFileSync(srcPath, dstPath)
       fs.unlinkSync(srcPath)
       const date = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })
-      const cmd = `git add -A posts/ drafts/ && git commit -m "記事公開 ${date}" && git pull --rebase && git push`
+      const cmd = `git pull --rebase --autostash && git add -A posts/ drafts/ && git commit -m "記事公開 ${date}" && git push`
       exec(cmd, { cwd: __dirname }, (err, _stdout, stderr) => {
         if (err && stderr && !stderr.includes('nothing to commit')) {
           res.writeHead(302, { Location: '/?msg=' + encodeURIComponent('公開しました（git警告: ' + stderr.slice(0, 80) + '）') })
@@ -981,7 +982,7 @@ const server = http.createServer(async (req, res) => {
   // POST /publish (git add/commit/push, JSON response)
   if (req.method === 'POST' && pathname === '/publish') {
     const date = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })
-    const cmd = `git add -A posts/ public/images/ drafts/ && (git diff --cached --quiet && echo "nothing" || git commit -m "記事更新 ${date}") && git pull --rebase && git push`
+    const cmd = `git pull --rebase --autostash && git add -A posts/ public/images/ drafts/ && (git diff --cached --quiet && echo "nothing" || git commit -m "記事更新 ${date}") && git push`
     exec(cmd, { cwd: __dirname }, (err, stdout, stderr) => {
       res.writeHead(200, { 'Content-Type': 'application/json' })
       if (err) {
