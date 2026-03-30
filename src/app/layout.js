@@ -22,13 +22,13 @@ export default function RootLayout({ children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="google-site-verification" content="8ZWuL1GijqKfjMQHI9PYIsRNPV67sPpKsd2_Zeoyzok" />
       </head>
-      <body style={{ backgroundColor: '#0a0e1a', color: '#e8eaf0' }}>
+      <body style={{ backgroundColor: '#f2f2f0', color: '#111111' }}>
         <Suspense fallback={null}>
           <StickyHeader />
         </Suspense>
         <Header />
         <Suspense fallback={
-          <div style={{ height: '42px', backgroundColor: '#070d1a', borderBottom: '1px solid #1e2a3a' }} />
+          <div style={{ height: '42px', backgroundColor: '#111111', borderBottom: '1px solid #1e1e1e' }} />
         }>
           <CategoryNav />
         </Suspense>
@@ -36,10 +36,10 @@ export default function RootLayout({ children }) {
           {children}
         </main>
         <footer style={{
-          borderTop: '1px solid #1e2a3a',
-          padding: '24px 16px',
-          marginTop: '48px',
-          backgroundColor: '#050814',
+          borderTop: '1px solid #e0e0e0',
+          padding: '20px 16px',
+          marginTop: '40px',
+          backgroundColor: '#f8f8f8',
         }}>
           <div style={{
             maxWidth: '1200px',
@@ -48,10 +48,10 @@ export default function RootLayout({ children }) {
             justifyContent: 'space-between',
             alignItems: 'center',
           }}>
-            <span style={{ fontSize: '11px', color: '#3a4a5c', fontFamily: 'monospace', letterSpacing: '0.1em' }}>
+            <span style={{ fontSize: '11px', color: '#999', fontFamily: 'monospace', letterSpacing: '0.1em' }}>
               &copy; 2026 宇宙便. ALL RIGHTS RESERVED.
             </span>
-            <span style={{ fontSize: '11px', color: '#4fc3f7', fontFamily: 'monospace', letterSpacing: '0.1em' }}>
+            <span style={{ fontSize: '11px', color: '#3d6b4e', fontFamily: 'monospace' }}>
               ▌ UCHU-BIN
             </span>
           </div>

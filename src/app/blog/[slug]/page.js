@@ -28,7 +28,7 @@ export default function BlogPost({ params }) {
           alignItems: 'center',
           gap: '6px',
           fontSize: '13px',
-          color: '#4fc3f7',
+          color: '#1a2744',
           textDecoration: 'none',
           marginBottom: '24px',
           fontWeight: 600,
@@ -40,7 +40,7 @@ export default function BlogPost({ params }) {
 
       {/* 記事ヘッダーブロック */}
       <div style={{
-        border: '1px solid #1e2a3a',
+        border: '1px solid #e0e0e0',
         overflow: 'hidden',
         marginBottom: '40px',
       }}>
@@ -66,9 +66,9 @@ export default function BlogPost({ params }) {
         {/* タイトルエリア */}
         <div style={{
           padding: '28px 32px',
-          backgroundColor: '#0f1629',
-          borderTop: post.image ? '3px solid #4fc3f7' : 'none',
-          borderLeft: !post.image ? '4px solid #4fc3f7' : 'none',
+          backgroundColor: '#ffffff',
+          borderTop: post.image ? '3px solid #1a2744' : 'none',
+          borderLeft: !post.image ? '4px solid #1a2744' : 'none',
         }}>
           {/* カテゴリバッジ */}
           <div style={{ marginBottom: '16px' }}>
@@ -78,9 +78,9 @@ export default function BlogPost({ params }) {
                 fontSize: '11px',
                 fontWeight: 700,
                 letterSpacing: '0.1em',
-                color: '#4fc3f7',
+                color: '#1a2744',
                 padding: '3px 10px',
-                border: '1px solid rgba(79,195,247,0.6)',
+                border: '1px solid #1a2744',
                 textDecoration: 'none',
               }}
             >
@@ -92,7 +92,7 @@ export default function BlogPost({ params }) {
           <h1 style={{
             fontSize: '26px',
             fontWeight: 800,
-            color: '#f0f2f8',
+            color: '#111111',
             lineHeight: 1.6,
             margin: '0 0 20px 0',
           }}>
@@ -102,8 +102,8 @@ export default function BlogPost({ params }) {
           {/* 日付 */}
           <div style={{
             fontSize: '12px',
-            color: '#3a4a5c',
-            borderTop: '1px solid #1e2a3a',
+            color: '#999999',
+            borderTop: '1px solid #e0e0e0',
             paddingTop: '14px',
           }}>
             {post.date}
@@ -120,7 +120,7 @@ export default function BlogPost({ params }) {
       <div style={{
         marginTop: '56px',
         paddingTop: '20px',
-        borderTop: '1px solid #1e2a3a',
+        borderTop: '1px solid #e0e0e0',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -129,7 +129,7 @@ export default function BlogPost({ params }) {
           href="/"
           style={{
             fontSize: '13px',
-            color: '#4fc3f7',
+            color: '#1a2744',
             textDecoration: 'none',
             fontWeight: 600,
           }}
@@ -140,7 +140,7 @@ export default function BlogPost({ params }) {
           href={`/?category=${encodeURIComponent(post.category)}`}
           style={{
             fontSize: '13px',
-            color: '#4fc3f7',
+            color: '#1a2744',
             textDecoration: 'none',
             fontWeight: 600,
           }}

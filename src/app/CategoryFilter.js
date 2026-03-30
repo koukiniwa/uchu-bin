@@ -211,17 +211,17 @@ export default function CategoryFilter({ posts }) {
         gap: '10px',
         marginBottom: '20px',
         paddingBottom: '10px',
-        borderBottom: '1px solid #1e2a3a',
+        borderBottom: '2px solid #111111',
       }}>
         <span style={{
           fontSize: '13px',
           fontWeight: 700,
-          color: '#e8eaf0',
+          color: '#111111',
           letterSpacing: '0.06em',
         }}>
           {(!activeCategory || activeCategory === 'ニュース') ? 'ニュース' : activeCategory}
         </span>
-        <span style={{ fontSize: '11px', color: '#3a4a5c', marginLeft: 'auto' }}>
+        <span style={{ fontSize: '11px', color: '#aaaaaa', marginLeft: 'auto' }}>
           {filtered.length}件
         </span>
       </div>
@@ -237,7 +237,7 @@ export default function CategoryFilter({ posts }) {
       </div>
 
       {filtered.length === 0 && (
-        <div style={{ textAlign: 'center', padding: '80px 0', color: '#3a4a5c' }}>
+        <div style={{ textAlign: 'center', padding: '80px 0', color: '#aaaaaa' }}>
           記事がありません
         </div>
       )}
