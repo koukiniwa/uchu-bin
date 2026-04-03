@@ -5,8 +5,10 @@ import CategoryNav from './CategoryNav'
 import StickyHeader from './StickyHeader'
 
 export const metadata = {
+  metadataBase: new URL('https://uchu-bin.jp'),
   title: '宇宙便 - 宇宙情報メディア',
-  description: 'ロケット・衛星・宇宙開発の最新情報をいち早くお届け',
+  description: 'ロケット・衛星・宇宙開発の最新情報をいち早くお届け。JAXA・NASA・SpaceXなど国内外の宇宙ニュースを毎日更新。',
+  keywords: ['宇宙便', '宇宙ニュース', 'ロケット', '衛星', '宇宙開発', 'JAXA', 'NASA', 'SpaceX', '宇宙情報', '月探査', '火星探査'],
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: '32x32' },
@@ -16,10 +18,19 @@ export const metadata = {
     apple: '/icon-192.png',
   },
   openGraph: {
-    title: '宇宙便',
-    description: 'ロケット・衛星・宇宙開発の最新情報',
+    title: '宇宙便 - 宇宙情報メディア',
+    description: 'ロケット・衛星・宇宙開発の最新情報をいち早くお届け。',
+    url: 'https://uchu-bin.jp',
+    siteName: '宇宙便',
     type: 'website',
-    images: [{ url: '/icon-512.png' }],
+    locale: 'ja_JP',
+    images: [{ url: '/icon-512.png', width: 512, height: 512, alt: '宇宙便' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '宇宙便 - 宇宙情報メディア',
+    description: 'ロケット・衛星・宇宙開発の最新情報をいち早くお届け。',
+    images: ['/icon-512.png'],
   },
 }
 

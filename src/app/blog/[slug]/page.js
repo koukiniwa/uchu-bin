@@ -9,9 +9,28 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
   const post = getPostBySlug(params.slug)
+  const url = `https://uchu-bin.jp/blog/${params.slug}`
+  const image = post.image || '/icon-512.png'
   return {
     title: `${post.title} - 宇宙便`,
     description: post.description,
+    keywords: ['宇宙便', post.category, 'ロケット', '宇宙ニュース', 'JAXA', 'NASA'],
+    openGraph: {
+      title: `${post.title} - 宇宙便`,
+      description: post.description,
+      url,
+      siteName: '宇宙便',
+      type: 'article',
+      locale: 'ja_JP',
+      publishedTime: post.date,
+      images: [{ url: image, alt: post.title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${post.title} - 宇宙便`,
+      description: post.description,
+      images: [image],
+    },
   }
 }
 
@@ -92,32 +111,40 @@ export default function BlogPost({ params }) {
         marginTop: '56px',
         paddingTop: '20px',
         borderTop: '1px solid #e0e0e0',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
       }}>
-        <Link
-          href="/"
-          style={{
-            fontSize: '13px',
-            color: '#1a2744',
-            textDecoration: 'none',
-            fontWeight: 600,
-          }}
-        >
-          ← 記事一覧へ
-        </Link>
-        <Link
-          href={`/?category=${encodeURIComponent(post.category)}`}
-          style={{
-            fontSize: '13px',
-            color: '#1a2744',
-            textDecoration: 'none',
-            fontWeight: 600,
-          }}
-        >
-          {post.category}の記事一覧 →
-        </Link>
+        {/* Xシェアボタン */}
+        <div style={{ marginBottom: '24px', textAlign: 'center' }}>
+          <a
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title + ' - 宇宙便')}&url=${encodeURIComponent('https://uchu-bin.jp/blog/' + post.slug)}&hashtags=宇宙便,宇宙ニュース`}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              backgroundColor: '#000000',
+              color: '#ffffff',
+              padding: '10px 24px',
+              borderRadius: '4px',
+              textDecoration: 'none',
+              fontSize: '14px',
+              fontWeight: 600,
+            }}
+          >
+            𝕏 でシェアする
+          </a>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Link href="/" style={{ fontSize: '13px', color: '#1a2744', textDecoration: 'none', fontWeight: 600 }}>
+            ← 記事一覧へ
+          </Link>
+          <Link
+            href={`/?category=${encodeURIComponent(post.category)}`}
+            style={{ fontSize: '13px', color: '#1a2744', textDecoration: 'none', fontWeight: 600 }}
+          >
+            {post.category}の記事一覧 →
+          </Link>
+        </div>
       </div>
     </div>
   )

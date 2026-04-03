@@ -1,32 +1,23 @@
-import fs from 'fs'
-import path from 'path'
-import matter from 'gray-matter'
-
-const SITE_URL = 'https://www.uchu-bin.jp'
+import { getAllPosts } from '@/lib/posts'
 
 export default function sitemap() {
-  const postsDir = path.join(process.cwd(), 'posts')
-  const files = fs.readdirSync(postsDir).filter((f) => f.endsWith('.md'))
+  const posts = getAllPosts()
+  const baseUrl = 'https://uchu-bin.jp'
 
-  const posts = files.map((file) => {
-    const content = fs.readFileSync(path.join(postsDir, file), 'utf-8')
-    const { data } = matter(content)
-    const slug = file.replace('.md', '')
-    return {
-      url: `${SITE_URL}/blog/${slug}`,
-      lastModified: new Date(data.date || Date.now()),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    }
-  })
+  const postUrls = posts.map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: post.date ? new Date(post.date) : new Date(),
+    changeFrequency: 'weekly',
+    priority: 0.8,
+  }))
 
   return [
     {
-      url: SITE_URL,
+      url: baseUrl,
       lastModified: new Date(),
       changeFrequency: 'daily',
-      priority: 1.0,
+      priority: 1,
     },
-    ...posts,
+    ...postUrls,
   ]
 }
