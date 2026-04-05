@@ -41,6 +41,33 @@ export default function RootLayout({ children }) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="google-site-verification" content="8ZWuL1GijqKfjMQHI9PYIsRNPV67sPpKsd2_Zeoyzok" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: '宇宙便',
+            alternateName: 'うちゅうびん',
+            url: 'https://uchu-bin.jp',
+            logo: 'https://uchu-bin.jp/icon-512.png',
+            description: 'ロケット・衛星・宇宙開発の最新情報をいち早くお届けする宇宙情報メディア。',
+            sameAs: [],
+          })}}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            name: '宇宙便',
+            url: 'https://uchu-bin.jp',
+            potentialAction: {
+              '@type': 'SearchAction',
+              target: 'https://uchu-bin.jp/?category={search_term_string}',
+              'query-input': 'required name=search_term_string',
+            },
+          })}}
+        />
       </head>
       <body style={{ backgroundColor: '#ffffff', color: '#111111' }}>
         <Suspense fallback={null}>

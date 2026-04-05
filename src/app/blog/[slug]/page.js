@@ -36,9 +36,27 @@ export async function generateMetadata({ params }) {
 
 export default function BlogPost({ params }) {
   const post = getPostBySlug(params.slug)
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'NewsArticle',
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    image: post.image ? [post.image] : ['https://uchu-bin.jp/icon-512.png'],
+    publisher: {
+      '@type': 'Organization',
+      name: '宇宙便',
+      logo: { '@type': 'ImageObject', url: 'https://uchu-bin.jp/icon-512.png' },
+    },
+    mainEntityOfPage: `https://uchu-bin.jp/blog/${params.slug}`,
+  }
 
   return (
     <div style={{ maxWidth: '820px', margin: '0 auto' }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       {/* 戻るリンク */}
       <Link
         href="/"
