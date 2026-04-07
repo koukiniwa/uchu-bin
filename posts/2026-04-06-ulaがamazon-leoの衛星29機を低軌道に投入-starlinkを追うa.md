@@ -1,5 +1,5 @@
 ---
-title: 'ULAがAmazon Leoの衛星29機を低軌道に投入——Starlinkを追うAmazonの衛星通信が本格化'
+title: 'ULAがAmazon Leoの衛星29機を低軌道に投入——Amazonの衛星通信が本格化'
 description: '4月4日、AmazonのAmazon Leoの衛星29機の打ち上げに成功した。デルタ航空との契約締結など顧客獲得が進む一方、FCCの期限という課題も抱える。'
 date: '2026-04-06'
 category: '衛星・通信'
