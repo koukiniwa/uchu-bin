@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
+import { useState, useEffect } from 'react'
 
 function HeroCard({ post }) {
   return (
@@ -183,9 +184,17 @@ function ArticleCard({ post }) {
   )
 }
 
+const PAGE_SIZE = 9
+
 export default function CategoryFilter({ posts }) {
   const searchParams = useSearchParams()
   const activeCategory = searchParams.get('category')
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
+
+  // カテゴリ切り替え時に表示件数をリセット
+  useEffect(() => {
+    setVisibleCount(PAGE_SIZE)
+  }, [activeCategory])
 
   const filtered = (!activeCategory || activeCategory === 'ニュース')
     ? posts
@@ -193,6 +202,8 @@ export default function CategoryFilter({ posts }) {
 
   const heroPost = filtered[0]
   const restPosts = filtered.slice(1)
+  const visibleRest = restPosts.slice(0, visibleCount - 1)
+  const hasMore = visibleCount < filtered.length
 
   return (
     <div>
@@ -223,10 +234,34 @@ export default function CategoryFilter({ posts }) {
 
       {/* 残りの記事グリッド */}
       <div className="article-grid">
-        {restPosts.map(post => (
+        {visibleRest.map(post => (
           <ArticleCard key={post.slug} post={post} />
         ))}
       </div>
+
+      {/* もっと見るボタン */}
+      {hasMore && (
+        <div style={{ textAlign: 'center', marginTop: '40px' }}>
+          <button
+            onClick={() => setVisibleCount(v => v + PAGE_SIZE)}
+            style={{
+              padding: '12px 48px',
+              fontSize: '13px',
+              fontWeight: 700,
+              letterSpacing: '0.08em',
+              color: '#111111',
+              backgroundColor: '#ffffff',
+              border: '2px solid #111111',
+              cursor: 'pointer',
+              transition: 'background-color 0.15s, color 0.15s',
+            }}
+            onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#111111'; e.currentTarget.style.color = '#ffffff' }}
+            onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#ffffff'; e.currentTarget.style.color = '#111111' }}
+          >
+            もっと見る（あと{filtered.length - visibleCount}件）
+          </button>
+        </div>
+      )}
 
       {filtered.length === 0 && (
         <div style={{ textAlign: 'center', padding: '80px 0', color: '#aaaaaa' }}>
