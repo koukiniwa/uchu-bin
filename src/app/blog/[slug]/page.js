@@ -52,7 +52,7 @@ export default function BlogPost({ params }) {
   }
 
   return (
-    <div style={{ maxWidth: '820px', margin: '0 auto' }}>
+    <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
