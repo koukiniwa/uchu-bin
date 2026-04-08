@@ -14,7 +14,7 @@ export default function Header() {
       }}>
         <Link href="/" style={{ textDecoration: 'none' }}>
           <img
-            src="/logo.jpg"
+            src="/logo.png"
             alt="宇宙便"
             fetchPriority="high"
             className="header-logo"
