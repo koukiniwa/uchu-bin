@@ -60,6 +60,7 @@ export default function BlogPost({ params }) {
       {/* 戻るリンク */}
       <Link
         href="/"
+        className="post-back"
         style={{
           display: 'inline-flex',
           alignItems: 'center',
@@ -92,7 +93,7 @@ export default function BlogPost({ params }) {
         </div>
 
         {/* タイトル */}
-        <h1 style={{
+        <h1 className="post-title" style={{
           fontSize: '28px', fontWeight: 800, color: '#111111',
           lineHeight: 1.6, margin: '0 0 16px 0',
         }}>
@@ -110,7 +111,7 @@ export default function BlogPost({ params }) {
 
       {/* ヒーロー画像 */}
       {post.image && (
-        <div style={{ width: '100%', height: '420px', overflow: 'hidden', marginBottom: '40px' }}>
+        <div className="post-hero-img" style={{ width: '100%', height: '420px', overflow: 'hidden', marginBottom: '40px' }}>
           <img
             src={post.image}
             alt={post.title}

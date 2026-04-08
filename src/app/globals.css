@@ -95,6 +95,14 @@ html, body {
   /* ヘッダーロゴ縮小 */
   .header-inner { height: 72px !important; }
   .header-logo { height: 56px !important; }
+
+  /* 記事ページ */
+  .post-hero-img { height: 220px !important; }
+  .post-body { font-size: 15px !important; line-height: 1.85 !important; }
+  .post-body h2 { font-size: 1.05rem !important; margin-top: 1.8rem !important; }
+  .post-body h3 { font-size: 0.95rem !important; }
+  .post-title { font-size: 20px !important; }
+  .post-back { font-size: 12px !important; }
 }
 
 /* 記事本文 */
