@@ -2,6 +2,7 @@ const http = require('http')
 const fs = require('fs')
 const path = require('path')
 const { exec } = require('child_process')
+const sharp = require('sharp')
 
 const PORT = 3001
 const POSTS_DIR = path.join(__dirname, 'posts')
@@ -125,9 +126,12 @@ function readRawBody(req) {
   })
 }
 
-function saveImage(data, ext) {
-  const name = Date.now() + ext
-  fs.writeFileSync(path.join(IMAGES_DIR, name), data)
+async function saveImage(data) {
+  const name = Date.now() + '.jpg'
+  await sharp(data)
+    .resize({ width: 1200, withoutEnlargement: true })
+    .jpeg({ quality: 82, mozjpeg: true })
+    .toFile(path.join(IMAGES_DIR, name))
   return name
 }
 
@@ -953,7 +957,7 @@ const server = http.createServer(async (req, res) => {
       if (!file || !file.filename) throw new Error('ファイルが選択されていません')
       const ext = path.extname(file.filename).toLowerCase()
       if (!['.jpg', '.jpeg', '.png', '.gif', '.webp'].includes(ext)) throw new Error('対応形式：JPG / PNG / GIF / WebP')
-      const name = saveImage(file.data, ext)
+      const name = await saveImage(file.data)
       res.writeHead(302, { Location: '/?msg=' + encodeURIComponent('画像をアップロードしました → /images/' + name) })
       res.end()
     } catch (e) {
@@ -969,7 +973,7 @@ const server = http.createServer(async (req, res) => {
       const ext = urlObj.searchParams.get('ext') || '.png'
       if (!['.jpg', '.jpeg', '.png', '.gif', '.webp'].includes(ext)) throw new Error('対応外の形式')
       const data = await readRawBody(req)
-      const name = saveImage(data, ext)
+      const name = await saveImage(data)
       res.writeHead(200, { 'Content-Type': 'application/json' })
       res.end(JSON.stringify({ path: '/images/' + name }))
     } catch (e) {

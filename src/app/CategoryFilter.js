@@ -23,6 +23,7 @@ function HeroCard({ post }) {
             <img
               src={post.image}
               alt={post.title}
+              fetchPriority="high"
               style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.65 }}
             />
           )}
@@ -135,6 +136,7 @@ function ArticleCard({ post }) {
             <img
               src={post.image}
               alt={post.title}
+              loading="lazy"
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
           ) : (

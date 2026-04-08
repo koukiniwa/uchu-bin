@@ -114,6 +114,7 @@ export default function BlogPost({ params }) {
           <img
             src={post.image}
             alt={post.title}
+            fetchPriority="high"
             style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
           />
         </div>
