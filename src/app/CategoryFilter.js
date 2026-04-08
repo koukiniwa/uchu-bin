@@ -184,26 +184,40 @@ function ArticleCard({ post }) {
   )
 }
 
-const PAGE_SIZE = 9
+const PAGE_SIZE = 19 // ヒーロー1 + グリッド18
 
 export default function CategoryFilter({ posts }) {
   const searchParams = useSearchParams()
   const activeCategory = searchParams.get('category')
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
+  const [page, setPage] = useState(1)
 
-  // カテゴリ切り替え時に表示件数をリセット
+  // カテゴリ切り替え時にページをリセット
   useEffect(() => {
-    setVisibleCount(PAGE_SIZE)
+    setPage(1)
   }, [activeCategory])
 
   const filtered = (!activeCategory || activeCategory === 'ニュース')
     ? posts
     : posts.filter(p => p.category === activeCategory)
 
-  const heroPost = filtered[0]
-  const restPosts = filtered.slice(1)
-  const visibleRest = restPosts.slice(0, visibleCount - 1)
-  const hasMore = visibleCount < filtered.length
+  const totalPages = Math.ceil(filtered.length / PAGE_SIZE)
+  const pageStart = (page - 1) * PAGE_SIZE
+  const pagePosts = filtered.slice(pageStart, pageStart + PAGE_SIZE)
+  const heroPost = pagePosts[0]
+  const restPosts = pagePosts.slice(1)
+
+  function goToPage(p) {
+    setPage(p)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  // 表示するページ番号を計算（最大7つ、現在ページを中心に）
+  function getPageNumbers() {
+    if (totalPages <= 7) return Array.from({ length: totalPages }, (_, i) => i + 1)
+    const nums = new Set([1, totalPages, page, page - 1, page + 1].filter(n => n >= 1 && n <= totalPages))
+    return Array.from(nums).sort((a, b) => a - b)
+  }
+  const pageNumbers = getPageNumbers()
 
   return (
     <div>
@@ -229,43 +243,89 @@ export default function CategoryFilter({ posts }) {
         </span>
       </div>
 
-      {/* ヒーロー（最新記事） */}
+      {/* ヒーロー（各ページ先頭記事） */}
       {heroPost && <HeroCard post={heroPost} />}
 
       {/* 残りの記事グリッド */}
       <div className="article-grid">
-        {visibleRest.map(post => (
+        {restPosts.map(post => (
           <ArticleCard key={post.slug} post={post} />
         ))}
       </div>
 
-      {/* もっと見るボタン */}
-      {hasMore && (
-        <div style={{ textAlign: 'center', marginTop: '40px' }}>
-          <button
-            onClick={() => setVisibleCount(v => v + PAGE_SIZE)}
-            style={{
-              padding: '12px 48px',
-              fontSize: '13px',
-              fontWeight: 700,
-              letterSpacing: '0.08em',
-              color: '#111111',
-              backgroundColor: '#ffffff',
-              border: '2px solid #111111',
-              cursor: 'pointer',
-              transition: 'background-color 0.15s, color 0.15s',
-            }}
-            onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#111111'; e.currentTarget.style.color = '#ffffff' }}
-            onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#ffffff'; e.currentTarget.style.color = '#111111' }}
-          >
-            もっと見る（あと{filtered.length - visibleCount}件）
-          </button>
-        </div>
-      )}
-
       {filtered.length === 0 && (
         <div style={{ textAlign: 'center', padding: '80px 0', color: '#aaaaaa' }}>
           記事がありません
+        </div>
+      )}
+
+      {/* ページネーション */}
+      {totalPages > 1 && (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '6px', marginTop: '48px' }}>
+          {/* 前へ */}
+          <button
+            onClick={() => goToPage(page - 1)}
+            disabled={page === 1}
+            style={{
+              padding: '8px 14px',
+              fontSize: '13px',
+              fontWeight: 600,
+              color: page === 1 ? '#cccccc' : '#111111',
+              backgroundColor: '#ffffff',
+              border: '1px solid',
+              borderColor: page === 1 ? '#e0e0e0' : '#111111',
+              cursor: page === 1 ? 'default' : 'pointer',
+            }}
+          >
+            ←
+          </button>
+
+          {/* ページ番号 */}
+          {pageNumbers.map((num, i) => {
+            const prev = pageNumbers[i - 1]
+            return (
+              <>
+                {prev && num - prev > 1 && (
+                  <span key={`ellipsis-${num}`} style={{ fontSize: '13px', color: '#aaaaaa', padding: '0 4px' }}>…</span>
+                )}
+                <button
+                  key={num}
+                  onClick={() => goToPage(num)}
+                  style={{
+                    padding: '8px 14px',
+                    fontSize: '13px',
+                    fontWeight: num === page ? 700 : 500,
+                    color: num === page ? '#ffffff' : '#111111',
+                    backgroundColor: num === page ? '#111111' : '#ffffff',
+                    border: '1px solid',
+                    borderColor: num === page ? '#111111' : '#e0e0e0',
+                    cursor: num === page ? 'default' : 'pointer',
+                    minWidth: '40px',
+                  }}
+                >
+                  {num}
+                </button>
+              </>
+            )
+          })}
+
+          {/* 次へ */}
+          <button
+            onClick={() => goToPage(page + 1)}
+            disabled={page === totalPages}
+            style={{
+              padding: '8px 14px',
+              fontSize: '13px',
+              fontWeight: 600,
+              color: page === totalPages ? '#cccccc' : '#111111',
+              backgroundColor: '#ffffff',
+              border: '1px solid',
+              borderColor: page === totalPages ? '#e0e0e0' : '#111111',
+              cursor: page === totalPages ? 'default' : 'pointer',
+            }}
+          >
+            →
+          </button>
         </div>
       )}
     </div>
