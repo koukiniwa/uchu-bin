@@ -43,9 +43,9 @@ html, body {
   background-size: 100% 100%;
 }
 
-/* カテゴリナビ スクロール非表示 */
+/* カテゴリナビ スクロール非表示・横方向のみ */
 .cat-nav::-webkit-scrollbar { display: none; }
-.cat-nav { -ms-overflow-style: none; scrollbar-width: none; }
+.cat-nav { -ms-overflow-style: none; scrollbar-width: none; touch-action: pan-x; }
 
 /* 記事カード hover */
 .mil-card {
