@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation'
 function HeroCard({ post }) {
   return (
     <Link href={`/blog/${post.slug}`} style={{ textDecoration: 'none', display: 'block', marginBottom: '24px' }}>
-      <article style={{
+      <article className="hero-card" style={{
         position: 'relative',
         height: '460px',
         overflow: 'hidden',
@@ -73,7 +73,7 @@ function HeroCard({ post }) {
             </span>
           </div>
 
-          <h2 style={{
+          <h2 className="hero-title" style={{
             fontSize: '24px',
             fontWeight: 800,
             color: '#ffffff',
@@ -85,7 +85,7 @@ function HeroCard({ post }) {
           </h2>
 
           {post.description && (
-            <p style={{
+            <p className="hero-desc" style={{
               fontSize: '14px',
               color: 'rgba(255,255,255,0.65)',
               margin: '0 0 18px 0',
@@ -131,7 +131,7 @@ function ArticleCard({ post }) {
         onMouseLeave={e => { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)' }}
       >
         {/* 画像エリア */}
-        <div style={{ position: 'relative', height: '180px', backgroundColor: '#1a2744', flexShrink: 0 }}>
+        <div className="card-img" style={{ position: 'relative', height: '180px', backgroundColor: '#1a2744', flexShrink: 0 }}>
           {post.image ? (
             <img
               src={post.image}
@@ -154,8 +154,8 @@ function ArticleCard({ post }) {
         </div>
 
         {/* テキストエリア */}
-        <div style={{ padding: '14px 16px 16px', display: 'flex', flexDirection: 'column', flex: 1 }}>
-          <h2 style={{
+        <div style={{ padding: '10px 10px 12px', display: 'flex', flexDirection: 'column', flex: 1 }}>
+          <h2 className="card-title" style={{
             fontSize: '14px', fontWeight: 700, color: '#111111',
             lineHeight: 1.6, margin: '0 0 8px 0',
             display: '-webkit-box', WebkitLineClamp: 2,
@@ -164,7 +164,7 @@ function ArticleCard({ post }) {
             {post.title}
           </h2>
           {post.description && (
-            <p style={{
+            <p className="card-desc" style={{
               fontSize: '12px', color: '#666666', margin: '0 0 10px 0',
               lineHeight: 1.65, flex: 1,
               display: '-webkit-box', WebkitLineClamp: 2,
@@ -173,9 +173,9 @@ function ArticleCard({ post }) {
               {post.description}
             </p>
           )}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 'auto', paddingTop: '8px', borderTop: '1px solid #f0f0f0' }}>
-            <span style={{ fontSize: '11px', color: '#aaaaaa' }}>{post.date}</span>
-            <span style={{ fontSize: '11px', color: '#1565c0', fontWeight: 600 }}>続きを読む →</span>
+          <div className="card-footer" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 'auto', paddingTop: '8px', borderTop: '1px solid #f0f0f0' }}>
+            <span className="card-date" style={{ fontSize: '11px', color: '#aaaaaa' }}>{post.date}</span>
+            <span className="card-more" style={{ fontSize: '11px', color: '#1565c0', fontWeight: 600 }}>続きを読む →</span>
           </div>
         </div>
       </article>

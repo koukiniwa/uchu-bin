@@ -81,7 +81,7 @@ export default function RootLayout({ children }) {
             <CategoryNav />
           </Suspense>
         </div>
-        <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '24px 16px', minHeight: 'calc(100vh - 200px)' }}>
+        <main className="main-content" style={{ maxWidth: '1200px', margin: '0 auto', padding: '24px 16px', minHeight: 'calc(100vh - 200px)' }}>
           {children}
         </main>
         <footer style={{

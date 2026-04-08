@@ -69,7 +69,32 @@ html, body {
   .article-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 640px) {
-  .article-grid { grid-template-columns: 1fr; }
+  /* 記事グリッド: 2列 */
+  .article-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+
+  /* カテゴリナビ: 左寄せ・パディング縮小 */
+  .cat-nav { justify-content: flex-start !important; padding: 0 8px !important; }
+  .cat-nav-item { padding: 10px 12px !important; font-size: 11px !important; }
+
+  /* ヒーローカード: 高さ縮小・フォント縮小 */
+  .hero-card { height: 240px !important; }
+  .hero-title { font-size: 15px !important; }
+  .hero-desc { display: none !important; }
+
+  /* 記事カード: 画像高さ縮小・テキスト縮小 */
+  .card-img { height: 100px !important; }
+  .card-title { font-size: 11px !important; line-height: 1.5 !important; }
+  .card-desc { display: none !important; }
+  .card-footer { padding-top: 6px !important; }
+  .card-date { font-size: 9px !important; }
+  .card-more { font-size: 9px !important; }
+
+  /* メインコンテンツの余白縮小 */
+  .main-content { padding: 14px 10px !important; }
+
+  /* ヘッダーロゴ縮小 */
+  .header-inner { height: 72px !important; }
+  .header-logo { height: 56px !important; }
 }
 
 /* 記事本文 */

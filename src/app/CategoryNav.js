@@ -29,6 +29,7 @@ export default function CategoryNav() {
             <Link
               key={cat}
               href={`/?category=${encodeURIComponent(cat)}`}
+              className="cat-nav-item"
               style={{
                 display: 'block',
                 padding: '14px 28px',

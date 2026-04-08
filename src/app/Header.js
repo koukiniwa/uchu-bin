@@ -3,7 +3,7 @@ import Link from 'next/link'
 export default function Header() {
   return (
     <header style={{ backgroundColor: 'transparent' }}>
-      <div style={{
+      <div className="header-inner" style={{
         maxWidth: '1200px',
         margin: '0 auto',
         padding: '0 24px',
@@ -16,6 +16,8 @@ export default function Header() {
           <img
             src="/logo.jpg"
             alt="宇宙便"
+            fetchPriority="high"
+            className="header-logo"
             style={{
               height: '80px',
               width: 'auto',
