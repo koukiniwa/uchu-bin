@@ -110,8 +110,6 @@ html, body {
   font-size: 17px;
   line-height: 2.0;
   color: #333333;
-  max-width: 680px;
-  margin: 0 auto;
   letter-spacing: 0.02em;
 }
 .post-body h2 {
