@@ -166,18 +166,18 @@ export default function BlogPost({ params }) {
         {/* 前後ナビゲーション */}
         <div style={{ display: 'flex', justifyContent: 'space-between', gap: '16px', marginBottom: '8px' }}>
           <div style={{ flex: 1 }}>
-            {prevPost && (
-              <Link href={`/blog/${prevPost.slug}`} style={{ textDecoration: 'none', display: 'block' }}>
-                <div style={{ fontSize: '11px', color: '#999', marginBottom: '4px' }}>← 前の記事</div>
-                <div style={{ fontSize: '13px', color: '#1a2744', fontWeight: 600, lineHeight: 1.5 }}>{prevPost.title}</div>
+            {nextPost && (
+              <Link href={`/blog/${nextPost.slug}`} style={{ textDecoration: 'none', display: 'block' }}>
+                <div style={{ fontSize: '11px', color: '#999', marginBottom: '4px' }}>← 新しい記事</div>
+                <div style={{ fontSize: '13px', color: '#1a2744', fontWeight: 600, lineHeight: 1.5 }}>{nextPost.title}</div>
               </Link>
             )}
           </div>
           <div style={{ flex: 1, textAlign: 'right' }}>
-            {nextPost && (
-              <Link href={`/blog/${nextPost.slug}`} style={{ textDecoration: 'none', display: 'block' }}>
-                <div style={{ fontSize: '11px', color: '#999', marginBottom: '4px' }}>次の記事 →</div>
-                <div style={{ fontSize: '13px', color: '#1a2744', fontWeight: 600, lineHeight: 1.5 }}>{nextPost.title}</div>
+            {prevPost && (
+              <Link href={`/blog/${prevPost.slug}`} style={{ textDecoration: 'none', display: 'block' }}>
+                <div style={{ fontSize: '11px', color: '#999', marginBottom: '4px' }}>古い記事 →</div>
+                <div style={{ fontSize: '13px', color: '#1a2744', fontWeight: 600, lineHeight: 1.5 }}>{prevPost.title}</div>
               </Link>
             )}
           </div>
