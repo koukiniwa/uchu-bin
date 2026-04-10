@@ -36,6 +36,14 @@ export async function generateMetadata({ params }) {
 
 export default function BlogPost({ params }) {
   const post = getPostBySlug(params.slug)
+  const allPosts = getAllPosts()
+  const currentIndex = allPosts.findIndex(p => p.slug === params.slug)
+  const prevPost = allPosts[currentIndex + 1] || null
+  const nextPost = allPosts[currentIndex - 1] || null
+  const relatedPosts = allPosts
+    .filter(p => p.slug !== params.slug && p.category === post.category)
+    .slice(0, 3)
+
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'NewsArticle',
@@ -154,18 +162,48 @@ export default function BlogPost({ params }) {
             𝕏 でシェアする
           </a>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Link href="/" style={{ fontSize: '13px', color: '#1a2744', textDecoration: 'none', fontWeight: 600 }}>
-            ← 記事一覧へ
-          </Link>
-          <Link
-            href={`/?category=${encodeURIComponent(post.category)}`}
-            style={{ fontSize: '13px', color: '#1a2744', textDecoration: 'none', fontWeight: 600 }}
-          >
-            {post.category}の記事一覧 →
-          </Link>
+        {/* 前後ナビゲーション */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', gap: '16px', marginBottom: '8px' }}>
+          <div style={{ flex: 1 }}>
+            {prevPost && (
+              <Link href={`/blog/${prevPost.slug}`} style={{ textDecoration: 'none', display: 'block' }}>
+                <div style={{ fontSize: '11px', color: '#999', marginBottom: '4px' }}>← 前の記事</div>
+                <div style={{ fontSize: '13px', color: '#1a2744', fontWeight: 600, lineHeight: 1.5 }}>{prevPost.title}</div>
+              </Link>
+            )}
+          </div>
+          <div style={{ flex: 1, textAlign: 'right' }}>
+            {nextPost && (
+              <Link href={`/blog/${nextPost.slug}`} style={{ textDecoration: 'none', display: 'block' }}>
+                <div style={{ fontSize: '11px', color: '#999', marginBottom: '4px' }}>次の記事 →</div>
+                <div style={{ fontSize: '13px', color: '#1a2744', fontWeight: 600, lineHeight: 1.5 }}>{nextPost.title}</div>
+              </Link>
+            )}
+          </div>
         </div>
       </div>
+
+      {/* 関連記事 */}
+      {relatedPosts.length > 0 && (
+        <div style={{ marginTop: '48px' }}>
+          <div style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '0.08em', color: '#555', marginBottom: '16px', borderLeft: '3px solid #1a2744', paddingLeft: '10px' }}>
+            関連記事
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            {relatedPosts.map(p => (
+              <Link key={p.slug} href={`/blog/${p.slug}`} style={{ textDecoration: 'none', display: 'flex', gap: '14px', alignItems: 'center', padding: '12px', border: '1px solid #e8e8e8', borderRadius: '4px' }}>
+                {p.image && (
+                  <img src={p.image} alt={p.title} style={{ width: '80px', height: '56px', objectFit: 'cover', flexShrink: 0, borderRadius: '2px' }} />
+                )}
+                <div>
+                  <div style={{ fontSize: '11px', color: '#999', marginBottom: '4px' }}>{p.date}</div>
+                  <div style={{ fontSize: '14px', color: '#111', fontWeight: 600, lineHeight: 1.5 }}>{p.title}</div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
