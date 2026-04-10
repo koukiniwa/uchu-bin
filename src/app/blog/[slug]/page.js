@@ -37,11 +37,12 @@ export async function generateMetadata({ params }) {
 export default function BlogPost({ params }) {
   const post = getPostBySlug(params.slug)
   const allPosts = getAllPosts()
-  const currentIndex = allPosts.findIndex(p => p.slug === params.slug)
+  const currentSlug = decodeURIComponent(params.slug)
+  const currentIndex = allPosts.findIndex(p => p.slug === currentSlug)
   const prevPost = allPosts[currentIndex + 1] || null
   const nextPost = allPosts[currentIndex - 1] || null
   const relatedPosts = allPosts
-    .filter(p => p.slug !== params.slug && p.category === post.category)
+    .filter(p => p.slug !== currentSlug && p.category === post.category)
     .slice(0, 3)
 
   const articleSchema = {
