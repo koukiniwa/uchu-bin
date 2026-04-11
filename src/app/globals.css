@@ -68,13 +68,12 @@ html, body {
 @media (max-width: 900px) {
   .article-grid { grid-template-columns: repeat(2, 1fr); }
 }
-/* サイドバー固定表示（メインコンテンツの右余白に配置） */
+/* サイドバー（メインコンテンツの右余白に配置・ページと一緒にスクロール） */
 .sidebar-fixed {
-  position: fixed;
-  top: 130px;
-  left: calc(50% + 616px);
+  position: absolute;
+  top: 24px;
+  right: -212px;
   width: 180px;
-  display: block;
 }
 @media (max-width: 1450px) {
   .sidebar-fixed { display: none; }

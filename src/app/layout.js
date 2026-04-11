@@ -82,12 +82,12 @@ export default function RootLayout({ children }) {
             <CategoryNav />
           </Suspense>
         </div>
-        <main className="main-content" style={{ maxWidth: '1200px', margin: '0 auto', padding: '24px 16px', minHeight: 'calc(100vh - 200px)' }}>
+        <main className="main-content" style={{ position: 'relative', maxWidth: '1200px', margin: '0 auto', padding: '24px 16px', minHeight: 'calc(100vh - 200px)' }}>
           {children}
+          <div className="sidebar-fixed">
+            <Sidebar />
+          </div>
         </main>
-        <div className="sidebar-fixed">
-          <Sidebar />
-        </div>
         <footer style={{
           borderTop: '1px solid #e0e0e0',
           padding: '20px 16px',
