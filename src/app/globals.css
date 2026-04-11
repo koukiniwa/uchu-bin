@@ -68,8 +68,16 @@ html, body {
 @media (max-width: 900px) {
   .article-grid { grid-template-columns: repeat(2, 1fr); }
 }
-@media (max-width: 900px) {
-  .sidebar-wrapper { display: none; }
+/* サイドバー固定表示（メインコンテンツの右余白に配置） */
+.sidebar-fixed {
+  position: fixed;
+  top: 130px;
+  left: calc(50% + 616px);
+  width: 180px;
+  display: block;
+}
+@media (max-width: 1450px) {
+  .sidebar-fixed { display: none; }
 }
 
 @media (max-width: 640px) {
