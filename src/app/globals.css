@@ -68,6 +68,10 @@ html, body {
 @media (max-width: 900px) {
   .article-grid { grid-template-columns: repeat(2, 1fr); }
 }
+@media (max-width: 900px) {
+  .sidebar-wrapper { display: none; }
+}
+
 @media (max-width: 640px) {
   /* 記事グリッド: 2列 */
   .article-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
