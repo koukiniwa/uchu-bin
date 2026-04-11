@@ -1,3 +1,5 @@
+'use client'
+
 const sections = [
   {
     label: '宇宙機関',
