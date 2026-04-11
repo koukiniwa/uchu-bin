@@ -3,7 +3,6 @@ import { Suspense } from 'react'
 import Header from './Header'
 import CategoryNav from './CategoryNav'
 import StickyHeader from './StickyHeader'
-import Sidebar from './Sidebar'
 
 export const metadata = {
   metadataBase: new URL('https://uchu-bin.jp'),
@@ -84,9 +83,6 @@ export default function RootLayout({ children }) {
         </div>
         <main className="main-content" style={{ position: 'relative', maxWidth: '1200px', margin: '0 auto', padding: '24px 16px', minHeight: 'calc(100vh - 200px)' }}>
           {children}
-          <div className="sidebar-fixed">
-            <Sidebar />
-          </div>
         </main>
         <footer style={{
           borderTop: '1px solid #e0e0e0',
