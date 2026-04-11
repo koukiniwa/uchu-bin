@@ -72,10 +72,10 @@ html, body {
 .sidebar-fixed {
   position: absolute;
   top: 24px;
-  right: -212px;
-  width: 180px;
+  right: -260px;
+  width: 236px;
 }
-@media (max-width: 1450px) {
+@media (max-width: 1500px) {
   .sidebar-fixed { display: none; }
 }
 

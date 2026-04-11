@@ -48,24 +48,18 @@ const sections = [
 
 export default function Sidebar() {
   return (
-    <aside style={{
-      width: '200px',
-      flexShrink: 0,
-      position: 'sticky',
-      top: '80px',
-      alignSelf: 'flex-start',
-    }}>
+    <aside>
       {sections.map((section) => (
-        <div key={section.label} style={{ marginBottom: '24px' }}>
+        <div key={section.label} style={{ marginBottom: '28px' }}>
           <div style={{
-            fontSize: '10px',
+            fontSize: '11px',
             fontWeight: 700,
             letterSpacing: '0.12em',
-            color: '#999',
+            color: '#1a2744',
             fontFamily: 'monospace',
-            borderBottom: '1px solid #e8e8e8',
+            borderBottom: '2px solid #1a2744',
             paddingBottom: '6px',
-            marginBottom: '8px',
+            marginBottom: '10px',
           }}>
             {section.label.toUpperCase()}
           </div>
@@ -76,18 +70,22 @@ export default function Sidebar() {
               target="_blank"
               rel="noopener noreferrer"
               style={{
-                display: 'block',
-                fontSize: '12px',
-                color: '#444',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                fontSize: '13px',
+                color: '#333',
                 textDecoration: 'none',
-                padding: '4px 0',
+                padding: '7px 8px',
                 borderBottom: '1px solid #f0f0f0',
-                transition: 'color 0.15s',
+                transition: 'background 0.15s, color 0.15s',
+                borderRadius: '3px',
               }}
-              onMouseEnter={e => e.currentTarget.style.color = '#1a2744'}
-              onMouseLeave={e => e.currentTarget.style.color = '#444'}
+              onMouseEnter={e => { e.currentTarget.style.background = '#f5f7ff'; e.currentTarget.style.color = '#1a2744' }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#333' }}
             >
-              {link.name} ↗
+              <span>{link.name}</span>
+              <span style={{ fontSize: '11px', color: '#aaa' }}>↗</span>
             </a>
           ))}
         </div>
