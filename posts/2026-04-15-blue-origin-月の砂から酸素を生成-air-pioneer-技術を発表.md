@@ -47,8 +47,7 @@ Air Pioneerの月面実装に向けた具体的な打ち上げ時期はまだ発
 ---
 
 ## 今後の見通し
-https://x.com/blueorigin/status/2039758550130417786?s=20
-
+<blockquote class="twitter-tweet" data-media-max-width="560"><p lang="en" dir="ltr">Lunar Permanence will require using resources on the Moon rather than hauling them from Earth. Our in-situ resource utilization system extracts oxygen from lunar regolith to create breathable air for astronauts and propellant for refueling landers and fuel cells. It also produces… <a href="https://t.co/qPjDpkuyUe">pic.twitter.com/qPjDpkuyUe</a></p>&mdash; Blue Origin (@blueorigin) <a href="https://twitter.com/blueorigin/status/2039758550130417786?ref_src=twsrc%5Etfw">April 2, 2026</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>　　実際の実験の様子
 次のステップは装置の小型化と打ち上げ可能な状態への改良、そして実際の月面環境での実証だ。アルテミス計画が進む中、Air Pioneerが月面に届く日がいつになるかが注目される。月で「空気を作る」という人類の長年の課題に、Blue Originが具体的な答えを示しつつある。
 
 ---
