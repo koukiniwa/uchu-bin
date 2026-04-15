@@ -26,7 +26,7 @@ image: '/images/1776258709202.jpg'
 
 ## Air Pioneerの仕組み
 
-![画像](/images/1776258917484.jpg)実際の装置
+![画像](/images/1776259221167.jpg)実際の装置
 
 Air Pioneerのプロセスは3段階だ。まずレゴリスを高温で溶融させて液体状にする。次にその溶融物を電気分解することで、金属成分と酸素に分離する。分離された酸素は生命維持システムに供給できる状態で回収される。
 
@@ -47,8 +47,7 @@ Air Pioneerの月面実装に向けた具体的な打ち上げ時期はまだ発
 ---
 
 ## 今後の見通し
-https://x.com/blueorigin/status/2041583026140762480?s=20
-<iframe src="https://platform.twitter.com/embed/Tweet.html?id=2041583026140762480" width="100%" height="480" frameborder="0" scrolling="no" allowtransparency="true" style="max-width:550px;display:block;margin:16px auto;"></iframe>
+https://x.com/blueorigin/status/2039758550130417786?s=20
 
 次のステップは装置の小型化と打ち上げ可能な状態への改良、そして実際の月面環境での実証だ。アルテミス計画が進む中、Air Pioneerが月面に届く日がいつになるかが注目される。月で「空気を作る」という人類の長年の課題に、Blue Originが具体的な答えを示しつつある。
 
