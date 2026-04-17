@@ -234,6 +234,21 @@ ${recentText}
 ニュース一覧（地域タグ付き）:
 ${newsText}
 
+【選題基準（重要）】
+以下の優先順位でニュースを選ぶこと：
+
+優先度：高（積極的に選ぶ）
+- 「初めて」がつく出来事（初飛行・初着陸・初成功・初試験）
+- まだ日本語メディアでほとんど報道されていない海外の新興企業・ロケットの話題
+- 宇宙政策・予算の大きな変化
+- 既存の常識を変える技術的発見・発表
+- 知名度は低いがこれから注目される可能性がある企業・ミッション
+
+優先度：低（できるだけ避ける）
+- Falcon 9・Falcon Heavyの定期的な商業打ち上げ（週2〜3回あり珍しくない）
+- すでに直近記事で扱ったSpaceX・NASAの話題の続報（新事実がない場合）
+- 「〇〇を目指している」という目標発表だけで実績がないもの
+
 地域バランスの目安: 米国50% / 日本20% / 中国20% / 欧州10%
 毎日異なる地域・テーマになるよう、直近記事と被らないものを選ぶこと。
 
@@ -252,7 +267,6 @@ ${newsText}
   "title": "記事タイトル（日本語、35文字以内・事実ベース）",
   "description": "記事の要約（90文字以内）",
   "category": "ロケット・衛星・通信・有人宇宙飛行・月探査・火星探査 のいずれか1つ",
-  "imageQuery": "NASA画像検索用の英語キーワード（必ずロケット・宇宙船・惑星・月面・基地などのハードウェアや天体を指定。人物・宇宙飛行士のポートレートは避ける。例: Artemis SLS rocket launch pad, SpaceX Starship vehicle, Mars surface landscape, lunar surface crater, ISS exterior, satellite deployment）",
   "body": "記事本文（マークダウン形式。## 見出しを3〜4つ、{{IMAGE_1}}と{{IMAGE_2}}を含め、1800〜2500文字）"
 }`,
       },
@@ -301,29 +315,11 @@ async function main() {
   const article = await generateArticle(newsByRegion, recentTitles)
   console.log(`  タイトル: ${article.title}`)
   console.log(`  カテゴリ: ${article.category}`)
-  console.log(`  画像検索ワード: ${article.imageQuery}`)
 
-  console.log('\n🌌 関連NASA画像を取得中...')
-  const images = await fetchNASAImages(article.imageQuery || article.title, 3)
-
-  // 本文の {{IMAGE_1}} {{IMAGE_2}} を画像＋出典付きで置き換え
-  let body = article.body
-  if (images[1]) {
-    body = body.replace(
-      '{{IMAGE_1}}',
-      `\n![${article.title}](${images[1].url})\n*出典: ${images[1].credit}*\n`
-    )
-  } else {
-    body = body.replace('{{IMAGE_1}}', '')
-  }
-  if (images[2]) {
-    body = body.replace(
-      '{{IMAGE_2}}',
-      `\n![${article.title}](${images[2].url})\n*出典: ${images[2].credit}*\n`
-    )
-  } else {
-    body = body.replace('{{IMAGE_2}}', '')
-  }
+  // 画像はプレースホルダーのまま残す（手動で差し替え）
+  const body = article.body
+    .replace('{{IMAGE_1}}', `\n![画像1](/images/ここに画像ファイル名)\n*出典: 出典を記入*\n`)
+    .replace('{{IMAGE_2}}', `\n![画像2](/images/ここに画像ファイル名)\n*出典: 出典を記入*\n`)
 
   const date = new Date().toISOString().slice(0, 10)
   const slug = `${date}-${Date.now()}`
@@ -334,12 +330,11 @@ async function main() {
     `description: '${article.description.replace(/'/g, "''")}'`,
     `date: '${date}'`,
     `category: '${article.category}'`,
+    `image: '/images/ここにカバー画像ファイル名'`,
+    `---`,
+    ``,
+    body,
   ]
-  if (images[0]) {
-    lines.push(`image: '${images[0].url}'`)
-    lines.push(`imageCredit: '${images[0].credit}'`)
-  }
-  lines.push(`---`, ``, body)
 
   const draftsDir = path.join(__dirname, '..', 'drafts')
   if (!fs.existsSync(draftsDir)) fs.mkdirSync(draftsDir, { recursive: true })
@@ -347,9 +342,9 @@ async function main() {
   fs.writeFileSync(filePath, lines.join('\n'), 'utf-8')
 
   console.log(`\n✅ 下書きを生成しました: drafts/${slug}.md`)
-  console.log(`  カバー画像: ${images[0] ? `✓ (${images[0].credit})` : '✗'}`)
-  console.log(`  本文内画像1: ${images[1] ? `✓ (${images[1].credit})` : '✗'}`)
-  console.log(`  本文内画像2: ${images[2] ? `✓ (${images[2].credit})` : '✗'}`)
+  console.log(`  📸 画像を手動で追加してください：`)
+  console.log(`     1. カバー画像: image: フィールドを書き換え`)
+  console.log(`     2. 本文画像1・2: ![画像] のファイル名を書き換え`)
 }
 
 main().catch((err) => {
