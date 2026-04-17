@@ -1,6 +1,17 @@
 import { getPostBySlug, getAllPosts } from '@/lib/posts'
 import Link from 'next/link'
 import Markdown from 'markdown-to-jsx'
+import TweetEmbed from '@/app/TweetEmbed'
+
+const TWEET_REGEX = /^https?:\/\/(twitter\.com|x\.com)\/\S+\/status\/\d+/
+
+function AutoTweet({ children }) {
+  const text = typeof children === 'string' ? children.trim() : ''
+  if (TWEET_REGEX.test(text)) {
+    return <TweetEmbed url={text} />
+  }
+  return <p>{children}</p>
+}
 
 export async function generateStaticParams() {
   const posts = getAllPosts()
@@ -132,7 +143,7 @@ export default function BlogPost({ params }) {
 
       {/* 本文 */}
       <div className="post-body">
-        <Markdown>{post.content}</Markdown>
+        <Markdown options={{ overrides: { p: AutoTweet } }}>{post.content}</Markdown>
       </div>
 
       {/* フッター */}

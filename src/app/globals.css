@@ -196,9 +196,12 @@ html, body {
 }
 .post-body img {
   max-width: 100%;
+  max-height: 480px;
+  width: auto;
   height: auto;
   display: block;
   margin: 1.5rem auto;
+  object-fit: contain;
 }
 .post-body em {
   color: #8892a4;

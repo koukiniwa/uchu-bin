@@ -70,6 +70,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body style={{ backgroundColor: '#ffffff', color: '#111111' }}>
+        <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
         <Suspense fallback={null}>
           <StickyHeader />
         </Suspense>
