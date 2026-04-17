@@ -553,219 +553,282 @@ function renderMain(message) {
 }
 
 function renderEdit(file, meta, body, message) {
+  return renderSplitEditor({
+    file, meta, body,
+    message: message ? message.replace(/<[^>]+>/g, '') : '',
+    action: '/update',
+    publishAction: '/update',
+    accentColor: '#e57373',
+    titleLabel: '記事編集',
+  })
+}
+
+function renderSplitEditor({ file, meta, body, message, action, publishAction, accentColor, titleLabel }) {
   const categoryOptions = CATEGORIES.map(c =>
     `<option value="${c}"${meta.category === c ? ' selected' : ''}>${c}</option>`
   ).join('')
   const safeTitle = (meta.title || '').replace(/"/g, '&quot;')
   const safeImage = (meta.image || '').replace(/"/g, '&quot;')
-  const safeDesc = (meta.description || '').replace(/"/g, '&quot;')
-  const safeBody = (body || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  const safeDesc  = (meta.description || '').replace(/"/g, '&quot;')
+  const safeBody  = (body || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  const color = accentColor || '#1a2744'
 
   return `<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>記事編集 - 宇宙便</title>
-  <style>${CSS}</style>
+  <title>${titleLabel} - 宇宙便</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Hiragino Sans','Meiryo',sans-serif; background:#f4f6fb; color:#111; height:100vh; overflow:hidden; display:flex; flex-direction:column; }
+    header { background:#1a2744; padding:0 24px; height:56px; display:flex; align-items:center; gap:12px; flex-shrink:0; }
+    header .bar { width:3px; height:28px; background:${color}; }
+    header h1 { color:#fff; font-size:18px; letter-spacing:0.12em; }
+    header a { color:rgba(255,255,255,0.7); font-size:13px; text-decoration:none; margin-left:16px; }
+    header a:hover { color:#fff; }
+    .msg-bar { padding:10px 24px; font-size:13px; font-weight:600; flex-shrink:0; }
+    .msg-bar.success { background:#e8f5e9; color:#2e7d32; border-bottom:1px solid #c8e6c9; }
+    .msg-bar.error   { background:#ffebee; color:#c62828; border-bottom:1px solid #ffcdd2; }
+    .split { display:flex; flex:1; overflow:hidden; }
+    /* ── 左ペイン ── */
+    .left { width:48%; min-width:380px; overflow-y:auto; padding:20px 24px; border-right:1px solid #dde3f0; background:#f8f9fc; display:flex; flex-direction:column; gap:12px; }
+    .field-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .field-row.full { grid-template-columns:1fr; }
+    label { display:block; font-size:11px; font-weight:700; color:#555; margin-bottom:5px; letter-spacing:0.06em; }
+    input[type=text], input[type=date], select { width:100%; padding:9px 11px; border:1px solid #ddd; border-radius:4px; font-size:13px; font-family:inherit; outline:none; background:#fff; }
+    input:focus, select:focus { border-color:${color}; }
+    .body-label { font-size:11px; font-weight:700; color:#555; letter-spacing:0.06em; margin-bottom:5px; }
+    #f-body { width:100%; flex:1; min-height:320px; padding:12px; border:1px solid #ddd; border-radius:4px; font-size:13px; font-family:'Courier New',monospace; line-height:1.75; resize:none; outline:none; }
+    #f-body:focus { border-color:${color}; }
+    .paste-zone { border:2px dashed #5a8fd4; border-radius:6px; padding:14px; text-align:center; color:#5a8fd4; font-size:12px; font-weight:600; cursor:pointer; transition:background 0.15s; }
+    .paste-zone:hover, .paste-zone.drag-over { background:#eef4fc; }
+    .btn-row { display:flex; gap:10px; }
+    .save-btn { flex:1; padding:11px; background:${color}; color:#fff; border:none; border-radius:4px; font-size:13px; font-weight:700; cursor:pointer; }
+    .save-btn:hover { opacity:0.88; }
+    .pub-btn { flex:1; padding:11px; background:#43a047; color:#fff; border:none; border-radius:4px; font-size:13px; font-weight:700; cursor:pointer; }
+    .pub-btn:hover { background:#2e7d32; }
+    /* ── 右ペイン（プレビュー） ── */
+    .right { flex:1; overflow-y:auto; padding:28px 36px; background:#fff; }
+    .preview-cover { width:100%; max-height:420px; object-fit:cover; display:block; margin-bottom:28px; border-radius:4px; }
+    .preview-cat { font-size:11px; font-weight:700; letter-spacing:0.1em; color:#1565c0; padding:3px 10px; border:1px solid #1565c0; display:inline-block; margin-bottom:14px; }
+    .preview-title { font-size:26px; font-weight:800; color:#111; line-height:1.55; margin-bottom:12px; }
+    .preview-date { font-size:12px; color:#999; border-bottom:1px solid #e0e0e0; padding-bottom:16px; margin-bottom:28px; }
+    .preview-body { font-size:16px; line-height:2.0; color:#333; letter-spacing:0.02em; }
+    .preview-body h2 { margin-top:2.2rem; margin-bottom:0.7rem; font-size:1.2rem; font-weight:700; color:#111; border-left:3px solid #1a2744; padding-left:12px; }
+    .preview-body h3 { margin-top:1.6rem; margin-bottom:0.5rem; font-size:1rem; font-weight:700; color:#222; }
+    .preview-body p { margin-bottom:1.1rem; }
+    .preview-body img { max-width:100%; max-height:480px; object-fit:contain; display:block; margin:1.2rem auto; }
+    .preview-body em { color:#8892a4; font-size:0.88em; display:block; text-align:center; margin-top:-0.8rem; margin-bottom:1.2rem; }
+    .preview-body strong { font-weight:700; }
+    .preview-body ul, .preview-body ol { padding-left:1.5rem; margin-bottom:1rem; }
+    .preview-body li { margin-bottom:0.4rem; }
+    .preview-body blockquote { border-left:3px solid #ccc; padding-left:1rem; color:#666; margin:1rem 0; font-style:italic; }
+    .preview-body a { color:#1565c0; }
+    .preview-placeholder { color:#bbb; font-size:14px; margin-top:60px; text-align:center; }
+  </style>
 </head>
 <body>
   <header>
-    <div class="bar" style="background:#e57373;"></div>
+    <div class="bar"></div>
     <h1>宇宙便</h1>
-    <a href="/">← 記事一覧に戻る</a>
+    <a href="/">← 一覧に戻る</a>
   </header>
-  <div class="container">
-    ${message || ''}
-    <div class="card">
-      <h2 class="edit-border">記事を編集</h2>
-      <form method="POST" action="/update">
+  ${message ? `<div class="msg-bar ${message.includes('エラー') ? 'error' : 'success'}">${message}</div>` : ''}
+  <div class="split">
+    <!-- 左：編集 -->
+    <div class="left">
+      <form id="editForm" method="POST" action="${action}" style="display:contents;">
         <input type="hidden" name="file" value="${file}">
-        <div class="form-row">
+        <div class="field-row">
           <div>
             <label>タイトル *</label>
-            <input type="text" name="title" value="${safeTitle}" required>
+            <input type="text" id="f-title" name="title" value="${safeTitle}" required>
           </div>
           <div>
             <label>カテゴリ *</label>
-            <select name="category" required>${categoryOptions}</select>
+            <select id="f-cat" name="category" required>${categoryOptions}</select>
           </div>
         </div>
-        <div class="form-row">
+        <div class="field-row">
           <div>
             <label>公開日 *</label>
-            <input type="date" name="date" value="${meta.date || ''}" required>
+            <input type="date" id="f-date" name="date" value="${meta.date || ''}" required>
           </div>
           <div>
-            <label>サムネイル画像URL</label>
-            <input type="text" name="image" value="${safeImage}">
+            <label>カバー画像パス</label>
+            <input type="text" id="f-image" name="image" value="${safeImage}" placeholder="/images/ファイル名.jpg">
           </div>
         </div>
-        <div class="form-row full">
+        <div class="field-row full">
           <div>
-            <label>説明文</label>
-            <input type="text" name="description" value="${safeDesc}">
+            <label>説明文（一覧に表示）</label>
+            <input type="text" id="f-desc" name="description" value="${safeDesc}">
           </div>
         </div>
-        <div class="form-row full">
-          <div>
-            <label>本文（Markdown）*</label>
-            <textarea name="content" required>${safeBody}</textarea>
-          </div>
+        <div class="paste-zone" id="pasteZone">
+          📋 Ctrl+V で画像を貼り付け ／ ドラッグ＆ドロップ
         </div>
-        <button type="submit" class="submit-btn">保存する</button>
+        <div>
+          <div class="body-label">本文（Markdown）*</div>
+          <textarea id="f-body" name="content" required>${safeBody}</textarea>
+        </div>
+        <div class="btn-row">
+          <button type="submit" class="save-btn">💾 保存</button>
+          <button type="button" class="pub-btn" onclick="publishDraft()">🚀 公開する</button>
+        </div>
       </form>
     </div>
+    <!-- 右：プレビュー -->
+    <div class="right" id="preview-pane">
+      <p class="preview-placeholder">← 入力すると右にリアルタイムでプレビューが表示されます</p>
+    </div>
   </div>
+
+  <form id="pubForm" method="POST" action="${publishAction}" style="display:none;">
+    <input type="hidden" name="file" value="${file}">
+  </form>
+
+  <script>
+    const TWEET_RE = /^https?:\\/\\/(twitter\\.com|x\\.com)\\/\\S+\\/status\\/\\d+/
+
+    function renderPreview() {
+      const title = document.getElementById('f-title').value
+      const image = document.getElementById('f-image').value
+      const body  = document.getElementById('f-body').value
+      const cat   = document.getElementById('f-cat').value
+      const date  = document.getElementById('f-date').value
+      const pane  = document.getElementById('preview-pane')
+
+      // bodyをTwitter埋め込み対応でHTML化
+      const lines = body.split('\\n')
+      const processedLines = lines.map(line => {
+        if (TWEET_RE.test(line.trim())) {
+          const m = line.trim().match(/status\\/(\\d+)/)
+          if (m) return '<blockquote class="twitter-tweet" data-lang="ja"><a href="' + line.trim() + '"></a></blockquote>'
+        }
+        return line
+      })
+      const htmlBody = marked.parse(processedLines.join('\\n'))
+
+      pane.innerHTML =
+        (image ? '<img class="preview-cover" src="' + image + '" alt="">' : '') +
+        (cat   ? '<span class="preview-cat">' + cat + '</span>' : '') +
+        (title ? '<h1 class="preview-title">' + title + '</h1>' : '') +
+        (date  ? '<div class="preview-date">' + date + '</div>' : '') +
+        '<div class="preview-body">' + htmlBody + '</div>'
+
+      // Twitter埋め込みを描画
+      if (window.twttr && window.twttr.widgets) {
+        window.twttr.widgets.load(pane)
+      }
+    }
+
+    // リアルタイム更新
+    ['f-title','f-image','f-body','f-cat','f-date'].forEach(id => {
+      const el = document.getElementById(id)
+      if (el) el.addEventListener('input', renderPreview)
+    })
+    renderPreview()
+
+    // 公開ボタン
+    function publishDraft() {
+      if (!confirm('この内容で公開しますか？')) return
+      document.getElementById('pubForm').submit()
+    }
+
+    // 画像アップロード共通
+    async function uploadBlob(blob) {
+      const ext = blob.type === 'image/png' ? '.png' : blob.type === 'image/gif' ? '.gif' : blob.type === 'image/webp' ? '.webp' : '.jpg'
+      const buf = await blob.arrayBuffer()
+      const res = await fetch('/upload-paste?ext=' + ext, { method:'POST', headers:{'Content-Type':blob.type}, body:buf })
+      const json = await res.json()
+      if (!json.path) throw new Error('アップロード失敗')
+      return json.path
+    }
+
+    function setPasteZone(msg, color) {
+      const z = document.getElementById('pasteZone')
+      z.textContent = msg
+      z.style.borderColor = color || ''
+      z.style.color = color || ''
+    }
+
+    function resetPasteZone() {
+      setPasteZone('📋 Ctrl+V で画像を貼り付け ／ ドラッグ＆ドロップ')
+    }
+
+    async function handleImage(blob) {
+      setPasteZone('⏳ アップロード中...')
+      try {
+        const imgPath = await uploadBlob(blob)
+        // カバー画像欄が空なら自動入力、そうでなければ本文に挿入
+        const imgInput = document.getElementById('f-image')
+        const bodyEl   = document.getElementById('f-body')
+        if (!imgInput.value) {
+          imgInput.value = imgPath
+          setPasteZone('✓ カバー画像に設定しました', '#43a047')
+        } else {
+          const pos = bodyEl.selectionStart
+          bodyEl.value = bodyEl.value.slice(0, pos) + '\\n![](' + imgPath + ')\\n' + bodyEl.value.slice(bodyEl.selectionEnd)
+          setPasteZone('✓ 本文に挿入しました', '#43a047')
+        }
+        renderPreview()
+        setTimeout(resetPasteZone, 3000)
+      } catch(e) {
+        setPasteZone('エラー: ' + e.message, '#e53935')
+        setTimeout(resetPasteZone, 3000)
+      }
+    }
+
+    // ペースト（画像 or TwitterURL）
+    document.addEventListener('paste', async (e) => {
+      const items = e.clipboardData ? Array.from(e.clipboardData.items) : []
+      const imgItem = items.find(i => i.type.startsWith('image/'))
+      if (imgItem) { e.preventDefault(); await handleImage(imgItem.getAsFile()); return }
+
+      // Twitter URLの自動変換（本文エリアにフォーカス中）
+      if (document.activeElement?.id === 'f-body') {
+        const textItem = items.find(i => i.type === 'text/plain')
+        if (textItem) {
+          textItem.getAsString(text => {
+            if (TWEET_RE.test(text.trim())) {
+              e.preventDefault()
+              const el = document.getElementById('f-body')
+              const pos = el.selectionStart
+              el.value = el.value.slice(0, pos) + '\\n' + text.trim() + '\\n' + el.value.slice(el.selectionEnd)
+              renderPreview()
+            }
+          })
+        }
+      }
+    })
+
+    // ドラッグ＆ドロップ
+    const pasteZone = document.getElementById('pasteZone')
+    pasteZone.addEventListener('dragover', e => { e.preventDefault(); pasteZone.classList.add('drag-over') })
+    pasteZone.addEventListener('dragleave', () => pasteZone.classList.remove('drag-over'))
+    pasteZone.addEventListener('drop', async e => {
+      e.preventDefault(); pasteZone.classList.remove('drag-over')
+      const f = e.dataTransfer.files[0]
+      if (f && f.type.startsWith('image/')) await handleImage(f)
+    })
+  </script>
 </body>
 </html>`
 }
 
 function renderEditDraft(file, meta, body, message) {
-  const categoryOptions = CATEGORIES.map(c =>
-    `<option value="${c}"${meta.category === c ? ' selected' : ''}>${c}</option>`
-  ).join('')
-  const safeTitle = (meta.title || '').replace(/"/g, '&quot;')
-  const safeImage = (meta.image || '').replace(/"/g, '&quot;')
-  const safeDesc = (meta.description || '').replace(/"/g, '&quot;')
-  const safeBody = (body || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-
-  return `<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>下書き編集 - 宇宙便</title>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <style>
-    ${CSS}
-    .tab-bar { display:flex; gap:0; margin-bottom:24px; border-bottom:2px solid #e0e0e0; }
-    .tab-btn { padding:10px 24px; background:none; border:none; font-size:14px; font-weight:700; color:#999; cursor:pointer; border-bottom:3px solid transparent; margin-bottom:-2px; }
-    .tab-btn.active { color:#1a2744; border-bottom-color:#ffa726; }
-    #preview-pane { display:none; }
-    #preview-pane.visible { display:block; }
-    #edit-pane.hidden { display:none; }
-    .preview-cover { width:100%; max-height:400px; object-fit:cover; display:block; margin-bottom:24px; border-radius:4px; }
-    .preview-body img { max-width:100%; height:auto; display:block; margin:16px auto; border-radius:4px; }
-    .preview-body h2 { font-size:20px; font-weight:800; margin:32px 0 12px; color:#1a2744; border-left:4px solid #ffa726; padding-left:12px; }
-    .preview-body h3 { font-size:16px; font-weight:700; margin:24px 0 8px; }
-    .preview-body p { line-height:1.85; margin-bottom:16px; color:#222; }
-    .preview-body em { color:#666; font-size:12px; }
-    .preview-body strong { font-weight:700; }
-    .preview-body blockquote { border-left:3px solid #ccc; padding-left:16px; color:#666; margin:16px 0; }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="bar" style="background:#ffa726;"></div>
-    <h1>宇宙便</h1>
-    <a href="/">← 記事一覧に戻る</a>
-  </header>
-  <div class="container">
-    ${message || ''}
-    <div class="card">
-      <h2 style="border-bottom-color:#ffa726;">🤖 AI下書きを編集</h2>
-
-      <div class="tab-bar">
-        <button class="tab-btn active" onclick="showTab('edit')">✏️ 編集</button>
-        <button class="tab-btn" onclick="showTab('preview')">👁 プレビュー</button>
-      </div>
-
-      <!-- 編集タブ -->
-      <div id="edit-pane">
-        <form method="POST" action="/update-draft">
-          <input type="hidden" name="file" value="${file}">
-          <div class="form-row">
-            <div>
-              <label>タイトル *</label>
-              <input type="text" id="f-title" name="title" value="${safeTitle}" required>
-            </div>
-            <div>
-              <label>カテゴリ *</label>
-              <select name="category" required>${categoryOptions}</select>
-            </div>
-          </div>
-          <div class="form-row">
-            <div>
-              <label>公開日 *</label>
-              <input type="date" name="date" value="${meta.date || ''}" required>
-            </div>
-            <div>
-              <label>サムネイル画像URL</label>
-              <input type="text" id="f-image" name="image" value="${safeImage}">
-            </div>
-          </div>
-          <div class="form-row full">
-            <div>
-              <label>説明文</label>
-              <input type="text" name="description" value="${safeDesc}">
-            </div>
-          </div>
-          <div class="form-row full">
-            <div>
-              <label>本文（Markdown）*</label>
-              <textarea id="f-body" name="content" required>${safeBody}</textarea>
-            </div>
-          </div>
-          <div class="btn-row">
-            <button type="submit" class="submit-btn" style="flex:1;">下書きを保存</button>
-          </div>
-        </form>
-        <form method="POST" action="/publish-draft" style="margin-top:12px;">
-          <input type="hidden" name="file" value="${file}">
-          <button type="submit" class="pub-btn">🚀 この下書きを公開する</button>
-        </form>
-      </div>
-
-      <!-- プレビュータブ -->
-      <div id="preview-pane">
-        <div id="preview-cover-wrap"></div>
-        <div style="margin-bottom:8px;">
-          <span id="preview-category" style="font-size:11px;font-weight:700;letter-spacing:0.08em;color:#1a2744;padding:3px 8px;border:1px solid #1a2744;"></span>
-        </div>
-        <h1 id="preview-title" style="font-size:24px;font-weight:800;color:#111;line-height:1.55;margin:12px 0;"></h1>
-        <div id="preview-date" style="font-size:12px;color:#999;border-top:1px solid #e0e0e0;padding-top:12px;margin-bottom:24px;"></div>
-        <div id="preview-body" class="preview-body"></div>
-        <div style="margin-top:24px;padding-top:16px;border-top:1px solid #e0e0e0;text-align:right;">
-          <form method="POST" action="/publish-draft">
-            <input type="hidden" name="file" value="${file}">
-            <button type="submit" class="pub-btn">🚀 この内容で公開する</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    function showTab(tab) {
-      document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', (tab==='edit'&&i===0)||(tab==='preview'&&i===1)))
-      document.getElementById('edit-pane').classList.toggle('hidden', tab !== 'edit')
-      const pp = document.getElementById('preview-pane')
-      pp.classList.toggle('visible', tab === 'preview')
-      if (tab === 'preview') renderPreview()
-    }
-
-    function renderPreview() {
-      const title = document.getElementById('f-title')?.value || ''
-      const image = document.getElementById('f-image')?.value || ''
-      const body  = document.getElementById('f-body')?.value  || ''
-      const cat   = document.querySelector('select[name=category]')?.value || ''
-      const date  = document.querySelector('input[name=date]')?.value || ''
-
-      const coverWrap = document.getElementById('preview-cover-wrap')
-      if (image) {
-        coverWrap.innerHTML = '<img class="preview-cover" src="' + image + '" alt="">'
-      } else {
-        coverWrap.innerHTML = ''
-      }
-      document.getElementById('preview-title').textContent = title
-      document.getElementById('preview-category').textContent = cat
-      document.getElementById('preview-date').textContent = date
-      document.getElementById('preview-body').innerHTML = marked.parse(body)
-    }
-  </script>
-</body>
-</html>`
+  return renderSplitEditor({
+    file, meta, body,
+    message: message ? message.replace(/<[^>]+>/g, '') : '',
+    action: '/update-draft',
+    publishAction: '/publish-draft',
+    accentColor: '#ffa726',
+    titleLabel: '下書き編集',
+  })
 }
 
 // ── HTTP server ───────────────────────────────────────────────────────────────
