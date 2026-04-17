@@ -1,7 +1,20 @@
 // 宇宙ニュース自動記事生成スクリプト
 // 使い方: ANTHROPIC_API_KEY=xxx node scripts/generate-news.js
+// 実行曜日: 月・火・木・土のみ（--forceオプションで強制実行）
 
 const Anthropic = require('@anthropic-ai/sdk')
+
+// 曜日チェック（月=1, 火=2, 木=4, 土=6）
+if (!process.argv.includes('--force')) {
+  const jstDay = new Date(Date.now() + 9 * 60 * 60 * 1000).getUTCDay()
+  const allowedDays = [1, 2, 4, 6] // 月・火・木・土
+  if (!allowedDays.includes(jstDay)) {
+    const dayNames = ['日', '月', '火', '水', '木', '金', '土']
+    console.log(`⏭️  今日は${dayNames[jstDay]}曜日のため生成をスキップします（月・火・木・土のみ）`)
+    console.log('   強制実行する場合は --force オプションをつけてください')
+    process.exit(0)
+  }
+}
 const fs = require('fs')
 const path = require('path')
 
@@ -262,12 +275,23 @@ ${newsText}
 - 「まとめると」「〜と言えるでしょう」「〜かもしれません」などAI文体は使わない
 - 本文中の1つ目の ## 見出しの直後に {{IMAGE_1}}、2つ目の ## 見出しの直後に {{IMAGE_2}} を入れる
 
+【記事構成の基本テンプレート（内容に合わせて3〜5見出しで柔軟に調整）】
+## 何が起きたか（今回のニュースの核心）
+{{IMAGE_1}}
+## なぜそれが重要なのか（背景・意義）
+## 技術的な詳細 または これまでの経緯
+{{IMAGE_2}}
+## 今後どうなるか（次のステップ・課題）
+
+※速報・内容が薄い場合は3見出しでよい。解説が多い場合は5見出しまで増やしてよい。
+※見出し名はテンプレートをそのまま使わず、記事内容に合った具体的な表現にすること。
+
 以下のJSON形式のみで返してください:
 {
   "title": "記事タイトル（日本語、35文字以内・事実ベース）",
   "description": "記事の要約（90文字以内）",
   "category": "ロケット・衛星・通信・有人宇宙飛行・月探査・火星探査 のいずれか1つ",
-  "body": "記事本文（マークダウン形式。## 見出しを3〜4つ、{{IMAGE_1}}と{{IMAGE_2}}を含め、1800〜2500文字）"
+  "body": "記事本文（マークダウン形式。## 見出しを3〜5つ、{{IMAGE_1}}と{{IMAGE_2}}を含め、2000〜2800文字）"
 }`,
       },
     ],
