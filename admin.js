@@ -711,10 +711,14 @@ function renderSplitEditor({ file, meta, body, message, action, publishAction, a
         }
         return line
       })
+      // /images/ → /img/ に変換してadminサーバーから画像を配信
+      const fixImgPath = src => src.startsWith('/images/') ? src.replace('/images/', '/img/') : src
       const htmlBody = marked.parse(processedLines.join('\\n'))
+        .replace(/src="(\\/images\\/[^"]+)"/g, (_, p) => 'src="' + fixImgPath(p) + '"')
 
+      const coverSrc = fixImgPath(image)
       pane.innerHTML =
-        (image ? '<img class="preview-cover" src="' + image + '" alt="">' : '') +
+        (image ? '<img class="preview-cover" src="' + coverSrc + '" alt="">' : '') +
         (cat   ? '<span class="preview-cat">' + cat + '</span>' : '') +
         (title ? '<h1 class="preview-title">' + title + '</h1>' : '') +
         (date  ? '<div class="preview-date">' + date + '</div>' : '') +
