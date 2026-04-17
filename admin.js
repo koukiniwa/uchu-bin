@@ -638,7 +638,11 @@ function renderSplitEditor({ file, meta, body, message, action, publishAction, a
   </header>
   ${message ? `<div class="msg-bar ${message.includes('エラー') ? 'error' : 'success'}">${message}</div>` : ''}
   <div class="split">
-    <!-- 左：編集 -->
+    <!-- 左：プレビュー -->
+    <div class="right" id="preview-pane">
+      <p class="preview-placeholder">右で入力するとここにプレビューが表示されます →</p>
+    </div>
+    <!-- 右：編集 -->
     <div class="left">
       <form id="editForm" method="POST" action="${action}" style="display:contents;">
         <input type="hidden" name="file" value="${file}">
@@ -680,10 +684,6 @@ function renderSplitEditor({ file, meta, body, message, action, publishAction, a
           <button type="button" class="pub-btn" onclick="publishDraft()">🚀 公開する</button>
         </div>
       </form>
-    </div>
-    <!-- 右：プレビュー -->
-    <div class="right" id="preview-pane">
-      <p class="preview-placeholder">← 入力すると右にリアルタイムでプレビューが表示されます</p>
     </div>
   </div>
 
