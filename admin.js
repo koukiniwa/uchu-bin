@@ -335,6 +335,29 @@ const CLIENT_JS = `
     }
   }
 
+  async function generateArticle(btn) {
+    if (!confirm('新しい記事を生成しますか？（1〜2分かかります）')) return
+    btn.disabled = true
+    btn.textContent = '⏳ 生成中...'
+    try {
+      const res = await fetch('/generate', { method: 'POST' })
+      const json = await res.json()
+      if (json.ok) {
+        btn.textContent = '✓ 生成完了！'
+        btn.style.background = '#43a047'
+        setTimeout(() => location.reload(), 1500)
+      } else {
+        alert('エラー: ' + json.error)
+        btn.disabled = false
+        btn.textContent = '🔄 新しく生成'
+      }
+    } catch(e) {
+      alert('通信エラー: ' + e.message)
+      btn.disabled = false
+      btn.textContent = '🔄 新しく生成'
+    }
+  }
+
   async function publish() {
     const btn = document.getElementById('publishBtn')
     btn.disabled = true
@@ -476,7 +499,10 @@ function renderMain(message) {
 
     <!-- AI下書き -->
     <div class="card">
-      <h2>🤖 AI下書き（確認・公開待ち）</h2>
+      <h2 style="display:flex;align-items:center;justify-content:space-between;">
+        <span>🤖 AI下書き（確認・公開待ち）</span>
+        <button onclick="generateArticle(this)" style="padding:6px 16px;background:#5a8fd4;color:#fff;border:none;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer;">🔄 新しく生成</button>
+      </h2>
       ${draftsSection}
     </div>
 
@@ -1063,6 +1089,26 @@ const server = http.createServer(async (req, res) => {
         } else {
           res.end(JSON.stringify({ ok: false, error: msg }))
         }
+      } else {
+        res.end(JSON.stringify({ ok: true }))
+      }
+    })
+    return
+  }
+
+  // POST /generate
+  if (req.method === 'POST' && pathname === '/generate') {
+    const apiKey = process.env.ANTHROPIC_API_KEY || ''
+    if (!apiKey) {
+      res.writeHead(200, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify({ ok: false, error: 'ANTHROPIC_API_KEY が設定されていません' }))
+      return
+    }
+    const cmd = `node scripts/generate-news.js --force`
+    exec(cmd, { cwd: __dirname, env: { ...process.env, ANTHROPIC_API_KEY: apiKey } }, (err, _stdout, stderr) => {
+      res.writeHead(200, { 'Content-Type': 'application/json' })
+      if (err) {
+        res.end(JSON.stringify({ ok: false, error: stderr || err.message }))
       } else {
         res.end(JSON.stringify({ ok: true }))
       }

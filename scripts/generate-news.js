@@ -20,6 +20,19 @@ const path = require('path')
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
+// 下書きが溜まりすぎていたらスキップ（--forceで無視）
+const DRAFTS_DIR = path.join(__dirname, '..', 'drafts')
+if (!process.argv.includes('--force')) {
+  const pendingDrafts = fs.existsSync(DRAFTS_DIR)
+    ? fs.readdirSync(DRAFTS_DIR).filter(f => f.endsWith('.md')).length
+    : 0
+  if (pendingDrafts >= 2) {
+    console.log(`⏭️  下書きが ${pendingDrafts} 件溜まっているためスキップします（2件以上で停止）`)
+    console.log('   強制実行する場合は --force オプションをつけてください')
+    process.exit(0)
+  }
+}
+
 // 地域別RSSフィード（日本20% / 米国50% / 中国20% / 欧州10% / その他）
 const RSS_FEEDS_BY_REGION = {
   japan: [
