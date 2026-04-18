@@ -6,8 +6,22 @@ export default function TweetEmbed({ url }) {
 
   useEffect(() => {
     if (!ref.current) return
-    if (window.twttr && window.twttr.widgets) {
-      window.twttr.widgets.load(ref.current)
+    const el = ref.current
+
+    const load = () => {
+      if (window.twttr?.widgets) window.twttr.widgets.load(el)
+    }
+
+    if (window.twttr?.ready) {
+      window.twttr.ready(load)
+    } else {
+      const id = setInterval(() => {
+        if (window.twttr?.ready) {
+          window.twttr.ready(load)
+          clearInterval(id)
+        }
+      }, 100)
+      return () => clearInterval(id)
     }
   }, [url])
 
