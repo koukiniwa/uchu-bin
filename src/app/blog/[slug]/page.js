@@ -2,6 +2,7 @@ import { getPostBySlug, getAllPosts } from '@/lib/posts'
 import Link from 'next/link'
 import Markdown from 'markdown-to-jsx'
 import TweetEmbed from '@/app/TweetEmbed'
+import TweetLoader from '@/app/TweetLoader'
 
 const TWEET_REGEX = /^https?:\/\/(twitter\.com|x\.com)\/\S+\/status\/\d+/
 
@@ -73,6 +74,7 @@ export default function BlogPost({ params }) {
 
   return (
     <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+      <TweetLoader />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
