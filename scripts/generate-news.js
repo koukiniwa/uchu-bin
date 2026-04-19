@@ -5,7 +5,7 @@
 const Anthropic = require('@anthropic-ai/sdk')
 
 // 曜日チェック（月=1, 火=2, 木=4, 土=6）
-if (!process.argv.includes('--force')) {
+if (!process.argv.includes('--force') && !process.argv.includes('--suggest')) {
   const jstDay = new Date(Date.now() + 9 * 60 * 60 * 1000).getUTCDay()
   const allowedDays = [1, 2, 4, 6] // 月・火・木・土
   if (!allowedDays.includes(jstDay)) {
@@ -20,9 +20,9 @@ const path = require('path')
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
-// 下書きが溜まりすぎていたらスキップ（--forceで無視）
+// 下書きが溜まりすぎていたらスキップ（--force / --suggestで無視）
 const DRAFTS_DIR = path.join(__dirname, '..', 'drafts')
-if (!process.argv.includes('--force')) {
+if (!process.argv.includes('--force') && !process.argv.includes('--suggest')) {
   const pendingDrafts = fs.existsSync(DRAFTS_DIR)
     ? fs.readdirSync(DRAFTS_DIR).filter(f => f.endsWith('.md')).length
     : 0
@@ -85,11 +85,11 @@ function parseRSS(xml, region) {
   return items.sort((a, b) => b.date - a.date).slice(0, 5)
 }
 
-// 直近14日の記事タイトルを取得（重複防止用）
-function getRecentTitles(days = 14) {
+// 直近N日の記事タイトルとカテゴリを取得（重複防止用）
+function getRecentArticles(days = 14) {
   const postsDir = path.join(__dirname, '..', 'posts')
   const cutoff = new Date(Date.now() - days * 24 * 60 * 60 * 1000)
-  const titles = []
+  const articles = []
   try {
     const files = fs.readdirSync(postsDir).filter((f) => f.endsWith('.md'))
     for (const file of files) {
@@ -97,11 +97,15 @@ function getRecentTitles(days = 14) {
       const dateMatch = content.match(/^date:\s*['"]?(\d{4}-\d{2}-\d{2})/)
       if (dateMatch && new Date(dateMatch[1]) >= cutoff) {
         const titleMatch = content.match(/^title:\s*['"]?(.+?)['"]?\s*$/m)
-        if (titleMatch) titles.push(titleMatch[1])
+        const catMatch = content.match(/^category:\s*['"]?(.+?)['"]?\s*$/m)
+        if (titleMatch) articles.push({
+          title: titleMatch[1],
+          category: catMatch ? catMatch[1] : ''
+        })
       }
     }
   } catch {}
-  return titles
+  return articles
 }
 
 // NASA画像のcollection.jsonから実在するURLと出典を取得
@@ -223,17 +227,31 @@ async function fetchNASAImages(query, count = 3) {
   return images
 }
 
-async function generateArticle(newsByRegion, recentTitles) {
+async function generateArticle(newsByRegion, recentArticles) {
   const newsText = Object.entries(newsByRegion)
     .flatMap(([region, items]) =>
       items.map((item) => `[${region.toUpperCase()}] ${item.title}\n${item.description}`)
     )
     .join('\n\n')
 
+  // カテゴリ別の直近記事数を集計
+  const catCount = {}
+  for (const a of recentArticles) {
+    if (a.category) catCount[a.category] = (catCount[a.category] || 0) + 1
+  }
+  const overusedCats = Object.entries(catCount).filter(([, n]) => n >= 2).map(([c]) => c)
+
   const recentText =
-    recentTitles.length > 0
-      ? `\n【直近14日間に生成済みの記事タイトル（これらと同じテーマは避けること）】\n${recentTitles.map((t) => `- ${t}`).join('\n')}\n`
+    recentArticles.length > 0
+      ? `\n【直近14日間に生成済みの記事（テーマとカテゴリが被らないようにすること）】\n${recentArticles.map((a) => `- [${a.category}] ${a.title}`).join('\n')}\n` +
+        (overusedCats.length > 0 ? `\n【直近で多いカテゴリ（できるだけ避けること）】${overusedCats.join('、')}\n` : '')
       : ''
+
+  // 選択済みトピック（管理画面からの指定）
+  const selectedTopic = process.env.ARTICLE_TOPIC || null
+  const topicConstraint = selectedTopic
+    ? `\n【重要】以下のテーマで必ず記事を書くこと（他のテーマは選ばないこと）:\n${selectedTopic}\n`
+    : ''
 
   // 現在の日付をJSTで渡す
   const now = new Date()
@@ -253,7 +271,7 @@ async function generateArticle(newsByRegion, recentTitles) {
 【重要】今日の日付は ${todayStr} です。
 ニュースソースに「〇〇年に予定」などの将来の予定が含まれていても、
 その日付がすでに過去であれば「当初〇〇年に予定されていた」と正確に表現してください。
-
+${topicConstraint}
 以下のニュース一覧から**1つだけ**選び、そのニュースに絞って深く解説してください。
 複数のニュースを混ぜないこと。
 ${recentText}
@@ -344,12 +362,12 @@ async function main() {
     process.exit(1)
   }
 
-  console.log('\n📋 直近の記事タイトルを確認中（重複防止）...')
-  const recentTitles = getRecentTitles(14)
-  console.log(`  直近14日: ${recentTitles.length} 件`)
+  console.log('\n📋 直近の記事を確認中（重複防止）...')
+  const recentArticles = getRecentArticles(14)
+  console.log(`  直近14日: ${recentArticles.length} 件`)
 
   console.log(`\n🤖 Claude APIで記事を生成中...`)
-  const article = await generateArticle(newsByRegion, recentTitles)
+  const article = await generateArticle(newsByRegion, recentArticles)
   console.log(`  タイトル: ${article.title}`)
   console.log(`  カテゴリ: ${article.category}`)
 
@@ -359,7 +377,13 @@ async function main() {
     .replace('{{IMAGE_2}}', `\n![画像2](/images/ここに画像ファイル名)\n*出典: 出典を記入*\n`)
 
   const date = new Date().toISOString().slice(0, 10)
-  const slug = `${date}-${Date.now()}`
+  const titleSlug = article.title
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/[^\w\u3000-\u9fff\uac00-\ud7af\u30a0-\u30ff\u3040-\u309f-]/g, '')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '')
+  const slug = `${date}-${titleSlug}`
 
   const lines = [
     `---`,
@@ -384,7 +408,81 @@ async function main() {
   console.log(`     2. 本文画像1・2: ![画像] のファイル名を書き換え`)
 }
 
-main().catch((err) => {
-  console.error('エラー:', err)
-  process.exit(1)
-})
+async function suggestMode() {
+  const newsByRegion = {}
+  for (const [region, feeds] of Object.entries(RSS_FEEDS_BY_REGION)) {
+    newsByRegion[region] = []
+    for (const { url } of feeds) {
+      try {
+        const xml = await fetchUrl(url)
+        const items = parseRSS(xml, region)
+        newsByRegion[region].push(...items)
+      } catch {}
+    }
+    newsByRegion[region] = newsByRegion[region]
+      .sort((a, b) => b.date - a.date)
+      .slice(0, REGION_COUNTS[region] || 2)
+  }
+
+  const recentArticles = getRecentArticles(14)
+  const newsText = Object.entries(newsByRegion)
+    .flatMap(([region, items]) =>
+      items.map((item) => `[${region.toUpperCase()}] ${item.title}\n${item.description}`)
+    )
+    .join('\n\n')
+
+  const catCount = {}
+  for (const a of recentArticles) {
+    if (a.category) catCount[a.category] = (catCount[a.category] || 0) + 1
+  }
+  const overusedCats = Object.entries(catCount).filter(([, n]) => n >= 2).map(([c]) => c)
+
+  const recentText =
+    recentArticles.length > 0
+      ? `\n【直近14日間の記事（テーマとカテゴリが被らないようにすること）】\n${recentArticles.map((a) => `- [${a.category}] ${a.title}`).join('\n')}\n` +
+        (overusedCats.length > 0 ? `\n【直近で多いカテゴリ（できるだけ避けること）】${overusedCats.join('、')}\n` : '')
+      : ''
+
+  const message = await client.messages.create({
+    model: 'claude-opus-4-6',
+    max_tokens: 1000,
+    messages: [
+      {
+        role: 'user',
+        content: `あなたは宇宙開発専門のニュースライターです。
+以下のニュース一覧から、記事化すべきテーマの候補を3〜5件選んでください。
+各候補は異なるカテゴリ（ロケット・衛星・通信・有人宇宙飛行・月探査・火星探査）になるよう意識してください。
+${process.env.CUSTOM_REQUEST ? `\n【編集者からのリクエスト（これを最優先で候補に入れること）】\n${process.env.CUSTOM_REQUEST}\n` : ''}${recentText}
+ニュース一覧:
+${newsText}
+
+【選題基準】
+優先: 初めての出来事、日本語記事が少ない海外新興企業、宇宙政策の大きな変化、技術的発見
+避ける: Falcon 9の定期商業打ち上げ、直近記事と被るテーマ、直近で多いカテゴリ
+
+以下のJSON配列のみで返してください（前後に余分なテキスト不要）:
+[
+  {"title": "記事タイトル（日本語、35文字以内）", "summary": "このニュースが重要な理由（60文字以内）", "category": "ロケット・衛星・通信・有人宇宙飛行・月探査・火星探査のいずれか"},
+  ...
+]`,
+      },
+    ],
+  })
+
+  const text = message.content[0].text
+  const jsonMatch = text.match(/\[[\s\S]*\]/)
+  if (!jsonMatch) throw new Error('JSONが見つかりません: ' + text.slice(0, 200))
+  process.stdout.write(jsonMatch[0])
+}
+
+if (process.argv.includes('--suggest')) {
+  suggestMode().catch((err) => {
+    process.stderr.write('エラー: ' + err.message + '\n')
+    process.exit(1)
+  })
+} else {
+  main().catch((err) => {
+    console.error('エラー:', err)
+    process.exit(1)
+  })
+}
