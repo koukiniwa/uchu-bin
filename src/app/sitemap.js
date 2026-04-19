@@ -2,7 +2,7 @@ import { getAllPosts } from '@/lib/posts'
 
 export default function sitemap() {
   const posts = getAllPosts()
-  const baseUrl = 'https://uchu-bin.jp'
+  const baseUrl = 'https://www.uchu-bin.jp'
 
   const postUrls = posts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
