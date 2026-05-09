@@ -480,13 +480,16 @@ async function main() {
     const filePath = path.join(postsDir, `${slug}.md`)
     fs.writeFileSync(filePath, lines.join('\n'), 'utf-8')
     console.log(`\n✅ 記事を保存: posts/${slug}.md`)
-    try {
-      execSync(`git add "posts/${slug}.md"`, { cwd: repoDir, stdio: 'inherit' })
-      execSync(`git commit -m "記事自動公開 ${article.title}"`, { cwd: repoDir, stdio: 'inherit' })
-      execSync('git push', { cwd: repoDir, stdio: 'inherit' })
-      console.log(`\n🚀 自動公開完了`)
-    } catch (e) {
-      console.error('Git エラー:', e.message)
+    // CI環境（GitHub Actions）ではワークフロー側でgit pushするためスキップ
+    if (!process.env.CI) {
+      try {
+        execSync(`git add "posts/${slug}.md"`, { cwd: repoDir, stdio: 'inherit' })
+        execSync(`git commit -m "記事自動公開 ${article.title}"`, { cwd: repoDir, stdio: 'inherit' })
+        execSync('git push', { cwd: repoDir, stdio: 'inherit' })
+        console.log(`\n🚀 自動公開完了`)
+      } catch (e) {
+        console.error('Git エラー:', e.message)
+      }
     }
   } else {
     const draftsDir = path.join(repoDir, 'drafts')
