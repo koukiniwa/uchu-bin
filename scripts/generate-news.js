@@ -3,6 +3,7 @@
 // 実行曜日: 月・火・木・土のみ（--forceオプションで強制実行）
 
 const Anthropic = require('@anthropic-ai/sdk')
+const { execSync } = require('child_process')
 
 // 曜日チェック（月=1, 火=2, 木=4, 土=6）
 if (!process.argv.includes('--force') && !process.argv.includes('--suggest')) {
@@ -227,6 +228,60 @@ async function fetchNASAImages(query, count = 3) {
   return images
 }
 
+// カテゴリ→英語キーワード
+const CATEGORY_KEYWORDS = {
+  'ロケット': 'rocket launch',
+  '衛星・通信': 'satellite',
+  '有人宇宙飛行': 'astronaut spaceflight',
+  '月探査': 'moon lunar',
+  '火星探査': 'mars',
+}
+
+// Xで関連ツイートを検索（has:media付き）
+async function searchRelevantTweets(title, category, count = 2) {
+  const token = process.env.TWITTER_BEARER_TOKEN
+  if (!token) {
+    console.log('  TWITTER_BEARER_TOKEN が未設定のためスキップ')
+    return []
+  }
+  const catKeyword = CATEGORY_KEYWORDS[category] || 'space'
+  const titleKeywords = title.match(/[A-Za-z][A-Za-z0-9\-]+/g)?.slice(0, 2).join(' ') || ''
+  const queries = [
+    titleKeywords ? `${titleKeywords} has:media -is:retweet` : null,
+    `${catKeyword} has:media -is:retweet lang:en`,
+  ].filter(Boolean)
+
+  const tweetUrls = []
+  for (const query of queries) {
+    if (tweetUrls.length >= count) break
+    try {
+      const encoded = encodeURIComponent(query)
+      const url = `https://api.twitter.com/2/tweets/search/recent?query=${encoded}&tweet.fields=author_id&expansions=author_id&user.fields=username&max_results=10`
+      const res = await fetch(url, {
+        headers: { Authorization: `Bearer ${token}` },
+        signal: AbortSignal.timeout(10000),
+      })
+      if (!res.ok) {
+        const err = await res.json()
+        console.log(`  X API エラー (${res.status}):`, JSON.stringify(err).slice(0, 100))
+        break
+      }
+      const data = await res.json()
+      const tweets = data.data || []
+      const users = Object.fromEntries((data.includes?.users || []).map((u) => [u.id, u.username]))
+      for (const tweet of tweets) {
+        if (tweetUrls.length >= count) break
+        const username = users[tweet.author_id] || 'twitter'
+        tweetUrls.push(`https://twitter.com/${username}/status/${tweet.id}`)
+      }
+      console.log(`  ✓ X検索「${query.slice(0, 40)}」→ ${tweets.length} 件`)
+    } catch (e) {
+      console.error('  X検索エラー:', e.message)
+    }
+  }
+  return tweetUrls
+}
+
 async function generateArticle(newsByRegion, recentArticles) {
   const newsText = Object.entries(newsByRegion)
     .flatMap(([region, items]) =>
@@ -371,12 +426,33 @@ async function main() {
   console.log(`  タイトル: ${article.title}`)
   console.log(`  カテゴリ: ${article.category}`)
 
-  // 画像はプレースホルダーのまま残す（手動で差し替え）
-  const body = article.body
-    .replace('{{IMAGE_1}}', `\n![画像1](/images/ここに画像ファイル名)\n*出典: 出典を記入*\n`)
-    .replace('{{IMAGE_2}}', `\n![画像2](/images/ここに画像ファイル名)\n*出典: 出典を記入*\n`)
+  const autoPublish = process.argv.includes('--auto-publish')
 
-  const date = new Date().toISOString().slice(0, 10)
+  // Xで関連ツイートを検索
+  console.log('\n🐦 X（Twitter）で関連ツイートを検索中...')
+  const tweets = await searchRelevantTweets(article.title, article.category)
+
+  // 画像プレースホルダーをツイートURLまたはプレースホルダーに置換
+  let body = article.body
+  body = body.replace('{{IMAGE_1}}', tweets[0]
+    ? `\n${tweets[0]}\n`
+    : `\n![画像1](/images/ここに画像ファイル名)\n*出典: 出典を記入*\n`)
+  body = body.replace('{{IMAGE_2}}', tweets[1]
+    ? `\n${tweets[1]}\n`
+    : `\n![画像2](/images/ここに画像ファイル名)\n*出典: 出典を記入*\n`)
+
+  // カバー画像
+  let coverImage = '/images/ここにカバー画像ファイル名'
+  if (autoPublish) {
+    console.log('\n🖼️  カバー画像を検索中...')
+    const imgs = await fetchNASAImages(article.title, 1)
+    if (imgs.length > 0) {
+      coverImage = imgs[0].url
+      console.log(`  ✓ カバー画像取得: ${coverImage.slice(0, 60)}...`)
+    }
+  }
+
+  const date = new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().slice(0, 10)
   const titleSlug = article.title
     .toLowerCase()
     .replace(/\s+/g, '-')
@@ -391,21 +467,35 @@ async function main() {
     `description: '${article.description.replace(/'/g, "''")}'`,
     `date: '${date}'`,
     `category: '${article.category}'`,
-    `image: '/images/ここにカバー画像ファイル名'`,
+    `image: '${coverImage}'`,
     `---`,
     ``,
     body,
   ]
 
-  const draftsDir = path.join(__dirname, '..', 'drafts')
-  if (!fs.existsSync(draftsDir)) fs.mkdirSync(draftsDir, { recursive: true })
-  const filePath = path.join(draftsDir, `${slug}.md`)
-  fs.writeFileSync(filePath, lines.join('\n'), 'utf-8')
+  const repoDir = path.join(__dirname, '..')
 
-  console.log(`\n✅ 下書きを生成しました: drafts/${slug}.md`)
-  console.log(`  📸 画像を手動で追加してください：`)
-  console.log(`     1. カバー画像: image: フィールドを書き換え`)
-  console.log(`     2. 本文画像1・2: ![画像] のファイル名を書き換え`)
+  if (autoPublish) {
+    const postsDir = path.join(repoDir, 'posts')
+    const filePath = path.join(postsDir, `${slug}.md`)
+    fs.writeFileSync(filePath, lines.join('\n'), 'utf-8')
+    console.log(`\n✅ 記事を保存: posts/${slug}.md`)
+    try {
+      execSync(`git add "posts/${slug}.md"`, { cwd: repoDir, stdio: 'inherit' })
+      execSync(`git commit -m "記事自動公開 ${article.title}"`, { cwd: repoDir, stdio: 'inherit' })
+      execSync('git push', { cwd: repoDir, stdio: 'inherit' })
+      console.log(`\n🚀 自動公開完了`)
+    } catch (e) {
+      console.error('Git エラー:', e.message)
+    }
+  } else {
+    const draftsDir = path.join(repoDir, 'drafts')
+    if (!fs.existsSync(draftsDir)) fs.mkdirSync(draftsDir, { recursive: true })
+    const filePath = path.join(draftsDir, `${slug}.md`)
+    fs.writeFileSync(filePath, lines.join('\n'), 'utf-8')
+    console.log(`\n✅ 下書きを生成しました: drafts/${slug}.md`)
+    console.log(`  📸 画像を手動で追加してください`)
+  }
 }
 
 async function suggestMode() {
