@@ -133,13 +133,20 @@ export default function BlogPost({ params }) {
 
       {/* ヒーロー画像 */}
       {post.image && (
-        <div className="post-hero-img" style={{ width: '100%', height: '420px', overflow: 'hidden', marginBottom: '40px' }}>
-          <img
-            src={post.image}
-            alt={post.title}
-            fetchPriority="high"
-            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-          />
+        <div style={{ marginBottom: '40px' }}>
+          <div className="post-hero-img" style={{ width: '100%', height: '420px', overflow: 'hidden' }}>
+            <img
+              src={post.image}
+              alt={post.title}
+              fetchPriority="high"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+          </div>
+          {post.imageCredit && (
+            <div style={{ fontSize: '11px', color: '#999', textAlign: 'right', marginTop: '4px' }}>
+              出典: {post.imageCredit}
+            </div>
+          )}
         </div>
       )}
 

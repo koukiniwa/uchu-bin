@@ -568,6 +568,12 @@ async function main() {
     .replace(/^-|-$/g, '')
   const slug = `${date}-${titleSlug}`
 
+  // 画像クレジット（OG画像のソースドメイン）
+  let imageCredit = ''
+  if (coverImage && article.source_url) {
+    try { imageCredit = new URL(article.source_url).hostname.replace('www.', '') } catch {}
+  }
+
   const lines = [
     `---`,
     `title: '${article.title.replace(/'/g, "''")}'`,
@@ -575,6 +581,7 @@ async function main() {
     `date: '${date}'`,
     `category: '${article.category}'`,
     `image: '${coverImage}'`,
+    ...(imageCredit ? [`imageCredit: '${imageCredit}'`] : []),
     `---`,
     ``,
     body,
