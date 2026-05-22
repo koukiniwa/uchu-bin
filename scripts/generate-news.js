@@ -142,9 +142,12 @@ async function fetchWikimediaImages(query, count = 2) {
     const searchData = await searchRes.json()
     const results = searchData?.query?.search || []
 
+    const PORTRAIT_WORDS = ['portrait', 'headshot', 'official photo', 'biography', 'crew photo', 'group photo', 'smiling', 'poses', 'seated', 'people', 'person', 'team photo']
     for (const result of results) {
       if (images.length >= count) break
       const title = result.title
+      const titleLow = title.toLowerCase()
+      if (PORTRAIT_WORDS.some(w => titleLow.includes(w))) continue
       try {
         const infoRes = await fetch(
           `https://commons.wikimedia.org/w/api.php?action=query&titles=${encodeURIComponent(title)}&prop=imageinfo&iiprop=url|extmetadata&format=json&origin=*`,
@@ -286,10 +289,18 @@ async function searchRelevantTweets(title, category, count = 2) {
   }
 
   const catKeyword = CATEGORY_KEYWORDS[category] || 'space'
+  // タイトルから短い英語キーワードを抽出（3文字以上、略語除く）
+  const titleKeywords = title.match(/[A-Za-z]{4,}/g)?.slice(0, 2).join(' ') || ''
   const queries = [
-    // 公式アカウントから画像付きツイートを検索
-    ...officialAccounts.slice(0, 2).map(acc => `from:${acc} has:media -is:retweet`),
-    // フォールバック：カテゴリキーワード検索
+    // 公式アカウント＋キーワードで絞り込み
+    ...officialAccounts.slice(0, 2).map(acc =>
+      titleKeywords
+        ? `from:${acc} ${titleKeywords} has:media -is:retweet`
+        : `from:${acc} has:media -is:retweet`
+    ),
+    // フォールバック：公式アカウントのみ（キーワードなし）
+    ...officialAccounts.slice(0, 1).map(acc => `from:${acc} has:media -is:retweet`),
+    // 最終フォールバック：カテゴリキーワード検索
     `${catKeyword} has:media -is:retweet lang:en`,
   ]
 
