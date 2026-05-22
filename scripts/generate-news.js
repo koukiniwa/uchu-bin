@@ -206,35 +206,33 @@ async function fetchNASAImages(query, count = 3) {
     images.push(...wiki)
   }
 
-  // それでも不足分はAPODで補完
-  if (images.length < count) {
-    try {
-      const apiKey = process.env.NASA_API_KEY || 'DEMO_KEY'
-      const res = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`, {
-        signal: AbortSignal.timeout(8000),
-      })
-      const apod = await res.json()
-      const url = apod.media_type === 'image' ? apod.url : apod.thumbnail_url
-      if (url) {
-        const credit = apod.copyright ? apod.copyright.replace(/\n/g, ' ').trim() : 'NASA'
-        while (images.length < count) images.push({ url, credit })
-        console.log(`  ✓ APOD画像で補完`)
-      }
-    } catch (e) {
-      console.error('  APOD取得失敗:', e.message)
-    }
-  }
-
   return images
 }
 
 // カテゴリ→英語キーワード
 const CATEGORY_KEYWORDS = {
   'ロケット': 'rocket launch',
-  '衛星・通信': 'satellite',
-  '有人宇宙飛行': 'astronaut spaceflight',
-  '月探査': 'moon lunar',
-  '火星探査': 'mars',
+  '衛星・通信': 'satellite orbit',
+  '有人宇宙飛行': 'astronaut crew spacecraft',
+  '月探査': 'moon lunar surface',
+  '火星探査': 'mars rover spacecraft',
+}
+
+// よく使う宇宙企業・機関名の英語マッピング
+const COMPANY_KEYWORDS = {
+  'スペースx': 'SpaceX',
+  'ロケットラボ': 'Rocket Lab Electron',
+  'ブルーオリジン': 'Blue Origin',
+  'nasa': 'NASA',
+  'jaxa': 'JAXA',
+  'esa': 'ESA',
+  'アルテミス': 'Artemis moon NASA',
+  'スターシップ': 'Starship SpaceX',
+  'ファルコン': 'Falcon SpaceX rocket',
+  'ニューグレン': 'New Glenn Blue Origin',
+  'ニュートロン': 'Neutron Rocket Lab',
+  'iss': 'ISS space station',
+  '国際宇宙ステーション': 'ISS space station',
 }
 
 // Xで関連ツイートを検索（has:media付き）
@@ -437,10 +435,19 @@ async function main() {
   const nasaBodyImages = []
   if (autoPublish) {
     console.log('\n🖼️  関連画像を検索中...')
-    const englishKeywords = article.title.match(/[A-Za-z][A-Za-z0-9\-\.]+/g)?.join(' ') || ''
-    const catKeyword = CATEGORY_KEYWORDS[article.category] || 'space'
-    const searchQuery = englishKeywords || catKeyword
-    const imgs = await fetchNASAImages(searchQuery, 3)
+    // タイトルから英語キーワードを抽出
+    const titleLower = article.title.toLowerCase()
+    let searchQuery = article.title.match(/[A-Za-z][A-Za-z0-9\-\.]+/g)?.join(' ') || ''
+    // 企業・機関名をキーワードに変換
+    for (const [jp, en] of Object.entries(COMPANY_KEYWORDS)) {
+      if (titleLower.includes(jp)) {
+        searchQuery = en + ' ' + searchQuery
+        break
+      }
+    }
+    // 英語キーワードがなければカテゴリキーワードを使用
+    if (!searchQuery.trim()) searchQuery = CATEGORY_KEYWORDS[article.category] || 'space'
+    const imgs = await fetchNASAImages(searchQuery.trim(), 3)
     if (imgs.length > 0) {
       coverImage = imgs[0].url
       nasaBodyImages.push(...imgs.slice(1))
