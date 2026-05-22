@@ -235,19 +235,63 @@ const COMPANY_KEYWORDS = {
   '国際宇宙ステーション': 'ISS space station',
 }
 
-// Xで関連ツイートを検索（has:media付き）
+// 企業・機関名 → 公式Xアカウント
+const OFFICIAL_ACCOUNTS = {
+  'スペースx': 'SpaceX',
+  'spacex': 'SpaceX',
+  'ロケットラボ': 'RocketLab',
+  'rocket lab': 'RocketLab',
+  'ブルーオリジン': 'blueorigin',
+  'blue origin': 'blueorigin',
+  'ニューグレン': 'blueorigin',
+  'nasa': 'NASA',
+  'jaxa': 'JAXA',
+  'esa': 'ESA',
+  'uli': 'ulalaunch',
+  'ula': 'ulalaunch',
+  'アルテミス': 'NASA',
+  'スターシップ': 'SpaceX',
+  'ファルコン': 'SpaceX',
+  'ニュートロン': 'RocketLab',
+  'iss': 'NASA',
+  '国際宇宙ステーション': 'NASA',
+  'virgin galactic': 'virgingalactic',
+  'アストロボティック': 'astrobotic',
+  'intuitive machines': 'Int_Machines',
+  'firefly': 'Firefly_Space',
+  'rocket lab': 'RocketLab',
+  'northrop': 'northropgrumman',
+  'ノースロップ': 'northropgrumman',
+  'boeing': 'Boeing',
+  'ボーイング': 'Boeing',
+  'lockheed': 'LockheedMartin',
+  'ロッキード': 'LockheedMartin',
+}
+
+// Xで関連ツイートを検索（公式アカウント優先）
 async function searchRelevantTweets(title, category, count = 2) {
   const token = process.env.TWITTER_BEARER_TOKEN
   if (!token) {
     console.log('  TWITTER_BEARER_TOKEN が未設定のためスキップ')
     return []
   }
+
+  // タイトルから公式アカウントを検出
+  const titleLower = title.toLowerCase()
+  const officialAccounts = []
+  for (const [keyword, account] of Object.entries(OFFICIAL_ACCOUNTS)) {
+    if (titleLower.includes(keyword) && !officialAccounts.includes(account)) {
+      officialAccounts.push(account)
+    }
+  }
+
   const catKeyword = CATEGORY_KEYWORDS[category] || 'space'
-  const titleKeywords = title.match(/[A-Za-z][A-Za-z0-9\-]+/g)?.slice(0, 2).join(' ') || ''
   const queries = [
-    titleKeywords ? `${titleKeywords} has:media -is:retweet` : null,
+    // 公式アカウントから画像付きツイートを検索
+    ...officialAccounts.slice(0, 2).map(acc => `from:${acc} has:media -is:retweet`),
+    // フォールバック：カテゴリキーワード検索
     `${catKeyword} has:media -is:retweet lang:en`,
-  ].filter(Boolean)
+  ]
 
   const tweetUrls = []
   for (const query of queries) {
@@ -262,7 +306,7 @@ async function searchRelevantTweets(title, category, count = 2) {
       if (!res.ok) {
         const err = await res.json()
         console.log(`  X API エラー (${res.status}):`, JSON.stringify(err).slice(0, 100))
-        break
+        continue
       }
       const data = await res.json()
       const tweets = data.data || []
@@ -272,7 +316,7 @@ async function searchRelevantTweets(title, category, count = 2) {
         const username = users[tweet.author_id] || 'twitter'
         tweetUrls.push(`https://twitter.com/${username}/status/${tweet.id}`)
       }
-      console.log(`  ✓ X検索「${query.slice(0, 40)}」→ ${tweets.length} 件`)
+      console.log(`  ✓ X検索「${query.slice(0, 50)}」→ ${tweets.length} 件`)
     } catch (e) {
       console.error('  X検索エラー:', e.message)
     }
