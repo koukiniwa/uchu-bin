@@ -432,25 +432,34 @@ async function main() {
   console.log('\n🐦 X（Twitter）で関連ツイートを検索中...')
   const tweets = await searchRelevantTweets(article.title, article.category)
 
-  // 画像プレースホルダーをツイートURLまたはプレースホルダーに置換
+  // NASA/Wikimedia画像を取得（カバー1枚＋本文2枚）
+  let coverImage = '/images/ここにカバー画像ファイル名'
+  const nasaBodyImages = []
+  if (autoPublish) {
+    console.log('\n🖼️  関連画像を検索中...')
+    const englishKeywords = article.title.match(/[A-Za-z][A-Za-z0-9\-\.]+/g)?.join(' ') || ''
+    const catKeyword = CATEGORY_KEYWORDS[article.category] || 'space'
+    const searchQuery = englishKeywords || catKeyword
+    const imgs = await fetchNASAImages(searchQuery, 3)
+    if (imgs.length > 0) {
+      coverImage = imgs[0].url
+      nasaBodyImages.push(...imgs.slice(1))
+      console.log(`  ✓ 画像取得: ${imgs.length}枚（クエリ: "${searchQuery.slice(0, 40)}"）`)
+    }
+  }
+
+  // 画像プレースホルダーをツイートURLまたはNASA画像に置換
   let body = article.body
   body = body.replace('{{IMAGE_1}}', tweets[0]
     ? `\n${tweets[0]}\n`
-    : `\n![画像1](/images/ここに画像ファイル名)\n*出典: 出典を記入*\n`)
+    : nasaBodyImages[0]
+      ? `\n![画像](${nasaBodyImages[0].url})\n*出典: ${nasaBodyImages[0].credit}*\n`
+      : '')
   body = body.replace('{{IMAGE_2}}', tweets[1]
     ? `\n${tweets[1]}\n`
-    : `\n![画像2](/images/ここに画像ファイル名)\n*出典: 出典を記入*\n`)
-
-  // カバー画像
-  let coverImage = '/images/ここにカバー画像ファイル名'
-  if (autoPublish) {
-    console.log('\n🖼️  カバー画像を検索中...')
-    const imgs = await fetchNASAImages(article.title, 1)
-    if (imgs.length > 0) {
-      coverImage = imgs[0].url
-      console.log(`  ✓ カバー画像取得: ${coverImage.slice(0, 60)}...`)
-    }
-  }
+    : nasaBodyImages[1]
+      ? `\n![画像](${nasaBodyImages[1].url})\n*出典: ${nasaBodyImages[1].credit}*\n`
+      : '')
 
   const date = new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().slice(0, 10)
   const titleSlug = article.title
