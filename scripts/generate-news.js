@@ -86,6 +86,21 @@ function parseRSS(xml, region) {
   return items.sort((a, b) => b.date - a.date).slice(0, 5)
 }
 
+// ソース記事のOG画像を取得
+async function fetchOGImage(url) {
+  try {
+    const html = await fetchUrl(url)
+    const match = html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/)
+      || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/)
+    const imageUrl = match?.[1]
+    if (!imageUrl || imageUrl.startsWith('data:')) return null
+    return imageUrl.startsWith('http') ? imageUrl : null
+  } catch (e) {
+    console.error('  OG画像取得失敗:', e.message)
+    return null
+  }
+}
+
 // 直近N日の記事タイトルとカテゴリを取得（重複防止用）
 function getRecentArticles(days = 14) {
   const postsDir = path.join(__dirname, '..', 'posts')
@@ -271,8 +286,8 @@ const OFFICIAL_ACCOUNTS = {
   'ロッキード': 'LockheedMartin',
 }
 
-// Xで関連ツイートを検索（公式アカウント優先）
-async function searchRelevantTweets(title, category, count = 2) {
+// Xで関連ツイートを検索（公式アカウント優先・日付絞り込み対応）
+async function searchRelevantTweets(title, category, count = 2, sourceDate = null) {
   const token = process.env.TWITTER_BEARER_TOKEN
   if (!token) {
     console.log('  TWITTER_BEARER_TOKEN が未設定のためスキップ')
@@ -309,7 +324,14 @@ async function searchRelevantTweets(title, category, count = 2) {
     if (tweetUrls.length >= count) break
     try {
       const encoded = encodeURIComponent(query)
-      const url = `https://api.twitter.com/2/tweets/search/recent?query=${encoded}&tweet.fields=author_id&expansions=author_id&user.fields=username&max_results=10`
+      // 日付が分かっている場合は前後2日間に絞り込む
+      let timeParams = ''
+      if (sourceDate) {
+        const start = new Date(sourceDate.getTime() - 2 * 24 * 60 * 60 * 1000).toISOString()
+        const end = new Date(Math.min(sourceDate.getTime() + 3 * 24 * 60 * 60 * 1000, Date.now())).toISOString()
+        timeParams = `&start_time=${start}&end_time=${end}`
+      }
+      const url = `https://api.twitter.com/2/tweets/search/recent?query=${encoded}&tweet.fields=author_id&expansions=author_id&user.fields=username&max_results=10${timeParams}`
       const res = await fetch(url, {
         headers: { Authorization: `Bearer ${token}` },
         signal: AbortSignal.timeout(10000),
@@ -338,7 +360,7 @@ async function searchRelevantTweets(title, category, count = 2) {
 async function generateArticle(newsByRegion, recentArticles) {
   const newsText = Object.entries(newsByRegion)
     .flatMap(([region, items]) =>
-      items.map((item) => `[${region.toUpperCase()}] ${item.title}\n${item.description}`)
+      items.map((item) => `[${region.toUpperCase()}] ${item.title}\nURL: ${item.link}\n${item.description}`)
     )
     .join('\n\n')
 
@@ -430,6 +452,7 @@ ${newsText}
   "title": "記事タイトル（日本語、35文字以内・事実ベース）",
   "description": "記事の要約（90文字以内）",
   "category": "ロケット・衛星・通信・有人宇宙飛行・月探査・火星探査 のいずれか1つ",
+  "source_url": "参考にしたニュースのURL（ニュース一覧に含まれるURLをそのまま記載）",
   "body": "記事本文（マークダウン形式。## 見出しを3〜5つ、{{IMAGE_1}}と{{IMAGE_2}}を含め、2000〜2800文字）"
 }`,
       },
@@ -481,42 +504,47 @@ async function main() {
 
   const autoPublish = process.argv.includes('--auto-publish')
 
-  // Xで関連ツイートを検索
-  console.log('\n🐦 X（Twitter）で関連ツイートを検索中...')
-  const tweets = await searchRelevantTweets(article.title, article.category)
-
-  // NASA/Wikimedia画像を取得（カバー1枚＋本文2枚）
+  // ソース記事のOG画像を取得（カバー用）
   let coverImage = ''
   const nasaBodyImages = []
   if (autoPublish) {
-    console.log('\n🖼️  関連画像を検索中...')
-    // タイトルから英語キーワードを抽出
-    const titleLower = article.title.toLowerCase()
-    let searchQuery = article.title.match(/[A-Za-z][A-Za-z0-9\-\.]+/g)?.join(' ') || ''
-    // 企業・機関名をキーワードに変換
-    for (const [jp, en] of Object.entries(COMPANY_KEYWORDS)) {
-      if (titleLower.includes(jp)) {
-        searchQuery = en + ' ' + searchQuery
-        break
+    // 1. ソース記事のOG画像を最優先で取得
+    if (article.source_url) {
+      console.log(`\n🖼️  ソース記事からOG画像を取得中... (${article.source_url.slice(0, 60)})`)
+      const ogImage = await fetchOGImage(article.source_url)
+      if (ogImage) {
+        coverImage = ogImage
+        console.log(`  ✓ OG画像取得: ${ogImage.slice(0, 60)}`)
       }
     }
-    // 英語キーワードがなければカテゴリキーワードを使用
-    if (!searchQuery.trim()) searchQuery = CATEGORY_KEYWORDS[article.category] || 'space'
-    let imgs = await fetchNASAImages(searchQuery.trim(), 3)
-    // 見つからない場合はカテゴリキーワードで再検索
-    if (imgs.length === 0) {
-      const fallback = CATEGORY_KEYWORDS[article.category] || 'space'
-      console.log(`  → フォールバック検索: "${fallback}"`)
-      imgs = await fetchNASAImages(fallback, 3)
-    }
-    if (imgs.length > 0) {
-      coverImage = imgs[0].url
-      nasaBodyImages.push(...imgs.slice(1))
-      console.log(`  ✓ 画像取得: ${imgs.length}枚（クエリ: "${searchQuery.slice(0, 40)}"）`)
-    } else {
-      console.log('  画像が見つかりませんでした')
+    // 2. OG画像が取得できなければNASA/Wikimediaで検索
+    if (!coverImage) {
+      console.log('\n🖼️  NASA/Wikimediaで関連画像を検索中...')
+      const titleLower = article.title.toLowerCase()
+      let searchQuery = article.title.match(/[A-Za-z][A-Za-z0-9\-\.]+/g)?.join(' ') || ''
+      for (const [jp, en] of Object.entries(COMPANY_KEYWORDS)) {
+        if (titleLower.includes(jp)) { searchQuery = en + ' ' + searchQuery; break }
+      }
+      if (!searchQuery.trim()) searchQuery = CATEGORY_KEYWORDS[article.category] || 'space'
+      let imgs = await fetchNASAImages(searchQuery.trim(), 3)
+      if (imgs.length === 0) imgs = await fetchNASAImages(CATEGORY_KEYWORDS[article.category] || 'space', 3)
+      if (imgs.length > 0) {
+        coverImage = imgs[0].url
+        nasaBodyImages.push(...imgs.slice(1))
+      }
     }
   }
+
+  // ソース記事の日付を取得（Twitterの日付絞り込み用）
+  const allNewsItems = Object.values(newsByRegion).flat()
+  const sourceItem = article.source_url
+    ? allNewsItems.find(i => i.link === article.source_url)
+    : null
+  const sourceDate = sourceItem?.date || null
+
+  // Xで関連ツイートを検索（ソース記事の日付で絞り込み）
+  console.log('\n🐦 X（Twitter）で関連ツイートを検索中...')
+  const tweets = await searchRelevantTweets(article.title, article.category, 2, sourceDate)
 
   // 画像プレースホルダーをツイートURLまたはNASA画像に置換
   let body = article.body
