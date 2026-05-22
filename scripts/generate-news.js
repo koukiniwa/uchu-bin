@@ -431,7 +431,7 @@ async function main() {
   const tweets = await searchRelevantTweets(article.title, article.category)
 
   // NASA/Wikimedia画像を取得（カバー1枚＋本文2枚）
-  let coverImage = '/images/ここにカバー画像ファイル名'
+  let coverImage = ''
   const nasaBodyImages = []
   if (autoPublish) {
     console.log('\n🖼️  関連画像を検索中...')
@@ -447,11 +447,19 @@ async function main() {
     }
     // 英語キーワードがなければカテゴリキーワードを使用
     if (!searchQuery.trim()) searchQuery = CATEGORY_KEYWORDS[article.category] || 'space'
-    const imgs = await fetchNASAImages(searchQuery.trim(), 3)
+    let imgs = await fetchNASAImages(searchQuery.trim(), 3)
+    // 見つからない場合はカテゴリキーワードで再検索
+    if (imgs.length === 0) {
+      const fallback = CATEGORY_KEYWORDS[article.category] || 'space'
+      console.log(`  → フォールバック検索: "${fallback}"`)
+      imgs = await fetchNASAImages(fallback, 3)
+    }
     if (imgs.length > 0) {
       coverImage = imgs[0].url
       nasaBodyImages.push(...imgs.slice(1))
       console.log(`  ✓ 画像取得: ${imgs.length}枚（クエリ: "${searchQuery.slice(0, 40)}"）`)
+    } else {
+      console.log('  画像が見つかりませんでした')
     }
   }
 
