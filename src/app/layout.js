@@ -5,7 +5,7 @@ import CategoryNav from './CategoryNav'
 import StickyHeader from './StickyHeader'
 
 export const metadata = {
-  metadataBase: new URL('https://uchu-bin.jp'),
+  metadataBase: new URL('https://www.uchu-bin.jp'),
   title: '宇宙便 - 宇宙情報メディア',
   description: 'ロケット・衛星・宇宙開発の最新情報をいち早くお届け。JAXA・NASA・SpaceXなど国内外の宇宙ニュースを毎日更新。',
   keywords: ['宇宙便', '宇宙ニュース', 'ロケット', '衛星', '宇宙開発', 'JAXA', 'NASA', 'SpaceX', '宇宙情報', '月探査', '火星探査'],
@@ -20,7 +20,7 @@ export const metadata = {
   openGraph: {
     title: '宇宙便 - 宇宙情報メディア',
     description: 'ロケット・衛星・宇宙開発の最新情報をいち早くお届け。',
-    url: 'https://uchu-bin.jp',
+    url: 'https://www.uchu-bin.jp',
     siteName: '宇宙便',
     type: 'website',
     locale: 'ja_JP',
@@ -48,8 +48,8 @@ export default function RootLayout({ children }) {
             '@type': 'Organization',
             name: '宇宙便',
             alternateName: 'うちゅうびん',
-            url: 'https://uchu-bin.jp',
-            logo: 'https://uchu-bin.jp/icon-512.png',
+            url: 'https://www.uchu-bin.jp',
+            logo: 'https://www.uchu-bin.jp/icon-512.png',
             description: 'ロケット・衛星・宇宙開発の最新情報をいち早くお届けする宇宙情報メディア。',
             sameAs: [],
           })}}
@@ -60,10 +60,10 @@ export default function RootLayout({ children }) {
             '@context': 'https://schema.org',
             '@type': 'WebSite',
             name: '宇宙便',
-            url: 'https://uchu-bin.jp',
+            url: 'https://www.uchu-bin.jp',
             potentialAction: {
               '@type': 'SearchAction',
-              target: 'https://uchu-bin.jp/?category={search_term_string}',
+              target: 'https://www.uchu-bin.jp/?category={search_term_string}',
               'query-input': 'required name=search_term_string',
             },
           })}}

@@ -21,7 +21,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
   const post = getPostBySlug(params.slug)
-  const url = `https://uchu-bin.jp/blog/${params.slug}`
+  const url = `https://www.uchu-bin.jp/blog/${params.slug}`
   const image = post.image || '/icon-512.png'
   return {
     title: `${post.title} - 宇宙便`,
@@ -63,13 +63,13 @@ export default function BlogPost({ params }) {
     headline: post.title,
     description: post.description,
     datePublished: post.date,
-    image: post.image ? [post.image] : ['https://uchu-bin.jp/icon-512.png'],
+    image: post.image ? [post.image] : ['https://www.uchu-bin.jp/icon-512.png'],
     publisher: {
       '@type': 'Organization',
       name: '宇宙便',
-      logo: { '@type': 'ImageObject', url: 'https://uchu-bin.jp/icon-512.png' },
+      logo: { '@type': 'ImageObject', url: 'https://www.uchu-bin.jp/icon-512.png' },
     },
-    mainEntityOfPage: `https://uchu-bin.jp/blog/${params.slug}`,
+    mainEntityOfPage: `https://www.uchu-bin.jp/blog/${params.slug}`,
   }
 
   return (
@@ -164,7 +164,7 @@ export default function BlogPost({ params }) {
         {/* Xシェアボタン */}
         <div style={{ marginBottom: '24px', textAlign: 'center' }}>
           <a
-            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title + ' - 宇宙便')}&url=${encodeURIComponent('https://uchu-bin.jp/blog/' + post.slug)}&hashtags=宇宙便,宇宙ニュース`}
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title + ' - 宇宙便')}&url=${encodeURIComponent('https://www.uchu-bin.jp/blog/' + post.slug)}&hashtags=宇宙便,宇宙ニュース`}
             target="_blank"
             rel="noopener noreferrer"
             style={{
