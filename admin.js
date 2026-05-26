@@ -3,6 +3,7 @@ const fs = require('fs')
 const path = require('path')
 const { exec } = require('child_process')
 const sharp = require('sharp')
+const { TwitterApi } = require('twitter-api-v2')
 
 const PORT = 3001
 const POSTS_DIR = path.join(__dirname, 'posts')
@@ -12,6 +13,21 @@ const CATEGORIES = ['ロケット', '衛星・通信', '有人宇宙飛行', '�
 
 if (!fs.existsSync(DRAFTS_DIR)) fs.mkdirSync(DRAFTS_DIR, { recursive: true })
 if (!fs.existsSync(IMAGES_DIR)) fs.mkdirSync(IMAGES_DIR, { recursive: true })
+
+const SITE_URL = 'https://www.uchu-bin.jp'
+
+async function tweetArticle(meta, slug) {
+  const apiKey = process.env.TWITTER_API_KEY
+  const apiSecret = process.env.TWITTER_API_SECRET
+  const accessToken = process.env.TWITTER_ACCESS_TOKEN
+  const accessSecret = process.env.TWITTER_ACCESS_TOKEN_SECRET
+  if (!apiKey || !apiSecret || !accessToken || !accessSecret) return
+  const client = new TwitterApi({ appKey: apiKey, appSecret: apiSecret, accessToken, accessSecret })
+  const title = meta.title || '新しい記事'
+  const url = `${SITE_URL}/blog/${slug.replace(/\.md$/, '')}`
+  const text = `${title}\n${url}`
+  await client.v2.tweet(text)
+}
 
 // ── Helper functions ──────────────────────────────────────────────────────────
 
@@ -335,26 +351,118 @@ const CLIENT_JS = `
     }
   }
 
-  async function generateArticle(btn) {
-    if (!confirm('新しい記事を生成しますか？（1〜2分かかります）')) return
+  async function generateDirect(btn) {
+    const request = document.getElementById('custom-request').value.trim()
+    if (!request) { alert('どんな記事を作りたいか入力してください'); return }
+    if (!confirm(\`「\${request}」で記事を生成しますか？（1〜2分かかります）\`)) return
     btn.disabled = true
     btn.textContent = '⏳ 生成中...'
     try {
-      const res = await fetch('/generate', { method: 'POST' })
+      const res = await fetch('/generate-from-topic', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title: request, summary: '' })
+      })
       const json = await res.json()
       if (json.ok) {
         btn.textContent = '✓ 生成完了！'
-        btn.style.background = '#43a047'
+        btn.style.background = '#2e7d32'
         setTimeout(() => location.reload(), 1500)
       } else {
         alert('エラー: ' + json.error)
         btn.disabled = false
-        btn.textContent = '🔄 新しく生成'
+        btn.textContent = '⚡ 入力内容で直接生成'
       }
     } catch(e) {
       alert('通信エラー: ' + e.message)
       btn.disabled = false
-      btn.textContent = '🔄 新しく生成'
+      btn.textContent = '⚡ 入力内容で直接生成'
+    }
+  }
+
+  async function suggestTopics(btn) {
+    btn.disabled = true
+    btn.textContent = '⏳ テーマ候補を取得中...'
+    const container = document.getElementById('suggest-container')
+    container.innerHTML = ''
+    const customRequest = document.getElementById('custom-request').value.trim()
+    try {
+      const res = await fetch('/suggest', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ customRequest })
+      })
+      const json = await res.json()
+      if (!json.ok) {
+        alert('エラー: ' + json.error)
+        btn.disabled = false
+        btn.textContent = '📋 テーマを選んで生成'
+        return
+      }
+      const candidates = json.candidates
+      container.innerHTML = \`
+        <div style="margin-top:12px;border:1px solid #444;border-radius:6px;padding:14px;background:#1e1e1e;">
+          <p style="margin:0 0 10px;font-weight:700;font-size:13px;color:#ccc;">テーマを選んでください：</p>
+          \${candidates.map((c, i) => \`
+            <label id="tlabel-\${i}" style="display:block;padding:10px 12px;margin-bottom:6px;background:#2a2a2a;border-radius:4px;cursor:pointer;border:2px solid transparent;transition:border-color .15s;">
+              <input type="radio" name="topic" value="\${i}" onchange="selectTopic(\${i})" style="margin-right:8px;accent-color:#5a8fd4;">
+              <strong style="font-size:13px;">\${c.title}</strong>
+              \${c.category ? \`<span style="font-size:10px;color:#5a8fd4;margin-left:8px;font-weight:700;">\${c.category}</span>\` : ''}
+              <br><span style="font-size:11px;color:#aaa;margin-left:20px;">\${c.summary}</span>
+            </label>
+          \`).join('')}
+          <button onclick="generateFromTopic(this)"
+            id="gen-from-topic-btn"
+            style="margin-top:10px;padding:9px 0;background:#43a047;color:#fff;border:none;border-radius:4px;font-size:13px;font-weight:700;cursor:pointer;width:100%;">
+            この内容で記事を生成
+          </button>
+        </div>
+      \`
+      // candidatesをdatasetに保存
+      document.getElementById('gen-from-topic-btn').dataset.candidates = JSON.stringify(candidates)
+      btn.disabled = false
+      btn.textContent = '📋 テーマを選んで生成'
+    } catch(e) {
+      alert('通信エラー: ' + e.message)
+      btn.disabled = false
+      btn.textContent = '📋 テーマを選んで生成'
+    }
+  }
+
+  function selectTopic(idx) {
+    document.querySelectorAll('[id^="tlabel-"]').forEach((el, i) => {
+      el.style.borderColor = i === idx ? '#5a8fd4' : 'transparent'
+    })
+  }
+
+  async function generateFromTopic(btn) {
+    const selected = document.querySelector('input[name="topic"]:checked')
+    if (!selected) { alert('テーマを選んでください'); return }
+    const candidates = JSON.parse(btn.dataset.candidates)
+    const topic = candidates[parseInt(selected.value)]
+    if (!confirm(\`「\${topic.title}」で記事を生成しますか？（1〜2分かかります）\`)) return
+    btn.disabled = true
+    btn.textContent = '⏳ 記事を生成中...'
+    try {
+      const res = await fetch('/generate-from-topic', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title: topic.title, summary: topic.summary })
+      })
+      const json = await res.json()
+      if (json.ok) {
+        btn.textContent = '✓ 生成完了！'
+        btn.style.background = '#2e7d32'
+        setTimeout(() => location.reload(), 1500)
+      } else {
+        alert('エラー: ' + json.error)
+        btn.disabled = false
+        btn.textContent = 'この内容で記事を生成'
+      }
+    } catch(e) {
+      alert('通信エラー: ' + e.message)
+      btn.disabled = false
+      btn.textContent = 'この内容で記事を生成'
     }
   }
 
@@ -499,10 +607,15 @@ function renderMain(message) {
 
     <!-- AI下書き -->
     <div class="card">
-      <h2 style="display:flex;align-items:center;justify-content:space-between;">
-        <span>🤖 AI下書き（確認・公開待ち）</span>
-        <button onclick="generateArticle(this)" style="padding:6px 16px;background:#5a8fd4;color:#fff;border:none;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer;">🔄 新しく生成</button>
-      </h2>
+      <h2>🤖 AI下書き（確認・公開待ち）</h2>
+      <div style="margin-bottom:12px;">
+        <textarea id="custom-request" placeholder="どんな記事を作りたいか入力（任意）&#10;例：スターシップの最新状況をまとめて&#10;例：インドの月探査について詳しく" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:4px;font-size:13px;font-family:inherit;resize:vertical;min-height:72px;"></textarea>
+        <div style="display:flex;gap:8px;margin-top:8px;">
+          <button onclick="suggestTopics(this)" style="flex:1;padding:8px;background:#5a8fd4;color:#fff;border:none;border-radius:4px;font-size:13px;font-weight:700;cursor:pointer;">📋 候補を見て選ぶ</button>
+          <button onclick="generateDirect(this)" style="flex:1;padding:8px;background:#7c4dff;color:#fff;border:none;border-radius:4px;font-size:13px;font-weight:700;cursor:pointer;">⚡ 入力内容で直接生成</button>
+        </div>
+      </div>
+      <div id="suggest-container"></div>
       ${draftsSection}
     </div>
 
@@ -764,9 +877,32 @@ function renderSplitEditor({ file, meta, body, message, action, publishAction, a
     renderPreview()
 
     // 公開ボタン
-    function publishDraft() {
+    const IS_DRAFT = ${JSON.stringify(publishAction !== action)}
+    async function publishDraft() {
       if (!confirm('この内容で公開しますか？')) return
-      document.getElementById('pubForm').submit()
+      if (IS_DRAFT) {
+        // 下書き→公開：まず保存してからpubFormで移動
+        const fd = new FormData(document.getElementById('editForm'))
+        fd.set('content', document.getElementById('f-body').value)
+        await fetch('${action}', { method: 'POST', body: fd })
+        document.getElementById('pubForm').submit()
+      } else {
+        // 公開済み記事：保存 → git push
+        const fd = new FormData(document.getElementById('editForm'))
+        fd.set('content', document.getElementById('f-body').value)
+        try {
+          await fetch('${action}', { method: 'POST', body: fd })
+          const res = await fetch('/publish', { method: 'POST' })
+          const json = await res.json()
+          if (json.ok) {
+            location.href = '/?msg=' + encodeURIComponent('✓ 保存＆公開しました')
+          } else {
+            alert('git pushエラー: ' + json.error)
+          }
+        } catch(e) {
+          alert('エラー: ' + e.message)
+        }
+      }
     }
 
     // 画像アップロード共通
@@ -991,11 +1127,14 @@ const server = http.createServer(async (req, res) => {
       const dstPath = path.join(POSTS_DIR, basename)
       if (!srcPath.startsWith(DRAFTS_DIR)) throw new Error('不正なリクエスト')
       if (!fs.existsSync(srcPath)) throw new Error('下書きが見つかりません')
+      const postContent = fs.readFileSync(srcPath, 'utf-8')
+      const { meta } = parseFrontmatter(postContent)
       fs.copyFileSync(srcPath, dstPath)
       fs.unlinkSync(srcPath)
       const date = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })
       const cmd = `git pull --rebase --autostash && git add -A posts/ drafts/ && git commit -m "記事公開 ${date}" && git push`
       exec(cmd, { cwd: __dirname }, (err, _stdout, stderr) => {
+        tweetArticle(meta, basename).catch(() => {})
         if (err && stderr && !stderr.includes('nothing to commit')) {
           res.writeHead(302, { Location: '/?msg=' + encodeURIComponent('公開しました（git警告: ' + stderr.slice(0, 80) + '）') })
         } else {
@@ -1111,6 +1250,69 @@ const server = http.createServer(async (req, res) => {
         res.end(JSON.stringify({ ok: false, error: stderr || err.message }))
       } else {
         res.end(JSON.stringify({ ok: true }))
+      }
+    })
+    return
+  }
+
+  // POST /suggest
+  if (req.method === 'POST' && pathname === '/suggest') {
+    const apiKey = process.env.ANTHROPIC_API_KEY || ''
+    if (!apiKey) {
+      res.writeHead(200, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify({ ok: false, error: 'ANTHROPIC_API_KEY が設定されていません' }))
+      return
+    }
+    readRawBody(req).then((buf) => {
+      let customRequest = ''
+      try { customRequest = JSON.parse(buf.toString()).customRequest || '' } catch {}
+      const cmd = `node scripts/generate-news.js --suggest`
+      const env = { ...process.env, ANTHROPIC_API_KEY: apiKey }
+      if (customRequest) env.CUSTOM_REQUEST = customRequest
+      exec(cmd, { cwd: __dirname, env }, (err, stdout, stderr) => {
+        res.writeHead(200, { 'Content-Type': 'application/json' })
+        if (err) {
+          res.end(JSON.stringify({ ok: false, error: stderr || err.message }))
+          return
+        }
+        try {
+          const candidates = JSON.parse(stdout)
+          res.end(JSON.stringify({ ok: true, candidates }))
+        } catch (e) {
+          res.end(JSON.stringify({ ok: false, error: 'JSONパースエラー: ' + stdout.slice(0, 300) }))
+        }
+      })
+    })
+    return
+  }
+
+  // POST /generate-from-topic
+  if (req.method === 'POST' && pathname === '/generate-from-topic') {
+    const apiKey = process.env.ANTHROPIC_API_KEY || ''
+    if (!apiKey) {
+      res.writeHead(200, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify({ ok: false, error: 'ANTHROPIC_API_KEY が設定されていません' }))
+      return
+    }
+    readRawBody(req).then((buf) => {
+      try {
+        const { title, summary } = JSON.parse(buf.toString())
+        const topic = title + (summary ? ': ' + summary : '')
+        const cmd = `node scripts/generate-news.js --force`
+        exec(cmd, {
+          cwd: __dirname,
+          env: { ...process.env, ANTHROPIC_API_KEY: apiKey, ARTICLE_TOPIC: topic }
+        }, (err, _stdout, stderr) => {
+          res.writeHead(200, { 'Content-Type': 'application/json' })
+          if (err) {
+            res.end(JSON.stringify({ ok: false, error: stderr || err.message }))
+          } else {
+            res.end(JSON.stringify({ ok: true }))
+          }
+        })
+      } catch (e) {
+        res.writeHead(200, { 'Content-Type': 'application/json' })
+        res.end(JSON.stringify({ ok: false, error: e.message }))
       }
     })
     return

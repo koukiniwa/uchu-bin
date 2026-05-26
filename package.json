@@ -9,11 +9,13 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.90.0",
+    "dotenv": "^17.4.2",
     "gray-matter": "^4.0.3",
     "markdown-to-jsx": "^7.2.0",
     "next": "^14",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "twitter-api-v2": "^1.29.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",
