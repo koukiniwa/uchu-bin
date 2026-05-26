@@ -51,6 +51,10 @@ jobs:
           git diff --cached --quiet || git commit -m "記事自動公開 $(TZ=Asia/Tokyo date '+%Y-%m-%d')"
           git push
 
+      - name: Vercelデプロイ待機（3分）
+        if: steps.check.outputs.skip == 'false'
+        run: sleep 180
+
       - name: Twitterに投稿
         if: steps.check.outputs.skip == 'false'
         env:
