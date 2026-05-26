@@ -1,4 +1,5 @@
 const http = require('http')
+const https = require('https')
 const fs = require('fs')
 const path = require('path')
 const { exec } = require('child_process')
@@ -1135,6 +1136,7 @@ const server = http.createServer(async (req, res) => {
       const cmd = `git pull --rebase --autostash && git add -A posts/ drafts/ && git commit -m "記事公開 ${date}" && git push`
       exec(cmd, { cwd: __dirname }, (err, _stdout, stderr) => {
         tweetArticle(meta, basename).catch(() => {})
+        https.get('https://www.google.com/ping?sitemap=https://www.uchu-bin.jp/sitemap.xml', () => {}).on('error', () => {})
         if (err && stderr && !stderr.includes('nothing to commit')) {
           res.writeHead(302, { Location: '/?msg=' + encodeURIComponent('公開しました（git警告: ' + stderr.slice(0, 80) + '）') })
         } else {

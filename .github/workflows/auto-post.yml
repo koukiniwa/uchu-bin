@@ -50,6 +50,7 @@ jobs:
           git add posts/
           git diff --cached --quiet || git commit -m "記事自動公開 $(TZ=Asia/Tokyo date '+%Y-%m-%d')"
           git push
+          curl -s "https://www.google.com/ping?sitemap=https://www.uchu-bin.jp/sitemap.xml" || true
 
       - name: Vercelデプロイ待機（3分）
         if: steps.check.outputs.skip == 'false'
