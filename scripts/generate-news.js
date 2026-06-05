@@ -26,6 +26,7 @@ const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 const RSS_FEEDS_BY_REGION = {
   japan: [
     { url: 'https://www.jaxa.jp/rss/press.rss', label: '日本（JAXA）' },
+    { url: 'https://sorae.info/feed', label: '日本（sorae.info）' },
   ],
   usa: [
     { url: 'https://www.nasaspaceflight.com/feed/', label: '米国（NASASpaceFlight）' },
@@ -46,7 +47,7 @@ const RSS_FEEDS_BY_REGION = {
 }
 
 // 地域ごとの取得件数（合計で約15件）
-const REGION_COUNTS = { japan: 3, usa: 5, china: 3, europe: 2, global: 2 }
+const REGION_COUNTS = { japan: 5, usa: 5, china: 3, europe: 2, global: 2 }
 
 async function fetchUrl(url) {
   const res = await fetch(url, {
@@ -432,6 +433,13 @@ async function generateArticle(newsByRegion, recentArticles) {
         (overusedCats.length > 0 ? `\n【直近で多いカテゴリ（できるだけ避けること）】${overusedCats.join('、')}\n` : '')
       : ''
 
+  // 直近14日間に日本関連記事がなければ優先指示を追加
+  const japanKeywords = ['JAXA', 'H3', 'KAIROS', 'ispace', '日本', 'Epsilon', 'イプシロン', 'SLIM', 'はやぶさ']
+  const hasJapanRecent = recentArticles.some(a => japanKeywords.some(kw => a.title.includes(kw)))
+  const japanPriorityText = !hasJapanRecent
+    ? '\n【優先指示】直近14日間に日本・JAXA関連の記事がありません。今回は[JAPAN]タグのニュースを最優先で選んでください。\n'
+    : ''
+
   // 選択済みトピック（管理画面からの指定）
   const selectedTopic = process.env.ARTICLE_TOPIC || null
   const topicConstraint = selectedTopic
@@ -459,7 +467,7 @@ async function generateArticle(newsByRegion, recentArticles) {
 ${topicConstraint}
 以下のニュース一覧から**1つだけ**選び、そのニュースに絞って深く解説してください。
 複数のニュースを混ぜないこと。
-${recentText}
+${japanPriorityText}${recentText}
 ニュース一覧（地域タグ付き）:
 ${newsText}
 
