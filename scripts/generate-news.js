@@ -502,7 +502,7 @@ ${newsText}
   "title": "記事タイトル（日本語、35文字以内・事実ベース）",
   "description": "記事の要約（90文字以内）",
   "category": "ロケット・衛星・通信・有人宇宙飛行・月探査・火星探査 のいずれか1つ",
-  "source_url": "参考にしたニュースのURL（ニュース一覧に含まれるURLをそのまま記載）",
+  "source_urls": ["メインの参考記事URL", "2つ目の参考記事URL（なければ1つでもよい）"],
   "body": "記事本文（マークダウン形式。## 見出しを3〜5つ、{{IMAGE_1}}と{{IMAGE_2}}を含め、2000〜2800文字）"
 }`,
       },
@@ -559,9 +559,10 @@ async function main() {
   const nasaBodyImages = []
   if (autoPublish) {
     // 1. ソース記事のOG画像を最優先で取得
-    if (article.source_url) {
-      console.log(`\n🖼️  ソース記事からOG画像を取得中... (${article.source_url.slice(0, 60)})`)
-      const ogImage = await fetchOGImage(article.source_url)
+    const primarySourceUrl = article.source_urls?.[0]
+    if (primarySourceUrl) {
+      console.log(`\n🖼️  ソース記事からOG画像を取得中... (${primarySourceUrl.slice(0, 60)})`)
+      const ogImage = await fetchOGImage(primarySourceUrl)
       if (ogImage) {
         console.log(`  🔍 画像の関連性を確認中...`)
         const isRelevant = await validateImageRelevance(ogImage, article.title, article.category)
@@ -618,9 +619,10 @@ async function main() {
   }
 
   // ソース記事の日付を取得（Twitterの日付絞り込み用）
+  const primarySourceUrl = article.source_urls?.[0]
   const allNewsItems = Object.values(newsByRegion).flat()
-  const sourceItem = article.source_url
-    ? allNewsItems.find(i => i.link === article.source_url)
+  const sourceItem = primarySourceUrl
+    ? allNewsItems.find(i => i.link === primarySourceUrl)
     : null
   const sourceDate = sourceItem?.date || null
 
@@ -644,6 +646,13 @@ async function main() {
   article.title = fixProperNouns(article.title)
   article.description = fixProperNouns(article.description)
 
+  // 参考記事セクションを末尾に追加
+  const sourceUrls = (article.source_urls || []).filter(u => u && u.startsWith('http'))
+  if (sourceUrls.length > 0) {
+    const refLines = sourceUrls.map(u => `- ${u}`)
+    body += `\n\n## 参考記事\n\n${refLines.join('\n')}`
+  }
+
   const date = new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().slice(0, 10)
   const titleSlug = article.title
     .toLowerCase()
@@ -655,8 +664,8 @@ async function main() {
 
   // 画像クレジット（OG画像のソースドメイン）
   let imageCredit = ''
-  if (coverImage && article.source_url) {
-    try { imageCredit = new URL(article.source_url).hostname.replace('www.', '') } catch {}
+  if (coverImage && primarySourceUrl) {
+    try { imageCredit = new URL(primarySourceUrl).hostname.replace('www.', '') } catch {}
   }
 
   const lines = [

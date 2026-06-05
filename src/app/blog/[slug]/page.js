@@ -58,19 +58,33 @@ export default function BlogPost({ params }) {
     .filter(p => p.slug !== currentSlug && p.category === post.category)
     .slice(0, 3)
 
+  const baseUrl = 'https://www.uchu-bin.jp'
+  const articleUrl = `${baseUrl}/blog/${params.slug}`
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'NewsArticle',
     headline: post.title,
     description: post.description,
     datePublished: post.date,
-    image: post.image ? [post.image] : ['https://www.uchu-bin.jp/icon-512.png'],
+    dateModified: post.date,
+    url: articleUrl,
+    inLanguage: 'ja',
+    articleSection: post.category,
+    image: post.image
+      ? [post.image.startsWith('http') ? post.image : `${baseUrl}${post.image}`]
+      : [`${baseUrl}/icon-512.png`],
+    author: {
+      '@type': 'Organization',
+      name: '宇宙便編集部',
+      url: baseUrl,
+    },
     publisher: {
       '@type': 'Organization',
       name: '宇宙便',
-      logo: { '@type': 'ImageObject', url: 'https://www.uchu-bin.jp/icon-512.png' },
+      url: baseUrl,
+      logo: { '@type': 'ImageObject', url: `${baseUrl}/icon-512.png` },
     },
-    mainEntityOfPage: `https://www.uchu-bin.jp/blog/${params.slug}`,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': articleUrl },
   }
 
   return (

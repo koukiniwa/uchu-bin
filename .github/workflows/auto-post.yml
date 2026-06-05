@@ -47,7 +47,7 @@ jobs:
         run: |
           git config user.name "宇宙便 Bot"
           git config user.email "bot@uchu-bin.jp"
-          git add posts/
+          git add posts/ public/feed.xml
           git diff --cached --quiet || git commit -m "記事自動公開 $(TZ=Asia/Tokyo date '+%Y-%m-%d')"
           git push
           curl -s "https://www.google.com/ping?sitemap=https://www.uchu-bin.jp/sitemap.xml" || true
