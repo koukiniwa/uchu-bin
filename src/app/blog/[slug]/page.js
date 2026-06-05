@@ -22,7 +22,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const post = getPostBySlug(params.slug)
   const url = `https://www.uchu-bin.jp/blog/${params.slug}`
-  const image = post.image || '/icon-512.png'
+  const baseUrl = 'https://www.uchu-bin.jp'
+  const image = post.image ? `${baseUrl}${post.image}` : `${baseUrl}/icon-512.png`
   return {
     title: `${post.title} - 宇宙便`,
     description: post.description,
