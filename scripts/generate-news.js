@@ -716,7 +716,8 @@ async function main() {
   const titleSlug = article.title
     .toLowerCase()
     .replace(/\s+/g, '-')
-    .replace(/[^\w\u3000-\u9fff\uac00-\ud7af\u30a0-\u30ff\u3040-\u309f-]/g, '')
+    .replace(/[、「」]/g, '-')
+  .replace(/[^\w\u3000-\u9fff\uac00-\ud7af\u30a0-\u30ff\u3040-\u309f-]/g, '')
     .replace(/-+/g, '-')
     .replace(/^-|-$/g, '')
   const slug = `${date}-${titleSlug}`
