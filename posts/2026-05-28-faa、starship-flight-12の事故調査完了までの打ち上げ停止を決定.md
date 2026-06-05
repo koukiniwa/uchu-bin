@@ -3,8 +3,8 @@ title: 'FAA、Starship Flight 12の事故調査完了までの打ち上げ停止
 description: 'FAAは5月22日に実施されたStarship Flight 12の結果を分析し、SpaceX主導の事故調査が完了するまで次回打ち上げを認めない方針を示した。'
 date: '2026-05-28'
 category: 'ロケット'
-image: 'http://images-assets.nasa.gov/image/KSC-20240525-PH-RKL01_0001/KSC-20240525-PH-RKL01_0001~medium.jpg'
-imageCredit: 'spaceflightnow.com'
+image: '/images/1776001300887.jpg'
+imageCredit: 'SpaceX'
 ---
 
 ## FAAがStarship打ち上げ再開にミシャップ調査の完了を要求
