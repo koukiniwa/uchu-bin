@@ -470,6 +470,12 @@ ${newsText}
 地域バランスの目安: 米国50% / 日本20% / 中国20% / 欧州10%
 毎日異なる地域・テーマになるよう、直近記事と被らないものを選ぶこと。
 
+【固有名詞の正確なスペル（必ずこの表記を使うこと）】
+ロケット: Falcon 9, Falcon Heavy, Starship, New Glenn, Electron, Neutron, Vulcan, New Shepard, Vega-C, Ariane 6, H3, Epsilon, KAIROS, Long March
+企業: SpaceX, Blue Origin, Rocket Lab, ULA, Northrop Grumman, Lockheed Martin, Boeing, Virgin Galactic, Sierra Space, Relativity Space, Firefly Aerospace, ABL Space, ispace
+機関: NASA, ESA, JAXA, ISRO, CNSA, Roscosmos
+ミッション: Artemis, Starlink, Kuiper, OneWeb, Starfall, HLS, Gateway
+
 文体・スタイルの基準（ミリレポ風）:
 - 「です・ます」調のジャーナリスティックな文体。硬すぎず、崩しすぎない
 - 冒頭の第一段落でニュースの核心を端的に伝える（何が起きたか・誰が・どこで）
@@ -591,6 +597,26 @@ async function main() {
     }
   }
 
+  // 固有名詞の誤字を自動修正
+  function fixProperNouns(text) {
+    const corrections = [
+      [/New Glann/g, 'New Glenn'], [/New Gleenn/g, 'New Glenn'], [/New Glen\b/g, 'New Glenn'],
+      [/StarShip/g, 'Starship'], [/Starhip/g, 'Starship'], [/Star Ship/g, 'Starship'],
+      [/Falcon9/g, 'Falcon 9'], [/Falcon-9/g, 'Falcon 9'],
+      [/Blue Origim/g, 'Blue Origin'], [/Blue Orgin/g, 'Blue Origin'],
+      [/SpaceX(?![\s,])/g, (m, o, s) => s[o + 6] && s[o + 6] !== ' ' && s[o + 6] !== ',' ? m : m],
+      [/Rocket Lab(?!s)/g, 'Rocket Lab'],
+      [/NASAA/g, 'NASA'], [/ESAA/g, 'ESA'], [/JAXAA/g, 'JAXA'],
+      [/Artimis/g, 'Artemis'], [/Artemus/g, 'Artemis'],
+      [/Starlnk/g, 'Starlink'], [/Starlik/g, 'Starlink'],
+    ]
+    let result = text
+    for (const [pattern, replacement] of corrections) {
+      result = result.replace(pattern, replacement)
+    }
+    return result
+  }
+
   // ソース記事の日付を取得（Twitterの日付絞り込み用）
   const allNewsItems = Object.values(newsByRegion).flat()
   const sourceItem = article.source_url
@@ -603,7 +629,7 @@ async function main() {
   const tweets = await searchRelevantTweets(article.title, article.category, 2, sourceDate)
 
   // 画像プレースホルダーをツイートURLまたはNASA画像に置換
-  let body = article.body
+  let body = fixProperNouns(article.body)
   body = body.replace('{{IMAGE_1}}', tweets[0]
     ? `\n${tweets[0]}\n`
     : nasaBodyImages[0]
@@ -614,6 +640,9 @@ async function main() {
     : nasaBodyImages[1]
       ? `\n![画像](${nasaBodyImages[1].url})\n*出典: ${nasaBodyImages[1].credit}*\n`
       : '')
+
+  article.title = fixProperNouns(article.title)
+  article.description = fixProperNouns(article.description)
 
   const date = new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().slice(0, 10)
   const titleSlug = article.title
