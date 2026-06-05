@@ -86,7 +86,7 @@ async function validateImageRelevance(imageUrl, title, category) {
         role: 'user',
         content: [
           { type: 'image', source: { type: 'url', url: imageUrl } },
-          { type: 'text', text: `この画像は「${title}」（カテゴリ:${category}）という宇宙ニュース記事のカバー画像として適切ですか？「yes」か「no」だけで答えてください。` }
+          { type: 'text', text: `この画像は「${title}」（カテゴリ:${category}）という宇宙ニュース記事のカバー画像として適切ですか？記事のトピックに直接関連する内容の画像であれば「yes」、記事と無関係・テーマが異なる場合は「no」と答えてください。「yes」か「no」だけで答えてください。` }
         ]
       }]
     })
@@ -290,6 +290,33 @@ const CATEGORY_KEYWORDS = {
   '有人宇宙飛行': 'astronaut crew spacecraft',
   '月探査': 'moon lunar surface',
   '火星探査': 'mars rover spacecraft',
+}
+
+// 日本語トピックキーワード→英語検索語（記事内容に合った画像を取得するため）
+const TOPIC_KEYWORDS = {
+  '全固体電池': 'solid state battery',
+  '電池': 'battery power satellite',
+  '推進': 'propulsion engine',
+  '燃料': 'fuel propellant',
+  'エンジン': 'rocket engine',
+  '静的燃焼': 'static fire engine test',
+  '爆発': 'explosion accident',
+  '着陸': 'landing spacecraft',
+  '月面': 'lunar surface moon',
+  '火星': 'mars surface rover',
+  '探査機': 'spacecraft probe',
+  '打ち上げ': 'rocket launch',
+  '軌道': 'orbit satellite',
+  '宇宙飛行士': 'astronaut spacewalk',
+  '補給': 'cargo resupply spacecraft',
+  'ドッキング': 'docking spacecraft',
+  '再突入': 'reentry capsule',
+  'コンステレーション': 'satellite constellation',
+  '通信': 'communication satellite',
+  '軽量化': 'small satellite lightweight',
+  '太陽電池': 'solar panel spacecraft',
+  '宇宙望遠鏡': 'space telescope',
+  '観測': 'observation satellite spacecraft',
 }
 
 // よく使う宇宙企業・機関名の英語マッピング
@@ -606,6 +633,13 @@ async function main() {
       let searchQuery = article.title.match(/[A-Za-z][A-Za-z0-9\-\.]+/g)?.join(' ') || ''
       for (const [jp, en] of Object.entries(COMPANY_KEYWORDS)) {
         if (titleLower.includes(jp)) { searchQuery = en + ' ' + searchQuery; break }
+      }
+      // トピックキーワードを追加（タイトルまたは説明文に含まれるもの）
+      for (const [jp, en] of Object.entries(TOPIC_KEYWORDS)) {
+        if (article.title.includes(jp) || article.description?.includes(jp)) {
+          searchQuery = (searchQuery + ' ' + en).trim()
+          break
+        }
       }
       if (!searchQuery.trim()) searchQuery = CATEGORY_KEYWORDS[article.category] || 'space'
       let imgs = await fetchNASAImages(searchQuery.trim(), 3)
