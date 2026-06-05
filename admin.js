@@ -1,34 +1,14 @@
 const http = require('http')
-const https = require('https')
 const fs = require('fs')
 const path = require('path')
 const { exec } = require('child_process')
 const sharp = require('sharp')
-const { TwitterApi } = require('twitter-api-v2')
-
 const PORT = 3001
 const POSTS_DIR = path.join(__dirname, 'posts')
-const DRAFTS_DIR = path.join(__dirname, 'drafts')
 const IMAGES_DIR = path.join(__dirname, 'public', 'images')
 const CATEGORIES = ['ロケット', '衛星・通信', '有人宇宙飛行', '月探査', '火星探査']
 
-if (!fs.existsSync(DRAFTS_DIR)) fs.mkdirSync(DRAFTS_DIR, { recursive: true })
 if (!fs.existsSync(IMAGES_DIR)) fs.mkdirSync(IMAGES_DIR, { recursive: true })
-
-const SITE_URL = 'https://www.uchu-bin.jp'
-
-async function tweetArticle(meta, slug) {
-  const apiKey = process.env.TWITTER_API_KEY
-  const apiSecret = process.env.TWITTER_API_SECRET
-  const accessToken = process.env.TWITTER_ACCESS_TOKEN
-  const accessSecret = process.env.TWITTER_ACCESS_TOKEN_SECRET
-  if (!apiKey || !apiSecret || !accessToken || !accessSecret) return
-  const client = new TwitterApi({ appKey: apiKey, appSecret: apiSecret, accessToken, accessSecret })
-  const title = meta.title || '新しい記事'
-  const url = `${SITE_URL}/blog/${slug.replace(/\.md$/, '')}`
-  const text = `${title}\n${url}`
-  await client.v2.tweet(text)
-}
 
 // ── Helper functions ──────────────────────────────────────────────────────────
 
@@ -203,9 +183,7 @@ const CSS = `
   .del-btn:hover { background: #ffebee; }
   .edit-btn { background: none; border: 1px solid #1a2744; color: #1a2744; padding: 4px 10px; border-radius: 3px; font-size: 11px; cursor: pointer; text-decoration: none; display: inline-block; }
   .edit-btn:hover { background: #eef2fa; }
-  .pdraft-btn { background: #43a047; border: none; color: #fff; padding: 4px 10px; border-radius: 3px; font-size: 11px; cursor: pointer; font-weight: 700; }
-  .pdraft-btn:hover { background: #2e7d32; }
-  .upload-row { display: flex; gap: 12px; align-items: flex-end; margin-bottom: 12px; }
+.upload-row { display: flex; gap: 12px; align-items: flex-end; margin-bottom: 12px; }
   .upload-row input[type=file] { flex: 1; padding: 8px; border: 1px dashed #aaa; border-radius: 4px; font-size: 13px; background: #fafafa; }
   .paste-zone { border: 2px dashed #5a8fd4; border-radius: 8px; padding: 20px; text-align: center; color: #5a8fd4; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.15s; margin-bottom: 16px; }
   .paste-zone:hover, .paste-zone.drag-over { background: #eef4fc; }
@@ -502,45 +480,11 @@ const CLIENT_JS = `
 
 function renderMain(message) {
   const posts = getList(POSTS_DIR)
-  const drafts = getList(DRAFTS_DIR)
   const images = fs.existsSync(IMAGES_DIR)
     ? fs.readdirSync(IMAGES_DIR).filter(f => /\.(jpg|jpeg|png|gif|webp)$/i.test(f)).sort((a, b) => b.localeCompare(a))
     : []
   const today = new Date().toISOString().slice(0, 10)
   const categoryOptions = CATEGORIES.map(c => `<option value="${c}">${c}</option>`).join('')
-
-  // Draft rows
-  const draftRowsArr = []
-  for (const d of drafts) {
-    draftRowsArr.push(`<tr>
-      <td>${d.date}</td>
-      <td>${d.category}</td>
-      <td style="font-weight:600;">${d.title}</td>
-      <td style="font-size:12px;color:#666;max-width:200px;">${d.description}</td>
-      <td style="white-space:nowrap;">
-        <div style="display:flex;gap:6px;">
-          <a href="/edit-draft?file=${encodeURIComponent(d.file)}" class="edit-btn">編集</a>
-          <form method="POST" action="/publish-draft" style="margin:0">
-            <input type="hidden" name="file" value="${d.file}">
-            <button type="submit" class="pdraft-btn">公開する</button>
-          </form>
-          <form method="POST" action="/delete-draft" onsubmit="return confirm('削除しますか？')" style="margin:0">
-            <input type="hidden" name="file" value="${d.file}">
-            <button type="submit" class="del-btn">削除</button>
-          </form>
-        </div>
-      </td>
-    </tr>`)
-  }
-
-  let draftsSection
-  if (drafts.length === 0) {
-    draftsSection = '<p style="color:#aaa;font-size:13px;">下書きはありません（毎朝6時に自動生成されます）</p>'
-  } else {
-    draftsSection = '<table><thead><tr><th>日付</th><th>カテゴリ</th><th>タイトル</th><th>説明</th><th></th></tr></thead><tbody>'
-    draftsSection += draftRowsArr.join('')
-    draftsSection += '</tbody></table>'
-  }
 
   // Post rows
   const postRowsArr = []
@@ -604,20 +548,6 @@ function renderMain(message) {
     <div class="card" id="posts-section">
       <h2>公開済み記事一覧</h2>
       ${postsSection}
-    </div>
-
-    <!-- AI下書き -->
-    <div class="card">
-      <h2>🤖 AI下書き（確認・公開待ち）</h2>
-      <div style="margin-bottom:12px;">
-        <textarea id="custom-request" placeholder="どんな記事を作りたいか入力（任意）&#10;例：スターシップの最新状況をまとめて&#10;例：インドの月探査について詳しく" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:4px;font-size:13px;font-family:inherit;resize:vertical;min-height:72px;"></textarea>
-        <div style="display:flex;gap:8px;margin-top:8px;">
-          <button onclick="suggestTopics(this)" style="flex:1;padding:8px;background:#5a8fd4;color:#fff;border:none;border-radius:4px;font-size:13px;font-weight:700;cursor:pointer;">📋 候補を見て選ぶ</button>
-          <button onclick="generateDirect(this)" style="flex:1;padding:8px;background:#7c4dff;color:#fff;border:none;border-radius:4px;font-size:13px;font-weight:700;cursor:pointer;">⚡ 入力内容で直接生成</button>
-        </div>
-      </div>
-      <div id="suggest-container"></div>
-      ${draftsSection}
     </div>
 
     <!-- 新規記事作成 -->
@@ -987,17 +917,6 @@ function renderSplitEditor({ file, meta, body, message, action, publishAction, a
 </html>`
 }
 
-function renderEditDraft(file, meta, body, message) {
-  return renderSplitEditor({
-    file, meta, body,
-    message: message ? message.replace(/<[^>]+>/g, '') : '',
-    action: '/update-draft',
-    publishAction: '/publish-draft',
-    accentColor: '#ffa726',
-    titleLabel: '下書き編集',
-  })
-}
-
 // ── HTTP server ───────────────────────────────────────────────────────────────
 
 const server = http.createServer(async (req, res) => {
@@ -1045,22 +964,6 @@ const server = http.createServer(async (req, res) => {
     return
   }
 
-  // GET /edit-draft?file=xxx.md
-  if (req.method === 'GET' && pathname === '/edit-draft') {
-    try {
-      const file = path.basename(urlObj.searchParams.get('file') || '')
-      const filePath = path.join(DRAFTS_DIR, file)
-      if (!file || !filePath.startsWith(DRAFTS_DIR) || !fs.existsSync(filePath)) throw new Error('下書きが見つかりません')
-      const { meta, body } = parseFrontmatter(fs.readFileSync(filePath, 'utf-8'))
-      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-      res.end(renderEditDraft(file, meta, body, ''))
-    } catch (e) {
-      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-      res.end(renderEditDraft('', {}, '', `<div class="message error">エラー：${e.message}</div>`))
-    }
-    return
-  }
-
   // POST /create
   if (req.method === 'POST' && pathname === '/create') {
     const data = await parseBody(req)
@@ -1095,74 +998,6 @@ const server = http.createServer(async (req, res) => {
     } catch (e) {
       res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
       res.end(renderMain(`<div class="message error">エラー：${e.message}</div>`))
-    }
-    return
-  }
-
-  // POST /update-draft
-  if (req.method === 'POST' && pathname === '/update-draft') {
-    const data = await parseBody(req)
-    try {
-      const { file, title, category, date, image, description, content } = data
-      if (!title || !category || !date || !content) throw new Error('必須項目が未入力です')
-      const filePath = path.join(DRAFTS_DIR, path.basename(file))
-      if (!filePath.startsWith(DRAFTS_DIR)) throw new Error('不正なリクエスト')
-      const bodyText = content.replace(/\r\n/g, '\n')
-      fs.writeFileSync(filePath, buildFrontmatter(title, description, date, category, image) + bodyText, 'utf-8')
-      const msg = `<div class="message success">✓ 下書きを保存しました</div>`
-      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-      res.end(renderEditDraft(path.basename(file), { title, category, date, image, description }, bodyText, msg))
-    } catch (e) {
-      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-      res.end(renderMain(`<div class="message error">エラー：${e.message}</div>`))
-    }
-    return
-  }
-
-  // POST /publish-draft
-  if (req.method === 'POST' && pathname === '/publish-draft') {
-    const data = await parseBody(req)
-    try {
-      const basename = path.basename(data.file || '')
-      const srcPath = path.join(DRAFTS_DIR, basename)
-      const dstPath = path.join(POSTS_DIR, basename)
-      if (!srcPath.startsWith(DRAFTS_DIR)) throw new Error('不正なリクエスト')
-      if (!fs.existsSync(srcPath)) throw new Error('下書きが見つかりません')
-      const postContent = fs.readFileSync(srcPath, 'utf-8')
-      const { meta } = parseFrontmatter(postContent)
-      fs.copyFileSync(srcPath, dstPath)
-      fs.unlinkSync(srcPath)
-      const date = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })
-      const cmd = `git pull --rebase --autostash && git add -A posts/ drafts/ && git commit -m "記事公開 ${date}" && git push`
-      exec(cmd, { cwd: __dirname }, (err, _stdout, stderr) => {
-        tweetArticle(meta, basename).catch(() => {})
-        https.get('https://www.google.com/ping?sitemap=https://www.uchu-bin.jp/sitemap.xml', () => {}).on('error', () => {})
-        if (err && stderr && !stderr.includes('nothing to commit')) {
-          res.writeHead(302, { Location: '/?msg=' + encodeURIComponent('公開しました（git警告: ' + stderr.slice(0, 80) + '）') })
-        } else {
-          res.writeHead(302, { Location: '/?msg=' + encodeURIComponent('記事を公開しました → Vercelが自動デプロイします') })
-        }
-        res.end()
-      })
-    } catch (e) {
-      res.writeHead(302, { Location: '/?msg=' + encodeURIComponent('エラー: ' + e.message) })
-      res.end()
-    }
-    return
-  }
-
-  // POST /delete-draft
-  if (req.method === 'POST' && pathname === '/delete-draft') {
-    const data = await parseBody(req)
-    try {
-      const filePath = path.join(DRAFTS_DIR, path.basename(data.file || ''))
-      if (!filePath.startsWith(DRAFTS_DIR)) throw new Error('不正なリクエスト')
-      if (fs.existsSync(filePath)) fs.unlinkSync(filePath)
-      res.writeHead(302, { Location: '/?msg=' + encodeURIComponent('下書きを削除しました') })
-      res.end()
-    } catch (e) {
-      res.writeHead(302, { Location: '/?msg=' + encodeURIComponent('エラー: ' + e.message) })
-      res.end()
     }
     return
   }
@@ -1220,7 +1055,7 @@ const server = http.createServer(async (req, res) => {
   // POST /publish (git add/commit/push, JSON response)
   if (req.method === 'POST' && pathname === '/publish') {
     const date = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })
-    const cmd = `git pull --rebase --autostash && git add -A posts/ public/images/ drafts/ && (git diff --cached --quiet && echo "nothing" || git commit -m "記事更新 ${date}") && git push`
+    const cmd = `git pull --rebase --autostash && git add -A posts/ public/images/ && (git diff --cached --quiet && echo "nothing" || git commit -m "記事更新 ${date}") && git push`
     exec(cmd, { cwd: __dirname }, (err, stdout, stderr) => {
       res.writeHead(200, { 'Content-Type': 'application/json' })
       if (err) {
@@ -1232,89 +1067,6 @@ const server = http.createServer(async (req, res) => {
         }
       } else {
         res.end(JSON.stringify({ ok: true }))
-      }
-    })
-    return
-  }
-
-  // POST /generate
-  if (req.method === 'POST' && pathname === '/generate') {
-    const apiKey = process.env.ANTHROPIC_API_KEY || ''
-    if (!apiKey) {
-      res.writeHead(200, { 'Content-Type': 'application/json' })
-      res.end(JSON.stringify({ ok: false, error: 'ANTHROPIC_API_KEY が設定されていません' }))
-      return
-    }
-    const cmd = `node scripts/generate-news.js --force`
-    exec(cmd, { cwd: __dirname, env: { ...process.env, ANTHROPIC_API_KEY: apiKey } }, (err, _stdout, stderr) => {
-      res.writeHead(200, { 'Content-Type': 'application/json' })
-      if (err) {
-        res.end(JSON.stringify({ ok: false, error: stderr || err.message }))
-      } else {
-        res.end(JSON.stringify({ ok: true }))
-      }
-    })
-    return
-  }
-
-  // POST /suggest
-  if (req.method === 'POST' && pathname === '/suggest') {
-    const apiKey = process.env.ANTHROPIC_API_KEY || ''
-    if (!apiKey) {
-      res.writeHead(200, { 'Content-Type': 'application/json' })
-      res.end(JSON.stringify({ ok: false, error: 'ANTHROPIC_API_KEY が設定されていません' }))
-      return
-    }
-    readRawBody(req).then((buf) => {
-      let customRequest = ''
-      try { customRequest = JSON.parse(buf.toString()).customRequest || '' } catch {}
-      const cmd = `node scripts/generate-news.js --suggest`
-      const env = { ...process.env, ANTHROPIC_API_KEY: apiKey }
-      if (customRequest) env.CUSTOM_REQUEST = customRequest
-      exec(cmd, { cwd: __dirname, env }, (err, stdout, stderr) => {
-        res.writeHead(200, { 'Content-Type': 'application/json' })
-        if (err) {
-          res.end(JSON.stringify({ ok: false, error: stderr || err.message }))
-          return
-        }
-        try {
-          const candidates = JSON.parse(stdout)
-          res.end(JSON.stringify({ ok: true, candidates }))
-        } catch (e) {
-          res.end(JSON.stringify({ ok: false, error: 'JSONパースエラー: ' + stdout.slice(0, 300) }))
-        }
-      })
-    })
-    return
-  }
-
-  // POST /generate-from-topic
-  if (req.method === 'POST' && pathname === '/generate-from-topic') {
-    const apiKey = process.env.ANTHROPIC_API_KEY || ''
-    if (!apiKey) {
-      res.writeHead(200, { 'Content-Type': 'application/json' })
-      res.end(JSON.stringify({ ok: false, error: 'ANTHROPIC_API_KEY が設定されていません' }))
-      return
-    }
-    readRawBody(req).then((buf) => {
-      try {
-        const { title, summary } = JSON.parse(buf.toString())
-        const topic = title + (summary ? ': ' + summary : '')
-        const cmd = `node scripts/generate-news.js --force`
-        exec(cmd, {
-          cwd: __dirname,
-          env: { ...process.env, ANTHROPIC_API_KEY: apiKey, ARTICLE_TOPIC: topic }
-        }, (err, _stdout, stderr) => {
-          res.writeHead(200, { 'Content-Type': 'application/json' })
-          if (err) {
-            res.end(JSON.stringify({ ok: false, error: stderr || err.message }))
-          } else {
-            res.end(JSON.stringify({ ok: true }))
-          }
-        })
-      } catch (e) {
-        res.writeHead(200, { 'Content-Type': 'application/json' })
-        res.end(JSON.stringify({ ok: false, error: e.message }))
       }
     })
     return
