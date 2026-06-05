@@ -108,19 +108,41 @@ async function validateImageRelevance(imageUrl, title, category) {
   }
 }
 
-// ソース記事のOG画像を取得
+// ソース記事のOG画像を取得（リトライ付き）
 async function fetchOGImage(url) {
-  try {
-    const html = await fetchUrl(url)
-    const match = html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/)
-      || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/)
-    const imageUrl = match?.[1]
-    if (!imageUrl || imageUrl.startsWith('data:')) return null
-    return imageUrl.startsWith('http') ? imageUrl : null
-  } catch (e) {
-    console.error('  OG画像取得失敗:', e.message)
-    return null
+  const USER_AGENTS = [
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Safari/605.1.15',
+    'Googlebot/2.1 (+http://www.google.com/bot.html)',
+  ]
+  for (let attempt = 0; attempt < USER_AGENTS.length; attempt++) {
+    try {
+      const res = await fetch(url, {
+        redirect: 'follow',
+        headers: {
+          'User-Agent': USER_AGENTS[attempt],
+          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+          'Accept-Language': 'en-US,en;q=0.9',
+        },
+        signal: AbortSignal.timeout(15000),
+      })
+      if (!res.ok) continue
+      const html = await res.text()
+      const match = html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/)
+        || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/)
+        || html.match(/<meta[^>]+name=["']twitter:image["'][^>]+content=["']([^"']+)["']/)
+      const imageUrl = match?.[1]
+      if (!imageUrl || imageUrl.startsWith('data:')) continue
+      if (imageUrl.startsWith('http')) return imageUrl
+      if (imageUrl.startsWith('/')) {
+        const base = new URL(url)
+        return `${base.protocol}//${base.host}${imageUrl}`
+      }
+    } catch (e) {
+      console.error(`  OG画像取得失敗（試行${attempt + 1}）:`, e.message)
+    }
   }
+  return null
 }
 
 // 直近N日の記事タイトルとカテゴリを取得（重複防止用）
