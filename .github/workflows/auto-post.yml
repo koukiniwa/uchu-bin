@@ -35,8 +35,28 @@ jobs:
             echo "skip=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: 記事を生成して公開
+      - name: 下書きキューを確認
+        id: draft_check
         if: steps.check.outputs.skip == 'false'
+        run: |
+          DATE=$(TZ=Asia/Tokyo date +%Y-%m-%d)
+          DRAFT=$(ls drafts/${DATE}-* 2>/dev/null | head -1)
+          if [ -n "$DRAFT" ]; then
+            echo "has_draft=true" >> $GITHUB_OUTPUT
+            echo "draft_file=$DRAFT" >> $GITHUB_OUTPUT
+            echo "下書きを発見: $DRAFT"
+          else
+            echo "has_draft=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 下書き記事を公開
+        if: steps.check.outputs.skip == 'false' && steps.draft_check.outputs.has_draft == 'true'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/generate-news.js --publish-draft "${{ steps.draft_check.outputs.draft_file }}"
+
+      - name: 記事を生成して公開
+        if: steps.check.outputs.skip == 'false' && steps.draft_check.outputs.has_draft == 'false'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           TWITTER_BEARER_TOKEN: ${{ secrets.TWITTER_BEARER_TOKEN }}

@@ -6,7 +6,7 @@ const Anthropic = require('@anthropic-ai/sdk')
 const { execSync } = require('child_process')
 
 // 曜日チェック（月=1, 火=2, 木=4, 土=6）
-if (!process.argv.includes('--force') && !process.argv.includes('--suggest')) {
+if (!process.argv.includes('--force') && !process.argv.includes('--suggest') && !process.argv.includes('--publish-draft')) {
   const jstDay = new Date(Date.now() + 9 * 60 * 60 * 1000).getUTCDay()
   const allowedDays = [1, 2, 4, 6] // 月・火・木・土
   if (!allowedDays.includes(jstDay)) {
@@ -23,7 +23,7 @@ const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
 // 下書きが溜まりすぎていたらスキップ（--force / --suggestで無視）
 const DRAFTS_DIR = path.join(__dirname, '..', 'drafts')
-if (!process.argv.includes('--force') && !process.argv.includes('--suggest')) {
+if (!process.argv.includes('--force') && !process.argv.includes('--suggest') && !process.argv.includes('--publish-draft')) {
   const pendingDrafts = fs.existsSync(DRAFTS_DIR)
     ? fs.readdirSync(DRAFTS_DIR).filter(f => f.endsWith('.md')).length
     : 0
@@ -806,7 +806,99 @@ ${newsText}
   process.stdout.write(jsonMatch[0])
 }
 
-if (process.argv.includes('--suggest')) {
+// 下書きを画像付きでpostsに公開する
+async function publishDraft(draftPath) {
+  console.log(`\n📂 下書きを公開: ${draftPath}`)
+  const content = fs.readFileSync(draftPath, 'utf-8')
+
+  const fmMatch = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/)
+  if (!fmMatch) throw new Error('frontmatterが見つかりません')
+  const frontmatter = fmMatch[1]
+  const body = fmMatch[2].trim()
+
+  const get = (key) => {
+    const m = frontmatter.match(new RegExp(`^${key}:\\s*'((?:[^']|'')*)'\\s*$`, 'm'))
+    return m ? m[1].replace(/''/g, "'") : ''
+  }
+  const title = get('title')
+  const description = get('description')
+  const category = get('category')
+  let image = get('image')
+  let imageCredit = get('imageCredit')
+  const date = get('date')
+
+  // 参考記事セクションからソースURLを抽出
+  const refMatch = body.match(/## 参考記事\n\n((?:- https?:\/\/[^\n]+\n?)+)/)
+  const sourceUrls = refMatch ? (refMatch[1].match(/https?:\/\/[^\s]+/g) || []) : []
+
+  // 画像がなければ取得
+  if (!image) {
+    console.log('\n🖼️  画像を取得中...')
+    if (sourceUrls[0]) {
+      const ogImage = await fetchOGImage(sourceUrls[0])
+      if (ogImage) {
+        const isRelevant = await validateImageRelevance(ogImage, title, category)
+        if (isRelevant) {
+          image = ogImage
+          try { imageCredit = new URL(sourceUrls[0]).hostname.replace('www.', '') } catch {}
+          console.log(`  ✓ OG画像取得`)
+        }
+      }
+    }
+    if (!image) {
+      const titleLower = title.toLowerCase()
+      let searchQuery = title.match(/[A-Za-z][A-Za-z0-9\-\.]+/g)?.join(' ') || ''
+      for (const [jp, en] of Object.entries(COMPANY_KEYWORDS)) {
+        if (titleLower.includes(jp)) { searchQuery = en + ' ' + searchQuery; break }
+      }
+      if (!searchQuery.trim()) searchQuery = CATEGORY_KEYWORDS[category] || 'space'
+      const imgs = await fetchNASAImages(searchQuery.trim(), 3)
+      for (const img of imgs) {
+        const isRelevant = await validateImageRelevance(img.url, title, category)
+        if (isRelevant) {
+          image = img.url
+          imageCredit = img.credit
+          console.log(`  ✓ NASA画像選択`)
+          break
+        }
+      }
+    }
+  }
+
+  // 外部URLの画像をローカル保存
+  const basename = path.basename(draftPath, '.md')
+  if (image && image.startsWith('http')) {
+    console.log('\n💾 カバー画像をローカルに保存中...')
+    const localPath = await downloadImage(image, basename)
+    if (localPath) image = localPath
+  }
+
+  const newLines = [
+    `---`,
+    `title: '${title.replace(/'/g, "''")}'`,
+    `description: '${description.replace(/'/g, "''")}'`,
+    `date: '${date}'`,
+    `category: '${category}'`,
+    `image: '${image}'`,
+    ...(imageCredit ? [`imageCredit: '${imageCredit}'`] : []),
+    `---`,
+    ``,
+    body,
+  ]
+
+  const postsDir = path.join(__dirname, '..', 'posts')
+  const destPath = path.join(postsDir, path.basename(draftPath))
+  fs.writeFileSync(destPath, newLines.join('\n'), 'utf-8')
+  fs.unlinkSync(draftPath)
+  console.log(`\n✅ 下書きを公開しました: posts/${path.basename(draftPath)}`)
+}
+
+const draftIndex = process.argv.indexOf('--publish-draft')
+if (draftIndex !== -1) {
+  const draftPath = process.argv[draftIndex + 1]
+  if (!draftPath) { console.error('--publish-draft にファイルパスを指定してください'); process.exit(1) }
+  publishDraft(draftPath).catch((err) => { console.error('エラー:', err); process.exit(1) })
+} else if (process.argv.includes('--suggest')) {
   suggestMode().catch((err) => {
     process.stderr.write('エラー: ' + err.message + '\n')
     process.exit(1)
