@@ -1,6 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const { TwitterApi } = require('twitter-api-v2')
+const Anthropic = require('@anthropic-ai/sdk')
 
 const POSTS_DIR = path.join(__dirname, '..', 'posts')
 const SITE_URL = 'https://www.uchu-bin.jp'
@@ -24,6 +25,36 @@ function parseFrontmatter(content) {
   return meta
 }
 
+async function generateComment(title, description, body) {
+  try {
+    const client = new Anthropic()
+    const lead = body.replace(/^---[\s\S]*?---\n/, '').replace(/#+\s.+/g, '').replace(/!\[.*?\]\(.*?\)/g, '').trim().slice(0, 300)
+    const res = await client.messages.create({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 100,
+      messages: [{
+        role: 'user',
+        content: `以下の宇宙ニュース記事について、Twitterに投稿する短いコメントを書いてください。
+
+タイトル: ${title}
+要約: ${description}
+本文冒頭: ${lead}
+
+条件:
+- タイトルをそのまま繰り返さない
+- なぜ重要か・何が驚きか・どんな意味があるかを自分の言葉で
+- 1〜2文、80文字以内
+- 自然な日本語（硬すぎず崩しすぎず）
+- 絵文字なし
+- コメント文のみ返す`
+      }]
+    })
+    return res.content[0].text.trim()
+  } catch {
+    return null
+  }
+}
+
 async function main() {
   const today = new Date().toLocaleDateString('sv-SE', { timeZone: 'Asia/Tokyo' })
   const files = fs.readdirSync(POSTS_DIR)
@@ -43,6 +74,11 @@ async function main() {
   const url = `${SITE_URL}/blog/${slug}`
   const categoryTag = CATEGORY_HASHTAGS[meta.category] || ''
 
+  const comment = await generateComment(title, meta.description || '', content)
+  const text = comment
+    ? `${comment}\n\n${url}\n#宇宙便 #宇宙ニュース ${categoryTag}`.trim()
+    : `${title}\n\n${url}\n#宇宙便 #宇宙ニュース ${categoryTag}`.trim()
+
   const client = new TwitterApi({
     appKey: process.env.TWITTER_API_KEY,
     appSecret: process.env.TWITTER_API_SECRET,
@@ -50,7 +86,6 @@ async function main() {
     accessSecret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
   })
 
-  const text = `${title}\n\n#宇宙便 #宇宙ニュース ${categoryTag}\n\n${url}`
   await client.v2.tweet(text)
   console.log('ツイート投稿完了:', text)
 }
