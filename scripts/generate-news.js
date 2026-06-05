@@ -546,6 +546,7 @@ ${newsText}
 以下のJSON形式のみで返してください:
 {
   "title": "記事タイトル（日本語、35文字以内・事実ベース）",
+  "slug": "url-slug-in-english-only (lowercase, hyphens, ASCII only, 4-8 words describing the topic)",
   "description": "記事の要約（90文字以内）",
   "category": "次の5つのうち1つだけ: ロケット / 衛星・通信 / 有人宇宙飛行 / 月探査 / 火星探査",
   "source_urls": ["メインの参考記事URL", "2つ目の参考記事URL（なければ1つでもよい）"],
@@ -713,13 +714,10 @@ async function main() {
   }
 
   const date = new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().slice(0, 10)
-  const titleSlug = article.title
-    .toLowerCase()
-    .replace(/\s+/g, '-')
-    .replace(/[、「」]/g, '-')
-  .replace(/[^\w\u3000-\u9fff\uac00-\ud7af\u30a0-\u30ff\u3040-\u309f-]/g, '')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '')
+  // Claudeが生成した英語slugを使用（ASCII以外が混入していても除去）
+  const titleSlug = article.slug
+    ? article.slug.toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '')
+    : article.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '').replace(/-+/g, '-').replace(/^-|-$/g, '')
   const slug = `${date}-${titleSlug}`
 
   // 画像クレジット（OG画像のソースドメイン）- ダウンロード前に取得

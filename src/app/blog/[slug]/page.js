@@ -14,6 +14,8 @@ function AutoTweet({ children }) {
   return <p>{children}</p>
 }
 
+export const dynamicParams = false
+
 export async function generateStaticParams() {
   const posts = getAllPosts()
   return posts.map((post) => ({ slug: post.slug }))
