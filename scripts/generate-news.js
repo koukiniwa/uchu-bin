@@ -559,7 +559,13 @@ async function main() {
   console.log(`  直近14日: ${recentArticles.length} 件`)
 
   console.log(`\n🤖 Claude APIで記事を生成中...`)
-  const article = await generateArticle(newsByRegion, recentArticles)
+  let article
+  try {
+    article = await generateArticle(newsByRegion, recentArticles)
+  } catch (e) {
+    console.log(`  ⚠️  1回目失敗（${e.message}）。リトライ中...`)
+    article = await generateArticle(newsByRegion, recentArticles)
+  }
   console.log(`  タイトル: ${article.title}`)
   console.log(`  カテゴリ: ${article.category}`)
 
@@ -684,6 +690,18 @@ async function main() {
     console.log('\n💾 カバー画像をローカルに保存中...')
     const localPath = await downloadImage(coverImage, slug)
     if (localPath) coverImage = localPath
+  }
+
+  // 本文中の外部画像をローカルに保存
+  if (autoPublish) {
+    const imgRegex = /!\[([^\]]*)\]\((https?:\/\/[^)]+)\)/g
+    let imgIndex = 0
+    const matches = [...body.matchAll(imgRegex)]
+    for (const [full, alt, url] of matches) {
+      const localPath = await downloadImage(url, `${slug}-body${imgIndex}`)
+      if (localPath) body = body.replace(url, localPath)
+      imgIndex++
+    }
   }
 
   const lines = [
