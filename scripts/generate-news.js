@@ -86,6 +86,28 @@ function parseRSS(xml, region) {
   return items.sort((a, b) => b.date - a.date).slice(0, 5)
 }
 
+// 画像が記事に関連しているかHaikuで判定
+async function validateImageRelevance(imageUrl, title, category) {
+  try {
+    const client = new Anthropic()
+    const response = await client.messages.create({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 10,
+      messages: [{
+        role: 'user',
+        content: [
+          { type: 'image', source: { type: 'url', url: imageUrl } },
+          { type: 'text', text: `この画像は「${title}」（カテゴリ:${category}）という宇宙ニュース記事のカバー画像として適切ですか？「yes」か「no」だけで答えてください。` }
+        ]
+      }]
+    })
+    return response.content[0].text.toLowerCase().trim().startsWith('yes')
+  } catch (e) {
+    console.error('  画像バリデーション失敗:', e.message)
+    return true
+  }
+}
+
 // ソース記事のOG画像を取得
 async function fetchOGImage(url) {
   try {
@@ -389,7 +411,7 @@ async function generateArticle(newsByRegion, recentArticles) {
   const todayStr = `${jst.getUTCFullYear()}年${jst.getUTCMonth() + 1}月${jst.getUTCDate()}日`
 
   const message = await client.messages.create({
-    model: 'claude-opus-4-6',
+    model: 'claude-sonnet-4-6',
     max_tokens: 4500,
     messages: [
       {
@@ -513,8 +535,14 @@ async function main() {
       console.log(`\n🖼️  ソース記事からOG画像を取得中... (${article.source_url.slice(0, 60)})`)
       const ogImage = await fetchOGImage(article.source_url)
       if (ogImage) {
-        coverImage = ogImage
-        console.log(`  ✓ OG画像取得: ${ogImage.slice(0, 60)}`)
+        console.log(`  🔍 画像の関連性を確認中...`)
+        const isRelevant = await validateImageRelevance(ogImage, article.title, article.category)
+        if (isRelevant) {
+          coverImage = ogImage
+          console.log(`  ✓ OG画像取得（関連性OK）: ${ogImage.slice(0, 60)}`)
+        } else {
+          console.log(`  ✗ OG画像が記事と無関係のためスキップ`)
+        }
       }
     }
     // 2. OG画像が取得できなければNASA/Wikimediaで検索
@@ -528,9 +556,15 @@ async function main() {
       if (!searchQuery.trim()) searchQuery = CATEGORY_KEYWORDS[article.category] || 'space'
       let imgs = await fetchNASAImages(searchQuery.trim(), 3)
       if (imgs.length === 0) imgs = await fetchNASAImages(CATEGORY_KEYWORDS[article.category] || 'space', 3)
-      if (imgs.length > 0) {
-        coverImage = imgs[0].url
-        nasaBodyImages.push(...imgs.slice(1))
+      for (const img of imgs) {
+        const isRelevant = await validateImageRelevance(img.url, article.title, article.category)
+        if (isRelevant) {
+          coverImage = img.url
+          nasaBodyImages.push(...imgs.filter(i => i.url !== img.url).slice(0, 2))
+          console.log(`  ✓ NASA画像選択（関連性OK）`)
+          break
+        }
+        console.log(`  ✗ NASA画像スキップ（無関係）`)
       }
     }
   }
