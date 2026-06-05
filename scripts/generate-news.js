@@ -108,6 +108,29 @@ async function validateImageRelevance(imageUrl, title, category) {
   }
 }
 
+// 画像をpublic/imagesにダウンロード保存
+async function downloadImage(imageUrl, filename) {
+  const publicImagesDir = path.join(__dirname, '..', 'public', 'images')
+  if (!fs.existsSync(publicImagesDir)) fs.mkdirSync(publicImagesDir, { recursive: true })
+  const ext = imageUrl.match(/\.(jpg|jpeg|png|webp)/i)?.[1]?.toLowerCase() || 'jpg'
+  const localFilename = `${filename}.${ext}`
+  const localPath = path.join(publicImagesDir, localFilename)
+  try {
+    const res = await fetch(imageUrl, {
+      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; news-bot/1.0)' },
+      signal: AbortSignal.timeout(15000),
+    })
+    if (!res.ok) return null
+    const buffer = Buffer.from(await res.arrayBuffer())
+    fs.writeFileSync(localPath, buffer)
+    console.log(`  ✓ 画像をローカル保存: public/images/${localFilename}`)
+    return `/images/${localFilename}`
+  } catch (e) {
+    console.error('  画像ダウンロード失敗:', e.message)
+    return null
+  }
+}
+
 // ソース記事のOG画像を取得（リトライ付き）
 async function fetchOGImage(url) {
   const USER_AGENTS = [
@@ -662,10 +685,17 @@ async function main() {
     .replace(/^-|-$/g, '')
   const slug = `${date}-${titleSlug}`
 
-  // 画像クレジット（OG画像のソースドメイン）
+  // 画像クレジット（OG画像のソースドメイン）- ダウンロード前に取得
   let imageCredit = ''
   if (coverImage && primarySourceUrl) {
     try { imageCredit = new URL(primarySourceUrl).hostname.replace('www.', '') } catch {}
+  }
+
+  // カバー画像をローカルに保存（外部URLの場合）
+  if (autoPublish && coverImage && coverImage.startsWith('http')) {
+    console.log('\n💾 カバー画像をローカルに保存中...')
+    const localPath = await downloadImage(coverImage, slug)
+    if (localPath) coverImage = localPath
   }
 
   const lines = [
