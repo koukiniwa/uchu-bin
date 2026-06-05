@@ -1,5 +1,7 @@
 const fs = require('fs')
 const path = require('path')
+const https = require('https')
+const http = require('http')
 const { TwitterApi } = require('twitter-api-v2')
 const Anthropic = require('@anthropic-ai/sdk')
 
@@ -55,6 +57,25 @@ async function generateComment(title, description, body) {
   }
 }
 
+async function downloadImageToTemp(imageUrl) {
+  try {
+    const tmpPath = path.join(require('os').tmpdir(), `tweet-image-${Date.now()}.jpg`)
+    const protocol = imageUrl.startsWith('https') ? https : http
+    await new Promise((resolve, reject) => {
+      const file = fs.createWriteStream(tmpPath)
+      protocol.get(imageUrl, { headers: { 'User-Agent': 'Mozilla/5.0' } }, (res) => {
+        if (res.statusCode !== 200) { reject(new Error(`HTTP ${res.statusCode}`)); return }
+        res.pipe(file)
+        file.on('finish', () => { file.close(); resolve() })
+      }).on('error', reject)
+    })
+    return tmpPath
+  } catch (e) {
+    console.error('  画像ダウンロード失敗:', e.message)
+    return null
+  }
+}
+
 async function main() {
   const today = new Date().toLocaleDateString('sv-SE', { timeZone: 'Asia/Tokyo' })
   const files = fs.readdirSync(POSTS_DIR)
@@ -86,7 +107,27 @@ async function main() {
     accessSecret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
   })
 
-  await client.v2.tweet(text)
+  // カバー画像を添付
+  let mediaId = null
+  if (meta.image) {
+    const imageUrl = meta.image.startsWith('http') ? meta.image : `${SITE_URL}${meta.image}`
+    const tmpPath = await downloadImageToTemp(imageUrl)
+    if (tmpPath) {
+      try {
+        mediaId = await client.v1.uploadMedia(tmpPath, { mimeType: 'image/jpeg' })
+        console.log('  ✓ 画像アップロード完了')
+        fs.unlinkSync(tmpPath)
+      } catch (e) {
+        console.error('  画像アップロード失敗:', e.message)
+        try { fs.unlinkSync(tmpPath) } catch {}
+      }
+    }
+  }
+
+  const tweetParams = mediaId
+    ? { text, media: { media_ids: [mediaId] } }
+    : text
+  await client.v2.tweet(tweetParams)
   console.log('ツイート投稿完了:', text)
 }
 
