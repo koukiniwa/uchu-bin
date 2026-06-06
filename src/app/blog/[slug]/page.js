@@ -151,17 +151,18 @@ export default function BlogPost({ params }) {
       {/* ヒーロー画像 */}
       {post.image && (
         <div style={{ marginBottom: '40px' }}>
-          <div className="post-hero-img" style={{ width: '100%', height: '420px', overflow: 'hidden' }}>
+          <div className="post-hero-img" style={{ width: '100%', overflow: 'hidden', backgroundColor: '#f5f5f5', textAlign: 'center' }}>
             <img
               src={post.image}
-              alt={post.title}
+              alt={post.imageCaption || post.title}
               fetchPriority="high"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              style={{ maxWidth: '100%', maxHeight: '500px', width: 'auto', height: 'auto', display: 'inline-block' }}
             />
           </div>
-          {post.imageCredit && (
+          {(post.imageCaption || post.imageCredit) && (
             <div style={{ fontSize: '11px', color: '#999', textAlign: 'right', marginTop: '4px' }}>
-              出典: {post.imageCredit}
+              {post.imageCaption && <span>{post.imageCaption}　</span>}
+              {post.imageCredit && <span>出典: {post.imageCredit}</span>}
             </div>
           )}
         </div>

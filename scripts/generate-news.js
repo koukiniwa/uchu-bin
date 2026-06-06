@@ -254,7 +254,8 @@ async function fetchWikimediaImages(query, count = 2) {
         if (!/\.(jpg|jpeg|png)$/i.test(info.url)) continue
         const artist = (info.extmetadata?.Artist?.value || '').replace(/<[^>]+>/g, '').trim() || 'Wikimedia Commons'
         const license = info.extmetadata?.LicenseShortName?.value || 'CC'
-        images.push({ url: info.url, credit: `${artist} / ${license} via Wikimedia Commons` })
+        const caption = title.replace(/^File:/, '').replace(/\.[^.]+$/, '')
+        images.push({ url: info.url, credit: `${artist} / ${license} via Wikimedia Commons`, caption })
       } catch {}
     }
     console.log(`  ✓ Wikimedia Commons「${query}」で ${images.length} 枚取得`)
@@ -290,7 +291,7 @@ async function fetchNASAImages(query, count = 3) {
       // 人物写真・ポートレートをスキップ
       if (PORTRAIT_WORDS.some(w => title.includes(w) || desc.includes(w))) continue
       const result = await resolveNASAImage(nasaId, center)
-      if (result) images.push(result)
+      if (result) images.push({ ...result, caption: item?.data?.[0]?.title || '' })
     }
     console.log(`  ✓ NASA画像ライブラリ「${query}」で ${images.length} 枚取得`)
   } catch (e) {
@@ -641,6 +642,7 @@ async function main() {
 
   // ソース記事のOG画像を取得（カバー用）
   let coverImage = ''
+  let coverImageCaption = ''
   const nasaBodyImages = []
   if (autoPublish) {
     // 1. ソース記事のOG画像を最優先で取得
@@ -681,6 +683,7 @@ async function main() {
         const isRelevant = await validateImageRelevance(img.url, article.title, article.category)
         if (isRelevant) {
           coverImage = img.url
+          coverImageCaption = img.caption || ''
           nasaBodyImages.push(...imgs.filter(i => i.url !== img.url).slice(0, 2))
           console.log(`  ✓ NASA画像選択（関連性OK）`)
           break
@@ -784,6 +787,7 @@ async function main() {
     `date: '${date}'`,
     `category: '${article.category}'`,
     `image: '${coverImage}'`,
+    ...(coverImageCaption ? [`imageCaption: '${coverImageCaption.replace(/'/g, "''")}'`] : []),
     ...(imageCredit ? [`imageCredit: '${imageCredit}'`] : []),
     `---`,
     ``,
