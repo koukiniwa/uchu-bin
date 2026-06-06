@@ -2,8 +2,8 @@ name: 記事自動公開
 
 on:
   schedule:
-    # 月・火・木・土 の 朝5時JST（UTC 20:00 前日）
-    - cron: '0 20 * * 0,1,3,5'
+    # 月・火・木・土 の 朝7時JST（UTC 22:00 前日）
+    - cron: '0 22 * * 0,1,3,5'
   workflow_dispatch: # 手動実行ボタン
 
 jobs:
