@@ -157,6 +157,29 @@ async function fetchOGImage(url) {
   return null
 }
 
+// タイトルから意味のあるキーワードを抽出
+function extractKeywords(title) {
+  // 英数字トークン（企業名・機体名など）
+  const en = title.match(/[A-Za-z][A-Za-z0-9\-\.]+/g) || []
+  // 日本語の主要名詞（2文字以上の連続した漢字・カタカナ）
+  const ja = title.match(/[\u4e00-\u9fa5\u30A0-\u30FF]{2,}/g) || []
+  return [...new Set([...en.map(w => w.toLowerCase()), ...ja])]
+}
+
+// 既存記事と新記事が重複しているか判定（キーワード2つ以上一致で重複）
+function isDuplicateArticle(newTitle, recentArticles) {
+  const newKws = extractKeywords(newTitle)
+  for (const a of recentArticles) {
+    const existKws = extractKeywords(a.title)
+    const matches = newKws.filter(kw => existKws.includes(kw))
+    if (matches.length >= 2) {
+      console.log(`  ⚠️  重複検出: 「${a.title}」と ${matches.length}語一致（${matches.join(', ')}）`)
+      return true
+    }
+  }
+  return false
+}
+
 // 直近N日の記事タイトルとカテゴリを取得（重複防止用）
 function getRecentArticles(days = 14) {
   const postsDir = path.join(__dirname, '..', 'posts')
@@ -596,13 +619,22 @@ async function main() {
 
   console.log(`\n🤖 Claude APIで記事を生成中...`)
   let article
-  try {
-    article = await generateArticle(newsByRegion, recentArticles)
-  } catch (e) {
-    console.log(`  ⚠️  1回目失敗（${e.message}）。リトライ中...`)
-    article = await generateArticle(newsByRegion, recentArticles)
+  const maxTries = 3
+  for (let attempt = 1; attempt <= maxTries; attempt++) {
+    try {
+      article = await generateArticle(newsByRegion, recentArticles)
+    } catch (e) {
+      console.log(`  ⚠️  生成失敗（${e.message}）。リトライ中...`)
+      article = await generateArticle(newsByRegion, recentArticles)
+    }
+    console.log(`  タイトル: ${article.title}`)
+    if (!isDuplicateArticle(article.title, recentArticles)) break
+    if (attempt < maxTries) {
+      console.log(`  🔄 重複のため再生成（${attempt}/${maxTries}）...`)
+    } else {
+      console.log(`  ⚠️  ${maxTries}回試みても重複。最後の生成結果を使用します。`)
+    }
   }
-  console.log(`  タイトル: ${article.title}`)
   console.log(`  カテゴリ: ${article.category}`)
 
   const autoPublish = process.argv.includes('--auto-publish')
