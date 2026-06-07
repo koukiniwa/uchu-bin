@@ -491,7 +491,7 @@ const CLIENT_JS = `
 
 // ── HTML renderers ────────────────────────────────────────────────────────────
 
-function renderMain(message) {
+function renderMain(message, monthParam) {
   const posts = getList(POSTS_DIR)
   const images = fs.existsSync(IMAGES_DIR)
     ? fs.readdirSync(IMAGES_DIR).filter(f => /\.(jpg|jpeg|png|gif|webp)$/i.test(f)).sort((a, b) => b.localeCompare(a))
@@ -506,46 +506,58 @@ function renderMain(message) {
   const postsByDate = {}
   for (const p of posts) { postsByDate[p.date] = p }
   const todayStr = new Date(Date.now() + 9*60*60*1000).toISOString().slice(0, 10)
-  const now = new Date()
+  const nowJst = new Date(Date.now() + 9*60*60*1000)
+  // 表示月の決定（monthParam例: "2026-05"）
+  let dispYear = nowJst.getUTCFullYear(), dispMonth = nowJst.getUTCMonth()
+  if (monthParam && /^\d{4}-\d{2}$/.test(monthParam)) {
+    dispYear = parseInt(monthParam.slice(0, 4))
+    dispMonth = parseInt(monthParam.slice(5, 7)) - 1
+  }
+  const prevD = new Date(dispYear, dispMonth - 1, 1)
+  const nextD = new Date(dispYear, dispMonth + 1, 1)
+  const prevParam = `${prevD.getFullYear()}-${String(prevD.getMonth()+1).padStart(2,'0')}`
+  const nextParam = `${nextD.getFullYear()}-${String(nextD.getMonth()+1).padStart(2,'0')}`
+  const currentParam = `${nowJst.getUTCFullYear()}-${String(nowJst.getUTCMonth()+1).padStart(2,'0')}`
   let postsSection
   if (posts.length === 0) {
     postsSection = '<p style="color:#aaa;font-size:13px;">記事がありません</p>'
   } else {
-    let cal = '<div class="cal-wrap">'
-    for (let i = 2; i >= 0; i--) {
-      const d = new Date(now.getFullYear(), now.getMonth() - i, 1)
-      const year = d.getFullYear(), month = d.getMonth()
-      const firstDay = new Date(year, month, 1).getDay()
-      const daysInMonth = new Date(year, month + 1, 0).getDate()
-      cal += `<div><div class="cal-month-title">${year}年${MONTH_NAMES[month]}</div><div class="cal-grid">`
-      cal += DAY_NAMES.map(n => `<div class="cal-dayname">${n}</div>`).join('')
-      for (let e = 0; e < firstDay; e++) cal += '<div class="cal-cell empty"></div>'
-      for (let day = 1; day <= daysInMonth; day++) {
-        const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`
-        const p = postsByDate[dateStr]
-        const isToday = dateStr === todayStr
-        if (p) {
-          const color = CAT_COLORS[p.category] || '#888'
-          cal += `<div class="cal-cell has-post" style="border-top:3px solid ${color}">
-            <div class="cal-day-num">${day}</div>
-            <a href="/edit?file=${encodeURIComponent(p.file)}" class="cal-post-link">
-              <span class="cal-cat-dot" style="background:${color}"></span>
-              <span class="cal-post-title">${p.title}</span>
-            </a>
-            <div class="cal-actions">
-              <form method="POST" action="/delete" onsubmit="return confirm('削除しますか？')" style="margin:0">
-                <input type="hidden" name="file" value="${p.file}">
-                <button type="submit" class="cal-del-btn">✕</button>
-              </form>
-            </div>
-          </div>`
-        } else {
-          cal += `<div class="cal-cell${isToday ? ' today' : ''}"><div class="cal-day-num">${day}</div></div>`
-        }
+    const firstDay = new Date(dispYear, dispMonth, 1).getDay()
+    const daysInMonth = new Date(dispYear, dispMonth + 1, 0).getDate()
+    let cal = `<div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+        <a href="/?month=${prevParam}" style="padding:4px 12px;border:1px solid #ddd;border-radius:4px;font-size:12px;text-decoration:none;color:#555;">← 前月</a>
+        <span style="font-size:15px;font-weight:700;color:#1a2744;">${dispYear}年${MONTH_NAMES[dispMonth]}</span>
+        <a href="/?month=${nextParam}" style="padding:4px 12px;border:1px solid #ddd;border-radius:4px;font-size:12px;text-decoration:none;color:#555;">次月 →</a>
+        ${currentParam !== `${dispYear}-${String(dispMonth+1).padStart(2,'0')}` ? `<a href="/" style="padding:4px 12px;background:#1a2744;color:#fff;border-radius:4px;font-size:12px;text-decoration:none;">今月</a>` : ''}
+      </div>
+      <div class="cal-grid">`
+    cal += DAY_NAMES.map(n => `<div class="cal-dayname">${n}</div>`).join('')
+    for (let e = 0; e < firstDay; e++) cal += '<div class="cal-cell empty"></div>'
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dateStr = `${dispYear}-${String(dispMonth+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`
+      const p = postsByDate[dateStr]
+      const isToday = dateStr === todayStr
+      if (p) {
+        const color = CAT_COLORS[p.category] || '#888'
+        cal += `<div class="cal-cell has-post" style="border-top:3px solid ${color}">
+          <div class="cal-day-num">${day}</div>
+          <a href="/edit?file=${encodeURIComponent(p.file)}" class="cal-post-link">
+            <span class="cal-cat-dot" style="background:${color}"></span>
+            <span class="cal-post-title">${p.title}</span>
+          </a>
+          <div class="cal-actions">
+            <form method="POST" action="/delete" onsubmit="return confirm('削除しますか？')" style="margin:0">
+              <input type="hidden" name="file" value="${p.file}">
+              <button type="submit" class="cal-del-btn">✕</button>
+            </form>
+          </div>
+        </div>`
+      } else {
+        cal += `<div class="cal-cell${isToday ? ' today' : ''}"><div class="cal-day-num">${day}</div></div>`
       }
-      cal += '</div></div>'
     }
-    cal += '</div>'
+    cal += '</div></div>'
     postsSection = cal
   }
 
@@ -963,8 +975,9 @@ const server = http.createServer(async (req, res) => {
     const msg = urlObj.searchParams.get('msg')
       ? `<div class="message success">✓ ${urlObj.searchParams.get('msg')}</div>`
       : ''
+    const month = urlObj.searchParams.get('month') || ''
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-    res.end(renderMain(msg))
+    res.end(renderMain(msg, month))
     return
   }
 
