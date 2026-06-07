@@ -175,14 +175,27 @@ const CSS = `
   .message { padding: 14px 20px; border-radius: 4px; margin-bottom: 24px; font-size: 14px; font-weight: 600; }
   .message.success { background: #e8f5e9; color: #2e7d32; border-left: 4px solid #43a047; }
   .message.error { background: #ffebee; color: #c62828; border-left: 4px solid #e53935; }
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  th { text-align: left; padding: 10px 12px; background: #f4f6fb; color: #555; font-size: 11px; letter-spacing: 0.05em; border-bottom: 2px solid #e0e0e0; }
-  td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
-  tr:hover td { background: #fafafa; }
   .del-btn { background: none; border: 1px solid #e53935; color: #e53935; padding: 4px 10px; border-radius: 3px; font-size: 11px; cursor: pointer; }
   .del-btn:hover { background: #ffebee; }
   .edit-btn { background: none; border: 1px solid #1a2744; color: #1a2744; padding: 4px 10px; border-radius: 3px; font-size: 11px; cursor: pointer; text-decoration: none; display: inline-block; }
   .edit-btn:hover { background: #eef2fa; }
+  .cal-wrap { display: flex; flex-direction: column; gap: 28px; }
+  .cal-month-title { font-size: 14px; font-weight: 700; color: #1a2744; margin-bottom: 10px; }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+  .cal-dayname { font-size: 10px; font-weight: 700; color: #aaa; text-align: center; padding: 4px 0; }
+  .cal-cell { min-height: 64px; padding: 6px; background: #fafafa; border-radius: 4px; border: 1px solid #eee; }
+  .cal-cell.empty { background: transparent; border: none; }
+  .cal-cell.today { background: #e8f0fe; border-color: #aac4f0; }
+  .cal-cell.has-post { background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
+  .cal-day-num { font-size: 10px; color: #bbb; margin-bottom: 3px; }
+  .cal-cell.today .cal-day-num { color: #1565c0; font-weight: 700; }
+  .cal-post-link { display: flex; gap: 6px; align-items: flex-start; text-decoration: none; }
+  .cal-post-title { font-size: 11px; color: #1a2744; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .cal-post-title:hover { color: #1565c0; }
+  .cal-cat-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 3px; }
+  .cal-actions { display: flex; gap: 4px; margin-top: 4px; }
+  .cal-del-btn { background: none; border: none; color: #ccc; font-size: 11px; cursor: pointer; padding: 0; line-height: 1; }
+  .cal-del-btn:hover { color: #e53935; }
 .upload-row { display: flex; gap: 12px; align-items: flex-end; margin-bottom: 12px; }
   .upload-row input[type=file] { flex: 1; padding: 8px; border: 1px dashed #aaa; border-radius: 4px; font-size: 13px; background: #fafafa; }
   .paste-zone { border: 2px dashed #5a8fd4; border-radius: 8px; padding: 20px; text-align: center; color: #5a8fd4; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.15s; margin-bottom: 16px; }
@@ -486,32 +499,54 @@ function renderMain(message) {
   const today = new Date().toISOString().slice(0, 10)
   const categoryOptions = CATEGORIES.map(c => `<option value="${c}">${c}</option>`).join('')
 
-  // Post rows
-  const postRowsArr = []
-  for (const p of posts) {
-    postRowsArr.push(`<tr>
-      <td>${p.date}</td>
-      <td>${p.category}</td>
-      <td>${p.title}</td>
-      <td style="white-space:nowrap;">
-        <div style="display:flex;gap:6px;">
-          <a href="/edit?file=${encodeURIComponent(p.file)}" class="edit-btn">編集</a>
-          <form method="POST" action="/delete" onsubmit="return confirm('削除しますか？')" style="margin:0">
-            <input type="hidden" name="file" value="${p.file}">
-            <button type="submit" class="del-btn">削除</button>
-          </form>
-        </div>
-      </td>
-    </tr>`)
-  }
-
+  // Calendar
+  const CAT_COLORS = { 'ロケット': '#e53935', '衛星・通信': '#1e88e5', '有人宇宙飛行': '#43a047', '月探査': '#8e24aa', '火星探査': '#f4511e' }
+  const MONTH_NAMES = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+  const DAY_NAMES = ['日','月','火','水','木','金','土']
+  const postsByDate = {}
+  for (const p of posts) { postsByDate[p.date] = p }
+  const todayStr = new Date(Date.now() + 9*60*60*1000).toISOString().slice(0, 10)
+  const now = new Date()
   let postsSection
   if (posts.length === 0) {
     postsSection = '<p style="color:#aaa;font-size:13px;">記事がありません</p>'
   } else {
-    postsSection = '<table><thead><tr><th>日付</th><th>カテゴリ</th><th>タイトル</th><th></th></tr></thead><tbody>'
-    postsSection += postRowsArr.join('')
-    postsSection += '</tbody></table>'
+    let cal = '<div class="cal-wrap">'
+    for (let i = 2; i >= 0; i--) {
+      const d = new Date(now.getFullYear(), now.getMonth() - i, 1)
+      const year = d.getFullYear(), month = d.getMonth()
+      const firstDay = new Date(year, month, 1).getDay()
+      const daysInMonth = new Date(year, month + 1, 0).getDate()
+      cal += `<div><div class="cal-month-title">${year}年${MONTH_NAMES[month]}</div><div class="cal-grid">`
+      cal += DAY_NAMES.map(n => `<div class="cal-dayname">${n}</div>`).join('')
+      for (let e = 0; e < firstDay; e++) cal += '<div class="cal-cell empty"></div>'
+      for (let day = 1; day <= daysInMonth; day++) {
+        const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`
+        const p = postsByDate[dateStr]
+        const isToday = dateStr === todayStr
+        if (p) {
+          const color = CAT_COLORS[p.category] || '#888'
+          cal += `<div class="cal-cell has-post" style="border-top:3px solid ${color}">
+            <div class="cal-day-num">${day}</div>
+            <a href="/edit?file=${encodeURIComponent(p.file)}" class="cal-post-link">
+              <span class="cal-cat-dot" style="background:${color}"></span>
+              <span class="cal-post-title">${p.title}</span>
+            </a>
+            <div class="cal-actions">
+              <form method="POST" action="/delete" onsubmit="return confirm('削除しますか？')" style="margin:0">
+                <input type="hidden" name="file" value="${p.file}">
+                <button type="submit" class="cal-del-btn">✕</button>
+              </form>
+            </div>
+          </div>`
+        } else {
+          cal += `<div class="cal-cell${isToday ? ' today' : ''}"><div class="cal-day-num">${day}</div></div>`
+        }
+      }
+      cal += '</div></div>'
+    }
+    cal += '</div>'
+    postsSection = cal
   }
 
   // Image grid
