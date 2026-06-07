@@ -505,10 +505,10 @@ function renderMain(message, monthParam) {
   const DAY_NAMES = ['日','月','火','水','木','金','土']
   const postsByDate = {}
   for (const p of posts) { postsByDate[p.date] = p }
-  const todayStr = new Date(Date.now() + 9*60*60*1000).toISOString().slice(0, 10)
-  const nowJst = new Date(Date.now() + 9*60*60*1000)
+  const now = new Date()
+  const todayStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`
   // 表示月の決定（monthParam例: "2026-05"）
-  let dispYear = nowJst.getUTCFullYear(), dispMonth = nowJst.getUTCMonth()
+  let dispYear = now.getFullYear(), dispMonth = now.getMonth()
   if (monthParam && /^\d{4}-\d{2}$/.test(monthParam)) {
     dispYear = parseInt(monthParam.slice(0, 4))
     dispMonth = parseInt(monthParam.slice(5, 7)) - 1
@@ -517,7 +517,7 @@ function renderMain(message, monthParam) {
   const nextD = new Date(dispYear, dispMonth + 1, 1)
   const prevParam = `${prevD.getFullYear()}-${String(prevD.getMonth()+1).padStart(2,'0')}`
   const nextParam = `${nextD.getFullYear()}-${String(nextD.getMonth()+1).padStart(2,'0')}`
-  const currentParam = `${nowJst.getUTCFullYear()}-${String(nowJst.getUTCMonth()+1).padStart(2,'0')}`
+  const currentParam = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`
   let postsSection
   if (posts.length === 0) {
     postsSection = '<p style="color:#aaa;font-size:13px;">記事がありません</p>'
