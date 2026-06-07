@@ -97,6 +97,27 @@ async function validateImageRelevance(imageUrl, title, category) {
   }
 }
 
+// 画像の日本語キャプションを生成
+async function generateImageCaption(imageUrl, articleTitle) {
+  try {
+    const response = await client.messages.create({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 60,
+      messages: [{
+        role: 'user',
+        content: [
+          { type: 'image', source: { type: 'url', url: imageUrl } },
+          { type: 'text', text: `この画像を日本語で一文で説明してください。「${articleTitle}」という記事のカバー画像です。説明文のみ出力してください（例：「SpaceXのFalcon 9ロケットが打ち上げ台に立つ様子」）。` }
+        ]
+      }]
+    })
+    return response.content[0].text.trim()
+  } catch (e) {
+    console.error('  キャプション生成失敗:', e.message)
+    return ''
+  }
+}
+
 // 画像をpublic/imagesにダウンロード保存
 async function downloadImage(imageUrl, filename) {
   const publicImagesDir = path.join(__dirname, '..', 'public', 'images')
@@ -656,6 +677,8 @@ async function main() {
         if (isRelevant) {
           coverImage = ogImage
           console.log(`  ✓ OG画像取得（関連性OK）: ${ogImage.slice(0, 60)}`)
+          console.log(`  📝 キャプション生成中...`)
+          coverImageCaption = await generateImageCaption(ogImage, article.title)
         } else {
           console.log(`  ✗ OG画像が記事と無関係のためスキップ`)
         }
@@ -683,9 +706,10 @@ async function main() {
         const isRelevant = await validateImageRelevance(img.url, article.title, article.category)
         if (isRelevant) {
           coverImage = img.url
-          coverImageCaption = img.caption || ''
           nasaBodyImages.push(...imgs.filter(i => i.url !== img.url).slice(0, 2))
           console.log(`  ✓ NASA画像選択（関連性OK）`)
+          console.log(`  📝 キャプション生成中...`)
+          coverImageCaption = await generateImageCaption(img.url, article.title)
           break
         }
         console.log(`  ✗ NASA画像スキップ（無関係）`)
