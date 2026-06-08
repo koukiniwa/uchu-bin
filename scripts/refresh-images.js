@@ -80,6 +80,9 @@ const BLOCKED_IMAGE_PATTERNS = [
   'koichi-wakata-spacex-training',               // 宇宙飛行士訓練写真
   'STS095',                                      // スペースシャトルSTS-95
   'NASA_seal',                                   // NASAシール/ロゴ
+  '201304210007HQ',                              // 2013年汎用NASAイベント写真
+  '201304210010HQ',                              // 同上
+  '201304210014HQ',                              // 同上
 ]
 
 function isBlockedImage(imageUrl) {
