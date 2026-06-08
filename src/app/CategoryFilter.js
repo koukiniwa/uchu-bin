@@ -126,13 +126,11 @@ function ArticleCard({ post }) {
           flexDirection: 'column',
           backgroundColor: '#ffffff',
           border: '1px solid #e8e8e8',
-          transition: 'box-shadow 0.2s, transform 0.2s',
+          transition: 'box-shadow 0.2s, transform 0.2s, border-color 0.2s',
         }}
-        onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-        onMouseLeave={e => { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)' }}
       >
         {/* 画像エリア */}
-        <div className="card-img" style={{ position: 'relative', height: '180px', backgroundColor: '#1a2744', flexShrink: 0 }}>
+        <div className="card-img" style={{ position: 'relative', height: '220px', backgroundColor: '#1a2744', flexShrink: 0 }}>
           {post.image ? (
             <img
               src={post.image}
@@ -148,7 +146,7 @@ function ArticleCard({ post }) {
             position: 'absolute', top: '10px', left: '10px',
             fontSize: '10px', fontWeight: 700, letterSpacing: '0.08em',
             color: '#fff', padding: '3px 8px',
-            backgroundColor: '#1565c0',
+            backgroundColor: '#1a2744',
           }}>
             {post.category}
           </span>
@@ -176,7 +174,7 @@ function ArticleCard({ post }) {
           )}
           <div className="card-footer" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 'auto', paddingTop: '8px', borderTop: '1px solid #f0f0f0' }}>
             <span className="card-date" style={{ fontSize: '11px', color: '#aaaaaa' }}>{post.date}</span>
-            <span className="card-more" style={{ fontSize: '11px', color: '#1565c0', fontWeight: 600 }}>続きを読む →</span>
+            <span className="card-more" style={{ fontSize: '11px', color: '#1a2744', fontWeight: 600 }}>続きを読む →</span>
           </div>
         </div>
       </article>

@@ -86,24 +86,35 @@ export default function RootLayout({ children }) {
           {children}
         </main>
         <footer style={{
-          borderTop: '1px solid #e0e0e0',
-          padding: '20px 16px',
-          marginTop: '40px',
-          backgroundColor: '#f8f8f8',
+          borderTop: '2px solid #111111',
+          marginTop: '60px',
+          backgroundColor: '#0f1629',
+          color: '#ffffff',
         }}>
           <div style={{
             maxWidth: '1200px',
             margin: '0 auto',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
+            padding: '40px 24px 28px',
           }}>
-            <span style={{ fontSize: '11px', color: '#999', fontFamily: 'monospace', letterSpacing: '0.1em' }}>
-              &copy; 2026 宇宙便. ALL RIGHTS RESERVED.
-            </span>
-            <span style={{ fontSize: '11px', color: '#3d6b4e', fontFamily: 'monospace' }}>
-              ▌ UCHU-BIN
-            </span>
+            {/* ロゴ＋キャッチコピー */}
+            <div style={{ marginBottom: '28px' }}>
+              <div style={{ fontSize: '18px', fontWeight: 800, letterSpacing: '0.12em', color: '#ffffff', marginBottom: '6px' }}>
+                宇宙便
+              </div>
+              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.06em' }}>
+                ロケット・衛星・宇宙開発の最新情報
+              </div>
+            </div>
+
+            {/* 区切り */}
+            <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+              <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.35)', letterSpacing: '0.08em' }}>
+                &copy; 2026 宇宙便. ALL RIGHTS RESERVED.
+              </span>
+              <span style={{ fontSize: '11px', color: '#4fc3f7', letterSpacing: '0.1em', fontWeight: 600 }}>
+                UCHU-BIN.JP
+              </span>
+            </div>
           </div>
         </footer>
       </body>
