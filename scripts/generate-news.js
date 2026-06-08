@@ -286,8 +286,27 @@ async function fetchWikimediaImages(query, count = 2) {
   return images
 }
 
+// 記事に無関係な企業名が画像タイトルに含まれているかチェック
+const COMPANY_IMAGE_FILTERS = [
+  { words: ['electron', 'rocket lab', 'rocketlab'], articleKeywords: ['ロケットラボ', 'rocket lab', 'electron'] },
+  { words: ['falcon', 'spacex', 'starship', 'dragon'], articleKeywords: ['spacex', 'スペースx', 'falcon', 'starship', 'dragon', 'ドラゴン'] },
+  { words: ['new glenn', 'new shepard', 'blue origin'], articleKeywords: ['blue origin', 'ブルーオリジン', 'new glenn', 'new shepard'] },
+  { words: ['sls', 'artemis'], articleKeywords: ['sls', 'artemis', 'アルテミス'] },
+]
+
+function isImageExcludedForArticle(nasaTitle, nasaDesc, articleTitle) {
+  const titleLow = articleTitle.toLowerCase()
+  const imgText = (nasaTitle + ' ' + nasaDesc).toLowerCase()
+  for (const filter of COMPANY_IMAGE_FILTERS) {
+    const imgHasCompany = filter.words.some(w => imgText.includes(w))
+    const articleHasCompany = filter.articleKeywords.some(k => titleLow.includes(k))
+    if (imgHasCompany && !articleHasCompany) return true
+  }
+  return false
+}
+
 // 記事に関連したNASA画像を検索して取得（出典付き）
-async function fetchNASAImages(query, count = 3) {
+async function fetchNASAImages(query, count = 3, articleTitle = '') {
   const images = []
 
   try {
@@ -311,6 +330,11 @@ async function fetchNASAImages(query, count = 3) {
       if (!nasaId) continue
       // 人物写真・ポートレートをスキップ
       if (PORTRAIT_WORDS.some(w => title.includes(w) || desc.includes(w))) continue
+      // 記事と無関係な企業の画像をスキップ
+      if (articleTitle && isImageExcludedForArticle(title, desc, articleTitle)) {
+        console.log(`  ✗ NASA画像スキップ（記事と無関係な企業: ${title.slice(0, 40)}）`)
+        continue
+      }
       const result = await resolveNASAImage(nasaId, center)
       if (result) images.push({ ...result, caption: item?.data?.[0]?.title || '' })
     }
@@ -701,8 +725,8 @@ async function main() {
         }
       }
       if (!searchQuery.trim()) searchQuery = CATEGORY_KEYWORDS[article.category] || 'space'
-      let imgs = await fetchNASAImages(searchQuery.trim(), 3)
-      if (imgs.length === 0) imgs = await fetchNASAImages(CATEGORY_KEYWORDS[article.category] || 'space', 3)
+      let imgs = await fetchNASAImages(searchQuery.trim(), 3, article.title)
+      if (imgs.length === 0) imgs = await fetchNASAImages(CATEGORY_KEYWORDS[article.category] || 'space', 3, article.title)
       for (const img of imgs) {
         const isRelevant = await validateImageRelevance(img.url, article.title, article.category)
         if (isRelevant) {
