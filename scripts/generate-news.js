@@ -86,7 +86,7 @@ async function validateImageRelevance(imageUrl, title, category) {
         role: 'user',
         content: [
           { type: 'image', source: { type: 'url', url: imageUrl } },
-          { type: 'text', text: `この画像は「${title}」（カテゴリ:${category}）という宇宙ニュース記事のカバー画像として適切ですか？記事のトピックに直接関連する内容の画像であれば「yes」、記事と無関係・テーマが異なる場合は「no」と答えてください。「yes」か「no」だけで答えてください。` }
+          { type: 'text', text: `この画像は「${title}」という記事に使用できますか？\n条件：画像に写っている主な被写体（企業名・機体名・人物など）が記事のトピックと一致していること。\n例えば記事がSpaceXについてならSpaceXの機体が写っている必要があり、Rocket Labなど別の企業の機体が写っている場合は「no」です。\n「yes」か「no」だけで答えてください。` }
         ]
       }]
     })
@@ -706,10 +706,15 @@ async function main() {
         const isRelevant = await validateImageRelevance(img.url, article.title, article.category)
         if (isRelevant) {
           coverImage = img.url
-          nasaBodyImages.push(...imgs.filter(i => i.url !== img.url).slice(0, 2))
           console.log(`  ✓ NASA画像選択（関連性OK）`)
           console.log(`  📝 キャプション生成中...`)
           coverImageCaption = await generateImageCaption(img.url, article.title)
+          // 本文用画像もバリデーション（無関係な画像を除外）
+          for (const bodyImg of imgs.filter(i => i.url !== img.url).slice(0, 2)) {
+            const bodyRelevant = await validateImageRelevance(bodyImg.url, article.title, article.category)
+            if (bodyRelevant) nasaBodyImages.push(bodyImg)
+            else console.log(`  ✗ 本文用画像スキップ（無関係）`)
+          }
           break
         }
         console.log(`  ✗ NASA画像スキップ（無関係）`)
