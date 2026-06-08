@@ -4,7 +4,7 @@ description: 'ブラックホールに落ちた量子情報がどこへ行くか
 date: '2026-06-08'
 category: '宇宙科学'
 image: '/images/2026-06-08-black-hole-information-paradox-7d-twisted-remnant.jpg'
-imageCaption: '軌道周期と質量比の関係を示す対数グラフで、白丸は観測データ、白点と矢印は理論予測値を表している。'
+imageCaption: '軌道周期と質量比の関係を示す対数グラフで、白丸は観測データ、白い矢印付きの点は理論的予測値を表している。'
 imageCredit: 'Credit: NASA/CfA/M. Garcia et al.) / Public domain via Wikimedia Commons'
 ---
 

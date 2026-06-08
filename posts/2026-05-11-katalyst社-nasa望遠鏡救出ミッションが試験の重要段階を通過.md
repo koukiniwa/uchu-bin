@@ -5,7 +5,7 @@ date: '2026-05-11'
 category: '衛星'
 image: '/images/2026-05-11-katalyst社-nasa望遠鏡救出ミッションが試験の重要段階を通過.jpg'
 imageCredit: 'NASA/JSC'
-imageCaption: '国際宇宙ステーション（ISS）の青い太陽電池パネルと金色のトラス構造が宇宙空間に浮かぶ様子'
+imageCaption: '国際宇宙ステーション（ISS）の太陽電池パネルと船体を備えた3次元の構造図。'
 ---
 
 ## 5億ドルの宇宙望遠鏡を救え――Katalyst社の「Link」が試験段階を突破
