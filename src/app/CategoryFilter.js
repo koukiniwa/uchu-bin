@@ -203,8 +203,8 @@ export default function CategoryFilter({ posts }) {
   const totalPages = Math.ceil(filtered.length / PAGE_SIZE)
   const pageStart = (page - 1) * PAGE_SIZE
   const pagePosts = filtered.slice(pageStart, pageStart + PAGE_SIZE)
-  const heroPost = pagePosts[0]
-  const restPosts = pagePosts.slice(1)
+  const heroPost = page === 1 ? pagePosts[0] : null
+  const restPosts = page === 1 ? pagePosts.slice(1) : pagePosts
 
   function goToPage(p) {
     setPage(p)
