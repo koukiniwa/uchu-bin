@@ -4,7 +4,7 @@ description: 'FAAは5月22日に実施されたStarship Flight 12の結果を分
 date: '2026-05-28'
 category: 'ロケット'
 image: '/images/2026-05-28-faa-starship-flight-12の事故調査完了までの打ち上げ停止を決定.jpg'
-imageCaption: 'SpaceXのFalcon 9ロケットが青空を背景に打ち上げられ、エンジンから白い煙を噴き出している様子'
+imageCaption: '白い煙に包まれながら打ち上げられるSpaceXのStarshipロケット。'
 imageCredit: 'NASA/HQ'
 ---
 

@@ -80,9 +80,7 @@ const BLOCKED_IMAGE_PATTERNS = [
   'koichi-wakata-spacex-training',               // 宇宙飛行士訓練写真
   'STS095',                                      // スペースシャトルSTS-95
   'NASA_seal',                                   // NASAシール/ロゴ
-  '201304210007HQ',                              // 2013年汎用NASAイベント写真
-  '201304210010HQ',                              // 同上
-  '201304210014HQ',                              // 同上
+  '20130421',                                    // 2013年4月21日の汎用NASAイベント写真シリーズ
 ]
 
 function isBlockedImage(imageUrl) {
@@ -322,7 +320,8 @@ async function generateWikimediaShortQuery(title) {
       }]
     })
     const q = response.content[0].text.trim().split('\n')[0].replace(/^[#\s"'「」]+|["'「」]+$/g, '').trim()
-    if (q && q.length > 2) return q
+    // 日本語が含まれている場合は無効（Claudeが謝罪文などを返した場合）
+    if (q && q.length > 2 && !/[\u3000-\u9fff\uff00-\uffef]/.test(q)) return q
   } catch {}
   return null
 }
@@ -460,6 +459,8 @@ async function main() {
     if (!newImage) {
       console.log(`  ⚠️  適切な画像が見つかりませんでした（スキップ）`)
       fail++
+      // 次の記事のWikimediaレート制限を避けるため少し待つ
+      await new Promise(r => setTimeout(r, 2000))
       continue
     }
 
@@ -494,6 +495,8 @@ async function main() {
     fs.writeFileSync(filePath, updatedContent, 'utf-8')
     console.log(`  💾 保存完了: ${newImage}`)
     success++
+    // Wikimediaレート制限を避けるため少し待つ
+    await new Promise(r => setTimeout(r, 2000))
   }
 
   console.log(`\n✅ 完了: 成功 ${success}件 / スキップ ${fail}件`)
