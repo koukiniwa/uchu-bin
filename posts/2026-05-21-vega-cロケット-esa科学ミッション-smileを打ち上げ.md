@@ -4,7 +4,7 @@ description: '欧州のVega Cロケットが地球磁気圏を観測する日欧
 date: '2026-05-21'
 category: '衛星'
 image: '/images/2026-05-21-vega-cロケット-esa科学ミッション-smileを打ち上げ.jpg'
-imageCaption: 'VegaロケットがESA科学ミッション「SMILE」を搭載して打ち上げ台に立つ様子'
+imageCaption: 'VegaロケットがESA科学ミッション「SMILE」を打ち上げるために発射台に立つ様子'
 imageCredit: 'Pline / CC BY-SA 4.0 via Wikimedia Commons'
 ---
 
