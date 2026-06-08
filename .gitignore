@@ -31,3 +31,6 @@ yarn-error.log*
 .idea/
 *.swp
 *.swo
+
+# Google Service Account（絶対にコミットしない）
+google-service-account.json

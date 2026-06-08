@@ -65,6 +65,20 @@ function shouldUseWikimediaFirst(title) {
   return WIKIMEDIA_FIRST_KEYWORDS.some(kw => low.includes(kw.toLowerCase()))
 }
 
+// SpaceX記事かどうかを判定（Flickrを優先使用するため）
+const SPACEX_ARTICLE_KEYWORDS = [
+  'spacex', 'スペースx', 'スペースエックス',
+  'falcon', 'ファルコン',
+  'starship', 'スターシップ',
+  'superheavy', 'スーパーヘビー',
+  'starfall',
+]
+
+function isSpaceXRelated(title) {
+  const low = title.toLowerCase()
+  return SPACEX_ARTICLE_KEYWORDS.some(kw => low.includes(kw.toLowerCase()))
+}
+
 const COMPANY_IMAGE_FILTERS = [
   { words: ['electron', 'rocket lab', 'rocketlab'], articleKeywords: ['ロケットラボ', 'rocket lab', 'electron'] },
   { words: ['falcon', 'spacex', 'starship', 'dragon'], articleKeywords: ['spacex', 'スペースx', 'falcon', 'starship', 'dragon', 'ドラゴン'] },
@@ -232,6 +246,45 @@ async function fetchWikimediaCategoryImages(category, count = 3) {
     }
   } catch (e) {
     console.error('  Wikimediaカテゴリ検索失敗:', e.message)
+  }
+  return images
+}
+
+// SpaceX公式FlickrからCC画像を取得（FLICKR_API_KEY必須）
+async function fetchSpaceXFlickrImages(query, count = 3) {
+  const apiKey = process.env.FLICKR_API_KEY
+  if (!apiKey) return []
+  const images = []
+  try {
+    const SPACEX_USER_ID = '130608600@N05'
+    const encoded = encodeURIComponent(query)
+    const res = await fetch(
+      `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&user_id=${SPACEX_USER_ID}&text=${encoded}&format=json&nojsoncallback=1&extras=url_l,description,license&per_page=15&sort=relevance&license=1,2,3,4,5,6,9`,
+      { signal: AbortSignal.timeout(10000) }
+    )
+    if (!res.ok) return []
+    const data = await res.json()
+    if (data.stat !== 'ok') return []
+    const photos = data?.photos?.photo || []
+    const SKIP_WORDS = ['portrait', 'headshot', 'logo', 'badge', 'icon', 'press', 'conference', 'meeting', 'signing', 'ceremony']
+    for (const photo of photos) {
+      if (images.length >= count) break
+      const title = (photo.title || '').toLowerCase()
+      if (SKIP_WORDS.some(w => title.includes(w))) continue
+      const imageUrl = photo.url_l
+      if (!imageUrl) continue
+      const licenseMap = { '1': 'CC BY-NC-SA 2.0', '2': 'CC BY-NC 2.0', '3': 'CC BY-NC-ND 2.0', '4': 'CC BY 2.0', '5': 'CC BY-SA 2.0', '6': 'CC BY-ND 2.0', '9': 'CC0' }
+      const license = licenseMap[String(photo.license)] || 'CC'
+      images.push({
+        url: imageUrl,
+        credit: `SpaceX / ${license} via Flickr`,
+        caption: photo.title || 'SpaceX',
+        fromFlickr: true,
+      })
+    }
+    console.log(`  SpaceX Flickr: ${images.length}件取得`)
+  } catch (e) {
+    console.error('  SpaceX Flickr検索失敗:', e.message)
   }
   return images
 }
@@ -479,41 +532,49 @@ async function main() {
     // Claudeで最適な検索クエリを生成
     const searchQuery = await generateSearchQuery(title, category)
 
-    // 画像検索（非NASA組織の記事はWikimediaを優先）
+    // 画像検索（SpaceX記事はFlickr優先、非NASA組織はWikimedia優先）
     const useWikiFirst = shouldUseWikimediaFirst(title)
     console.log(`  🔎 検索クエリ: "${searchQuery.trim()}" ${useWikiFirst ? '[Wikimedia優先]' : ''}`)
-    let imgs
-    if (useWikiFirst) {
-      // まずカテゴリマップで正確な画像を探す（全文検索より正確・レート制限が発生しにくい）
-      const mappedCategory = getWikimediaCategory(title)
-      if (mappedCategory) {
-        console.log(`  🗂️  Wikimediaカテゴリ: "${mappedCategory}"`)
-        imgs = await fetchWikimediaCategoryImages(mappedCategory, 3)
+    let imgs = []
+    // SpaceX記事はFlickrを最優先（FLICKR_API_KEYが設定されている場合）
+    if (isSpaceXRelated(title) && process.env.FLICKR_API_KEY) {
+      const flickrQuery = await generateWikimediaShortQuery(title) || searchQuery.trim()
+      console.log(`  🚀 SpaceX Flickr検索: "${flickrQuery}"`)
+      imgs = await fetchSpaceXFlickrImages(flickrQuery, 3)
+    }
+    if (imgs.length < 2) {
+      if (useWikiFirst) {
+        // まずカテゴリマップで正確な画像を探す（全文検索より正確・レート制限が発生しにくい）
+        const mappedCategory = getWikimediaCategory(title)
+        if (mappedCategory) {
+          console.log(`  🗂️  Wikimediaカテゴリ: "${mappedCategory}"`)
+          const seen = new Set(imgs.map(i => i.url))
+          const more = await fetchWikimediaCategoryImages(mappedCategory, 3 - imgs.length)
+          imgs.push(...more.filter(i => !seen.has(i.url)))
+        }
+        // カテゴリで見つからなかった場合はキーワード検索にフォールバック
+        if (imgs.length < 2) {
+          const wikiQuery = await generateWikimediaShortQuery(title) || searchQuery.trim()
+          if (wikiQuery !== searchQuery.trim()) {
+            console.log(`  🔎 Wikimediaクエリ: "${wikiQuery}"`)
+          }
+          const seen = new Set(imgs.map(i => i.url))
+          const moreImgs = await fetchWikimediaImages(wikiQuery, 3 - imgs.length)
+          imgs.push(...moreImgs.filter(i => !seen.has(i.url)))
+          // 短縮クエリで少ない場合、元のクエリでも試す
+          if (imgs.length < 2 && wikiQuery !== searchQuery.trim()) {
+            const fallbackImgs = await fetchWikimediaImages(searchQuery.trim(), 3 - imgs.length)
+            const allUrls = new Set(imgs.map(i => i.url))
+            imgs.push(...fallbackImgs.filter(i => !allUrls.has(i.url)))
+          }
+        }
+        if (imgs.length < 2) {
+          const nasaImgs = await fetchNASAImages(searchQuery.trim(), 3 - imgs.length, title)
+          imgs.push(...nasaImgs)
+        }
       } else {
-        imgs = []
+        imgs = await fetchNASAImages(searchQuery.trim(), 3, title)
       }
-      // カテゴリで見つからなかった場合はキーワード検索にフォールバック
-      if (imgs.length < 2) {
-        const wikiQuery = await generateWikimediaShortQuery(title) || searchQuery.trim()
-        if (wikiQuery !== searchQuery.trim()) {
-          console.log(`  🔎 Wikimediaクエリ: "${wikiQuery}"`)
-        }
-        const moreImgs = await fetchWikimediaImages(wikiQuery, 3 - imgs.length)
-        const existingUrls = new Set(imgs.map(i => i.url))
-        imgs.push(...moreImgs.filter(i => !existingUrls.has(i.url)))
-        // 短縮クエリで少ない場合、元のクエリでも試す
-        if (imgs.length < 2 && wikiQuery !== searchQuery.trim()) {
-          const fallbackImgs = await fetchWikimediaImages(searchQuery.trim(), 3 - imgs.length)
-          const allUrls = new Set(imgs.map(i => i.url))
-          imgs.push(...fallbackImgs.filter(i => !allUrls.has(i.url)))
-        }
-      }
-      if (imgs.length < 2) {
-        const nasaImgs = await fetchNASAImages(searchQuery.trim(), 3 - imgs.length, title)
-        imgs.push(...nasaImgs)
-      }
-    } else {
-      imgs = await fetchNASAImages(searchQuery.trim(), 3, title)
     }
     if (imgs.length === 0) {
       console.log(`  🔎 フォールバック: "${CATEGORY_KEYWORDS[category] || 'space'}"`)

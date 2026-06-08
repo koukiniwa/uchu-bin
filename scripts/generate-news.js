@@ -351,6 +351,45 @@ async function fetchWikimediaCategoryImages(category, count = 3) {
   return images
 }
 
+// SpaceX公式FlickrからCC画像を取得（FLICKR_API_KEY必須）
+async function fetchSpaceXFlickrImages(query, count = 3) {
+  const apiKey = process.env.FLICKR_API_KEY
+  if (!apiKey) return []
+  const images = []
+  try {
+    const SPACEX_USER_ID = '130608600@N05'
+    const encoded = encodeURIComponent(query)
+    const res = await fetch(
+      `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&user_id=${SPACEX_USER_ID}&text=${encoded}&format=json&nojsoncallback=1&extras=url_l,description,license&per_page=15&sort=relevance&license=1,2,3,4,5,6,9`,
+      { signal: AbortSignal.timeout(10000) }
+    )
+    if (!res.ok) return []
+    const data = await res.json()
+    if (data.stat !== 'ok') return []
+    const photos = data?.photos?.photo || []
+    const SKIP_WORDS = ['portrait', 'headshot', 'logo', 'badge', 'icon', 'press', 'conference', 'meeting', 'signing', 'ceremony']
+    for (const photo of photos) {
+      if (images.length >= count) break
+      const title = (photo.title || '').toLowerCase()
+      if (SKIP_WORDS.some(w => title.includes(w))) continue
+      const imageUrl = photo.url_l
+      if (!imageUrl) continue
+      const licenseMap = { '1': 'CC BY-NC-SA 2.0', '2': 'CC BY-NC 2.0', '3': 'CC BY-NC-ND 2.0', '4': 'CC BY 2.0', '5': 'CC BY-SA 2.0', '6': 'CC BY-ND 2.0', '9': 'CC0' }
+      const license = licenseMap[String(photo.license)] || 'CC'
+      images.push({
+        url: imageUrl,
+        credit: `SpaceX / ${license} via Flickr`,
+        caption: photo.title || 'SpaceX',
+        fromFlickr: true,
+      })
+    }
+    console.log(`  SpaceX Flickr: ${images.length}件取得`)
+  } catch (e) {
+    console.error('  SpaceX Flickr検索失敗:', e.message)
+  }
+  return images
+}
+
 // Wikimedia向けの短いクエリを生成（機体名・企業名・天文現象だけ2語）
 async function generateWikimediaShortQuery(title) {
   try {
@@ -386,6 +425,20 @@ const WIKIMEDIA_FIRST_KEYWORDS = [
 function shouldUseWikimediaFirst(title) {
   const low = title.toLowerCase()
   return WIKIMEDIA_FIRST_KEYWORDS.some(kw => low.includes(kw.toLowerCase()))
+}
+
+// SpaceX記事かどうかを判定（Flickrを優先使用するため）
+const SPACEX_ARTICLE_KEYWORDS = [
+  'spacex', 'スペースx', 'スペースエックス',
+  'falcon', 'ファルコン',
+  'starship', 'スターシップ',
+  'superheavy', 'スーパーヘビー',
+  'starfall',
+]
+
+function isSpaceXRelated(title) {
+  const low = title.toLowerCase()
+  return SPACEX_ARTICLE_KEYWORDS.some(kw => low.includes(kw.toLowerCase()))
 }
 
 // 記事キーワード → Wikimediaカテゴリ名のマッピング
@@ -781,17 +834,18 @@ ${newsText}
 - 煽り・誇張・「驚き」演出は不要。事実が面白い
 - 「まとめると」「〜と言えるでしょう」「〜かもしれません」などAI文体は使わない
 - 本文中の1つ目の ## 見出しの直後に {{IMAGE_1}}、2つ目の ## 見出しの直後に {{IMAGE_2}} を入れる
+- **業界全体の一般解説・将来展望で水増ししない。このニュース固有の事実だけを書く**
+- **各段落は3〜4文で完結させる。同じ内容を言い換えて繰り返さない**
 
-【記事構成の基本テンプレート（内容に合わせて3〜5見出しで柔軟に調整）】
-## 何が起きたか（今回のニュースの核心）
+【記事構成（見出し3つ固定）】
+## （何が起きたか：今回のニュースの核心を具体的なタイトルで）
 {{IMAGE_1}}
-## なぜそれが重要なのか（背景・意義）
-## 技術的な詳細 または これまでの経緯
+## （なぜ重要か・背景：このニュース固有の文脈のみ）
 {{IMAGE_2}}
-## 今後どうなるか（次のステップ・課題）
+## （次のステップ・残る課題：具体的に）
 
-※速報・内容が薄い場合は3見出しでよい。解説が多い場合は5見出しまで増やしてよい。
 ※見出し名はテンプレートをそのまま使わず、記事内容に合った具体的な表現にすること。
+※3つの見出しに収まらない場合のみ4つにしてよい。5つは不可。
 
 以下のJSON形式のみで返してください:
 {
@@ -800,7 +854,7 @@ ${newsText}
   "description": "記事の要約（90文字以内）",
   "category": "次の6つのうち1つだけ: ロケット / 衛星・通信 / 有人宇宙飛行 / 月探査 / 火星探査 / 宇宙科学（天文学・物理学・観測衛星・望遠鏡など）",
   "source_urls": ["メインの参考記事URL", "2つ目の参考記事URL（なければ1つでもよい）"],
-  "body": "記事本文（マークダウン形式。## 見出しを3〜5つ、{{IMAGE_1}}と{{IMAGE_2}}を含め、2000〜2800文字）"
+  "body": "記事本文（マークダウン形式。## 見出しを3つ、{{IMAGE_1}}と{{IMAGE_2}}を含め、1400〜1900文字）"
 }`,
       },
     ],
@@ -897,28 +951,38 @@ async function main() {
       console.log(`  🔎 検索クエリ: "${searchQuery}"`)
       const useWikiFirst = shouldUseWikimediaFirst(article.title)
       let imgs = []
-      if (useWikiFirst) {
-        // まずカテゴリ直接検索（最も正確）
-        const mappedCategory = getWikimediaCategory(article.title)
-        if (mappedCategory) {
-          console.log(`  🗂️  Wikimediaカテゴリ: "${mappedCategory}"`)
-          imgs = await fetchWikimediaCategoryImages(mappedCategory, 3)
+      // SpaceX記事はFlickrを最優先（FLICKR_API_KEYが設定されている場合）
+      if (isSpaceXRelated(article.title) && process.env.FLICKR_API_KEY) {
+        const flickrQuery = await generateWikimediaShortQuery(article.title) || searchQuery
+        console.log(`  🚀 SpaceX Flickr検索: "${flickrQuery}"`)
+        imgs = await fetchSpaceXFlickrImages(flickrQuery, 3)
+      }
+      if (imgs.length < 2) {
+        if (useWikiFirst) {
+          // まずカテゴリ直接検索（最も正確）
+          const mappedCategory = getWikimediaCategory(article.title)
+          if (mappedCategory) {
+            console.log(`  🗂️  Wikimediaカテゴリ: "${mappedCategory}"`)
+            const seen = new Set(imgs.map(i => i.url))
+            const more = await fetchWikimediaCategoryImages(mappedCategory, 3 - imgs.length)
+            imgs.push(...more.filter(i => !seen.has(i.url)))
+          }
+          // カテゴリで不足ならキーワード検索
+          if (imgs.length < 2) {
+            const wikiQuery = await generateWikimediaShortQuery(article.title) || searchQuery
+            if (wikiQuery !== searchQuery) console.log(`  🔎 Wikimediaクエリ: "${wikiQuery}"`)
+            const seen = new Set(imgs.map(i => i.url))
+            const more = await fetchWikimediaImages(wikiQuery, 3 - imgs.length)
+            imgs.push(...more.filter(i => !seen.has(i.url)))
+          }
+          // それでも不足ならNASA
+          if (imgs.length < 2) {
+            const nasa = await fetchNASAImages(searchQuery, 3 - imgs.length, article.title)
+            imgs.push(...nasa)
+          }
+        } else {
+          imgs = await fetchNASAImages(searchQuery, 3, article.title)
         }
-        // カテゴリで不足ならキーワード検索
-        if (imgs.length < 2) {
-          const wikiQuery = await generateWikimediaShortQuery(article.title) || searchQuery
-          if (wikiQuery !== searchQuery) console.log(`  🔎 Wikimediaクエリ: "${wikiQuery}"`)
-          const more = await fetchWikimediaImages(wikiQuery, 3 - imgs.length)
-          const seen = new Set(imgs.map(i => i.url))
-          imgs.push(...more.filter(i => !seen.has(i.url)))
-        }
-        // それでも不足ならNASA
-        if (imgs.length < 2) {
-          const nasa = await fetchNASAImages(searchQuery, 3 - imgs.length, article.title)
-          imgs.push(...nasa)
-        }
-      } else {
-        imgs = await fetchNASAImages(searchQuery, 3, article.title)
       }
       // フォールバック: カテゴリキーワードで再検索
       if (imgs.length === 0) {
@@ -1063,6 +1127,17 @@ async function main() {
       console.log(`\n🚀 自動公開完了`)
     } catch (e) {
       console.error('Git エラー:', e.message)
+    }
+  }
+
+  // Google Indexing APIに通知（キーファイルがある場合のみ）
+  const keyFile = path.join(repoDir, 'google-service-account.json')
+  if (autoPublish && fs.existsSync(keyFile)) {
+    try {
+      console.log('\n🔍 Google Indexing APIに送信中...')
+      execSync(`node scripts/submit-to-google.js ${slug}`, { cwd: repoDir, stdio: 'inherit' })
+    } catch (e) {
+      console.error('Google Indexing API エラー:', e.message)
     }
   }
 }
