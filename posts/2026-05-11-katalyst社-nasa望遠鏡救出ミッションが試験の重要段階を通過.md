@@ -5,7 +5,7 @@ date: '2026-05-11'
 category: '衛星'
 image: '/images/2026-05-11-katalyst社-nasa望遠鏡救出ミッションが試験の重要段階を通過.jpg'
 imageCredit: 'NASA/JPL'
-imageCaption: 'NASAの望遠鏡救出ミッションで撮影された、クレーターが見える月面の拡大画像。'
+imageCaption: 'NASA の望遠鏡救出ミッションに向けた試験段階で捉えられた、宇宙空間における衛星またはロボットアームの様子'
 ---
 
 ## 5億ドルの宇宙望遠鏡を救え――Katalyst社の「Link」が試験段階を突破

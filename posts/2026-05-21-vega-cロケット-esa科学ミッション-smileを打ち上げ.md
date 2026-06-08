@@ -4,8 +4,8 @@ description: '欧州のVega Cロケットが地球磁気圏を観測する日欧
 date: '2026-05-21'
 category: '衛星'
 image: '/images/2026-05-21-vega-cロケット-esa科学ミッション-smileを打ち上げ.png'
-imageCaption: 'ESAのVega Cロケットが科学ミッション「SMILE」を宇宙空間へと打ち上げる様子のイラスト'
-imageCredit: 'European Space Agency / CC BY-SA 3.0 IGO via Wikimedia Commons'
+imageCaption: 'Vega-Cロケットの構造と仕様を示す技術図解で、210トンの単体ロケットが複数のペイロードを軌道上に投入できることを説明しています。'
+imageCredit: 'European Space Agency / CC BY-SA 3.0 igo via Wikimedia Commons'
 ---
 
 ## Vega Cが科学衛星SMILEを軌道投入――地球磁気圏の謎に挑む

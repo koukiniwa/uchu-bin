@@ -4,8 +4,8 @@ description: 'FAAの環境審査文書からSpaceXが開発中の再突入機「
 date: '2026-06-01'
 category: 'ロケット'
 image: '/images/2026-06-01-spacex-starfall再突入機の全容-faa文書で判明.jpg'
-imageCaption: 'SpaceXのStarlink衛星が大気圏に再突入する際に発生する光跡を捉えた夜空の写真。'
-imageCredit: 'NASA/GSFC'
+imageCaption: '青空を背景に、エンジンから炎と白い煙を噴き出しながら打ち上げられるSpaceXのロケット。'
+imageCredit: 'NASA/HQ'
 ---
 
 ## FAA文書が明かしたSpaceX「Starfall」再突入機計画

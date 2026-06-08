@@ -4,15 +4,15 @@ description: 'ブラックホールに落ちた量子情報がどこへ行くか
 date: '2026-06-08'
 category: 'ロケット'
 image: '/images/2026-06-08-black-hole-information-paradox-7d-twisted-remnant.jpg'
-imageCaption: '1978年11月にアインシュタイン天文台で撮影されたはくちょう座X-1からのX線放射の観測画像で、ブラックホール候補天体の周囲に広がるエネルギー放射を示している。'
-imageCredit: 'NASA/MSFC'
+imageCaption: '白い液体燃料ロケットが青空を背景に打ち上げられ、エンジンから炎と白煙を噴き出している様子'
+imageCredit: 'NASA/HQ'
 ---
 
 ## 物理学最大の未解決問題に、新たな理論的突破口
 
 
 ![画像](/images/2026-06-08-black-hole-information-paradox-7d-twisted-remnant-body0.jpg)
-*出典: NASA/JPL*
+*出典: Wikimedia Commons / Public domain via Wikimedia Commons*
 
 
 ブラックホールに吸い込まれた物質が持つ「量子情報」は、いったいどこへ消えるのか。この問いは「ブラックホール情報パラドックス」と呼ばれ、アインシュタインの一般相対性理論と量子力学という2大理論が真っ向から矛盾する、現代物理学における最大級の未解決問題のひとつだ。2026年6月7日、情報科学系メディアsorae.infoが伝えたところによると、この問題に対して「ねじれた7次元時空の構造を持つ極小の残骸（レムナント）が量子情報を保持する」という新たな理論的可能性が示された。

@@ -270,6 +270,34 @@ async function downloadImage(imageUrl, filename) {
   }
 }
 
+// ---- Claudeで最適な画像検索クエリを生成 ----
+async function generateSearchQuery(title, category) {
+  try {
+    const response = await client.messages.create({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 30,
+      messages: [{
+        role: 'user',
+        content: `宇宙ニュース記事「${title}」のカバー画像をNASA画像ライブラリまたはWikimedia Commonsで検索します。最適な英語検索クエリを3〜5語で1つだけ答えてください。具体的な機体名・企業名・ミッション名・天文現象を含めてください。クエリのみ出力してください。`
+      }]
+    })
+    const query = response.content[0].text.trim().replace(/^["'「」]|["'「」]$/g, '')
+    if (query && query.length > 3) return query
+  } catch (e) {
+    console.error('  クエリ生成失敗:', e.message)
+  }
+  // フォールバック: 機械的抽出
+  const titleLower = title.toLowerCase()
+  let q = title.match(/[A-Za-z][A-Za-z0-9\-\.]+/g)?.join(' ') || ''
+  for (const [jp, en] of Object.entries(COMPANY_KEYWORDS)) {
+    if (titleLower.includes(jp)) { q = en + ' ' + q; break }
+  }
+  for (const [jp, en] of Object.entries(TOPIC_KEYWORDS)) {
+    if (title.includes(jp)) { q = (q + ' ' + en).trim(); break }
+  }
+  return q.trim() || CATEGORY_KEYWORDS[category] || 'space'
+}
+
 // ---- frontmatter読み書き ----
 function parseFrontmatter(content) {
   const normalized = content.replace(/\r\n/g, '\n').replace(/\r/g, '\n')
@@ -337,16 +365,8 @@ async function main() {
 
     console.log(`\n[${i + 1}/${files.length}] ${title}`)
 
-    // 検索クエリ構築
-    const titleLower = title.toLowerCase()
-    let searchQuery = title.match(/[A-Za-z][A-Za-z0-9\-\.]+/g)?.join(' ') || ''
-    for (const [jp, en] of Object.entries(COMPANY_KEYWORDS)) {
-      if (titleLower.includes(jp)) { searchQuery = en + ' ' + searchQuery; break }
-    }
-    for (const [jp, en] of Object.entries(TOPIC_KEYWORDS)) {
-      if (title.includes(jp)) { searchQuery = (searchQuery + ' ' + en).trim(); break }
-    }
-    if (!searchQuery.trim()) searchQuery = CATEGORY_KEYWORDS[category] || 'space'
+    // Claudeで最適な検索クエリを生成
+    const searchQuery = await generateSearchQuery(title, category)
 
     // 画像検索（非NASA組織の記事はWikimediaを優先）
     const useWikiFirst = shouldUseWikimediaFirst(title)

@@ -3,7 +3,9 @@ title: 'NASA、Swift天文衛星の軌道をロボットで引き上げる前例
 description: 'NASAはNorthrop Grumman社のロボット宇宙機「LINK」を用い、老朽化するSwift天文衛星の軌道を引き上げる史上初の試みを2026年6月に実施する。'
 date: '2026-05-22'
 category: '衛星'
-image: 'https://www.nasa.gov/wp-content/uploads/2026/05/testing-link-vibration-tests-2-4000x2600-1.jpg'
+image: '/images/2026-05-22-nasa-swift天文衛星の軌道をロボットで引き上げる前例なきミッションを公開へ.jpg'
+imageCaption: 'NASA Swift天文衛星の表面を捉えた宇宙からの画像'
+imageCredit: 'NASA/JPL'
 ---
 
 ## Northrop Grummanのロボット宇宙機がSwift衛星の軌道を引き上げる——6月にペガサスXLで打ち上げ

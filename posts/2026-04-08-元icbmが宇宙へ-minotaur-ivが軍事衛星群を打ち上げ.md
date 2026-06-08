@@ -4,8 +4,8 @@ description: '冷戦期のICBM「ピースキーパー」を転用したMinotaur
 date: '2026-04-08'
 category: 'ロケット'
 image: '/images/2026-04-08-元icbmが宇宙へ-minotaur-ivが軍事衛星群を打ち上げ.jpg'
-imageCredit: 'U.S. Space Force photo by Senior Airman Kevin Hernandez / Public domain via Wikimedia Commons'
-imageCaption: '黄色いクレーン車に支えられた改造型ICBMロケットが、薄暮の中で打ち上げ準備中の様子。'
+imageCredit: 'NASA/ARC'
+imageCaption: '夕焼け空を背景に、Minotaur IVロケットが軍事衛星を積んで夜明け前の空へ打ち上がる様子。'
 ---
 
 冷戦時代にアメリカが配備した核ミサイル「ピースキーパー」が、今も現役で宇宙を飛んでいる。4月7日午前4時33分（現地時間）、そのロケットモーターを転用した「Minotaur IV（ミノタウロスIV）」が、カリフォルニア州ヴァンデンバーグ宇宙軍基地のSLC-8から打ち上げられた。ミッション名はSTP-S29A。米国防総省の宇宙技術実証プログラムとして、軍事通信や軌道デブリ検出など複数の実験装置を低軌道に投入し、打ち上げは成功した。

@@ -379,6 +379,34 @@ async function fetchNASAImages(query, count = 3, articleTitle = '') {
   return images
 }
 
+// Claudeで最適な画像検索クエリを生成
+async function generateSearchQuery(title, category) {
+  try {
+    const response = await client.messages.create({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 30,
+      messages: [{
+        role: 'user',
+        content: `宇宙ニュース記事「${title}」のカバー画像をNASA画像ライブラリまたはWikimedia Commonsで検索します。最適な英語検索クエリを3〜5語で1つだけ答えてください。具体的な機体名・企業名・ミッション名・天文現象を含めてください。クエリのみ出力してください。`
+      }]
+    })
+    const query = response.content[0].text.trim().replace(/^["'「」]|["'「」]$/g, '')
+    if (query && query.length > 3) return query
+  } catch (e) {
+    console.error('  クエリ生成失敗:', e.message)
+  }
+  // フォールバック
+  const titleLower = title.toLowerCase()
+  let q = title.match(/[A-Za-z][A-Za-z0-9\-\.]+/g)?.join(' ') || ''
+  for (const [jp, en] of Object.entries(COMPANY_KEYWORDS)) {
+    if (titleLower.includes(jp)) { q = en + ' ' + q; break }
+  }
+  for (const [jp, en] of Object.entries(TOPIC_KEYWORDS)) {
+    if (title.includes(jp)) { q = (q + ' ' + en).trim(); break }
+  }
+  return q.trim() || CATEGORY_KEYWORDS[category] || 'space'
+}
+
 // カテゴリ→英語キーワード
 const CATEGORY_KEYWORDS = {
   'ロケット': 'rocket launch',
@@ -739,20 +767,9 @@ async function main() {
     // 2. OG画像が取得できなければNASA/Wikimediaで検索
     if (!coverImage) {
       console.log('\n🖼️  NASA/Wikimediaで関連画像を検索中...')
-      const titleLower = article.title.toLowerCase()
-      let searchQuery = article.title.match(/[A-Za-z][A-Za-z0-9\-\.]+/g)?.join(' ') || ''
-      for (const [jp, en] of Object.entries(COMPANY_KEYWORDS)) {
-        if (titleLower.includes(jp)) { searchQuery = en + ' ' + searchQuery; break }
-      }
-      // トピックキーワードを追加（タイトルまたは説明文に含まれるもの）
-      for (const [jp, en] of Object.entries(TOPIC_KEYWORDS)) {
-        if (article.title.includes(jp) || article.description?.includes(jp)) {
-          searchQuery = (searchQuery + ' ' + en).trim()
-          break
-        }
-      }
-      if (!searchQuery.trim()) searchQuery = CATEGORY_KEYWORDS[article.category] || 'space'
-      let imgs = await fetchNASAImages(searchQuery.trim(), 3, article.title)
+      const searchQuery = await generateSearchQuery(article.title, article.category)
+      console.log(`  🔎 検索クエリ: "${searchQuery}"`)
+      let imgs = await fetchNASAImages(searchQuery, 3, article.title)
       if (imgs.length === 0) imgs = await fetchNASAImages(CATEGORY_KEYWORDS[article.category] || 'space', 3, article.title)
       for (const img of imgs) {
         const isRelevant = await validateImageRelevance(img.url, article.title, article.category)
