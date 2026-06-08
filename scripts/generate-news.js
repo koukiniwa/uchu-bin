@@ -93,7 +93,7 @@ async function validateImageRelevance(imageUrl, title, category) {
     return response.content[0].text.toLowerCase().trim().startsWith('yes')
   } catch (e) {
     console.error('  画像バリデーション失敗:', e.message)
-    return true
+    return false
   }
 }
 
@@ -335,6 +335,7 @@ const CATEGORY_KEYWORDS = {
   '有人宇宙飛行': 'astronaut crew spacecraft',
   '月探査': 'moon lunar surface',
   '火星探査': 'mars rover spacecraft',
+  '宇宙科学': 'galaxy nebula cosmos telescope',
 }
 
 // 日本語トピックキーワード→英語検索語（記事内容に合った画像を取得するため）
@@ -593,7 +594,7 @@ ${newsText}
   "title": "記事タイトル（日本語、35文字以内・事実ベース）",
   "slug": "url-slug-in-english-only (lowercase, hyphens, ASCII only, 4-8 words describing the topic)",
   "description": "記事の要約（90文字以内）",
-  "category": "次の5つのうち1つだけ: ロケット / 衛星・通信 / 有人宇宙飛行 / 月探査 / 火星探査",
+  "category": "次の6つのうち1つだけ: ロケット / 衛星・通信 / 有人宇宙飛行 / 月探査 / 火星探査 / 宇宙科学（天文学・物理学・観測衛星・望遠鏡など）",
   "source_urls": ["メインの参考記事URL", "2つ目の参考記事URL（なければ1つでもよい）"],
   "body": "記事本文（マークダウン形式。## 見出しを3〜5つ、{{IMAGE_1}}と{{IMAGE_2}}を含め、2000〜2800文字）"
 }`,

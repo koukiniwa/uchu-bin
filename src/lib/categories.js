@@ -1,4 +1,4 @@
-export const CATEGORIES = ['ニュース', 'ロケット', '衛星・通信', '有人宇宙飛行', '月探査', '火星探査']
+export const CATEGORIES = ['ニュース', 'ロケット', '衛星・通信', '有人宇宙飛行', '月探査', '火星探査', '宇宙科学']
 
 export const CATEGORY_COLORS = {
   'ニュース':       '#1a2744',
@@ -7,5 +7,6 @@ export const CATEGORY_COLORS = {
   '有人宇宙飛行':   '#27ae60',
   '月探査':         '#8e44ad',
   '火星探査':       '#d35400',
+  '宇宙科学':       '#00838f',
   '未分類':         '#555555',
 }
