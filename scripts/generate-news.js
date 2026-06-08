@@ -102,7 +102,7 @@ async function generateImageCaption(imageUrl, articleTitle) {
   try {
     const response = await client.messages.create({
       model: 'claude-haiku-4-5-20251001',
-      max_tokens: 60,
+      max_tokens: 120,
       messages: [{
         role: 'user',
         content: [

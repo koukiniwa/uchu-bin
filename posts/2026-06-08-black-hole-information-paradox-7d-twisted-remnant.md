@@ -4,7 +4,7 @@ description: 'ブラックホールに落ちた量子情報がどこへ行くか
 date: '2026-06-08'
 category: 'ロケット'
 image: '/images/2026-06-08-black-hole-information-paradox-7d-twisted-remnant.jpg'
-imageCaption: '1978年11月にアインシュタイン天文台で観測されたシグナスX-1からのX線放射を示す2つの画像で、左側は高密度の放射領域を、右側'
+imageCaption: '「1976年11月18日にアインシュタイン天文台で観測されたシグナスX-1のX線画像で、左側は高密度な放射領域、右側は初観測時の低密度な放射パターンを示している」'
 imageCredit: 'NASA/MSFC'
 ---
 
