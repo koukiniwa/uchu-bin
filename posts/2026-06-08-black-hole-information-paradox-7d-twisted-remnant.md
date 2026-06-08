@@ -4,7 +4,8 @@ description: 'ブラックホールに落ちた量子情報がどこへ行くか
 date: '2026-06-08'
 category: 'ロケット'
 image: '/images/2026-06-08-black-hole-information-paradox-7d-twisted-remnant.jpg'
-imageCredit: 'sorae.info'
+imageCaption: '「1978年11月に愛因斯坦天文台で観測されたCygnus X-1からのX線放射を示す2つの画像」'
+imageCredit: 'NASA/MSFC'
 ---
 
 ## 物理学最大の未解決問題に、新たな理論的突破口

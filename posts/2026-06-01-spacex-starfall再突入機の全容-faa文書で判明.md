@@ -3,8 +3,9 @@ title: 'SpaceX「Starfall」再突入機の全容、FAA文書で判明'
 description: 'FAAの環境審査文書からSpaceXが開発中の再突入機「Starfall」の詳細が明らかに。宇宙製造品の回収を目指す新プロジェクトの概要を解説する。'
 date: '2026-06-01'
 category: 'ロケット'
-image: 'https://spacenews.com/wp-content/uploads/2026/05/starfall.jpeg'
-imageCredit: 'spacenews.com'
+image: '/images/2026-06-01-spacex-starfall再突入機の全容-faa文書で判明.jpg'
+imageCaption: 'SpaceX Starship上段機の大気圏再突入時に発生する火球現象を捉えた夜間の風景写真で、地上の集落上空に縦に延びる鮮やか'
+imageCredit: 'NASA/GSFC'
 ---
 
 ## FAA文書が明かしたSpaceX「Starfall」再突入機計画
