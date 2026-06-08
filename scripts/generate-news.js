@@ -283,34 +283,157 @@ async function fetchWikimediaImages(query, count = 2) {
     )
     const searchData = await searchRes.json()
     const results = searchData?.query?.search || []
-
     const PORTRAIT_WORDS = ['portrait', 'headshot', 'official photo', 'biography', 'crew photo', 'group photo', 'smiling', 'poses', 'seated', 'people', 'person', 'team photo']
     for (const result of results) {
       if (images.length >= count) break
       const title = result.title
-      const titleLow = title.toLowerCase()
-      if (PORTRAIT_WORDS.some(w => titleLow.includes(w))) continue
+      if (PORTRAIT_WORDS.some(w => title.toLowerCase().includes(w))) continue
       try {
         const infoRes = await fetch(
-          `https://commons.wikimedia.org/w/api.php?action=query&titles=${encodeURIComponent(title)}&prop=imageinfo&iiprop=url|extmetadata&format=json&origin=*`,
+          `https://commons.wikimedia.org/w/api.php?action=query&titles=${encodeURIComponent(title)}&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=1200&format=json&origin=*`,
           { signal: AbortSignal.timeout(8000) }
         )
         const infoData = await infoRes.json()
         const page = Object.values(infoData?.query?.pages || {})[0]
         const info = page?.imageinfo?.[0]
-        if (!info?.url) continue
-        if (!/\.(jpg|jpeg|png)$/i.test(info.url)) continue
+        const imageUrl = info?.thumburl || info?.url
+        if (!imageUrl || !/\.(jpg|jpeg|png)/i.test(imageUrl)) continue
+        if (/\.svg/i.test(info?.url || '')) continue
         const artist = (info.extmetadata?.Artist?.value || '').replace(/<[^>]+>/g, '').trim() || 'Wikimedia Commons'
         const license = info.extmetadata?.LicenseShortName?.value || 'CC'
         const caption = title.replace(/^File:/, '').replace(/\.[^.]+$/, '')
-        images.push({ url: info.url, credit: `${artist} / ${license} via Wikimedia Commons`, caption })
+        images.push({ url: imageUrl, credit: `${artist} / ${license} via Wikimedia Commons`, caption, fromWikimedia: true })
       } catch {}
     }
-    console.log(`  ✓ Wikimedia Commons「${query}」で ${images.length} 枚取得`)
   } catch (e) {
     console.error('  Wikimedia Commons検索失敗:', e.message)
   }
   return images
+}
+
+// Wikimediaカテゴリから直接画像取得（全文検索より正確・レート制限が発生しにくい）
+async function fetchWikimediaCategoryImages(category, count = 3) {
+  const images = []
+  try {
+    const encoded = encodeURIComponent(`Category:${category}`)
+    const res = await fetch(
+      `https://commons.wikimedia.org/w/api.php?action=query&list=categorymembers&cmtitle=${encoded}&cmtype=file&format=json&cmlimit=30&origin=*`,
+      { signal: AbortSignal.timeout(10000) }
+    )
+    const data = await res.json()
+    const members = data?.query?.categorymembers || []
+    const SKIP_WORDS = ['logo', 'badge', 'seal', 'icon', 'portrait', 'headshot', 'diagram', 'map', 'chart']
+    for (const member of members) {
+      if (images.length >= count) break
+      const title = member.title || ''
+      if (SKIP_WORDS.some(w => title.toLowerCase().includes(w))) continue
+      if (!/\.(jpg|jpeg|png)/i.test(title)) continue
+      try {
+        const infoRes = await fetch(
+          `https://commons.wikimedia.org/w/api.php?action=query&titles=${encodeURIComponent(title)}&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=1200&format=json&origin=*`,
+          { signal: AbortSignal.timeout(8000) }
+        )
+        const infoData = await infoRes.json()
+        const page = Object.values(infoData?.query?.pages || {})[0]
+        const info = page?.imageinfo?.[0]
+        const imageUrl = info?.thumburl || info?.url
+        if (!imageUrl || !/\.(jpg|jpeg|png)/i.test(imageUrl)) continue
+        if (/\.svg/i.test(info?.url || '')) continue
+        const artist = (info.extmetadata?.Artist?.value || '').replace(/<[^>]+>/g, '').trim() || 'Wikimedia Commons'
+        const license = info.extmetadata?.LicenseShortName?.value || 'CC'
+        const caption = title.replace(/^File:/, '').replace(/\.[^.]+$/, '')
+        images.push({ url: imageUrl, credit: `${artist} / ${license} via Wikimedia Commons`, caption, fromWikimedia: true })
+      } catch {}
+    }
+  } catch (e) {
+    console.error('  Wikimediaカテゴリ検索失敗:', e.message)
+  }
+  return images
+}
+
+// Wikimedia向けの短いクエリを生成（機体名・企業名・天文現象だけ2語）
+async function generateWikimediaShortQuery(title) {
+  try {
+    const response = await client.messages.create({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 15,
+      messages: [{
+        role: 'user',
+        content: `記事「${title}」のWikimedia Commons画像検索用に、機体名・企業名・天文現象だけを英語2語で答えてください。例：「SpaceX Starship」「New Glenn」「black hole」「Vega-C rocket」。2語のみ出力。`
+      }]
+    })
+    const q = response.content[0].text.trim().split('\n')[0].replace(/^[#\s"'「」]+|["'「」]+$/g, '').trim()
+    if (q && q.length > 2 && !/[\u3000-\u9fff\uff00-\uffef]/.test(q)) return q
+  } catch {}
+  return null
+}
+
+// Wikimediaを優先して検索すべき記事のキーワード（NASA以外の組織・理論物理系）
+const WIKIMEDIA_FIRST_KEYWORDS = [
+  'esa', 'arianespace', 'vega', 'ariane',
+  'ロケットラボ', 'rocket lab', 'electron', 'neutron',
+  'ブルーオリジン', 'blue origin', 'new glenn', 'new shepard',
+  'starship', 'スターシップ', 'superheavy', 'starfall',
+  'spectrum', 'isar', 'mynaric',
+  'isro', 'cnsa', 'roscosmos',
+  'ast spacemobile', 'orbit fab', 'thales',
+  'マクセル', 'maxell', 'ispace',
+  '宇宙軍', 'faa', 'ゴールデンドーム',
+  'ブラックホール', '重力波', '暗黒物質', 'パラドックス',
+  '宇宙科学', '天文', '望遠鏡', '銀河', '星雲',
+]
+
+function shouldUseWikimediaFirst(title) {
+  const low = title.toLowerCase()
+  return WIKIMEDIA_FIRST_KEYWORDS.some(kw => low.includes(kw.toLowerCase()))
+}
+
+// 記事キーワード → Wikimediaカテゴリ名のマッピング
+const WIKIMEDIA_CATEGORY_MAP = [
+  { keywords: ['smile', 'smileミッション'], category: 'SMILE_(spacecraft)' },
+  { keywords: ['vega-c', 'vega c', 'ヴェガ'], category: 'Vega-C' },
+  { keywords: ['ariane 6', 'ariane6', 'アリアン6'], category: 'Ariane_6' },
+  { keywords: ['ariane 5', 'ariane5', 'アリアン5'], category: 'Ariane_5' },
+  { keywords: ['esa '], category: 'Images_by_the_European_Space_Agency' },
+  { keywords: ['starship', 'スターシップ', 'superheavy', 'starfall'], category: 'SpaceX_Starship' },
+  { keywords: ['falcon 9', 'falcon9'], category: 'Falcon_9' },
+  { keywords: ['falcon heavy'], category: 'Falcon_Heavy' },
+  { keywords: ['dragon'], category: 'Dragon_(spacecraft)' },
+  { keywords: ['new glenn', 'ニューグレン'], category: 'New_Glenn' },
+  { keywords: ['new shepard', 'ニューシェパード'], category: 'New_Shepard' },
+  { keywords: ['electron', 'エレクトロン'], category: 'Electron_(rocket)' },
+  { keywords: ['neutron'], category: 'Neutron_(rocket)' },
+  { keywords: ['artemis', 'アルテミス'], category: 'Artemis_program' },
+  { keywords: ['sls ', 'space launch system'], category: 'Space_Launch_System' },
+  { keywords: ['james webb', 'ジェームズウェッブ'], category: 'James_Webb_Space_Telescope' },
+  { keywords: ['hubble'], category: 'Hubble_Space_Telescope' },
+  { keywords: ['ブラックホール', 'black hole'], category: 'Black_holes' },
+  { keywords: ['銀河', 'galaxy'], category: 'Galaxies' },
+  { keywords: ['星雲', 'nebula'], category: 'Nebulae' },
+]
+
+function getWikimediaCategory(title) {
+  const low = title.toLowerCase()
+  for (const entry of WIKIMEDIA_CATEGORY_MAP) {
+    if (entry.keywords.some(kw => low.includes(kw.toLowerCase()))) return entry.category
+  }
+  return null
+}
+
+// 汎用NASA画像のブロックリスト
+const BLOCKED_IMAGE_PATTERNS = [
+  'NASA 60th_SEAL',
+  'international-space-station-mockup-training',
+  'GSFC_20171208_Archive',
+  'koichi-wakata-spacex-training',
+  'STS095',
+  'NASA_seal',
+  '20130421',
+]
+
+function isBlockedImage(url) {
+  const low = url.toLowerCase()
+  return BLOCKED_IMAGE_PATTERNS.some(p => low.includes(p.toLowerCase()))
 }
 
 // 記事に無関係な企業名が画像タイトルに含まれているかチェック
@@ -363,9 +486,11 @@ async function fetchNASAImages(query, count = 3, articleTitle = '') {
         continue
       }
       const result = await resolveNASAImage(nasaId, center)
-      if (result) images.push({ ...result, caption: item?.data?.[0]?.title || '' })
+      if (result) {
+        if (isBlockedImage(result.url)) continue
+        images.push({ ...result, caption: item?.data?.[0]?.title || '' })
+      }
     }
-    console.log(`  ✓ NASA画像ライブラリ「${query}」で ${images.length} 枚取得`)
   } catch (e) {
     console.error('  NASA画像検索失敗:', e.message)
   }
@@ -764,21 +889,48 @@ async function main() {
         }
       }
     }
-    // 2. OG画像が取得できなければNASA/Wikimediaで検索
+    // 2. OG画像が取得できなければWikimedia/NASAで検索
     if (!coverImage) {
-      console.log('\n🖼️  NASA/Wikimediaで関連画像を検索中...')
+      console.log('\n🖼️  Wikimedia/NASAで関連画像を検索中...')
       const searchQuery = await generateSearchQuery(article.title, article.category)
       console.log(`  🔎 検索クエリ: "${searchQuery}"`)
-      let imgs = await fetchNASAImages(searchQuery, 3, article.title)
-      if (imgs.length === 0) imgs = await fetchNASAImages(CATEGORY_KEYWORDS[article.category] || 'space', 3, article.title)
+      const useWikiFirst = shouldUseWikimediaFirst(article.title)
+      let imgs = []
+      if (useWikiFirst) {
+        // まずカテゴリ直接検索（最も正確）
+        const mappedCategory = getWikimediaCategory(article.title)
+        if (mappedCategory) {
+          console.log(`  🗂️  Wikimediaカテゴリ: "${mappedCategory}"`)
+          imgs = await fetchWikimediaCategoryImages(mappedCategory, 3)
+        }
+        // カテゴリで不足ならキーワード検索
+        if (imgs.length < 2) {
+          const wikiQuery = await generateWikimediaShortQuery(article.title) || searchQuery
+          if (wikiQuery !== searchQuery) console.log(`  🔎 Wikimediaクエリ: "${wikiQuery}"`)
+          const more = await fetchWikimediaImages(wikiQuery, 3 - imgs.length)
+          const seen = new Set(imgs.map(i => i.url))
+          imgs.push(...more.filter(i => !seen.has(i.url)))
+        }
+        // それでも不足ならNASA
+        if (imgs.length < 2) {
+          const nasa = await fetchNASAImages(searchQuery, 3 - imgs.length, article.title)
+          imgs.push(...nasa)
+        }
+      } else {
+        imgs = await fetchNASAImages(searchQuery, 3, article.title)
+      }
+      // フォールバック: カテゴリキーワードで再検索
+      if (imgs.length === 0) {
+        imgs = await fetchNASAImages(CATEGORY_KEYWORDS[article.category] || 'space', 3, article.title)
+      }
       for (const img of imgs) {
+        const strictMode = !img.fromWikimedia
         const isRelevant = await validateImageRelevance(img.url, article.title, article.category)
         if (isRelevant) {
           coverImage = img.url
-          console.log(`  ✓ NASA画像選択（関連性OK）`)
+          console.log(`  ✓ 画像選択OK`)
           console.log(`  📝 キャプション生成中...`)
           coverImageCaption = await generateImageCaption(img.url, article.title)
-          // 本文用画像もバリデーション（無関係な画像を除外）
           for (const bodyImg of imgs.filter(i => i.url !== img.url).slice(0, 2)) {
             const bodyRelevant = await validateImageRelevance(bodyImg.url, article.title, article.category)
             if (bodyRelevant) nasaBodyImages.push(bodyImg)
@@ -786,7 +938,7 @@ async function main() {
           }
           break
         }
-        console.log(`  ✗ NASA画像スキップ（無関係）`)
+        console.log(`  ✗ 画像スキップ（無関係）`)
       }
     }
   }
