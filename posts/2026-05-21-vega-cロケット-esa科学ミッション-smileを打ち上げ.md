@@ -3,9 +3,6 @@ title: 'Vega Cロケット、ESA科学ミッション「SMILE」を打ち上げ'
 description: '欧州のVega Cロケットが地球磁気圏を観測する日欧中共同ミッション「SMILE」の打ち上げに成功した。'
 date: '2026-05-21'
 category: '衛星'
-image: '/images/2026-05-21-vega-cロケット-esa科学ミッション-smileを打ち上げ.jpg'
-imageCredit: 'NASA/JSC'
-imageCaption: '国際宇宙ステーション内で、NASA and ESAの宇宙飛行士たちがSMILEミッションに関する打ち上げ準備について会議を行っている様子'
 ---
 
 ## Vega Cが科学衛星SMILEを軌道投入――地球磁気圏の謎に挑む

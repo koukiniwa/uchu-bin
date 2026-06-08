@@ -70,6 +70,21 @@ const COMPANY_IMAGE_FILTERS = [
   { words: ['sls', 'artemis'], articleKeywords: ['sls', 'artemis', 'アルテミス'] },
 ]
 
+// 明らかに間違った汎用画像のブロックリスト（URLにこれらが含まれていたらスキップ）
+const BLOCKED_IMAGE_PATTERNS = [
+  'NASA 60th_SEAL',                              // NASA 60周年ロゴ
+  'international-space-station-mockup-training', // ISS訓練モックアップ
+  'GSFC_20171208_Archive',                       // GDSCの汎用アーカイブ画像
+  'koichi-wakata-spacex-training',               // 宇宙飛行士訓練写真
+  'STS095',                                      // スペースシャトルSTS-95
+  'NASA_seal',                                   // NASAシール/ロゴ
+]
+
+function isBlockedImage(imageUrl) {
+  const urlLow = imageUrl.toLowerCase()
+  return BLOCKED_IMAGE_PATTERNS.some(p => urlLow.includes(p.toLowerCase()))
+}
+
 function isImageExcludedForArticle(nasaTitle, nasaDesc, articleTitle) {
   const titleLow = articleTitle.toLowerCase()
   const imgText = (nasaTitle + ' ' + nasaDesc).toLowerCase()
@@ -111,17 +126,21 @@ async function fetchWikimediaImages(query, count = 2) {
       if (PORTRAIT_WORDS.some(w => title.toLowerCase().includes(w))) continue
       try {
         const infoRes = await fetch(
-          `https://commons.wikimedia.org/w/api.php?action=query&titles=${encodeURIComponent(title)}&prop=imageinfo&iiprop=url|extmetadata&format=json&origin=*`,
+          `https://commons.wikimedia.org/w/api.php?action=query&titles=${encodeURIComponent(title)}&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=1200&format=json&origin=*`,
           { signal: AbortSignal.timeout(8000) }
         )
         const infoData = await infoRes.json()
         const page = Object.values(infoData?.query?.pages || {})[0]
         const info = page?.imageinfo?.[0]
-        if (!info?.url || !/\.(jpg|jpeg|png)$/i.test(info.url)) continue
+        // サムネイルURLがあればそちらを使う（大きすぎる画像を避けるため）
+        const imageUrl = info?.thumburl || info?.url
+        if (!imageUrl || !/\.(jpg|jpeg|png)/i.test(imageUrl)) continue
+        // 元のURLもJPG/PNG確認
+        if (!info?.url) continue
         const artist = (info.extmetadata?.Artist?.value || '').replace(/<[^>]+>/g, '').trim() || 'Wikimedia Commons'
         const license = info.extmetadata?.LicenseShortName?.value || 'CC'
         const caption = title.replace(/^File:/, '').replace(/\.[^.]+$/, '')
-        images.push({ url: info.url, credit: `${artist} / ${license} via Wikimedia Commons`, caption })
+        images.push({ url: imageUrl, credit: `${artist} / ${license} via Wikimedia Commons`, caption })
       } catch {}
     }
   } catch (e) {
@@ -151,7 +170,13 @@ async function fetchNASAImages(query, count = 3, articleTitle = '') {
       if (PORTRAIT_WORDS.some(w => title.includes(w) || desc.includes(w))) continue
       if (articleTitle && isImageExcludedForArticle(title, desc, articleTitle)) continue
       const result = await resolveNASAImage(nasaId, center)
-      if (result) images.push({ ...result, caption: item?.data?.[0]?.title || '' })
+      if (result) {
+        if (isBlockedImage(result.url)) {
+          console.log(`  ✗ ブロックリスト画像をスキップ: ${result.url.slice(0, 60)}`)
+          continue
+        }
+        images.push({ ...result, caption: item?.data?.[0]?.title || '' })
+      }
     }
   } catch (e) {
     console.error('  NASA検索失敗:', e.message)
@@ -193,7 +218,7 @@ async function validateImageRelevance(imageUrl, title) {
         role: 'user',
         content: [
           { type: 'image', source: { type: 'base64', media_type: imgData.mediaType, data: imgData.data } },
-          { type: 'text', text: `この画像は「${title}」という記事のカバー画像として適切ですか？\n条件：画像が宇宙・ロケット・天体・宇宙飛行士・衛星・惑星などに関連し、かつ記事のテーマ（企業・ミッション・技術・組織など）と大きく矛盾しないこと。\n例えばESA記事にNASA宇宙飛行士訓練施設の画像はNG、ドイツの民間ロケット記事にNASAロケットエンジン試験の画像はNG。\n「yes」か「no」だけで答えてください。` }
+          { type: 'text', text: `この画像は「${title}」という記事のカバー画像として使えますか？\n\n以下のどれかに当てはまればno：\n- 施設の室内・会議・人物の訓練・ポートレート写真（宇宙飛行士の訓練含む）で、記事が宇宙飛行士の活動を直接扱わない場合\n- 企業ロゴ・記念マーク・シール画像\n- 星野・銀河・星雲の一般天文写真で、記事が天文学・宇宙科学を専門に扱わない場合\n- 記事の企業・ミッション・機体と明らかに無関係な別の企業の機体が主役の場合\n\n上記に当てはまらず、宇宙・ロケット・天体・衛星・惑星などに関連する写真や図であればyes。\n「yes」か「no」だけで答えてください。` }
         ]
       }]
     })
