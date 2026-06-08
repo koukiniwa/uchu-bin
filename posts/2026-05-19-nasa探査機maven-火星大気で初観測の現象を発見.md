@@ -3,7 +3,9 @@ title: 'NASA探査機MAVEN、火星大気で初観測の現象を発見'
 description: 'NASAの火星周回探査機MAVENが、火星の大気中で地球の磁気圏でしか確認されていなかった荷電粒子の圧縮現象を初めて検出した。'
 date: '2026-05-19'
 category: '火星探査'
-image: 'https://apod.nasa.gov/apod/image/2605/ngc3169_ngc3166_ngc3165px1024.jpg'
+image: '/images/2026-05-19-nasa探査機maven-火星大気で初観測の現象を発見.jpg'
+imageCredit: 'NASA/JPL'
+imageCaption: '「NASA探査機MAVENが観測した15-100 MeVおよび80-220 MeVの高エネルギープロトンと火星大気中の粒子の相互作用データを示すグラフ」'
 ---
 
 ## 火星大気で「地球型」の荷電粒子現象を初検出

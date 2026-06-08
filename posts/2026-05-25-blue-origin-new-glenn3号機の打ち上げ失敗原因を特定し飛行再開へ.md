@@ -3,8 +3,9 @@ title: 'Blue Origin、New Glenn3号機の打ち上げ失敗原因を特定し飛
 description: 'Blue OriginがNew Glenn3号機の失敗調査を完了。原因を特定し、次の打ち上げに向けた再開準備を進めている。'
 date: '2026-05-25'
 category: 'ロケット'
-image: 'https://spacenews.com/wp-content/uploads/2026/05/Gallery-NG3-liftoff3-scaled.jpg'
-imageCredit: 'spacenews.com'
+image: '/images/2026-05-25-blue-origin-new-glenn3号機の打ち上げ失敗原因を特定し飛行再開へ.jpg'
+imageCaption: 'Blue Originのニューシェパードロケットが夜間に打ち上げられ、星々とオーロラが輝く夜空へ向かう様子'
+imageCredit: 'NASA/GSFC'
 ---
 
 Blue Originが、大型ロケット「New Glenn（ニューグレン）」の3号機で発生した打ち上げ失敗について調査を完了し、飛行再開の準備を進めていることが明らかになりました。同社にとってNew Glennは商業打ち上げ市場への本格参入を担う基幹ロケットであり、今回の調査完了と再開判断は今後の事業展開を左右する重要な節目となります。

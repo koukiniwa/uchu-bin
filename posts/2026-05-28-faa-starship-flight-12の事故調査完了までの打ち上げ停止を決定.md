@@ -3,15 +3,15 @@ title: 'FAA、Starship Flight 12の事故調査完了までの打ち上げ停止
 description: 'FAAは5月22日に実施されたStarship Flight 12の結果を分析し、SpaceX主導の事故調査が完了するまで次回打ち上げを認めない方針を示した。'
 date: '2026-05-28'
 category: 'ロケット'
-image: '/images/1776001300887.jpg'
-imageCredit: 'SpaceX'
+image: '/images/2026-05-28-faa-starship-flight-12の事故調査完了までの打ち上げ停止を決定.jpg'
+imageCaption: 'SpaceXのスターシップが夜空に向かって打ち上げられ、星々とオーロラが輝く中を上昇する様子'
+imageCredit: 'NASA/GSFC'
 ---
 
 ## FAAがStarship打ち上げ再開にミシャップ調査の完了を要求
 
 
-![画像](http://images-assets.nasa.gov/image/KSC-20240525-PH-RKL01_0006/KSC-20240525-PH-RKL01_0006~large.jpg)
-*出典: NASA/KSC*
+
 
 
 米連邦航空局（FAA）は2026年5月27日、SpaceXが5月22日に実施した大型ロケット「Starship」のFlight 12について、同社主導のミシャップ調査（mishap investigation＝事故・不具合調査）が完了するまでStarshipの打ち上げ再開を認めないと発表しました。FAAはFlight 12の飛行データおよび結果を分析した上でこの判断に至ったとしています。
@@ -21,8 +21,7 @@ StarshipはSpaceXが開発する全高約120m・推力約7,500トンの超大型
 ## Starship飛行試験の経緯とFlight 12の位置づけ
 
 
-![画像](http://images-assets.nasa.gov/image/KSC-20240525-PH-RKL01_0005/KSC-20240525-PH-RKL01_0005~large.jpg)
-*出典: NASA/KSC*
+
 
 
 Starshipの飛行試験は2023年4月のFlight 1から始まりました。初期の試験では第1段ブースター「Super Heavy」と上段「Ship」の分離失敗や機体の喪失が相次ぎ、FAAはそのたびにミシャップ調査の完了を打ち上げ再開の条件としてきました。

@@ -3,7 +3,9 @@ title: 'Katalyst社、NASA望遠鏡救出ミッションが試験の重要段階
 description: '新興企業Katalyst Space Technologiesが、故障したNASA宇宙望遠鏡の救出ミッションに向けた重要な試験マイルストーンを達成した。'
 date: '2026-05-11'
 category: '衛星'
-image: 'https://apod.nasa.gov/apod/image/2605/CometOrion_Perrot_960_annotated.jpg'
+image: '/images/2026-05-11-katalyst社-nasa望遠鏡救出ミッションが試験の重要段階を通過.jpg'
+imageCredit: 'NASA/JSC'
+imageCaption: '国際宇宙ステーションの内部で、宇宙飛行士たちがNASA望遠鏡救出ミッションに関する技術説明と試験内容の確認を行っている様子。'
 ---
 
 ## 5億ドルの宇宙望遠鏡を救え――Katalyst社の「Link」が試験段階を突破
