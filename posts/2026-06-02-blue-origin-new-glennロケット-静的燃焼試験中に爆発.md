@@ -3,6 +3,9 @@ title: 'Blue Origin「New Glenn」ロケット、静的燃焼試験中に爆発'
 description: 'Blue Originの大型ロケットNew Glennがケープカナベラルでの静的燃焼試験中に爆発。6月4日に予定されていたAmazon衛星打ち上げに影響。'
 date: '2026-06-02'
 category: 'ロケット'
+image: '/images/2026-06-02-blue-origin-new-glennロケット-静的燃焼試験中に爆発.jpg'
+imageCaption: '白いロケットが青空を背景に打ち上げられ、エンジンから炎と煙を噴き出している様子'
+imageCredit: 'NASA/HQ'
 ---
 
 ## New Glennロケット、ケープカナベラルで静的燃焼試験中に爆発

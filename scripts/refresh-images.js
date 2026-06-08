@@ -218,7 +218,7 @@ async function validateImageRelevance(imageUrl, title) {
         role: 'user',
         content: [
           { type: 'image', source: { type: 'base64', media_type: imgData.mediaType, data: imgData.data } },
-          { type: 'text', text: `この画像は「${title}」という記事のカバー画像として使えますか？\n\n以下のどれかに当てはまればno：\n- 施設の室内・会議・人物の訓練・ポートレート写真（宇宙飛行士の訓練含む）で、記事が宇宙飛行士の活動を直接扱わない場合\n- 企業ロゴ・記念マーク・シール画像\n- 星野・銀河・星雲の一般天文写真で、記事が天文学・宇宙科学を専門に扱わない場合\n- 記事の企業・ミッション・機体と明らかに無関係な別の企業の機体が主役の場合\n\n上記に当てはまらず、宇宙・ロケット・天体・衛星・惑星などに関連する写真や図であればyes。\n「yes」か「no」だけで答えてください。` }
+          { type: 'text', text: `この画像は宇宙・天文・ロケット・衛星・宇宙飛行士・惑星・星などに関連する画像ですか？\n以下の場合は「no」：企業ロゴ・記念シール・完全な地上風景（空や建物だけ）・非宇宙の人物写真。\nそれ以外の宇宙関連であれば「yes」。「yes」か「no」だけで答えてください。` }
         ]
       }]
     })
@@ -294,9 +294,12 @@ function updateFrontmatter(content, updates) {
     const regex = new RegExp(`^${key}:.*$`, 'm')
     if (regex.test(fm)) {
       fm = fm.replace(regex, `${key}: '${escaped}'`)
-    } else {
-      // image行の直後に追加
+    } else if (key !== 'image' && /^image: '/.test(fm)) {
+      // image行の直後に追加（imageCaption/imageCreditの場合）
       fm = fm.replace(/(image: '[^']*'\n)/, `$1${key}: '${escaped}'\n`)
+    } else {
+      // 行が存在しない場合は---の直前に追加
+      fm = fm.replace(/(\n---)/, `\n${key}: '${escaped}'$1`)
     }
   }
   return normalized.replace(/^(---\n[\s\S]*?\n---\n?)/, fm)
