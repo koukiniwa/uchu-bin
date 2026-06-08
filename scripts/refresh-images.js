@@ -50,12 +50,14 @@ const WIKIMEDIA_FIRST_KEYWORDS = [
   'esa', 'arianespace', 'vega', 'ariane', // ヨーロッパ宇宙機関
   'ロケットラボ', 'rocket lab', 'electron', 'neutron', // Rocket Lab
   'ブルーオリジン', 'blue origin', 'new glenn', 'new shepard', // Blue Origin
+  'starship', 'スターシップ', 'superheavy', 'starfall', // SpaceX Starship
   'spectrum', 'isar', 'mynaric', // ヨーロッパ系スタートアップ
   'isro', 'cnsa', 'roscosmos', // 各国宇宙機関
   'ast spacemobile', 'orbit fab', 'thales', // 商業系
-  'マクセル', 'maxell', // 日本商業
+  'マクセル', 'maxell', 'ispace', // 日本商業
   '宇宙軍', 'faa', 'ゴールデンドーム', // 軍事・規制
   'ブラックホール', '重力波', '暗黒物質', 'パラドックス', // 理論物理
+  '宇宙科学', '天文', '望遠鏡', '銀河', '星雲', // 天文・宇宙科学
 ]
 
 function shouldUseWikimediaFirst(title) {
@@ -135,12 +137,14 @@ async function fetchWikimediaImages(query, count = 2) {
         // サムネイルURLがあればそちらを使う（大きすぎる画像を避けるため）
         const imageUrl = info?.thumburl || info?.url
         if (!imageUrl || !/\.(jpg|jpeg|png)/i.test(imageUrl)) continue
+        // SVGファイルはサムネイル変換後もサイズが大きくなるためスキップ
+        if (/\.svg/i.test(info?.url || '')) continue
         // 元のURLもJPG/PNG確認
         if (!info?.url) continue
         const artist = (info.extmetadata?.Artist?.value || '').replace(/<[^>]+>/g, '').trim() || 'Wikimedia Commons'
         const license = info.extmetadata?.LicenseShortName?.value || 'CC'
         const caption = title.replace(/^File:/, '').replace(/\.[^.]+$/, '')
-        images.push({ url: imageUrl, credit: `${artist} / ${license} via Wikimedia Commons`, caption })
+        images.push({ url: imageUrl, credit: `${artist} / ${license} via Wikimedia Commons`, caption, fromWikimedia: true })
       } catch {}
     }
   } catch (e) {
@@ -207,10 +211,15 @@ async function fetchImageAsBase64(imageUrl) {
   }
 }
 
-async function validateImageRelevance(imageUrl, title) {
+// strictMode=true: タイトル認識型（NASAフォールバックに使用）
+// strictMode=false: 軽量型（Wikimedia専用クエリ結果に使用）
+async function validateImageRelevance(imageUrl, title, strictMode = true) {
   try {
     const imgData = await fetchImageAsBase64(imageUrl)
     if (!imgData) return false
+    const prompt = strictMode
+      ? `この画像は記事「${title}」のカバー画像として適切ですか？\n以下の場合は「no」：企業ロゴ・記念シール・地上風景・非宇宙の人物写真・全く別のロケット/ミッション/天文現象の画像（例：スターシップ記事にFalcon 9、ブラックホール記事にロケット）。\n記事に登場する機体・企業・天文現象の画像なら「yes」。「yes」か「no」だけで答えてください。`
+      : `この画像は宇宙・天文・ロケット・衛星・宇宙飛行士・惑星・星などに関連する画像ですか？\n企業ロゴ・記念シール・地上風景のみ・非宇宙の人物写真は「no」。それ以外は「yes」。「yes」か「no」だけで答えてください。`
     const response = await client.messages.create({
       model: 'claude-haiku-4-5-20251001',
       max_tokens: 10,
@@ -218,7 +227,7 @@ async function validateImageRelevance(imageUrl, title) {
         role: 'user',
         content: [
           { type: 'image', source: { type: 'base64', media_type: imgData.mediaType, data: imgData.data } },
-          { type: 'text', text: `この画像は宇宙・天文・ロケット・衛星・宇宙飛行士・惑星・星などに関連する画像ですか？\n以下の場合は「no」：企業ロゴ・記念シール・完全な地上風景（空や建物だけ）・非宇宙の人物写真。\nそれ以外の宇宙関連であれば「yes」。「yes」か「no」だけで答えてください。` }
+          { type: 'text', text: prompt }
         ]
       }]
     })
@@ -298,6 +307,23 @@ async function generateSearchQuery(title, category) {
   return q.trim() || CATEGORY_KEYWORDS[category] || 'space'
 }
 
+// Wikimedia向けの短いクエリを生成（ファイル名マッチング用に2〜3語）
+async function generateWikimediaShortQuery(title) {
+  try {
+    const response = await client.messages.create({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 15,
+      messages: [{
+        role: 'user',
+        content: `記事「${title}」のWikimedia Commons画像検索用に、機体名・企業名・天文現象だけを英語2語で答えてください。例：「SpaceX Starship」「New Glenn」「black hole」「Vega-C rocket」。2語のみ出力。`
+      }]
+    })
+    const q = response.content[0].text.trim().split('\n')[0].replace(/^[#\s"'「」]+|["'「」]+$/g, '').trim()
+    if (q && q.length > 2) return q
+  } catch {}
+  return null
+}
+
 // ---- frontmatter読み書き ----
 function parseFrontmatter(content) {
   const normalized = content.replace(/\r\n/g, '\n').replace(/\r/g, '\n')
@@ -352,6 +378,7 @@ async function main() {
   }
 
   let success = 0, skip = 0, fail = 0
+  const usedImageUrls = new Set() // 同一実行内での画像URL重複を防ぐ
 
   for (let i = 0; i < files.length; i++) {
     const file = files[i]
@@ -373,8 +400,18 @@ async function main() {
     console.log(`  🔎 検索クエリ: "${searchQuery.trim()}" ${useWikiFirst ? '[Wikimedia優先]' : ''}`)
     let imgs
     if (useWikiFirst) {
-      // Wikimediaを先に試し、見つからなければNASA
-      imgs = await fetchWikimediaImages(searchQuery.trim(), 3)
+      // Wikimediaには短いクエリ（ファイル名マッチング向け）を生成して先に試す
+      const wikiQuery = await generateWikimediaShortQuery(title) || searchQuery.trim()
+      if (wikiQuery !== searchQuery.trim()) {
+        console.log(`  🔎 Wikimediaクエリ: "${wikiQuery}"`)
+      }
+      imgs = await fetchWikimediaImages(wikiQuery, 3)
+      // 短縮クエリで少ない場合、元のクエリでも試す
+      if (imgs.length < 2 && wikiQuery !== searchQuery.trim()) {
+        const moreImgs = await fetchWikimediaImages(searchQuery.trim(), 3 - imgs.length)
+        const existingUrls = new Set(imgs.map(i => i.url))
+        imgs.push(...moreImgs.filter(i => !existingUrls.has(i.url)))
+      }
       if (imgs.length < 2) {
         const nasaImgs = await fetchNASAImages(searchQuery.trim(), 3 - imgs.length, title)
         imgs.push(...nasaImgs)
@@ -393,8 +430,13 @@ async function main() {
     let selectedUrl = ''
 
     for (const img of imgs) {
+      if (usedImageUrls.has(img.url)) {
+        console.log(`  ✗ スキップ（他の記事で使用済み）`)
+        continue
+      }
       console.log(`  🔍 検証中: ${img.url.slice(0, 80)}`)
-      const isRelevant = await validateImageRelevance(img.url, title)
+      // Wikimediaの専用クエリ結果は軽量バリデーション、NASAフォールバックは厳格バリデーション
+      const isRelevant = await validateImageRelevance(img.url, title, !img.fromWikimedia)
       if (isRelevant) {
         console.log(`  ✓ 画像選択OK`)
         const localPath = await downloadImage(img.url, slug)
@@ -403,6 +445,7 @@ async function main() {
           newImage = localPath
           newCredit = img.credit || ''
           selectedUrl = img.url
+          usedImageUrls.add(img.url)
           break
         }
         console.log(`  ✗ ダウンロード失敗、次の候補へ`)

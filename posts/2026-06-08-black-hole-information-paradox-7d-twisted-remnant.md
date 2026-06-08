@@ -2,10 +2,10 @@
 title: 'ブラックホール情報パラドックス、「7次元ねじれ残骸」で新解答'
 description: 'ブラックホールに落ちた量子情報がどこへ行くかという未解決問題に、ねじれた7次元時空の極小残骸が情報を保持するという新たな理論的解答が示された。'
 date: '2026-06-08'
-category: 'ロケット'
+category: '宇宙科学'
 image: '/images/2026-06-08-black-hole-information-paradox-7d-twisted-remnant.jpg'
-imageCaption: '白い液体燃料ロケットが青空を背景に打ち上げられ、エンジンから炎と白煙を噴き出している様子'
-imageCredit: 'NASA/HQ'
+imageCaption: '「赤、青、黄色の光を放つ星々とガス雲が織りなす、宇宙の深部を表現した抽象的な星図」'
+imageCredit: 'Benjamin Crowell / CC BY-SA 4.0 via Wikimedia Commons'
 ---
 
 ## 物理学最大の未解決問題に、新たな理論的突破口

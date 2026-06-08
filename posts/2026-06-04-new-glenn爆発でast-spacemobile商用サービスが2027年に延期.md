@@ -4,8 +4,8 @@ description: 'Blue OriginのNew Glennの発射台爆発事故により、AST Spa
 date: '2026-06-04'
 category: '通信'
 image: '/images/2026-06-04-new-glenn爆発でast-spacemobile商用サービスが2027年に延期.jpg'
-imageCaption: '黒い宇宙背景に照らされた月面のクレーターが見える白い球体の衛星画像'
-imageCredit: 'NASA/JPL'
+imageCaption: '夜間にロケットが発射台から打ち上げられ、エンジンの炎と白煙が夜空に立ち上る様子'
+imageCredit: 'U.S. Space Force 45SW by Senior Airman Samuel Becker / Public domain via Wikimedia Commons'
 ---
 
 ## Blue Origin「New Glenn」事故がAST SpaceMobileの商用計画を直撃
