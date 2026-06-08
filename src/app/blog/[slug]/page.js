@@ -160,9 +160,9 @@ export default function BlogPost({ params }) {
             />
           </div>
           {(post.imageCaption || post.imageCredit) && (
-            <div style={{ fontSize: '11px', color: '#999', textAlign: 'right', marginTop: '4px' }}>
-              {post.imageCaption && <span>{post.imageCaption}　</span>}
-              {post.imageCredit && <span>出典: {post.imageCredit}</span>}
+            <div style={{ fontSize: '11px', color: '#999', marginTop: '6px', display: 'flex', justifyContent: 'space-between', gap: '12px', flexWrap: 'wrap' }}>
+              {post.imageCaption && <span style={{ flex: 1 }}>{post.imageCaption}</span>}
+              {post.imageCredit && <span style={{ whiteSpace: 'nowrap' }}>出典: {post.imageCredit}</span>}
             </div>
           )}
         </div>
