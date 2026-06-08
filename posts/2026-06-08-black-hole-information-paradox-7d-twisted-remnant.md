@@ -4,15 +4,14 @@ description: 'ブラックホールに落ちた量子情報がどこへ行くか
 date: '2026-06-08'
 category: '宇宙科学'
 image: '/images/2026-06-08-black-hole-information-paradox-7d-twisted-remnant.jpg'
-imageCaption: '「赤、青、黄色の光を放つ星々とガス雲が織りなす、宇宙の深部を表現した抽象的な星図」'
-imageCredit: 'Benjamin Crowell / CC BY-SA 4.0 via Wikimedia Commons'
+imageCaption: '軌道周期と質量比の関係を示す対数グラフで、白丸は観測データ、白点と矢印は理論予測値を表している。'
+imageCredit: 'Credit: NASA/CfA/M. Garcia et al.) / Public domain via Wikimedia Commons'
 ---
 
 ## 物理学最大の未解決問題に、新たな理論的突破口
 
 
-![画像](/images/2026-06-08-black-hole-information-paradox-7d-twisted-remnant-body0.jpg)
-*出典: Wikimedia Commons / Public domain via Wikimedia Commons*
+
 
 
 ブラックホールに吸い込まれた物質が持つ「量子情報」は、いったいどこへ消えるのか。この問いは「ブラックホール情報パラドックス」と呼ばれ、アインシュタインの一般相対性理論と量子力学という2大理論が真っ向から矛盾する、現代物理学における最大級の未解決問題のひとつだ。2026年6月7日、情報科学系メディアsorae.infoが伝えたところによると、この問題に対して「ねじれた7次元時空の構造を持つ極小の残骸（レムナント）が量子情報を保持する」という新たな理論的可能性が示された。
@@ -26,8 +25,7 @@ imageCredit: 'Benjamin Crowell / CC BY-SA 4.0 via Wikimedia Commons'
 ## ねじれた7次元という解答——理論の概要
 
 
-![画像](/images/2026-06-08-black-hole-information-paradox-7d-twisted-remnant-body1.jpg)
-*出典: NASA/KSC*
+
 
 
 今回示された理論的解答は、ブラックホールが完全に蒸発せず、ごく小さな「残骸（レムナント）」を残すという仮説に基づいている。新しい点は、その残骸の幾何学的な構造だ。通常の3次元空間ではなく、余剰次元を含む7次元の時空がねじれた（トポロジカルな）構造を形成し、そこに量子情報が「符号化」されて保存されるという。
