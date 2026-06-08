@@ -869,6 +869,7 @@ async function main() {
   // ソース記事のOG画像を取得（カバー用）
   let coverImage = ''
   let coverImageCaption = ''
+  let coverImageCredit = ''
   const nasaBodyImages = []
   if (autoPublish) {
     // 1. ソース記事のOG画像を最優先で取得
@@ -928,6 +929,7 @@ async function main() {
         const isRelevant = await validateImageRelevance(img.url, article.title, article.category)
         if (isRelevant) {
           coverImage = img.url
+          coverImageCredit = img.credit || ''
           console.log(`  ✓ 画像選択OK`)
           console.log(`  📝 キャプション生成中...`)
           coverImageCaption = await generateImageCaption(img.url, article.title)
@@ -1005,9 +1007,11 @@ async function main() {
     : article.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '').replace(/-+/g, '-').replace(/^-|-$/g, '')
   const slug = `${date}-${titleSlug}`
 
-  // 画像クレジット（OG画像のソースドメイン）- ダウンロード前に取得
+  // 画像クレジット: NASA/Wikimediaの場合は画像固有のクレジット、OG画像の場合はソースドメイン
   let imageCredit = ''
-  if (coverImage && primarySourceUrl) {
+  if (coverImageCredit) {
+    imageCredit = coverImageCredit
+  } else if (coverImage && primarySourceUrl) {
     try { imageCredit = new URL(primarySourceUrl).hostname.replace('www.', '') } catch {}
   }
 
