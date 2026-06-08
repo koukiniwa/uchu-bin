@@ -4,7 +4,7 @@ description: 'FAAは5月22日に実施されたStarship Flight 12の結果を分
 date: '2026-05-28'
 category: 'ロケット'
 image: '/images/2026-05-28-faa-starship-flight-12の事故調査完了までの打ち上げ停止を決定.jpg'
-imageCaption: 'SpaceXのスターシップが夜空に向かって打ち上げられ、星々とオーロラが輝く中を上昇する様子'
+imageCaption: 'SpaceXのスターシップが夜空に向かって打ち上げられ、星と北極光が輝く中を上昇する様子。'
 imageCredit: 'NASA/GSFC'
 ---
 

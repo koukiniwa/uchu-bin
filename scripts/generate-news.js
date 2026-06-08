@@ -79,13 +79,27 @@ function parseRSS(xml, region) {
 async function validateImageRelevance(imageUrl, title, category) {
   try {
     const client = new Anthropic()
+    // HTTP URLはbase64でダウンロードして渡す（ClaudeAPIはHTTPSのみURLサポート）
+    let imageSource
+    if (imageUrl.startsWith('https://')) {
+      imageSource = { type: 'url', url: imageUrl }
+    } else {
+      const res = await fetch(imageUrl, {
+        headers: { 'User-Agent': 'Mozilla/5.0 (compatible; news-bot/1.0)' },
+        signal: AbortSignal.timeout(15000),
+      })
+      if (!res.ok) return false
+      const buffer = Buffer.from(await res.arrayBuffer())
+      const mediaType = imageUrl.match(/\.png$/i) ? 'image/png' : 'image/jpeg'
+      imageSource = { type: 'base64', media_type: mediaType, data: buffer.toString('base64') }
+    }
     const response = await client.messages.create({
       model: 'claude-haiku-4-5-20251001',
       max_tokens: 10,
       messages: [{
         role: 'user',
         content: [
-          { type: 'image', source: { type: 'url', url: imageUrl } },
+          { type: 'image', source: imageSource },
           { type: 'text', text: `この画像は「${title}」という記事に使用できますか？\n条件：画像に写っている主な被写体（企業名・機体名・人物など）が記事のトピックと一致していること。\n例えば記事がSpaceXについてならSpaceXの機体が写っている必要があり、Rocket Labなど別の企業の機体が写っている場合は「no」です。\n「yes」か「no」だけで答えてください。` }
         ]
       }]
@@ -100,13 +114,26 @@ async function validateImageRelevance(imageUrl, title, category) {
 // 画像の日本語キャプションを生成
 async function generateImageCaption(imageUrl, articleTitle) {
   try {
+    let imageSource
+    if (imageUrl.startsWith('https://')) {
+      imageSource = { type: 'url', url: imageUrl }
+    } else {
+      const res = await fetch(imageUrl, {
+        headers: { 'User-Agent': 'Mozilla/5.0 (compatible; news-bot/1.0)' },
+        signal: AbortSignal.timeout(15000),
+      })
+      if (!res.ok) return ''
+      const buffer = Buffer.from(await res.arrayBuffer())
+      const mediaType = imageUrl.match(/\.png$/i) ? 'image/png' : 'image/jpeg'
+      imageSource = { type: 'base64', media_type: mediaType, data: buffer.toString('base64') }
+    }
     const response = await client.messages.create({
       model: 'claude-haiku-4-5-20251001',
       max_tokens: 120,
       messages: [{
         role: 'user',
         content: [
-          { type: 'image', source: { type: 'url', url: imageUrl } },
+          { type: 'image', source: imageSource },
           { type: 'text', text: `この画像を日本語で一文で説明してください。「${articleTitle}」という記事のカバー画像です。説明文のみ出力してください（例：「SpaceXのFalcon 9ロケットが打ち上げ台に立つ様子」）。` }
         ]
       }]

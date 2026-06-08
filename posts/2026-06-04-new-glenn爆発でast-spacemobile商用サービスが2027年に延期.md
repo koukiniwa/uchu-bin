@@ -3,9 +3,6 @@ title: 'New Glenn爆発でAST SpaceMobile商用サービスが2027年に延期'
 description: 'Blue OriginのNew Glennの発射台爆発事故により、AST SpaceMobileの直接スマホ通信衛星コンステレーション計画が3〜6カ月遅延する見通しとなった。'
 date: '2026-06-04'
 category: '通信'
-image: '/images/2026-06-04-new-glenn爆発でast-spacemobile商用サービスが2027年に延期.jpg'
-imageCaption: '国際宇宙ステーション内で、宇宙飛行士たちが書類を手に持ちながら機器の説明を受けている様子。'
-imageCredit: 'NASA/JSC'
 ---
 
 ## Blue Origin「New Glenn」事故がAST SpaceMobileの商用計画を直撃

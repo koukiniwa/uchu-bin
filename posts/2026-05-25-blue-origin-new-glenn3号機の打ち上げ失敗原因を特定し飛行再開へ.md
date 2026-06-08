@@ -4,7 +4,7 @@ description: 'Blue OriginがNew Glenn3号機の失敗調査を完了。原因を
 date: '2026-05-25'
 category: 'ロケット'
 image: '/images/2026-05-25-blue-origin-new-glenn3号機の打ち上げ失敗原因を特定し飛行再開へ.jpg'
-imageCaption: 'Blue Originのニューシェパードロケットが夜間に打ち上げられ、星々とオーロラが輝く夜空へ向かう様子'
+imageCaption: 'Blue Originのニューシェパードロケットが夜空に向けて打ち上げられ、地上の施設と星空を背景に垂直に上昇する様子'
 imageCredit: 'NASA/GSFC'
 ---
 

@@ -45,6 +45,24 @@ const COMPANY_KEYWORDS = {
   'iss': 'ISS space station', '国際宇宙ステーション': 'ISS space station',
 }
 
+// これらのキーワードを含む記事はWikimediaを優先して検索（NASA画像が合わないケースが多い）
+const WIKIMEDIA_FIRST_KEYWORDS = [
+  'esa', 'arianespace', 'vega', 'ariane', // ヨーロッパ宇宙機関
+  'ロケットラボ', 'rocket lab', 'electron', 'neutron', // Rocket Lab
+  'ブルーオリジン', 'blue origin', 'new glenn', 'new shepard', // Blue Origin
+  'spectrum', 'isar', 'mynaric', // ヨーロッパ系スタートアップ
+  'isro', 'cnsa', 'roscosmos', // 各国宇宙機関
+  'ast spacemobile', 'orbit fab', 'thales', // 商業系
+  'マクセル', 'maxell', // 日本商業
+  '宇宙軍', 'faa', 'ゴールデンドーム', // 軍事・規制
+  'ブラックホール', '重力波', '暗黒物質', 'パラドックス', // 理論物理
+]
+
+function shouldUseWikimediaFirst(title) {
+  const low = title.toLowerCase()
+  return WIKIMEDIA_FIRST_KEYWORDS.some(kw => low.includes(kw.toLowerCase()))
+}
+
 const COMPANY_IMAGE_FILTERS = [
   { words: ['electron', 'rocket lab', 'rocketlab'], articleKeywords: ['ロケットラボ', 'rocket lab', 'electron'] },
   { words: ['falcon', 'spacex', 'starship', 'dragon'], articleKeywords: ['spacex', 'スペースx', 'falcon', 'starship', 'dragon', 'ドラゴン'] },
@@ -152,7 +170,11 @@ async function fetchImageAsBase64(imageUrl) {
       signal: AbortSignal.timeout(15000),
     })
     if (!res.ok) return null
+    // 5MB超えはスキップ（Claude APIの10MB制限に余裕を持たせる）
+    const contentLength = res.headers.get('content-length')
+    if (contentLength && parseInt(contentLength) > 5 * 1024 * 1024) return null
     const buffer = Buffer.from(await res.arrayBuffer())
+    if (buffer.length > 5 * 1024 * 1024) return null
     const mediaType = imageUrl.match(/\.png$/i) ? 'image/png' : 'image/jpeg'
     return { data: buffer.toString('base64'), mediaType }
   } catch {
@@ -171,7 +193,7 @@ async function validateImageRelevance(imageUrl, title) {
         role: 'user',
         content: [
           { type: 'image', source: { type: 'base64', media_type: imgData.mediaType, data: imgData.data } },
-          { type: 'text', text: `この画像は宇宙・天文・ロケット・衛星・宇宙飛行士・惑星・星などに関連する画像ですか？人物のポートレートや地上の風景など宇宙と無関係の場合は「no」、宇宙関連なら「yes」と答えてください。「yes」か「no」だけで答えてください。` }
+          { type: 'text', text: `この画像は「${title}」という記事のカバー画像として適切ですか？\n条件：画像が宇宙・ロケット・天体・宇宙飛行士・衛星・惑星などに関連し、かつ記事のテーマ（企業・ミッション・技術・組織など）と大きく矛盾しないこと。\n例えばESA記事にNASA宇宙飛行士訓練施設の画像はNG、ドイツの民間ロケット記事にNASAロケットエンジン試験の画像はNG。\n「yes」か「no」だけで答えてください。` }
         ]
       }]
     })
@@ -257,13 +279,21 @@ function updateFrontmatter(content, updates) {
 
 // ---- メイン処理 ----
 async function main() {
-  const limit = parseInt(process.argv[2]) || 5
-  const files = fs.readdirSync(POSTS_DIR)
-    .filter(f => f.endsWith('.md'))
-    .sort()
-    .slice(-limit) // 最新N件
-
-  console.log(`\n📋 最新${files.length}件の記事の画像を再取得します\n`)
+  // --slugs slug1,slug2,... で特定記事のみ処理
+  const slugsArg = process.argv.find(a => a.startsWith('--slugs='))
+  let files
+  if (slugsArg) {
+    const slugs = slugsArg.replace('--slugs=', '').split(',')
+    files = slugs.map(s => s.trim() + '.md').filter(f => fs.existsSync(path.join(POSTS_DIR, f)))
+    console.log(`\n📋 指定${files.length}件の記事の画像を再取得します\n`)
+  } else {
+    const limit = parseInt(process.argv[2]) || 5
+    files = fs.readdirSync(POSTS_DIR)
+      .filter(f => f.endsWith('.md'))
+      .sort()
+      .slice(-limit) // 最新N件
+    console.log(`\n📋 最新${files.length}件の記事の画像を再取得します\n`)
+  }
 
   let success = 0, skip = 0, fail = 0
 
@@ -290,9 +320,20 @@ async function main() {
     }
     if (!searchQuery.trim()) searchQuery = CATEGORY_KEYWORDS[category] || 'space'
 
-    // 画像検索
-    console.log(`  🔎 検索クエリ: "${searchQuery.trim()}"`)
-    let imgs = await fetchNASAImages(searchQuery.trim(), 3, title)
+    // 画像検索（非NASA組織の記事はWikimediaを優先）
+    const useWikiFirst = shouldUseWikimediaFirst(title)
+    console.log(`  🔎 検索クエリ: "${searchQuery.trim()}" ${useWikiFirst ? '[Wikimedia優先]' : ''}`)
+    let imgs
+    if (useWikiFirst) {
+      // Wikimediaを先に試し、見つからなければNASA
+      imgs = await fetchWikimediaImages(searchQuery.trim(), 3)
+      if (imgs.length < 2) {
+        const nasaImgs = await fetchNASAImages(searchQuery.trim(), 3 - imgs.length, title)
+        imgs.push(...nasaImgs)
+      }
+    } else {
+      imgs = await fetchNASAImages(searchQuery.trim(), 3, title)
+    }
     if (imgs.length === 0) {
       console.log(`  🔎 フォールバック: "${CATEGORY_KEYWORDS[category] || 'space'}"`)
       imgs = await fetchNASAImages(CATEGORY_KEYWORDS[category] || 'space', 3, title)
@@ -308,14 +349,16 @@ async function main() {
       const isRelevant = await validateImageRelevance(img.url, title)
       if (isRelevant) {
         console.log(`  ✓ 画像選択OK`)
-        newCaption = await generateImageCaption(img.url, title)
         const localPath = await downloadImage(img.url, slug)
         if (localPath) {
+          newCaption = await generateImageCaption(img.url, title)
           newImage = localPath
           newCredit = img.credit || ''
           selectedUrl = img.url
+          break
         }
-        break
+        console.log(`  ✗ ダウンロード失敗、次の候補へ`)
+        continue
       }
       console.log(`  ✗ スキップ（無関係）`)
     }
