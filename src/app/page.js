@@ -2,6 +2,7 @@ import { Suspense } from 'react'
 import { getAllPosts } from '@/lib/posts'
 import CategoryFilter from './CategoryFilter'
 import Sidebar from './Sidebar'
+import SidebarLeft from './SidebarLeft'
 
 export default function Home() {
   const posts = getAllPosts()
@@ -17,6 +18,7 @@ export default function Home() {
       <div className="sidebar-fixed">
         <Sidebar />
       </div>
+      <SidebarLeft />
     </div>
   )
 }
