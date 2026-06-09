@@ -122,6 +122,7 @@ const WIKIMEDIA_CATEGORY_MAP = [
   { keywords: ['iss ', '国際宇宙ステーション', 'space station'], category: 'International_Space_Station' },
   { keywords: ['james webb', 'ジェームズウェッブ'], category: 'James_Webb_Space_Telescope' },
   { keywords: ['hubble'], category: 'Hubble_Space_Telescope' },
+  { keywords: ['h3ロケット', 'h3 rocket', 'h-3', 'h3号機'], category: 'H3_(rocket)' },
   // 天文現象
   { keywords: ['ブラックホール', 'black hole'], category: 'Black_holes' },
   { keywords: ['銀河', 'galaxy'], category: 'Galaxies' },

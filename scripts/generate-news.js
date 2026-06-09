@@ -460,6 +460,7 @@ const WIKIMEDIA_CATEGORY_MAP = [
   { keywords: ['sls ', 'space launch system'], category: 'Space_Launch_System' },
   { keywords: ['james webb', 'ジェームズウェッブ'], category: 'James_Webb_Space_Telescope' },
   { keywords: ['hubble'], category: 'Hubble_Space_Telescope' },
+  { keywords: ['h3ロケット', 'h3 rocket', 'h-3', 'h3号機'], category: 'H3_(rocket)' },
   { keywords: ['ブラックホール', 'black hole'], category: 'Black_holes' },
   { keywords: ['銀河', 'galaxy'], category: 'Galaxies' },
   { keywords: ['星雲', 'nebula'], category: 'Nebulae' },
