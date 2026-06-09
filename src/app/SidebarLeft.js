@@ -19,7 +19,7 @@ export default function SidebarLeft() {
         onMouseLeave={e => { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)' }}
       >
         <img
-          src="https://space-map-git-main-koukiniwas-projects.vercel.app/og.png"
+          src="/moon-map-og.png"
           alt="月面探査機マップ"
           style={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', display: 'block' }}
         />
