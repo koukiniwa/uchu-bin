@@ -5,7 +5,7 @@ date: '2026-05-19'
 category: '火星探査'
 image: '/images/2026-05-19-nasa探査機maven-火星大気で初観測の現象を発見.jpg'
 imageCredit: 'NASA/JPL'
-imageCaption: '火星上空で大気圏突入する探査機カプセルの想像図'
+imageCaption: '2017年9月12～13日にMAVEN/IUVSが観測した火星オーロラの強度分布を示すグラフで、過去の記録比25倍の明るさを記録したことを表している。'
 ---
 
 ## 火星大気で「地球型」の荷電粒子現象を初検出

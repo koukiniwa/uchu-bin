@@ -5,7 +5,7 @@ date: '2026-04-15'
 category: '月探査'
 image: '/images/2026-04-15-blue-origin-月の砂から酸素を生成-air-pioneer-技術を発表.jpg'
 imageCredit: 'United States Congress, Office of Robert Aderholt / Public domain via Wikimedia Commons'
-imageCaption: 'Blue Originの幹部が月面での酸素生成技術に関するプレゼンテーションを行っている会場の様子'
+imageCaption: 'Blue Originの幹部がプレゼンテーション会場で月の砂から酸素を生成する「Air Pioneer」技術について講演している様子'
 ---
 
 2026年4月7日、ジェフ・ベゾスが設立した宇宙企業**Blue Origin**は、月面の砂から呼吸可能な酸素を生成する反応装置「**Air Pioneer（エア・パイオニア）**」の開発に成功したと発表した。
