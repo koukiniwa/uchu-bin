@@ -234,7 +234,7 @@ export default function CategoryFilter({ posts }) {
               flex: 1,
               display: 'block',
               textAlign: 'center',
-              padding: '0',
+              padding: '7px 0',
               fontSize: '13px',
               fontWeight: 700,
               color: '#ffffff',

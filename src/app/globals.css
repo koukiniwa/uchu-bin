@@ -88,7 +88,16 @@ html, body {
   .map-shortcut-bar {
     display: flex;
     gap: 0;
+    margin-top: -24px;
     margin-bottom: 16px;
+    margin-left: -16px;
+    margin-right: -16px;
+  }
+}
+@media (max-width: 640px) {
+  .map-shortcut-bar {
+    margin-top: -14px;
+    margin-bottom: 14px;
     margin-left: -10px;
     margin-right: -10px;
   }
