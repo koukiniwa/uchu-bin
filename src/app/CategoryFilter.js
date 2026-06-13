@@ -222,9 +222,9 @@ export default function CategoryFilter({ posts }) {
       {/* スマホ用マップショートカット */}
       <div className="map-shortcut-bar">
         {[
-          { label: '🌕 月面マップ', href: 'https://space-map-git-main-koukiniwas-projects.vercel.app/moon' },
-          { label: '🔴 火星マップ', href: 'https://space-map-koukiniwas-projects.vercel.app/mars' },
-        ].map(({ label, href }) => (
+          { label: '🌕 月面マップ', href: 'https://space-map-git-main-koukiniwas-projects.vercel.app/moon', bg: '#7c8490' },
+          { label: '🔴 火星マップ', href: 'https://space-map-koukiniwas-projects.vercel.app/mars', bg: '#b5451b' },
+        ].map(({ label, href, bg }) => (
           <a
             key={href}
             href={href}
@@ -237,8 +237,8 @@ export default function CategoryFilter({ posts }) {
               padding: '9px 0',
               fontSize: '13px',
               fontWeight: 700,
-              color: '#1a2744',
-              border: '1px solid #1a2744',
+              color: '#ffffff',
+              backgroundColor: bg,
               textDecoration: 'none',
               letterSpacing: '0.04em',
             }}
