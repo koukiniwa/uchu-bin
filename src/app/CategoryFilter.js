@@ -219,6 +219,35 @@ export default function CategoryFilter({ posts }) {
 
   return (
     <div>
+      {/* スマホ用マップショートカット */}
+      <div className="map-shortcut-bar">
+        {[
+          { label: '🌕 月面マップ', href: 'https://space-map-git-main-koukiniwas-projects.vercel.app/moon' },
+          { label: '🔴 火星マップ', href: 'https://space-map-koukiniwas-projects.vercel.app/mars' },
+        ].map(({ label, href }) => (
+          <a
+            key={href}
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              flex: 1,
+              display: 'block',
+              textAlign: 'center',
+              padding: '9px 0',
+              fontSize: '13px',
+              fontWeight: 700,
+              color: '#1a2744',
+              border: '1px solid #1a2744',
+              textDecoration: 'none',
+              letterSpacing: '0.04em',
+            }}
+          >
+            {label}
+          </a>
+        ))}
+      </div>
+
       {/* セクションヘッダー */}
       <div style={{
         display: 'flex',

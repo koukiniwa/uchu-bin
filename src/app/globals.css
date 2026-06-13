@@ -80,6 +80,18 @@ html, body {
   .sidebar-fixed { display: none; }
 }
 
+/* スマホ用マップショートカットバー */
+.map-shortcut-bar {
+  display: none;
+}
+@media (max-width: 1100px) {
+  .map-shortcut-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+}
+
 /* サイドバー左（月面マップカードなど） */
 .sidebar-left {
   position: absolute;
