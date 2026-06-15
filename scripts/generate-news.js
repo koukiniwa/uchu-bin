@@ -1206,10 +1206,6 @@ async function main() {
           imgs = await fetchNASAImages(searchQuery, 3, article.title)
         }
       }
-      // フォールバック: カテゴリキーワードで再検索
-      if (imgs.length === 0) {
-        imgs = await fetchNASAImages(CATEGORY_KEYWORDS[article.category] || 'space', 3, article.title)
-      }
       for (const img of imgs) {
         const strictMode = !img.fromWikimedia
         const isRelevant = await validateImageRelevance(img.url, article.title, article.category)
@@ -1294,10 +1290,16 @@ async function main() {
   const slug = `${date}-${titleSlug}`
 
   // 画像クレジット: NASA/Wikimediaの場合は画像固有のクレジット、OG画像の場合はソースドメイン
+  // 画像が見つからない場合はロゴをフォールバックとして使用
+  if (!coverImage) {
+    coverImage = '/logo.png'
+    console.log('  📎 画像未取得のためロゴを使用')
+  }
+
   let imageCredit = ''
   if (coverImageCredit) {
     imageCredit = coverImageCredit
-  } else if (coverImage && primarySourceUrl) {
+  } else if (coverImage && coverImage !== '/logo.png' && primarySourceUrl) {
     try { imageCredit = new URL(primarySourceUrl).hostname.replace('www.', '') } catch {}
   }
 
