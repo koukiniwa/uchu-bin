@@ -22,11 +22,12 @@ const path = require('path')
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
 
-// 地域別RSSフィード（日本20% / 米国50% / 中国20% / 欧州10% / その他）
+// 地域別RSSフィード（日本30% / 米国40% / 中国20% / 欧州10% / その他）
 const RSS_FEEDS_BY_REGION = {
   japan: [
     { url: 'https://www.jaxa.jp/rss/press.rss', label: '日本（JAXA）' },
     { url: 'https://sorae.info/feed', label: '日本（sorae.info）' },
+    { url: 'https://spacenews.com/tag/japan/feed/', label: '日本（SpaceNews Japan）' },
   ],
   usa: [
     { url: 'https://www.nasaspaceflight.com/feed/', label: '米国（NASASpaceFlight）' },
@@ -46,8 +47,14 @@ const RSS_FEEDS_BY_REGION = {
   ],
 }
 
-// 地域ごとの取得件数（合計で約15件）
-const REGION_COUNTS = { japan: 5, usa: 5, china: 3, europe: 2, global: 2 }
+// 地域ごとの取得件数（合計で約20件）
+const REGION_COUNTS = { japan: 8, usa: 5, china: 3, europe: 2, global: 2 }
+
+// JAXAプレスリリースから除外するキーワード（部品調達・契約・行政手続き系）
+const JAXA_SKIP_KEYWORDS = [
+  '調達', '契約', '入札', '公募', '審査', '委員会', '協定', '覚書', 'MOU',
+  '委託', '選定', '仕様書', '意見公募', '評価結果', '締結', '採択', '補助金',
+]
 
 async function fetchUrl(url) {
   const res = await fetch(url, {
@@ -805,6 +812,12 @@ ${newsText}
 【選題基準（重要）】
 以下の優先順位でニュースを選ぶこと：
 
+優先度：最高（[JAPAN]タグのこれらは必ず最優先で選ぶ）
+- H3・イプシロン・KAIROSなど日本ロケットの打ち上げ成功・失敗
+- JAXA探査機・衛星の着陸・成果・新発見（SLIM、はやぶさ、MMX等）
+- 日本人宇宙飛行士の搭乗・帰還・宇宙での活動
+- ispace・スペースワン等の日本民間宇宙企業の重大イベント
+
 優先度：高（積極的に選ぶ）
 - 「初めて」がつく出来事（初飛行・初着陸・初成功・初試験）
 - まだ日本語メディアでほとんど報道されていない海外の新興企業・ロケットの話題
@@ -816,8 +829,9 @@ ${newsText}
 - Falcon 9・Falcon Heavyの定期的な商業打ち上げ（週2〜3回あり珍しくない）
 - すでに直近記事で扱ったSpaceX・NASAの話題の続報（新事実がない場合）
 - 「〇〇を目指している」という目標発表だけで実績がないもの
+- 部品調達・契約締結・技術審査・行政手続きの発表（結果でなくプロセスの話）
 
-地域バランスの目安: 米国50% / 日本20% / 中国20% / 欧州10%
+地域バランスの目安: 日本30% / 米国40% / 中国20% / 欧州10%
 毎日異なる地域・テーマになるよう、直近記事と被らないものを選ぶこと。
 
 【固有名詞の正確なスペル（必ずこの表記を使うこと）】
@@ -882,6 +896,18 @@ async function main() {
       } catch (e) {
         console.error(`  ✗ ${label}: ${e.message}`)
       }
+    }
+    // JAXAプレスリリースの地味な技術・行政系記事を除外
+    if (region === 'japan') {
+      const before = newsByRegion[region].length
+      newsByRegion[region] = newsByRegion[region].filter(item => {
+        if (!item.link?.includes('jaxa.jp')) return true
+        const skip = JAXA_SKIP_KEYWORDS.some(kw => item.title.includes(kw))
+        if (skip) console.log(`  🚫 JAXA除外: ${item.title}`)
+        return !skip
+      })
+      const removed = before - newsByRegion[region].length
+      if (removed > 0) console.log(`  ✂️  JAXAフィルター: ${removed}件除外`)
     }
     // 地域ごとの上限件数に絞る（新しい順）
     newsByRegion[region] = newsByRegion[region]
