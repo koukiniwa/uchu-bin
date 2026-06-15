@@ -751,7 +751,29 @@ async function searchRelevantTweets(title, category, count = 2, sourceDate = nul
   return tweetUrls
 }
 
+// ソース記事の本文をHTMLから抽出（p要素のテキストを最大4000文字）
+async function fetchArticleBody(url) {
+  try {
+    const html = await fetchUrl(url)
+    const cleaned = html
+      .replace(/<script[\s\S]*?<\/script>/gi, '')
+      .replace(/<style[\s\S]*?<\/style>/gi, '')
+    const paragraphs = []
+    const pRegex = /<p[^>]*>([\s\S]*?)<\/p>/gi
+    let match
+    while ((match = pRegex.exec(cleaned)) !== null) {
+      const text = match[1].replace(/<[^>]+>/g, '').replace(/&\w+;|&#\d+;/g, ' ').replace(/\s+/g, ' ').trim()
+      if (text.length > 40) paragraphs.push(text)
+    }
+    const body = paragraphs.slice(0, 20).join('\n\n').slice(0, 4000)
+    return body || null
+  } catch {
+    return null
+  }
+}
+
 async function generateArticle(newsByRegion, recentArticles) {
+  const allItems = Object.values(newsByRegion).flat()
   const newsText = Object.entries(newsByRegion)
     .flatMap(([region, items]) =>
       items.map((item) => `[${region.toUpperCase()}] ${item.title}\nURL: ${item.link}\n${item.description}`)
@@ -789,6 +811,81 @@ async function generateArticle(newsByRegion, recentArticles) {
   const jst = new Date(now.getTime() + 9 * 60 * 60 * 1000)
   const todayStr = `${jst.getUTCFullYear()}年${jst.getUTCMonth() + 1}月${jst.getUTCDate()}日`
 
+  // === STEP 1: 記事を選択（Haiku - 安価） ===
+  console.log('\n🔍 記事テーマを選択中...')
+  const selMsg = await client.messages.create({
+    model: 'claude-haiku-4-5-20251001',
+    max_tokens: 256,
+    messages: [{
+      role: 'user',
+      content: `以下のニュース一覧から、記事にする1件を選んでください。
+${japanPriorityText}${recentText}${topicConstraint}
+【選題基準（重要）】
+優先度：最高（[JAPAN]タグは必ず最優先）
+- H3・イプシロン・KAIROSなど日本ロケットの打ち上げ成功・失敗
+- JAXA探査機・衛星の着陸・成果・新発見（SLIM、はやぶさ、MMX等）
+- 日本人宇宙飛行士の搭乗・帰還・宇宙での活動
+- ispace・スペースワン等の日本民間宇宙企業の重大イベント
+
+優先度：高
+- 「初めて」がつく出来事（初飛行・初着陸・初成功・初試験）
+- まだ日本語メディアでほとんど報道されていない海外の新興企業・ロケットの話題
+- 宇宙政策・予算の大きな変化・既存の常識を変える技術的発見
+
+優先度：低（避ける）
+- Falcon 9・Falcon Heavyの定期的な商業打ち上げ
+- すでに直近記事で扱った話題の続報（新事実がない場合）
+- 部品調達・契約締結・技術審査・行政手続きの発表
+
+地域バランスの目安: 日本30% / 米国40% / 中国20% / 欧州10%
+直近記事と被らない地域・テーマを選ぶこと。
+
+ニュース一覧:
+${newsText}
+
+以下のJSON形式のみで返してください（他のテキストは不要）:
+{"url": "選んだ記事のURL", "title": "選んだ記事のタイトル"}`,
+    }],
+  })
+
+  let selectedItem
+  try {
+    const selJson = JSON.parse(selMsg.content[0].text.match(/\{[\s\S]*\}/)[0])
+    selectedItem = allItems.find(i => i.link === selJson.url) || allItems[0]
+    console.log(`  ✓ 選択: ${selectedItem.title}`)
+  } catch {
+    selectedItem = allItems[0]
+    console.log(`  ⚠️  選択パース失敗。先頭記事を使用: ${selectedItem.title}`)
+  }
+
+  // === STEP 2: ソース記事の本文を取得 ===
+  let articleBody = ''
+  if (selectedItem?.link) {
+    console.log(`\n📰 ソース記事の本文を取得中... (${selectedItem.link.slice(0, 60)})`)
+    articleBody = await fetchArticleBody(selectedItem.link)
+    if (articleBody) {
+      console.log(`  ✓ 本文取得成功（${articleBody.length}文字）`)
+    } else {
+      console.log(`  ✗ 本文取得失敗（概要のみで生成）`)
+    }
+  }
+
+  // ソース記事の公開日をJSTで取得
+  const sourceDate = selectedItem?.date instanceof Date && !isNaN(selectedItem.date) ? selectedItem.date : null
+  const sourceDateJst = sourceDate ? new Date(sourceDate.getTime() + 9 * 60 * 60 * 1000) : null
+  const sourceDateStr = sourceDateJst
+    ? `${sourceDateJst.getUTCFullYear()}年${sourceDateJst.getUTCMonth() + 1}月${sourceDateJst.getUTCDate()}日`
+    : null
+
+  const dateInstruction = sourceDateStr
+    ? `【重要】今日の日付は ${todayStr} です。このニュースのソース記事は ${sourceDateStr} に公開されました。記事内の出来事は「${sourceDateStr}、〜した」「〜が明らかになった」のようにソース記事の日付を基準に時制を書いてください。「〇〇年に予定」という記述がすでに過去であれば「当初〇〇年に予定されていた」と表現してください。`
+    : `【重要】今日の日付は ${todayStr} です。ニュースソースに「〇〇年に予定」などの将来の予定が含まれていても、その日付がすでに過去であれば「当初〇〇年に予定されていた」と正確に表現してください。`
+
+  const bodySection = articleBody
+    ? `\n【ソース記事の本文（事実の根拠として使用すること）】\n${articleBody}\n`
+    : ''
+
+  // === STEP 3: 記事を執筆（Sonnet） ===
   const message = await client.messages.create({
     model: 'claude-sonnet-4-6',
     max_tokens: 4500,
@@ -799,41 +896,15 @@ async function generateArticle(newsByRegion, recentArticles) {
 「ミリレポ」のような軍事・専門系ニュースサイトのスタイルを参考に、
 宇宙開発ニュースをわかりやすく、しかし報道として正確に伝える記事を書いてください。
 
-【重要】今日の日付は ${todayStr} です。
-ニュースソースに「〇〇年に予定」などの将来の予定が含まれていても、
-その日付がすでに過去であれば「当初〇〇年に予定されていた」と正確に表現してください。
+${dateInstruction}
 ${topicConstraint}
-以下のニュース一覧から**1つだけ**選び、そのニュースに絞って深く解説してください。
-複数のニュースを混ぜないこと。
-${japanPriorityText}${recentText}
-ニュース一覧（地域タグ付き）:
-${newsText}
+以下のニュースについて日本語で記事を書いてください：
 
-【選題基準（重要）】
-以下の優先順位でニュースを選ぶこと：
-
-優先度：最高（[JAPAN]タグのこれらは必ず最優先で選ぶ）
-- H3・イプシロン・KAIROSなど日本ロケットの打ち上げ成功・失敗
-- JAXA探査機・衛星の着陸・成果・新発見（SLIM、はやぶさ、MMX等）
-- 日本人宇宙飛行士の搭乗・帰還・宇宙での活動
-- ispace・スペースワン等の日本民間宇宙企業の重大イベント
-
-優先度：高（積極的に選ぶ）
-- 「初めて」がつく出来事（初飛行・初着陸・初成功・初試験）
-- まだ日本語メディアでほとんど報道されていない海外の新興企業・ロケットの話題
-- 宇宙政策・予算の大きな変化
-- 既存の常識を変える技術的発見・発表
-- 知名度は低いがこれから注目される可能性がある企業・ミッション
-
-優先度：低（できるだけ避ける）
-- Falcon 9・Falcon Heavyの定期的な商業打ち上げ（週2〜3回あり珍しくない）
-- すでに直近記事で扱ったSpaceX・NASAの話題の続報（新事実がない場合）
-- 「〇〇を目指している」という目標発表だけで実績がないもの
-- 部品調達・契約締結・技術審査・行政手続きの発表（結果でなくプロセスの話）
-
-地域バランスの目安: 日本30% / 米国40% / 中国20% / 欧州10%
-毎日異なる地域・テーマになるよう、直近記事と被らないものを選ぶこと。
-
+【対象ニュース】
+タイトル: ${selectedItem.title}
+URL: ${selectedItem.link}
+概要: ${selectedItem.description || '（なし）'}
+${bodySection}
 【固有名詞の正確なスペル（必ずこの表記を使うこと）】
 ロケット: Falcon 9, Falcon Heavy, Starship, New Glenn, Electron, Neutron, Vulcan, New Shepard, Vega-C, Ariane 6, H3, Epsilon, KAIROS, Long March
 企業: SpaceX, Blue Origin, Rocket Lab, ULA, Northrop Grumman, Lockheed Martin, Boeing, Virgin Galactic, Sierra Space, Relativity Space, Firefly Aerospace, ABL Space, ispace
