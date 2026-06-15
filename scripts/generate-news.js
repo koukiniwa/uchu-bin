@@ -414,6 +414,41 @@ async function generateWikimediaShortQuery(title) {
   return null
 }
 
+// ローカル写真ライブラリ（public/images/library/）からトピックに合った画像を返す
+const LIBRARY_TOPIC_KEYWORDS = {
+  h3:         ['h3ロケット', 'h3 rocket', 'h3号機', 'h3-', 'h-3'],
+  epsilon:    ['イプシロン', 'epsilon', 'kairos', 'カイロス'],
+  slim:       ['slim', 'スリム'],
+  hayabusa:   ['はやぶさ', 'hayabusa', 'mmx', 'フォボス'],
+  iss:        ['国際宇宙ステーション', ' iss ', 'きぼう'],
+  astronaut:  ['宇宙飛行士', 'astronaut', '飛行士'],
+  starship:   ['starship', 'スターシップ'],
+  falcon9:    ['falcon 9', 'falcon9', 'ファルコン9'],
+  newglenn:   ['new glenn', 'ニューグレン'],
+  moon:       ['月面', '月探査', 'lunar', '月着陸'],
+  mars:       ['火星', ' mars'],
+  blackhole:  ['ブラックホール', 'black hole'],
+  satellite:  ['人工衛星', '通信衛星', 'constellation'],
+}
+
+function getLibraryImage(title) {
+  const libraryDir = path.join(__dirname, '../public/images/library')
+  if (!fs.existsSync(libraryDir)) return null
+  const titleLow = title.toLowerCase()
+  for (const [key, keywords] of Object.entries(LIBRARY_TOPIC_KEYWORDS)) {
+    if (keywords.some(kw => titleLow.includes(kw.toLowerCase()))) {
+      const files = fs.readdirSync(libraryDir)
+        .filter(f => f.startsWith(key + '_') && /\.(jpg|jpeg|png)$/i.test(f))
+      if (files.length > 0) {
+        const chosen = files[Math.floor(Math.random() * files.length)]
+        console.log(`  📚 ライブラリ画像使用: ${chosen}`)
+        return `/images/library/${chosen}`
+      }
+    }
+  }
+  return null
+}
+
 // Wikimediaを優先して検索すべき記事のキーワード（NASA以外の組織・理論物理系）
 const WIKIMEDIA_FIRST_KEYWORDS = [
   'esa', 'arianespace', 'vega', 'ariane',
@@ -1024,9 +1059,15 @@ async function main() {
   let coverImageCredit = ''
   const nasaBodyImages = []
   if (autoPublish) {
-    // 1. ソース記事のOG画像を最優先で取得
+    // 0. ローカルライブラリ画像を最優先で使用
+    const libraryImage = getLibraryImage(article.title)
+    if (libraryImage) {
+      coverImage = libraryImage
+    }
+
+    // 1. ライブラリになければソース記事のOG画像を取得
     const primarySourceUrl = article.source_urls?.[0]
-    if (primarySourceUrl) {
+    if (!coverImage && primarySourceUrl) {
       console.log(`\n🖼️  ソース記事からOG画像を取得中... (${primarySourceUrl.slice(0, 60)})`)
       const ogImage = await fetchOGImage(primarySourceUrl)
       if (ogImage) {
