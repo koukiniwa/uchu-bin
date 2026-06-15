@@ -1,0 +1,65 @@
+name: 速報チェック・自動投稿
+
+on:
+  schedule:
+    # 2時間ごと（UTC）
+    - cron: '0 */2 * * *'
+  workflow_dispatch:
+
+jobs:
+  check-and-post:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+
+      - name: 依存パッケージをインストール
+        run: npm install
+
+      - name: 速報チェック
+        id: check
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/check-breaking-news.js
+
+      - name: 速報記事を生成・公開
+        if: steps.check.outputs.breaking == 'true'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TWITTER_BEARER_TOKEN: ${{ secrets.TWITTER_BEARER_TOKEN }}
+          ARTICLE_TOPIC: ${{ steps.check.outputs.topic }}
+        run: |
+          echo "速報スコア: ${{ steps.check.outputs.score }}点"
+          node scripts/generate-news.js --force --auto-publish
+
+      - name: git push
+        if: steps.check.outputs.breaking == 'true'
+        run: |
+          git config user.name "宇宙便 速報Bot"
+          git config user.email "bot@uchu-bin.jp"
+          git add posts/ public/feed.xml public/images/
+          git diff --cached --quiet || git commit -m "速報 $(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M') [score:${{ steps.check.outputs.score }}]"
+          git push
+          curl -s "https://www.google.com/ping?sitemap=https://www.uchu-bin.jp/sitemap.xml" || true
+
+      - name: Vercelデプロイ待機（3分）
+        if: steps.check.outputs.breaking == 'true'
+        run: sleep 180
+
+      - name: Twitterに投稿
+        if: steps.check.outputs.breaking == 'true'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
+          TWITTER_API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
+          TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+          TWITTER_ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
+        run: node scripts/tweet-latest-post.js
