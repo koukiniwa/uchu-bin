@@ -416,72 +416,102 @@ async function generateWikimediaShortQuery(title) {
 
 // ローカル写真ライブラリ（public/images/library/）からトピックに合った画像を返す
 const LIBRARY_TOPIC_KEYWORDS = {
-  // 日本
-  h3:           ['h3ロケット', 'h3 rocket', 'h3号機', 'h3-', 'h-3'],
-  epsilon:      ['イプシロン', 'epsilon'],
-  kairos:       ['kairos', 'カイロス', 'インターステラ', 'interstellar technologies'],
-  // 米国SpaceX
-  starship:     ['starship', 'スターシップ', 'super heavy', 'superheavy'],
-  falcon9:      ['falcon 9', 'falcon9', 'ファルコン9'],
-  falconheavy:  ['falcon heavy', 'ファルコンヘビー'],
-  // 米国Blue Origin
-  newglenn:     ['new glenn', 'ニューグレン'],
-  newshepard:   ['new shepard', 'ニューシェパード'],
-  // 米国Rocket Lab
-  electron:     ['electron', 'エレクトロン'],
-  neutron:      ['neutron', 'ニュートロン'],
-  // 米国ULA
-  vulcan:       ['vulcan centaur', 'vulcan cer', 'ヴァルカン'],
-  atlasv:       ['atlas v', 'atlas-v', 'アトラスv'],
-  deltaiv:      ['delta iv', 'デルタiv'],
-  // 米国Firefly
-  fireflyalpha: ['firefly alpha', 'ファイアフライ'],
-  fireflymlv:   ['firefly mlv'],
-  // 米国その他
-  terranr:      ['terran r', 'relativity space'],
-  stokenova:    ['stoke', 'nova rocket'],
-  rs1:          ['rs1', 'abl space'],
-  // 欧州ESA
-  sls:          ['sls', 'space launch system', 'アルテミスロケット'],
-  ariane6:      ['ariane 6', 'ariane6', 'アリアン6'],
-  ariane5:      ['ariane 5', 'ariane5', 'アリアン5'],
-  vegac:        ['vega-c', 'vega c', 'ヴェガ'],
-  // 欧州民間
-  spectrum:     ['spectrum', 'isar aerospace'],
-  orbexprime:   ['orbex', 'prime rocket'],
-  rfaone:       ['rfa one', 'rocket factory'],
-  miura:        ['miura', 'pld space'],
-  // ロシア
-  soyuz:        ['soyuz', 'ソユーズ'],
-  angara:       ['angara', 'アンガラ'],
-  proton:       ['proton', 'プロトン'],
-  // 中国国営
-  longmarch5:   ['long march 5', '長征5号', 'cz-5'],
-  longmarch7:   ['long march 7', '長征7号', 'cz-7'],
-  longmarch9:   ['long march 9', '長征9号', 'cz-9'],
-  // 中国民間
-  zhuque:       ['zhuque', '朱雀', 'landspace'],
-  lijian:       ['lijian', '力箭', 'orienspace', '引力'],
-  // 韓国
-  nuri:         ['nuri', 'ヌリ', 'kslv-ii', 'kslv2'],
-  naro:         ['naro', 'ナロ', 'kslv-i'],
-  hanbit:       ['hanbit', 'innospace'],
-  // オーストラリア
-  eris:         ['eris', 'gilmour'],
-  // インド
-  pslv:         ['pslv', 'polar satellite'],
-  lvm3:         ['lvm3', 'lvm-3', 'gslv mk3'],
-  agnibaan:     ['agnibaan', 'agnikul'],
-  vikram:       ['vikram', 'skyroot'],
-  // 探査・ミッション
-  slim:         ['slim', 'スリム'],
-  hayabusa:     ['はやぶさ', 'hayabusa', 'mmx', 'フォボス'],
-  iss:          ['国際宇宙ステーション', ' iss ', 'きぼう'],
-  astronaut:    ['宇宙飛行士', 'astronaut', '飛行士'],
-  moon:         ['月面', '月探査', 'lunar', '月着陸'],
-  mars:         ['火星', ' mars'],
-  blackhole:    ['ブラックホール', 'black hole'],
-  satellite:    ['人工衛星', '通信衛星', 'constellation'],
+  // ===== 日本ロケット =====
+  h3:             ['h3ロケット', 'h3 rocket', 'h3号機', 'h3-', 'h-3'],
+  epsilon:        ['イプシロン', 'epsilon'],
+  kairos:         ['kairos', 'カイロス', 'インターステラ', 'interstellar technologies'],
+  // ===== 米国ロケット =====
+  starship:       ['starship', 'スターシップ', 'super heavy', 'superheavy'],
+  falcon9:        ['falcon 9', 'falcon9', 'ファルコン9'],
+  falconheavy:    ['falcon heavy', 'ファルコンヘビー'],
+  newglenn:       ['new glenn', 'ニューグレン'],
+  newshepard:     ['new shepard', 'ニューシェパード'],
+  electron:       ['electron', 'エレクトロン'],
+  neutron:        ['neutron', 'ニュートロン'],
+  sls:            ['sls', 'space launch system', 'アルテミスロケット'],
+  vulcan:         ['vulcan centaur', 'ヴァルカン'],
+  atlasv:         ['atlas v', 'atlas-v', 'アトラスv'],
+  deltaiv:        ['delta iv', 'デルタiv'],
+  fireflyalpha:   ['firefly alpha', 'ファイアフライ'],
+  terranr:        ['terran r', 'relativity space'],
+  stokenova:      ['stoke space'],
+  rs1:            ['rs1', 'abl space'],
+  // ===== 欧州ロケット =====
+  ariane6:        ['ariane 6', 'ariane6', 'アリアン6'],
+  ariane5:        ['ariane 5', 'ariane5', 'アリアン5'],
+  vegac:          ['vega-c', 'vega c', 'ヴェガ'],
+  spectrum:       ['spectrum', 'isar aerospace'],
+  orbexprime:     ['orbex'],
+  rfaone:         ['rfa one', 'rocket factory augsburg'],
+  miura:          ['miura', 'pld space'],
+  // ===== ロシアロケット =====
+  soyuz:          ['soyuz rocket', 'ソユーズロケット', 'soyuz-2'],
+  angara:         ['angara', 'アンガラ'],
+  proton:         ['proton', 'プロトン'],
+  // ===== 中国ロケット =====
+  longmarch5:     ['long march 5', '長征5号', 'cz-5'],
+  longmarch7:     ['long march 7', '長征7号', 'cz-7'],
+  longmarch9:     ['long march 9', '長征9号', 'cz-9'],
+  zhuque:         ['zhuque', '朱雀', 'landspace'],
+  lijian:         ['lijian', '力箭', 'orienspace'],
+  // ===== 韓国・他ロケット =====
+  nuri:           ['nuri', 'ヌリ', 'kslv-ii'],
+  eris:           ['eris', 'gilmour'],
+  pslv:           ['pslv'],
+  lvm3:           ['lvm3', 'lvm-3', 'gslv mk3'],
+  agnibaan:       ['agnibaan', 'agnikul'],
+  // ===== 有人宇宙船 =====
+  crewdragon:     ['crew dragon', 'クルードラゴン', 'dragon spacecraft'],
+  starliner:      ['starliner', 'スターライナー', 'boeing capsule'],
+  soyuzcapsule:   ['soyuz spacecraft', 'ソユーズ宇宙船', 'soyuz ms'],
+  orion:          ['orion capsule', 'オリオン宇宙船', 'orion spacecraft'],
+  cargodrag:      ['cargo dragon', 'カーゴドラゴン'],
+  htv:            ['htv', 'こうのとり', 'htv-x'],
+  cygnus:         ['cygnus', 'シグナス'],
+  starhls:        ['starship hls', 'human landing system', 'hls'],
+  // ===== 月着陸船 =====
+  slim:           ['slim', 'スリム'],
+  hakutor:        ['hakuto', 'ハクト', 'ispace'],
+  novac:          ['nova-c', 'intuitive machines', 'im-1', 'im-2', 'im-3', 'odysseus'],
+  peregrine:      ['peregrine', 'astrobotic peregrine'],
+  blueghost:      ['blue ghost', 'ブルーゴースト'],
+  griffin:        ['astrobotic griffin', 'griffin lander', 'viper'],
+  change6:        ['嫦娥6', 'chang\'e 6', 'change-6', 'chang\'e6'],
+  change7:        ['嫦娥7', 'chang\'e 7', 'change-7', 'chang\'e7'],
+  chinalander:    ['中国有人月面', 'chinese crewed lunar lander'],
+  vikramlander:   ['vikram lander', 'chandrayaan', 'チャンドラヤーン', 'pragyan'],
+  bluemoon1:      ['blue moon mk1', 'blue moon cargo'],
+  bluemoon2:      ['blue moon mk2', 'blue moon crewed', 'blue moon hls'],
+  // ===== 宇宙ステーション =====
+  iss:            ['国際宇宙ステーション', ' iss ', 'きぼう', 'international space station'],
+  tiangong:       ['天宮', 'tiangong', 'css ', '中国宇宙ステーション'],
+  axiom:          ['axiom station', 'axiom space', 'アクシオム'],
+  orbitalreef:    ['orbital reef', 'オービタルリーフ'],
+  starlab:        ['starlab', 'スターラボ'],
+  haven1:         ['haven-1', 'haven 1', 'vast space'],
+  haven2:         ['haven-2', 'haven 2'],
+  gateway:        ['gateway', 'ゲートウェイ', '月軌道ステーション'],
+  // ===== 宇宙探査機 =====
+  hayabusa:       ['はやぶさ', 'hayabusa', 'mmx', 'フォボス'],
+  // ===== 天体・天文 =====
+  moon:           ['月面', '月探査', 'lunar', '月着陸', '月軌道'],
+  mars:           ['火星', 'mars rover', 'mars lander', '火星探査'],
+  earth:          ['地球観測', 'earth observation', '地球から見た'],
+  jupiter:        ['木星', 'jupiter'],
+  saturn:         ['土星', 'saturn'],
+  asteroid:       ['小惑星', 'asteroid', 'ryugu', 'bennu', 'イトカワ'],
+  sun:            ['太陽活動', 'solar activity', '太陽観測'],
+  solarflare:     ['太陽フレア', 'solar flare', 'コロナ質量放出', 'cme'],
+  blackhole:      ['ブラックホール', 'black hole'],
+  galaxy:         ['銀河', 'galaxy', '天の川'],
+  nebula:         ['星雲', 'nebula'],
+  gravitationalwave: ['重力波', 'gravitational wave'],
+  darkmatter:     ['暗黒物質', 'dark matter', 'ダークマター'],
+  jwst:           ['ジェームズウェッブ', 'james webb', 'jwst'],
+  hubble:         ['ハッブル', 'hubble'],
+  // ===== 宇宙飛行士・汎用 =====
+  astronaut:      ['宇宙飛行士', 'astronaut', '飛行士', '船外活動', 'eva '],
+  satellite:      ['人工衛星', '通信衛星', 'constellation'],
 }
 
 function getLibraryImage(title) {
