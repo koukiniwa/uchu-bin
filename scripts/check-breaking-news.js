@@ -96,7 +96,7 @@ function setOutput(key, value) {
 
 async function main() {
   const BREAKING_THRESHOLD = 8
-  const MAX_POSTS_PER_DAY = 2
+  const MAX_POSTS_PER_DAY = 1
 
   const todayCount = postedTodayCount()
   if (todayCount >= MAX_POSTS_PER_DAY) {
