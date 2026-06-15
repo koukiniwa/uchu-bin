@@ -442,6 +442,7 @@ const LIBRARY_TOPIC_KEYWORDS = {
   stokenova:    ['stoke', 'nova rocket'],
   rs1:          ['rs1', 'abl space'],
   // 欧州ESA
+  sls:          ['sls', 'space launch system', 'アルテミスロケット'],
   ariane6:      ['ariane 6', 'ariane6', 'アリアン6'],
   ariane5:      ['ariane 5', 'ariane5', 'アリアン5'],
   vegac:        ['vega-c', 'vega c', 'ヴェガ'],
