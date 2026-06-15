@@ -416,19 +416,71 @@ async function generateWikimediaShortQuery(title) {
 
 // ローカル写真ライブラリ（public/images/library/）からトピックに合った画像を返す
 const LIBRARY_TOPIC_KEYWORDS = {
-  h3:         ['h3ロケット', 'h3 rocket', 'h3号機', 'h3-', 'h-3'],
-  epsilon:    ['イプシロン', 'epsilon', 'kairos', 'カイロス'],
-  slim:       ['slim', 'スリム'],
-  hayabusa:   ['はやぶさ', 'hayabusa', 'mmx', 'フォボス'],
-  iss:        ['国際宇宙ステーション', ' iss ', 'きぼう'],
-  astronaut:  ['宇宙飛行士', 'astronaut', '飛行士'],
-  starship:   ['starship', 'スターシップ'],
-  falcon9:    ['falcon 9', 'falcon9', 'ファルコン9'],
-  newglenn:   ['new glenn', 'ニューグレン'],
-  moon:       ['月面', '月探査', 'lunar', '月着陸'],
-  mars:       ['火星', ' mars'],
-  blackhole:  ['ブラックホール', 'black hole'],
-  satellite:  ['人工衛星', '通信衛星', 'constellation'],
+  // 日本
+  h3:           ['h3ロケット', 'h3 rocket', 'h3号機', 'h3-', 'h-3'],
+  epsilon:      ['イプシロン', 'epsilon'],
+  kairos:       ['kairos', 'カイロス', 'インターステラ', 'interstellar technologies'],
+  // 米国SpaceX
+  starship:     ['starship', 'スターシップ', 'super heavy', 'superheavy'],
+  falcon9:      ['falcon 9', 'falcon9', 'ファルコン9'],
+  falconheavy:  ['falcon heavy', 'ファルコンヘビー'],
+  // 米国Blue Origin
+  newglenn:     ['new glenn', 'ニューグレン'],
+  newshepard:   ['new shepard', 'ニューシェパード'],
+  // 米国Rocket Lab
+  electron:     ['electron', 'エレクトロン'],
+  neutron:      ['neutron', 'ニュートロン'],
+  // 米国ULA
+  vulcan:       ['vulcan centaur', 'vulcan cer', 'ヴァルカン'],
+  atlasv:       ['atlas v', 'atlas-v', 'アトラスv'],
+  deltaiv:      ['delta iv', 'デルタiv'],
+  // 米国Firefly
+  fireflyalpha: ['firefly alpha', 'ファイアフライ'],
+  fireflymlv:   ['firefly mlv'],
+  // 米国その他
+  terranr:      ['terran r', 'relativity space'],
+  stokenova:    ['stoke', 'nova rocket'],
+  rs1:          ['rs1', 'abl space'],
+  // 欧州ESA
+  ariane6:      ['ariane 6', 'ariane6', 'アリアン6'],
+  ariane5:      ['ariane 5', 'ariane5', 'アリアン5'],
+  vegac:        ['vega-c', 'vega c', 'ヴェガ'],
+  // 欧州民間
+  spectrum:     ['spectrum', 'isar aerospace'],
+  orbexprime:   ['orbex', 'prime rocket'],
+  rfaone:       ['rfa one', 'rocket factory'],
+  miura:        ['miura', 'pld space'],
+  // ロシア
+  soyuz:        ['soyuz', 'ソユーズ'],
+  angara:       ['angara', 'アンガラ'],
+  proton:       ['proton', 'プロトン'],
+  // 中国国営
+  longmarch5:   ['long march 5', '長征5号', 'cz-5'],
+  longmarch7:   ['long march 7', '長征7号', 'cz-7'],
+  longmarch9:   ['long march 9', '長征9号', 'cz-9'],
+  // 中国民間
+  zhuque:       ['zhuque', '朱雀', 'landspace'],
+  lijian:       ['lijian', '力箭', 'orienspace', '引力'],
+  // 韓国
+  nuri:         ['nuri', 'ヌリ', 'kslv-ii', 'kslv2'],
+  naro:         ['naro', 'ナロ', 'kslv-i'],
+  hanbit:       ['hanbit', 'innospace'],
+  // オーストラリア
+  eris:         ['eris', 'gilmour'],
+  // インド
+  pslv:         ['pslv', 'polar satellite'],
+  lvm3:         ['lvm3', 'lvm-3', 'gslv mk3'],
+  agnibaan:     ['agnibaan', 'agnikul'],
+  vikram:       ['vikram', 'skyroot'],
+  // 探査・ミッション
+  slim:         ['slim', 'スリム'],
+  hayabusa:     ['はやぶさ', 'hayabusa', 'mmx', 'フォボス'],
+  iss:          ['国際宇宙ステーション', ' iss ', 'きぼう'],
+  astronaut:    ['宇宙飛行士', 'astronaut', '飛行士'],
+  moon:         ['月面', '月探査', 'lunar', '月着陸'],
+  mars:         ['火星', ' mars'],
+  blackhole:    ['ブラックホール', 'black hole'],
+  satellite:    ['人工衛星', '通信衛星', 'constellation'],
 }
 
 function getLibraryImage(title) {
