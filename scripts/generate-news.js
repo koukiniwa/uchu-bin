@@ -1226,22 +1226,23 @@ async function main() {
         }
       }
       for (const img of imgs) {
-        const strictMode = !img.fromWikimedia
-        const isRelevant = await validateImageRelevance(img.url, article.title, article.category)
+        // カバー画像は主役チェックあり（mainSubjectがあれば厳格、なければ緩い）
+        const isRelevant = await validateImageRelevance(img.url, article.title, article.category, mainSubject)
         if (isRelevant) {
           coverImage = img.url
           coverImageCredit = img.credit || ''
           console.log(`  ✓ 画像選択OK`)
-          console.log(`  📝 キャプション生成中...`)
+          console.log(`  キャプション生成中...`)
           coverImageCaption = await generateImageCaption(img.url, article.title)
           for (const bodyImg of imgs.filter(i => i.url !== img.url).slice(0, 2)) {
+            // 本文用画像は緩いチェック（主役チェックなし）
             const bodyRelevant = await validateImageRelevance(bodyImg.url, article.title, article.category)
             if (bodyRelevant) nasaBodyImages.push(bodyImg)
             else console.log(`  ✗ 本文用画像スキップ（無関係）`)
           }
           break
         }
-        console.log(`  ✗ 画像スキップ（無関係）`)
+        console.log(`  ✗ 画像スキップ（主役不一致）`)
       }
     }
   }
