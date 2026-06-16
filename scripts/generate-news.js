@@ -525,6 +525,74 @@ const LIBRARY_TOPIC_KEYWORDS = {
   satellite:      ['人工衛星', '通信衛星', 'constellation'],
 }
 
+const LIBRARY_CREDIT_MAP = {
+  // 日本
+  h3:           'H3 Rocket / JAXA',
+  epsilon:      'Epsilon Rocket / JAXA',
+  kairos:       'KAIROS / Interstellar Technologies',
+  slim:         'SLIM / JAXA',
+  hakutor:      'HAKUTO-R / ispace',
+  // 米国・SpaceX
+  starship:     'Starship / SpaceX',
+  starhls:      'Starship HLS / SpaceX',
+  falcon9:      'Falcon 9 / SpaceX',
+  falconheavy:  'Falcon Heavy / SpaceX',
+  // 米国・Blue Origin
+  newglenn:     'New Glenn / Blue Origin',
+  newshepard:   'New Shepard / Blue Origin',
+  bluemoon1:    'Blue Moon Mk1 / Blue Origin',
+  bluemoon2:    'Blue Moon Mk2 / Blue Origin',
+  // 米国・その他
+  sls:          'SLS / NASA',
+  orion:        'Orion / NASA',
+  vulcan:       'Vulcan Centaur / ULA',
+  atlasv:       'Atlas V / ULA',
+  deltaiv:      'Delta IV / ULA',
+  electron:     'Electron / Rocket Lab',
+  neutron:      'Neutron / Rocket Lab',
+  fireflyalpha: 'Alpha / Firefly Aerospace',
+  blueghost:    'Blue Ghost / Firefly Aerospace',
+  terranr:      'Terran R / Relativity Space',
+  stokenova:    'Nova / Stoke Space',
+  // 月面探査
+  novac:        'Nova-C / Intuitive Machines',
+  peregrine:    'Peregrine / Astrobotic',
+  griffin:      'Griffin / Astrobotic',
+  vikramlander:'Vikram Lander / ISRO',
+  change6:      "Chang'e 6 / CNSA",
+  change7:      "Chang'e 7 / CNSA",
+  chinalander: 'Chinese Crewed Lunar Lander / CNSA',
+  luna25:       'Luna-25 / Roscosmos',
+  // 宇宙ステーション
+  iss:          'ISS / NASA・JAXA・ESA',
+  tiangong:     'Tiangong / CNSA',
+  axiom:        'Axiom Station / Axiom Space',
+  orbitalreef:  'Orbital Reef / Blue Origin',
+  starlab:      'Starlab / Voyager Space',
+  haven1:       'Haven-1 / Vast Space',
+  haven2:       'Haven-2 / Vast Space',
+  gateway:      'Gateway / NASA',
+  // 欧州
+  ariane6:      'Ariane 6 / ArianeGroup',
+  vegac:        'Vega-C / ESA',
+  spectrum:     'Spectrum / Isar Aerospace',
+  // アジア
+  nuri:         'Nuri / KARI',
+  pslv:         'PSLV / ISRO',
+  lvm3:         'LVM3 / ISRO',
+  // 天体・天文
+  jwst:         'James Webb Space Telescope / NASA',
+  hubble:       'Hubble Space Telescope / NASA',
+  moon:         'Moon',
+  mars:         'Mars',
+  earth:        'Earth',
+  jupiter:      'Jupiter',
+  saturn:       'Saturn',
+  sun:          'Sun',
+  blackhole:    'Black Hole',
+  galaxy:       'Galaxy',
+}
+
 function getLibraryImage(title) {
   const libraryDir = path.join(__dirname, '../public/images/library')
   if (!fs.existsSync(libraryDir)) return null
@@ -1181,7 +1249,9 @@ async function main() {
       const libraryImage = getLibraryImage(article.title)
       if (libraryImage) {
         coverImage = libraryImage
-        console.log(`  ✓ ライブラリ画像を使用: ${libraryImage}`)
+        const libraryKey = libraryImage.match(/\/library\/(\w+)_\d+/)?.[1]
+        coverImageCredit = LIBRARY_CREDIT_MAP[libraryKey] || mainSubject || ''
+        console.log(`  ✓ ライブラリ画像を使用: ${libraryImage} (credit: ${coverImageCredit})`)
       }
     }
 
