@@ -83,10 +83,22 @@ function parseRSS(xml, region) {
 }
 
 // 画像が記事に関連しているかHaikuで判定
-async function validateImageRelevance(imageUrl, title, category) {
+// 記事タイトルから主役の機体・ミッション名を抽出
+async function extractMainSubject(title) {
   try {
-    const client = new Anthropic()
-    // HTTP URLはbase64でダウンロードして渡す（ClaudeAPIはHTTPSのみURLサポート）
+    const res = await client.messages.create({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 20,
+      messages: [{ role: 'user', content: `宇宙ニュースのタイトルから主役の機体・ロケット・探査機・ミッション名を20文字以内で抽出してください。\n例：「H3ロケット」「Starship」「SLIM」「New Glenn」「Crew Dragon」「Ariane 6」「HAKUTO-R」\nタイトル: ${title}\n固有名詞のみ出力（説明不要）:` }]
+    })
+    return res.content[0].text.trim().slice(0, 20) || null
+  } catch { return null }
+}
+
+// 画像が記事に関連しているかHaikuで判定
+// subject指定時は厳格モード（その機体・ミッションが写っているか）
+async function validateImageRelevance(imageUrl, title, _category, subject = null) {
+  try {
     let imageSource
     if (imageUrl.startsWith('https://')) {
       imageSource = { type: 'url', url: imageUrl }
@@ -100,16 +112,15 @@ async function validateImageRelevance(imageUrl, title, category) {
       const mediaType = imageUrl.match(/\.png$/i) ? 'image/png' : 'image/jpeg'
       imageSource = { type: 'base64', media_type: mediaType, data: buffer.toString('base64') }
     }
+
+    const prompt = subject
+      ? `この画像は「${subject}」を主役とした「${title}」という記事のカバー画像として適切ですか？\n\n以下に当てはまればno：\n- ${subject}が写っていない（別のロケット・機体が主役）\n- ロゴ・バナー・グラフ・室内写真のみ\n- 一般的な宇宙写真で${subject}と無関係\n\n${subject}の機体・打ち上げ炎・着陸シーン・ミッション関連のCGや図が写っていればyes。\n「yes」か「no」だけで答えてください。`
+      : `この画像は「${title}」という記事のカバー画像として使えますか？\n\n以下に当てはまればno：\n- 施設室内・会議・訓練・ポートレート写真\n- 企業ロゴ・バナー・シール・グラフのみ\n- 記事の機体・ミッションと明らかに無関係な別の機体が主役\n\n宇宙・ロケット・天体・衛星・惑星などに関連する写真や図であればyes。\n「yes」か「no」だけで答えてください。`
+
     const response = await client.messages.create({
       model: 'claude-haiku-4-5-20251001',
       max_tokens: 10,
-      messages: [{
-        role: 'user',
-        content: [
-          { type: 'image', source: imageSource },
-          { type: 'text', text: `この画像は「${title}」という記事のカバー画像として使えますか？\n\n以下のどれかに当てはまればno：\n- 施設の室内・会議・人物の訓練・ポートレート写真（宇宙飛行士の訓練含む）で、記事が宇宙飛行士の活動を直接扱わない場合\n- 企業ロゴ・記念マーク・シール画像\n- 星野・銀河・星雲の一般天文写真で、記事が天文学・宇宙科学を専門に扱わない場合\n- 記事の企業・ミッション・機体と明らかに無関係な別の企業の機体が主役の場合\n\n上記に当てはまらず、宇宙・ロケット・天体・衛星・惑星などに関連する写真や図であればyes。\n「yes」か「no」だけで答えてください。` }
-        ]
-      }]
+      messages: [{ role: 'user', content: [{ type: 'image', source: imageSource }, { type: 'text', text: prompt }] }]
     })
     return response.content[0].text.toLowerCase().trim().startsWith('yes')
   } catch (e) {
@@ -1142,31 +1153,39 @@ async function main() {
   let coverImageCredit = ''
   const nasaBodyImages = []
   if (autoPublish) {
-    // 0. ローカルライブラリ画像を最優先で使用
-    const libraryImage = getLibraryImage(article.title)
-    if (libraryImage) {
-      coverImage = libraryImage
-    }
-
-    // 1. ライブラリになければソース記事のOG画像を取得
     const primarySourceUrl = article.source_urls?.[0]
-    if (!coverImage && primarySourceUrl) {
-      console.log(`\n🖼️  ソース記事からOG画像を取得中... (${primarySourceUrl.slice(0, 60)})`)
+
+    // 主役の機体・ミッション名を抽出（OG画像の厳格チェック用）
+    const mainSubject = await extractMainSubject(article.title)
+    if (mainSubject) console.log(`\n  主役: ${mainSubject}`)
+
+    // 0. OG画像を最優先（厳格チェック：主役の機体が写っているか）
+    if (primarySourceUrl) {
+      console.log(`\n  OG画像を取得中... (${primarySourceUrl.slice(0, 60)})`)
       const ogImage = await fetchOGImage(primarySourceUrl)
       if (ogImage) {
-        console.log(`  🔍 画像の関連性を確認中...`)
-        const isRelevant = await validateImageRelevance(ogImage, article.title, article.category)
+        console.log(`  OG画像の関連性を確認中...`)
+        const isRelevant = await validateImageRelevance(ogImage, article.title, article.category, mainSubject)
         if (isRelevant) {
           coverImage = ogImage
-          console.log(`  ✓ OG画像取得（関連性OK）: ${ogImage.slice(0, 60)}`)
-          console.log(`  📝 キャプション生成中...`)
+          console.log(`  ✓ OG画像採用`)
           coverImageCaption = await generateImageCaption(ogImage, article.title)
         } else {
-          console.log(`  ✗ OG画像が記事と無関係のためスキップ`)
+          console.log(`  ✗ OG画像スキップ（主役と不一致）`)
         }
       }
     }
-    // 2. OG画像が取得できなければWikimedia/NASAで検索
+
+    // 1. OG画像が取得できなければライブラリ
+    if (!coverImage) {
+      const libraryImage = getLibraryImage(article.title)
+      if (libraryImage) {
+        coverImage = libraryImage
+        console.log(`  ✓ ライブラリ画像を使用: ${libraryImage}`)
+      }
+    }
+
+    // 2. ライブラリになければWikimedia/NASAで検索
     if (!coverImage) {
       console.log('\n🖼️  Wikimedia/NASAで関連画像を検索中...')
       const searchQuery = await generateSearchQuery(article.title, article.category)
