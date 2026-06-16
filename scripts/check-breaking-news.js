@@ -98,6 +98,14 @@ async function main() {
   const BREAKING_THRESHOLD = 8
   const MAX_POSTS_PER_DAY = 1
 
+  // 投稿可能時間チェック（JST 7:00〜22:00のみ）
+  const jstHour = new Date(Date.now() + 9 * 60 * 60 * 1000).getUTCHours()
+  if (jstHour < 7 || jstHour >= 22) {
+    console.log(`夜間のためスキップ（現在JST ${jstHour}時）`)
+    setOutput('breaking', 'false')
+    return
+  }
+
   const todayCount = postedTodayCount()
   if (todayCount >= MAX_POSTS_PER_DAY) {
     console.log(`本日すでに${todayCount}件投稿済み。上限に達したためスキップ。`)
