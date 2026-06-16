@@ -1311,14 +1311,14 @@ async function main() {
   // 画像クレジット: NASA/Wikimediaの場合は画像固有のクレジット、OG画像の場合はソースドメイン
   // 画像が見つからない場合はロゴをフォールバックとして使用
   if (!coverImage) {
-    coverImage = '/logo.png'
+    coverImage = '/logo.jpg'
     console.log('  📎 画像未取得のためロゴを使用')
   }
 
   let imageCredit = ''
   if (coverImageCredit) {
     imageCredit = coverImageCredit
-  } else if (coverImage && coverImage !== '/logo.png' && primarySourceUrl) {
+  } else if (coverImage && coverImage !== '/logo.jpg' && primarySourceUrl) {
     try { imageCredit = new URL(primarySourceUrl).hostname.replace('www.', '') } catch {}
   }
 

@@ -3,7 +3,7 @@ title: 'NASAがロマン宇宙望遠鏡打ち上げのNASA Socialへ参加者募
 description: 'NASAが次世代宇宙望遠鏡「ナンシー・グレース・ロマン宇宙望遠鏡」の打ち上げに合わせ、デジタルクリエイターやSNSユーザーを対象としたNASA Socialへの参加者を募集した。'
 date: '2026-06-16'
 category: '宇宙科学（天文学・物理学・観測衛星・望遠鏡など）'
-image: '/logo.png'
+image: '/logo.jpg'
 ---
 
 ## NASAがロマン宇宙望遠鏡打ち上げ向けNASA Socialの参加者登録受付を開始
