@@ -39,7 +39,7 @@ async function fetchUrl(url) {
   return res.text()
 }
 
-function parseRSS(xml) {
+function parseRSS(xml, label) {
   const items = []
   const itemRegex = /<item>([\s\S]*?)<\/item>/g
   let m
@@ -50,22 +50,44 @@ function parseRSS(xml) {
     const link = get('link')
     const pubDate = get('pubDate')
     const date = pubDate ? new Date(pubDate) : new Date(0)
-    if (title && link) items.push({ title, link, date })
+    if (title && link) items.push({ title, link, date, label })
   }
   return items
+}
+
+// 同じトピックを何ソースが報じているか数える
+function countSourceCoverage(item, allItems) {
+  const words = item.title.toLowerCase()
+    .split(/[\s\-\/\|「」【】（）()]+/)
+    .filter(w => w.length > 3)
+  const coveringSources = new Set()
+  for (const other of allItems) {
+    if (other.link === item.link) continue
+    const otherWords = other.title.toLowerCase().split(/[\s\-\/\|「」【】（）()]+/)
+    const overlap = words.filter(w => otherWords.includes(w)).length
+    if (overlap >= 2) coveringSources.add(other.label)
+  }
+  return coveringSources.size
 }
 
 // Haikuで速報スコアを判定（1〜10）
 async function scoreItem(item) {
   const prompt = `以下の宇宙ニュースの「速報重要度」を1〜10で採点してください。
 
-【採点基準】
-9〜10点: Falcon 9以外のロケット打ち上げ成功・失敗、着陸成功・失敗、有人ミッション異常、史上初の出来事、H3・Starship・New Glenn等の重大イベント
-8〜9点: JAXA探査機の重大成果、日本人飛行士の搭乗・帰還、新型ロケット初飛行
-7〜8点: Falcon 9以外の定期商業打ち上げ成功（Starlink以外）、宇宙政策の大きな変化
-5〜6点: Falcon 9・Falcon Heavyの定期商業打ち上げ（Starlinkなど週複数回あるもの）
-3〜4点: 契約締結・資金調達・人事・計画発表
-1〜2点: 技術報告・審査・仕様変更・部品調達
+【最重要ルール】
+「実際に起きた完了した出来事」のみ高スコア。「予告・募集・計画・発表」は低スコア。
+
+【高スコア（7点以上）の条件 ― 必ず過去形・完了形であること】
+10点: H3・Starship・New Glenn等の打ち上げ成功または失敗、月面・火星着陸の成功または失敗、有人宇宙船の事故・緊急事態、史上初の出来事
+9点: JAXA探査機の重大成果、日本人飛行士の搭乗完了・帰還完了、新型ロケットの初飛行成功または失敗
+8点: Falcon 9以外のロケット打ち上げ成功（定期商業打ち上げ含む）
+7点: Falcon 9の打ち上げ成功（Starlink以外）、宇宙政策の重大決定
+
+【低スコア（6点以下）― 以下に該当するものは必ず低スコア】
+5〜6点: Falcon 9・Starlinkの定期打ち上げ（週複数回あるルーティン）
+3〜4点: 契約締結・資金調達・人事・スケジュール変更・打ち上げ延期
+2〜3点: イベント告知・参加者募集・NASA Social・プレスイベント・見学会
+1〜2点: 技術報告・審査通過・仕様変更・部品調達・研究発表
 
 ニュースタイトル: ${item.title}
 URL: ${item.link}
@@ -95,7 +117,7 @@ function setOutput(key, value) {
 }
 
 async function main() {
-  const BREAKING_THRESHOLD = 8
+  const BREAKING_THRESHOLD = 9
   const MAX_POSTS_PER_DAY = 1
 
   // 投稿可能時間チェック（JST 7:00〜22:00のみ）
@@ -132,7 +154,7 @@ async function main() {
   for (const { url, label } of RSS_FEEDS) {
     try {
       const xml = await fetchUrl(url)
-      const items = parseRSS(xml)
+      const items = parseRSS(xml, label)
       const fresh = items.filter(i => i.date > cutoff && !postedUrls.has(i.link))
       console.log(`  ${label}: ${fresh.length}件の新着`)
       freshItems.push(...fresh)
@@ -160,8 +182,12 @@ async function main() {
   let topScore = 0
 
   for (const item of unique) {
-    const score = await scoreItem(item)
-    console.log(`  [${score}点] ${item.title}`)
+    const baseScore = await scoreItem(item)
+    const sourceCoverage = countSourceCoverage(item, freshItems)
+    const bonus = sourceCoverage >= 2 ? 2 : sourceCoverage >= 1 ? 1 : 0
+    const score = Math.min(10, baseScore + bonus)
+    const bonusStr = bonus > 0 ? ` +${bonus}(${sourceCoverage}ソース)` : ''
+    console.log(`  [${score}点${bonusStr}] ${item.title}`)
     if (score > topScore) {
       topScore = score
       topItem = item
