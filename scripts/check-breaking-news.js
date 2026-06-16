@@ -70,24 +70,71 @@ function countSourceCoverage(item, allItems) {
   return coveringSources.size
 }
 
+// ライブラリ画像が存在するか確認
+function hasLibraryImage(title) {
+  const libraryDir = path.join(__dirname, '../public/images/library')
+  const KEYWORDS = {
+    h3: ['h3ロケット', 'h3 rocket', 'h3号機', 'h-3', 'h3-'],
+    kairos: ['kairos', 'カイロス', 'インターステラ', 'interstellar'],
+    epsilon: ['イプシロン', 'epsilon'],
+    slim: ['slim', 'スリム'],
+    hakutor: ['hakuto', 'ハクト', 'ispace'],
+    starship: ['starship', 'スターシップ'],
+    falcon9: ['falcon 9', 'falcon9', 'ファルコン9'],
+    falconheavy: ['falcon heavy', 'ファルコンヘビー'],
+    newglenn: ['new glenn', 'ニューグレン'],
+    sls: ['sls', 'space launch system'],
+    electron: ['electron', 'エレクトロン', 'rocket lab'],
+    neutron: ['neutron', 'ニュートロン'],
+    ariane6: ['ariane 6', 'ariane6', 'アリアン6'],
+    vulcan: ['vulcan', 'ヴァルカン'],
+    nuri: ['nuri', 'ヌリ', 'kslv'],
+    starlab: ['starlab', 'スターラボ'],
+    tiangong: ['天宮', 'tiangong', 'css'],
+    iss: ['国際宇宙ステーション', 'iss ', 'きぼう'],
+    moon: ['月面', '月着陸', 'lunar landing'],
+    mars: ['火星着陸', 'mars landing'],
+    jwst: ['ジェームズウェッブ', 'james webb', 'jwst'],
+    blackhole: ['ブラックホール', 'black hole'],
+  }
+  const t = title.toLowerCase()
+  try {
+    const files = fs.readdirSync(libraryDir)
+    for (const [key, words] of Object.entries(KEYWORDS)) {
+      if (words.some(w => t.includes(w.toLowerCase()))) {
+        if (files.some(f => f.startsWith(key + '_'))) return true
+      }
+    }
+  } catch {}
+  return false
+}
+
+// 日本関連ニュースか判定
+function isJapanRelated(title) {
+  const t = title.toLowerCase()
+  const keywords = ['h3', 'jaxa', 'kairos', 'カイロス', 'slim', 'スリム', 'はやぶさ', 'hayabusa',
+    'ispace', 'インターステラ', '宇宙航空', '日本', 'japan', 'japanese', 'mmx', 'hakuto',
+    'epsilon', 'イプシロン', '飛行士', '野口', '若田', '古川', '星出', '油井', '金井', '堀川']
+  return keywords.some(k => t.includes(k))
+}
+
 // Haikuで速報スコアを判定（1〜10）
 async function scoreItem(item) {
   const prompt = `以下の宇宙ニュースの「速報重要度」を1〜10で採点してください。
 
-【最重要ルール】
-「実際に起きた完了した出来事」のみ高スコア。「予告・募集・計画・発表」は低スコア。
+【最重要ルール】「実際に起きた完了した出来事」のみ高スコア。「予告・募集・計画・発表」は低スコア。
 
-【高スコア（7点以上）の条件 ― 必ず過去形・完了形であること】
-10点: H3・Starship・New Glenn等の打ち上げ成功または失敗、月面・火星着陸の成功または失敗、有人宇宙船の事故・緊急事態、史上初の出来事
-9点: JAXA探査機の重大成果、日本人飛行士の搭乗完了・帰還完了、新型ロケットの初飛行成功または失敗
-8点: Falcon 9以外のロケット打ち上げ成功（定期商業打ち上げ含む）
-7点: Falcon 9の打ち上げ成功（Starlink以外）、宇宙政策の重大決定
+【採点基準 ― 必ず過去形・完了形の出来事であること】
+10点: H3・KAIROS・SLIM等の日本ロケット・探査機の打ち上げ/着陸成功または失敗、日本人飛行士の搭乗/帰還
+9点: Starship・New Glenn・SLS等の米国大型ロケット打ち上げ成功/失敗、月面・火星着陸成功/失敗、有人宇宙船事故
+8点: Ariane 6・Long March等の欧州・中国主要ロケット打ち上げ成功/失敗、JAXA探査機の重大成果
+7点: Electron等小型ロケット、Falcon 9の非Starlink打ち上げ成功/失敗
+5〜6点: Falcon 9 Starlinkの定期打ち上げ（週複数回あるルーティン）
+3〜4点: 契約締結・資金調達・人事・スケジュール変更・打ち上げ延期・予定発表
+2〜3点: イベント告知・参加者募集・NASA Social・プレスイベント・見学会・広報活動
+1〜2点: 技術報告・審査通過・仕様変更・部品調達
 
-【低スコア（6点以下）― 以下に該当するものは必ず低スコア】
-5〜6点: Falcon 9・Starlinkの定期打ち上げ（週複数回あるルーティン）
-3〜4点: 契約締結・資金調達・人事・スケジュール変更・打ち上げ延期
-2〜3点: イベント告知・参加者募集・NASA Social・プレスイベント・見学会
-1〜2点: 技術報告・審査通過・仕様変更・部品調達・研究発表
+【特別ルール】純粋な宇宙科学研究（ブラックホール・暗黒物質・重力波観測・理論物理・素粒子等）は最大4点
 
 ニュースタイトル: ${item.title}
 URL: ${item.link}
@@ -184,10 +231,16 @@ async function main() {
   for (const item of unique) {
     const baseScore = await scoreItem(item)
     const sourceCoverage = countSourceCoverage(item, freshItems)
-    const bonus = sourceCoverage >= 2 ? 2 : sourceCoverage >= 1 ? 1 : 0
-    const score = Math.min(10, baseScore + bonus)
-    const bonusStr = bonus > 0 ? ` +${bonus}(${sourceCoverage}ソース)` : ''
-    console.log(`  [${score}点${bonusStr}] ${item.title}`)
+    const sourceBonus = sourceCoverage >= 2 ? 2 : sourceCoverage >= 1 ? 1 : 0
+    const japanBonus = isJapanRelated(item.title) ? 2 : 0
+    const imageBonus = hasLibraryImage(item.title) ? 1 : 0
+    const score = Math.min(10, baseScore + sourceBonus + japanBonus + imageBonus)
+    const details = [
+      sourceBonus > 0 ? `+${sourceBonus}ソース` : '',
+      japanBonus > 0 ? '+2日本' : '',
+      imageBonus > 0 ? '+1画像' : '',
+    ].filter(Boolean).join(' ')
+    console.log(`  [${score}点${details ? ` (${details})` : ''}] ${item.title}`)
     if (score > topScore) {
       topScore = score
       topItem = item
