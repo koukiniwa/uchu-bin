@@ -188,7 +188,7 @@ async function downloadImage(imageUrl, filename) {
 
 // ソース記事のOG画像を取得（リトライ付き）
 async function fetchOGImage(url) {
-  const USER_AGENTS = [
+  const USER_AGENTS = [近の記事を分析してみて多分内容がちょっとおかしいかも
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Safari/605.1.15',
     'Googlebot/2.1 (+http://www.google.com/bot.html)',
@@ -232,8 +232,17 @@ function extractKeywords(title) {
   return [...new Set([...en.map(w => w.toLowerCase()), ...ja])]
 }
 
-// 既存記事と新記事が重複しているか判定（キーワード2つ以上一致で重複）
-function isDuplicateArticle(newTitle, recentArticles) {
+// 既存記事と新記事が重複しているか判定
+function isDuplicateArticle(newTitle, newSourceUrls = [], recentArticles) {
+  // ① ソースURL完全一致（最も確実）
+  for (const a of recentArticles) {
+    if (a.sourceUrls && newSourceUrls.some(url => a.sourceUrls.includes(url))) {
+      const matched = newSourceUrls.find(url => a.sourceUrls.includes(url))
+      console.log(`  ⚠️  重複URL検知: ${matched}`)
+      return true
+    }
+  }
+  // ② タイトルキーワード2つ以上一致
   const newKws = extractKeywords(newTitle)
   for (const a of recentArticles) {
     const existKws = extractKeywords(a.title)
@@ -246,8 +255,8 @@ function isDuplicateArticle(newTitle, recentArticles) {
   return false
 }
 
-// 直近N日の記事タイトルとカテゴリを取得（重複防止用）
-function getRecentArticles(days = 14) {
+// 直近N日の記事タイトル・カテゴリ・ソースURLを取得（重複防止用）
+function getRecentArticles(days = 30) {
   const postsDir = path.join(__dirname, '..', 'posts')
   const cutoff = new Date(Date.now() - days * 24 * 60 * 60 * 1000)
   const articles = []
@@ -259,9 +268,12 @@ function getRecentArticles(days = 14) {
       if (dateMatch && new Date(dateMatch[1]) >= cutoff) {
         const titleMatch = content.match(/^title:\s*['"]?(.+?)['"]?\s*$/m)
         const catMatch = content.match(/^category:\s*['"]?(.+?)['"]?\s*$/m)
+        // 参考記事セクションからソースURLを収集
+        const sourceUrls = [...content.matchAll(/^- (https?:\/\/.+)$/gm)].map(m => m[1].trim())
         if (titleMatch) articles.push({
           title: titleMatch[1],
-          category: catMatch ? catMatch[1] : ''
+          category: catMatch ? catMatch[1] : '',
+          sourceUrls,
         })
       }
     }
@@ -1034,6 +1046,10 @@ ${japanPriorityText}${recentText}${topicConstraint}
 - すでに直近記事で扱った話題の続報（新事実がない場合）
 - 部品調達・契約締結・技術審査・行政手続きの発表
 
+【絶対条件】
+- 報じている出来事が14日以上前に起きた場合は選ばないこと（記事が最近公開されていても、内容が古い出来事の振り返り・分析の場合はNG）
+- 今日の日付は${todayStr}。本文中に「2週間以上前の日付」が主役として登場する記事は除外すること
+
 地域バランスの目安: 日本30% / 米国40% / 中国20% / 欧州10%
 直近記事と被らない地域・テーマを選ぶこと。
 
@@ -1190,8 +1206,8 @@ async function main() {
   }
 
   console.log('\n📋 直近の記事を確認中（重複防止）...')
-  const recentArticles = getRecentArticles(14)
-  console.log(`  直近14日: ${recentArticles.length} 件`)
+  const recentArticles = getRecentArticles(30)
+  console.log(`  直近30日: ${recentArticles.length} 件`)
 
   console.log(`\n🤖 Claude APIで記事を生成中...`)
   let article
@@ -1204,7 +1220,7 @@ async function main() {
       article = await generateArticle(newsByRegion, recentArticles)
     }
     console.log(`  タイトル: ${article.title}`)
-    if (!isDuplicateArticle(article.title, recentArticles)) break
+    if (!isDuplicateArticle(article.title, article.source_urls || [], recentArticles)) break
     if (attempt < maxTries) {
       console.log(`  🔄 重複のため再生成（${attempt}/${maxTries}）...`)
     } else {
