@@ -1193,6 +1193,16 @@ async function main() {
       const removed = before - newsByRegion[region].length
       if (removed > 0) console.log(`  ✂️  JAXAフィルター: ${removed}件除外`)
     }
+    // 7日以上前のRSS記事を除外（日付不明は許容）
+    const RSS_MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000
+    const rssCutoff = new Date(Date.now() - RSS_MAX_AGE_MS)
+    const beforeDate = newsByRegion[region].length
+    newsByRegion[region] = newsByRegion[region].filter(item =>
+      item.date.getTime() === 0 || item.date >= rssCutoff
+    )
+    const removedDate = beforeDate - newsByRegion[region].length
+    if (removedDate > 0) console.log(`  📅 7日超え除外: ${removedDate}件`)
+
     // 地域ごとの上限件数に絞る（新しい順）
     newsByRegion[region] = newsByRegion[region]
       .sort((a, b) => b.date - a.date)
