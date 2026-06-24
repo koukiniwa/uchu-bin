@@ -188,7 +188,7 @@ async function downloadImage(imageUrl, filename) {
 
 // ソース記事のOG画像を取得（リトライ付き）
 async function fetchOGImage(url) {
-  const USER_AGENTS = [近の記事を分析してみて多分内容がちょっとおかしいかも
+  const USER_AGENTS = [
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Safari/605.1.15',
     'Googlebot/2.1 (+http://www.google.com/bot.html)',
