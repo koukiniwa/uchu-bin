@@ -3,8 +3,8 @@ title: 'はやぶさ2が小惑星トリフネを撮影　フライバイは7月5
 description: 'JAXAの小惑星探査機「はやぶさ2」が約700万km先の小惑星トリフネを撮影。フライバイは7月5日に実施予定。'
 date: '2026-06-27'
 category: '宇宙科学（天文学・物理学・観測衛星・望遠鏡など）'
-image: '/images/library/asteroid_001.jpg'
-imageCredit: 'はやぶさ2'
+image: '/images/library/hayabusa_001.jpg'
+imageCredit: 'Hayabusa2 / JAXA'
 ---
 
 JAXA（宇宙航空研究開発機構）は2026年6月26日、小惑星探査機「はやぶさ2」が次の目標天体である小惑星「トリフネ（Torifune）」をカメラで捉えた画像を公開した。撮影時点での距離は約700万kmで、フライバイ（接近通過）の実施は2026年7月5日を予定している。同日には記者説明会も開催され、ミッションの現状が報告された。

@@ -3,7 +3,7 @@ title: 'アクセルスペース、GRUS-3衛星7機を7月7日に打ち上げ'
 description: 'アクセルスペースが次世代地球観測衛星GRUS-3の7機を2026年7月7日午後4時15分（日本時間）にFalcon 9で打ち上げると発表。'
 date: '2026-07-04'
 category: '衛星・通信'
-image: '/logo.jpg'
+image: '/images/library/satellite_001.jpg'
 ---
 
 ## GRUS-3の7機、7月7日16時15分にFalcon 9で打ち上げへ
