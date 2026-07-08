@@ -2,11 +2,12 @@
 // 使い方: ANTHROPIC_API_KEY=xxx node scripts/generate-news.js
 // 実行曜日: 月・火・木・土のみ（--forceオプションで強制実行）
 
-const Anthropic = require('@anthropic-ai/sdk')
+const fs = require('fs')
+const path = require('path')
 const { execSync } = require('child_process')
 
-// 曜日チェック（月=1, 火=2, 木=4, 土=6）
-if (!process.argv.includes('--force') && !process.argv.includes('--suggest')) {
+// 曜日チェック（月=1, 火=2, 木=4, 土=6）— 直接実行時のみ
+if (require.main === module && !process.argv.includes('--force') && !process.argv.includes('--suggest')) {
   const jstDay = new Date(Date.now() + 9 * 60 * 60 * 1000).getUTCDay()
   const allowedDays = [1, 2, 4, 6] // 月・火・木・土
   if (!allowedDays.includes(jstDay)) {
@@ -16,8 +17,8 @@ if (!process.argv.includes('--force') && !process.argv.includes('--suggest')) {
     process.exit(0)
   }
 }
-const fs = require('fs')
-const path = require('path')
+
+const Anthropic = require('@anthropic-ai/sdk')
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
@@ -114,8 +115,8 @@ async function validateImageRelevance(imageUrl, title, _category, subject = null
     }
 
     const prompt = subject
-      ? `この画像は「${subject}」を主役とした「${title}」という記事のカバー画像として適切ですか？\n\n以下に当てはまればno：\n- ${subject}が写っていない（別のロケット・機体が主役）\n- ロゴ・バナー・グラフ・室内写真のみ\n- 一般的な宇宙写真で${subject}と無関係\n\n${subject}の機体・打ち上げ炎・着陸シーン・ミッション関連のCGや図が写っていればyes。\n「yes」か「no」だけで答えてください。`
-      : `この画像は「${title}」という記事のカバー画像として使えますか？\n\n以下に当てはまればno：\n- 施設室内・会議・訓練・ポートレート写真\n- 企業ロゴ・バナー・シール・グラフのみ\n- 記事の機体・ミッションと明らかに無関係な別の機体が主役\n\n宇宙・ロケット・天体・衛星・惑星などに関連する写真や図であればyes。\n「yes」か「no」だけで答えてください。`
+      ? `この画像は「${subject}」を主役とした「${title}」という記事のカバー画像として適切ですか？\n\n以下に1つでも当てはまればno：\n- ${subject}の機体・天体・現象が写っていない（別のロケット・衛星・天体が主役の画像はno）\n- グラフ・散布図・チャート・表・数式などの科学的な図表\n- 企業ロゴ・バナー・シール・記念マーク\n- 施設室内・会議室・訓練・ポートレート写真\n- 「${subject}」と名前が違う機体が中央に大きく写っている（例：H3の記事にISS、ブラックホールの記事にロケット）\n- 不鮮明・低解像度・サムネイルサイズの画像\n\n${subject}そのもの、またはその打ち上げ・着陸・飛行・天文現象の写真・イラスト・CGのみyes。\n「yes」か「no」だけで答えてください。`
+      : `この画像は「${title}」という記事のカバー画像として使えますか？\n\n以下に1つでも当てはまればno：\n- グラフ・散布図・チャート・表・数式などの科学的な図表\n- 施設室内・会議・訓練・ポートレート写真\n- 企業ロゴ・バナー・シール・記念マーク\n- 記事の機体・ミッションと明らかに無関係な別の機体・天体が主役\n- 不鮮明・低解像度・サムネイルサイズの画像\n\n記事テーマに直接関連する宇宙・ロケット・天体・衛星の写真・イラスト・CGのみyes。汎用的な宇宙写真はno。\n「yes」か「no」だけで答えてください。`
 
     const response = await client.messages.create({
       model: 'claude-haiku-4-5-20251001',
@@ -184,6 +185,29 @@ async function downloadImage(imageUrl, filename) {
     console.error('  画像ダウンロード失敗:', e.message)
     return null
   }
+}
+
+// 外部画像をライブラリに自動保存（次回以降同トピックで再利用可能に）
+function autoSaveToLibrary(localImagePath, mainSubject) {
+  if (!mainSubject) return
+  const libraryDir = path.join(__dirname, '../public/images/library')
+  if (!fs.existsSync(libraryDir)) return
+  // mainSubjectからライブラリキーを生成（英数字のみ、小文字）
+  const key = mainSubject.toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 20)
+  if (!key || key.length < 2) return
+  // 既にこのキーのファイルが3つ以上あればスキップ
+  const existing = fs.readdirSync(libraryDir).filter(f => f.startsWith(key + '_') && /\.(jpg|jpeg|png)$/i.test(f))
+  if (existing.length >= 3) return
+  const srcPath = path.join(__dirname, '..', 'public', localImagePath)
+  if (!fs.existsSync(srcPath)) return
+  const ext = path.extname(srcPath) || '.jpg'
+  const num = String(existing.length + 1).padStart(3, '0')
+  const destFilename = `${key}_${num}${ext}`
+  const destPath = path.join(libraryDir, destFilename)
+  try {
+    fs.copyFileSync(srcPath, destPath)
+    console.log(`  📦 ライブラリに自動保存: ${destFilename}`)
+  } catch {}
 }
 
 // ソース記事のOG画像を取得（リトライ付き）
@@ -506,7 +530,7 @@ const LIBRARY_TOPIC_KEYWORDS = {
   bluemoon1:      ['blue moon mk1', 'blue moon cargo'],
   bluemoon2:      ['blue moon mk2', 'blue moon crewed', 'blue moon hls'],
   // ===== 宇宙ステーション =====
-  iss:            ['国際宇宙ステーション', ' iss ', 'きぼう', 'international space station'],
+  iss:            ['国際宇宙ステーション', 'iss ', 'iss、', 'iss滞在', 'きぼう', 'international space station'],
   tiangong:       ['天宮', 'tiangong', 'css ', '中国宇宙ステーション'],
   axiom:          ['axiom station', 'axiom space', 'アクシオム'],
   orbitalreef:    ['orbital reef', 'オービタルリーフ'],
@@ -514,8 +538,55 @@ const LIBRARY_TOPIC_KEYWORDS = {
   haven1:         ['haven-1', 'haven 1', 'vast space'],
   haven2:         ['haven-2', 'haven 2'],
   gateway:        ['gateway', 'ゲートウェイ', '月軌道ステーション'],
+  // ===== 有人宇宙船（追加）=====
+  shenzhou:       ['神舟', 'shenzhou', 'シェンジョウ'],
+  gaganyaan:      ['gaganyaan', 'ガガンヤーン'],
+  dreamchaser:    ['dream chaser', 'ドリームチェイサー', 'sierra space'],
   // ===== 宇宙探査機 =====
-  hayabusa:       ['はやぶさ', 'hayabusa', 'mmx', 'フォボス'],
+  hayabusa:       ['はやぶさ', 'hayabusa'],
+  mmx:            ['mmx', 'フォボス', 'martian moons'],
+  perseverance:   ['perseverance', 'パーサヴィアランス', 'パーシビアランス'],
+  ingenuity:      ['ingenuity', 'インジェニュイティ', '火星ヘリ'],
+  europaclipper:  ['europa clipper', 'エウロパクリッパー'],
+  bepicolumbo:    ['bepicolombo', 'ベピコロンボ', '水星探査'],
+  davinci:        ['davinci', 'ダヴィンチ', '金星探査'],
+  juno:           ['juno', 'ジュノー'],
+  psyche:         ['psyche', 'サイキ'],
+  lucy:           ['lucy ', 'ルーシー', 'トロヤ群'],
+  osirisrex:      ['osiris-rex', 'osiris-apex', 'オシリス'],
+  parkersolar:    ['parker solar', 'パーカー', 'パーカーソーラー'],
+  tianwen:        ['天問', 'tianwen'],
+  dart:           ['dart ', 'hera ', 'ヘラ探査', '小惑星衝突', 'ディモルフォス'],
+  // ===== 宇宙望遠鏡（追加）=====
+  xrism:          ['xrism', 'x線天文'],
+  euclid:         ['euclid', 'ユークリッド'],
+  roman:          ['roman space', 'ナンシーグレース', 'roman telescope'],
+  chandra:        ['chandra', 'チャンドラ'],
+  tess:           ['tess ', 'tess、', 'トランジット系外惑星'],
+  // ===== 衛星コンステレーション =====
+  starlink:       ['starlink', 'スターリンク'],
+  starlinklaunch: ['starlink打ち上げ', 'starlink投入', 'starlink deployment'],
+  starlinktrain:  ['starlink列車', 'starlink光害', '衛星列車', '光の列'],
+  amazonleo:      ['kuiper', 'カイパー', 'amazon leo', 'アマゾン衛星'],
+  oneweb:         ['oneweb', 'ワンウェブ'],
+  astspacemobile: ['ast spacemobile', 'ast space'],
+  // ===== 船外活動 =====
+  evaiss:         ['iss船外活動', 'iss eva', 'iss spacewalk'],
+  evachina:       ['中国船外活動', '天宮eva', '天宮船外'],
+  evalunar:       ['月面eva', '月面船外', 'lunar eva', '月面活動'],
+  // ===== ロゴ =====
+  logo_jaxa:      ['jaxa発表', 'jaxa予算', 'jaxa組織', 'jaxa方針'],
+  logo_nasa:      ['nasa予算', 'nasa組織', 'nasa再編', 'nasa方針', 'nasa長官'],
+  logo_esa:       ['esa予算', 'esa組織', 'esa方針'],
+  logo_cnsa:      ['cnsa発表', '中国航天', '中国宇宙政策'],
+  logo_isro:      ['isro発表', 'isro予算', 'インド宇宙機関'],
+  logo_roscosmos: ['roscosmos', 'ロスコスモス'],
+  logo_spacex:    ['spacex決算', 'spacex企業', 'spacex評価額'],
+  logo_blueorigin:['blue origin企業', 'blue origin決算'],
+  logo_artemis:   ['アルテミス計画', 'artemis program'],
+  // ===== 人物 =====
+  person_elonmusk:['イーロン・マスク', 'elon musk', 'マスク氏'],
+  person_jeffbezos:['ジェフ・ベゾス', 'jeff bezos', 'ベゾス氏'],
   // ===== 天体・天文 =====
   moon:           ['月面', '月探査', 'lunar', '月着陸', '月軌道'],
   mars:           ['火星', 'mars rover', 'mars lander', '火星探査'],
@@ -529,12 +600,16 @@ const LIBRARY_TOPIC_KEYWORDS = {
   galaxy:         ['銀河', 'galaxy', '天の川'],
   nebula:         ['星雲', 'nebula'],
   gravitationalwave: ['重力波', 'gravitational wave'],
-  darkmatter:     ['暗黒物質', 'dark matter', 'ダークマター'],
+  darkmatter:     ['暗黒物質', 'dark matter', 'ダークマター', 'ダークエネルギー'],
+  supernova:      ['超新星', 'supernova'],
+  exoplanet:      ['系外惑星', 'exoplanet', 'トランジット', 'ハビタブル'],
+  comet:          ['彗星', 'comet'],
   jwst:           ['ジェームズウェッブ', 'james webb', 'jwst'],
   hubble:         ['ハッブル', 'hubble'],
-  // ===== 宇宙飛行士・汎用 =====
-  astronaut:      ['宇宙飛行士', 'astronaut', '飛行士', '船外活動', 'eva '],
+  // ===== 汎用 =====
+  astronaut:      ['宇宙飛行士', 'astronaut', '飛行士'],
   satellite:      ['人工衛星', '通信衛星', 'constellation'],
+  spacedebris:    ['スペースデブリ', 'space debris', 'デブリ除去', '宇宙ごみ'],
 }
 
 const LIBRARY_CREDIT_MAP = {
@@ -592,9 +667,66 @@ const LIBRARY_CREDIT_MAP = {
   nuri:         'Nuri / KARI',
   pslv:         'PSLV / ISRO',
   lvm3:         'LVM3 / ISRO',
+  // ロシア
+  proton:       'Proton / Roscosmos',
+  soyuz:        'Soyuz / Roscosmos',
+  angara:       'Angara / Roscosmos',
+  // 有人宇宙船（追加）
+  shenzhou:     'Shenzhou / CNSA',
+  gaganyaan:    'Gaganyaan / ISRO',
+  dreamchaser:  'Dream Chaser / Sierra Space',
+  // 探査機
+  hayabusa:     'Hayabusa2 / JAXA',
+  mmx:          'MMX / JAXA',
+  perseverance: 'Perseverance / NASA',
+  ingenuity:    'Ingenuity / NASA',
+  europaclipper:'Europa Clipper / NASA',
+  bepicolumbo:  'BepiColombo / ESA・JAXA',
+  davinci:      'DAVINCI / NASA',
+  juno:         'Juno / NASA',
+  psyche:       'Psyche / NASA',
+  lucy:         'Lucy / NASA',
+  osirisrex:    'OSIRIS-REx / NASA',
+  parkersolar:  'Parker Solar Probe / NASA',
+  tianwen:      'Tianwen / CNSA',
+  dart:         'DART / NASA',
+  // 宇宙望遠鏡（追加）
+  xrism:        'XRISM / JAXA',
+  euclid:       'Euclid / ESA',
+  roman:        'Roman Space Telescope / NASA',
+  chandra:      'Chandra / NASA',
+  tess:         'TESS / NASA',
+  // 衛星コンステレーション
+  starlink:     'Starlink / SpaceX',
+  starlinklaunch:'Starlink / SpaceX',
+  starlinktrain:'Starlink / SpaceX',
+  amazonleo:    'Project Kuiper / Amazon',
+  oneweb:       'OneWeb',
+  astspacemobile:'AST SpaceMobile',
+  // 船外活動
+  evaiss:       'EVA / NASA',
+  evachina:     'EVA / CNSA',
+  evalunar:     'Lunar EVA / NASA',
+  // ロゴ
+  logo_jaxa:    'JAXA',
+  logo_nasa:    'NASA',
+  logo_esa:     'ESA',
+  logo_cnsa:    'CNSA',
+  logo_isro:    'ISRO',
+  logo_roscosmos:'Roscosmos',
+  logo_spacex:  'SpaceX',
+  logo_blueorigin:'Blue Origin',
+  logo_artemis: 'Artemis Program / NASA',
+  // 人物
+  person_elonmusk:'Photo',
+  person_jeffbezos:'Photo',
+  // その他
+  spacedebris:  'Space Debris',
+  deepspace:    'Deep Space',
   // 天体・天文
   jwst:         'James Webb Space Telescope / NASA',
   hubble:       'Hubble Space Telescope / NASA',
+  spacetelescope: 'Space Telescope / NASA',
   moon:         'Moon',
   mars:         'Mars',
   earth:        'Earth',
@@ -603,23 +735,65 @@ const LIBRARY_CREDIT_MAP = {
   sun:          'Sun',
   blackhole:    'Black Hole',
   galaxy:       'Galaxy',
+  nebula:       'Nebula',
+  solarflare:   'Solar Flare / NASA',
+  asteroid:     'Asteroid',
+  supernova:    'Supernova Remnant',
+  exoplanet:    'Exoplanet / NASA',
+  comet:        'Comet',
+  gravitationalwave: 'Gravitational Wave / NASA',
+  darkmatter:   'Dark Matter / NASA',
+  spaceweather: 'Space Weather / NASA',
+  // 汎用
+  astronaut:    'Astronaut / NASA',
+  satellite:    'Satellite / NASA',
+  spacecraft:   'Spacecraft / NASA',
+  rocketlaunch: 'Rocket Launch / NASA',
 }
 
-function getLibraryImage(title) {
+// カテゴリ別フォールバック画像（キーワードマッチが外れた場合の安全ネット）
+const CATEGORY_FALLBACK_TOPICS = {
+  'ロケット':       ['rocketlaunch', 'deepspace'],
+  '月探査':         ['moon', 'evalunar', 'deepspace'],
+  '火星探査':       ['mars', 'deepspace'],
+  '宇宙科学':       ['nebula', 'galaxy', 'deepspace'],
+  '有人宇宙飛行':   ['astronaut', 'evaiss', 'deepspace'],
+  '衛星・通信':     ['satellite', 'deepspace'],
+}
+
+function pickLibraryFile(libraryDir, key) {
+  const files = fs.readdirSync(libraryDir)
+    .filter(f => f.startsWith(key + '_') && /\.(jpg|jpeg|png)$/i.test(f))
+  if (files.length === 0) return null
+  return files[Math.floor(Math.random() * files.length)]
+}
+
+function getLibraryImage(title, category) {
   const libraryDir = path.join(__dirname, '../public/images/library')
   if (!fs.existsSync(libraryDir)) return null
   const titleLow = title.toLowerCase()
+
+  // 1. キーワードで特定トピックにマッチ
   for (const [key, keywords] of Object.entries(LIBRARY_TOPIC_KEYWORDS)) {
     if (keywords.some(kw => titleLow.includes(kw.toLowerCase()))) {
-      const files = fs.readdirSync(libraryDir)
-        .filter(f => f.startsWith(key + '_') && /\.(jpg|jpeg|png)$/i.test(f))
-      if (files.length > 0) {
-        const chosen = files[Math.floor(Math.random() * files.length)]
+      const chosen = pickLibraryFile(libraryDir, key)
+      if (chosen) {
         console.log(`  📚 ライブラリ画像使用: ${chosen}`)
         return `/images/library/${chosen}`
       }
     }
   }
+
+  // 2. カテゴリフォールバック（キーワードが外れても画像を返す）
+  const fallbackTopics = CATEGORY_FALLBACK_TOPICS[category] || CATEGORY_FALLBACK_TOPICS['宇宙科学']
+  for (const key of fallbackTopics) {
+    const chosen = pickLibraryFile(libraryDir, key)
+    if (chosen) {
+      console.log(`  📚 カテゴリフォールバック画像: ${chosen} (${category})`)
+      return `/images/library/${chosen}`
+    }
+  }
+
   return null
 }
 
@@ -960,32 +1134,67 @@ async function searchRelevantTweets(title, category, count = 2, sourceDate = nul
   return tweetUrls
 }
 
-// ソース記事の本文をHTMLから抽出（p要素のテキストを最大4000文字）
+// ソース記事の本文をHTMLから抽出（p/div/article要素のテキストを最大4000文字）
 async function fetchArticleBody(url) {
-  try {
-    const html = await fetchUrl(url)
-    const cleaned = html
-      .replace(/<script[\s\S]*?<\/script>/gi, '')
-      .replace(/<style[\s\S]*?<\/style>/gi, '')
-    const paragraphs = []
-    const pRegex = /<p[^>]*>([\s\S]*?)<\/p>/gi
-    let match
-    while ((match = pRegex.exec(cleaned)) !== null) {
-      const text = match[1].replace(/<[^>]+>/g, '').replace(/&\w+;|&#\d+;/g, ' ').replace(/\s+/g, ' ').trim()
-      if (text.length > 40) paragraphs.push(text)
-    }
-    const body = paragraphs.slice(0, 20).join('\n\n').slice(0, 4000)
-    return body || null
-  } catch {
-    return null
+  const USER_AGENTS_BODY = [
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+    'Googlebot/2.1 (+http://www.google.com/bot.html)',
+    'Mozilla/5.0 (compatible; news-bot/1.0)',
+  ]
+  for (const ua of USER_AGENTS_BODY) {
+    try {
+      const res = await fetch(url, {
+        redirect: 'follow',
+        headers: {
+          'User-Agent': ua,
+          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+          'Accept-Language': 'en-US,en;q=0.9,ja;q=0.8',
+        },
+        signal: AbortSignal.timeout(15000),
+      })
+      if (!res.ok) continue
+      const html = await res.text()
+      const cleaned = html
+        .replace(/<script[\s\S]*?<\/script>/gi, '')
+        .replace(/<style[\s\S]*?<\/style>/gi, '')
+        .replace(/<nav[\s\S]*?<\/nav>/gi, '')
+        .replace(/<header[\s\S]*?<\/header>/gi, '')
+        .replace(/<footer[\s\S]*?<\/footer>/gi, '')
+        .replace(/<aside[\s\S]*?<\/aside>/gi, '')
+      const paragraphs = []
+      // article/main要素内を優先抽出
+      const articleMatch = cleaned.match(/<(?:article|main)[^>]*>([\s\S]*?)<\/(?:article|main)>/i)
+      const searchTarget = articleMatch ? articleMatch[1] : cleaned
+      const pRegex = /<(?:p|div[^>]*class="[^"]*(?:content|body|text|entry|post)[^"]*")[^>]*>([\s\S]*?)<\/(?:p|div)>/gi
+      let match
+      while ((match = pRegex.exec(searchTarget)) !== null) {
+        const text = match[1].replace(/<[^>]+>/g, '').replace(/&\w+;|&#\d+;/g, ' ').replace(/\s+/g, ' ').trim()
+        if (text.length > 40) paragraphs.push(text)
+      }
+      // p要素でヒットしない場合、<p>のみで再試行
+      if (paragraphs.length === 0) {
+        const simplePRegex = /<p[^>]*>([\s\S]*?)<\/p>/gi
+        while ((match = simplePRegex.exec(cleaned)) !== null) {
+          const text = match[1].replace(/<[^>]+>/g, '').replace(/&\w+;|&#\d+;/g, ' ').replace(/\s+/g, ' ').trim()
+          if (text.length > 40) paragraphs.push(text)
+        }
+      }
+      const body = paragraphs.slice(0, 20).join('\n\n').slice(0, 4000)
+      if (body && body.length > 200) return body
+    } catch {}
   }
+  return null
 }
 
 async function generateArticle(newsByRegion, recentArticles) {
   const allItems = Object.values(newsByRegion).flat()
+  const now = new Date()
   const newsText = Object.entries(newsByRegion)
     .flatMap(([region, items]) =>
-      items.map((item) => `[${region.toUpperCase()}] ${item.title}\nURL: ${item.link}\n${item.description}`)
+      items.map((item) => {
+        const ageHours = item.date.getTime() > 0 ? Math.round((now - item.date) / (1000 * 60 * 60)) : '不明'
+        return `[${region.toUpperCase()}] ${item.title}\nURL: ${item.link}\n公開: ${ageHours}時間前\n${item.description}`
+      })
     )
     .join('\n\n')
 
@@ -1016,7 +1225,6 @@ async function generateArticle(newsByRegion, recentArticles) {
     : ''
 
   // 現在の日付をJSTで渡す
-  const now = new Date()
   const jst = new Date(now.getTime() + 9 * 60 * 60 * 1000)
   const todayStr = `${jst.getUTCFullYear()}年${jst.getUTCMonth() + 1}月${jst.getUTCDate()}日`
 
@@ -1046,9 +1254,13 @@ ${japanPriorityText}${recentText}${topicConstraint}
 - すでに直近記事で扱った話題の続報（新事実がない場合）
 - 部品調達・契約締結・技術審査・行政手続きの発表
 
+【鮮度（重要）】
+- 各ニュースの「公開: ○時間前」を確認すること
+- 24時間以内のニュースを最優先、48時間以内を優先、それ以上古いものはできるだけ避ける
+- 今日の日付は${todayStr}。報じている出来事が3日以上前に起きたものは避けること
+
 【絶対条件】
 - 報じている出来事が14日以上前に起きた場合は選ばないこと（記事が最近公開されていても、内容が古い出来事の振り返り・分析の場合はNG）
-- 今日の日付は${todayStr}。本文中に「2週間以上前の日付」が主役として登場する記事は除外すること
 
 地域バランスの目安: 日本30% / 米国40% / 中国20% / 欧州10%
 直近記事と被らない地域・テーマを選ぶこと。
@@ -1094,8 +1306,14 @@ ${newsText}
     ? `【重要】今日の日付は ${todayStr} です。このニュースのソース記事は ${sourceDateStr} に公開されました。記事内の出来事は「${sourceDateStr}、〜した」「〜が明らかになった」のようにソース記事の日付を基準に時制を書いてください。「〇〇年に予定」という記述がすでに過去であれば「当初〇〇年に予定されていた」と表現してください。`
     : `【重要】今日の日付は ${todayStr} です。ニュースソースに「〇〇年に予定」などの将来の予定が含まれていても、その日付がすでに過去であれば「当初〇〇年に予定されていた」と正確に表現してください。`
 
+  const hasFullBody = articleBody && articleBody.length > 500
   const bodySection = articleBody
     ? `\n【ソース記事の本文（事実の根拠として使用すること）】\n${articleBody}\n`
+    : ''
+
+  // ソース情報が少ない場合の追加制約
+  const infoLimitWarning = !hasFullBody
+    ? `\n【重要：ソース情報が限られています】\nソース記事の本文を取得できなかったため、タイトルと概要のみが情報源です。\n- ソースに書かれていない具体的な数値・日付・技術仕様を推測で書かないこと\n- 確認できない情報は「〜とされる」「〜と報じられている」と表記すること\n- 本文は800〜1200文字に抑えること（情報不足で水増ししない）\n`
     : ''
 
   // === STEP 3: 記事を執筆（Sonnet） ===
@@ -1110,7 +1328,7 @@ ${newsText}
 宇宙開発ニュースをわかりやすく、しかし報道として正確に伝える記事を書いてください。
 
 ${dateInstruction}
-${topicConstraint}
+${topicConstraint}${infoLimitWarning}
 以下のニュースについて日本語で記事を書いてください：
 
 【対象ニュース】
@@ -1153,7 +1371,7 @@ ${bodySection}
   "description": "記事の要約（90文字以内）",
   "category": "次の6つのうち1つだけ: ロケット / 衛星・通信 / 有人宇宙飛行 / 月探査 / 火星探査 / 宇宙科学（天文学・物理学・観測衛星・望遠鏡など）",
   "source_urls": ["メインの参考記事URL", "2つ目の参考記事URL（なければ1つでもよい）"],
-  "body": "記事本文（マークダウン形式。## 見出しを3つ、{{IMAGE_1}}と{{IMAGE_2}}を含め、1400〜1900文字）"
+  "body": "記事本文（マークダウン形式。## 見出しを3つ、{{IMAGE_1}}と{{IMAGE_2}}を含め、${hasFullBody ? '1400〜1900' : '800〜1200'}文字）"
 }`,
       },
     ],
@@ -1162,7 +1380,22 @@ ${bodySection}
   const text = message.content[0].text
   const jsonMatch = text.match(/\{[\s\S]*\}/)
   if (!jsonMatch) throw new Error('JSONが見つかりません: ' + text.slice(0, 200))
-  return JSON.parse(jsonMatch[0])
+  const parsed = JSON.parse(jsonMatch[0])
+
+  // カテゴリの正規化（許可リスト外のカテゴリを修正）
+  const VALID_CATEGORIES = ['ロケット', '衛星・通信', '有人宇宙飛行', '月探査', '火星探査', '宇宙科学']
+  if (!VALID_CATEGORIES.includes(parsed.category)) {
+    const cat = (parsed.category || '').toLowerCase()
+    if (cat.includes('宇宙科学') || cat.includes('天文')) parsed.category = '宇宙科学'
+    else if (cat.includes('通信') || cat.includes('衛星')) parsed.category = '衛星・通信'
+    else if (cat.includes('有人') || cat.includes('飛行士')) parsed.category = '有人宇宙飛行'
+    else if (cat.includes('月')) parsed.category = '月探査'
+    else if (cat.includes('火星')) parsed.category = '火星探査'
+    else parsed.category = 'ロケット'
+    console.log(`  ⚠️  カテゴリ正規化: → ${parsed.category}`)
+  }
+
+  return parsed
 }
 
 async function main() {
@@ -1193,8 +1426,8 @@ async function main() {
       const removed = before - newsByRegion[region].length
       if (removed > 0) console.log(`  ✂️  JAXAフィルター: ${removed}件除外`)
     }
-    // 7日以上前のRSS記事を除外（日付不明は許容）
-    const RSS_MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000
+    // 3日以上前のRSS記事を除外（日付不明は許容）
+    const RSS_MAX_AGE_MS = 3 * 24 * 60 * 60 * 1000
     const rssCutoff = new Date(Date.now() - RSS_MAX_AGE_MS)
     const beforeDate = newsByRegion[region].length
     newsByRegion[region] = newsByRegion[region].filter(item =>
@@ -1246,15 +1479,27 @@ async function main() {
   let coverImageCaption = ''
   let coverImageCredit = ''
   const nasaBodyImages = []
+  let mainSubject = null
   if (autoPublish) {
     const primarySourceUrl = article.source_urls?.[0]
 
-    // 主役の機体・ミッション名を抽出（OG画像の厳格チェック用）
-    const mainSubject = await extractMainSubject(article.title)
+    // 主役の機体・ミッション名を抽出（画像の厳格チェック用）
+    mainSubject = await extractMainSubject(article.title)
     if (mainSubject) console.log(`\n  主役: ${mainSubject}`)
 
-    // 0. OG画像を最優先（厳格チェック：主役の機体が写っているか）
-    if (primarySourceUrl) {
+    // 0. ライブラリ画像を最優先（手動で用意した高品質画像）
+    {
+      const libraryImage = getLibraryImage(article.title, article.category)
+      if (libraryImage) {
+        coverImage = libraryImage
+        const libraryKey = libraryImage.match(/\/library\/(\w+)_\d+/)?.[1]
+        coverImageCredit = LIBRARY_CREDIT_MAP[libraryKey] || mainSubject || ''
+        console.log(`  ✓ ライブラリ画像を使用: ${libraryImage} (credit: ${coverImageCredit})`)
+      }
+    }
+
+    // 1. ライブラリになければOG画像（厳格チェック：主役の機体が写っているか）
+    if (!coverImage && primarySourceUrl) {
       console.log(`\n  OG画像を取得中... (${primarySourceUrl.slice(0, 60)})`)
       const ogImage = await fetchOGImage(primarySourceUrl)
       if (ogImage) {
@@ -1270,18 +1515,7 @@ async function main() {
       }
     }
 
-    // 1. OG画像が取得できなければライブラリ
-    if (!coverImage) {
-      const libraryImage = getLibraryImage(article.title)
-      if (libraryImage) {
-        coverImage = libraryImage
-        const libraryKey = libraryImage.match(/\/library\/(\w+)_\d+/)?.[1]
-        coverImageCredit = LIBRARY_CREDIT_MAP[libraryKey] || mainSubject || ''
-        console.log(`  ✓ ライブラリ画像を使用: ${libraryImage} (credit: ${coverImageCredit})`)
-      }
-    }
-
-    // 2. ライブラリになければWikimedia/NASAで検索
+    // 2. OG画像もなければWikimedia/NASAで検索
     if (!coverImage) {
       console.log('\n🖼️  Wikimedia/NASAで関連画像を検索中...')
       const searchQuery = await generateSearchQuery(article.title, article.category)
@@ -1391,8 +1625,12 @@ async function main() {
   article.title = fixProperNouns(article.title)
   article.description = fixProperNouns(article.description)
 
-  // 参考記事セクションを末尾に追加
-  const sourceUrls = (article.source_urls || []).filter(u => u && u.startsWith('http'))
+  // 参考記事セクションを末尾に追加（必ずソースURLを含める）
+  let sourceUrls = (article.source_urls || []).filter(u => u && u.startsWith('http'))
+  // Claudeがsource_urlsを生成しなかった場合、元のソース記事URLを追加
+  if (sourceUrls.length === 0 && primarySourceUrl) {
+    sourceUrls = [primarySourceUrl]
+  }
   if (sourceUrls.length > 0) {
     const refLines = sourceUrls.map(u => `- ${u}`)
     body += `\n\n## 参考記事\n\n${refLines.join('\n')}`
@@ -1423,7 +1661,11 @@ async function main() {
   if (autoPublish && coverImage && coverImage.startsWith('http')) {
     console.log('\n💾 カバー画像をローカルに保存中...')
     const localPath = await downloadImage(coverImage, slug)
-    if (localPath) coverImage = localPath
+    if (localPath) {
+      coverImage = localPath
+      // 成功した外部画像をライブラリに自動保存（次回以降再利用）
+      autoSaveToLibrary(localPath, mainSubject)
+    }
   }
 
   // 本文中の外部画像をローカルに保存
@@ -1482,7 +1724,12 @@ async function main() {
   }
 }
 
-main().catch((err) => {
-  console.error('エラー:', err)
-  process.exit(1)
-})
+// 直接実行時のみmain()を呼ぶ（requireされた場合はデータのみ提供）
+if (require.main === module) {
+  main().catch((err) => {
+    console.error('エラー:', err)
+    process.exit(1)
+  })
+}
+
+module.exports = { LIBRARY_TOPIC_KEYWORDS, LIBRARY_CREDIT_MAP, CATEGORY_FALLBACK_TOPICS, getLibraryImage, pickLibraryFile }

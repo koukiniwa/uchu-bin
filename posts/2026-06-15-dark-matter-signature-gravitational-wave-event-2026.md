@@ -3,8 +3,8 @@ title: '重力波イベントに暗黒物質の痕跡か、新研究が示す手
 description: '重力波観測データから暗黒物質の痕跡を検出した可能性があるとする新研究が発表。宇宙最大の謎に迫る新たなアプローチが注目を集めている。'
 date: '2026-06-15'
 category: '宇宙科学（天文学・物理学・観測衛星・望遠鏡など）'
-image: '/images/library/blackhole_001.jpg'
-imageCredit: 'Black Hole'
+image: '/images/library/nebula_001.jpg'
+imageCredit: 'Nebula'
 ---
 
 ## 重力波の観測データに、暗黒物質の「ゆらぎ」が刻まれていた

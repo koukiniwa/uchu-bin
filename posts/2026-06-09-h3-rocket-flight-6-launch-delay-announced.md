@@ -3,7 +3,7 @@ title: 'H3ロケット6号機、打ち上げ直前に延期　固体ブースタ
 description: 'JAXAは6月8日、翌10日に予定していたH3ロケット6号機の打ち上げ延期を発表。固体ブースターを使わない「30形態」初の飛行試験が対象。'
 date: '2026-06-09'
 category: 'ロケット'
-image: '/images/2026-06-09-h3-rocket-flight-6-launch-delay-announced.jpg'
+image: '/images/library/h3_001.jpg'
 ---
 
 ## H3ロケット6号機、打ち上げ2日前に延期決定　JAXAが6月8日付で発表

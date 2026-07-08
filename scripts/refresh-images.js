@@ -7,6 +7,8 @@ const path = require('path')
 require('dotenv').config({ path: path.join(__dirname, '..', '.env.local') })
 const Anthropic = require('@anthropic-ai/sdk')
 
+const { LIBRARY_TOPIC_KEYWORDS, LIBRARY_CREDIT_MAP, CATEGORY_FALLBACK_TOPICS, getLibraryImage } = require('./generate-news')
+
 const POSTS_DIR = path.join(__dirname, '..', 'posts')
 const IMAGES_DIR = path.join(__dirname, '..', 'public', 'images')
 
@@ -355,8 +357,8 @@ async function validateImageRelevance(imageUrl, title, strictMode = true) {
     const imgData = await fetchImageAsBase64(imageUrl)
     if (!imgData) return false
     const prompt = strictMode
-      ? `この画像は記事「${title}」のカバー画像として適切ですか？\n以下の場合は「no」：企業ロゴ・記念シール・地上風景・非宇宙の人物写真・全く別のロケット/ミッション/天文現象の画像（例：スターシップ記事にFalcon 9、ブラックホール記事にロケット）。\n記事に登場する機体・企業・天文現象の画像なら「yes」。「yes」か「no」だけで答えてください。`
-      : `この画像は宇宙・天文・ロケット・衛星・宇宙飛行士・惑星・星などに関連する画像ですか？\n企業ロゴ・記念シール・地上風景のみ・非宇宙の人物写真は「no」。それ以外は「yes」。「yes」か「no」だけで答えてください。`
+      ? `この画像は記事「${title}」のカバー画像として適切ですか？\n\n以下に1つでも当てはまればno：\n- 記事のテーマと異なる機体・天体・現象が主役の画像\n- グラフ・散布図・チャート・表・数式などの科学的な図表\n- 企業ロゴ・記念シール・バナー・マーク\n- 施設室内・会議・訓練・ポートレート写真\n- 不鮮明・低解像度・サムネイルサイズの画像\n\n記事テーマに直接関連する宇宙・ロケット・天体の写真・イラスト・CGのみyes。\n「yes」か「no」だけで答えてください。`
+      : `この画像は宇宙・天文・ロケット・衛星・惑星などに関連する視覚的に魅力のある画像ですか？\n\n以下に当てはまればno：\n- グラフ・散布図・チャート・表・数式のみの図表\n- 企業ロゴ・記念シール・バナー\n- 施設室内・地上風景のみ・非宇宙の人物写真\n- 不鮮明・低解像度の画像\n\nそれ以外の宇宙関連の写真・イラスト・CGはyes。\n「yes」か「no」だけで答えてください。`
     const response = await client.messages.create({
       model: 'claude-haiku-4-5-20251001',
       max_tokens: 10,
@@ -529,6 +531,21 @@ async function main() {
     const slug = file.replace('.md', '')
 
     console.log(`\n[${i + 1}/${files.length}] ${title}`)
+
+    // ライブラリ画像を最優先チェック（generate-news.jsと同じロジック）
+    const libraryImage = getLibraryImage(title, category)
+    if (libraryImage) {
+      const libraryKey = libraryImage.match(/\/library\/(\w+)_\d+/)?.[1]
+      const credit = LIBRARY_CREDIT_MAP[libraryKey] || ''
+      let updatedContent = updateFrontmatter(content, {
+        image: libraryImage,
+        ...(credit ? { imageCredit: credit } : {}),
+      })
+      fs.writeFileSync(filePath, updatedContent, 'utf-8')
+      console.log(`  💾 ライブラリ画像で保存完了`)
+      success++
+      continue
+    }
 
     // Claudeで最適な検索クエリを生成
     const searchQuery = await generateSearchQuery(title, category)

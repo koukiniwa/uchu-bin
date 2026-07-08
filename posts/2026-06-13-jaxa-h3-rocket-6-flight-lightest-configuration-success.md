@@ -3,8 +3,7 @@ title: 'H3ロケット6号機、最軽量構成で軌道投入に成功'
 description: 'JAXAが2026年6月12日にH3ロケット6号機を打ち上げ、2段目の軌道投入を達成。最軽量構成での初飛行となった。'
 date: '2026-06-13'
 category: 'ロケット'
-image: '/images/2026-06-13-jaxa-h3-rocket-6-flight-lightest-configuration-success.jpg'
-imageCaption: '「宇宙空間で展開した太陽電池パネルを備えた人工衛星の衛星間通信アンテナが地球を背景に映る様子」'
+image: '/images/library/h3_001.jpg'
 imageCredit: 'NASA/JSC'
 ---
 
