@@ -14,6 +14,7 @@ const CATEGORY_HASHTAGS = {
   '有人宇宙飛行': '#有人宇宙飛行',
   '月探査': '#月探査',
   '火星探査': '#火星探査',
+  '宇宙科学（天文学・物理学・観測衛星・望遠鏡など）': '#宇宙科学',
 }
 
 function parseFrontmatter(content) {
@@ -111,16 +112,26 @@ async function main() {
   // カバー画像を添付
   let mediaId = null
   if (meta.image) {
-    const imageUrl = meta.image.startsWith('http') ? meta.image : `${SITE_URL}${meta.image}`
-    const tmpPath = await downloadImageToTemp(imageUrl)
-    if (tmpPath) {
+    let imagePath = null
+    // ライブラリ画像はローカルから直接読む
+    if (meta.image.startsWith('/images/library/')) {
+      const localPath = path.join(__dirname, '..', 'public', meta.image)
+      if (fs.existsSync(localPath)) imagePath = localPath
+    }
+    // それ以外はVercelからダウンロード
+    if (!imagePath) {
+      const imageUrl = meta.image.startsWith('http') ? meta.image : `${SITE_URL}${meta.image}`
+      imagePath = await downloadImageToTemp(imageUrl)
+    }
+    if (imagePath) {
       try {
-        mediaId = await client.v1.uploadMedia(tmpPath, { mimeType: 'image/jpeg' })
+        mediaId = await client.v1.uploadMedia(imagePath, { mimeType: 'image/jpeg' })
         console.log('  ✓ 画像アップロード完了')
-        fs.unlinkSync(tmpPath)
+        // ダウンロードしたtmpファイルのみ削除（ライブラリ画像は削除しない）
+        if (imagePath.includes(require('os').tmpdir())) fs.unlinkSync(imagePath)
       } catch (e) {
         console.error('  画像アップロード失敗:', e.message)
-        try { fs.unlinkSync(tmpPath) } catch {}
+        if (imagePath.includes(require('os').tmpdir())) try { fs.unlinkSync(imagePath) } catch {}
       }
     }
   }
