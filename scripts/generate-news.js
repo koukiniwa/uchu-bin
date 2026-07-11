@@ -38,18 +38,19 @@ const RSS_FEEDS_BY_REGION = {
   ],
   china: [
     { url: 'https://spacenews.com/section/china/feed/', label: '中国（SpaceNews China）' },
+    { url: 'https://spacenews.com/section/civil-space/feed/', label: '中国/各国（SpaceNews Civil）' },
   ],
   europe: [
     { url: 'https://www.esa.int/rssfeed/ESA_top_News', label: '欧州（ESA）' },
+    { url: 'https://europeanspaceflight.com/feed/', label: '欧州（European Spaceflight）' },
   ],
   global: [
     { url: 'https://spacenews.com/feed/', label: 'グローバル（SpaceNews）' },
-    { url: 'https://www.planetary.org/rss/articles', label: 'グローバル（Planetary Society）' },
   ],
 }
 
 // 地域ごとの取得件数（合計で約20件）
-const REGION_COUNTS = { japan: 8, usa: 5, china: 3, europe: 2, global: 2 }
+const REGION_COUNTS = { japan: 5, usa: 6, china: 4, europe: 3, global: 2 }
 
 // JAXAプレスリリースから除外するキーワード（部品調達・契約・行政手続き系）
 const JAXA_SKIP_KEYWORDS = [
@@ -1211,12 +1212,20 @@ async function generateArticle(newsByRegion, recentArticles) {
         (overusedCats.length > 0 ? `\n【直近で多いカテゴリ（できるだけ避けること）】${overusedCats.join('、')}\n` : '')
       : ''
 
-  // 直近14日間に日本関連記事がなければ優先指示を追加
-  const japanKeywords = ['JAXA', 'H3', 'KAIROS', 'ispace', '日本', 'Epsilon', 'イプシロン', 'SLIM', 'はやぶさ']
-  const hasJapanRecent = recentArticles.some(a => japanKeywords.some(kw => a.title.includes(kw)))
-  const japanPriorityText = !hasJapanRecent
-    ? '\n【優先指示】直近14日間に日本・JAXA関連の記事がありません。今回は[JAPAN]タグのニュースを最優先で選んでください。\n'
-    : ''
+  // 直近の地域バランスを確認
+  const japanKeywords = ['JAXA', 'H3', 'KAIROS', 'ispace', '日本', 'Epsilon', 'イプシロン', 'SLIM', 'はやぶさ', 'アクセルスペース']
+  const chinaKeywords = ['中国', '千帆', '長征', '天宮', '神舟', '天問', 'CNSA']
+  const europeKeywords = ['ESA', 'Ariane', 'JAXA' /* excluded */, 'Vega', 'ArianeGroup', 'Euclid', 'JUICE']
+  const recentJapan = recentArticles.filter(a => japanKeywords.some(kw => a.title.includes(kw))).length
+  const recentChina = recentArticles.filter(a => chinaKeywords.some(kw => a.title.includes(kw))).length
+  const recentEurope = recentArticles.filter(a => europeKeywords.filter(kw => kw !== 'JAXA').some(kw => a.title.includes(kw))).length
+  const total = recentArticles.length || 1
+  let regionPriorityText = ''
+  if (recentJapan / total > 0.4) {
+    regionPriorityText = '\n【地域バランス注意】直近で日本の記事が多すぎます。今回は海外（米国・中国・欧州）のニュースを優先してください。\n'
+  } else if (recentChina / total < 0.1 && recentEurope / total < 0.1) {
+    regionPriorityText = '\n【地域バランス注意】直近で中国・欧州の記事が少なすぎます。今回は中国または欧州のニュースを優先してください。\n'
+  }
 
   // 選択済みトピック（管理画面からの指定）
   const selectedTopic = process.env.ARTICLE_TOPIC || null
@@ -1236,23 +1245,21 @@ async function generateArticle(newsByRegion, recentArticles) {
     messages: [{
       role: 'user',
       content: `以下のニュース一覧から、記事にする1件を選んでください。
-${japanPriorityText}${recentText}${topicConstraint}
+${regionPriorityText}${recentText}${topicConstraint}
 【選題基準（重要）】
-優先度：最高（[JAPAN]タグは必ず最優先）
-- H3・イプシロン・KAIROSなど日本ロケットの打ち上げ成功・失敗
-- JAXA探査機・衛星の着陸・成果・新発見（SLIM、はやぶさ、MMX等）
-- 日本人宇宙飛行士の搭乗・帰還・宇宙での活動
-- ispace・スペースワン等の日本民間宇宙企業の重大イベント
-
 優先度：高
 - 「初めて」がつく出来事（初飛行・初着陸・初成功・初試験）
 - まだ日本語メディアでほとんど報道されていない海外の新興企業・ロケットの話題
-- 宇宙政策・予算の大きな変化・既存の常識を変える技術的発見
+- 宇宙政策・予算の大きな変化
+- 有人宇宙飛行・月探査・火星探査の進展
+- 商業宇宙ステーション・宇宙旅行・デブリ除去など宇宙産業の話題
 
 優先度：低（避ける）
 - Falcon 9・Falcon Heavyの定期的な商業打ち上げ
 - すでに直近記事で扱った話題の続報（新事実がない場合）
 - 部品調達・契約締結・技術審査・行政手続きの発表
+- 純粋な天文学の発見・観測成果（新しい銀河の発見、天体の観測データなど）。宇宙望遠鏡・観測衛星の「打ち上げ・運用開始・技術的成果」は宇宙開発なのでOK
+- 理論物理学の論文発表（暗黒物質、重力波理論など）
 
 【鮮度（重要）】
 - 各ニュースの「公開: ○時間前」を確認すること
@@ -1262,8 +1269,8 @@ ${japanPriorityText}${recentText}${topicConstraint}
 【絶対条件】
 - 報じている出来事が14日以上前に起きた場合は選ばないこと（記事が最近公開されていても、内容が古い出来事の振り返り・分析の場合はNG）
 
-地域バランスの目安: 日本30% / 米国40% / 中国20% / 欧州10%
-直近記事と被らない地域・テーマを選ぶこと。
+地域バランスの目安: 米国40% / 日本20% / 中国20% / 欧州・その他20%
+直近記事と被らない地域・テーマを選ぶこと。日本の記事ばかり続かないよう注意。
 
 ニュース一覧:
 ${newsText}
