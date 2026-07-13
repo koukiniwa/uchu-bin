@@ -193,8 +193,20 @@ function autoSaveToLibrary(localImagePath, mainSubject) {
   if (!mainSubject) return
   const libraryDir = path.join(__dirname, '../public/images/library')
   if (!fs.existsSync(libraryDir)) return
-  // mainSubjectからライブラリキーを生成（英数字のみ、小文字）
-  const key = mainSubject.toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 20)
+  // mainSubjectをLIBRARY_TOPIC_KEYWORDSから逆引きして正しいキーを取得
+  const subjectLow = mainSubject.toLowerCase()
+  let key = null
+  for (const [k, keywords] of Object.entries(LIBRARY_TOPIC_KEYWORDS)) {
+    if (k.startsWith('logo_') || k.startsWith('person_')) continue
+    if (keywords.some(kw => subjectLow.includes(kw.toLowerCase()) || kw.toLowerCase().includes(subjectLow))) {
+      key = k
+      break
+    }
+  }
+  // 逆引き失敗時は英数字のみでキー生成（フォールバック）
+  if (!key) {
+    key = subjectLow.replace(/[^a-z0-9]/g, '').slice(0, 20)
+  }
   if (!key || key.length < 2) return
   // 既にこのキーのファイルが3つ以上あればスキップ
   const existing = fs.readdirSync(libraryDir).filter(f => f.startsWith(key + '_') && /\.(jpg|jpeg|png)$/i.test(f))
@@ -565,9 +577,10 @@ const LIBRARY_TOPIC_KEYWORDS = {
   chandra:        ['chandra', 'チャンドラ'],
   tess:           ['tess ', 'tess、', 'トランジット系外惑星'],
   // ===== 衛星コンステレーション =====
+  // 注意: より具体的なキーワードを先に定義（starlinkより前にlaunch/trainを置く）
+  starlinklaunch: ['starlink打ち上げ', 'starlink投入', 'starlink deployment', 'starlink launch', 'starlink mission'],
+  starlinktrain:  ['starlink列車', 'starlink光害', '衛星列車', '光の列', 'starlink train', 'light pollution starlink'],
   starlink:       ['starlink', 'スターリンク'],
-  starlinklaunch: ['starlink打ち上げ', 'starlink投入', 'starlink deployment'],
-  starlinktrain:  ['starlink列車', 'starlink光害', '衛星列車', '光の列'],
   amazonleo:      ['kuiper', 'カイパー', 'amazon leo', 'アマゾン衛星'],
   oneweb:         ['oneweb', 'ワンウェブ'],
   astspacemobile: ['ast spacemobile', 'ast space'],
@@ -576,15 +589,8 @@ const LIBRARY_TOPIC_KEYWORDS = {
   evachina:       ['中国船外活動', '天宮eva', '天宮船外'],
   evalunar:       ['月面eva', '月面船外', 'lunar eva', '月面活動'],
   // ===== ロゴ =====
-  logo_jaxa:      ['jaxa発表', 'jaxa予算', 'jaxa組織', 'jaxa方針'],
-  logo_nasa:      ['nasa予算', 'nasa組織', 'nasa再編', 'nasa方針', 'nasa長官'],
-  logo_esa:       ['esa予算', 'esa組織', 'esa方針'],
-  logo_cnsa:      ['cnsa発表', '中国航天', '中国宇宙政策'],
-  logo_isro:      ['isro発表', 'isro予算', 'インド宇宙機関'],
-  logo_roscosmos: ['roscosmos', 'ロスコスモス'],
-  logo_spacex:    ['spacex決算', 'spacex企業', 'spacex評価額'],
-  logo_blueorigin:['blue origin企業', 'blue origin決算'],
-  logo_artemis:   ['アルテミス計画', 'artemis program'],
+  // ロゴはキーワードマッチではなく、getLibraryImage()内の組織名フォールバックで使用
+  // （具体的な機体にマッチしなかった場合にのみ組織ロゴが選ばれる）
   // ===== 人物 =====
   person_elonmusk:['イーロン・マスク', 'elon musk', 'マスク氏'],
   person_jeffbezos:['ジェフ・ベゾス', 'jeff bezos', 'ベゾス氏'],
@@ -758,8 +764,11 @@ const CATEGORY_FALLBACK_TOPICS = {
   '月探査':         ['moon', 'evalunar', 'deepspace'],
   '火星探査':       ['mars', 'deepspace'],
   '宇宙科学':       ['nebula', 'galaxy', 'deepspace'],
+  '宇宙科学（天文学・物理学・観測衛星・望遠鏡など）': ['nebula', 'galaxy', 'deepspace'],
   '有人宇宙飛行':   ['astronaut', 'evaiss', 'deepspace'],
   '衛星・通信':     ['satellite', 'deepspace'],
+  '衛星':           ['satellite', 'deepspace'],
+  '通信':           ['satellite', 'deepspace'],
 }
 
 function pickLibraryFile(libraryDir, key) {
@@ -785,7 +794,29 @@ function getLibraryImage(title, category) {
     }
   }
 
-  // 2. カテゴリフォールバック（キーワードが外れても画像を返す）
+  // 2. 組織名ロゴフォールバック（具体的な機体にマッチしなかったが組織名はある場合）
+  const ORG_LOGO_MAP = [
+    { keywords: ['jaxa', 'JAXA'], logo: 'logo_jaxa' },
+    { keywords: ['nasa', 'NASA'], logo: 'logo_nasa' },
+    { keywords: ['esa', 'ESA'], logo: 'logo_esa' },
+    { keywords: ['cnsa', 'CNSA', '中国航天'], logo: 'logo_cnsa' },
+    { keywords: ['isro', 'ISRO'], logo: 'logo_isro' },
+    { keywords: ['roscosmos', 'ロスコスモス'], logo: 'logo_roscosmos' },
+    { keywords: ['spacex', 'SpaceX', 'スペースX'], logo: 'logo_spacex' },
+    { keywords: ['blue origin', 'ブルーオリジン'], logo: 'logo_blueorigin' },
+    { keywords: ['アルテミス', 'artemis'], logo: 'logo_artemis' },
+  ]
+  for (const { keywords, logo } of ORG_LOGO_MAP) {
+    if (keywords.some(kw => title.includes(kw) || titleLow.includes(kw.toLowerCase()))) {
+      const chosen = pickLibraryFile(libraryDir, logo)
+      if (chosen) {
+        console.log(`  📚 組織ロゴフォールバック: ${chosen}`)
+        return `/images/library/${chosen}`
+      }
+    }
+  }
+
+  // 3. カテゴリフォールバック（キーワードも組織名もマッチしなかった場合）
   const fallbackTopics = CATEGORY_FALLBACK_TOPICS[category] || CATEGORY_FALLBACK_TOPICS['宇宙科学']
   for (const key of fallbackTopics) {
     const chosen = pickLibraryFile(libraryDir, key)
@@ -1391,9 +1422,10 @@ ${bodySection}
 
   // カテゴリの正規化（許可リスト外のカテゴリを修正）
   const VALID_CATEGORIES = ['ロケット', '衛星・通信', '有人宇宙飛行', '月探査', '火星探査', '宇宙科学']
+  // まず完全一致チェック、なければ部分一致で正規化
   if (!VALID_CATEGORIES.includes(parsed.category)) {
-    const cat = (parsed.category || '').toLowerCase()
-    if (cat.includes('宇宙科学') || cat.includes('天文')) parsed.category = '宇宙科学'
+    const cat = (parsed.category || '')
+    if (cat.includes('宇宙科学') || cat.includes('天文') || cat.includes('望遠鏡')) parsed.category = '宇宙科学'
     else if (cat.includes('通信') || cat.includes('衛星')) parsed.category = '衛星・通信'
     else if (cat.includes('有人') || cat.includes('飛行士')) parsed.category = '有人宇宙飛行'
     else if (cat.includes('月')) parsed.category = '月探査'
