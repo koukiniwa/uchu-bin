@@ -511,6 +511,7 @@ const LIBRARY_TOPIC_KEYWORDS = {
   // ===== 中国ロケット =====
   longmarch5:     ['long march 5', '長征5号', 'cz-5'],
   longmarch7:     ['long march 7', '長征7号', 'cz-7'],
+  longmarch8:     ['long march 8', '長征8号', 'cz-8', '千帆', 'qianfan', 'spacesail'],
   longmarch9:     ['long march 9', '長征9号', 'cz-9'],
   zhuque:         ['zhuque', '朱雀', 'landspace'],
   lijian:         ['lijian', '力箭', 'orienspace'],
@@ -559,6 +560,8 @@ const LIBRARY_TOPIC_KEYWORDS = {
   hayabusa:       ['はやぶさ', 'hayabusa'],
   mmx:            ['mmx', 'フォボス', 'martian moons'],
   perseverance:   ['perseverance', 'パーサヴィアランス', 'パーシビアランス'],
+  curiosity:      ['curiosity', 'キュリオシティ'],
+  zhurong:        ['祝融', 'zhurong'],
   ingenuity:      ['ingenuity', 'インジェニュイティ', '火星ヘリ'],
   europaclipper:  ['europa clipper', 'エウロパクリッパー'],
   bepicolumbo:    ['bepicolombo', 'ベピコロンボ', '水星探査'],
@@ -573,7 +576,8 @@ const LIBRARY_TOPIC_KEYWORDS = {
   // ===== 宇宙望遠鏡（追加）=====
   xrism:          ['xrism', 'x線天文'],
   euclid:         ['euclid', 'ユークリッド'],
-  roman:          ['roman space', 'ナンシーグレース', 'roman telescope'],
+  swiftsat:       ['swift天文', 'swift observatory', 'neil gehrels', 'スウィフト天文', 'スウィフト衛星'],
+  roman:          ['roman space', 'ナンシーグレース', 'roman telescope', 'ローマン宇宙望遠鏡', 'ローマン望遠鏡'],
   chandra:        ['chandra', 'チャンドラ'],
   tess:           ['tess ', 'tess、', 'トランジット系外惑星'],
   // ===== 衛星コンステレーション =====
@@ -584,6 +588,9 @@ const LIBRARY_TOPIC_KEYWORDS = {
   amazonleo:      ['kuiper', 'カイパー', 'amazon leo', 'アマゾン衛星'],
   oneweb:         ['oneweb', 'ワンウェブ'],
   astspacemobile: ['ast spacemobile', 'ast space'],
+  // ===== 企業（ロゴではなく画像） =====
+  axelspace:      ['アクセルスペース', 'axelspace', 'grus'],
+  astroscale:     ['astroscale', 'アストロスケール', 'adras'],
   // ===== 船外活動 =====
   evaiss:         ['iss船外活動', 'iss eva', 'iss spacewalk'],
   evachina:       ['中国船外活動', '天宮eva', '天宮船外'],
@@ -617,6 +624,9 @@ const LIBRARY_TOPIC_KEYWORDS = {
   astronaut:      ['宇宙飛行士', 'astronaut', '飛行士'],
   satellite:      ['人工衛星', '通信衛星', 'constellation'],
   spacedebris:    ['スペースデブリ', 'space debris', 'デブリ除去', '宇宙ごみ'],
+  supercamiokande:['スーパーカミオカンデ', 'super-kamiokande', 'ニュートリノ', 'neutrino'],
+  michibiki:      ['みちびき', 'michibiki', 'qzss', '準天頂'],
+  raptor:         ['raptor', 'ラプター'],
 }
 
 const LIBRARY_CREDIT_MAP = {
@@ -710,6 +720,8 @@ const LIBRARY_CREDIT_MAP = {
   amazonleo:    'Project Kuiper / Amazon',
   oneweb:       'OneWeb',
   astspacemobile:'AST SpaceMobile',
+  axelspace:     'Axelspace',
+  astroscale:    'Astroscale',
   // 船外活動
   evaiss:       'EVA / NASA',
   evachina:     'EVA / CNSA',
@@ -755,6 +767,14 @@ const LIBRARY_CREDIT_MAP = {
   astronaut:    'Astronaut / NASA',
   satellite:    'Satellite / NASA',
   spacecraft:   'Spacecraft / NASA',
+  // 新規追加
+  longmarch8:   'Long March 8 / CNSA',
+  curiosity:    'Curiosity / NASA',
+  zhurong:      'Zhurong / CNSA',
+  swiftsat:     'Swift Observatory / NASA',
+  michibiki:    'QZSS / JAXA',
+  raptor:       'Raptor Engine / SpaceX',
+  supercamiokande: 'Super-Kamiokande / University of Tokyo',
   rocketlaunch: 'Rocket Launch / NASA',
 }
 
@@ -805,6 +825,7 @@ function getLibraryImage(title, category) {
     { keywords: ['spacex', 'SpaceX', 'スペースX'], logo: 'logo_spacex' },
     { keywords: ['blue origin', 'ブルーオリジン'], logo: 'logo_blueorigin' },
     { keywords: ['アルテミス', 'artemis'], logo: 'logo_artemis' },
+    { keywords: ['rocket lab', 'ロケットラボ'], logo: 'logo_rocketlab' },
   ]
   for (const { keywords, logo } of ORG_LOGO_MAP) {
     if (keywords.some(kw => title.includes(kw) || titleLow.includes(kw.toLowerCase()))) {
