@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-18T06:58:33.705Z",
+  "updated": "2026-07-18T07:18:52.448Z",
   "launches": [
     {
       "id": "10fa7952-f00b-4292-80a2-4207e208844e",
@@ -10,7 +10,7 @@
       "time": "06:35",
       "tentative": false,
       "provider": "Skyroot Aerospace",
-      "country": "",
+      "country": "IN",
       "pad": "Satish Dhawan Space Centre, India",
       "status": "Deployed",
       "image": {
@@ -38,7 +38,7 @@
       "time": "02:50",
       "tentative": false,
       "provider": "Orienspace Technology",
-      "country": "",
+      "country": "CN",
       "pad": "Haiyang Oriental Spaceport",
       "status": "Go",
       "image": {
@@ -66,7 +66,7 @@
       "time": "12:00",
       "tentative": false,
       "provider": "China Aerospace Science and Technology Corporation",
-      "country": "",
+      "country": "CN",
       "pad": "Xichang Satellite Launch Center, People's Republic of China",
       "status": "Go",
       "image": {
@@ -94,7 +94,7 @@
       "time": "02:00",
       "tentative": false,
       "provider": "CAS Space",
-      "country": "",
+      "country": "CN",
       "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
       "status": "TBC",
       "image": {
@@ -122,7 +122,7 @@
       "time": "11:00",
       "tentative": false,
       "provider": "China Aerospace Science and Technology Corporation",
-      "country": "",
+      "country": "CN",
       "pad": "Wenchang Space Launch Site, People's Republic of China",
       "status": "TBC",
       "image": {
@@ -150,7 +150,7 @@
       "time": null,
       "tentative": true,
       "provider": "Indian Space Research Organization",
-      "country": "",
+      "country": "IN",
       "pad": "Satish Dhawan Space Centre, India",
       "status": "TBD",
       "image": {
@@ -178,7 +178,7 @@
       "time": null,
       "tentative": true,
       "provider": "China Aerospace Science and Technology Corporation",
-      "country": "",
+      "country": "CN",
       "pad": "Wenchang Space Launch Site, People's Republic of China",
       "status": "TBD",
       "image": {
@@ -206,7 +206,7 @@
       "time": null,
       "tentative": true,
       "provider": "Agency for Defense Development",
-      "country": "",
+      "country": "KR",
       "pad": "Sea Launch",
       "status": "TBD",
       "image": {
@@ -234,7 +234,7 @@
       "time": null,
       "tentative": true,
       "provider": "Russian Federal Space Agency (ROSCOSMOS)",
-      "country": "",
+      "country": "RU",
       "pad": "Plesetsk Cosmodrome, Russian Federation",
       "status": "TBD",
       "image": {
@@ -262,7 +262,7 @@
       "time": null,
       "tentative": true,
       "provider": "Russian Space Forces",
-      "country": "",
+      "country": "RU",
       "pad": "Plesetsk Cosmodrome, Russian Federation",
       "status": "TBD",
       "image": {
@@ -290,7 +290,7 @@
       "time": null,
       "tentative": true,
       "provider": "Isar Aerospace",
-      "country": "",
+      "country": "DE",
       "pad": "Andøya Spaceport",
       "status": "TBD",
       "image": {
@@ -318,7 +318,7 @@
       "time": "19:30",
       "tentative": false,
       "provider": "Mitsubishi Heavy Industries",
-      "country": "",
+      "country": "JP",
       "pad": "Tanegashima Space Center, Japan",
       "status": "Go",
       "image": {
@@ -346,7 +346,7 @@
       "time": null,
       "tentative": true,
       "provider": "Arianespace",
-      "country": "",
+      "country": "FR",
       "pad": "Guiana Space Centre, French Guiana",
       "status": "TBD",
       "image": {
@@ -374,7 +374,7 @@
       "time": null,
       "tentative": true,
       "provider": "China Aerospace Science and Technology Corporation",
-      "country": "",
+      "country": "CN",
       "pad": "Wenchang Space Launch Site, People's Republic of China",
       "status": "TBD",
       "image": {
@@ -402,7 +402,7 @@
       "time": null,
       "tentative": true,
       "provider": "Rocket Factory Augsburg",
-      "country": "",
+      "country": "DE",
       "pad": "SaxaVord Spaceport",
       "status": "TBD",
       "image": {

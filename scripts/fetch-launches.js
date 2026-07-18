@@ -17,6 +17,33 @@ function isNotable(launch) {
   return true
 }
 
+// 国コードを取得（APIのネスト構造を複数試す＋プロバイダー名フォールバック）
+function getCountryCode(launch) {
+  // pad.agencies[0].country[0].alpha_2_code が最も正確
+  const padAgency = launch.pad?.agencies?.[0]?.country?.[0]?.alpha_2_code
+  if (padAgency) return padAgency
+  // プロバイダー名から推定
+  const provider = (launch.launch_service_provider?.name || '').toLowerCase()
+  if (provider.includes('china') || provider.includes('cas space') || provider.includes('galactic energy') || provider.includes('landspace') || provider.includes('orienspace') || provider.includes('ispace china')) return 'CN'
+  if (provider.includes('isro') || provider.includes('indian') || provider.includes('skyroot') || provider.includes('agnikul')) return 'IN'
+  if (provider.includes('nasa') || provider.includes('ula') || provider.includes('abl space') || provider.includes('firefly') || provider.includes('relativity') || provider.includes('blue origin') || provider.includes('virgin')) return 'US'
+  if (provider.includes('jaxa') || provider.includes('mitsubishi')) return 'JP'
+  if (provider.includes('roscosmos') || provider.includes('russian')) return 'RU'
+  if (provider.includes('arianespace') || provider.includes('esa')) return 'EU'
+  if (provider.includes('isar') || provider.includes('rocket factory')) return 'DE'
+  if (provider.includes('korea') || provider.includes('innospace')) return 'KR'
+  if (provider.includes('defense development')) return 'KR'
+  // ロケット名から推定
+  const rocket = (launch.rocket?.configuration?.name || '').toLowerCase()
+  if (rocket.includes('long march') || rocket.includes('kuaizhou') || rocket.includes('zhuque') || rocket.includes('gravity') || rocket.includes('kinetica') || rocket.includes('ceres') || rocket.includes('lijian')) return 'CN'
+  if (rocket.includes('soyuz') || rocket.includes('angara') || rocket.includes('proton')) return 'RU'
+  if (rocket.includes('h3') || rocket.includes('h-ii') || rocket.includes('epsilon') || rocket.includes('kairos')) return 'JP'
+  if (rocket.includes('gslv') || rocket.includes('pslv') || rocket.includes('lvm') || rocket.includes('sslv') || rocket.includes('vikram')) return 'IN'
+  if (rocket.includes('ariane') || rocket.includes('vega')) return 'EU'
+  if (rocket.includes('nuri')) return 'KR'
+  return ''
+}
+
 // ロケット名を簡潔にする
 function shortRocketName(name) {
   return name
@@ -54,7 +81,7 @@ async function main() {
         time: isTentative ? null : timeStr,
         tentative: isTentative || false,
         provider: l.launch_service_provider?.name || '',
-        country: l.pad?.country_code || l.pad?.location?.country_code || '',
+        country: getCountryCode(l),
         pad: l.pad?.location?.name || '',
         status: l.status?.abbrev || '',
         image: l.image || l.rocket?.configuration?.image_url || null,
