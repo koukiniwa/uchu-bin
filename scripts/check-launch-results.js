@@ -99,11 +99,7 @@ async function main() {
     return
   }
 
-  // 当日既に記事があれば見送り（通常の記事公開と衝突しないように）
-  if (hasArticleToday()) {
-    console.log('\n本日は既に記事が公開されているため、打ち上げ記事の生成をスキップします')
-    return
-  }
+  // 打ち上げ記事は通常記事と独立して公開する（衝突チェックしない）
 
   // 記事生成の情報を GITHUB_OUTPUT に出力
   const status = target.status?.name || 'Unknown'
