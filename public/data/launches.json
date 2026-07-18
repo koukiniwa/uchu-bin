@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-18T13:04:26.033Z",
+  "updated": "2026-07-18T14:09:05.957Z",
   "launches": [
     {
       "id": "ac897b9f-44d2-4ff4-8416-1a0a076e98a2",
@@ -100,20 +100,6 @@
       "status": "TBD"
     },
     {
-      "id": "17d0ec68-f466-4916-9dc5-16123eda6484",
-      "name": "GSLV Mk II | GISAT-1A (EOS-05)",
-      "rocket": "GSLV Mk II",
-      "mission": "GISAT-1A (EOS-05)",
-      "date": "2026-07-31",
-      "month": 7,
-      "time": null,
-      "tentative": true,
-      "provider": "Indian Space Research Organization",
-      "country": "IN",
-      "pad": "Satish Dhawan Space Centre, India",
-      "status": "TBD"
-    },
-    {
       "id": "beac6ac1-97dd-4eb2-912c-8b4d4d15cd4e",
       "name": "Long March 7A | Unknown Payload",
       "rocket": "Long March 7A",
@@ -210,6 +196,20 @@
       "country": "FR",
       "pad": "Guiana Space Centre, French Guiana",
       "status": "TBD"
+    },
+    {
+      "id": "521f3a1c-f977-4306-9b7f-495858719adf",
+      "name": "Falcon Heavy | Nancy Grace Roman Space Telescope",
+      "rocket": "Falcon Heavy",
+      "mission": "Nancy Grace Roman Space Telescope",
+      "date": "2026-08-30",
+      "month": 8,
+      "time": "11:20",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Kennedy Space Center, FL, USA",
+      "status": "Go"
     }
   ],
   "recent": [
