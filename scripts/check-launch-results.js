@@ -119,12 +119,18 @@ async function main() {
   if (missionLow.includes('maiden') || missionLow.includes('demo flight') || missionLow.includes('first flight') || missionLow.includes('初飛行') || missionLow.includes('inaugural')) {
     scale = 'large'
   }
+  // ペイロード不明は最小扱い（初飛行・失敗を除く）
+  const isUnknownPayload = !mission || mission === 'Unknown Payload' || mission.toLowerCase().includes('unknown')
+  if (isUnknownPayload && scale !== 'large' && scale !== 'failure') {
+    scale = 'unknown_payload'
+  }
 
   const SCALE_CONFIG = {
     large:   { words: '3000〜4000', label: '大型/初飛行' },
     medium:  { words: '2000〜2500', label: '通常' },
     small:   { words: '1500〜2000', label: '小型' },
     failure: { words: '2500〜3500', label: '失敗/異常' },
+    unknown_payload: { words: '800〜1200', label: 'ペイロード不明' },
   }
   const config = SCALE_CONFIG[scale]
   console.log(`  規模判定: ${config.label}（${config.words}文字）`)
@@ -147,7 +153,13 @@ async function main() {
 - ペイロード（衛星等）の目的を説明する
 - 今後の予定や影響にも触れる
 - 事実に基づき、推測や憶測は避ける
-- ${config.words}文字程度`
+- ${config.words}文字程度
+${isUnknownPayload ? `
+【ペイロード不明時の注意】
+- ペイロードが非公開・不明であることを明記する
+- 不明なペイロードについて推測や捏造は絶対にしない
+- ロケットの基本情報と打ち上げ結果を簡潔にまとめる
+- 短い記事で構わない。水増ししない` : ''}`
 
   console.log(`\n記事生成対象: ${rocket} | ${mission} | ${status}`)
 
