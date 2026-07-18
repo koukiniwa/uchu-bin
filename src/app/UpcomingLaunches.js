@@ -2,14 +2,20 @@
 
 import { useState, useEffect } from 'react'
 
-function countryFlag(code) {
-  if (!code || code.length < 2) return ''
+const COUNTRY_NAMES = {
+  US: 'USA', CN: '中国', IN: 'インド', JP: '日本', RU: 'ロシア',
+  FR: '欧州', EU: '欧州', DE: 'ドイツ', KR: '韓国', NZ: 'NZ',
+  GB: 'UK', BR: 'ブラジル', IL: 'イスラエル', IR: 'イラン', AU: '豪州',
+}
+
+function countryName(code) {
+  if (!code) return ''
   const iso2 = code.length === 2 ? code : {
     USA: 'US', CHN: 'CN', IND: 'IN', JPN: 'JP', RUS: 'RU', FRA: 'FR',
     GUF: 'FR', KOR: 'KR', NZL: 'NZ', GBR: 'GB', DEU: 'DE', BRA: 'BR',
     IRN: 'IR', ISR: 'IL', KAZ: 'KZ', AUS: 'AU', MHL: 'MH',
   }[code] || code.slice(0, 2)
-  return String.fromCodePoint(...[...iso2.toUpperCase()].map(c => 0x1F1E6 + c.charCodeAt(0) - 65))
+  return COUNTRY_NAMES[iso2] || iso2
 }
 
 function formatDate(dateStr, timeStr, tentative) {
@@ -17,27 +23,22 @@ function formatDate(dateStr, timeStr, tentative) {
   const [, m, d] = dateStr.split('-')
   const month = parseInt(m)
   const day = parseInt(d)
-  if (tentative) return { date: `${month}/${day}`, time: 'TBD' }
+  if (tentative) return { date: `${month}/${day}`, time: '' }
   if (timeStr) {
     const [h, min] = timeStr.split(':')
     let jstH = parseInt(h) + 9
     let jstDay = day
     if (jstH >= 24) { jstH -= 24; jstDay += 1 }
-    return { date: `${month}/${jstDay}`, time: `${String(jstH).padStart(2, '0')}:${min} JST` }
+    return { date: `${month}/${jstDay}`, time: `${String(jstH).padStart(2, '0')}:${min}` }
   }
   return { date: `${month}/${day}`, time: '' }
 }
 
-// 日付が近いものにラベルをつける
-function getUrgencyLabel(dateStr) {
+function getDaysUntil(dateStr) {
   if (!dateStr) return null
   const now = new Date()
   const launch = new Date(dateStr + 'T00:00:00Z')
-  const diffDays = Math.floor((launch - now) / (1000 * 60 * 60 * 24))
-  if (diffDays <= 0) return 'TODAY'
-  if (diffDays <= 1) return 'TOMORROW'
-  if (diffDays <= 3) return 'SOON'
-  return null
+  return Math.floor((launch - now) / (1000 * 60 * 60 * 24))
 }
 
 export default function UpcomingLaunches() {
@@ -61,117 +62,88 @@ export default function UpcomingLaunches() {
       border: '1px solid #e0e0e0',
       background: '#fff',
     }}>
-      {/* ヘッダー */}
       <div style={{
-        background: 'linear-gradient(135deg, #0f1629 0%, #1a2744 100%)',
-        color: '#fff',
-        padding: '12px 14px 10px',
+        background: '#0f1629',
+        padding: '11px 14px',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'baseline',
       }}>
-        <div style={{
-          fontSize: '14px',
-          fontWeight: 800,
-          letterSpacing: '0.06em',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '6px',
+        <span style={{
+          fontSize: '12px',
+          fontWeight: 700,
+          color: '#fff',
+          letterSpacing: '0.1em',
         }}>
-          <span style={{ fontSize: '16px' }}>🚀</span>
-          打ち上げ予定
-        </div>
-        <div style={{
-          fontSize: '9px',
-          color: 'rgba(255,255,255,0.45)',
-          marginTop: '4px',
-          letterSpacing: '0.04em',
-        }}>
-          Starlink定期便を除く全世界の打ち上げ
-        </div>
+          LAUNCH SCHEDULE
+        </span>
+        <span style={{ fontSize: '9px', color: 'rgba(255,255,255,0.35)', letterSpacing: '0.04em' }}>
+          Starlink除く
+        </span>
       </div>
 
-      {/* 打ち上げリスト */}
-      <div>
-        {visible.map((l, i) => {
-          const { date, time } = formatDate(l.date, l.time, l.tentative)
-          const urgency = getUrgencyLabel(l.date)
-          const flag = countryFlag(l.country)
-          const missionText = l.mission && l.mission !== 'Unknown Payload' ? l.mission : l.provider
+      <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '11.5px' }}>
+        <thead>
+          <tr style={{ borderBottom: '2px solid #1a2744' }}>
+            <th style={{ padding: '6px 8px 6px 14px', textAlign: 'left', fontSize: '9px', fontWeight: 700, color: '#999', letterSpacing: '0.08em' }}>日時</th>
+            <th style={{ padding: '6px 8px', textAlign: 'left', fontSize: '9px', fontWeight: 700, color: '#999', letterSpacing: '0.08em' }}>ロケット</th>
+            <th style={{ padding: '6px 14px 6px 8px', textAlign: 'right', fontSize: '9px', fontWeight: 700, color: '#999', letterSpacing: '0.08em' }}>国</th>
+          </tr>
+        </thead>
+        <tbody>
+          {visible.map((l, i) => {
+            const { date, time } = formatDate(l.date, l.time, l.tentative)
+            const days = getDaysUntil(l.date)
+            const isImminent = days !== null && days <= 3
+            const country = countryName(l.country)
+            const missionText = l.mission && l.mission !== 'Unknown Payload' ? l.mission : ''
 
-          return (
-            <div key={l.id || i} style={{
-              padding: '10px 14px',
-              borderBottom: i < visible.length - 1 ? '1px solid #f0f0f0' : 'none',
-              display: 'flex',
-              gap: '10px',
-              alignItems: 'flex-start',
-            }}>
-              {/* 日付カラム */}
-              <div style={{
-                minWidth: '44px',
-                textAlign: 'center',
-                flexShrink: 0,
+            return (
+              <tr key={l.id || i} style={{
+                borderBottom: i < visible.length - 1 ? '1px solid #f0f0f0' : 'none',
+                background: isImminent ? '#fafafa' : 'transparent',
               }}>
-                <div style={{
-                  fontSize: '14px',
-                  fontWeight: 800,
-                  color: urgency ? '#d32f2f' : '#1a2744',
-                  lineHeight: 1.2,
+                <td style={{ padding: '8px 8px 8px 14px', verticalAlign: 'top', whiteSpace: 'nowrap' }}>
+                  <div style={{ fontWeight: 700, color: isImminent ? '#c62828' : '#1a2744', fontSize: '12px' }}>
+                    {date}
+                  </div>
+                  {time && (
+                    <div style={{ fontSize: '9px', color: '#999', marginTop: '1px' }}>{time}</div>
+                  )}
+                </td>
+                <td style={{ padding: '8px 8px', verticalAlign: 'top' }}>
+                  <div style={{ fontWeight: 700, color: '#1a2744', fontSize: '12px', lineHeight: 1.3 }}>
+                    {l.rocket}
+                  </div>
+                  {missionText && (
+                    <div style={{
+                      fontSize: '10px',
+                      color: '#999',
+                      marginTop: '1px',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap',
+                      maxWidth: '120px',
+                    }}>
+                      {missionText}
+                    </div>
+                  )}
+                </td>
+                <td style={{
+                  padding: '8px 14px 8px 8px',
+                  verticalAlign: 'top',
+                  textAlign: 'right',
+                  fontSize: '10px',
+                  color: '#888',
+                  whiteSpace: 'nowrap',
                 }}>
-                  {date}
-                </div>
-                {time && (
-                  <div style={{
-                    fontSize: '9px',
-                    color: l.tentative ? '#bbb' : '#666',
-                    marginTop: '2px',
-                  }}>
-                    {time}
-                  </div>
-                )}
-                {urgency && (
-                  <div style={{
-                    fontSize: '8px',
-                    fontWeight: 700,
-                    color: '#fff',
-                    background: urgency === 'TODAY' ? '#d32f2f' : urgency === 'TOMORROW' ? '#e65100' : '#f57c00',
-                    borderRadius: '3px',
-                    padding: '1px 4px',
-                    marginTop: '3px',
-                    display: 'inline-block',
-                  }}>
-                    {urgency}
-                  </div>
-                )}
-              </div>
-
-              {/* 詳細カラム */}
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{
-                  fontSize: '12.5px',
-                  fontWeight: 700,
-                  color: '#1a2744',
-                  lineHeight: 1.3,
-                }}>
-                  {flag && <span style={{ marginRight: '4px' }}>{flag}</span>}
-                  {l.rocket}
-                </div>
-                {missionText && (
-                  <div style={{
-                    fontSize: '11px',
-                    color: '#777',
-                    marginTop: '2px',
-                    lineHeight: 1.3,
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                    whiteSpace: 'nowrap',
-                  }}>
-                    {missionText}
-                  </div>
-                )}
-              </div>
-            </div>
-          )
-        })}
-      </div>
+                  {country}
+                </td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
     </div>
   )
 }
