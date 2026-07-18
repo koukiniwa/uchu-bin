@@ -1260,7 +1260,7 @@ async function generateArticle(newsByRegion, recentArticles) {
 
   const recentText =
     recentArticles.length > 0
-      ? `\n【直近14日間に生成済みの記事（テーマとカテゴリが被らないようにすること）】\n${recentArticles.map((a) => `- [${a.category}] ${a.title}`).join('\n')}\n` +
+      ? `\n【直近14日間に生成済みの記事 - 以下と同じ主題の記事は絶対に選ばないこと】\n${recentArticles.map((a) => `- [${a.category}] ${a.title}`).join('\n')}\n` +
         (overusedCats.length > 0 ? `\n【直近で多いカテゴリ（できるだけ避けること）】${overusedCats.join('、')}\n` : '')
       : ''
 
@@ -1307,6 +1307,9 @@ ${regionPriorityText}${recentText}${topicConstraint}
 - 商業宇宙ステーション・宇宙旅行・デブリ除去など宇宙産業の話題
 
 優先度：低（避ける）
+- ロケット打ち上げの「予定」「延期」「準備中」「搬入」「到着」の記事。打ち上げは「成功」「失敗」「実施」など結果が出た記事のみ選ぶ
+- 同じミッションの予告と結果がある場合、結果の方だけを選ぶ
+- 「到着」「組み立て開始」「試験完了」など、準備段階の進捗報告
 - Falcon 9・Falcon Heavyの定期的な商業打ち上げ
 - すでに直近記事で扱った話題の続報（新事実がない場合）
 - 部品調達・契約締結・技術審査・行政手続きの発表
@@ -1320,6 +1323,7 @@ ${regionPriorityText}${recentText}${topicConstraint}
 
 【絶対条件】
 - 報じている出来事が14日以上前に起きた場合は選ばないこと（記事が最近公開されていても、内容が古い出来事の振り返り・分析の場合はNG）
+- 上記「直近14日間に生成済みの記事」に含まれるミッション・機体・望遠鏡と同じ主題のニュースは絶対に選ばないこと。角度を変えても同じ主題はNG
 
 地域バランスの目安: 米国40% / 日本20% / 中国20% / 欧州・その他20%
 直近記事と被らない地域・テーマを選ぶこと。日本の記事ばかり続かないよう注意。
