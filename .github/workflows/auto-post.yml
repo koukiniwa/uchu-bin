@@ -1,11 +1,11 @@
-name: 記事自動公開
+name: 記事自動公開（停止中 - 打ち上げ記事システムに移行）
 
 on:
-  schedule:
-    - cron: '0 3 * * 1'   # 月曜 12:00 JST
-    - cron: '0 22 * * 3'  # 木曜  7:00 JST
-    - cron: '0 0 * * 6'   # 土曜  9:00 JST
-  workflow_dispatch: # 手動実行ボタン
+  # schedule:
+  #   - cron: '0 3 * * 1'   # 月曜 12:00 JST
+  #   - cron: '0 22 * * 3'  # 木曜  7:00 JST
+  #   - cron: '0 0 * * 6'   # 土曜  9:00 JST
+  workflow_dispatch: # 手動実行ボタン（必要時に使える）
 
 jobs:
   auto-post:
