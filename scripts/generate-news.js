@@ -514,13 +514,18 @@ const LIBRARY_TOPIC_KEYWORDS = {
   longmarch8:     ['long march 8', '長征8号', 'cz-8', '千帆', 'qianfan', 'spacesail'],
   longmarch9:     ['long march 9', '長征9号', 'cz-9'],
   zhuque:         ['zhuque', '朱雀', 'landspace'],
-  lijian:         ['lijian', '力箭', 'orienspace'],
+  lijian:         ['lijian', '力箭'],
+  gravity1:       ['gravity-1', 'gravity 1', 'orienspace'],
+  kinetica1:      ['kinetica', 'cas space'],
   // ===== 韓国・他ロケット =====
   nuri:           ['nuri', 'ヌリ', 'kslv-ii'],
+  mir:            ['mir rocket', 'mirロケット', 'mir ロケット', 'mirが', 'mirの'],
   eris:           ['eris', 'gilmour'],
   pslv:           ['pslv'],
-  lvm3:           ['lvm3', 'lvm-3', 'gslv mk3'],
+  gslv:           ['gslv mk ii', 'gslv mk2', 'gslv-mk2', 'gslv '],
+  lvm3:           ['lvm3', 'lvm-3', 'gslv mk3', 'gslv mk iii'],
   agnibaan:       ['agnibaan', 'agnikul'],
+  vikram1:        ['vikram-i', 'vikram i', 'vikram-1', 'skyroot'],
   // ===== 有人宇宙船 =====
   crewdragon:     ['crew dragon', 'クルードラゴン', 'dragon spacecraft'],
   starliner:      ['starliner', 'スターライナー', 'boeing capsule'],
@@ -776,6 +781,11 @@ const LIBRARY_CREDIT_MAP = {
   raptor:       'Raptor Engine / SpaceX',
   supercamiokande: 'Super-Kamiokande / University of Tokyo',
   rocketlaunch: 'Rocket Launch / NASA',
+  vikram1:      'Vikram-I / Skyroot Aerospace',
+  gravity1:     'Gravity-1 / Orienspace',
+  gslv:         'GSLV Mk II / ISRO',
+  mir:          'Mir / ADD (Korea)',
+  kinetica1:    'Kinetica 1 / CAS Space',
 }
 
 // カテゴリ別フォールバック画像（キーワードマッチが外れた場合の安全ネット）
