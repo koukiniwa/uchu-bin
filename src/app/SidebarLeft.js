@@ -1,5 +1,7 @@
 'use client'
 
+import UpcomingLaunches from './UpcomingLaunches'
+
 export default function SidebarLeft() {
   return (
     <div className="sidebar-left">
@@ -62,6 +64,7 @@ export default function SidebarLeft() {
           </div>
         </div>
       </a>
+      <UpcomingLaunches />
     </div>
   )
 }

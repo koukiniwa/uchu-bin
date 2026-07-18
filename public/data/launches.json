@@ -1,0 +1,425 @@
+{
+  "updated": "2026-07-18T06:58:33.705Z",
+  "launches": [
+    {
+      "id": "10fa7952-f00b-4292-80a2-4207e208844e",
+      "name": "Vikram-I | Demo Flight",
+      "rocket": "Vikram-I",
+      "mission": "Demo Flight",
+      "date": "2026-07-18",
+      "time": "06:35",
+      "tentative": false,
+      "provider": "Skyroot Aerospace",
+      "country": "",
+      "pad": "Satish Dhawan Space Centre, India",
+      "status": "Deployed",
+      "image": {
+        "id": 2785,
+        "name": "Vikram-I on launch pad",
+        "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/vikram-i_on_lau_image_20260717052522.jpg",
+        "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/vikram-i_on_lau_image_thumbnail_20260717052523.jpeg",
+        "credit": "Skyroot Aerospace",
+        "license": {
+          "id": 1,
+          "name": "Unknown",
+          "priority": 9,
+          "link": null
+        },
+        "single_use": true,
+        "variants": []
+      }
+    },
+    {
+      "id": "d8eb4b68-5307-4b3b-b585-5598958defc2",
+      "name": "Gravity-1 | Unknown Payload",
+      "rocket": "Gravity-1",
+      "mission": "Unknown Payload",
+      "date": "2026-07-22",
+      "time": "02:50",
+      "tentative": false,
+      "provider": "Orienspace Technology",
+      "country": "",
+      "pad": "Haiyang Oriental Spaceport",
+      "status": "Go",
+      "image": {
+        "id": 1742,
+        "name": "[AUTO] Gravity-1 - image",
+        "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/gravity-1_image_20240108105446.jpeg",
+        "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305193637.jpeg",
+        "credit": null,
+        "license": {
+          "id": 1,
+          "name": "Unknown",
+          "priority": 9,
+          "link": null
+        },
+        "single_use": true,
+        "variants": []
+      }
+    },
+    {
+      "id": "5421e43a-1623-40ac-9dac-201075064e24",
+      "name": "Long March 3B/E | Unknown Payload",
+      "rocket": "Long March 3B",
+      "mission": "Unknown Payload",
+      "date": "2026-07-23",
+      "time": "12:00",
+      "tentative": false,
+      "provider": "China Aerospace Science and Technology Corporation",
+      "country": "",
+      "pad": "Xichang Satellite Launch Center, People's Republic of China",
+      "status": "Go",
+      "image": {
+        "id": 1491,
+        "name": "[AUTO] Long March 3B/E | ChinaSat 26 - image",
+        "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/long2520march_image_20230907120240.jpeg",
+        "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305192932.jpeg",
+        "credit": "China Aerospace Science and Technology Corporation",
+        "license": {
+          "id": 1,
+          "name": "Unknown",
+          "priority": 9,
+          "link": null
+        },
+        "single_use": false,
+        "variants": []
+      }
+    },
+    {
+      "id": "fa42624c-1e30-4b4b-a06b-59b6153bc4e5",
+      "name": "Kinetica 1 | Unknown Payload",
+      "rocket": "Kinetica 1",
+      "mission": "Unknown Payload",
+      "date": "2026-07-24",
+      "time": "02:00",
+      "tentative": false,
+      "provider": "CAS Space",
+      "country": "",
+      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
+      "status": "TBC",
+      "image": {
+        "id": 1755,
+        "name": "[AUTO] Kinetica 1 - image",
+        "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/zhongke-1a_image_20220912002218.png",
+        "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305193659.png",
+        "credit": null,
+        "license": {
+          "id": 1,
+          "name": "Unknown",
+          "priority": 9,
+          "link": null
+        },
+        "single_use": true,
+        "variants": []
+      }
+    },
+    {
+      "id": "12b9454b-d48b-4fd5-9c11-17c18f45dafe",
+      "name": "Long March 8A | Unknown Payload",
+      "rocket": "Long March 8A",
+      "mission": "Unknown Payload",
+      "date": "2026-07-24",
+      "time": "11:00",
+      "tentative": false,
+      "provider": "China Aerospace Science and Technology Corporation",
+      "country": "",
+      "pad": "Wenchang Space Launch Site, People's Republic of China",
+      "status": "TBC",
+      "image": {
+        "id": 2616,
+        "name": "CZ-8A Launch (SatNet LEO Group 14)",
+        "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/cz-8a_launch_2_image_20251206093107.jpeg",
+        "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/cz-8a_launch_2_image_thumbnail_20251206093108.jpeg",
+        "credit": "CASC",
+        "license": {
+          "id": 1,
+          "name": "Unknown",
+          "priority": 9,
+          "link": null
+        },
+        "single_use": false,
+        "variants": []
+      }
+    },
+    {
+      "id": "17d0ec68-f466-4916-9dc5-16123eda6484",
+      "name": "GSLV Mk II | GISAT-1A (EOS-05)",
+      "rocket": "GSLV Mk II",
+      "mission": "GISAT-1A (EOS-05)",
+      "date": "2026-07-31",
+      "time": null,
+      "tentative": true,
+      "provider": "Indian Space Research Organization",
+      "country": "",
+      "pad": "Satish Dhawan Space Centre, India",
+      "status": "TBD",
+      "image": {
+        "id": 1744,
+        "name": "[AUTO] GSLV Mk II - image",
+        "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/gslv2520mk2520ii_image_20190825171642.jpg",
+        "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305193640.jpeg",
+        "credit": null,
+        "license": {
+          "id": 1,
+          "name": "Unknown",
+          "priority": 9,
+          "link": null
+        },
+        "single_use": true,
+        "variants": []
+      }
+    },
+    {
+      "id": "beac6ac1-97dd-4eb2-912c-8b4d4d15cd4e",
+      "name": "Long March 7A | Unknown Payload",
+      "rocket": "Long March 7A",
+      "mission": "Unknown Payload",
+      "date": "2026-07-31",
+      "time": null,
+      "tentative": true,
+      "provider": "China Aerospace Science and Technology Corporation",
+      "country": "",
+      "pad": "Wenchang Space Launch Site, People's Republic of China",
+      "status": "TBD",
+      "image": {
+        "id": 2617,
+        "name": "CZ-7A Launch (Yaogan 45)",
+        "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/cz-7a_launch_2_image_20251206093324.jpeg",
+        "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/cz-7a_launch_2_image_thumbnail_20251206093324.jpeg",
+        "credit": "CASC",
+        "license": {
+          "id": 1,
+          "name": "Unknown",
+          "priority": 9,
+          "link": null
+        },
+        "single_use": false,
+        "variants": []
+      }
+    },
+    {
+      "id": "9e27a1ed-e81a-4918-b32b-0380cf3a9f8f",
+      "name": "Mir | Demo Flight",
+      "rocket": "Mir",
+      "mission": "Demo Flight",
+      "date": "2026-07-31",
+      "time": null,
+      "tentative": true,
+      "provider": "Agency for Defense Development",
+      "country": "",
+      "pad": "Sea Launch",
+      "status": "TBD",
+      "image": {
+        "id": 1338,
+        "name": "South Korean ADD Solid-Fuel SLV (3 stage) liftoff (S-STEP)",
+        "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/south2520korea_image_20231204145331.png",
+        "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305192440.png",
+        "credit": "Yonhap",
+        "license": {
+          "id": 1,
+          "name": "Unknown",
+          "priority": 9,
+          "link": null
+        },
+        "single_use": false,
+        "variants": []
+      }
+    },
+    {
+      "id": "aafe107e-46d8-420c-bcb9-192069d80893",
+      "name": "Soyuz 2.1b | 16 x Rassvet-3",
+      "rocket": "Soyuz 2.1b",
+      "mission": "16 x Rassvet-3",
+      "date": "2026-07-31",
+      "time": null,
+      "tentative": true,
+      "provider": "Russian Federal Space Agency (ROSCOSMOS)",
+      "country": "",
+      "pad": "Plesetsk Cosmodrome, Russian Federation",
+      "status": "TBD",
+      "image": {
+        "id": 1830,
+        "name": "Soyuz 2.1b on the pad",
+        "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/soyuz_2.1b_image_20230802085331.jpg",
+        "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305193901.jpeg",
+        "credit": "Roscosmos",
+        "license": {
+          "id": 14,
+          "name": "Roscosmos Image Use Policy",
+          "priority": 3,
+          "link": "https://www.roscosmos.ru/22650/"
+        },
+        "single_use": false,
+        "variants": []
+      }
+    },
+    {
+      "id": "458e2e52-87b0-4707-96d8-6899f92e53ee",
+      "name": "Soyuz 2.1b/Fregat | Glonass-K1 No. 19",
+      "rocket": "Soyuz 2.1b/Fregat",
+      "mission": "Glonass-K1 No. 19",
+      "date": "2026-07-31",
+      "time": null,
+      "tentative": true,
+      "provider": "Russian Space Forces",
+      "country": "",
+      "pad": "Plesetsk Cosmodrome, Russian Federation",
+      "status": "TBD",
+      "image": {
+        "id": 1830,
+        "name": "Soyuz 2.1b on the pad",
+        "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/soyuz_2.1b_image_20230802085331.jpg",
+        "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305193901.jpeg",
+        "credit": "Roscosmos",
+        "license": {
+          "id": 14,
+          "name": "Roscosmos Image Use Policy",
+          "priority": 3,
+          "link": "https://www.roscosmos.ru/22650/"
+        },
+        "single_use": false,
+        "variants": []
+      }
+    },
+    {
+      "id": "1b23eb18-e06e-4058-9b42-e95ca0980511",
+      "name": "Spectrum | Onward and Upward",
+      "rocket": "Spectrum",
+      "mission": "Onward and Upward",
+      "date": "2026-08-06",
+      "time": null,
+      "tentative": true,
+      "provider": "Isar Aerospace",
+      "country": "",
+      "pad": "Andøya Spaceport",
+      "status": "TBD",
+      "image": {
+        "id": 2355,
+        "name": "Spectrum on the pad at Andøya Spaceport (Maiden Flight)",
+        "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/spectrum_on_the_image_20250321072643.jpeg",
+        "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/spectrum_on_the_image_thumbnail_20250321072643.jpeg",
+        "credit": "Isar Aerospace | Robin Brillert, Wingmen Media",
+        "license": {
+          "id": 1,
+          "name": "Unknown",
+          "priority": 9,
+          "link": null
+        },
+        "single_use": false,
+        "variants": []
+      }
+    },
+    {
+      "id": "b89ab080-66c3-4831-85a9-38d85da71d30",
+      "name": "H3-22 | Michibiki 7 (QZS-7)",
+      "rocket": "H3-22",
+      "mission": "Michibiki 7 (QZS-7)",
+      "date": "2026-08-06",
+      "time": "19:30",
+      "tentative": false,
+      "provider": "Mitsubishi Heavy Industries",
+      "country": "",
+      "pad": "Tanegashima Space Center, Japan",
+      "status": "Go",
+      "image": {
+        "id": 2496,
+        "name": "H3-22 liftoff (VEP-4)",
+        "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/h3-22_liftoff__image_20251028183835.jpg",
+        "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/h3-22_liftoff__image_thumbnail_20251028183835.jpeg",
+        "credit": "JAXA",
+        "license": {
+          "id": 1,
+          "name": "Unknown",
+          "priority": 9,
+          "link": null
+        },
+        "single_use": false,
+        "variants": []
+      }
+    },
+    {
+      "id": "a57aed97-b94f-42e1-905e-9421dbd96ac8",
+      "name": "Ariane 62 | MTG-I2",
+      "rocket": "Ariane 62",
+      "mission": "MTG-I2",
+      "date": "2026-08-27",
+      "time": null,
+      "tentative": true,
+      "provider": "Arianespace",
+      "country": "",
+      "pad": "Guiana Space Centre, French Guiana",
+      "status": "TBD",
+      "image": {
+        "id": 2123,
+        "name": "Ariane 62 liftoff (Maiden Flight)",
+        "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/ariane_62_lifto_image_20240711132056.jpeg",
+        "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/ariane_62_lifto_image_thumbnail_20240711132056.jpeg",
+        "credit": "ESA/CNES/Arianespace/ArianeGroup/Optique vidéo du CSG–S. Martin",
+        "license": {
+          "id": 2,
+          "name": "ESA Standard Licence",
+          "priority": 2,
+          "link": "https://www.esa.int/ESA_Multimedia/Terms_and_conditions_of_use_of_images_and_videos_available_on_the_esa_website"
+        },
+        "single_use": false,
+        "variants": []
+      }
+    },
+    {
+      "id": "9d402fb6-9115-424d-b6f0-bd3b13ee310e",
+      "name": "Long March 5 | Chang'e 7",
+      "rocket": "Long March 5",
+      "mission": "Chang'e 7",
+      "date": "2026-08-31",
+      "time": null,
+      "tentative": true,
+      "provider": "China Aerospace Science and Technology Corporation",
+      "country": "",
+      "pad": "Wenchang Space Launch Site, People's Republic of China",
+      "status": "TBD",
+      "image": {
+        "id": 2771,
+        "name": "Long March 5 TJSW-25",
+        "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/long_march_5_tj_image_20260612043435.jpg",
+        "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/long_march_5_tj_image_thumbnail_20260612043435.jpeg",
+        "credit": "CASC",
+        "license": {
+          "id": 1,
+          "name": "Unknown",
+          "priority": 9,
+          "link": null
+        },
+        "single_use": true,
+        "variants": []
+      }
+    },
+    {
+      "id": "91b13c6c-4525-496d-997b-3521bb6a4cd8",
+      "name": "RFA One | Maiden Flight",
+      "rocket": "RFA One",
+      "mission": "Maiden Flight",
+      "date": "2026-08-31",
+      "time": null,
+      "tentative": true,
+      "provider": "Rocket Factory Augsburg",
+      "country": "",
+      "pad": "SaxaVord Spaceport",
+      "status": "TBD",
+      "image": {
+        "id": 1815,
+        "name": "[AUTO] RFA One - image",
+        "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/rfa_one_image_20230117001619.png",
+        "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305193837.png",
+        "credit": null,
+        "license": {
+          "id": 1,
+          "name": "Unknown",
+          "priority": 9,
+          "link": null
+        },
+        "single_use": true,
+        "variants": []
+      }
+    }
+  ]
+}

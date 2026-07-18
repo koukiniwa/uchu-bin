@@ -1,0 +1,32 @@
+name: 打ち上げ予定更新
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # 6時間ごと
+  workflow_dispatch:
+
+jobs:
+  update-launches:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+
+      - name: 打ち上げデータ取得
+        run: node scripts/fetch-launches.js
+
+      - name: 変更があればコミット
+        run: |
+          git config user.name "宇宙便 Bot"
+          git config user.email "bot@uchu-bin.jp"
+          git add public/data/launches.json
+          git diff --cached --quiet || git commit -m "打ち上げ予定更新 $(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M')"
+          git push
