@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-18T07:18:52.448Z",
+  "updated": "2026-07-18T07:21:54.604Z",
   "launches": [
     {
       "id": "10fa7952-f00b-4292-80a2-4207e208844e",
@@ -26,6 +26,62 @@
           "link": null
         },
         "single_use": true,
+        "variants": []
+      }
+    },
+    {
+      "id": "ac897b9f-44d2-4ff4-8416-1a0a076e98a2",
+      "name": "Starship | Flight 13",
+      "rocket": "Starship",
+      "mission": "Flight 13",
+      "date": "2026-07-20",
+      "time": "22:45",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "SpaceX Starbase, TX, USA",
+      "status": "Go",
+      "image": {
+        "id": 2301,
+        "name": "Starship on the launch pad during WDR (Flight 7)",
+        "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/starship_on_the_image_20250111100520.jpg",
+        "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/starship_on_the_image_thumbnail_20250111100521.jpeg",
+        "credit": "SpaceX",
+        "license": {
+          "id": 1,
+          "name": "Unknown",
+          "priority": 9,
+          "link": null
+        },
+        "single_use": false,
+        "variants": []
+      }
+    },
+    {
+      "id": "0f6780cf-edae-4d7c-99d6-ce7de784d140",
+      "name": "Falcon 9 Block 5 | MRV-1",
+      "rocket": "Falcon 9",
+      "mission": "MRV-1",
+      "date": "2026-07-21",
+      "time": "21:15",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Cape Canaveral SFS, FL, USA",
+      "status": "Go",
+      "image": {
+        "id": 1736,
+        "name": "Falcon 9 liftoff from LC-39A",
+        "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/falcon_9_image_20230807133459.jpeg",
+        "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305193628.jpeg",
+        "credit": "SpaceX",
+        "license": {
+          "id": 5,
+          "name": "CC BY-NC 2.0",
+          "priority": 1,
+          "link": "https://creativecommons.org/licenses/by-nc/2.0/"
+        },
+        "single_use": false,
         "variants": []
       }
     },
@@ -138,6 +194,90 @@
           "link": null
         },
         "single_use": false,
+        "variants": []
+      }
+    },
+    {
+      "id": "599ba2df-7483-4b2f-a083-2b5ddc06e069",
+      "name": "Electron | LOXSAT 1",
+      "rocket": "Electron",
+      "mission": "LOXSAT 1",
+      "date": "2026-07-31",
+      "time": null,
+      "tentative": true,
+      "provider": "Rocket Lab",
+      "country": "NZ",
+      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
+      "status": "TBD",
+      "image": {
+        "id": 1727,
+        "name": "[AUTO] Electron - image",
+        "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/electron_image_20190705175640.jpeg",
+        "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305193613.jpeg",
+        "credit": null,
+        "license": {
+          "id": 1,
+          "name": "Unknown",
+          "priority": 9,
+          "link": null
+        },
+        "single_use": true,
+        "variants": []
+      }
+    },
+    {
+      "id": "9f5a4cb6-63f9-47e1-9512-b468bae2a8e6",
+      "name": "Electron | StriX Launch 11",
+      "rocket": "Electron",
+      "mission": "StriX Launch 11",
+      "date": "2026-07-31",
+      "time": null,
+      "tentative": true,
+      "provider": "Rocket Lab",
+      "country": "NZ",
+      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
+      "status": "TBD",
+      "image": {
+        "id": 1727,
+        "name": "[AUTO] Electron - image",
+        "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/electron_image_20190705175640.jpeg",
+        "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305193613.jpeg",
+        "credit": null,
+        "license": {
+          "id": 1,
+          "name": "Unknown",
+          "priority": 9,
+          "link": null
+        },
+        "single_use": true,
+        "variants": []
+      }
+    },
+    {
+      "id": "8b7e748c-6ed5-4681-a898-827b4a23b8d7",
+      "name": "Electron | The Grain Goddess Provides (iQPS Launch 7)",
+      "rocket": "Electron",
+      "mission": "The Grain Goddess Provides (iQPS Launch 7)",
+      "date": "2026-07-31",
+      "time": null,
+      "tentative": true,
+      "provider": "Rocket Lab",
+      "country": "US",
+      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
+      "status": "TBD",
+      "image": {
+        "id": 1727,
+        "name": "[AUTO] Electron - image",
+        "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/electron_image_20190705175640.jpeg",
+        "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305193613.jpeg",
+        "credit": null,
+        "license": {
+          "id": 1,
+          "name": "Unknown",
+          "priority": 9,
+          "link": null
+        },
+        "single_use": true,
         "variants": []
       }
     },
@@ -278,146 +418,6 @@
           "link": "https://www.roscosmos.ru/22650/"
         },
         "single_use": false,
-        "variants": []
-      }
-    },
-    {
-      "id": "1b23eb18-e06e-4058-9b42-e95ca0980511",
-      "name": "Spectrum | Onward and Upward",
-      "rocket": "Spectrum",
-      "mission": "Onward and Upward",
-      "date": "2026-08-06",
-      "time": null,
-      "tentative": true,
-      "provider": "Isar Aerospace",
-      "country": "DE",
-      "pad": "Andøya Spaceport",
-      "status": "TBD",
-      "image": {
-        "id": 2355,
-        "name": "Spectrum on the pad at Andøya Spaceport (Maiden Flight)",
-        "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/spectrum_on_the_image_20250321072643.jpeg",
-        "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/spectrum_on_the_image_thumbnail_20250321072643.jpeg",
-        "credit": "Isar Aerospace | Robin Brillert, Wingmen Media",
-        "license": {
-          "id": 1,
-          "name": "Unknown",
-          "priority": 9,
-          "link": null
-        },
-        "single_use": false,
-        "variants": []
-      }
-    },
-    {
-      "id": "b89ab080-66c3-4831-85a9-38d85da71d30",
-      "name": "H3-22 | Michibiki 7 (QZS-7)",
-      "rocket": "H3-22",
-      "mission": "Michibiki 7 (QZS-7)",
-      "date": "2026-08-06",
-      "time": "19:30",
-      "tentative": false,
-      "provider": "Mitsubishi Heavy Industries",
-      "country": "JP",
-      "pad": "Tanegashima Space Center, Japan",
-      "status": "Go",
-      "image": {
-        "id": 2496,
-        "name": "H3-22 liftoff (VEP-4)",
-        "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/h3-22_liftoff__image_20251028183835.jpg",
-        "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/h3-22_liftoff__image_thumbnail_20251028183835.jpeg",
-        "credit": "JAXA",
-        "license": {
-          "id": 1,
-          "name": "Unknown",
-          "priority": 9,
-          "link": null
-        },
-        "single_use": false,
-        "variants": []
-      }
-    },
-    {
-      "id": "a57aed97-b94f-42e1-905e-9421dbd96ac8",
-      "name": "Ariane 62 | MTG-I2",
-      "rocket": "Ariane 62",
-      "mission": "MTG-I2",
-      "date": "2026-08-27",
-      "time": null,
-      "tentative": true,
-      "provider": "Arianespace",
-      "country": "FR",
-      "pad": "Guiana Space Centre, French Guiana",
-      "status": "TBD",
-      "image": {
-        "id": 2123,
-        "name": "Ariane 62 liftoff (Maiden Flight)",
-        "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/ariane_62_lifto_image_20240711132056.jpeg",
-        "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/ariane_62_lifto_image_thumbnail_20240711132056.jpeg",
-        "credit": "ESA/CNES/Arianespace/ArianeGroup/Optique vidéo du CSG–S. Martin",
-        "license": {
-          "id": 2,
-          "name": "ESA Standard Licence",
-          "priority": 2,
-          "link": "https://www.esa.int/ESA_Multimedia/Terms_and_conditions_of_use_of_images_and_videos_available_on_the_esa_website"
-        },
-        "single_use": false,
-        "variants": []
-      }
-    },
-    {
-      "id": "9d402fb6-9115-424d-b6f0-bd3b13ee310e",
-      "name": "Long March 5 | Chang'e 7",
-      "rocket": "Long March 5",
-      "mission": "Chang'e 7",
-      "date": "2026-08-31",
-      "time": null,
-      "tentative": true,
-      "provider": "China Aerospace Science and Technology Corporation",
-      "country": "CN",
-      "pad": "Wenchang Space Launch Site, People's Republic of China",
-      "status": "TBD",
-      "image": {
-        "id": 2771,
-        "name": "Long March 5 TJSW-25",
-        "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/long_march_5_tj_image_20260612043435.jpg",
-        "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/long_march_5_tj_image_thumbnail_20260612043435.jpeg",
-        "credit": "CASC",
-        "license": {
-          "id": 1,
-          "name": "Unknown",
-          "priority": 9,
-          "link": null
-        },
-        "single_use": true,
-        "variants": []
-      }
-    },
-    {
-      "id": "91b13c6c-4525-496d-997b-3521bb6a4cd8",
-      "name": "RFA One | Maiden Flight",
-      "rocket": "RFA One",
-      "mission": "Maiden Flight",
-      "date": "2026-08-31",
-      "time": null,
-      "tentative": true,
-      "provider": "Rocket Factory Augsburg",
-      "country": "DE",
-      "pad": "SaxaVord Spaceport",
-      "status": "TBD",
-      "image": {
-        "id": 1815,
-        "name": "[AUTO] RFA One - image",
-        "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/rfa_one_image_20230117001619.png",
-        "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305193837.png",
-        "credit": null,
-        "license": {
-          "id": 1,
-          "name": "Unknown",
-          "priority": 9,
-          "link": null
-        },
-        "single_use": true,
         "variants": []
       }
     }

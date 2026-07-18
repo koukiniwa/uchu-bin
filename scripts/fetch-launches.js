@@ -8,12 +8,11 @@ const path = require('path')
 const OUTPUT_PATH = path.join(__dirname, '..', 'public', 'data', 'launches.json')
 const API_URL = 'https://ll.thespacedevs.com/2.3.0/launches/upcoming/?limit=40&mode=normal'
 
-// SpaceX全般とElectronを除外
+// Falcon 9 Starlinkのみ除外（SpaceXの他ミッション・Electronは残す）
 function isNotable(launch) {
-  const provider = (launch.launch_service_provider?.name || '').toLowerCase()
   const rocket = (launch.rocket?.configuration?.name || '').toLowerCase()
-  if (provider.includes('spacex')) return false
-  if (rocket.includes('electron')) return false
+  const mission = (launch.mission?.name || launch.name || '').toLowerCase()
+  if (rocket.includes('falcon 9') && mission.includes('starlink')) return false
   return true
 }
 
@@ -41,6 +40,7 @@ function getCountryCode(launch) {
   if (rocket.includes('gslv') || rocket.includes('pslv') || rocket.includes('lvm') || rocket.includes('sslv') || rocket.includes('vikram')) return 'IN'
   if (rocket.includes('ariane') || rocket.includes('vega')) return 'EU'
   if (rocket.includes('nuri')) return 'KR'
+  if (rocket.includes('electron')) return 'NZ'
   return ''
 }
 
