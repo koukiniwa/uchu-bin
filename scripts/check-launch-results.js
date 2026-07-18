@@ -72,8 +72,8 @@ async function main() {
       continue
     }
 
-    // 48時間以上前のものは古すぎるのでスキップ
-    if (hoursElapsed > 48) {
+    // 24時間以上前のものは古すぎるのでスキップ
+    if (hoursElapsed > 24) {
       console.log(`  [古い] ${launch.name} (${hoursElapsed.toFixed(0)}h前)`)
       // 報告済みに追加して次回チェックをスキップ
       reported.launches.push({ id: launch.id, name: launch.name, skipped: true, date: new Date().toISOString() })

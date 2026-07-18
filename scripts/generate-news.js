@@ -1554,7 +1554,11 @@ async function main() {
     let coverImage = ''
     let coverImageCredit = ''
     if (autoPublish) {
-      const libraryImage = getLibraryImage(article.title, article.category)
+      // ロケット名・ミッション名を含めてマッチ精度を上げる
+      const rocket = process.env.LAUNCH_ROCKET || ''
+      const mission = process.env.LAUNCH_MISSION || ''
+      const searchTitle = `${article.title} ${rocket} ${mission}`
+      const libraryImage = getLibraryImage(searchTitle, article.category)
       if (libraryImage) {
         coverImage = libraryImage
         const libraryKey = libraryImage.match(/\/library\/(\w+)_\d+/)?.[1]
