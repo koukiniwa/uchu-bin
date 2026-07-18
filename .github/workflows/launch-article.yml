@@ -59,8 +59,21 @@ jobs:
         if: steps.check.outputs.found == 'true'
         run: sleep 180
 
-      - name: Twitterに投稿
+      - name: ツイート時間帯チェック（JST 7:00-23:00のみ）
         if: steps.check.outputs.found == 'true'
+        id: tweet_time
+        run: |
+          JST_HOUR=$(TZ=Asia/Tokyo date +%H)
+          if [ "$JST_HOUR" -ge 7 ] && [ "$JST_HOUR" -lt 23 ]; then
+            echo "ok=true" >> $GITHUB_OUTPUT
+            echo "JST ${JST_HOUR}時: ツイート可能な時間帯です"
+          else
+            echo "ok=false" >> $GITHUB_OUTPUT
+            echo "JST ${JST_HOUR}時: 深夜のためツイートをスキップします"
+          fi
+
+      - name: Twitterに投稿
+        if: steps.check.outputs.found == 'true' && steps.tweet_time.outputs.ok == 'true'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
