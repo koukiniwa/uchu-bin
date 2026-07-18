@@ -1462,7 +1462,109 @@ ${bodySection}
   return parsed
 }
 
+// 打ち上げ結果から記事を生成するモード
+async function generateLaunchArticle() {
+  const prompt = process.env.LAUNCH_ARTICLE_PROMPT
+  if (!prompt) { console.error('LAUNCH_ARTICLE_PROMPT が未設定'); process.exit(1) }
+
+  const rocket = process.env.LAUNCH_ROCKET || 'Unknown'
+  const mission = process.env.LAUNCH_MISSION || ''
+  const status = process.env.LAUNCH_STATUS || ''
+
+  console.log(`\n🚀 打ち上げ記事生成モード: ${rocket} | ${mission} | ${status}`)
+
+  const message = await client.messages.create({
+    model: 'claude-sonnet-4-20250514',
+    max_tokens: 4096,
+    messages: [{
+      role: 'user',
+      content: `${prompt}
+
+文体・スタイルの基準:
+- 「です・ます」調のジャーナリスティックな文体
+- 冒頭で結果（成功/失敗）を明記
+- 具体的な数字・日付・固有名詞を使う
+- 煽り・誇張は不要。事実ベースで
+- 「まとめると」「〜と言えるでしょう」などAI文体は使わない
+- 本文中の1つ目の ## 見出しの直後に {{IMAGE_1}}、2つ目の ## 見出しの直後に {{IMAGE_2}} を入れる
+- 業界全体の一般解説で水増ししない。この打ち上げ固有の事実だけを書く
+
+【記事構成（見出し3つ固定）】
+## （打ち上げ結果の核心）
+{{IMAGE_1}}
+## （ミッション・ペイロードの詳細）
+{{IMAGE_2}}
+## （次のステップ・今後の予定）
+
+以下のJSON形式のみで返してください:
+{
+  "title": "記事タイトル（日本語、35文字以内）",
+  "slug": "url-slug-in-english (lowercase, hyphens, 4-8 words)",
+  "description": "記事の要約（90文字以内）",
+  "category": "ロケット",
+  "source_urls": [],
+  "body": "記事本文（マークダウン、1400〜1900文字）"
+}`,
+    }],
+  })
+
+  const text = message.content[0].text
+  const jsonMatch = text.match(/\{[\s\S]*\}/)
+  if (!jsonMatch) throw new Error('JSONが見つかりません')
+  return JSON.parse(jsonMatch[0])
+}
+
 async function main() {
+  // 打ち上げ記事モード
+  if (process.argv.includes('--launch-article')) {
+    const article = await generateLaunchArticle()
+    console.log(`  タイトル: ${article.title}`)
+    console.log(`  カテゴリ: ${article.category}`)
+
+    const autoPublish = process.argv.includes('--auto-publish')
+    let coverImage = ''
+    let coverImageCredit = ''
+    if (autoPublish) {
+      const libraryImage = getLibraryImage(article.title, article.category)
+      if (libraryImage) {
+        coverImage = libraryImage
+        const libraryKey = libraryImage.match(/\/library\/(\w+)_\d+/)?.[1]
+        coverImageCredit = LIBRARY_CREDIT_MAP[libraryKey] || ''
+        console.log(`  📚 ライブラリ画像使用: ${libraryImage}`)
+      }
+    }
+
+    const jstDate = new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().slice(0, 10)
+    const slug = `${jstDate}-${(article.slug || 'launch-article').replace(/[^a-z0-9\-]/gi, '-').toLowerCase().slice(0, 80)}`
+    let body = article.body.replace(/\{\{IMAGE_1\}\}/g, '').replace(/\{\{IMAGE_2\}\}/g, '')
+    body += '\n\n## 参考記事\n\n'
+    if (article.source_urls?.length) {
+      body += article.source_urls.map(u => `- ${u}`).join('\n')
+    } else {
+      body += '- Launch Library 2 (The Space Devs)'
+    }
+
+    const frontmatter = [
+      '---',
+      `title: '${article.title.replace(/'/g, "''")}'`,
+      `description: '${(article.description || '').replace(/'/g, "''")}'`,
+      `date: '${jstDate}'`,
+      `category: '${article.category}'`,
+      coverImage ? `image: '${coverImage}'` : "image: '/logo.jpg'",
+      coverImageCredit ? `imageCredit: '${coverImageCredit}'` : '',
+      '---',
+    ].filter(Boolean).join('\n')
+
+    const filePath = path.join(__dirname, '..', 'posts', `${slug}.md`)
+    fs.writeFileSync(filePath, `${frontmatter}\n\n${body}\n`, 'utf-8')
+    console.log(`\n記事を保存しました: ${filePath}`)
+    // フィードも更新
+    if (autoPublish && typeof generateFeed === 'function') {
+      try { generateFeed() } catch {}
+    }
+    return
+  }
+
   console.log('📡 地域別に宇宙ニュースを取得中...')
 
   const newsByRegion = {}

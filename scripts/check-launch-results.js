@@ -1,0 +1,170 @@
+#!/usr/bin/env node
+// 打ち上げ結果チェック → 記事自動生成スクリプト
+// Launch Library 2 APIで最近完了した打ち上げを検出し、記事を生成する
+// Usage: node scripts/check-launch-results.js
+
+const fs = require('fs')
+const path = require('path')
+
+const REPORTED_PATH = path.join(__dirname, '..', 'public', 'data', 'reported-launches.json')
+const POSTS_DIR = path.join(__dirname, '..', 'posts')
+const LL2_PREVIOUS = 'https://ll.thespacedevs.com/2.3.0/launches/previous/?limit=10&mode=normal'
+const MIN_HOURS_AFTER_LAUNCH = 3  // 打ち上げ後3時間待つ
+
+// 報告済みリスト読み込み
+function getReported() {
+  try {
+    return JSON.parse(fs.readFileSync(REPORTED_PATH, 'utf-8'))
+  } catch {
+    return { launches: [] }
+  }
+}
+
+function saveReported(data) {
+  const dir = path.dirname(REPORTED_PATH)
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
+  fs.writeFileSync(REPORTED_PATH, JSON.stringify(data, null, 2), 'utf-8')
+}
+
+// Starlink定期便を除外
+function isNotable(launch) {
+  const rocket = (launch.rocket?.configuration?.name || '').toLowerCase()
+  const mission = (launch.mission?.name || launch.name || '').toLowerCase()
+  if (rocket.includes('falcon 9') && mission.includes('starlink')) return false
+  return true
+}
+
+// 当日既に記事があるか
+function hasArticleToday() {
+  const jstDate = new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().slice(0, 10)
+  try {
+    return fs.readdirSync(POSTS_DIR).filter(f => f.startsWith(jstDate) && f.endsWith('.md')).length > 0
+  } catch { return false }
+}
+
+async function main() {
+  console.log('=== 打ち上げ結果チェック ===')
+
+  // 直近の完了した打ち上げを取得
+  const res = await fetch(LL2_PREVIOUS, {
+    headers: { 'User-Agent': 'uchu-bin/1.0 (space news site)' },
+    signal: AbortSignal.timeout(15000),
+  })
+  if (!res.ok) throw new Error(`API error: ${res.status}`)
+  const data = await res.json()
+
+  const reported = getReported()
+  const reportedIds = new Set(reported.launches.map(l => l.id))
+  const now = Date.now()
+
+  // 対象の打ち上げを検出
+  let target = null
+  for (const launch of data.results) {
+    // Starlink除外
+    if (!isNotable(launch)) continue
+
+    // 既に報告済み
+    if (reportedIds.has(launch.id)) {
+      console.log(`  [済] ${launch.name}`)
+      continue
+    }
+
+    // 打ち上げ時刻からの経過時間
+    const launchTime = new Date(launch.net).getTime()
+    const hoursElapsed = (now - launchTime) / (1000 * 60 * 60)
+
+    // 3時間未満はまだ待つ
+    if (hoursElapsed < MIN_HOURS_AFTER_LAUNCH) {
+      console.log(`  [待機] ${launch.name} (${hoursElapsed.toFixed(1)}h経過、${MIN_HOURS_AFTER_LAUNCH}h後に記事化)`)
+      continue
+    }
+
+    // 48時間以上前のものは古すぎるのでスキップ
+    if (hoursElapsed > 48) {
+      console.log(`  [古い] ${launch.name} (${hoursElapsed.toFixed(0)}h前)`)
+      // 報告済みに追加して次回チェックをスキップ
+      reported.launches.push({ id: launch.id, name: launch.name, skipped: true, date: new Date().toISOString() })
+      continue
+    }
+
+    const status = launch.status?.name || 'Unknown'
+    console.log(`  [新規] ${launch.name} - ${status} (${hoursElapsed.toFixed(1)}h前)`)
+    target = launch
+    break  // 1回の実行で1記事のみ
+  }
+
+  if (!target) {
+    console.log('\n新しい打ち上げ結果はありません')
+    saveReported(reported)
+    return
+  }
+
+  // 当日既に記事があれば見送り（通常の記事公開と衝突しないように）
+  if (hasArticleToday()) {
+    console.log('\n本日は既に記事が公開されているため、打ち上げ記事の生成をスキップします')
+    return
+  }
+
+  // 記事生成の情報を GITHUB_OUTPUT に出力
+  const status = target.status?.name || 'Unknown'
+  const rocket = target.rocket?.configuration?.name || 'Unknown'
+  const mission = target.mission?.name || ''
+  const provider = target.launch_service_provider?.name || ''
+  const pad = target.pad?.location?.name || ''
+  const missionDesc = target.mission?.description || ''
+  const launchDate = target.net ? new Date(target.net).toISOString() : ''
+
+  const articlePrompt = `以下のロケット打ち上げについて、宇宙ニュース記事を書いてください。
+
+【打ち上げ情報】
+- ロケット: ${rocket}
+- ミッション: ${mission}
+- 打ち上げ事業者: ${provider}
+- 射場: ${pad}
+- 打ち上げ日時(UTC): ${launchDate}
+- 結果: ${status}
+- ミッション概要: ${missionDesc}
+
+【記事の書き方】
+- 結果（成功/失敗）を最初に明記する
+- ロケットの仕様や過去の実績を含める
+- ペイロード（衛星等）の目的を説明する
+- 今後の予定や影響にも触れる
+- 事実に基づき、推測や憶測は避ける
+- 1500〜2500文字程度`
+
+  console.log(`\n記事生成対象: ${rocket} | ${mission} | ${status}`)
+
+  // GITHUB_OUTPUT に出力（GitHub Actionsで使用）
+  const outputFile = process.env.GITHUB_OUTPUT
+  if (outputFile) {
+    fs.appendFileSync(outputFile, `found=true\n`)
+    fs.appendFileSync(outputFile, `rocket=${rocket}\n`)
+    fs.appendFileSync(outputFile, `mission=${mission}\n`)
+    fs.appendFileSync(outputFile, `status=${status}\n`)
+    fs.appendFileSync(outputFile, `provider=${provider}\n`)
+    fs.appendFileSync(outputFile, `pad=${pad}\n`)
+    fs.appendFileSync(outputFile, `launch_date=${launchDate}\n`)
+    fs.appendFileSync(outputFile, `mission_desc<<EOFMISSION\n${missionDesc}\nEOFMISSION\n`)
+    fs.appendFileSync(outputFile, `article_prompt<<EOFPROMPT\n${articlePrompt}\nEOFPROMPT\n`)
+  } else {
+    // ローカルテスト用
+    console.log('\n--- 記事プロンプト ---')
+    console.log(articlePrompt.slice(0, 500) + '...')
+  }
+
+  // 報告済みに追加
+  reported.launches.push({
+    id: target.id,
+    name: target.name,
+    status,
+    date: new Date().toISOString(),
+  })
+  // 古いエントリを削除（90日以上前）
+  const cutoff = Date.now() - 90 * 24 * 60 * 60 * 1000
+  reported.launches = reported.launches.filter(l => new Date(l.date).getTime() > cutoff)
+  saveReported(reported)
+  console.log('報告済みリストを更新しました')
+}
+
+main().catch(e => { console.error('エラー:', e.message); process.exit(1) })
