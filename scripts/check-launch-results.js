@@ -9,7 +9,7 @@ const path = require('path')
 const REPORTED_PATH = path.join(__dirname, '..', 'public', 'data', 'reported-launches.json')
 const POSTS_DIR = path.join(__dirname, '..', 'posts')
 const LL2_PREVIOUS = 'https://ll.thespacedevs.com/2.3.0/launches/previous/?limit=10&mode=normal'
-const MIN_HOURS_AFTER_LAUNCH = 3  // 打ち上げ後3時間待つ
+const MIN_HOURS_AFTER_LAUNCH = 2  // 打ち上げ後2時間待つ（軌道投入確認に十分）
 
 // 報告済みリスト読み込み
 function getReported() {
@@ -34,13 +34,6 @@ function isNotable(launch) {
   return true
 }
 
-// 当日既に記事があるか
-function hasArticleToday() {
-  const jstDate = new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().slice(0, 10)
-  try {
-    return fs.readdirSync(POSTS_DIR).filter(f => f.startsWith(jstDate) && f.endsWith('.md')).length > 0
-  } catch { return false }
-}
 
 async function main() {
   console.log('=== 打ち上げ結果チェック ===')
