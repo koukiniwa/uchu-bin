@@ -23,7 +23,7 @@ function formatDate(dateStr, timeStr, tentative) {
   const [, m, d] = dateStr.split('-')
   const month = parseInt(m)
   const day = parseInt(d)
-  if (tentative) return { date: `${month}/${day}`, time: '' }
+  if (tentative) return { date: `${month}月`, time: '' }
   if (timeStr) {
     const [h, min] = timeStr.split(':')
     let jstH = parseInt(h) + 9

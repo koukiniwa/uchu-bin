@@ -6,7 +6,7 @@ const fs = require('fs')
 const path = require('path')
 
 const OUTPUT_PATH = path.join(__dirname, '..', 'public', 'data', 'launches.json')
-const API_URL = 'https://ll.thespacedevs.com/2.3.0/launches/upcoming/?limit=40&mode=normal'
+const API_URL = 'https://ll.thespacedevs.com/2.3.0/launches/upcoming/?limit=80&mode=normal'
 
 // Falcon 9 Starlinkのみ除外（SpaceXの他ミッション・Electronは残す）
 function isNotable(launch) {
@@ -61,16 +61,17 @@ async function main() {
   if (!res.ok) throw new Error(`API error: ${res.status}`)
   const data = await res.json()
 
-  const launches = data.results
+  const allLaunches = data.results
     .filter(isNotable)
-    .slice(0, 15)
     .map(l => {
       const net = l.net ? new Date(l.net) : null
       const dateStr = net ? net.toISOString().slice(0, 10) : null
       const timeStr = net ? net.toISOString().slice(11, 16) : null
-      // 日付が月末00:00UTCの場合は「月内予定」（正確な日時未定）
-      const isTentative = net && net.getUTCDate() === 1 && net.getUTCHours() === 0 && net.getUTCMinutes() === 0
-        || l.status?.abbrev === 'TBD'
+      const isTentative = l.status?.abbrev === 'TBD' || l.status?.abbrev === 'TBC'
+        || (net && net.getUTCHours() === 0 && net.getUTCMinutes() === 0
+            && (net.getUTCDate() >= 28 || net.getUTCDate() === 1))
+      // TBDの場合は「○月」表示用に月だけ保持
+      const month = net ? net.getUTCMonth() + 1 : null
 
       return {
         id: l.id,
@@ -78,15 +79,28 @@ async function main() {
         rocket: shortRocketName(l.rocket?.configuration?.name || 'Unknown'),
         mission: l.mission?.name || l.name?.split('|')[1]?.trim() || '',
         date: dateStr,
+        month,
         time: isTentative ? null : timeStr,
         tentative: isTentative || false,
         provider: l.launch_service_provider?.name || '',
         country: getCountryCode(l),
         pad: l.pad?.location?.name || '',
         status: l.status?.abbrev || '',
-        image: l.image || l.rocket?.configuration?.image_url || null,
       }
     })
+
+  // TBDの同一ロケットをまとめる（同月内）
+  const seen = new Set()
+  const launches = []
+  for (const l of allLaunches) {
+    if (l.tentative) {
+      const key = `${l.rocket}_${l.month}`
+      if (seen.has(key)) continue
+      seen.add(key)
+    }
+    launches.push(l)
+    if (launches.length >= 15) break
+  }
 
   // 出力ディレクトリがなければ作成
   const outDir = path.dirname(OUTPUT_PATH)
