@@ -22,7 +22,12 @@ export function getAllPosts() {
         image: data.image || '',
       }
     })
-    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .sort((a, b) => {
+      const dateDiff = new Date(b.date) - new Date(a.date)
+      if (dateDiff !== 0) return dateDiff
+      // 同じ日付の場合はファイル名の降順（後から作られた方が上）
+      return b.slug.localeCompare(a.slug)
+    })
 }
 
 export function getPostBySlug(slug) {
