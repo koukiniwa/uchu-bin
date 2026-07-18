@@ -1,9 +1,9 @@
-name: 速報チェック・自動投稿
+name: 速報チェック・自動投稿（停止中 - 打ち上げ記事システムに移行）
 
 on:
-  schedule:
-    # 2時間ごと（UTC）
-    - cron: '0 */2 * * *'
+  # schedule:
+  #   # 2時間ごと（UTC）
+  #   - cron: '0 */2 * * *'
   workflow_dispatch:
 
 jobs:
