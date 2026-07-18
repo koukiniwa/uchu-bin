@@ -114,6 +114,32 @@ async function main() {
   const missionDesc = target.mission?.description || ''
   const launchDate = target.net ? new Date(target.net).toISOString() : ''
 
+  // 打ち上げの規模を判定して分量を決める
+  const rocketLow = rocket.toLowerCase()
+  const statusLow = status.toLowerCase()
+  let scale = 'medium' // デフォルト
+  if (statusLow.includes('failure') || statusLow.includes('partial')) {
+    scale = 'failure'
+  } else if (rocketLow.includes('starship') || rocketLow.includes('sls') || rocketLow.includes('new glenn') || rocketLow.includes('long march 5') || rocketLow.includes('falcon heavy')) {
+    scale = 'large'
+  } else if (rocketLow.includes('electron') || rocketLow.includes('kairos') || rocketLow.includes('epsilon') || rocketLow.includes('kuaizhou') || rocketLow.includes('lijian') || rocketLow.includes('vikram') || rocketLow.includes('kinetica')) {
+    scale = 'small'
+  }
+  // 初飛行は大型扱い
+  const missionLow = (mission + ' ' + missionDesc).toLowerCase()
+  if (missionLow.includes('maiden') || missionLow.includes('demo flight') || missionLow.includes('first flight') || missionLow.includes('初飛行') || missionLow.includes('inaugural')) {
+    scale = 'large'
+  }
+
+  const SCALE_CONFIG = {
+    large:   { words: '3000〜4000', label: '大型/初飛行' },
+    medium:  { words: '2000〜2500', label: '通常' },
+    small:   { words: '1500〜2000', label: '小型' },
+    failure: { words: '2500〜3500', label: '失敗/異常' },
+  }
+  const config = SCALE_CONFIG[scale]
+  console.log(`  規模判定: ${config.label}（${config.words}文字）`)
+
   const articlePrompt = `以下のロケット打ち上げについて、宇宙ニュース記事を書いてください。
 
 【打ち上げ情報】
@@ -124,6 +150,7 @@ async function main() {
 - 打ち上げ日時(UTC): ${launchDate}
 - 結果: ${status}
 - ミッション概要: ${missionDesc}
+- 規模: ${config.label}
 
 【記事の書き方】
 - 結果（成功/失敗）を最初に明記する
@@ -131,7 +158,7 @@ async function main() {
 - ペイロード（衛星等）の目的を説明する
 - 今後の予定や影響にも触れる
 - 事実に基づき、推測や憶測は避ける
-- 1500〜2500文字程度`
+- ${config.words}文字程度`
 
   console.log(`\n記事生成対象: ${rocket} | ${mission} | ${status}`)
 
@@ -147,6 +174,7 @@ async function main() {
     fs.appendFileSync(outputFile, `launch_date=${launchDate}\n`)
     fs.appendFileSync(outputFile, `mission_desc<<EOFMISSION\n${missionDesc}\nEOFMISSION\n`)
     fs.appendFileSync(outputFile, `article_prompt<<EOFPROMPT\n${articlePrompt}\nEOFPROMPT\n`)
+    fs.appendFileSync(outputFile, `article_words=${config.words}\n`)
   } else {
     // ローカルテスト用
     console.log('\n--- 記事プロンプト ---')
