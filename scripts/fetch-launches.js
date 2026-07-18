@@ -54,15 +54,52 @@ function shortRocketName(name) {
 
 async function main() {
   console.log('Fetching upcoming launches...')
-  const res = await fetch(API_URL, {
-    headers: { 'User-Agent': 'uchu-bin/1.0 (space news site)' },
-    signal: AbortSignal.timeout(15000),
-  })
-  if (!res.ok) throw new Error(`API error: ${res.status}`)
-  const data = await res.json()
+  const [upcomingRes, recentRes] = await Promise.all([
+    fetch(API_URL, {
+      headers: { 'User-Agent': 'uchu-bin/1.0 (space news site)' },
+      signal: AbortSignal.timeout(15000),
+    }),
+    fetch('https://ll.thespacedevs.com/2.3.0/launches/previous/?limit=10&mode=normal', {
+      headers: { 'User-Agent': 'uchu-bin/1.0 (space news site)' },
+      signal: AbortSignal.timeout(15000),
+    }),
+  ])
+  if (!upcomingRes.ok) throw new Error(`API error: ${upcomingRes.status}`)
+  const data = await upcomingRes.json()
+
+  // 直近3日の完了した打ち上げを取得
+  const recentData = recentRes.ok ? await recentRes.json() : { results: [] }
+  const threeDaysAgo = Date.now() - 3 * 24 * 60 * 60 * 1000
+  const recent = recentData.results
+    .filter(l => {
+      if (!isNotable(l)) return false
+      const launchTime = new Date(l.net).getTime()
+      return launchTime > threeDaysAgo
+    })
+    .map(l => {
+      const statusName = (l.status?.name || '').toLowerCase()
+      let result = 'success'
+      let resultLabel = '成功'
+      if (statusName.includes('failure')) { result = 'failure'; resultLabel = '失敗' }
+      else if (statusName.includes('partial')) { result = 'partial'; resultLabel = '一部失敗' }
+      return {
+        id: l.id,
+        rocket: shortRocketName(l.rocket?.configuration?.name || 'Unknown'),
+        mission: l.mission?.name || l.name?.split('|')[1]?.trim() || '',
+        date: l.net ? new Date(l.net).toISOString().slice(0, 10) : null,
+        country: getCountryCode(l),
+        provider: l.launch_service_provider?.name || '',
+        result,
+        resultLabel,
+      }
+    })
+  console.log(`Found ${recent.length} recent completions (last 3 days)`)
+
+  // 完了済みのIDを除外
+  const recentIds = new Set(recent.map(r => r.id))
 
   const allLaunches = data.results
-    .filter(isNotable)
+    .filter(l => isNotable(l) && !recentIds.has(l.id))
     .map(l => {
       const net = l.net ? new Date(l.net) : null
       const dateStr = net ? net.toISOString().slice(0, 10) : null
@@ -109,6 +146,7 @@ async function main() {
   const output = {
     updated: new Date().toISOString(),
     launches,
+    recent,
   }
   fs.writeFileSync(OUTPUT_PATH, JSON.stringify(output, null, 2), 'utf-8')
   console.log(`Saved ${launches.length} notable launches to ${OUTPUT_PATH}`)

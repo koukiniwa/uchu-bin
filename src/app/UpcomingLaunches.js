@@ -43,17 +43,21 @@ function getDaysUntil(dateStr) {
 
 export default function UpcomingLaunches() {
   const [launches, setLaunches] = useState([])
+  const [recent, setRecent] = useState([])
 
   useEffect(() => {
     fetch('/data/launches.json')
       .then(r => r.json())
-      .then(data => setLaunches(data.launches || []))
+      .then(data => {
+        setLaunches(data.launches || [])
+        setRecent(data.recent || [])
+      })
       .catch(() => {})
   }, [])
 
-  if (launches.length === 0) return null
+  if (launches.length === 0 && recent.length === 0) return null
 
-  const visible = launches.slice(0, 10)
+  const visible = launches.slice(0, recent.length > 0 ? 8 : 10)
 
   return (
     <div style={{
@@ -91,6 +95,54 @@ export default function UpcomingLaunches() {
           </tr>
         </thead>
         <tbody>
+          {recent.map((l, i) => {
+            const { date } = formatDate(l.date, null, false)
+            const country = countryName(l.country)
+            const isSuccess = l.result === 'success'
+            const resultColor = isSuccess ? '#2e7d32' : '#c62828'
+            const resultBg = isSuccess ? '#e8f5e9' : '#fbe9e7'
+            return (
+              <tr key={`r-${l.id || i}`} style={{
+                borderBottom: '1px solid #f0f0f0',
+                background: resultBg,
+                borderLeft: `3px solid ${resultColor}`,
+              }}>
+                <td style={{ padding: '6px 8px 6px 11px', verticalAlign: 'top', whiteSpace: 'nowrap' }}>
+                  <div style={{ fontWeight: 700, color: '#555', fontSize: '11px' }}>{date}</div>
+                </td>
+                <td style={{ padding: '6px 8px', verticalAlign: 'top' }}>
+                  <div style={{ fontWeight: 700, color: '#333', fontSize: '11.5px', lineHeight: 1.3 }}>
+                    {l.rocket}
+                  </div>
+                  <span style={{
+                    display: 'inline-block',
+                    marginTop: '2px',
+                    fontSize: '9px',
+                    fontWeight: 700,
+                    color: resultColor,
+                    background: isSuccess ? '#c8e6c9' : '#ffcdd2',
+                    padding: '1px 5px',
+                    borderRadius: '3px',
+                    letterSpacing: '0.05em',
+                  }}>
+                    {l.resultLabel}
+                  </span>
+                </td>
+                <td style={{
+                  padding: '6px 14px 6px 8px',
+                  verticalAlign: 'top',
+                  textAlign: 'right',
+                  fontSize: '10px',
+                  color: '#888',
+                }}>
+                  {country}
+                </td>
+              </tr>
+            )
+          })}
+          {recent.length > 0 && visible.length > 0 && (
+            <tr><td colSpan={3} style={{ padding: 0, borderBottom: '2px solid #e0e0e0' }} /></tr>
+          )}
           {visible.map((l, i) => {
             const { date, time } = formatDate(l.date, l.time, l.tentative)
             const days = getDaysUntil(l.date)

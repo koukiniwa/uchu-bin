@@ -1,20 +1,6 @@
 {
-  "updated": "2026-07-18T13:02:49.960Z",
+  "updated": "2026-07-18T13:04:26.033Z",
   "launches": [
-    {
-      "id": "10fa7952-f00b-4292-80a2-4207e208844e",
-      "name": "Vikram-I | Demo Flight",
-      "rocket": "Vikram-I",
-      "mission": "Demo Flight",
-      "date": "2026-07-18",
-      "month": 7,
-      "time": "06:35",
-      "tentative": false,
-      "provider": "Skyroot Aerospace",
-      "country": "IN",
-      "pad": "Satish Dhawan Space Centre, India",
-      "status": "Deployed"
-    },
     {
       "id": "ac897b9f-44d2-4ff4-8416-1a0a076e98a2",
       "name": "Starship | Flight 13",
@@ -210,6 +196,42 @@
       "country": "JP",
       "pad": "Tanegashima Space Center, Japan",
       "status": "Go"
+    },
+    {
+      "id": "a57aed97-b94f-42e1-905e-9421dbd96ac8",
+      "name": "Ariane 62 | MTG-I2",
+      "rocket": "Ariane 62",
+      "mission": "MTG-I2",
+      "date": "2026-08-27",
+      "month": 8,
+      "time": null,
+      "tentative": true,
+      "provider": "Arianespace",
+      "country": "FR",
+      "pad": "Guiana Space Centre, French Guiana",
+      "status": "TBD"
+    }
+  ],
+  "recent": [
+    {
+      "id": "10fa7952-f00b-4292-80a2-4207e208844e",
+      "rocket": "Vikram-I",
+      "mission": "Demo Flight",
+      "date": "2026-07-18",
+      "country": "IN",
+      "provider": "Skyroot Aerospace",
+      "result": "success",
+      "resultLabel": "成功"
+    },
+    {
+      "id": "d9adedc4-8fa1-4a36-84f9-43b8893a6865",
+      "rocket": "Falcon 9",
+      "mission": "SDA Tranche 1 Transport Layer E",
+      "date": "2026-07-16",
+      "country": "",
+      "provider": "SpaceX",
+      "result": "success",
+      "resultLabel": "成功"
     }
   ]
 }
