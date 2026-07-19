@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-19T08:08:04.460Z",
+  "updated": "2026-07-19T13:05:16.269Z",
   "launches": [
     {
       "id": "ac897b9f-44d2-4ff4-8416-1a0a076e98a2",
@@ -62,14 +62,14 @@
       "name": "Kinetica 1 | Unknown Payload",
       "rocket": "Kinetica 1",
       "mission": "Unknown Payload",
-      "date": "2026-07-24",
+      "date": "2026-07-23",
       "month": 7,
-      "time": null,
-      "tentative": true,
+      "time": "23:30",
+      "tentative": false,
       "provider": "CAS Space",
       "country": "CN",
       "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
-      "status": "TBC"
+      "status": "Go"
     },
     {
       "id": "12b9454b-d48b-4fd5-9c11-17c18f45dafe",
