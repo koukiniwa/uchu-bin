@@ -286,7 +286,7 @@ export default function LaunchDashboard() {
                   flex: '1 0 145px',
                 }}>
                   <div style={{
-                    fontSize: '12px', fontWeight: 700, color: '#c62828',
+                    fontSize: '12px', fontWeight: 700, color: '#1a2744',
                     marginBottom: '4px',
                   }}>
                     {l.tentative ? `${date}` : `${date} ${time || ''}`}
@@ -324,7 +324,7 @@ export default function LaunchDashboard() {
           }}>
             最近の結果
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
             {recent.map((l, i) => {
               const isSuccess = l.result === 'success'
               const { date } = toJST(l.date, null, false)
@@ -333,15 +333,15 @@ export default function LaunchDashboard() {
                 <div key={`r-${l.id || i}`} style={{
                   display: 'flex', alignItems: 'center', gap: '10px',
                   padding: '8px 12px',
-                  background: isSuccess ? '#f6faf6' : '#fef6f5',
+                  background: '#fff',
+                  border: '1px solid #e8e8e8',
                   borderRadius: '3px',
-                  borderLeft: `3px solid ${isSuccess ? '#2e7d32' : '#c62828'}`,
                 }}>
                   <span style={{
                     fontSize: '10px', fontWeight: 700,
-                    color: isSuccess ? '#2e7d32' : '#c62828',
-                    background: isSuccess ? '#c8e6c9' : '#ffcdd2',
-                    padding: '2px 8px', borderRadius: '4px', whiteSpace: 'nowrap',
+                    color: isSuccess ? '#1a2744' : '#888',
+                    border: '1px solid #ddd',
+                    padding: '2px 8px', borderRadius: '2px', whiteSpace: 'nowrap',
                   }}>
                     {l.resultLabel}
                   </span>
