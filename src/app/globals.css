@@ -116,17 +116,18 @@ html, body {
 
 /* スマホ: カウントダウン圧縮 */
 @media (max-width: 640px) {
-  .countdown-hero { margin-bottom: 12px !important; }
-  .countdown-hero > div:first-child { padding: 18px 14px 16px !important; }
-  .countdown-title { font-size: 9px !important; margin-bottom: 6px !important; }
-  .countdown-rocket { font-size: 20px !important; }
-  .countdown-info { font-size: 11px !important; margin-bottom: 12px !important; }
-  .countdown-numbers { gap: 4px !important; margin-bottom: 8px !important; }
-  .countdown-value { font-size: 24px !important; min-width: 36px !important; }
-  .countdown-label { font-size: 8px !important; margin-top: 3px !important; }
-  .countdown-sep { font-size: 16px !important; padding: 0 2px !important; }
-  .launch-section { margin-bottom: 14px !important; }
-  .launch-section-title { margin-bottom: 8px !important; }
+  .countdown-hero { margin-bottom: 8px !important; }
+  .countdown-hero > div:first-child { padding: 12px 14px 10px !important; }
+  .countdown-title { font-size: 9px !important; margin-bottom: 2px !important; }
+  .countdown-rocket { font-size: 18px !important; }
+  .countdown-info { font-size: 10px !important; margin-bottom: 6px !important; }
+  .countdown-numbers { gap: 4px !important; margin-bottom: 4px !important; }
+  .countdown-value { font-size: 22px !important; min-width: 32px !important; }
+  .countdown-label { font-size: 8px !important; margin-top: 2px !important; }
+  .countdown-sep { font-size: 14px !important; padding: 0 2px !important; }
+  .countdown-date { font-size: 10px !important; }
+  .launch-section { margin-bottom: 8px !important; }
+  .launch-section-title { margin-bottom: 4px !important; font-size: 12px !important; }
 }
 
 /* スマホ対応 */
