@@ -46,13 +46,18 @@ export default function UpcomingLaunches() {
   const [recent, setRecent] = useState([])
 
   useEffect(() => {
-    fetch('/data/launches.json')
-      .then(r => r.json())
-      .then(data => {
-        setLaunches(data.launches || [])
-        setRecent(data.recent || [])
-      })
-      .catch(() => {})
+    const load = () => {
+      fetch(`/data/launches.json?t=${Date.now()}`)
+        .then(r => r.json())
+        .then(data => {
+          setLaunches(data.launches || [])
+          setRecent(data.recent || [])
+        })
+        .catch(() => {})
+    }
+    load()
+    const interval = setInterval(load, 30 * 60 * 1000)
+    return () => clearInterval(interval)
   }, [])
 
   if (launches.length === 0 && recent.length === 0) return null
