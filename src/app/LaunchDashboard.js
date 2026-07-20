@@ -198,6 +198,12 @@ export default function LaunchDashboard() {
           overflow: 'hidden',
           display: 'flex',
         }}>
+          {/* スマホ用: 背景画像 */}
+          {heroImage && (
+            <div className="countdown-hero-bg">
+              <img src={heroImage} alt="" />
+            </div>
+          )}
           {/* 左: カウントダウン情報 */}
           <div style={{
             flex: 1, padding: '28px 24px 24px',

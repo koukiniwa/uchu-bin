@@ -96,9 +96,22 @@ html, body {
   .sidebar-right { display: none; }
 }
 
-/* ヒーローロケット画像（スマホで非表示） */
+/* ヒーローロケット画像（スマホでは背景として表示） */
 @media (max-width: 700px) {
   .hero-rocket-img { display: none !important; }
+  .countdown-hero-bg { display: block !important; }
+}
+.countdown-hero-bg {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.countdown-hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.25;
 }
 
 /* スマホ: カウントダウン圧縮 */
