@@ -78,8 +78,8 @@ function toJST(dateStr, timeStr) {
   const utc = new Date(Date.UTC(y, m - 1, d, h, min))
   const jst = new Date(utc.getTime() + 9 * 60 * 60 * 1000)
   return {
-    date: `${jst.getMonth() + 1}/${jst.getDate()}`,
-    time: `${String(jst.getHours()).padStart(2, '0')}:${String(jst.getMinutes()).padStart(2, '0')}`,
+    date: `${jst.getUTCMonth() + 1}/${jst.getUTCDate()}`,
+    time: `${String(jst.getUTCHours()).padStart(2, '0')}:${String(jst.getUTCMinutes()).padStart(2, '0')}`,
     fullDate: utc,
   }
 }
@@ -92,8 +92,8 @@ function relativeDate(dateStr, timeStr, tentative) {
     : new Date(Date.UTC(y, m - 1, d))
   const jst = new Date(utc.getTime() + 9 * 60 * 60 * 1000)
   const nowJST = new Date(new Date().getTime() + 9 * 60 * 60 * 1000)
-  const todayStart = new Date(nowJST.getFullYear(), nowJST.getMonth(), nowJST.getDate())
-  const targetStart = new Date(jst.getFullYear(), jst.getMonth(), jst.getDate())
+  const todayStart = new Date(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth(), nowJST.getUTCDate()))
+  const targetStart = new Date(Date.UTC(jst.getUTCFullYear(), jst.getUTCMonth(), jst.getUTCDate()))
   const diffDays = Math.round((targetStart - todayStart) / 86400000)
   if (diffDays < -1) return `${Math.abs(diffDays)}日前`
   if (diffDays === -1) return '昨日'
