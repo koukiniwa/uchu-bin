@@ -84,6 +84,26 @@ function toJST(dateStr, timeStr) {
   }
 }
 
+function relativeDate(dateStr, timeStr, tentative) {
+  if (!dateStr || tentative) return null
+  const [y, m, d] = dateStr.split('-').map(Number)
+  const utc = timeStr
+    ? new Date(Date.UTC(y, m - 1, d, ...timeStr.split(':').map(Number)))
+    : new Date(Date.UTC(y, m - 1, d))
+  const jst = new Date(utc.getTime() + 9 * 60 * 60 * 1000)
+  const nowJST = new Date(new Date().getTime() + 9 * 60 * 60 * 1000)
+  const todayStart = new Date(nowJST.getFullYear(), nowJST.getMonth(), nowJST.getDate())
+  const targetStart = new Date(jst.getFullYear(), jst.getMonth(), jst.getDate())
+  const diffDays = Math.round((targetStart - todayStart) / 86400000)
+  if (diffDays < -1) return `${Math.abs(diffDays)}日前`
+  if (diffDays === -1) return '昨日'
+  if (diffDays === 0) return '今日'
+  if (diffDays === 1) return '明日'
+  if (diffDays === 2) return '明後日'
+  if (diffDays <= 7) return `${diffDays}日後`
+  return null
+}
+
 function getCountdown(targetDate) {
   if (!targetDate) return null
   const diff = targetDate - new Date()
@@ -273,47 +293,42 @@ export default function LaunchDashboard() {
           </div>
           <div className="launch-cards">
             {recent.map((l, i) => {
-              const { date } = toJST(l.date, null, false)
+              const rel = relativeDate(l.date, null, false)
               const country = countryName(l.country)
               return (
                 <div key={`r-${l.id || i}`} style={{
-                  background: '#fff',
+                  background: '#f8f8f8',
                   border: '1px solid #e0e0e0',
                   borderRadius: '3px',
                   padding: '10px 12px',
                   minWidth: '145px',
                   flex: '1 0 145px',
-                  opacity: 0.75,
                 }}>
-                  <div style={{
-                    fontSize: '12px', fontWeight: 700, color: '#1a2744',
-                    marginBottom: '4px',
-                  }}>
-                    {date}
+                  <div style={{ fontSize: '12px', fontWeight: 700, color: '#888', marginBottom: '4px' }}>
+                    {rel || '完了'}
                     <span style={{
-                      fontSize: '9px', fontWeight: 700, color: '#555',
+                      fontSize: '9px', fontWeight: 600, color: '#555',
                       border: '1px solid #ccc', padding: '1px 5px',
                       borderRadius: '2px', marginLeft: '6px',
                     }}>
                       {l.resultLabel}
                     </span>
                   </div>
-                  <div style={{
-                    fontSize: '14px', fontWeight: 700, color: '#1a2744',
-                    marginBottom: '4px', lineHeight: 1.3,
-                  }}>
+                  <div style={{ fontSize: '14px', fontWeight: 700, color: '#555', marginBottom: '4px', lineHeight: 1.3 }}>
                     {l.rocket}
                   </div>
-                  <div style={{ fontSize: '10px', color: '#aaa', marginTop: '4px' }}>
-                    {country}
-                  </div>
+                  <div style={{ fontSize: '10px', color: '#aaa', marginTop: '4px' }}>{country}</div>
                 </div>
               )
             })}
             {upcomingCards.map((l, i) => {
               const { date, time } = toJST(l.date, l.time, l.tentative)
+              const rel = relativeDate(l.date, l.time, l.tentative)
               const country = countryName(l.country)
               const mission = l.mission && l.mission !== 'Unknown Payload' ? l.mission : ''
+              const dateLabel = rel
+                ? (time ? `${rel} ${time}` : rel)
+                : (l.tentative ? date : `${date} ${time || ''}`)
               return (
                 <div key={l.id || i} style={{
                   background: '#fff',
@@ -323,29 +338,18 @@ export default function LaunchDashboard() {
                   minWidth: '145px',
                   flex: '1 0 145px',
                 }}>
-                  <div style={{
-                    fontSize: '12px', fontWeight: 700, color: '#1a2744',
-                    marginBottom: '4px',
-                  }}>
-                    {l.tentative ? `${date}` : `${date} ${time || ''}`}
+                  <div style={{ fontSize: '12px', fontWeight: 700, color: '#1a2744', marginBottom: '4px' }}>
+                    {dateLabel}
                   </div>
-                  <div style={{
-                    fontSize: '14px', fontWeight: 700, color: '#1a2744',
-                    marginBottom: '4px', lineHeight: 1.3,
-                  }}>
+                  <div style={{ fontSize: '14px', fontWeight: 700, color: '#1a2744', marginBottom: '4px', lineHeight: 1.3 }}>
                     {l.rocket}
                   </div>
                   {mission && (
-                    <div style={{
-                      fontSize: '11px', color: '#999',
-                      overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-                    }}>
+                    <div style={{ fontSize: '11px', color: '#999', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                       {mission}
                     </div>
                   )}
-                  <div style={{ fontSize: '10px', color: '#aaa', marginTop: '4px' }}>
-                    {country}
-                  </div>
+                  <div style={{ fontSize: '10px', color: '#aaa', marginTop: '4px' }}>{country}</div>
                 </div>
               )
             })}
