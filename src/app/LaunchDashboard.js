@@ -171,16 +171,16 @@ export default function LaunchDashboard() {
       {nextLaunch && (
         <div className="countdown-hero" style={{
           background: 'linear-gradient(135deg, #0a0e1a 0%, #0f1629 40%, #1a2744 100%)',
-          borderRadius: '12px',
+          borderRadius: '4px',
           padding: '0',
-          marginBottom: '24px',
+          marginBottom: '16px',
           position: 'relative',
           overflow: 'hidden',
           display: 'flex',
         }}>
           {/* 左: カウントダウン情報 */}
           <div style={{
-            flex: 1, padding: '36px 32px 32px',
+            flex: 1, padding: '28px 24px 24px',
             position: 'relative', zIndex: 1,
           }}>
             <div style={{
@@ -208,7 +208,7 @@ export default function LaunchDashboard() {
               </div>
               <div className="countdown-info" style={{
                 fontSize: '13px', color: 'rgba(255,255,255,0.5)',
-                marginBottom: '24px',
+                marginBottom: '18px',
               }}>
                 {nextLaunch.mission && nextLaunch.mission !== 'Unknown Payload' ? nextLaunch.mission + ' | ' : ''}
                 {nextLaunch.provider || ''} | {countryName(nextLaunch.country)}
@@ -261,10 +261,10 @@ export default function LaunchDashboard() {
 
       {/* === 今後の打ち上げ === */}
       {upcomingCards.length > 0 && (
-        <div className="launch-section" style={{ marginBottom: '32px' }}>
+        <div className="launch-section" style={{ marginBottom: '20px' }}>
           <div className="launch-section-title" style={{
             fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em',
-            color: '#999', marginBottom: '14px',
+            color: '#999', marginBottom: '10px',
           }}>
             今後の打ち上げ
             <span style={{ fontSize: '9px', color: '#ccc', marginLeft: '12px', letterSpacing: '0.04em', fontWeight: 400 }}>
@@ -280,14 +280,14 @@ export default function LaunchDashboard() {
                 <div key={l.id || i} style={{
                   background: '#fff',
                   border: '1px solid #e8e8e8',
-                  borderRadius: '8px',
-                  padding: '14px 16px',
-                  minWidth: '160px',
-                  flex: '1 0 160px',
+                  borderRadius: '3px',
+                  padding: '10px 12px',
+                  minWidth: '145px',
+                  flex: '1 0 145px',
                 }}>
                   <div style={{
                     fontSize: '12px', fontWeight: 700, color: '#c62828',
-                    marginBottom: '8px',
+                    marginBottom: '4px',
                   }}>
                     {l.tentative ? `${date}` : `${date} ${time || ''}`}
                   </div>
@@ -317,10 +317,10 @@ export default function LaunchDashboard() {
 
       {/* === 最近の打ち上げ結果 === */}
       {recent.length > 0 && (
-        <div className="launch-section" style={{ marginBottom: '36px' }}>
+        <div className="launch-section" style={{ marginBottom: '24px' }}>
           <div className="launch-section-title" style={{
             fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em',
-            color: '#999', marginBottom: '14px',
+            color: '#999', marginBottom: '10px',
           }}>
             最近の結果
           </div>
@@ -331,10 +331,10 @@ export default function LaunchDashboard() {
               const country = countryName(l.country)
               return (
                 <div key={`r-${l.id || i}`} style={{
-                  display: 'flex', alignItems: 'center', gap: '12px',
-                  padding: '10px 16px',
+                  display: 'flex', alignItems: 'center', gap: '10px',
+                  padding: '8px 12px',
                   background: isSuccess ? '#f6faf6' : '#fef6f5',
-                  borderRadius: '8px',
+                  borderRadius: '3px',
                   borderLeft: `3px solid ${isSuccess ? '#2e7d32' : '#c62828'}`,
                 }}>
                   <span style={{

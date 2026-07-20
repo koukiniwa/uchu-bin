@@ -24,7 +24,7 @@ html, body {
 .mil-card {
   background-color: #ffffff;
   border: 1px solid #e8e8e8;
-  border-radius: 8px;
+  border-radius: 3px;
   transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
   cursor: pointer;
 }
@@ -61,16 +61,17 @@ html, body {
 
 /* スマホ: カウントダウン圧縮 */
 @media (max-width: 640px) {
-  .countdown-hero { padding: 20px 16px 18px !important; margin-bottom: 16px !important; }
-  .countdown-hero .countdown-title { font-size: 10px !important; margin-bottom: 8px !important; }
-  .countdown-hero .countdown-rocket { font-size: 20px !important; }
-  .countdown-hero .countdown-info { font-size: 11px !important; margin-bottom: 16px !important; }
-  .countdown-numbers { gap: 6px !important; margin-bottom: 10px !important; }
-  .countdown-value { font-size: 24px !important; min-width: 40px !important; }
-  .countdown-label { font-size: 8px !important; }
-  .countdown-sep { font-size: 18px !important; }
-  .launch-section { margin-bottom: 20px !important; }
-  .launch-section-title { margin-bottom: 10px !important; }
+  .countdown-hero { margin-bottom: 12px !important; }
+  .countdown-hero > div:first-child { padding: 18px 14px 16px !important; }
+  .countdown-title { font-size: 9px !important; margin-bottom: 6px !important; }
+  .countdown-rocket { font-size: 20px !important; }
+  .countdown-info { font-size: 11px !important; margin-bottom: 12px !important; }
+  .countdown-numbers { gap: 4px !important; margin-bottom: 8px !important; }
+  .countdown-value { font-size: 24px !important; min-width: 36px !important; }
+  .countdown-label { font-size: 8px !important; margin-top: 3px !important; }
+  .countdown-sep { font-size: 16px !important; padding: 0 2px !important; }
+  .launch-section { margin-bottom: 14px !important; }
+  .launch-section-title { margin-bottom: 8px !important; }
 }
 
 /* スマホ対応 */

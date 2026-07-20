@@ -10,13 +10,13 @@ function ArticleCard({ post }) {
         width: '100%', overflow: 'hidden', cursor: 'pointer',
         display: 'flex', flexDirection: 'column',
         backgroundColor: '#ffffff', border: '1px solid #e8e8e8',
-        borderRadius: '8px',
+        borderRadius: '3px',
         transition: 'box-shadow 0.2s, transform 0.2s, border-color 0.2s',
       }}>
         <div className="card-img" style={{
           position: 'relative', height: '200px',
           backgroundColor: '#1a2744', flexShrink: 0,
-          borderRadius: '8px 8px 0 0', overflow: 'hidden',
+          borderRadius: '3px 3px 0 0', overflow: 'hidden',
         }}>
           {post.image ? (
             <img src={post.image} alt={post.title} loading="lazy"
