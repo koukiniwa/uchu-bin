@@ -99,13 +99,13 @@ function getCountdown(targetDate) {
 function CountdownUnit({ value, label }) {
   return (
     <div style={{ textAlign: 'center' }}>
-      <div style={{
+      <div className="countdown-value" style={{
         fontSize: '36px', fontWeight: 800, color: '#fff',
         fontFamily: 'monospace', lineHeight: 1, minWidth: '56px',
       }}>
         {String(value).padStart(2, '0')}
       </div>
-      <div style={{
+      <div className="countdown-label" style={{
         fontSize: '10px', fontWeight: 600, color: 'rgba(255,255,255,0.4)',
         letterSpacing: '0.08em', marginTop: '6px',
       }}>
@@ -117,7 +117,7 @@ function CountdownUnit({ value, label }) {
 
 function Separator() {
   return (
-    <div style={{
+    <div className="countdown-sep" style={{
       fontSize: '24px', fontWeight: 300, color: 'rgba(255,255,255,0.2)',
       padding: '0 4px', lineHeight: 1,
     }}>:</div>
@@ -169,7 +169,7 @@ export default function LaunchDashboard() {
     <div>
       {/* === HERO: 次の打ち上げカウントダウン === */}
       {nextLaunch && (
-        <div style={{
+        <div className="countdown-hero" style={{
           background: 'linear-gradient(135deg, #0a0e1a 0%, #0f1629 40%, #1a2744 100%)',
           borderRadius: '12px',
           padding: '0',
@@ -194,19 +194,19 @@ export default function LaunchDashboard() {
               `,
             }} />
             <div style={{ position: 'relative' }}>
-              <div style={{
+              <div className="countdown-title" style={{
                 fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em',
                 color: 'rgba(255,255,255,0.35)', marginBottom: '14px',
               }}>
                 次の打ち上げ
               </div>
-              <div style={{
+              <div className="countdown-rocket" style={{
                 fontSize: '26px', fontWeight: 800, color: '#fff',
                 marginBottom: '4px', lineHeight: 1.2,
               }}>
                 {nextLaunch.rocket}
               </div>
-              <div style={{
+              <div className="countdown-info" style={{
                 fontSize: '13px', color: 'rgba(255,255,255,0.5)',
                 marginBottom: '24px',
               }}>
@@ -215,7 +215,7 @@ export default function LaunchDashboard() {
               </div>
 
               {countdown && (
-                <div style={{
+                <div className="countdown-numbers" style={{
                   display: 'flex', alignItems: 'center', gap: '10px',
                   marginBottom: '16px',
                 }}>
@@ -261,8 +261,8 @@ export default function LaunchDashboard() {
 
       {/* === 今後の打ち上げ === */}
       {upcomingCards.length > 0 && (
-        <div style={{ marginBottom: '32px' }}>
-          <div style={{
+        <div className="launch-section" style={{ marginBottom: '32px' }}>
+          <div className="launch-section-title" style={{
             fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em',
             color: '#999', marginBottom: '14px',
           }}>
@@ -317,8 +317,8 @@ export default function LaunchDashboard() {
 
       {/* === 最近の打ち上げ結果 === */}
       {recent.length > 0 && (
-        <div style={{ marginBottom: '36px' }}>
-          <div style={{
+        <div className="launch-section" style={{ marginBottom: '36px' }}>
+          <div className="launch-section-title" style={{
             fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em',
             color: '#999', marginBottom: '14px',
           }}>

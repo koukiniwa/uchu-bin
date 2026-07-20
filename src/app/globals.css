@@ -59,6 +59,20 @@ html, body {
   .hero-rocket-img { display: none !important; }
 }
 
+/* スマホ: カウントダウン圧縮 */
+@media (max-width: 640px) {
+  .countdown-hero { padding: 20px 16px 18px !important; margin-bottom: 16px !important; }
+  .countdown-hero .countdown-title { font-size: 10px !important; margin-bottom: 8px !important; }
+  .countdown-hero .countdown-rocket { font-size: 20px !important; }
+  .countdown-hero .countdown-info { font-size: 11px !important; margin-bottom: 16px !important; }
+  .countdown-numbers { gap: 6px !important; margin-bottom: 10px !important; }
+  .countdown-value { font-size: 24px !important; min-width: 40px !important; }
+  .countdown-label { font-size: 8px !important; }
+  .countdown-sep { font-size: 18px !important; }
+  .launch-section { margin-bottom: 20px !important; }
+  .launch-section-title { margin-bottom: 10px !important; }
+}
+
 /* スマホ対応 */
 @media (max-width: 640px) {
   .article-grid { grid-template-columns: 1fr; gap: 12px; }
