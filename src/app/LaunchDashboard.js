@@ -259,101 +259,105 @@ export default function LaunchDashboard() {
         </div>
       )}
 
-      {/* === 今後の打ち上げ === */}
-      {upcomingCards.length > 0 && (
+      {/* === 打ち上げスケジュール（テーブル形式） === */}
+      {(upcomingCards.length > 0 || recent.length > 0) && (
         <div className="launch-section" style={{ marginBottom: '20px' }}>
-          <div className="launch-section-title" style={{
-            fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em',
-            color: '#999', marginBottom: '10px',
-          }}>
-            今後の打ち上げ
-            <span style={{ fontSize: '9px', color: '#ccc', marginLeft: '12px', letterSpacing: '0.04em', fontWeight: 400 }}>
-              ※Starlinkを除く
-            </span>
-          </div>
-          <div className="launch-cards">
-            {upcomingCards.map((l, i) => {
-              const { date, time } = toJST(l.date, l.time, l.tentative)
-              const country = countryName(l.country)
-              const mission = l.mission && l.mission !== 'Unknown Payload' ? l.mission : ''
-              return (
-                <div key={l.id || i} style={{
-                  background: '#fff',
-                  border: '1px solid #e8e8e8',
-                  borderRadius: '3px',
-                  padding: '10px 12px',
-                  minWidth: '145px',
-                  flex: '1 0 145px',
-                }}>
-                  <div style={{
-                    fontSize: '12px', fontWeight: 700, color: '#c62828',
-                    marginBottom: '4px',
-                  }}>
-                    {l.tentative ? `${date}` : `${date} ${time || ''}`}
-                  </div>
-                  <div style={{
-                    fontSize: '14px', fontWeight: 700, color: '#1a2744',
-                    marginBottom: '4px', lineHeight: 1.3,
-                  }}>
-                    {l.rocket}
-                  </div>
-                  {mission && (
-                    <div style={{
-                      fontSize: '11px', color: '#999',
-                      overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
+            {recent.length > 0 && (
+              <>
+                <thead>
+                  <tr>
+                    <td colSpan={4} style={{
+                      fontSize: '10px', fontWeight: 700, letterSpacing: '0.08em',
+                      color: '#999', padding: '0 0 6px', borderBottom: '2px solid #e0e0e0',
                     }}>
-                      {mission}
-                    </div>
-                  )}
-                  <div style={{ fontSize: '10px', color: '#aaa', marginTop: '6px' }}>
-                    {country}
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      )}
-
-      {/* === 最近の打ち上げ結果 === */}
-      {recent.length > 0 && (
-        <div className="launch-section" style={{ marginBottom: '24px' }}>
-          <div className="launch-section-title" style={{
-            fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em',
-            color: '#999', marginBottom: '10px',
-          }}>
-            最近の結果
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            {recent.map((l, i) => {
-              const isSuccess = l.result === 'success'
-              const { date } = toJST(l.date, null, false)
-              const country = countryName(l.country)
-              return (
-                <div key={`r-${l.id || i}`} style={{
-                  display: 'flex', alignItems: 'center', gap: '10px',
-                  padding: '8px 12px',
-                  background: isSuccess ? '#f6faf6' : '#fef6f5',
-                  borderRadius: '3px',
-                  borderLeft: `3px solid ${isSuccess ? '#2e7d32' : '#c62828'}`,
-                }}>
-                  <span style={{
-                    fontSize: '10px', fontWeight: 700,
-                    color: isSuccess ? '#2e7d32' : '#c62828',
-                    background: isSuccess ? '#c8e6c9' : '#ffcdd2',
-                    padding: '2px 8px', borderRadius: '4px', whiteSpace: 'nowrap',
-                  }}>
-                    {l.resultLabel}
-                  </span>
-                  <span style={{ fontSize: '13px', fontWeight: 600, color: '#333', flex: 1 }}>
-                    {l.rocket}
-                  </span>
-                  <span style={{ fontSize: '11px', color: '#999' }}>{country}</span>
-                  <span style={{ fontSize: '11px', color: '#bbb' }}>{date}</span>
-                </div>
-              )
-            })}
-          </div>
+                      最近の結果
+                    </td>
+                  </tr>
+                </thead>
+                <tbody>
+                  {recent.map((l, i) => {
+                    const isSuccess = l.result === 'success'
+                    const { date } = toJST(l.date, null, false)
+                    return (
+                      <tr key={`r-${l.id || i}`} style={{
+                        borderBottom: '1px solid #f0f0f0',
+                        background: isSuccess ? '#f8fbf8' : '#fef8f7',
+                      }}>
+                        <td style={{ padding: '7px 0', width: '80px', whiteSpace: 'nowrap' }}>
+                          <span style={{
+                            fontSize: '10px', fontWeight: 700,
+                            color: isSuccess ? '#2e7d32' : '#c62828',
+                            background: isSuccess ? '#c8e6c9' : '#ffcdd2',
+                            padding: '2px 6px', borderRadius: '2px',
+                          }}>
+                            {l.resultLabel}
+                          </span>
+                        </td>
+                        <td style={{ padding: '7px 8px', fontWeight: 600, color: '#333' }}>
+                          {l.rocket}
+                        </td>
+                        <td style={{ padding: '7px 8px', color: '#999', fontSize: '12px', textAlign: 'right' }}>
+                          {countryName(l.country)}
+                        </td>
+                        <td style={{ padding: '7px 0', color: '#bbb', fontSize: '12px', textAlign: 'right', width: '50px' }}>
+                          {date}
+                        </td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </>
+            )}
+            {upcomingCards.length > 0 && (
+              <>
+                <thead>
+                  <tr>
+                    <td colSpan={4} style={{
+                      fontSize: '10px', fontWeight: 700, letterSpacing: '0.08em',
+                      color: '#999', padding: `${recent.length > 0 ? '14px' : '0'} 0 6px`,
+                      borderBottom: '2px solid #e0e0e0',
+                    }}>
+                      今後の打ち上げ
+                      <span style={{ fontSize: '9px', color: '#ccc', marginLeft: '8px', fontWeight: 400 }}>
+                        Starlink除く
+                      </span>
+                    </td>
+                  </tr>
+                </thead>
+                <tbody>
+                  {upcomingCards.map((l, i) => {
+                    const { date, time } = toJST(l.date, l.time, l.tentative)
+                    const mission = l.mission && l.mission !== 'Unknown Payload' ? l.mission : ''
+                    return (
+                      <tr key={l.id || i} style={{ borderBottom: '1px solid #f0f0f0' }}>
+                        <td style={{
+                          padding: '7px 0', fontWeight: 700, fontSize: '12px',
+                          color: '#c62828', whiteSpace: 'nowrap', width: '80px',
+                        }}>
+                          {l.tentative ? date : `${date}`}
+                          {!l.tentative && time && (
+                            <span style={{ color: '#999', fontWeight: 400, marginLeft: '4px' }}>{time}</span>
+                          )}
+                        </td>
+                        <td style={{ padding: '7px 8px', fontWeight: 600, color: '#1a2744' }}>
+                          {l.rocket}
+                          {mission && (
+                            <span style={{ color: '#aaa', fontWeight: 400, marginLeft: '6px', fontSize: '11px' }}>
+                              {mission}
+                            </span>
+                          )}
+                        </td>
+                        <td style={{ padding: '7px 0', color: '#999', fontSize: '12px', textAlign: 'right' }} colSpan={2}>
+                          {countryName(l.country)}
+                        </td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </>
+            )}
+          </table>
         </div>
       )}
     </div>
