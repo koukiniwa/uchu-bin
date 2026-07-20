@@ -8,6 +8,58 @@ const COUNTRY_NAMES = {
   GB: 'UK', BR: 'ブラジル', IL: 'イスラエル', AU: '豪州',
 }
 
+const ROCKET_IMAGES = {
+  'starship': 'starship_001.jpg',
+  'falcon 9': 'falcon9_001.jpg',
+  'falcon heavy': 'falconheavy_001.jpg',
+  'electron': 'electron_001.jpg',
+  'neutron': 'neutron_001.jpg',
+  'h3': 'h3_001.jpg',
+  'h-3': 'h3_001.jpg',
+  'ariane 6': 'ariane6_001.jpg',
+  'ariane 5': 'ariane5_001.jpg',
+  'soyuz': 'soyuz_001.jpg',
+  'long march': 'longmarch5_001.jpg',
+  'long march 5': 'longmarch5_001.jpg',
+  'long march 7': 'longmarch7_001.jpg',
+  'long march 8': 'longmarch8_001.jpg',
+  'long march 3': 'longmarch5_001.jpg',
+  'vulcan': 'vulcan_001.jpg',
+  'new glenn': 'newglenn_001.jpg',
+  'new shepard': 'newshepard_001.jpg',
+  'vega': 'vegac_001.jpg',
+  'pslv': 'pslv_001.jpg',
+  'gslv': 'gslv_001.jpg',
+  'lvm3': 'lvm3_001.jpg',
+  'sls': 'sls_001.jpg',
+  'vikram': 'vikram1_001.jpg',
+  'kairos': 'kairos_001.jpg',
+  'epsilon': 'epsilon_001.jpg',
+  'nuri': 'nuri_001.jpg',
+  'gravity-1': 'gravity1_001.jpg',
+  'kinetica': 'kinetica1_001.jpg',
+  'spectrum': 'spectrum_001.jpg',
+  'terran': 'terranr_001.jpg',
+  'firefly': 'fireflyalpha_001.jpg',
+  'angara': 'angara_001.jpg',
+  'proton': 'proton_001.jpg',
+  'zhuque': 'zhuque_001.jpg',
+  'delta iv': 'deltaiv_001.jpg',
+  'atlas': 'atlasv_001.jpg',
+  'miura': 'miura_001.jpg',
+  'rfa': 'rocketlaunch_001.jpg',
+  'mir': 'mir_001.jpg',
+}
+
+function getRocketImage(rocketName) {
+  if (!rocketName) return null
+  const lower = rocketName.toLowerCase()
+  for (const [key, file] of Object.entries(ROCKET_IMAGES)) {
+    if (lower.includes(key)) return `/images/library/${file}`
+  }
+  return '/images/library/rocketlaunch_001.jpg'
+}
+
 function countryName(code) {
   if (!code) return ''
   const iso2 = code.length === 2 ? code : {
@@ -48,21 +100,14 @@ function CountdownUnit({ value, label }) {
   return (
     <div style={{ textAlign: 'center' }}>
       <div style={{
-        fontSize: '36px',
-        fontWeight: 800,
-        color: '#fff',
-        fontFamily: 'monospace',
-        lineHeight: 1,
-        minWidth: '56px',
+        fontSize: '36px', fontWeight: 800, color: '#fff',
+        fontFamily: 'monospace', lineHeight: 1, minWidth: '56px',
       }}>
         {String(value).padStart(2, '0')}
       </div>
       <div style={{
-        fontSize: '9px',
-        fontWeight: 600,
-        color: 'rgba(255,255,255,0.4)',
-        letterSpacing: '0.15em',
-        marginTop: '6px',
+        fontSize: '10px', fontWeight: 600, color: 'rgba(255,255,255,0.4)',
+        letterSpacing: '0.08em', marginTop: '6px',
       }}>
         {label}
       </div>
@@ -73,11 +118,8 @@ function CountdownUnit({ value, label }) {
 function Separator() {
   return (
     <div style={{
-      fontSize: '24px',
-      fontWeight: 300,
-      color: 'rgba(255,255,255,0.2)',
-      padding: '0 4px',
-      lineHeight: 1,
+      fontSize: '24px', fontWeight: 300, color: 'rgba(255,255,255,0.2)',
+      padding: '0 4px', lineHeight: 1,
     }}>:</div>
   )
 }
@@ -121,88 +163,112 @@ export default function LaunchDashboard() {
 
   const upcomingCards = launches.slice(nextLaunch ? 1 : 0, 6)
   const nextJST = nextLaunch ? toJST(nextLaunch.date, nextLaunch.time) : null
+  const heroImage = nextLaunch ? getRocketImage(nextLaunch.rocket) : null
 
   return (
     <div>
-      {/* === HERO: Next Launch Countdown === */}
+      {/* === HERO: 次の打ち上げカウントダウン === */}
       {nextLaunch && (
         <div style={{
           background: 'linear-gradient(135deg, #0a0e1a 0%, #0f1629 40%, #1a2744 100%)',
           borderRadius: '12px',
-          padding: '40px 32px 36px',
+          padding: '0',
           marginBottom: '24px',
           position: 'relative',
           overflow: 'hidden',
+          display: 'flex',
         }}>
+          {/* 左: カウントダウン情報 */}
           <div style={{
-            position: 'absolute', inset: 0, opacity: 0.15,
-            backgroundImage: `
-              radial-gradient(1px 1px at 10% 20%, #fff, transparent),
-              radial-gradient(1.5px 1.5px at 30% 60%, #fff, transparent),
-              radial-gradient(1px 1px at 50% 15%, #fff, transparent),
-              radial-gradient(1.5px 1.5px at 70% 45%, #fff, transparent),
-              radial-gradient(1px 1px at 85% 75%, #fff, transparent),
-              radial-gradient(1px 1px at 95% 30%, #fff, transparent)
-            `,
-          }} />
-          <div style={{ position: 'relative' }}>
+            flex: 1, padding: '36px 32px 32px',
+            position: 'relative', zIndex: 1,
+          }}>
             <div style={{
-              fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em',
-              color: 'rgba(255,255,255,0.35)', marginBottom: '16px',
-            }}>
-              NEXT LAUNCH
-            </div>
-            <div style={{
-              fontSize: '28px', fontWeight: 800, color: '#fff',
-              marginBottom: '4px', lineHeight: 1.2,
-            }}>
-              {nextLaunch.rocket}
-            </div>
-            <div style={{
-              fontSize: '14px', color: 'rgba(255,255,255,0.5)',
-              marginBottom: '28px',
-            }}>
-              {nextLaunch.mission && nextLaunch.mission !== 'Unknown Payload' ? nextLaunch.mission + ' | ' : ''}
-              {nextLaunch.provider || ''} | {countryName(nextLaunch.country)}
-            </div>
-
-            {countdown && (
+              position: 'absolute', inset: 0, opacity: 0.12,
+              backgroundImage: `
+                radial-gradient(1px 1px at 10% 20%, #fff, transparent),
+                radial-gradient(1.5px 1.5px at 30% 60%, #fff, transparent),
+                radial-gradient(1px 1px at 50% 15%, #fff, transparent),
+                radial-gradient(1.5px 1.5px at 70% 45%, #fff, transparent),
+                radial-gradient(1px 1px at 85% 75%, #fff, transparent)
+              `,
+            }} />
+            <div style={{ position: 'relative' }}>
               <div style={{
-                display: 'flex', alignItems: 'center', gap: '12px',
-                marginBottom: '20px',
+                fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em',
+                color: 'rgba(255,255,255,0.35)', marginBottom: '14px',
               }}>
-                <CountdownUnit value={countdown.days} label="DAYS" />
-                <Separator />
-                <CountdownUnit value={countdown.hours} label="HRS" />
-                <Separator />
-                <CountdownUnit value={countdown.minutes} label="MIN" />
-                <Separator />
-                <CountdownUnit value={countdown.seconds} label="SEC" />
+                次の打ち上げ
               </div>
-            )}
-
-            {nextJST && (
               <div style={{
-                fontSize: '12px', color: 'rgba(255,255,255,0.35)',
-                letterSpacing: '0.05em',
+                fontSize: '26px', fontWeight: 800, color: '#fff',
+                marginBottom: '4px', lineHeight: 1.2,
               }}>
-                {nextJST.date} {nextJST.time} JST
+                {nextLaunch.rocket}
               </div>
-            )}
+              <div style={{
+                fontSize: '13px', color: 'rgba(255,255,255,0.5)',
+                marginBottom: '24px',
+              }}>
+                {nextLaunch.mission && nextLaunch.mission !== 'Unknown Payload' ? nextLaunch.mission + ' | ' : ''}
+                {nextLaunch.provider || ''} | {countryName(nextLaunch.country)}
+              </div>
+
+              {countdown && (
+                <div style={{
+                  display: 'flex', alignItems: 'center', gap: '10px',
+                  marginBottom: '16px',
+                }}>
+                  <CountdownUnit value={countdown.days} label="日" />
+                  <Separator />
+                  <CountdownUnit value={countdown.hours} label="時間" />
+                  <Separator />
+                  <CountdownUnit value={countdown.minutes} label="分" />
+                  <Separator />
+                  <CountdownUnit value={countdown.seconds} label="秒" />
+                </div>
+              )}
+
+              {nextJST && (
+                <div style={{
+                  fontSize: '12px', color: 'rgba(255,255,255,0.35)',
+                  letterSpacing: '0.05em',
+                }}>
+                  {nextJST.date} {nextJST.time} JST
+                </div>
+              )}
+            </div>
           </div>
+
+          {/* 右: ロケット画像 */}
+          {heroImage && (
+            <div className="hero-rocket-img" style={{
+              width: '280px', flexShrink: 0,
+              position: 'relative',
+            }}>
+              <img src={heroImage} alt={nextLaunch.rocket} style={{
+                width: '100%', height: '100%', objectFit: 'cover',
+                opacity: 0.7,
+              }} />
+              <div style={{
+                position: 'absolute', inset: 0,
+                background: 'linear-gradient(to right, #0f1629 0%, transparent 40%)',
+              }} />
+            </div>
+          )}
         </div>
       )}
 
-      {/* === UPCOMING LAUNCHES === */}
+      {/* === 今後の打ち上げ === */}
       {upcomingCards.length > 0 && (
         <div style={{ marginBottom: '32px' }}>
           <div style={{
-            fontSize: '11px', fontWeight: 700, letterSpacing: '0.15em',
+            fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em',
             color: '#999', marginBottom: '14px',
           }}>
-            UPCOMING
-            <span style={{ fontSize: '9px', color: '#ccc', marginLeft: '12px', letterSpacing: '0.05em', fontWeight: 400 }}>
-              Starlink除く
+            今後の打ち上げ
+            <span style={{ fontSize: '9px', color: '#ccc', marginLeft: '12px', letterSpacing: '0.04em', fontWeight: 400 }}>
+              ※Starlinkを除く
             </span>
           </div>
           <div className="launch-cards">
@@ -239,9 +305,7 @@ export default function LaunchDashboard() {
                       {mission}
                     </div>
                   )}
-                  <div style={{
-                    fontSize: '10px', color: '#aaa', marginTop: '6px',
-                  }}>
+                  <div style={{ fontSize: '10px', color: '#aaa', marginTop: '6px' }}>
                     {country}
                   </div>
                 </div>
@@ -251,14 +315,14 @@ export default function LaunchDashboard() {
         </div>
       )}
 
-      {/* === RECENT RESULTS === */}
+      {/* === 最近の打ち上げ結果 === */}
       {recent.length > 0 && (
         <div style={{ marginBottom: '36px' }}>
           <div style={{
-            fontSize: '11px', fontWeight: 700, letterSpacing: '0.15em',
+            fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em',
             color: '#999', marginBottom: '14px',
           }}>
-            RECENT RESULTS
+            最近の結果
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             {recent.map((l, i) => {
@@ -267,9 +331,7 @@ export default function LaunchDashboard() {
               const country = countryName(l.country)
               return (
                 <div key={`r-${l.id || i}`} style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '12px',
+                  display: 'flex', alignItems: 'center', gap: '12px',
                   padding: '10px 16px',
                   background: isSuccess ? '#f6faf6' : '#fef6f5',
                   borderRadius: '8px',
@@ -279,8 +341,7 @@ export default function LaunchDashboard() {
                     fontSize: '10px', fontWeight: 700,
                     color: isSuccess ? '#2e7d32' : '#c62828',
                     background: isSuccess ? '#c8e6c9' : '#ffcdd2',
-                    padding: '2px 8px', borderRadius: '4px',
-                    whiteSpace: 'nowrap',
+                    padding: '2px 8px', borderRadius: '4px', whiteSpace: 'nowrap',
                   }}>
                     {l.resultLabel}
                   </span>

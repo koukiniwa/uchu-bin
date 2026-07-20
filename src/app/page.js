@@ -78,7 +78,7 @@ export default function Home() {
         paddingBottom: '10px', borderBottom: '1px solid #e8e8e8',
         display: 'flex', justifyContent: 'space-between',
       }}>
-        <span>ARTICLES</span>
+        <span>ニュース</span>
         <span style={{ fontWeight: 400, letterSpacing: '0.05em' }}>{posts.length}件</span>
       </div>
 

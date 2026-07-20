@@ -54,6 +54,11 @@ html, body {
 .launch-cards::-webkit-scrollbar { display: none; }
 .launch-cards { -ms-overflow-style: none; scrollbar-width: none; }
 
+/* ヒーローロケット画像（スマホで非表示） */
+@media (max-width: 700px) {
+  .hero-rocket-img { display: none !important; }
+}
+
 /* スマホ対応 */
 @media (max-width: 640px) {
   .article-grid { grid-template-columns: 1fr; gap: 12px; }

@@ -84,7 +84,7 @@ export default function RootLayout({ children }) {
             </Link>
             <nav style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
               <Link href="/" style={{ fontSize: '12px', color: 'rgba(255,255,255,0.7)', textDecoration: 'none', letterSpacing: '0.08em' }}>
-                HOME
+                ホーム
               </Link>
               <a href="https://x.com/hgS9nGJWWF17545" target="_blank" rel="noopener noreferrer"
                 style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', textDecoration: 'none', letterSpacing: '0.08em' }}>
