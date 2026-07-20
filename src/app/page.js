@@ -83,23 +83,10 @@ export default function Home() {
       </div>
 
       <div className="article-grid">
-        {posts.slice(0, 12).map(post => (
+        {posts.map(post => (
           <ArticleCard key={post.slug} post={post} />
         ))}
       </div>
-
-      {posts.length > 12 && (
-        <div style={{ textAlign: 'center', marginTop: '32px' }}>
-          <Link href="/?page=all" style={{
-            display: 'inline-block', padding: '10px 32px',
-            fontSize: '13px', fontWeight: 600, color: '#1a2744',
-            border: '1px solid #1a2744', borderRadius: '6px',
-            textDecoration: 'none',
-          }}>
-            すべての記事を見る
-          </Link>
-        </div>
-      )}
     </div>
   )
 }
