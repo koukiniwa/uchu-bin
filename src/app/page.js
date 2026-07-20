@@ -5,12 +5,10 @@ import ArticleList from './ArticleList'
 
 function MapCard({ href, img, alt, title, desc }) {
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer"
+    <a href={href} target="_blank" rel="noopener noreferrer" className="map-card"
       style={{ display: 'block', textDecoration: 'none', borderRadius: '3px',
         overflow: 'hidden', border: '1px solid #e0e0e0', marginBottom: '12px',
         boxShadow: '0 1px 4px rgba(0,0,0,0.06)', transition: 'box-shadow 0.15s, transform 0.15s' }}
-      onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)'; e.currentTarget.style.transform = 'translateY(-1px)' }}
-      onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 1px 4px rgba(0,0,0,0.06)'; e.currentTarget.style.transform = 'translateY(0)' }}
     >
       <img src={img} alt={alt} style={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', display: 'block' }} />
       <div style={{ padding: '8px 10px 10px', background: '#fff' }}>
