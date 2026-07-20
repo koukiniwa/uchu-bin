@@ -54,6 +54,17 @@ html, body {
 .launch-cards::-webkit-scrollbar { display: none; }
 .launch-cards { -ms-overflow-style: none; scrollbar-width: none; }
 
+/* 右サイドバー（マップカード） */
+.sidebar-right {
+  position: absolute;
+  top: 0;
+  right: -230px;
+  width: 210px;
+}
+@media (max-width: 1200px) {
+  .sidebar-right { display: none; }
+}
+
 /* ヒーローロケット画像（スマホで非表示） */
 @media (max-width: 700px) {
   .hero-rocket-img { display: none !important; }
