@@ -181,7 +181,7 @@ export default function LaunchDashboard() {
     return () => clearInterval(timer)
   }, [nextLaunch])
 
-  const upcomingCards = launches.slice(nextLaunch ? 1 : 0, 6)
+  const upcomingCards = launches.slice(nextLaunch ? 1 : 0, 10)
   const nextJST = nextLaunch ? toJST(nextLaunch.date, nextLaunch.time) : null
   const heroImage = nextLaunch ? getRocketImage(nextLaunch.rocket) : null
 
