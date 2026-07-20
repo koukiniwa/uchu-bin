@@ -59,6 +59,12 @@ jobs:
         if: steps.check.outputs.found == 'true'
         run: sleep 180
 
+      - name: Googleにサイトマップ通知
+        if: steps.check.outputs.found == 'true'
+        run: |
+          curl -s "https://www.google.com/ping?sitemap=https://www.uchu-bin.jp/sitemap.xml" || true
+          echo "サイトマップping送信完了"
+
       - name: Twitterに投稿
         if: steps.check.outputs.found == 'true'
         env:
