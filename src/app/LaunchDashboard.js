@@ -304,23 +304,29 @@ export default function LaunchDashboard() {
                   minWidth: '145px',
                   flex: '1 0 145px',
                 }}>
-                  <div style={{ fontSize: '12px', fontWeight: 700, color: '#888', marginBottom: '4px' }}>
+                  <div style={{ fontSize: '11px', fontWeight: 600, color: '#aaa', marginBottom: '4px' }}>
                     {rel || '完了'}
                     <span style={{
-                      fontSize: '9px', fontWeight: 600, color: '#555',
-                      border: '1px solid #ccc', padding: '1px 5px',
+                      fontSize: '9px', fontWeight: 600, color: '#888',
+                      background: '#eee', padding: '1px 5px',
                       borderRadius: '2px', marginLeft: '6px',
                     }}>
                       {l.resultLabel}
                     </span>
                   </div>
-                  <div style={{ fontSize: '14px', fontWeight: 700, color: '#555', marginBottom: '4px', lineHeight: 1.3 }}>
+                  <div style={{ fontSize: '14px', fontWeight: 700, color: '#999', marginBottom: '4px', lineHeight: 1.3, textDecoration: 'line-through', textDecorationColor: '#ddd' }}>
                     {l.rocket}
                   </div>
                   <div style={{ fontSize: '10px', color: '#aaa', marginTop: '4px' }}>{country}</div>
                 </div>
               )
             })}
+            {recent.length > 0 && upcomingCards.length > 0 && (
+              <div style={{
+                minWidth: '1px', width: '1px', alignSelf: 'stretch',
+                background: '#ccc', margin: '0 4px', flexShrink: 0,
+              }} />
+            )}
             {upcomingCards.map((l, i) => {
               const { date, time } = toJST(l.date, l.time, l.tentative)
               const rel = relativeDate(l.date, l.time, l.tentative)
