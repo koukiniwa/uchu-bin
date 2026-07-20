@@ -291,39 +291,59 @@ export default function LaunchDashboard() {
               Starlink除く
             </span>
           </div>
-          <div className="launch-cards">
-            {upcomingCards.map((l, i) => {
-              const { date, time } = toJST(l.date, l.time, l.tentative)
-              const rel = relativeDate(l.date, l.time, l.tentative)
-              const country = countryName(l.country)
-              const mission = l.mission && l.mission !== 'Unknown Payload' ? l.mission : ''
-              const dateLabel = rel
-                ? (time ? `${rel} ${time}` : rel)
-                : (l.tentative ? date : `${date} ${time || ''}`)
-              return (
-                <div key={l.id || i} style={{
-                  background: '#fff',
-                  border: '1px solid #e8e8e8',
-                  borderRadius: '3px',
-                  padding: '10px 12px',
-                  minWidth: '145px',
-                  flex: '1 0 145px',
-                }}>
-                  <div style={{ fontSize: '12px', fontWeight: 700, color: '#1a2744', marginBottom: '4px' }}>
-                    {dateLabel}
-                  </div>
-                  <div style={{ fontSize: '14px', fontWeight: 700, color: '#1a2744', marginBottom: '4px', lineHeight: 1.3 }}>
-                    {l.rocket}
-                  </div>
-                  {mission && (
-                    <div style={{ fontSize: '11px', color: '#999', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                      {mission}
+          <div style={{ position: 'relative' }}>
+            <button className="scroll-arrow scroll-arrow-left" onClick={() => {
+              const el = document.querySelector('.launch-cards')
+              if (el) el.scrollBy({ left: -200, behavior: 'smooth' })
+            }}>&#8249;</button>
+            <button className="scroll-arrow scroll-arrow-right" onClick={() => {
+              const el = document.querySelector('.launch-cards')
+              if (el) el.scrollBy({ left: 200, behavior: 'smooth' })
+            }}>&#8250;</button>
+            <div className="launch-cards">
+              {upcomingCards.map((l, i) => {
+                const { date, time } = toJST(l.date, l.time, l.tentative)
+                const rel = relativeDate(l.date, l.time, l.tentative)
+                const country = countryName(l.country)
+                const mission = l.mission && l.mission !== 'Unknown Payload' ? l.mission : ''
+                const rocketImg = getRocketImage(l.rocket)
+                const dateLabel = rel
+                  ? (time ? `${rel} ${time}` : rel)
+                  : (l.tentative ? date : `${date} ${time || ''}`)
+                return (
+                  <div key={l.id || i} style={{
+                    background: '#fff',
+                    border: '1px solid #e8e8e8',
+                    borderRadius: '3px',
+                    minWidth: '155px',
+                    flex: '1 0 155px',
+                    overflow: 'hidden',
+                  }}>
+                    {rocketImg && (
+                      <div style={{ height: '80px', overflow: 'hidden' }}>
+                        <img src={rocketImg} alt={l.rocket} style={{
+                          width: '100%', height: '100%', objectFit: 'cover',
+                        }} />
+                      </div>
+                    )}
+                    <div style={{ padding: '8px 10px' }}>
+                      <div style={{ fontSize: '11px', fontWeight: 700, color: '#1a2744', marginBottom: '3px' }}>
+                        {dateLabel}
+                      </div>
+                      <div style={{ fontSize: '13px', fontWeight: 700, color: '#1a2744', marginBottom: '2px', lineHeight: 1.3 }}>
+                        {l.rocket}
+                      </div>
+                      {mission && (
+                        <div style={{ fontSize: '10px', color: '#999', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                          {mission}
+                        </div>
+                      )}
+                      <div style={{ fontSize: '10px', color: '#aaa', marginTop: '2px' }}>{country}</div>
                     </div>
-                  )}
-                  <div style={{ fontSize: '10px', color: '#aaa', marginTop: '4px' }}>{country}</div>
-                </div>
-              )
-            })}
+                  </div>
+                )
+              })}
+            </div>
           </div>
         </div>
       )}
