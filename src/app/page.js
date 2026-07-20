@@ -14,7 +14,7 @@ function ArticleCard({ post }) {
         transition: 'box-shadow 0.2s, transform 0.2s, border-color 0.2s',
       }}>
         <div className="card-img" style={{
-          position: 'relative', height: '200px',
+          position: 'relative', aspectRatio: '16/9',
           backgroundColor: '#1a2744', flexShrink: 0,
           borderRadius: '3px 3px 0 0', overflow: 'hidden',
         }}>
