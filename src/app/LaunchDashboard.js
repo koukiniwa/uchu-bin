@@ -280,7 +280,7 @@ export default function LaunchDashboard() {
       )}
 
       {/* === 打ち上げスケジュール（結果+予定を統一カード形式で） === */}
-      {(recent.length > 0 || upcomingCards.length > 0) && (
+      {upcomingCards.length > 0 && (
         <div className="launch-section" style={{ marginBottom: '20px' }}>
           <div className="launch-section-title" style={{
             fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em',
@@ -292,41 +292,6 @@ export default function LaunchDashboard() {
             </span>
           </div>
           <div className="launch-cards">
-            {recent.map((l, i) => {
-              const rel = relativeDate(l.date, null, false)
-              const country = countryName(l.country)
-              return (
-                <div key={`r-${l.id || i}`} style={{
-                  background: '#f8f8f8',
-                  border: '1px solid #e0e0e0',
-                  borderRadius: '3px',
-                  padding: '10px 12px',
-                  minWidth: '145px',
-                  flex: '1 0 145px',
-                }}>
-                  <div style={{ fontSize: '11px', fontWeight: 600, color: '#aaa', marginBottom: '4px' }}>
-                    {rel || '完了'}
-                    <span style={{
-                      fontSize: '9px', fontWeight: 600, color: '#888',
-                      background: '#eee', padding: '1px 5px',
-                      borderRadius: '2px', marginLeft: '6px',
-                    }}>
-                      {l.resultLabel}
-                    </span>
-                  </div>
-                  <div style={{ fontSize: '14px', fontWeight: 700, color: '#999', marginBottom: '4px', lineHeight: 1.3, textDecoration: 'line-through', textDecorationColor: '#ddd' }}>
-                    {l.rocket}
-                  </div>
-                  <div style={{ fontSize: '10px', color: '#aaa', marginTop: '4px' }}>{country}</div>
-                </div>
-              )
-            })}
-            {recent.length > 0 && upcomingCards.length > 0 && (
-              <div style={{
-                minWidth: '1px', width: '1px', alignSelf: 'stretch',
-                background: '#ccc', margin: '0 4px', flexShrink: 0,
-              }} />
-            )}
             {upcomingCards.map((l, i) => {
               const { date, time } = toJST(l.date, l.time, l.tentative)
               const rel = relativeDate(l.date, l.time, l.tentative)
