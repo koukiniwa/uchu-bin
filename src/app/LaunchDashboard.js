@@ -23,7 +23,7 @@ const ROCKET_IMAGES = {
   'long march 5': 'longmarch5_001.jpg',
   'long march 7': 'longmarch7_001.jpg',
   'long march 8': 'longmarch8_001.jpg',
-  'long march 3': 'longmarch5_001.jpg',
+  'long march 3': 'longmarch3_001.jpg',
   'vulcan': 'vulcan_001.jpg',
   'new glenn': 'newglenn_001.jpg',
   'new shepard': 'newshepard_001.jpg',
