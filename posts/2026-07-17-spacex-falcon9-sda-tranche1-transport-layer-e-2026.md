@@ -3,8 +3,8 @@ title: 'SpaceX、米宇宙軍SDA向け21機の衛星打ち上げに成功'
 description: 'SpaceXはFalcon 9でSDA Tranche 1 Transport Layer Eミッションを成功させ、ヨーク・スペース製21機の軍事通信衛星を低軌道に投入した。'
 date: '2026-07-17'
 category: 'ロケット'
-image: '/images/library/logo_spacex_001.jpg'
-imageCredit: 'SpaceX'
+image: '/images/library/falcon9_001.jpg'
+imageCredit: 'Falcon 9 / SpaceX'
 ---
 
 ## Falcon 9、21機の軍事通信衛星を低軌道へ投入——打ち上げ成功
