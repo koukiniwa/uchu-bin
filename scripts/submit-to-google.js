@@ -11,6 +11,16 @@ const SITE_URL = 'https://www.uchu-bin.jp'
 const KEY_FILE = path.join(__dirname, '..', 'google-service-account.json')
 
 async function getAuthClient() {
+  // 環境変数からキーを読む（GitHub Actions用）
+  if (process.env.GOOGLE_SERVICE_ACCOUNT_KEY) {
+    const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_KEY)
+    const auth = new google.auth.GoogleAuth({
+      credentials,
+      scopes: ['https://www.googleapis.com/auth/indexing'],
+    })
+    return await auth.getClient()
+  }
+  // ローカル用: JSONファイルから読む
   const auth = new google.auth.GoogleAuth({
     keyFile: KEY_FILE,
     scopes: ['https://www.googleapis.com/auth/indexing'],
@@ -38,8 +48,8 @@ async function submitUrl(authClient, url) {
 }
 
 async function main() {
-  if (!fs.existsSync(KEY_FILE)) {
-    console.error('google-service-account.json が見つかりません')
+  if (!process.env.GOOGLE_SERVICE_ACCOUNT_KEY && !fs.existsSync(KEY_FILE)) {
+    console.error('GOOGLE_SERVICE_ACCOUNT_KEY環境変数またはgoogle-service-account.jsonが必要です')
     process.exit(1)
   }
 
