@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-21T05:50:36.766Z",
+  "updated": "2026-07-21T08:28:23.809Z",
   "launches": [
     {
       "id": "0f6780cf-edae-4d7c-99d6-ce7de784d140",
@@ -212,16 +212,5 @@
       "status": "TBC"
     }
   ],
-  "recent": [
-    {
-      "id": "10fa7952-f00b-4292-80a2-4207e208844e",
-      "rocket": "Vikram-I",
-      "mission": "Demo Flight",
-      "date": "2026-07-18",
-      "country": "IN",
-      "provider": "Skyroot Aerospace",
-      "result": "success",
-      "resultLabel": "成功"
-    }
-  ]
+  "recent": []
 }
