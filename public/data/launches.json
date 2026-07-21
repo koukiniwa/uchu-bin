@@ -1,20 +1,6 @@
 {
-  "updated": "2026-07-21T19:21:38.102Z",
+  "updated": "2026-07-21T22:03:11.111Z",
   "launches": [
-    {
-      "id": "0f6780cf-edae-4d7c-99d6-ce7de784d140",
-      "name": "Falcon 9 Block 5 | MRV-1",
-      "rocket": "Falcon 9",
-      "mission": "MRV-1",
-      "date": "2026-07-21",
-      "month": 7,
-      "time": "21:15",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "Cape Canaveral SFS, FL, USA",
-      "status": "Go"
-    },
     {
       "id": "d8eb4b68-5307-4b3b-b585-5598958defc2",
       "name": "Gravity-1 | Unknown Payload",
@@ -210,7 +196,32 @@
       "country": "CN",
       "pad": "Wenchang Space Launch Site, People's Republic of China",
       "status": "TBC"
+    },
+    {
+      "id": "b0e7d1cc-24dd-4da4-bb60-b15b6791d08e",
+      "name": "Long March 12 | Unknown Payload",
+      "rocket": "Long March 12",
+      "mission": "Unknown Payload",
+      "date": "2026-08-17",
+      "month": 8,
+      "time": null,
+      "tentative": true,
+      "provider": "China Aerospace Science and Technology Corporation",
+      "country": "CN",
+      "pad": "Wenchang Space Launch Site, People's Republic of China",
+      "status": "TBC"
     }
   ],
-  "recent": []
+  "recent": [
+    {
+      "id": "0f6780cf-edae-4d7c-99d6-ce7de784d140",
+      "rocket": "Falcon 9",
+      "mission": "MRV-1",
+      "date": "2026-07-21",
+      "country": "US",
+      "provider": "SpaceX",
+      "result": "success",
+      "resultLabel": "成功"
+    }
+  ]
 }
