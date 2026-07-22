@@ -17,6 +17,12 @@
       "name": "Falcon 9 Block 5 | MRV-1",
       "status": "Payload Deployed",
       "date": "2026-07-22T00:57:22.479Z"
+    },
+    {
+      "id": "d8eb4b68-5307-4b3b-b585-5598958defc2",
+      "name": "Gravity-1 | 9 satellites",
+      "status": "Launch Successful",
+      "date": "2026-07-22T07:14:47.084Z"
     }
   ]
 }
