@@ -1,20 +1,6 @@
 {
-  "updated": "2026-07-22T02:37:11.842Z",
+  "updated": "2026-07-22T05:50:35.864Z",
   "launches": [
-    {
-      "id": "d8eb4b68-5307-4b3b-b585-5598958defc2",
-      "name": "Gravity-1 | Unknown Payload",
-      "rocket": "Gravity-1",
-      "mission": "Unknown Payload",
-      "date": "2026-07-22",
-      "month": 7,
-      "time": "02:50",
-      "tentative": false,
-      "provider": "Orienspace Technology",
-      "country": "CN",
-      "pad": "Haiyang Oriental Spaceport",
-      "status": "Go"
-    },
     {
       "id": "5421e43a-1623-40ac-9dac-201075064e24",
       "name": "Long March 3B/E | Unknown Payload",
@@ -210,9 +196,33 @@
       "country": "CN",
       "pad": "Wenchang Space Launch Site, People's Republic of China",
       "status": "TBC"
+    },
+    {
+      "id": "a57aed97-b94f-42e1-905e-9421dbd96ac8",
+      "name": "Ariane 62 | MTG-I2",
+      "rocket": "Ariane 62",
+      "mission": "MTG-I2",
+      "date": "2026-08-27",
+      "month": 8,
+      "time": null,
+      "tentative": true,
+      "provider": "Arianespace",
+      "country": "FR",
+      "pad": "Guiana Space Centre, French Guiana",
+      "status": "TBD"
     }
   ],
   "recent": [
+    {
+      "id": "d8eb4b68-5307-4b3b-b585-5598958defc2",
+      "rocket": "Gravity-1",
+      "mission": "9 satellites",
+      "date": "2026-07-22",
+      "country": "CN",
+      "provider": "Orienspace Technology",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "0f6780cf-edae-4d7c-99d6-ce7de784d140",
       "rocket": "Falcon 9",
