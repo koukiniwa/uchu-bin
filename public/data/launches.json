@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-22T19:18:49.103Z",
+  "updated": "2026-07-22T22:03:22.370Z",
   "launches": [
     {
       "id": "5421e43a-1623-40ac-9dac-201075064e24",
@@ -230,16 +230,6 @@
       "date": "2026-07-21",
       "country": "US",
       "provider": "SpaceX",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "aafe107e-46d8-420c-bcb9-192069d80893",
-      "rocket": "Soyuz 2.1b",
-      "mission": "16 x Rassvet-3",
-      "date": "2026-07-19",
-      "country": "RU",
-      "provider": "Russian Federal Space Agency (ROSCOSMOS)",
       "result": "success",
       "resultLabel": "成功"
     }
