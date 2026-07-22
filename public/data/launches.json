@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-22T00:58:09.695Z",
+  "updated": "2026-07-22T02:37:11.842Z",
   "launches": [
     {
       "id": "d8eb4b68-5307-4b3b-b585-5598958defc2",
@@ -114,20 +114,6 @@
       "status": "TBD"
     },
     {
-      "id": "aafe107e-46d8-420c-bcb9-192069d80893",
-      "name": "Soyuz 2.1b | 16 x Rassvet-3",
-      "rocket": "Soyuz 2.1b",
-      "mission": "16 x Rassvet-3",
-      "date": "2026-07-31",
-      "month": 7,
-      "time": null,
-      "tentative": true,
-      "provider": "Russian Federal Space Agency (ROSCOSMOS)",
-      "country": "RU",
-      "pad": "Plesetsk Cosmodrome, Russian Federation",
-      "status": "TBD"
-    },
-    {
       "id": "458e2e52-87b0-4707-96d8-6899f92e53ee",
       "name": "Soyuz 2.1b/Fregat | Glonass-K1 No. 19",
       "rocket": "Soyuz 2.1b/Fregat",
@@ -210,6 +196,20 @@
       "country": "CN",
       "pad": "Wenchang Space Launch Site, People's Republic of China",
       "status": "TBC"
+    },
+    {
+      "id": "9d402fb6-9115-424d-b6f0-bd3b13ee310e",
+      "name": "Long March 5 | Chang'e 7",
+      "rocket": "Long March 5",
+      "mission": "Chang'e 7",
+      "date": "2026-08-24",
+      "month": 8,
+      "time": null,
+      "tentative": true,
+      "provider": "China Aerospace Science and Technology Corporation",
+      "country": "CN",
+      "pad": "Wenchang Space Launch Site, People's Republic of China",
+      "status": "TBC"
     }
   ],
   "recent": [
@@ -220,6 +220,16 @@
       "date": "2026-07-21",
       "country": "US",
       "provider": "SpaceX",
+      "result": "success",
+      "resultLabel": "成功"
+    },
+    {
+      "id": "aafe107e-46d8-420c-bcb9-192069d80893",
+      "rocket": "Soyuz 2.1b",
+      "mission": "16 x Rassvet-3",
+      "date": "2026-07-19",
+      "country": "RU",
+      "provider": "Russian Federal Space Agency (ROSCOSMOS)",
       "result": "success",
       "resultLabel": "成功"
     }
