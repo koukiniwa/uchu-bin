@@ -1,20 +1,6 @@
 {
-  "updated": "2026-07-23T11:09:39.009Z",
+  "updated": "2026-07-23T13:58:37.300Z",
   "launches": [
-    {
-      "id": "5421e43a-1623-40ac-9dac-201075064e24",
-      "name": "Long March 3B/E | Unknown Payload",
-      "rocket": "Long March 3B",
-      "mission": "Unknown Payload",
-      "date": "2026-07-23",
-      "month": 7,
-      "time": "12:00",
-      "tentative": false,
-      "provider": "China Aerospace Science and Technology Corporation",
-      "country": "CN",
-      "pad": "Xichang Satellite Launch Center, People's Republic of China",
-      "status": "Go"
-    },
     {
       "id": "ac897b9f-44d2-4ff4-8416-1a0a076e98a2",
       "name": "Starship | Flight 13",
@@ -55,6 +41,20 @@
       "provider": "China Aerospace Science and Technology Corporation",
       "country": "CN",
       "pad": "Wenchang Space Launch Site, People's Republic of China",
+      "status": "Go"
+    },
+    {
+      "id": "394d2745-610b-409e-b4ea-2071a35f8668",
+      "name": "Long March 6A | Unknown Payload",
+      "rocket": "Long March 6A",
+      "mission": "Unknown Payload",
+      "date": "2026-07-30",
+      "month": 7,
+      "time": "01:00",
+      "tentative": false,
+      "provider": "China Aerospace Science and Technology Corporation",
+      "country": "CN",
+      "pad": "Taiyuan Satellite Launch Center, People's Republic of China",
       "status": "Go"
     },
     {
@@ -213,6 +213,16 @@
     }
   ],
   "recent": [
+    {
+      "id": "5421e43a-1623-40ac-9dac-201075064e24",
+      "rocket": "Long March 3B",
+      "mission": "Tianlian 2-06",
+      "date": "2026-07-23",
+      "country": "CN",
+      "provider": "China Aerospace Science and Technology Corporation",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "d8eb4b68-5307-4b3b-b585-5598958defc2",
       "rocket": "Gravity-1",
