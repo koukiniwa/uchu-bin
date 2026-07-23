@@ -1485,7 +1485,7 @@ async function generateLaunchArticle() {
 
   const message = await client.messages.create({
     model: 'claude-sonnet-4-6',
-    max_tokens: 6000,
+    max_tokens: parseInt(process.env.LAUNCH_ARTICLE_MAX_TOKENS || '2500'),
     messages: [{
       role: 'user',
       content: `${prompt}

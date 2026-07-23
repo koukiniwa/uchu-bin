@@ -176,6 +176,7 @@ ${isUnknownPayload ? `
     fs.appendFileSync(outputFile, `mission_desc<<EOFMISSION\n${missionDesc}\nEOFMISSION\n`)
     fs.appendFileSync(outputFile, `article_prompt<<EOFPROMPT\n${articlePrompt}\nEOFPROMPT\n`)
     fs.appendFileSync(outputFile, `article_words=${config.words}\n`)
+    fs.appendFileSync(outputFile, `article_max_tokens=${config.maxTokens}\n`)
   } else {
     // ローカルテスト用
     console.log('\n--- 記事プロンプト ---')

@@ -40,6 +40,7 @@ jobs:
           LAUNCH_MISSION_DESC: ${{ steps.check.outputs.mission_desc }}
           LAUNCH_ARTICLE_PROMPT: ${{ steps.check.outputs.article_prompt }}
           LAUNCH_ARTICLE_WORDS: ${{ steps.check.outputs.article_words }}
+          LAUNCH_ARTICLE_MAX_TOKENS: ${{ steps.check.outputs.article_max_tokens }}
         run: node scripts/generate-news.js --force --auto-publish --launch-article
 
       - name: 打ち上げ予定を更新
