@@ -167,11 +167,17 @@ export default function LaunchDashboard() {
 
   useEffect(() => {
     if (launches.length === 0) return
-    const first = launches.find(l => !l.tentative && l.time)
+    const now = new Date()
+    const upcoming = launches.filter(l => {
+      if (l.tentative || !l.time) return false
+      const utc = new Date(l.date + 'T' + l.time + ':00Z')
+      return utc.getTime() > now.getTime()
+    })
+    const first = upcoming[0]
     if (!first) return
     const { fullDate } = toJST(first.date, first.time)
     setNextLaunch({ ...first, fullDate })
-  }, [launches])
+  }, [launches, countdown])
 
   useEffect(() => {
     if (!nextLaunch?.fullDate) return
