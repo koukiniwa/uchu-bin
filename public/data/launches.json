@@ -1,20 +1,6 @@
 {
-  "updated": "2026-07-23T19:17:04.638Z",
+  "updated": "2026-07-23T22:03:35.156Z",
   "launches": [
-    {
-      "id": "ac897b9f-44d2-4ff4-8416-1a0a076e98a2",
-      "name": "Starship | Flight 13",
-      "rocket": "Starship",
-      "mission": "Flight 13",
-      "date": "2026-07-23",
-      "month": 7,
-      "time": "22:45",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "SpaceX Starbase, TX, USA",
-      "status": "Go"
-    },
     {
       "id": "fa42624c-1e30-4b4b-a06b-59b6153bc4e5",
       "name": "Kinetica 1 | Unknown Payload",
@@ -27,6 +13,20 @@
       "provider": "CAS Space",
       "country": "CN",
       "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
+      "status": "Go"
+    },
+    {
+      "id": "ac897b9f-44d2-4ff4-8416-1a0a076e98a2",
+      "name": "Starship | Flight 13",
+      "rocket": "Starship",
+      "mission": "Flight 13",
+      "date": "2026-07-24",
+      "month": 7,
+      "time": "22:45",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "SpaceX Starbase, TX, USA",
       "status": "Go"
     },
     {
