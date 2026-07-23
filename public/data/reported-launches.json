@@ -23,6 +23,12 @@
       "name": "Gravity-1 | 9 satellites",
       "status": "Launch Successful",
       "date": "2026-07-22T07:14:47.084Z"
+    },
+    {
+      "id": "5421e43a-1623-40ac-9dac-201075064e24",
+      "name": "Long March 3B/E | Tianlian 2-06",
+      "status": "Launch Successful",
+      "date": "2026-07-23T15:33:28.429Z"
     }
   ]
 }
