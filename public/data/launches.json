@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-23T02:42:41.804Z",
+  "updated": "2026-07-23T05:53:59.701Z",
   "launches": [
     {
       "id": "5421e43a-1623-40ac-9dac-201075064e24",
@@ -106,12 +106,12 @@
       "mission": "Unknown Payload",
       "date": "2026-08-04",
       "month": 8,
-      "time": null,
-      "tentative": true,
+      "time": "08:50",
+      "tentative": false,
       "provider": "China Aerospace Science and Technology Corporation",
       "country": "CN",
       "pad": "Wenchang Space Launch Site, People's Republic of China",
-      "status": "TBC"
+      "status": "Go"
     },
     {
       "id": "1b23eb18-e06e-4058-9b42-e95ca0980511",
