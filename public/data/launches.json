@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-22T22:03:22.370Z",
+  "updated": "2026-07-23T02:42:41.804Z",
   "launches": [
     {
       "id": "5421e43a-1623-40ac-9dac-201075064e24",
@@ -100,20 +100,6 @@
       "status": "TBD"
     },
     {
-      "id": "458e2e52-87b0-4707-96d8-6899f92e53ee",
-      "name": "Soyuz 2.1b/Fregat | Glonass-K1 No. 19",
-      "rocket": "Soyuz 2.1b/Fregat",
-      "mission": "Glonass-K1 No. 19",
-      "date": "2026-07-31",
-      "month": 7,
-      "time": null,
-      "tentative": true,
-      "provider": "Russian Space Forces",
-      "country": "RU",
-      "pad": "Plesetsk Cosmodrome, Russian Federation",
-      "status": "TBD"
-    },
-    {
       "id": "12b9454b-d48b-4fd5-9c11-17c18f45dafe",
       "name": "Long March 8A | Unknown Payload",
       "rocket": "Long March 8A",
@@ -210,6 +196,20 @@
       "country": "FR",
       "pad": "Guiana Space Centre, French Guiana",
       "status": "TBD"
+    },
+    {
+      "id": "521f3a1c-f977-4306-9b7f-495858719adf",
+      "name": "Falcon Heavy | Nancy Grace Roman Space Telescope",
+      "rocket": "Falcon Heavy",
+      "mission": "Nancy Grace Roman Space Telescope",
+      "date": "2026-08-30",
+      "month": 8,
+      "time": "11:20",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Kennedy Space Center, FL, USA",
+      "status": "Go"
     }
   ],
   "recent": [
