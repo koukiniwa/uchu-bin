@@ -126,11 +126,11 @@ async function main() {
   }
 
   const SCALE_CONFIG = {
-    large:   { words: '3000〜4000', label: '大型/初飛行' },
-    medium:  { words: '2000〜2500', label: '通常' },
-    small:   { words: '1500〜2000', label: '小型' },
-    failure: { words: '2500〜3500', label: '失敗/異常' },
-    unknown_payload: { words: '800〜1200', label: 'ペイロード不明' },
+    large:   { words: '2000〜2500', maxTokens: 3000, label: '大型/初飛行' },
+    medium:  { words: '1200〜1800', maxTokens: 2200, label: '通常' },
+    small:   { words: '800〜1200', maxTokens: 1600, label: '小型' },
+    failure: { words: '1500〜2000', maxTokens: 2500, label: '失敗/異常' },
+    unknown_payload: { words: '600〜800', maxTokens: 1200, label: 'ペイロード不明' },
   }
   const config = SCALE_CONFIG[scale]
   console.log(`  規模判定: ${config.label}（${config.words}文字）`)
@@ -149,11 +149,11 @@ async function main() {
 
 【記事の書き方】
 - 結果（成功/失敗）を最初に明記する
-- ロケットの仕様や過去の実績を含める
-- ペイロード（衛星等）の目的を説明する
-- 今後の予定や影響にも触れる
+- ペイロード（衛星等）の目的を簡潔に説明する
+- ロケットの基本スペック（全長・推力等）は不要。読者は宇宙ファンなので知っている
 - 事実に基づき、推測や憶測は避ける
-- ${config.words}文字程度
+- 冗長な説明や水増しは厳禁
+- **文字数: ${config.words}文字（これを超えてはいけない。短い方が良い）**
 ${isUnknownPayload ? `
 【ペイロード不明時の注意】
 - ペイロードが非公開・不明であることを明記する
