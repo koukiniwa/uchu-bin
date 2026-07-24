@@ -29,4 +29,5 @@ jobs:
           git config user.email "bot@uchu-bin.jp"
           git add public/data/launches.json
           git diff --cached --quiet || git commit -m "打ち上げ予定更新 $(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M')"
+          git pull --rebase origin main
           git push

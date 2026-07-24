@@ -54,6 +54,7 @@ jobs:
           git config user.email "bot@uchu-bin.jp"
           git add posts/ public/data/ public/feed.xml public/images/
           git diff --cached --quiet || git commit -m "打ち上げ記事自動公開: ${{ steps.check.outputs.rocket }} - ${{ steps.check.outputs.mission }}"
+          git pull --rebase origin main
           git push
 
       - name: Vercelデプロイ待機（3分）
