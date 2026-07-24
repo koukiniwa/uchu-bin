@@ -509,6 +509,7 @@ const LIBRARY_TOPIC_KEYWORDS = {
   angara:         ['angara', 'アンガラ'],
   proton:         ['proton', 'プロトン'],
   // ===== 中国ロケット =====
+  longmarch3:     ['long march 3', '長征3号', 'cz-3'],
   longmarch5:     ['long march 5', '長征5号', 'cz-5'],
   longmarch7:     ['long march 7', '長征7号', 'cz-7'],
   longmarch8:     ['long march 8', '長征8号', 'cz-8', '千帆', 'qianfan', 'spacesail'],

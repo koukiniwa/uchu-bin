@@ -8,7 +8,7 @@ const path = require('path')
 
 const REPORTED_PATH = path.join(__dirname, '..', 'public', 'data', 'reported-launches.json')
 const POSTS_DIR = path.join(__dirname, '..', 'posts')
-const LL2_PREVIOUS = 'https://ll.thespacedevs.com/2.3.0/launches/previous/?limit=10&mode=normal'
+const LL2_PREVIOUS = 'https://ll.thespacedevs.com/2.2.0/launch/previous/?limit=10&mode=normal'
 const MIN_HOURS_AFTER_LAUNCH = 2  // 打ち上げ後2時間待つ（軌道投入確認に十分）
 
 // 報告済みリスト読み込み
@@ -38,13 +38,23 @@ function isNotable(launch) {
 async function main() {
   console.log('=== 打ち上げ結果チェック ===')
 
-  // 直近の完了した打ち上げを取得
-  const res = await fetch(LL2_PREVIOUS, {
-    headers: { 'User-Agent': 'uchu-bin/1.0 (space news site)' },
-    signal: AbortSignal.timeout(30000),
-  })
-  if (!res.ok) throw new Error(`API error: ${res.status}`)
-  const data = await res.json()
+  // 直近の完了した打ち上げを取得（リトライ付き）
+  let data
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      const res = await fetch(LL2_PREVIOUS, {
+        headers: { 'User-Agent': 'uchu-bin/1.0 (space news site)' },
+        signal: AbortSignal.timeout(30000),
+      })
+      if (!res.ok) throw new Error(`API error: ${res.status}`)
+      data = await res.json()
+      break
+    } catch (e) {
+      console.log(`  API取得失敗 (${attempt}/3): ${e.message}`)
+      if (attempt === 3) throw e
+      await new Promise(r => setTimeout(r, 5000))
+    }
+  }
 
   const reported = getReported()
   const reportedIds = new Set(reported.launches.map(l => l.id))
