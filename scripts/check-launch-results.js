@@ -41,7 +41,7 @@ async function main() {
   // 直近の完了した打ち上げを取得
   const res = await fetch(LL2_PREVIOUS, {
     headers: { 'User-Agent': 'uchu-bin/1.0 (space news site)' },
-    signal: AbortSignal.timeout(15000),
+    signal: AbortSignal.timeout(30000),
   })
   if (!res.ok) throw new Error(`API error: ${res.status}`)
   const data = await res.json()
