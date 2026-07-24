@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-24T19:24:50.399Z",
+  "updated": "2026-07-24T22:04:12.411Z",
   "launches": [
     {
       "id": "ac897b9f-44d2-4ff4-8416-1a0a076e98a2",
@@ -8,7 +8,7 @@
       "mission": "Flight 13",
       "date": "2026-07-24",
       "month": 7,
-      "time": "22:45",
+      "time": "22:51",
       "tentative": false,
       "provider": "SpaceX",
       "country": "US",
@@ -240,16 +240,6 @@
       "date": "2026-07-22",
       "country": "CN",
       "provider": "Orienspace Technology",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "0f6780cf-edae-4d7c-99d6-ce7de784d140",
-      "rocket": "Falcon 9",
-      "mission": "MRV-1",
-      "date": "2026-07-21",
-      "country": "US",
-      "provider": "SpaceX",
       "result": "success",
       "resultLabel": "成功"
     }
