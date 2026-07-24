@@ -1595,6 +1595,15 @@ async function main() {
     if (autoPublish && typeof generateFeed === 'function') {
       try { generateFeed() } catch {}
     }
+    // Google Indexing APIに送信
+    if (autoPublish) {
+      try {
+        const repoDir = path.join(__dirname, '..')
+        execSync(`node scripts/submit-to-google.js ${slug}`, { cwd: repoDir, stdio: 'inherit' })
+      } catch (e) {
+        console.error('Google Indexing API送信失敗:', e.message)
+      }
+    }
     return
   }
 
