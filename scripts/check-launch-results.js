@@ -8,7 +8,7 @@ const path = require('path')
 
 const REPORTED_PATH = path.join(__dirname, '..', 'public', 'data', 'reported-launches.json')
 const POSTS_DIR = path.join(__dirname, '..', 'posts')
-const LL2_PREVIOUS = 'https://ll.thespacedevs.com/2.2.0/launch/previous/?limit=10&mode=normal'
+const LL2_PREVIOUS = 'https://ll.thespacedevs.com/2.2.0/launch/previous/?limit=20&mode=normal'
 const MIN_HOURS_AFTER_LAUNCH = 2  // 打ち上げ後2時間待つ（軌道投入確認に十分）
 
 // 報告済みリスト読み込み
