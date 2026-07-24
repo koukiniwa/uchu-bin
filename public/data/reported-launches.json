@@ -29,6 +29,12 @@
       "name": "Long March 3B/E | Tianlian 2-06",
       "status": "Launch Successful",
       "date": "2026-07-23T15:33:28.429Z"
+    },
+    {
+      "id": "fa42624c-1e30-4b4b-a06b-59b6153bc4e5",
+      "name": "Kinetica 1 | 5 satellites",
+      "status": "Launch Successful",
+      "date": "2026-07-24T07:36:19.883Z"
     }
   ]
 }
