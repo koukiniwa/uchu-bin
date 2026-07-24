@@ -3,8 +3,8 @@ title: '長征3B/E、天鏈2号06星の打ち上げに成功'
 description: '中国が西昌衛星発射センターから長征3B/Eを打ち上げ、第2世代データ中継衛星「天鏈2号06星」を静止軌道へ投入することに成功した。'
 date: '2026-07-24'
 category: 'ロケット'
-image: '/images/library/rocketlaunch_001.jpg'
-imageCredit: 'Rocket Launch / NASA'
+image: '/images/library/longmarch3_001.jpg'
+imageCredit: 'Long March 3B / CNSA'
 ---
 
 ## 長征3B/E、天鏈2号06星を静止軌道へ正常投入
