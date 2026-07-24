@@ -1,20 +1,6 @@
 {
-  "updated": "2026-07-23T22:03:35.156Z",
+  "updated": "2026-07-24T02:38:49.459Z",
   "launches": [
-    {
-      "id": "fa42624c-1e30-4b4b-a06b-59b6153bc4e5",
-      "name": "Kinetica 1 | Unknown Payload",
-      "rocket": "Kinetica 1",
-      "mission": "Unknown Payload",
-      "date": "2026-07-23",
-      "month": 7,
-      "time": "23:30",
-      "tentative": false,
-      "provider": "CAS Space",
-      "country": "CN",
-      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
-      "status": "Go"
-    },
     {
       "id": "ac897b9f-44d2-4ff4-8416-1a0a076e98a2",
       "name": "Starship | Flight 13",
@@ -210,9 +196,33 @@
       "country": "US",
       "pad": "Kennedy Space Center, FL, USA",
       "status": "Go"
+    },
+    {
+      "id": "56a85c82-ea71-449b-828c-b583f6f4a18b",
+      "name": "Falcon 9 Block 5 | BlueBird Block 2 #6-8",
+      "rocket": "Falcon 9",
+      "mission": "BlueBird Block 2 #6-8",
+      "date": "2026-08-31",
+      "month": 8,
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Cape Canaveral SFS, FL, USA",
+      "status": "TBD"
     }
   ],
   "recent": [
+    {
+      "id": "fa42624c-1e30-4b4b-a06b-59b6153bc4e5",
+      "rocket": "Kinetica 1",
+      "mission": "5 satellites",
+      "date": "2026-07-23",
+      "country": "CN",
+      "provider": "CAS Space",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "5421e43a-1623-40ac-9dac-201075064e24",
       "rocket": "Long March 3B",
