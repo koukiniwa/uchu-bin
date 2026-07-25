@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-25T02:37:02.705Z",
+  "updated": "2026-07-25T03:51:05.740Z",
   "launches": [
     {
       "id": "beac6ac1-97dd-4eb2-912c-8b4d4d15cd4e",
@@ -240,16 +240,6 @@
       "date": "2026-07-23",
       "country": "CN",
       "provider": "China Aerospace Science and Technology Corporation",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "d8eb4b68-5307-4b3b-b585-5598958defc2",
-      "rocket": "Gravity-1",
-      "mission": "9 satellites",
-      "date": "2026-07-22",
-      "country": "CN",
-      "provider": "Orienspace Technology",
       "result": "success",
       "resultLabel": "成功"
     }
