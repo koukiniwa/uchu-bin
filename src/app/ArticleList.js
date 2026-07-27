@@ -67,13 +67,6 @@ export default function ArticleList({ posts }) {
 
   return (
     <div>
-      {/* SEO: 全記事へのリンクを隠しで保持 */}
-      <div style={{ display: 'none' }}>
-        {posts.map(p => (
-          <a key={p.slug} href={`/blog/${p.slug}`}>{p.title}</a>
-        ))}
-      </div>
-
       <div className="article-grid">
         {visible.map(post => (
           <ArticleCard key={post.slug} post={post} />

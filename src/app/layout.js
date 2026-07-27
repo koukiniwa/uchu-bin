@@ -6,6 +6,11 @@ export const metadata = {
   title: '宇宙便 - 宇宙情報メディア',
   description: 'ロケット打ち上げ速報・スケジュール・宇宙開発ニュースをリアルタイムでお届け。',
   keywords: ['宇宙便', '宇宙ニュース', 'ロケット', '打ち上げ', '宇宙開発', 'JAXA', 'NASA', 'SpaceX', 'カウントダウン', 'launch schedule'],
+  alternates: {
+    types: {
+      'application/rss+xml': '/feed.xml',
+    },
+  },
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: '32x32' },
@@ -48,7 +53,7 @@ export default function RootLayout({ children }) {
             url: 'https://www.uchu-bin.jp',
             logo: 'https://www.uchu-bin.jp/icon-512.png',
             description: 'ロケット打ち上げ速報・スケジュール・宇宙開発ニュースをリアルタイムでお届けする宇宙情報メディア。',
-            sameAs: [],
+            sameAs: ['https://x.com/hgS9nGJWWF17545'],
           })}}
         />
         <script
@@ -58,11 +63,6 @@ export default function RootLayout({ children }) {
             '@type': 'WebSite',
             name: '宇宙便',
             url: 'https://www.uchu-bin.jp',
-            potentialAction: {
-              '@type': 'SearchAction',
-              target: 'https://www.uchu-bin.jp/?category={search_term_string}',
-              'query-input': 'required name=search_term_string',
-            },
           })}}
         />
       </head>
