@@ -81,3 +81,15 @@ jobs:
           TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
           TWITTER_ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
         run: node scripts/tweet-latest-post.js
+
+      - name: 公式ツイートを引用RT
+        if: steps.check.outputs.found == 'true'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
+          TWITTER_API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
+          TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+          TWITTER_ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
+          LAUNCH_ROCKET: ${{ steps.check.outputs.rocket }}
+          LAUNCH_PROVIDER: ${{ steps.check.outputs.provider }}
+        run: node scripts/quote-tweet-launch.js || echo "引用RT失敗（続行）"
