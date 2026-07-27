@@ -55,8 +55,25 @@ async function main() {
 
   const authClient = await getAuthClient()
 
-  // slugが指定された場合はそのURLを送信
   const slugArg = process.argv[2]
+
+  // --all: 全記事を一括送信
+  if (slugArg === '--all') {
+    const files = fs.readdirSync(POSTS_DIR).filter(f => f.endsWith('.md')).sort()
+    console.log(`全記事 ${files.length} 件を送信します`)
+    let ok = 0, fail = 0
+    for (const file of files) {
+      const slug = file.replace(/\.md$/, '')
+      const url = `${SITE_URL}/blog/${slug}`
+      const result = await submitUrl(authClient, url)
+      result ? ok++ : fail++
+      await new Promise(r => setTimeout(r, 1000)) // レート制限対策
+    }
+    console.log(`完了: 成功 ${ok} 件, 失敗 ${fail} 件`)
+    return
+  }
+
+  // slugが指定された場合はそのURLを送信
   if (slugArg) {
     const url = `${SITE_URL}/blog/${slugArg}`
     console.log(`Google Indexing APIに送信: ${url}`)
