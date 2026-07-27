@@ -1601,12 +1601,30 @@ async function main() {
     const jstDate = new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().slice(0, 10)
     const slug = `${jstDate}-${(article.slug || 'launch-article').replace(/[^a-z0-9\-]/gi, '-').toLowerCase().slice(0, 80)}`
     let body = article.body.replace(/\{\{IMAGE_1\}\}/g, '').replace(/\{\{IMAGE_2\}\}/g, '')
-    body += '\n\n## 参考記事\n\n'
-    if (article.source_urls?.length) {
-      body += article.source_urls.map(u => `- ${u}`).join('\n')
-    } else {
-      body += '- Launch Library 2 (The Space Devs)'
+
+    // 参考記事URLを自動生成（プロバイダー公式サイト + LL2）
+    const PROVIDER_REFS = {
+      'SpaceX': 'https://www.spacex.com/launches/',
+      'NASA': 'https://www.nasa.gov/news/all-news/',
+      'Rocket Lab': 'https://www.rocketlabusa.com/missions/',
+      'Blue Origin': 'https://www.blueorigin.com/news',
+      'Arianespace': 'https://www.arianespace.com/mission-update/',
+      'ULA': 'https://www.ulalaunch.com/missions',
+      'JAXA': 'https://www.jaxa.jp/projects/',
+      'Mitsubishi Heavy Industries': 'https://www.mhi.com/jp/news/',
+      'China Aerospace Science and Technology Corporation': 'https://www.casc.com.cn/',
+      'ISRO': 'https://www.isro.gov.in/launches.html',
+      'Roscosmos': 'https://www.roscosmos.ru/launch/',
+      'Firefly Aerospace': 'https://fireflyspace.com/missions/',
+      'Relativity Space': 'https://www.relativityspace.com/',
+      'Isar Aerospace': 'https://www.isaraerospace.com/news',
     }
+    const provider = process.env.LAUNCH_PROVIDER || ''
+    const refs = ['- [Launch Library 2 (The Space Devs)](https://thespacedevs.com/)']
+    if (PROVIDER_REFS[provider]) {
+      refs.unshift(`- [${provider}](${PROVIDER_REFS[provider]})`)
+    }
+    body += '\n\n## 参考記事\n\n' + refs.join('\n')
 
     const frontmatter = [
       '---',
@@ -1626,15 +1644,7 @@ async function main() {
     if (autoPublish && typeof generateFeed === 'function') {
       try { generateFeed() } catch {}
     }
-    // Google Indexing APIに送信
-    if (autoPublish) {
-      try {
-        const repoDir = path.join(__dirname, '..')
-        execSync(`node scripts/submit-to-google.js ${slug}`, { cwd: repoDir, stdio: 'inherit' })
-      } catch (e) {
-        console.error('Google Indexing API送信失敗:', e.message)
-      }
-    }
+    // Google Indexing APIはワークフローのデプロイ後ステップで実行
     return
   }
 
