@@ -136,11 +136,11 @@ async function main() {
   }
 
   const SCALE_CONFIG = {
-    large:   { words: '1200〜1800', maxTokens: 2200, label: '大型/初飛行' },
-    medium:  { words: '600〜1000', maxTokens: 1600, label: '通常' },
-    small:   { words: '300〜500', maxTokens: 1000, label: '小型' },
-    failure: { words: '800〜1200', maxTokens: 1600, label: '失敗/異常' },
-    unknown_payload: { words: '200〜400', maxTokens: 800, label: 'ペイロード不明' },
+    large:   { words: '1800〜2200', maxTokens: 2800, label: '大型/初飛行' },
+    medium:  { words: '1000〜1500', maxTokens: 2000, label: '通常' },
+    small:   { words: '700〜1000', maxTokens: 1400, label: '小型' },
+    failure: { words: '1200〜1600', maxTokens: 2200, label: '失敗/異常' },
+    unknown_payload: { words: '500〜700', maxTokens: 1000, label: 'ペイロード不明' },
   }
   const config = SCALE_CONFIG[scale]
   console.log(`  規模判定: ${config.label}（${config.words}文字）`)

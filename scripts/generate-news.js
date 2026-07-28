@@ -1515,7 +1515,7 @@ async function generateLaunchArticle() {
   console.log(`\n🚀 打ち上げ記事生成モード: ${rocket} | ${mission} | ${status}`)
 
   // 文字数に応じた記事構成を決定
-  const words = process.env.LAUNCH_ARTICLE_WORDS || '1200〜1800'
+  const words = process.env.LAUNCH_ARTICLE_WORDS || '1800〜2200'
   const maxWord = parseInt(words.split('〜')[1] || words)
   let structureGuide, imageGuide
   if (maxWord <= 500) {
