@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-28T10:35:00.878Z",
+  "updated": "2026-07-28T12:53:53.060Z",
   "launches": [
     {
       "id": "beac6ac1-97dd-4eb2-912c-8b4d4d15cd4e",
@@ -83,6 +83,20 @@
       "provider": "China Aerospace Science and Technology Corporation",
       "country": "CN",
       "pad": "Wenchang Space Launch Site, People's Republic of China",
+      "status": "Go"
+    },
+    {
+      "id": "56a85c82-ea71-449b-828c-b583f6f4a18b",
+      "name": "Falcon 9 Block 5 | BlueBird Block 2 #6-8",
+      "rocket": "Falcon 9",
+      "mission": "BlueBird Block 2 #6-8",
+      "date": "2026-08-05",
+      "month": 8,
+      "time": "07:42",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Cape Canaveral SFS, FL, USA",
       "status": "Go"
     },
     {
@@ -184,10 +198,10 @@
       "status": "Go"
     },
     {
-      "id": "56a85c82-ea71-449b-828c-b583f6f4a18b",
-      "name": "Falcon 9 Block 5 | BlueBird Block 2 #6-8",
+      "id": "be8b4b0d-1989-48a5-a96d-e8e4d59ed8b3",
+      "name": "Falcon 9 Block 5 | Globalstar 2-R Mission 1 (x 9)",
       "rocket": "Falcon 9",
-      "mission": "BlueBird Block 2 #6-8",
+      "mission": "Globalstar 2-R Mission 1 (x 9)",
       "date": "2026-08-31",
       "month": 8,
       "time": null,
@@ -195,20 +209,6 @@
       "provider": "SpaceX",
       "country": "US",
       "pad": "Cape Canaveral SFS, FL, USA",
-      "status": "TBD"
-    },
-    {
-      "id": "91b13c6c-4525-496d-997b-3521bb6a4cd8",
-      "name": "RFA One | Maiden Flight",
-      "rocket": "RFA One",
-      "mission": "Maiden Flight",
-      "date": "2026-08-31",
-      "month": 8,
-      "time": null,
-      "tentative": true,
-      "provider": "Rocket Factory Augsburg",
-      "country": "DE",
-      "pad": "SaxaVord Spaceport",
       "status": "TBD"
     }
   ],
