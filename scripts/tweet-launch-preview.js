@@ -187,9 +187,7 @@ async function main() {
     const text = `${relDay} ${jstTime} JST 打ち上げ予定
 
 ${launch.rocket}
-📍 ${padShort}${mission}
-
-#宇宙便 #ロケット打ち上げ`.trim()
+📍 ${padShort}${mission}`.trim()
 
     console.log(`予告ツイート: ${launch.rocket}`)
     console.log(text)

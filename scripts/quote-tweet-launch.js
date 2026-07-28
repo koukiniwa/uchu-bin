@@ -134,7 +134,7 @@ async function main() {
   })
 
   const comment = res.content[0].text.trim().replace(/^["「]|["」]$/g, '')
-  const tweetText = `${comment}\n\n${articleUrl}\n#宇宙便 #宇宙ニュース`
+  const tweetText = `${comment}\n\n${articleUrl}`
 
   console.log(`  コメント: ${comment}`)
 

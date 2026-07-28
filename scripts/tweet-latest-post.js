@@ -99,8 +99,8 @@ async function main() {
 
   const comment = await generateComment(title, meta.description || '', content)
   const text = comment
-    ? `${comment}\n\n${url}\n#宇宙便 #宇宙ニュース ${categoryTag}`.trim()
-    : `${title}\n\n${url}\n#宇宙便 #宇宙ニュース ${categoryTag}`.trim()
+    ? `${comment}\n\n${url}`.trim()
+    : `${title}\n\n${url}`.trim()
 
   const client = new TwitterApi({
     appKey: process.env.TWITTER_API_KEY,
