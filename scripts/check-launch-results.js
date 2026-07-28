@@ -136,11 +136,11 @@ async function main() {
   }
 
   const SCALE_CONFIG = {
-    large:   { words: '2000〜2500', maxTokens: 3000, label: '大型/初飛行' },
-    medium:  { words: '1200〜1800', maxTokens: 2200, label: '通常' },
-    small:   { words: '800〜1200', maxTokens: 1600, label: '小型' },
-    failure: { words: '1500〜2000', maxTokens: 2500, label: '失敗/異常' },
-    unknown_payload: { words: '600〜800', maxTokens: 1200, label: 'ペイロード不明' },
+    large:   { words: '1200〜1800', maxTokens: 2200, label: '大型/初飛行' },
+    medium:  { words: '600〜1000', maxTokens: 1600, label: '通常' },
+    small:   { words: '300〜500', maxTokens: 1000, label: '小型' },
+    failure: { words: '800〜1200', maxTokens: 1600, label: '失敗/異常' },
+    unknown_payload: { words: '200〜400', maxTokens: 800, label: 'ペイロード不明' },
   }
   const config = SCALE_CONFIG[scale]
   console.log(`  規模判定: ${config.label}（${config.words}文字）`)
@@ -162,7 +162,9 @@ async function main() {
 - ペイロード（衛星等）の目的を簡潔に説明する
 - ロケットの基本スペック（全長・推力等）は不要。読者は宇宙ファンなので知っている
 - 事実に基づき、推測や憶測は避ける
-- 冗長な説明や水増しは厳禁
+- 冗長な説明や水増しは厳禁。同じ事実を言い換えて繰り返さない
+- 「〜と言えるでしょう」「〜が期待されます」「詳細は追って明らかになる見込みだ」などのAI的な定型表現は禁止
+- 速報記事として最短で伝える。読者の時間を奪わない
 - **文字数: ${config.words}文字（これを超えてはいけない。短い方が良い）**
 ${isUnknownPayload ? `
 【ペイロード不明時の注意】

@@ -1563,7 +1563,7 @@ async function generateLaunchArticle() {
   "description": "記事の要約（90文字以内）",
   "category": "ロケット",
   "source_urls": [],
-  "body": "記事本文（マークダウン、${process.env.LAUNCH_ARTICLE_WORDS || '2000〜2500'}文字）"
+  "body": "記事本文（マークダウン、${process.env.LAUNCH_ARTICLE_WORDS || '1200〜1800'}文字）"
 }`,
     }],
   })
