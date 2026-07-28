@@ -53,7 +53,7 @@ export default function RootLayout({ children }) {
             url: 'https://www.uchu-bin.jp',
             logo: 'https://www.uchu-bin.jp/icon-512.png',
             description: 'ロケット打ち上げ速報・スケジュール・宇宙開発ニュースをリアルタイムでお届けする宇宙情報メディア。',
-            sameAs: ['https://x.com/hgS9nGJWWF17545'],
+            sameAs: ['https://x.com/uchubin_jp'],
           })}}
         />
         <script
@@ -86,7 +86,7 @@ export default function RootLayout({ children }) {
               <Link href="/" style={{ fontSize: '12px', color: 'rgba(255,255,255,0.7)', textDecoration: 'none', letterSpacing: '0.08em' }}>
                 ホーム
               </Link>
-              <a href="https://x.com/hgS9nGJWWF17545" target="_blank" rel="noopener noreferrer"
+              <a href="https://x.com/uchubin_jp" target="_blank" rel="noopener noreferrer"
                 style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', textDecoration: 'none', letterSpacing: '0.08em' }}>
                 X / Twitter
               </a>
