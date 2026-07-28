@@ -339,15 +339,8 @@ export default function LaunchDashboard() {
                 const dateLabel = rel
                   ? (time ? `${rel} ${time}` : rel)
                   : (l.tentative ? date : `${date} ${time || ''}`)
-                return (
-                  <div key={l.id || i} style={{
-                    background: '#fff',
-                    border: '1px solid #e8e8e8',
-                    borderRadius: '3px',
-                    minWidth: '155px',
-                    flex: '1 0 155px',
-                    overflow: 'hidden',
-                  }}>
+                const cardContent = (
+                  <>
                     {rocketImg && (
                       <div style={{ height: '80px', overflow: 'hidden' }}>
                         <img src={rocketImg} alt={l.rocket} style={{
@@ -369,6 +362,27 @@ export default function LaunchDashboard() {
                       )}
                       <div style={{ fontSize: '10px', color: '#aaa', marginTop: '2px' }}>{country}</div>
                     </div>
+                  </>
+                )
+                const cardStyle = {
+                  background: '#fff',
+                  border: '1px solid #e8e8e8',
+                  borderRadius: '3px',
+                  minWidth: '155px',
+                  flex: '1 0 155px',
+                  overflow: 'hidden',
+                  textDecoration: 'none',
+                  color: 'inherit',
+                  display: 'block',
+                  cursor: l.webcast ? 'pointer' : 'default',
+                }
+                return l.webcast ? (
+                  <a key={l.id || i} href={l.webcast} target="_blank" rel="noopener noreferrer" style={cardStyle}>
+                    {cardContent}
+                  </a>
+                ) : (
+                  <div key={l.id || i} style={cardStyle}>
+                    {cardContent}
                   </div>
                 )
               })}

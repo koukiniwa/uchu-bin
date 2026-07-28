@@ -110,6 +110,13 @@ async function main() {
       // TBDの場合は「○月」表示用に月だけ保持
       const month = net ? net.getUTCMonth() + 1 : null
 
+      // ライブ配信URL（YouTube優先）
+      const vidUrls = l.vidURLs || []
+      const webcast = vidUrls.find(v => v.url?.includes('youtube'))?.url
+        || vidUrls.find(v => v.url?.includes('youtu.be'))?.url
+        || vidUrls[0]?.url
+        || null
+
       return {
         id: l.id,
         name: l.name,
@@ -123,6 +130,7 @@ async function main() {
         country: getCountryCode(l),
         pad: l.pad?.location?.name || '',
         status: l.status?.abbrev || '',
+        webcast: webcast || undefined,
       }
     })
 
