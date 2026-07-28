@@ -10,7 +10,7 @@ const LAUNCHES_PATH = path.join(__dirname, '..', 'public', 'data', 'launches.jso
 const PREVIEWED_PATH = path.join(__dirname, '..', 'public', 'data', 'tweeted-previews.json')
 const IMAGES_DIR = path.join(__dirname, '..', 'public', 'images', 'library')
 
-const HOURS_BEFORE = 6 // 打ち上げ何時間前に予告するか
+const HOURS_BEFORE = 3 // 打ち上げ何時間前に予告するか
 
 // ロケット名 → 画像ファイル（LaunchDashboard.jsと同じマッピング）
 const ROCKET_IMAGES = {
