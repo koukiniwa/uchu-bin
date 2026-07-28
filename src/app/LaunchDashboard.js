@@ -153,11 +153,125 @@ function Separator() {
   )
 }
 
+// 射場名を日本語に
+const PAD_SHORT = {
+  'Kennedy': 'ケネディ宇宙センター（米国）',
+  'Cape Canaveral': 'ケープカナベラル（米国）',
+  'Vandenberg': 'ヴァンデンバーグ（米国）',
+  'Starbase': 'スターベース（米国）',
+  'Boca Chica': 'スターベース（米国）',
+  'Wenchang': '文昌宇宙発射場（中国）',
+  'Jiuquan': '酒泉衛星発射センター（中国）',
+  'Taiyuan': '太原衛星発射センター（中国）',
+  'Xichang': '西昌衛星発射センター（中国）',
+  'Tanegashima': '種子島宇宙センター（日本）',
+  'Uchinoura': '内之浦宇宙空間観測所（日本）',
+  'Mahia': 'マヒア半島（ニュージーランド）',
+  'Sriharikota': 'サティッシュ・ダワン宇宙センター（インド）',
+  'Kourou': 'ギアナ宇宙センター（仏領ギアナ）',
+  'Plesetsk': 'プレセツク宇宙基地（ロシア）',
+  'Baikonur': 'バイコヌール宇宙基地（カザフスタン）',
+  'Vostochny': 'ボストチヌイ宇宙基地（ロシア）',
+}
+function shortenPad(pad) {
+  if (!pad) return ''
+  for (const [key, val] of Object.entries(PAD_SHORT)) {
+    if (pad.includes(key)) return val
+  }
+  return pad
+}
+
+function LaunchModal({ launch, onClose }) {
+  const [cd, setCd] = useState(null)
+  const { date, time, fullDate } = toJST(launch.date, launch.time, launch.tentative)
+  const rocketImg = getRocketImage(launch.rocket)
+  const country = countryName(launch.country)
+  const mission = launch.mission && launch.mission !== 'Unknown Payload' ? launch.mission : null
+  const pad = shortenPad(launch.pad)
+
+  useEffect(() => {
+    if (!fullDate) return
+    const tick = () => setCd(getCountdown(fullDate))
+    tick()
+    const timer = setInterval(tick, 1000)
+    return () => clearInterval(timer)
+  }, [fullDate])
+
+  return (
+    <div onClick={onClose} style={{
+      position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+      background: 'rgba(0,0,0,0.6)', zIndex: 9999,
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      padding: '20px',
+    }}>
+      <div onClick={e => e.stopPropagation()} style={{
+        background: '#fff', borderRadius: '8px', maxWidth: '360px', width: '100%',
+        overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
+      }}>
+        {rocketImg && (
+          <div style={{ height: '180px', overflow: 'hidden', position: 'relative' }}>
+            <img src={rocketImg} alt={launch.rocket} style={{
+              width: '100%', height: '100%', objectFit: 'cover',
+            }} />
+            <button onClick={onClose} style={{
+              position: 'absolute', top: '8px', right: '8px',
+              background: 'rgba(0,0,0,0.5)', color: '#fff', border: 'none',
+              borderRadius: '50%', width: '28px', height: '28px',
+              cursor: 'pointer', fontSize: '14px', lineHeight: '28px',
+            }}>✕</button>
+          </div>
+        )}
+        <div style={{ padding: '16px 20px' }}>
+          <div style={{ fontSize: '18px', fontWeight: 700, color: '#1a2744', marginBottom: '12px' }}>
+            {launch.rocket}
+          </div>
+          {cd && (
+            <div style={{
+              background: '#0a0e1a', borderRadius: '6px', padding: '10px',
+              display: 'flex', justifyContent: 'center', gap: '8px', marginBottom: '14px',
+            }}>
+              {[
+                { v: cd.days, l: '日' }, { v: cd.hours, l: '時間' },
+                { v: cd.minutes, l: '分' }, { v: cd.seconds, l: '秒' },
+              ].map(({ v, l }) => (
+                <div key={l} style={{ textAlign: 'center' }}>
+                  <div style={{ fontSize: '22px', fontWeight: 800, color: '#fff', fontFamily: 'monospace' }}>
+                    {String(v).padStart(2, '0')}
+                  </div>
+                  <div style={{ fontSize: '9px', color: 'rgba(255,255,255,0.5)' }}>{l}</div>
+                </div>
+              ))}
+            </div>
+          )}
+          <div style={{ fontSize: '13px', color: '#444', lineHeight: 1.8 }}>
+            {time && <div>📅 {date} {time} JST</div>}
+            {!time && <div>📅 {date}（日時未定）</div>}
+            {pad && <div>📍 {pad}</div>}
+            {launch.provider && <div>🏢 {launch.provider}</div>}
+            {mission && <div>🎯 {mission}</div>}
+            {country && <div>🌍 {country}</div>}
+          </div>
+          {launch.webcast && (
+            <a href={launch.webcast} target="_blank" rel="noopener noreferrer" style={{
+              display: 'block', textAlign: 'center', marginTop: '14px',
+              background: '#ff0000', color: '#fff', padding: '10px',
+              borderRadius: '6px', textDecoration: 'none', fontWeight: 700, fontSize: '13px',
+            }}>
+              ▶ ライブ配信を見る
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function LaunchDashboard() {
   const [launches, setLaunches] = useState([])
   const [recent, setRecent] = useState([])
   const [countdown, setCountdown] = useState(null)
   const [nextLaunch, setNextLaunch] = useState(null)
+  const [selectedLaunch, setSelectedLaunch] = useState(null)
 
   useEffect(() => {
     const load = () => {
@@ -364,24 +478,16 @@ export default function LaunchDashboard() {
                     </div>
                   </>
                 )
-                const cardStyle = {
-                  background: '#fff',
-                  border: '1px solid #e8e8e8',
-                  borderRadius: '3px',
-                  minWidth: '155px',
-                  flex: '1 0 155px',
-                  overflow: 'hidden',
-                  textDecoration: 'none',
-                  color: 'inherit',
-                  display: 'block',
-                  cursor: l.webcast ? 'pointer' : 'default',
-                }
-                return l.webcast ? (
-                  <a key={l.id || i} href={l.webcast} target="_blank" rel="noopener noreferrer" style={cardStyle}>
-                    {cardContent}
-                  </a>
-                ) : (
-                  <div key={l.id || i} style={cardStyle}>
+                return (
+                  <div key={l.id || i} onClick={() => setSelectedLaunch(l)} style={{
+                    background: '#fff',
+                    border: '1px solid #e8e8e8',
+                    borderRadius: '3px',
+                    minWidth: '155px',
+                    flex: '1 0 155px',
+                    overflow: 'hidden',
+                    cursor: 'pointer',
+                  }}>
                     {cardContent}
                   </div>
                 )
@@ -389,6 +495,9 @@ export default function LaunchDashboard() {
             </div>
           </div>
         </div>
+      )}
+      {selectedLaunch && (
+        <LaunchModal launch={selectedLaunch} onClose={() => setSelectedLaunch(null)} />
       )}
     </div>
   )
