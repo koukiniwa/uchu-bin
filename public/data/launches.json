@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-27T22:06:34.085Z",
+  "updated": "2026-07-28T02:31:09.992Z",
   "launches": [
     {
       "id": "beac6ac1-97dd-4eb2-912c-8b4d4d15cd4e",
@@ -176,7 +176,7 @@
       "mission": "Nancy Grace Roman Space Telescope",
       "date": "2026-08-30",
       "month": 8,
-      "time": "11:20",
+      "time": "11:26",
       "tentative": false,
       "provider": "SpaceX",
       "country": "US",
@@ -212,16 +212,5 @@
       "status": "TBD"
     }
   ],
-  "recent": [
-    {
-      "id": "ac897b9f-44d2-4ff4-8416-1a0a076e98a2",
-      "rocket": "Starship",
-      "mission": "Flight 13",
-      "date": "2026-07-24",
-      "country": "US",
-      "provider": "SpaceX",
-      "result": "success",
-      "resultLabel": "成功"
-    }
-  ]
+  "recent": []
 }
