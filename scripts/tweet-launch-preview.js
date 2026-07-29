@@ -8,55 +8,7 @@ const { TwitterApi } = require('twitter-api-v2')
 
 const LAUNCHES_PATH = path.join(__dirname, '..', 'public', 'data', 'launches.json')
 const PREVIEWED_PATH = path.join(__dirname, '..', 'public', 'data', 'tweeted-previews.json')
-const IMAGES_DIR = path.join(__dirname, '..', 'public', 'images', 'library')
-
 const HOURS_BEFORE = 3 // 打ち上げ何時間前に予告するか
-
-// ロケット名 → 画像ファイル（LaunchDashboard.jsと同じマッピング）
-const ROCKET_IMAGES = {
-  'starship': 'starship_001.jpg',
-  'falcon 9': 'falcon9_001.jpg',
-  'falcon heavy': 'falconheavy_001.jpg',
-  'electron': 'electron_001.jpg',
-  'h3': 'h3_001.jpg',
-  'h-iia': 'h3_001.jpg',
-  'new glenn': 'newglenn_001.jpg',
-  'new shepard': 'newshepard_001.jpg',
-  'vulcan': 'vulcan_001.jpg',
-  'ariane 6': 'ariane6_001.jpg',
-  'vega': 'vegac_001.jpg',
-  'soyuz': 'soyuz_001.jpg',
-  'proton': 'proton_001.jpg',
-  'angara': 'angara_001.jpg',
-  'long march 10': 'longmarch10_001.jpg',
-  'long march 12': 'longmarch12_001.jpg',
-  'long march 2': 'longmarch2_001.jpg',
-  'long march 3': 'longmarch3_001.jpg',
-  'long march 5': 'longmarch5_001.jpg',
-  'long march 6': 'longmarch6_001.jpg',
-  'long march 7': 'longmarch7_001.jpg',
-  'long march 8': 'longmarch8_001.jpg',
-  'long march': 'logo_cnsa_001.jpg',
-  'kuaizhou': 'kuaizhou_001.jpg',
-  'lijian': 'lijian_001.jpg',
-  'ceres': 'ceres1_001.jpg',
-  'kinetica': 'kinetica1_001.jpg',
-  'gravity': 'gravity1_001.jpg',
-  'zhuque': 'zhuque_001.jpg',
-  'kairos': 'kairos_001.jpg',
-  'epsilon': 'epsilon_001.jpg',
-  'pslv': 'pslv_001.jpg',
-  'gslv': 'gslv_001.jpg',
-  'lvm3': 'lvm3_001.jpg',
-  'sls': 'sls_001.jpg',
-  'atlas': 'atlasv_001.jpg',
-  'spectrum': 'spectrum_001.jpg',
-  'firefly': 'fireflyalpha_001.jpg',
-  'terran': 'terranr_001.jpg',
-  'neutron': 'neutron_001.jpg',
-  'nuri': 'nuri_001.jpg',
-  'vikram': 'vikram1_001.jpg',
-}
 
 // 射場名を短縮
 const PAD_SHORT = {
@@ -84,19 +36,6 @@ function shortenPad(pad) {
     if (pad.includes(key)) return val
   }
   return pad.split(',').pop().trim()
-}
-
-function getRocketImage(rocket) {
-  const lower = rocket.toLowerCase()
-  for (const [key, file] of Object.entries(ROCKET_IMAGES)) {
-    if (lower.includes(key)) {
-      const imgPath = path.join(IMAGES_DIR, file)
-      if (fs.existsSync(imgPath)) return imgPath
-    }
-  }
-  // フォールバック
-  const fallback = path.join(IMAGES_DIR, 'rocketlaunch_001.jpg')
-  return fs.existsSync(fallback) ? fallback : null
 }
 
 function getPreviewed() {
@@ -192,24 +131,8 @@ ${launch.rocket}
     console.log(`予告ツイート: ${launch.rocket}`)
     console.log(text)
 
-    // 画像添付
-    let mediaId = null
-    const imgPath = getRocketImage(launch.rocket)
-    if (imgPath) {
-      try {
-        mediaId = await client.v1.uploadMedia(imgPath, { mimeType: 'image/jpeg' })
-        console.log('  画像添付:', path.basename(imgPath))
-      } catch (e) {
-        console.error('  画像アップロード失敗:', e.message)
-      }
-    }
-
-    const tweetParams = mediaId
-      ? { text, media: { media_ids: [mediaId] } }
-      : text
-
     try {
-      await client.v2.tweet(tweetParams)
+      await client.v2.tweet(text)
       console.log('  投稿完了')
       previewed.ids.push({ id: launch.id, at: new Date().toISOString() })
     } catch (e) {
