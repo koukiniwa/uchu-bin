@@ -89,6 +89,9 @@ export default function RootLayout({ children }) {
               <Link href="/" style={{ fontSize: '12px', color: 'rgba(255,255,255,0.7)', textDecoration: 'none', letterSpacing: '0.08em' }}>
                 ホーム
               </Link>
+              <a href="/schedule" style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', textDecoration: 'none', letterSpacing: '0.08em' }}>
+                打ち上げ予定
+              </a>
               <a href="/about" style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', textDecoration: 'none', letterSpacing: '0.08em' }}>
                 このサイトについて
               </a>
@@ -127,6 +130,9 @@ export default function RootLayout({ children }) {
             </div>
             {/* Links */}
             <div style={{ display: 'flex', gap: '16px', marginBottom: '24px', flexWrap: 'wrap' }}>
+              <a href="/schedule" style={{ fontSize: '12px', color: '#4fc3f7', textDecoration: 'none' }}>
+                打ち上げ予定
+              </a>
               <a href="/about" style={{ fontSize: '12px', color: '#4fc3f7', textDecoration: 'none' }}>
                 このサイトについて
               </a>
