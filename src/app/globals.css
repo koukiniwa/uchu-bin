@@ -20,6 +20,24 @@ html, body {
 ::-webkit-scrollbar-track { background: #f0f0f0; }
 ::-webkit-scrollbar-thumb { background: #cccccc; border-radius: 3px; }
 
+/* ヘッダーナビ */
+.header-nav {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.header-nav a {
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+@media (max-width: 640px) {
+  .header-nav { gap: 12px; }
+  .header-nav a { font-size: 11px; letter-spacing: 0; }
+}
+
 /* 記事カード hover */
 .mil-card {
   background-color: #ffffff;

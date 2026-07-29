@@ -85,20 +85,10 @@ export default function RootLayout({ children }) {
                 height: '36px', width: 'auto', display: 'block', mixBlendMode: 'screen',
               }} />
             </Link>
-            <nav style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-              <Link href="/" style={{ fontSize: '12px', color: 'rgba(255,255,255,0.7)', textDecoration: 'none', letterSpacing: '0.08em' }}>
-                ホーム
-              </Link>
-              <a href="/schedule" style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', textDecoration: 'none', letterSpacing: '0.08em' }}>
-                打ち上げ予定
-              </a>
-              <a href="/about" style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', textDecoration: 'none', letterSpacing: '0.08em' }}>
-                このサイトについて
-              </a>
-              <a href="https://x.com/uchubin_jp" target="_blank" rel="noopener noreferrer"
-                style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', textDecoration: 'none', letterSpacing: '0.08em' }}>
-                X / Twitter
-              </a>
+            <nav className="header-nav">
+              <a href="/schedule">打ち上げ予定</a>
+              <a href="/about">このサイトについて</a>
+              <a href="https://x.com/uchubin_jp" target="_blank" rel="noopener noreferrer">X</a>
             </nav>
           </div>
         </header>
