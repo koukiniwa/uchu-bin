@@ -326,7 +326,7 @@ export default function LaunchDashboard() {
     <div>
       {/* === HERO: 次の打ち上げカウントダウン === */}
       {nextLaunch && (
-        <div className="countdown-hero" style={{
+        <div className="countdown-hero" onClick={() => setSelectedLaunch(nextLaunch)} style={{
           background: 'linear-gradient(135deg, #0a0e1a 0%, #0f1629 40%, #1a2744 100%)',
           borderRadius: '4px',
           padding: '0',
@@ -334,6 +334,7 @@ export default function LaunchDashboard() {
           position: 'relative',
           overflow: 'hidden',
           display: 'flex',
+          cursor: 'pointer',
         }}>
           {/* スマホ用: 背景画像 */}
           {heroImage && (
@@ -430,9 +431,6 @@ export default function LaunchDashboard() {
             color: '#999', marginBottom: '10px',
           }}>
             打ち上げスケジュール
-            <span style={{ fontSize: '9px', color: '#ccc', marginLeft: '10px', letterSpacing: '0.04em', fontWeight: 400 }}>
-              Starlink除く
-            </span>
           </div>
           <div style={{ position: 'relative' }}>
             <button className="scroll-arrow scroll-arrow-left" onClick={() => {
