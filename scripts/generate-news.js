@@ -524,6 +524,7 @@ const LIBRARY_TOPIC_KEYWORDS = {
   lijian:         ['lijian', '力箭'],
   gravity1:       ['gravity-1', 'gravity 1', 'orienspace'],
   kinetica1:      ['kinetica', 'cas space'],
+  smartdragon3:   ['smart dragon', '捷龙', 'sd-3'],
   // ===== 韓国・他ロケット =====
   nuri:           ['nuri', 'ヌリ', 'kslv-ii'],
   mir:            ['mir rocket', 'mirロケット', 'mir ロケット', 'mirが', 'mirの'],
@@ -817,6 +818,7 @@ const LIBRARY_CREDIT_MAP = {
   gslv:         'GSLV Mk II / ISRO',
   mir:          'Mir / ADD (Korea)',
   kinetica1:    'Kinetica 1 / CAS Space',
+  smartdragon3: 'Smart Dragon 3 / CALT',
 }
 
 // カテゴリ別フォールバック画像（キーワードマッチが外れた場合の安全ネット）

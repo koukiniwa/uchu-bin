@@ -28,6 +28,7 @@ const ROCKET_IMAGES = {
   'long march 7': 'longmarch7_001.jpg',
   'long march 8': 'longmarch8_001.jpg',
   'long march': 'logo_cnsa_001.jpg',
+  'smart dragon': 'smartdragon3_001.jpg',
   'kuaizhou': 'kuaizhou_001.jpg',
   'ceres': 'ceres1_001.jpg',
   'vulcan': 'vulcan_001.jpg',
