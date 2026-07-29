@@ -88,9 +88,9 @@ export default function RootLayout({ children }) {
               <Link href="/" style={{ fontSize: '12px', color: 'rgba(255,255,255,0.7)', textDecoration: 'none', letterSpacing: '0.08em' }}>
                 ホーム
               </Link>
-              <Link href="/about" style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', textDecoration: 'none', letterSpacing: '0.08em' }}>
+              <a href="/about" style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', textDecoration: 'none', letterSpacing: '0.08em' }}>
                 このサイトについて
-              </Link>
+              </a>
               <a href="https://x.com/uchubin_jp" target="_blank" rel="noopener noreferrer"
                 style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', textDecoration: 'none', letterSpacing: '0.08em' }}>
                 X / Twitter
@@ -126,9 +126,9 @@ export default function RootLayout({ children }) {
             </div>
             {/* Links */}
             <div style={{ display: 'flex', gap: '16px', marginBottom: '24px', flexWrap: 'wrap' }}>
-              <Link href="/about" style={{ fontSize: '12px', color: '#4fc3f7', textDecoration: 'none' }}>
+              <a href="/about" style={{ fontSize: '12px', color: '#4fc3f7', textDecoration: 'none' }}>
                 このサイトについて
-              </Link>
+              </a>
               <a href="https://space-map-git-main-koukiniwas-projects.vercel.app/moon"
                 target="_blank" rel="noopener noreferrer"
                 style={{ fontSize: '12px', color: '#4fc3f7', textDecoration: 'none' }}>
