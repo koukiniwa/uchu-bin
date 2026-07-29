@@ -71,6 +71,8 @@ export default function RootLayout({ children }) {
         <header style={{
           background: 'linear-gradient(135deg, #0a0e1a 0%, #0f1629 40%, #1a2744 100%)',
           borderBottom: '1px solid rgba(255,255,255,0.08)',
+          position: 'relative',
+          zIndex: 10,
         }}>
           <div style={{
             maxWidth: '900px', margin: '0 auto', padding: '0 20px',
