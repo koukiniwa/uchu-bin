@@ -1,20 +1,6 @@
 {
-  "updated": "2026-07-29T10:39:03.817Z",
+  "updated": "2026-07-29T13:00:47.589Z",
   "launches": [
-    {
-      "id": "beac6ac1-97dd-4eb2-912c-8b4d4d15cd4e",
-      "name": "Long March 7A | Unknown Payload",
-      "rocket": "Long March 7A",
-      "mission": "Unknown Payload",
-      "date": "2026-07-29",
-      "month": 7,
-      "time": "11:50",
-      "tentative": false,
-      "provider": "China Aerospace Science and Technology Corporation",
-      "country": "CN",
-      "pad": "Wenchang Space Launch Site, People's Republic of China",
-      "status": "Go"
-    },
     {
       "id": "394d2745-610b-409e-b4ea-2071a35f8668",
       "name": "Long March 6A | Unknown Payload",
@@ -280,7 +266,32 @@
       "country": "US",
       "pad": "Cape Canaveral SFS, FL, USA",
       "status": "TBD"
+    },
+    {
+      "id": "9e27a1ed-e81a-4918-b32b-0380cf3a9f8f",
+      "name": "Mir | Demo Flight",
+      "rocket": "Mir",
+      "mission": "Demo Flight",
+      "date": "2026-08-31",
+      "month": 8,
+      "time": null,
+      "tentative": true,
+      "provider": "Agency for Defense Development",
+      "country": "KR",
+      "pad": "Sea Launch",
+      "status": "TBD"
     }
   ],
-  "recent": []
+  "recent": [
+    {
+      "id": "beac6ac1-97dd-4eb2-912c-8b4d4d15cd4e",
+      "rocket": "Long March 7A",
+      "mission": "Tianlian 3-01",
+      "date": "2026-07-29",
+      "country": "CN",
+      "provider": "China Aerospace Science and Technology Corporation",
+      "result": "success",
+      "resultLabel": "成功"
+    }
+  ]
 }
