@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-29T07:43:05.701Z",
+  "updated": "2026-07-29T10:39:03.817Z",
   "launches": [
     {
       "id": "beac6ac1-97dd-4eb2-912c-8b4d4d15cd4e",
@@ -41,6 +41,34 @@
       "provider": "SpaceX",
       "country": "US",
       "pad": "Cape Canaveral SFS, FL, USA",
+      "status": "Go"
+    },
+    {
+      "id": "e7e55b53-6f69-4c22-9fc5-df00df653a3f",
+      "name": "Falcon 9 Block 5 | Starlink Group 17-52",
+      "rocket": "Falcon 9",
+      "mission": "Starlink Group 17-52",
+      "date": "2026-07-31",
+      "month": 7,
+      "time": "02:00",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "",
+      "pad": "Vandenberg SFB, CA, USA",
+      "status": "Go"
+    },
+    {
+      "id": "0448d030-5175-4c1f-bd0b-4f3f87072921",
+      "name": "Falcon 9 Block 5 | Starlink Group 17-53",
+      "rocket": "Falcon 9",
+      "mission": "Starlink Group 17-53",
+      "date": "2026-08-03",
+      "month": 8,
+      "time": "14:00",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "",
+      "pad": "Vandenberg SFB, CA, USA",
       "status": "Go"
     },
     {
@@ -114,6 +142,20 @@
       "status": "Go"
     },
     {
+      "id": "e4316d4c-9eb8-4a18-9b0d-4307c3970ef6",
+      "name": "Falcon 9 Block 5 | Starlink Group 17-38",
+      "rocket": "Falcon 9",
+      "mission": "Starlink Group 17-38",
+      "date": "2026-08-07",
+      "month": 8,
+      "time": "14:00",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "",
+      "pad": "Vandenberg SFB, CA, USA",
+      "status": "Go"
+    },
+    {
       "id": "cff704ab-8098-4f65-899e-50adaf908e59",
       "name": "Long March 7A | Unknown Payload",
       "rocket": "Long March 7A",
@@ -126,6 +168,34 @@
       "country": "CN",
       "pad": "Wenchang Space Launch Site, People's Republic of China",
       "status": "TBC"
+    },
+    {
+      "id": "36ab6924-bb36-416a-b71d-cda9e88004be",
+      "name": "Falcon 9 Block 5 | Starlink Group 10-19",
+      "rocket": "Falcon 9",
+      "mission": "Starlink Group 10-19",
+      "date": "2026-08-10",
+      "month": 8,
+      "time": "11:00",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Cape Canaveral SFS, FL, USA",
+      "status": "Go"
+    },
+    {
+      "id": "6f94dbe4-1318-4ffb-a53d-351bbdcba733",
+      "name": "Falcon 9 Block 5 | Starlink Group 17-49",
+      "rocket": "Falcon 9",
+      "mission": "Starlink Group 17-49",
+      "date": "2026-08-11",
+      "month": 8,
+      "time": "02:00",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "",
+      "pad": "Vandenberg SFB, CA, USA",
+      "status": "Go"
     },
     {
       "id": "b0e7d1cc-24dd-4da4-bb60-b15b6791d08e",
