@@ -1,11 +1,12 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 const PAGE_SIZE = 12
 
 function ArticleCard({ post }) {
   return (
-    <a href={`/blog/${post.slug}`} style={{ textDecoration: 'none', display: 'block' }}>
+    <Link href={`/blog/${post.slug}`} style={{ textDecoration: 'none', display: 'block' }}>
       <article className="mil-card" style={{
         width: '100%', overflow: 'hidden', cursor: 'pointer',
         display: 'flex', flexDirection: 'column',
@@ -55,7 +56,7 @@ function ArticleCard({ post }) {
           </div>
         </div>
       </article>
-    </a>
+    </Link>
   )
 }
 

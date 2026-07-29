@@ -18,6 +18,12 @@ export default function sitemap() {
       changeFrequency: 'daily',
       priority: 1,
     },
+    {
+      url: `${baseUrl}/about`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
     ...postUrls,
   ]
 }
