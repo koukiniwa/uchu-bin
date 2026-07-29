@@ -45,7 +45,9 @@ jobs:
 
       - name: 予告済みリスト保存
         run: |
-          git add public/data/tweeted-previews.json
-          git diff --cached --quiet || git commit -m "予告ツイート済みリスト更新"
-          git pull --rebase origin main
-          git push
+          if [ -f public/data/tweeted-previews.json ]; then
+            git add public/data/tweeted-previews.json
+            git diff --cached --quiet || git commit -m "予告ツイート済みリスト更新"
+            git pull --rebase origin main
+            git push
+          fi
