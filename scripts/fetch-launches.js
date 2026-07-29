@@ -8,11 +8,9 @@ const path = require('path')
 const OUTPUT_PATH = path.join(__dirname, '..', 'public', 'data', 'launches.json')
 const API_URL = 'https://ll.thespacedevs.com/2.3.0/launches/upcoming/?limit=80&mode=normal'
 
-// Falcon 9 Starlinkのみ除外（SpaceXの他ミッション・Electronは残す）
+// スケジュール表示: 全打ち上げを含める（Starlink含む）
+// 記事生成のみStarlinkを除外（check-launch-results.js側で制御）
 function isNotable(launch) {
-  const rocket = (launch.rocket?.configuration?.name || '').toLowerCase()
-  const mission = (launch.mission?.name || launch.name || '').toLowerCase()
-  if (rocket.includes('falcon 9') && mission.includes('starlink')) return false
   return true
 }
 
@@ -72,7 +70,6 @@ async function main() {
   const threeDaysAgo = Date.now() - 3 * 24 * 60 * 60 * 1000
   const recent = recentData.results
     .filter(l => {
-      if (!isNotable(l)) return false
       const launchTime = new Date(l.net).getTime()
       return launchTime > threeDaysAgo
     })
@@ -144,7 +141,7 @@ async function main() {
       seen.add(key)
     }
     launches.push(l)
-    if (launches.length >= 15) break
+    if (launches.length >= 20) break
   }
 
   // 出力ディレクトリがなければ作成
