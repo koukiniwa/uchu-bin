@@ -47,6 +47,12 @@
       "name": "Long March 7A | Tianlian 3-01",
       "status": "Launch Successful",
       "date": "2026-07-29T14:53:12.320Z"
+    },
+    {
+      "id": "394d2745-610b-409e-b4ea-2071a35f8668",
+      "name": "Long March 6A | TJSW-27A & B",
+      "status": "Launch Successful",
+      "date": "2026-07-30T05:48:01.352Z"
     }
   ]
 }
