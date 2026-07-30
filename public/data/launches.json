@@ -1,20 +1,6 @@
 {
-  "updated": "2026-07-29T23:59:36.983Z",
+  "updated": "2026-07-30T03:16:27.707Z",
   "launches": [
-    {
-      "id": "394d2745-610b-409e-b4ea-2071a35f8668",
-      "name": "Long March 6A | Unknown Payload",
-      "rocket": "Long March 6A",
-      "mission": "Unknown Payload",
-      "date": "2026-07-30",
-      "month": 7,
-      "time": "01:00",
-      "tentative": false,
-      "provider": "China Aerospace Science and Technology Corporation",
-      "country": "CN",
-      "pad": "Taiyuan Satellite Launch Center, People's Republic of China",
-      "status": "Go"
-    },
     {
       "id": "24675e3d-2458-48a3-8c70-5196e44d4dc3",
       "name": "Falcon 9 Block 5 | NROL-95",
@@ -280,9 +266,33 @@
       "country": "KR",
       "pad": "Sea Launch",
       "status": "TBD"
+    },
+    {
+      "id": "ef02e2cf-e617-4b38-a526-951ac9204b0a",
+      "name": "Zhuque-3 | Flight 2",
+      "rocket": "Zhuque-3",
+      "mission": "Flight 2",
+      "date": "2026-08-31",
+      "month": 8,
+      "time": null,
+      "tentative": true,
+      "provider": "LandSpace",
+      "country": "CN",
+      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
+      "status": "TBD"
     }
   ],
   "recent": [
+    {
+      "id": "394d2745-610b-409e-b4ea-2071a35f8668",
+      "rocket": "Long March 6A",
+      "mission": "TJSW-27A & B",
+      "date": "2026-07-30",
+      "country": "CN",
+      "provider": "China Aerospace Science and Technology Corporation",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "beac6ac1-97dd-4eb2-912c-8b4d4d15cd4e",
       "rocket": "Long March 7A",
