@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 
 const COUNTRY_NAMES = {
   US: 'USA', CN: '中国', IN: 'インド', JP: '日本', RU: 'ロシア',
@@ -271,7 +271,6 @@ export default function LaunchDashboard() {
   const [launches, setLaunches] = useState([])
   const [recent, setRecent] = useState([])
   const [countdown, setCountdown] = useState(null)
-  const [nextLaunch, setNextLaunch] = useState(null)
   const [selectedLaunch, setSelectedLaunch] = useState(null)
 
   useEffect(() => {
@@ -289,19 +288,18 @@ export default function LaunchDashboard() {
     return () => clearInterval(fetchInterval)
   }, [])
 
-  useEffect(() => {
-    if (launches.length === 0) return
+  const nextLaunch = useMemo(() => {
+    if (launches.length === 0) return null
     const now = new Date()
     const upcoming = launches.filter(l => {
       if (l.tentative || !l.time) return false
       const utc = new Date(l.date + 'T' + l.time + ':00Z')
       return utc.getTime() > now.getTime()
     })
-    const first = upcoming[0]
-    if (!first) return
-    const { fullDate } = toJST(first.date, first.time)
-    setNextLaunch({ ...first, fullDate })
-  }, [launches, countdown])
+    if (!upcoming[0]) return null
+    const { fullDate } = toJST(upcoming[0].date, upcoming[0].time)
+    return { ...upcoming[0], fullDate }
+  }, [launches])
 
   useEffect(() => {
     if (!nextLaunch?.fullDate) return
