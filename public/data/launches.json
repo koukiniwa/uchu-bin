@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-31T21:04:13.518Z",
+  "updated": "2026-07-31T22:59:59.429Z",
   "launches": [
     {
       "id": "e7e55b53-6f69-4c22-9fc5-df00df653a3f",
@@ -8,7 +8,7 @@
       "mission": "Starlink Group 17-52",
       "date": "2026-08-01",
       "month": 8,
-      "time": "02:59",
+      "time": "03:04",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
