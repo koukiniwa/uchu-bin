@@ -59,6 +59,30 @@
       "name": "Falcon 9 Block 5 | NROL-95",
       "status": "Launch in Flight",
       "date": "2026-07-30T11:13:06.115Z"
+    },
+    {
+      "id": "aafe107e-46d8-420c-bcb9-192069d80893",
+      "name": "Soyuz 2.1b | 16 x Rassvet-3",
+      "skipped": true,
+      "date": "2026-08-01T10:04:33.450Z"
+    },
+    {
+      "id": "a556b963-0f36-4660-95a8-fdffdba653e2",
+      "name": "Soyuz 2.1a | Soyuz MS-29",
+      "skipped": true,
+      "date": "2026-08-01T10:04:33.450Z"
+    },
+    {
+      "id": "1e79a5e9-c02c-470f-882f-884120100fef",
+      "name": "Long March 10B | Demo Flight",
+      "skipped": true,
+      "date": "2026-08-01T10:04:33.451Z"
+    },
+    {
+      "id": "e7e55b53-6f69-4c22-9fc5-df00df653a3f",
+      "name": "Falcon 9 Block 5 | Starlink Group 17-52",
+      "status": "Launch Successful",
+      "date": "2026-08-01T10:04:33.451Z"
     }
   ]
 }
