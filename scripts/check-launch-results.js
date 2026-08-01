@@ -96,6 +96,38 @@ async function main() {
     break  // 1回の実行で1記事のみ
   }
 
+  // Starlink結果ツイート用チェック（記事は生成しない）
+  for (const launch of data.results) {
+    const rocket = (launch.rocket?.configuration?.name || '').toLowerCase()
+    const mission = (launch.mission?.name || launch.name || '').toLowerCase()
+    if (!(rocket.includes('falcon 9') && mission.includes('starlink'))) continue
+    if (reportedIds.has(launch.id)) continue
+
+    const launchTime = new Date(launch.net).getTime()
+    const hoursElapsed = (now - launchTime) / (1000 * 60 * 60)
+    if (hoursElapsed < MIN_HOURS_AFTER_LAUNCH) continue
+    if (hoursElapsed > 24) {
+      reported.launches.push({ id: launch.id, name: launch.name, skipped: true, date: new Date().toISOString() })
+      continue
+    }
+
+    const slStatus = launch.status?.name || 'Unknown'
+    const slRocket = launch.rocket?.configuration?.name || 'Falcon 9'
+    const slMission = launch.mission?.name || ''
+    console.log(`  [Starlink] ${slRocket} / ${slMission} - ${slStatus}`)
+
+    const outputFile = process.env.GITHUB_OUTPUT
+    if (outputFile) {
+      fs.appendFileSync(outputFile, `starlink_found=true\n`)
+      fs.appendFileSync(outputFile, `starlink_rocket=${slRocket}\n`)
+      fs.appendFileSync(outputFile, `starlink_mission=${slMission}\n`)
+      fs.appendFileSync(outputFile, `starlink_status=${slStatus}\n`)
+    }
+
+    reported.launches.push({ id: launch.id, name: launch.name, status: slStatus, date: new Date().toISOString() })
+    break
+  }
+
   if (!target) {
     console.log('\n新しい打ち上げ結果はありません')
     saveReported(reported)
