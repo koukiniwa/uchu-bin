@@ -1,5 +1,6 @@
 import './globals.css'
 import Link from 'next/link'
+import Script from 'next/script'
 
 export const metadata = {
   metadataBase: new URL('https://www.uchu-bin.jp'),
@@ -40,6 +41,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ja">
       <head>
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-CPLXJNSZK5" strategy="afterInteractive" />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-CPLXJNSZK5');`}
+        </Script>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="max-image-preview:large" />
