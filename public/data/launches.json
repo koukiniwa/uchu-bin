@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-02T20:10:24.504Z",
+  "updated": "2026-08-02T21:56:33.853Z",
   "launches": [
     {
       "id": "12b9454b-d48b-4fd5-9c11-17c18f45dafe",
@@ -56,20 +56,6 @@
       "country": "US",
       "pad": "Cape Canaveral SFS, FL, USA",
       "status": "Go"
-    },
-    {
-      "id": "1b23eb18-e06e-4058-9b42-e95ca0980511",
-      "name": "Spectrum | Onward and Upward",
-      "rocket": "Spectrum",
-      "mission": "Onward and Upward",
-      "date": "2026-08-06",
-      "month": 8,
-      "time": null,
-      "tentative": true,
-      "provider": "Isar Aerospace",
-      "country": "DE",
-      "pad": "Andøya Spaceport",
-      "status": "TBD"
     },
     {
       "id": "b89ab080-66c3-4831-85a9-38d85da71d30",
@@ -237,6 +223,20 @@
       "provider": "Agency for Defense Development",
       "country": "KR",
       "pad": "Sea Launch",
+      "status": "TBD"
+    },
+    {
+      "id": "1b23eb18-e06e-4058-9b42-e95ca0980511",
+      "name": "Spectrum | Onward and Upward",
+      "rocket": "Spectrum",
+      "mission": "Onward and Upward",
+      "date": "2026-08-31",
+      "month": 8,
+      "time": null,
+      "tentative": true,
+      "provider": "Isar Aerospace",
+      "country": "DE",
+      "pad": "Andøya Spaceport",
       "status": "TBD"
     },
     {
