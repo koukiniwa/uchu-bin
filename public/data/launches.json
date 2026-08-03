@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-03T12:23:14.985Z",
+  "updated": "2026-08-03T15:43:11.503Z",
   "launches": [
     {
       "id": "12b9454b-d48b-4fd5-9c11-17c18f45dafe",
@@ -58,20 +58,6 @@
       "status": "Go"
     },
     {
-      "id": "b89ab080-66c3-4831-85a9-38d85da71d30",
-      "name": "H3-22 | Michibiki 7 (QZS-7)",
-      "rocket": "H3-22",
-      "mission": "Michibiki 7 (QZS-7)",
-      "date": "2026-08-06",
-      "month": 8,
-      "time": "19:30",
-      "tentative": false,
-      "provider": "Mitsubishi Heavy Industries",
-      "country": "JP",
-      "pad": "Tanegashima Space Center, Japan",
-      "status": "Go"
-    },
-    {
       "id": "e4316d4c-9eb8-4a18-9b0d-4307c3970ef6",
       "name": "Falcon 9 Block 5 | Starlink Group 17-38",
       "rocket": "Falcon 9",
@@ -126,6 +112,20 @@
       "country": "",
       "pad": "Vandenberg SFB, CA, USA",
       "status": "Go"
+    },
+    {
+      "id": "be8b4b0d-1989-48a5-a96d-e8e4d59ed8b3",
+      "name": "Falcon 9 Block 5 | Globalstar 2-R Mission 1 (x 9)",
+      "rocket": "Falcon 9",
+      "mission": "Globalstar 2-R Mission 1 (x 9)",
+      "date": "2026-08-16",
+      "month": 8,
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Cape Canaveral SFS, FL, USA",
+      "status": "TBC"
     },
     {
       "id": "b0e7d1cc-24dd-4da4-bb60-b15b6791d08e",
@@ -198,17 +198,17 @@
       "status": "TBD"
     },
     {
-      "id": "be8b4b0d-1989-48a5-a96d-e8e4d59ed8b3",
-      "name": "Falcon 9 Block 5 | Globalstar 2-R Mission 1 (x 9)",
-      "rocket": "Falcon 9",
-      "mission": "Globalstar 2-R Mission 1 (x 9)",
+      "id": "b89ab080-66c3-4831-85a9-38d85da71d30",
+      "name": "H3-22 | Michibiki 7 (QZS-7)",
+      "rocket": "H3-22",
+      "mission": "Michibiki 7 (QZS-7)",
       "date": "2026-08-31",
       "month": 8,
       "time": null,
       "tentative": true,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "Cape Canaveral SFS, FL, USA",
+      "provider": "Mitsubishi Heavy Industries",
+      "country": "JP",
+      "pad": "Tanegashima Space Center, Japan",
       "status": "TBD"
     },
     {
