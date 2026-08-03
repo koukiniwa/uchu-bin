@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-03T15:43:11.503Z",
+  "updated": "2026-08-03T17:50:57.386Z",
   "launches": [
     {
       "id": "12b9454b-d48b-4fd5-9c11-17c18f45dafe",
@@ -162,12 +162,12 @@
       "mission": "MTG-I2",
       "date": "2026-08-27",
       "month": 8,
-      "time": null,
-      "tentative": true,
+      "time": "20:10",
+      "tentative": false,
       "provider": "Arianespace",
       "country": "FR",
       "pad": "Guiana Space Centre, French Guiana",
-      "status": "TBD"
+      "status": "Go"
     },
     {
       "id": "521f3a1c-f977-4306-9b7f-495858719adf",
@@ -268,17 +268,17 @@
       "status": "TBC"
     },
     {
-      "id": "8effc13a-c658-4d2e-9f15-8dba4d7fe2dd",
-      "name": "Vega-C | Sentinel-3C & FLEX",
-      "rocket": "Vega-C",
-      "mission": "Sentinel-3C & FLEX",
-      "date": "2026-09-15",
+      "id": "18441371-8b2e-457c-afb5-1ec1b11ab630",
+      "name": "Falcon 9 Block 5 | Crew-13",
+      "rocket": "Falcon 9",
+      "mission": "Crew-13",
+      "date": "2026-09-12",
       "month": 9,
-      "time": "01:21",
+      "time": "22:34",
       "tentative": false,
-      "provider": "Avio S.p.A",
-      "country": "FR",
-      "pad": "Guiana Space Centre, French Guiana",
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Cape Canaveral SFS, FL, USA",
       "status": "Go"
     }
   ],
