@@ -1,3 +1,5 @@
+import fs from 'fs'
+import path from 'path'
 import { getPostBySlug, getAllPosts } from '@/lib/posts'
 import Link from 'next/link'
 import Markdown from 'markdown-to-jsx'
@@ -12,6 +14,48 @@ function AutoTweet({ children }) {
     return <TweetEmbed url={text} />
   }
   return <p>{children}</p>
+}
+
+const PAD_SHORT = {
+  'Kennedy': 'ケネディ宇宙センター', 'Cape Canaveral': 'ケープカナベラル',
+  'Vandenberg': 'ヴァンデンバーグ', 'Starbase': 'スターベース',
+  'Wenchang': '文昌', 'Jiuquan': '酒泉', 'Taiyuan': '太原',
+  'Tanegashima': '種子島', 'Mahia': 'マヒア半島', 'Kourou': 'クールー',
+  'Guiana': 'クールー', 'Baikonur': 'バイコヌール',
+}
+
+function NextLaunchBanner() {
+  try {
+    const data = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'public', 'data', 'launches.json'), 'utf-8'))
+    const now = new Date()
+    const next = (data.launches || []).find(l => {
+      if (!l.time || l.tentative) return false
+      const utc = new Date(l.date + 'T' + l.time + ':00Z')
+      return utc > now
+    })
+    if (!next) return null
+    const utc = new Date(next.date + 'T' + next.time + ':00Z')
+    const jst = new Date(utc.getTime() + 9 * 3600000)
+    const timeStr = `${jst.getUTCMonth() + 1}/${jst.getUTCDate()} ${String(jst.getUTCHours()).padStart(2, '0')}:${String(jst.getUTCMinutes()).padStart(2, '0')} JST`
+    let pad = next.pad || ''
+    for (const [k, v] of Object.entries(PAD_SHORT)) { if (pad.includes(k)) { pad = v; break } }
+    return (
+      <div style={{ margin: '32px 0', padding: '16px 20px', background: 'linear-gradient(135deg, #0a0e1a, #1a2744)', borderRadius: '6px' }}>
+        <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.35)', marginBottom: '8px' }}>
+          🚀 次の打ち上げ予定
+        </div>
+        <div style={{ fontSize: '17px', fontWeight: 800, color: '#fff', marginBottom: '4px' }}>
+          {next.rocket}
+        </div>
+        <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.6)', marginBottom: '10px' }}>
+          {timeStr} 📍 {pad}
+        </div>
+        <a href="/schedule" style={{ fontSize: '12px', color: '#4fc3f7', textDecoration: 'none', fontWeight: 600 }}>
+          スケジュール一覧を見る →
+        </a>
+      </div>
+    )
+  } catch { return null }
 }
 
 export const dynamicParams = false
@@ -221,6 +265,9 @@ export default function BlogPost({ params }) {
           </div>
         </div>
       </div>
+
+      {/* 次の打ち上げ */}
+      <NextLaunchBanner />
 
       {/* 関連記事 */}
       {relatedPosts.length > 0 && (
