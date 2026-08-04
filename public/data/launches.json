@@ -1,20 +1,6 @@
 {
-  "updated": "2026-08-04T08:35:58.166Z",
+  "updated": "2026-08-04T11:23:11.399Z",
   "launches": [
-    {
-      "id": "12b9454b-d48b-4fd5-9c11-17c18f45dafe",
-      "name": "Long March 8A | Unknown Payload",
-      "rocket": "Long March 8A",
-      "mission": "Unknown Payload",
-      "date": "2026-08-04",
-      "month": 8,
-      "time": "08:50",
-      "tentative": false,
-      "provider": "China Aerospace Science and Technology Corporation",
-      "country": "CN",
-      "pad": "Wenchang Space Launch Site, People's Republic of China",
-      "status": "Go"
-    },
     {
       "id": "0448d030-5175-4c1f-bd0b-4f3f87072921",
       "name": "Falcon 9 Block 5 | Starlink Group 17-53",
@@ -280,7 +266,32 @@
       "country": "US",
       "pad": "Cape Canaveral SFS, FL, USA",
       "status": "Go"
+    },
+    {
+      "id": "8effc13a-c658-4d2e-9f15-8dba4d7fe2dd",
+      "name": "Vega-C | Sentinel-3C & FLEX",
+      "rocket": "Vega-C",
+      "mission": "Sentinel-3C & FLEX",
+      "date": "2026-09-15",
+      "month": 9,
+      "time": "01:21",
+      "tentative": false,
+      "provider": "Avio S.p.A",
+      "country": "FR",
+      "pad": "Guiana Space Centre, French Guiana",
+      "status": "Go"
     }
   ],
-  "recent": []
+  "recent": [
+    {
+      "id": "12b9454b-d48b-4fd5-9c11-17c18f45dafe",
+      "rocket": "Long March 8A",
+      "mission": "SatNet LEO Group 23",
+      "date": "2026-08-04",
+      "country": "CN",
+      "provider": "China Aerospace Science and Technology Corporation",
+      "result": "success",
+      "resultLabel": "成功"
+    }
+  ]
 }
