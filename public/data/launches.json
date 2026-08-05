@@ -1,6 +1,20 @@
 {
-  "updated": "2026-08-05T19:32:02.946Z",
+  "updated": "2026-08-05T21:08:03.224Z",
   "launches": [
+    {
+      "id": "8b7e748c-6ed5-4681-a898-827b4a23b8d7",
+      "name": "Electron | The Grain Goddess Provides (iQPS Launch 7)",
+      "rocket": "Electron",
+      "mission": "The Grain Goddess Provides (iQPS Launch 7)",
+      "date": "2026-08-06",
+      "month": 8,
+      "time": "09:00",
+      "tentative": false,
+      "provider": "Rocket Lab",
+      "country": "US",
+      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
+      "status": "Go"
+    },
     {
       "id": "e4316d4c-9eb8-4a18-9b0d-4307c3970ef6",
       "name": "Falcon 9 Block 5 | Starlink Group 17-38",
@@ -266,20 +280,6 @@
       "country": "FR",
       "pad": "Guiana Space Centre, French Guiana",
       "status": "Go"
-    },
-    {
-      "id": "ad358a4d-c541-409b-9366-9c2f2da4aeb9",
-      "name": "Falcon 9 Block 5 | O3b mPower 11-13",
-      "rocket": "Falcon 9",
-      "mission": "O3b mPower 11-13",
-      "date": "2026-09-30",
-      "month": 9,
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "",
-      "pad": "Cape Canaveral SFS, FL, USA",
-      "status": "TBD"
     }
   ],
   "recent": [
