@@ -1614,7 +1614,9 @@ async function main() {
       }
     }
 
-    const jstDate = new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().slice(0, 10)
+    const jstNow = new Date(Date.now() + 9 * 60 * 60 * 1000)
+    const jstDate = jstNow.toISOString().slice(0, 10)
+    const jstDateTime = jstNow.toISOString().replace('Z', '+09:00')
     const slug = `${jstDate}-${(article.slug || 'launch-article').replace(/[^a-z0-9\-]/gi, '-').toLowerCase().slice(0, 80)}`
     let body = article.body.replace(/\{\{IMAGE_1\}\}/g, '').replace(/\{\{IMAGE_2\}\}/g, '')
 
@@ -1646,7 +1648,7 @@ async function main() {
       '---',
       `title: '${article.title.replace(/'/g, "''")}'`,
       `description: '${(article.description || '').replace(/'/g, "''")}'`,
-      `date: '${jstDate}'`,
+      `date: '${jstDateTime}'`,
       `category: '${article.category}'`,
       coverImage ? `image: '${coverImage}'` : "image: '/logo.jpg'",
       coverImageCredit ? `imageCredit: '${coverImageCredit}'` : '',

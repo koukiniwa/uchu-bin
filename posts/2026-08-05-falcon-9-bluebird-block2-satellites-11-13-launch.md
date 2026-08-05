@@ -1,7 +1,7 @@
 ---
 title: 'Falcon 9がBlueBird Block 2衛星3機を打ち上げ'
 description: 'SpaceXのFalcon 9が、AST SpaceMobileのBlueBird Block 2衛星3機をケープカナベラルから打ち上げた。商業LEO史上最大級の通信アレイを搭載する。'
-date: '2026-08-05'
+date: '2026-08-05T16:42:00+09:00'
 category: 'ロケット'
 image: '/images/library/falcon9_001.jpg'
 imageCredit: 'Falcon 9 / SpaceX'

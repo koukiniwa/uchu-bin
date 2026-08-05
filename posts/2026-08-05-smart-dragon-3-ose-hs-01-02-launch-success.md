@@ -1,7 +1,7 @@
 ---
 title: 'Smart Dragon 3打ち上げ成功、地球観測衛星2機を軌道投入'
 description: '中国のSmart Dragon 3ロケットが海陽東方宇宙港から打ち上げられ、インドネシアとウズベキスタン向けのハイパースペクトル地球観測衛星2機の軌道投入に成功した。'
-date: '2026-08-05'
+date: '2026-08-05T11:35:00+09:00'
 category: 'ロケット'
 image: '/images/library/smartdragon3_001.jpg'
 imageCredit: 'Smart Dragon 3 / CALT'
