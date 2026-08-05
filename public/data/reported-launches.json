@@ -125,6 +125,12 @@
       "name": "Falcon 9 Block 5 | Starlink Group 17-53",
       "status": "Launch Successful",
       "date": "2026-08-04T20:11:30.638Z"
+    },
+    {
+      "id": "d46cab82-dcf5-4d70-b698-d7bead7f638c",
+      "name": "Smart Dragon 3 | OSE HS-01 & 02",
+      "status": "Launch Successful",
+      "date": "2026-08-05T07:17:15.078Z"
     }
   ]
 }
