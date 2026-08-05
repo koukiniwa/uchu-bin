@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-05T07:17:41.039Z",
+  "updated": "2026-08-05T07:38:52.899Z",
   "launches": [
     {
       "id": "56a85c82-ea71-449b-828c-b583f6f4a18b",
@@ -8,7 +8,7 @@
       "mission": "BlueBird 11-13 (Block 2 #6-8)",
       "date": "2026-08-05",
       "month": 8,
-      "time": "08:49",
+      "time": "07:49",
       "tentative": false,
       "provider": "SpaceX",
       "country": "US",
