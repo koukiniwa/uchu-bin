@@ -6,6 +6,7 @@ const { TwitterApi } = require('twitter-api-v2')
 
 const POSTS_DIR = path.join(__dirname, '..', 'posts')
 const SITE_URL = 'https://www.uchu-bin.jp'
+const TWEETED_FILE = path.join(__dirname, '..', 'public', 'data', 'tweeted-posts.json')
 
 function parseFrontmatter(content) {
   const match = content.match(/^---\n([\s\S]*?)\n---/)
@@ -16,6 +17,21 @@ function parseFrontmatter(content) {
     if (m) meta[m[1]] = m[2]
   }
   return meta
+}
+
+function loadTweeted() {
+  try {
+    return JSON.parse(fs.readFileSync(TWEETED_FILE, 'utf-8'))
+  } catch {
+    return []
+  }
+}
+
+function saveTweeted(list) {
+  // 直近90日分だけ保持
+  const cutoff = new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)
+  const trimmed = list.filter(entry => entry.date >= cutoff)
+  fs.writeFileSync(TWEETED_FILE, JSON.stringify(trimmed, null, 2), 'utf-8')
 }
 
 async function downloadImageToTemp(imageUrl) {
@@ -39,23 +55,29 @@ async function downloadImageToTemp(imageUrl) {
 
 async function main() {
   const today = new Date().toLocaleDateString('sv-SE', { timeZone: 'Asia/Tokyo' })
+  const tweeted = loadTweeted()
+  const tweetedSlugs = new Set(tweeted.map(t => t.slug))
+
+  // 今日の記事で未ツイートのものを探す
   const files = fs.readdirSync(POSTS_DIR)
     .filter(f => f.startsWith(today) && f.endsWith('.md'))
+    .filter(f => !tweetedSlugs.has(f.replace(/\.md$/, '')))
     .sort()
 
   if (files.length === 0) {
-    console.log('本日公開の記事が見つかりませんでした')
+    console.log('未ツイートの本日記事はありません')
     return
   }
 
-  const file = files[files.length - 1]
+  // 未ツイートの中で最初の1件をツイート
+  const file = files[0]
   const content = fs.readFileSync(path.join(POSTS_DIR, file), 'utf-8')
   const meta = parseFrontmatter(content)
   const slug = file.replace(/\.md$/, '')
   const title = meta.title || slug
   const url = `${SITE_URL}/blog/${slug}`
 
-  // 記事タイトル + URL（AIコメント廃止）
+  // 記事タイトル + URL
   const text = `${title}\n${url}`
 
   const client = new TwitterApi({
@@ -94,6 +116,11 @@ async function main() {
     : text
   await client.v2.tweet(tweetParams)
   console.log('ツイート投稿完了:', text)
+
+  // ツイート済みとして記録
+  tweeted.push({ slug, date: today })
+  saveTweeted(tweeted)
+  console.log('ツイート済みリストに追加:', slug)
 }
 
 main().catch(e => {

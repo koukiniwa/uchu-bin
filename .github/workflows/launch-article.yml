@@ -116,6 +116,16 @@ jobs:
           TWITTER_ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
         run: node scripts/tweet-latest-post.js
 
+      - name: ツイート済みリスト保存
+        if: steps.check.outputs.found == 'true'
+        run: |
+          if [ -f public/data/tweeted-posts.json ]; then
+            git add public/data/tweeted-posts.json
+            git diff --cached --quiet || git commit -m "ツイート済みリスト更新"
+            git pull --rebase origin main
+            git push
+          fi
+
       - name: 公式ツイートを引用RT
         if: steps.check.outputs.found == 'true'
         env:
