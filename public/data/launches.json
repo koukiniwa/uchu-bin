@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-06T15:16:21.570Z",
+  "updated": "2026-08-06T23:59:16.970Z",
   "launches": [
     {
       "id": "e4316d4c-9eb8-4a18-9b0d-4307c3970ef6",
@@ -72,17 +72,17 @@
       "status": "Go"
     },
     {
-      "id": "be8b4b0d-1989-48a5-a96d-e8e4d59ed8b3",
-      "name": "Falcon 9 Block 5 | Globalstar 2-R Mission 1 (x 9)",
+      "id": "55b79515-ddbf-4198-8a59-29a12ed21330",
+      "name": "Falcon 9 Block 5 | R-1",
       "rocket": "Falcon 9",
-      "mission": "Globalstar 2-R Mission 1 (x 9)",
-      "date": "2026-08-16",
+      "mission": "R-1",
+      "date": "2026-08-15",
       "month": 8,
       "time": null,
       "tentative": true,
       "provider": "SpaceX",
-      "country": "US",
-      "pad": "Cape Canaveral SFS, FL, USA",
+      "country": "",
+      "pad": "Vandenberg SFB, CA, USA",
       "status": "TBC"
     },
     {
@@ -98,6 +98,20 @@
       "country": "CN",
       "pad": "Wenchang Space Launch Site, People's Republic of China",
       "status": "TBC"
+    },
+    {
+      "id": "f6958a77-37bb-4559-a108-40ba0ff9e34a",
+      "name": "Falcon 9 Block 5 | Starlink Group 17-50",
+      "rocket": "Falcon 9",
+      "mission": "Starlink Group 17-50",
+      "date": "2026-08-19",
+      "month": 8,
+      "time": "02:00",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "",
+      "pad": "Vandenberg SFB, CA, USA",
+      "status": "Go"
     },
     {
       "id": "9d402fb6-9115-424d-b6f0-bd3b13ee310e",
@@ -134,7 +148,7 @@
       "mission": "Nancy Grace Roman Space Telescope",
       "date": "2026-08-30",
       "month": 8,
-      "time": "11:26",
+      "time": "11:25",
       "tentative": false,
       "provider": "SpaceX",
       "country": "US",
@@ -266,20 +280,6 @@
       "country": "FR",
       "pad": "Guiana Space Centre, French Guiana",
       "status": "Go"
-    },
-    {
-      "id": "ad358a4d-c541-409b-9366-9c2f2da4aeb9",
-      "name": "Falcon 9 Block 5 | O3b mPower 11-13",
-      "rocket": "Falcon 9",
-      "mission": "O3b mPower 11-13",
-      "date": "2026-09-30",
-      "month": 9,
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "",
-      "pad": "Cape Canaveral SFS, FL, USA",
-      "status": "TBD"
     }
   ],
   "recent": [
