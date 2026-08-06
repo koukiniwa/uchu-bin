@@ -137,6 +137,12 @@
       "name": "Falcon 9 Block 5 | BlueBird 11-13 (Block 2 #6-8)",
       "status": "Launch in Flight",
       "date": "2026-08-05T10:10:02.805Z"
+    },
+    {
+      "id": "8b7e748c-6ed5-4681-a898-827b4a23b8d7",
+      "name": "Electron | The Grain Goddess Provides (iQPS Launch 7)",
+      "status": "Launch in Flight",
+      "date": "2026-08-06T12:27:48.491Z"
     }
   ]
 }
