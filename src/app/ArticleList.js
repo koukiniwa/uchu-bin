@@ -48,7 +48,7 @@ function ArticleCard({ post }) {
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
             marginTop: 'auto', paddingTop: '8px', borderTop: '1px solid #f0f0f0',
           }}>
-            <span className="card-date" style={{ fontSize: '11px', color: '#aaa' }}>{post.date}</span>
+            <span className="card-date" style={{ fontSize: '11px', color: '#aaa' }}>{post.date?.slice(0, 10)}</span>
             <span className="card-more" style={{ fontSize: '11px', color: '#1a2744', fontWeight: 600 }}>
               続きを読む
             </span>

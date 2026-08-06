@@ -188,7 +188,7 @@ export default function BlogPost({ params }) {
           fontSize: '12px', color: '#999999',
           borderBottom: '1px solid #e0e0e0', paddingBottom: '20px',
         }}>
-          {post.date}
+          {post.date?.slice(0, 10)}
         </div>
       </div>
 
@@ -282,7 +282,7 @@ export default function BlogPost({ params }) {
                   <img src={p.image} alt={p.title} style={{ width: '80px', height: '56px', objectFit: 'cover', flexShrink: 0, borderRadius: '2px' }} />
                 )}
                 <div>
-                  <div style={{ fontSize: '11px', color: '#999', marginBottom: '4px' }}>{p.date}</div>
+                  <div style={{ fontSize: '11px', color: '#999', marginBottom: '4px' }}>{p.date?.slice(0, 10)}</div>
                   <div style={{ fontSize: '14px', color: '#111', fontWeight: 600, lineHeight: 1.5 }}>{p.title}</div>
                 </div>
               </Link>
