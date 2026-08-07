@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-07T07:15:22.679Z",
+  "updated": "2026-08-07T08:58:34.265Z",
   "launches": [
     {
       "id": "e4316d4c-9eb8-4a18-9b0d-4307c3970ef6",
@@ -320,16 +320,6 @@
       "date": "2026-08-04",
       "country": "",
       "provider": "SpaceX",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "12b9454b-d48b-4fd5-9c11-17c18f45dafe",
-      "rocket": "Long March 8A",
-      "mission": "SatNet LEO Group 23",
-      "date": "2026-08-04",
-      "country": "CN",
-      "provider": "China Aerospace Science and Technology Corporation",
       "result": "success",
       "resultLabel": "成功"
     }
