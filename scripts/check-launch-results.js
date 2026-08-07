@@ -148,14 +148,14 @@ async function main() {
   // 打ち上げの規模を判定して分量を決める
   const rocketLow = rocket.toLowerCase()
   const statusLow = status.toLowerCase()
+  const missionLow = (mission + ' ' + missionDesc).toLowerCase()
   let scale = 'medium' // デフォルト
   if (statusLow.includes('failure') || statusLow.includes('partial')) {
     scale = 'failure'
-  } else if (rocketLow.includes('starship') || rocketLow.includes('sls') || rocketLow.includes('new glenn') || rocketLow.includes('long march 5') || rocketLow.includes('falcon heavy')) {
+  } else if (rocketLow.includes('starship') || rocketLow.includes('sls') || rocketLow.includes('new glenn') || rocketLow.includes('long march 5') || rocketLow.includes('falcon heavy') || missionLow.includes('crew') || missionLow.includes('shenzhou') || missionLow.includes('starliner')) {
     scale = 'large'
   }
   // 初飛行は大型扱い
-  const missionLow = (mission + ' ' + missionDesc).toLowerCase()
   if (missionLow.includes('maiden') || missionLow.includes('demo flight') || missionLow.includes('first flight') || missionLow.includes('初飛行') || missionLow.includes('inaugural')) {
     scale = 'large'
   }
