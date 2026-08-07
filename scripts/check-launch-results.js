@@ -153,8 +153,6 @@ async function main() {
     scale = 'failure'
   } else if (rocketLow.includes('starship') || rocketLow.includes('sls') || rocketLow.includes('new glenn') || rocketLow.includes('long march 5') || rocketLow.includes('falcon heavy')) {
     scale = 'large'
-  } else if (rocketLow.includes('electron') || rocketLow.includes('kairos') || rocketLow.includes('epsilon') || rocketLow.includes('kuaizhou') || rocketLow.includes('lijian') || rocketLow.includes('vikram') || rocketLow.includes('kinetica')) {
-    scale = 'small'
   }
   // 初飛行は大型扱い
   const missionLow = (mission + ' ' + missionDesc).toLowerCase()
@@ -169,9 +167,8 @@ async function main() {
 
   const SCALE_CONFIG = {
     large:   { words: '1800〜2200', maxTokens: 2800, label: '大型/初飛行' },
-    medium:  { words: '1000〜1500', maxTokens: 2000, label: '通常' },
-    small:   { words: '700〜1000', maxTokens: 1400, label: '小型' },
-    failure: { words: '1200〜1600', maxTokens: 2200, label: '失敗/異常' },
+    medium:  { words: '1500〜2000', maxTokens: 2400, label: '通常' },
+    failure: { words: '1800〜2200', maxTokens: 2800, label: '失敗/異常' },
     unknown_payload: { words: '500〜700', maxTokens: 1000, label: 'ペイロード不明' },
   }
   const config = SCALE_CONFIG[scale]
