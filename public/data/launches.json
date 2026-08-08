@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-08T01:38:15.291Z",
+  "updated": "2026-08-08T03:25:26.987Z",
   "launches": [
     {
       "id": "e4316d4c-9eb8-4a18-9b0d-4307c3970ef6",
@@ -300,16 +300,6 @@
       "date": "2026-08-05",
       "country": "US",
       "provider": "SpaceX",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "d46cab82-dcf5-4d70-b698-d7bead7f638c",
-      "rocket": "Smart Dragon 3",
-      "mission": "OSE HS-01 & 02",
-      "date": "2026-08-05",
-      "country": "CN",
-      "provider": "China Rocket Co. Ltd.",
       "result": "success",
       "resultLabel": "成功"
     }
