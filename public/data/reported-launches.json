@@ -143,6 +143,12 @@
       "name": "Electron | The Grain Goddess Provides (iQPS Launch 7)",
       "status": "Launch in Flight",
       "date": "2026-08-06T12:27:48.491Z"
+    },
+    {
+      "id": "e4316d4c-9eb8-4a18-9b0d-4307c3970ef6",
+      "name": "Falcon 9 Block 5 | Starlink Group 17-38",
+      "status": "Launch Successful",
+      "date": "2026-08-08T18:46:05.727Z"
     }
   ]
 }
