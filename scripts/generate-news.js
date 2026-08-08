@@ -535,7 +535,7 @@ const LIBRARY_TOPIC_KEYWORDS = {
   agnibaan:       ['agnibaan', 'agnikul'],
   vikram1:        ['vikram-i', 'vikram i', 'vikram-1', 'skyroot'],
   // ===== 有人宇宙船 =====
-  crewdragon:     ['crew dragon', 'クルードラゴン', 'dragon spacecraft'],
+  crewdragon:     ['crew dragon', 'クルードラゴン', 'dragon spacecraft', 'crew-'],
   starliner:      ['starliner', 'スターライナー', 'boeing capsule'],
   soyuzcapsule:   ['soyuz spacecraft', 'ソユーズ宇宙船', 'soyuz ms'],
   orion:          ['orion capsule', 'オリオン宇宙船', 'orion spacecraft'],
@@ -601,7 +601,7 @@ const LIBRARY_TOPIC_KEYWORDS = {
   starlink:       ['starlink', 'スターリンク'],
   amazonleo:      ['kuiper', 'カイパー', 'amazon leo', 'アマゾン衛星'],
   oneweb:         ['oneweb', 'ワンウェブ'],
-  astspacemobile: ['ast spacemobile', 'ast space'],
+  astspacemobile: ['ast spacemobile', 'ast space', 'bluebird', 'ブルーバード'],
   // ===== 企業（ロゴではなく画像） =====
   axelspace:      ['アクセルスペース', 'axelspace', 'grus'],
   astroscale:     ['astroscale', 'アストロスケール', 'adras'],
@@ -727,6 +727,15 @@ const LIBRARY_CREDIT_MAP = {
   roman:        'Roman Space Telescope / NASA',
   chandra:      'Chandra / NASA',
   tess:         'TESS / NASA',
+  // 有人宇宙船
+  crewdragon:   'Crew Dragon / SpaceX',
+  starliner:    'Starliner / Boeing',
+  soyuzcapsule: 'Soyuz / Roscosmos',
+  cargodrag:    'Cargo Dragon / SpaceX',
+  htv:          'HTV-X / JAXA',
+  cygnus:       'Cygnus / Northrop Grumman',
+  // 測位衛星・その他
+  michibiki:    'みちびき / JAXA・内閣府',
   // 衛星コンステレーション
   starlink:     'Starlink / SpaceX',
   starlinklaunch:'Starlink / SpaceX',
@@ -1542,10 +1551,10 @@ async function generateLaunchArticle() {
 {{IMAGE_1}}
 （フライトシーケンスを追う）
 
-## （この打ち上げの注目ポイント）
+## （ペイロードの詳細・ミッション内容）
 {{IMAGE_2}}
 
-## （ペイロード詳細または今後の展開）`
+## （今後の展開・意義）`
     imageGuide = '本文中の1つ目の ## 見出しの直後に {{IMAGE_1}}、2つ目の ## 見出しの直後に {{IMAGE_2}} を入れる'
   }
 
@@ -1618,7 +1627,37 @@ async function main() {
     const jstDate = jstNow.toISOString().slice(0, 10)
     const jstDateTime = jstNow.toISOString().replace('Z', '+09:00')
     const slug = `${jstDate}-${(article.slug || 'launch-article').replace(/[^a-z0-9\-]/gi, '-').toLowerCase().slice(0, 80)}`
-    let body = article.body.replace(/\{\{IMAGE_1\}\}/g, '').replace(/\{\{IMAGE_2\}\}/g, '')
+    // ペイロード画像の挿入（ミッション名でマッチする画像があれば{{IMAGE_1}}に使用）
+    const mission = process.env.LAUNCH_MISSION || ''
+    let payloadImage = null
+    if (mission) {
+      const missionLow = mission.toLowerCase()
+      for (const [key, keywords] of Object.entries(LIBRARY_TOPIC_KEYWORDS)) {
+        if (keywords.some(kw => missionLow.includes(kw.toLowerCase()))) {
+          const chosen = pickLibraryFile(path.join(__dirname, '../public/images/library'), key)
+          if (chosen) {
+            payloadImage = `/images/library/${chosen}`
+            console.log(`  📦 ペイロード画像: ${chosen} (mission: ${mission})`)
+            break
+          }
+        }
+      }
+    }
+    let body = article.body
+    if (payloadImage) {
+      const credit = LIBRARY_CREDIT_MAP[payloadImage.match(/\/library\/(\w+)_\d+/)?.[1]] || mission
+      const imgTag = `\n![${mission}](${payloadImage})\n*${credit}*\n`
+      // ペイロード画像は2つ目の見出し（通常ペイロード解説セクション）に配置
+      if (body.includes('{{IMAGE_2}}')) {
+        body = body.replace(/\{\{IMAGE_1\}\}/g, '')
+        body = body.replace(/\{\{IMAGE_2\}\}/g, imgTag)
+      } else {
+        // IMAGE_2がない場合はIMAGE_1に配置
+        body = body.replace(/\{\{IMAGE_1\}\}/g, imgTag)
+      }
+    } else {
+      body = body.replace(/\{\{IMAGE_1\}\}/g, '').replace(/\{\{IMAGE_2\}\}/g, '')
+    }
 
     // 参考記事URLを自動生成（プロバイダー公式サイト + LL2）
     const PROVIDER_REFS = {
