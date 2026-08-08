@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-08T06:52:49.702Z",
+  "updated": "2026-08-08T07:50:07.971Z",
   "launches": [
     {
       "id": "e4316d4c-9eb8-4a18-9b0d-4307c3970ef6",
@@ -290,16 +290,6 @@
       "date": "2026-08-06",
       "country": "US",
       "provider": "Rocket Lab",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "56a85c82-ea71-449b-828c-b583f6f4a18b",
-      "rocket": "Falcon 9",
-      "mission": "BlueBird 11-13 (Block 2 #6-8)",
-      "date": "2026-08-05",
-      "country": "US",
-      "provider": "SpaceX",
       "result": "success",
       "resultLabel": "成功"
     }
