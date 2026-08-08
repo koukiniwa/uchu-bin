@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-08T04:56:30.527Z",
+  "updated": "2026-08-08T05:43:43.835Z",
   "launches": [
     {
       "id": "e4316d4c-9eb8-4a18-9b0d-4307c3970ef6",
@@ -13,20 +13,6 @@
       "provider": "SpaceX",
       "country": "",
       "pad": "Vandenberg SFB, CA, USA",
-      "status": "Go"
-    },
-    {
-      "id": "b89ab080-66c3-4831-85a9-38d85da71d30",
-      "name": "H3-22 | Michibiki 7 (QZS-7)",
-      "rocket": "H3-22",
-      "mission": "Michibiki 7 (QZS-7)",
-      "date": "2026-08-09",
-      "month": 8,
-      "time": "19:00",
-      "tentative": false,
-      "provider": "Mitsubishi Heavy Industries",
-      "country": "JP",
-      "pad": "Tanegashima Space Center, Japan",
       "status": "Go"
     },
     {
@@ -55,6 +41,20 @@
       "provider": "SpaceX",
       "country": "US",
       "pad": "Cape Canaveral SFS, FL, USA",
+      "status": "Go"
+    },
+    {
+      "id": "b89ab080-66c3-4831-85a9-38d85da71d30",
+      "name": "H3-22 | Michibiki 7 (QZS-7)",
+      "rocket": "H3-22",
+      "mission": "Michibiki 7 (QZS-7)",
+      "date": "2026-08-10",
+      "month": 8,
+      "time": "19:00",
+      "tentative": false,
+      "provider": "Mitsubishi Heavy Industries",
+      "country": "JP",
+      "pad": "Tanegashima Space Center, Japan",
       "status": "Go"
     },
     {
