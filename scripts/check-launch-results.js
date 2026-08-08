@@ -174,6 +174,25 @@ async function main() {
   const config = SCALE_CONFIG[scale]
   console.log(`  規模判定: ${config.label}（${config.words}文字）`)
 
+  // ロケットの打ち上げ回数を取得（50回以下なら記事に含める）
+  let launchCountInfo = ''
+  try {
+    const rocketConfigId = target.rocket?.configuration?.id
+    if (rocketConfigId) {
+      const countRes = await fetch(`https://ll.thespacedevs.com/2.2.0/launch/?rocket__configuration__id=${rocketConfigId}&limit=1&format=json`)
+      const countData = await countRes.json()
+      const totalLaunches = countData.count || 0
+      if (totalLaunches > 0 && totalLaunches <= 50) {
+        launchCountInfo = `- このロケットの通算打ち上げ回数: ${totalLaunches}回目（記事に「X回目の打ち上げ」と含めること）`
+        console.log(`  打ち上げ回数: ${totalLaunches}回目（記事に含める）`)
+      } else if (totalLaunches > 50) {
+        console.log(`  打ち上げ回数: ${totalLaunches}回目（多いため記事に含めない）`)
+      }
+    }
+  } catch (e) {
+    console.log(`  打ち上げ回数取得失敗: ${e.message}`)
+  }
+
   const articlePrompt = `以下のロケット打ち上げについて、宇宙ニュース記事を書いてください。
 
 【打ち上げ情報】
@@ -185,6 +204,7 @@ async function main() {
 - 結果: ${status}
 - ミッション概要: ${missionDesc}
 - 規模: ${config.label}
+${launchCountInfo}
 
 【記事の書き方】
 - 結果（成功/失敗）を最初に明記する
