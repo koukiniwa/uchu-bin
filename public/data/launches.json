@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-09T07:54:51.047Z",
+  "updated": "2026-08-09T08:42:25.269Z",
   "launches": [
     {
       "id": "cff704ab-8098-4f65-899e-50adaf908e59",
@@ -36,7 +36,7 @@
       "mission": "Michibiki 7 (QZS-7)",
       "date": "2026-08-10",
       "month": 8,
-      "time": "19:00",
+      "time": "19:23",
       "tentative": false,
       "provider": "Mitsubishi Heavy Industries",
       "country": "JP",
