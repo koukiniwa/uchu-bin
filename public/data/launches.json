@@ -1,20 +1,6 @@
 {
-  "updated": "2026-08-10T13:07:15.431Z",
+  "updated": "2026-08-10T14:58:14.038Z",
   "launches": [
-    {
-      "id": "36ab6924-bb36-416a-b71d-cda9e88004be",
-      "name": "Falcon 9 Block 5 | Starlink Group 10-19",
-      "rocket": "Falcon 9",
-      "mission": "Starlink Group 10-19",
-      "date": "2026-08-10",
-      "month": 8,
-      "time": "16:20",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "Cape Canaveral SFS, FL, USA",
-      "status": "Go"
-    },
     {
       "id": "b89ab080-66c3-4831-85a9-38d85da71d30",
       "name": "H3-22 | Michibiki 7 (QZS-7)",
@@ -41,6 +27,20 @@
       "provider": "LandSpace",
       "country": "CN",
       "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
+      "status": "Go"
+    },
+    {
+      "id": "36ab6924-bb36-416a-b71d-cda9e88004be",
+      "name": "Falcon 9 Block 5 | Starlink Group 10-19",
+      "rocket": "Falcon 9",
+      "mission": "Starlink Group 10-19",
+      "date": "2026-08-11",
+      "month": 8,
+      "time": "14:26",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Cape Canaveral SFS, FL, USA",
       "status": "Go"
     },
     {
