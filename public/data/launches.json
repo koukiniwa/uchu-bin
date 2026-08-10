@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-10T19:56:10.286Z",
+  "updated": "2026-08-10T20:44:49.236Z",
   "launches": [
     {
       "id": "36ab6924-bb36-416a-b71d-cda9e88004be",
@@ -31,17 +31,17 @@
     },
     {
       "id": "55b79515-ddbf-4198-8a59-29a12ed21330",
-      "name": "Falcon 9 Block 5 | R-1",
+      "name": "Falcon 9 Block 5 | USSF-366",
       "rocket": "Falcon 9",
-      "mission": "R-1",
+      "mission": "USSF-366",
       "date": "2026-08-15",
       "month": 8,
-      "time": null,
-      "tentative": true,
+      "time": "21:52",
+      "tentative": false,
       "provider": "SpaceX",
       "country": "",
       "pad": "Vandenberg SFB, CA, USA",
-      "status": "TBC"
+      "status": "Go"
     },
     {
       "id": "be8b4b0d-1989-48a5-a96d-e8e4d59ed8b3",
