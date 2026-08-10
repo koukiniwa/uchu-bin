@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-09T23:30:56.533Z",
+  "updated": "2026-08-10T01:47:22.095Z",
   "launches": [
     {
       "id": "cff704ab-8098-4f65-899e-50adaf908e59",
@@ -22,7 +22,7 @@
       "mission": "Starlink Group 10-19",
       "date": "2026-08-10",
       "month": 8,
-      "time": "14:49",
+      "time": "15:07",
       "tentative": false,
       "provider": "SpaceX",
       "country": "US",
@@ -170,6 +170,20 @@
       "status": "Go"
     },
     {
+      "id": "ab3c1e6c-03fe-48a7-b6ce-30c79569bdfb",
+      "name": "Angara 1.2 | Kosmos (Unknown Payload)",
+      "rocket": "Angara 1.2",
+      "mission": "Kosmos (Unknown Payload)",
+      "date": "2026-08-31",
+      "month": 8,
+      "time": null,
+      "tentative": true,
+      "provider": "Russian Space Forces",
+      "country": "RU",
+      "pad": "Plesetsk Cosmodrome, Russian Federation",
+      "status": "TBD"
+    },
+    {
       "id": "599ba2df-7483-4b2f-a083-2b5ddc06e069",
       "name": "Electron | LOXSAT 1",
       "rocket": "Electron",
@@ -265,20 +279,6 @@
       "provider": "SpaceX",
       "country": "US",
       "pad": "Cape Canaveral SFS, FL, USA",
-      "status": "Go"
-    },
-    {
-      "id": "8effc13a-c658-4d2e-9f15-8dba4d7fe2dd",
-      "name": "Vega-C | Sentinel-3C & FLEX",
-      "rocket": "Vega-C",
-      "mission": "Sentinel-3C & FLEX",
-      "date": "2026-09-15",
-      "month": 9,
-      "time": "01:21",
-      "tentative": false,
-      "provider": "Avio S.p.A",
-      "country": "FR",
-      "pad": "Guiana Space Centre, French Guiana",
       "status": "Go"
     }
   ],
