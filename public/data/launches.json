@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-10T17:51:22.491Z",
+  "updated": "2026-08-10T18:57:04.611Z",
   "launches": [
     {
       "id": "b89ab080-66c3-4831-85a9-38d85da71d30",
@@ -13,20 +13,6 @@
       "provider": "Mitsubishi Heavy Industries",
       "country": "JP",
       "pad": "Tanegashima Space Center, Japan",
-      "status": "Go"
-    },
-    {
-      "id": "ef02e2cf-e617-4b38-a526-951ac9204b0a",
-      "name": "Zhuque-3 | Flight 2",
-      "rocket": "Zhuque-3",
-      "mission": "Flight 2",
-      "date": "2026-08-10",
-      "month": 8,
-      "time": "23:45",
-      "tentative": false,
-      "provider": "LandSpace",
-      "country": "CN",
-      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
       "status": "Go"
     },
     {
@@ -251,6 +237,20 @@
       "provider": "Isar Aerospace",
       "country": "DE",
       "pad": "Andøya Spaceport",
+      "status": "TBD"
+    },
+    {
+      "id": "ef02e2cf-e617-4b38-a526-951ac9204b0a",
+      "name": "Zhuque-3 | Flight 2",
+      "rocket": "Zhuque-3",
+      "mission": "Flight 2",
+      "date": "2026-08-31",
+      "month": 8,
+      "time": null,
+      "tentative": true,
+      "provider": "LandSpace",
+      "country": "CN",
+      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
       "status": "TBD"
     },
     {
