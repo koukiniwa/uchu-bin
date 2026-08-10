@@ -155,6 +155,12 @@
       "name": "Long March 7A | Unknown Payload",
       "status": "Launch Failure",
       "date": "2026-08-10T15:06:20.953Z"
+    },
+    {
+      "id": "b89ab080-66c3-4831-85a9-38d85da71d30",
+      "name": "H3-22 | Michibiki 7 (QZS-7)",
+      "status": "Launch in Flight",
+      "date": "2026-08-10T21:49:08.394Z"
     }
   ]
 }
