@@ -149,6 +149,12 @@
       "name": "Falcon 9 Block 5 | Starlink Group 17-38",
       "status": "Launch Successful",
       "date": "2026-08-08T18:46:05.727Z"
+    },
+    {
+      "id": "cff704ab-8098-4f65-899e-50adaf908e59",
+      "name": "Long March 7A | Unknown Payload",
+      "status": "Launch Failure",
+      "date": "2026-08-10T15:06:20.953Z"
     }
   ]
 }
