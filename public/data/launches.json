@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-10T20:44:49.236Z",
+  "updated": "2026-08-10T21:40:56.181Z",
   "launches": [
     {
       "id": "36ab6924-bb36-416a-b71d-cda9e88004be",
@@ -134,7 +134,7 @@
       "mission": "Nancy Grace Roman Space Telescope",
       "date": "2026-08-30",
       "month": 8,
-      "time": "11:25",
+      "time": "11:26",
       "tentative": false,
       "provider": "SpaceX",
       "country": "US",
