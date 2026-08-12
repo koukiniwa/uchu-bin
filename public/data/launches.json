@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-12T16:01:16.873Z",
+  "updated": "2026-08-12T17:56:45.668Z",
   "launches": [
     {
       "id": "55b79515-ddbf-4198-8a59-29a12ed21330",
@@ -34,14 +34,14 @@
       "name": "Long March 12 | Unknown Payload",
       "rocket": "Long March 12",
       "mission": "Unknown Payload",
-      "date": "2026-08-17",
+      "date": "2026-08-16",
       "month": 8,
-      "time": null,
-      "tentative": true,
+      "time": "04:10",
+      "tentative": false,
       "provider": "China Aerospace Science and Technology Corporation",
       "country": "CN",
       "pad": "Wenchang Space Launch Site, People's Republic of China",
-      "status": "TBC"
+      "status": "Go"
     },
     {
       "id": "f6958a77-37bb-4559-a108-40ba0ff9e34a",
@@ -84,6 +84,20 @@
       "country": "CN",
       "pad": "Wenchang Space Launch Site, People's Republic of China",
       "status": "TBC"
+    },
+    {
+      "id": "ad501ebd-a357-4305-90c1-c46c6feb2ecf",
+      "name": "Falcon 9 Block 5 | Starlink Group 10-49",
+      "rocket": "Falcon 9",
+      "mission": "Starlink Group 10-49",
+      "date": "2026-08-25",
+      "month": 8,
+      "time": "11:00",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Cape Canaveral SFS, FL, USA",
+      "status": "Go"
     },
     {
       "id": "a57aed97-b94f-42e1-905e-9421dbd96ac8",
@@ -264,20 +278,6 @@
       "tentative": true,
       "provider": "SpaceX",
       "country": "US",
-      "pad": "Cape Canaveral SFS, FL, USA",
-      "status": "TBD"
-    },
-    {
-      "id": "ef9850ad-1096-425b-9d27-f7bbd186e61a",
-      "name": "Vulcan VC6L | Amazon Leo (LV-01)",
-      "rocket": "Vulcan VC6L",
-      "mission": "Amazon Leo (LV-01)",
-      "date": "2026-09-30",
-      "month": 9,
-      "time": null,
-      "tentative": true,
-      "provider": "United Launch Alliance",
-      "country": "",
       "pad": "Cape Canaveral SFS, FL, USA",
       "status": "TBD"
     }
