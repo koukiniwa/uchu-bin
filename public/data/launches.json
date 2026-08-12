@@ -1,20 +1,6 @@
 {
-  "updated": "2026-08-12T04:08:56.300Z",
+  "updated": "2026-08-12T06:14:23.420Z",
   "launches": [
-    {
-      "id": "6f94dbe4-1318-4ffb-a53d-351bbdcba733",
-      "name": "Falcon 9 Block 5 | Starlink Group 17-49",
-      "rocket": "Falcon 9",
-      "mission": "Starlink Group 17-49",
-      "date": "2026-08-12",
-      "month": 8,
-      "time": "04:46",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "",
-      "pad": "Vandenberg SFB, CA, USA",
-      "status": "Go"
-    },
     {
       "id": "55b79515-ddbf-4198-8a59-29a12ed21330",
       "name": "Falcon 9 Block 5 | USSF-366",
@@ -280,9 +266,33 @@
       "country": "US",
       "pad": "Cape Canaveral SFS, FL, USA",
       "status": "TBD"
+    },
+    {
+      "id": "ef9850ad-1096-425b-9d27-f7bbd186e61a",
+      "name": "Vulcan VC6L | Amazon Leo (LV-01)",
+      "rocket": "Vulcan VC6L",
+      "mission": "Amazon Leo (LV-01)",
+      "date": "2026-09-30",
+      "month": 9,
+      "time": null,
+      "tentative": true,
+      "provider": "United Launch Alliance",
+      "country": "",
+      "pad": "Cape Canaveral SFS, FL, USA",
+      "status": "TBD"
     }
   ],
   "recent": [
+    {
+      "id": "6f94dbe4-1318-4ffb-a53d-351bbdcba733",
+      "rocket": "Falcon 9",
+      "mission": "Starlink Group 17-49",
+      "date": "2026-08-12",
+      "country": "",
+      "provider": "SpaceX",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "36ab6924-bb36-416a-b71d-cda9e88004be",
       "rocket": "Falcon 9",
