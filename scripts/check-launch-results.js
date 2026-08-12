@@ -112,9 +112,16 @@ async function main() {
     }
 
     const slStatus = launch.status?.name || 'Unknown'
+    const slStatusLow = slStatus.toLowerCase()
     const slRocket = launch.rocket?.configuration?.name || 'Falcon 9'
     const slMission = launch.mission?.name || ''
     console.log(`  [Starlink] ${slRocket} / ${slMission} - ${slStatus}`)
+
+    // ステータスが確定していない場合はスキップ（次回再チェック）
+    if (!slStatusLow.includes('success') && !slStatusLow.includes('failure') && !slStatusLow.includes('partial')) {
+      console.log(`  ⏳ ステータス未確定のためスキップ: ${slStatus}`)
+      continue
+    }
 
     const outputFile = process.env.GITHUB_OUTPUT
     if (outputFile) {

@@ -47,8 +47,13 @@ jobs:
               accessSecret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
             });
             const s = process.env.STARLINK_STATUS.toLowerCase();
-            const ok = s.includes('success');
-            const text = (ok ? '✅' : '❌') + ' ' + process.env.STARLINK_ROCKET + ' / ' + process.env.STARLINK_MISSION + (ok ? ' 打ち上げ成功' : ' 打ち上げ失敗');
+            const isSuccess = s.includes('success');
+            const isFailure = s.includes('failure') || s.includes('partial');
+            if (!isSuccess && !isFailure) {
+              console.log('ステータス未確定のためツイートスキップ:', process.env.STARLINK_STATUS);
+              process.exit(0);
+            }
+            const text = (isSuccess ? '✅' : '❌') + ' ' + process.env.STARLINK_ROCKET + ' / ' + process.env.STARLINK_MISSION + (isSuccess ? ' 打ち上げ成功' : ' 打ち上げ失敗');
             client.v2.tweet(text).then(() => console.log('Starlinkツイート完了:', text));
           "
 
