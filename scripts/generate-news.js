@@ -641,6 +641,11 @@ const LIBRARY_TOPIC_KEYWORDS = {
   supercamiokande:['スーパーカミオカンデ', 'super-kamiokande', 'ニュートリノ', 'neutrino'],
   michibiki:      ['みちびき', 'michibiki', 'qzss', '準天頂'],
   raptor:         ['raptor', 'ラプター'],
+  iqps:           ['iqps', 'iQPS', 'QPS-SAR'],
+  strix:          ['strix', 'synspective'],
+  globalstar:     ['globalstar', 'グローバルスター'],
+  progress:       ['progress ms', 'プログレス'],
+  mtgi:           ['mtg-i', 'meteosat'],
 }
 
 const LIBRARY_CREDIT_MAP = {
@@ -742,6 +747,11 @@ const LIBRARY_CREDIT_MAP = {
   starlinktrain:'Starlink / SpaceX',
   amazonleo:    'Project Kuiper / Amazon',
   oneweb:       'OneWeb',
+  iqps:         'QPS-SAR / iQPS',
+  strix:        'StriX / Synspective',
+  globalstar:   'Globalstar',
+  progress:     'Progress / Roscosmos',
+  mtgi:         'MTG-I / EUMETSAT',
   astspacemobile:'AST SpaceMobile',
   axelspace:     'Axelspace',
   astroscale:    'Astroscale',
