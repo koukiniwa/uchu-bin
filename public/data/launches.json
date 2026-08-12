@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-12T17:56:45.668Z",
+  "updated": "2026-08-12T19:05:25.042Z",
   "launches": [
     {
       "id": "55b79515-ddbf-4198-8a59-29a12ed21330",
@@ -41,6 +41,20 @@
       "provider": "China Aerospace Science and Technology Corporation",
       "country": "CN",
       "pad": "Wenchang Space Launch Site, People's Republic of China",
+      "status": "Go"
+    },
+    {
+      "id": "cb6f4df1-c045-423b-904c-e63bf1ee5168",
+      "name": "Long March 2C | Unknown Payload",
+      "rocket": "Long March 2C",
+      "mission": "Unknown Payload",
+      "date": "2026-08-17",
+      "month": 8,
+      "time": "03:00",
+      "tentative": false,
+      "provider": "China Aerospace Science and Technology Corporation",
+      "country": "CN",
+      "pad": "Taiyuan Satellite Launch Center, People's Republic of China",
       "status": "Go"
     },
     {
@@ -266,20 +280,6 @@
       "country": "FR",
       "pad": "Guiana Space Centre, French Guiana",
       "status": "Go"
-    },
-    {
-      "id": "ad358a4d-c541-409b-9366-9c2f2da4aeb9",
-      "name": "Falcon 9 Block 5 | O3b mPower 11-13",
-      "rocket": "Falcon 9",
-      "mission": "O3b mPower 11-13",
-      "date": "2026-09-30",
-      "month": 9,
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "Cape Canaveral SFS, FL, USA",
-      "status": "TBD"
     }
   ],
   "recent": [
