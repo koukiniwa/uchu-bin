@@ -646,6 +646,8 @@ const LIBRARY_TOPIC_KEYWORDS = {
   globalstar:     ['globalstar', 'グローバルスター'],
   progress:       ['progress ms', 'プログレス'],
   mtgi:           ['mtg-i', 'meteosat'],
+  blacksky:       ['blacksky', 'ブラックスカイ'],
+  hawkeye360:     ['hawkeye', 'ホークアイ'],
 }
 
 const LIBRARY_CREDIT_MAP = {
@@ -752,6 +754,8 @@ const LIBRARY_CREDIT_MAP = {
   globalstar:   'Globalstar',
   progress:     'Progress / Roscosmos',
   mtgi:         'MTG-I / EUMETSAT',
+  blacksky:     'BlackSky / BlackSky Technology',
+  hawkeye360:   'HawkEye 360',
   astspacemobile:'AST SpaceMobile',
   axelspace:     'Axelspace',
   astroscale:    'Astroscale',
