@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-13T11:46:19.493Z",
+  "updated": "2026-08-13T13:09:37.874Z",
   "launches": [
     {
       "id": "55b79515-ddbf-4198-8a59-29a12ed21330",
@@ -312,16 +312,6 @@
       "provider": "Mitsubishi Heavy Industries",
       "result": "success",
       "resultLabel": "成功"
-    },
-    {
-      "id": "cff704ab-8098-4f65-899e-50adaf908e59",
-      "rocket": "Long March 7A",
-      "mission": "ChinaSat 4B",
-      "date": "2026-08-10",
-      "country": "CN",
-      "provider": "China Aerospace Science and Technology Corporation",
-      "result": "failure",
-      "resultLabel": "失敗"
     }
   ]
 }
