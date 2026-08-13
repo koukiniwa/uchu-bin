@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-13T19:05:33.127Z",
+  "updated": "2026-08-13T20:42:19.367Z",
   "launches": [
     {
       "id": "55b79515-ddbf-4198-8a59-29a12ed21330",
@@ -300,16 +300,6 @@
       "date": "2026-08-11",
       "country": "US",
       "provider": "SpaceX",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "b89ab080-66c3-4831-85a9-38d85da71d30",
-      "rocket": "H3-22",
-      "mission": "Michibiki 7 (QZS-7)",
-      "date": "2026-08-10",
-      "country": "JP",
-      "provider": "Mitsubishi Heavy Industries",
       "result": "success",
       "resultLabel": "成功"
     }
