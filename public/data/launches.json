@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-15T04:31:01.655Z",
+  "updated": "2026-08-15T05:24:02.791Z",
   "launches": [
     {
       "id": "55b79515-ddbf-4198-8a59-29a12ed21330",
@@ -8,7 +8,7 @@
       "mission": "USSF-366",
       "date": "2026-08-15",
       "month": 8,
-      "time": "21:52",
+      "time": "21:54",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
@@ -282,16 +282,5 @@
       "status": "TBC"
     }
   ],
-  "recent": [
-    {
-      "id": "6f94dbe4-1318-4ffb-a53d-351bbdcba733",
-      "rocket": "Falcon 9",
-      "mission": "Starlink Group 17-49",
-      "date": "2026-08-12",
-      "country": "",
-      "provider": "SpaceX",
-      "result": "success",
-      "resultLabel": "成功"
-    }
-  ]
+  "recent": []
 }
