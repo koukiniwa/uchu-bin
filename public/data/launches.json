@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-15T16:23:32.674Z",
+  "updated": "2026-08-15T17:19:39.116Z",
   "launches": [
     {
       "id": "55b79515-ddbf-4198-8a59-29a12ed21330",
@@ -8,7 +8,7 @@
       "mission": "USSF-366",
       "date": "2026-08-15",
       "month": 8,
-      "time": "21:54",
+      "time": "23:47",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
@@ -148,12 +148,12 @@
       "mission": "Starlink Group 15-22",
       "date": "2026-08-25",
       "month": 8,
-      "time": null,
-      "tentative": true,
+      "time": "16:44",
+      "tentative": false,
       "provider": "SpaceX",
       "country": "",
       "pad": "Vandenberg SFB, CA, USA",
-      "status": "TBC"
+      "status": "Go"
     },
     {
       "id": "a57aed97-b94f-42e1-905e-9421dbd96ac8",
