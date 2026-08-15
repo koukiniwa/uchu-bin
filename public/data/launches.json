@@ -1,20 +1,6 @@
 {
-  "updated": "2026-08-15T18:29:05.896Z",
+  "updated": "2026-08-15T19:21:14.057Z",
   "launches": [
-    {
-      "id": "55b79515-ddbf-4198-8a59-29a12ed21330",
-      "name": "Falcon 9 Block 5 | USSF-366",
-      "rocket": "Falcon 9",
-      "mission": "USSF-366",
-      "date": "2026-08-15",
-      "month": 8,
-      "time": "23:47",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "",
-      "pad": "Vandenberg SFB, CA, USA",
-      "status": "Go"
-    },
     {
       "id": "be8b4b0d-1989-48a5-a96d-e8e4d59ed8b3",
       "name": "Falcon 9 Block 5 | Globalstar 2-R Mission 1 (x 9)",
@@ -27,6 +13,20 @@
       "provider": "SpaceX",
       "country": "US",
       "pad": "Cape Canaveral SFS, FL, USA",
+      "status": "Go"
+    },
+    {
+      "id": "55b79515-ddbf-4198-8a59-29a12ed21330",
+      "name": "Falcon 9 Block 5 | USSF-366",
+      "rocket": "Falcon 9",
+      "mission": "USSF-366",
+      "date": "2026-08-16",
+      "month": 8,
+      "time": "01:50",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "",
+      "pad": "Vandenberg SFB, CA, USA",
       "status": "Go"
     },
     {
