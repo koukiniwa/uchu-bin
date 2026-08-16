@@ -173,6 +173,12 @@
       "name": "Falcon 9 Block 5 | Starlink Group 17-49",
       "status": "Launch in Flight",
       "date": "2026-08-12T06:55:00.958Z"
+    },
+    {
+      "id": "55b79515-ddbf-4198-8a59-29a12ed21330",
+      "name": "Falcon 9 Block 5 | USSF-366",
+      "status": "Launch in Flight",
+      "date": "2026-08-16T04:09:26.414Z"
     }
   ]
 }
