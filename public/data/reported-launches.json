@@ -179,6 +179,12 @@
       "name": "Falcon 9 Block 5 | USSF-366",
       "status": "Launch in Flight",
       "date": "2026-08-16T04:09:26.414Z"
+    },
+    {
+      "id": "be8b4b0d-1989-48a5-a96d-e8e4d59ed8b3",
+      "name": "Falcon 9 Block 5 | Globalstar 2-R Mission 1 (x 8)",
+      "status": "Launch Successful",
+      "date": "2026-08-16T05:02:27.087Z"
     }
   ]
 }
