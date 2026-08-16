@@ -1,20 +1,6 @@
 {
-  "updated": "2026-08-15T23:19:54.801Z",
+  "updated": "2026-08-16T01:16:50.025Z",
   "launches": [
-    {
-      "id": "be8b4b0d-1989-48a5-a96d-e8e4d59ed8b3",
-      "name": "Falcon 9 Block 5 | Globalstar 2-R Mission 1 (x 9)",
-      "rocket": "Falcon 9",
-      "mission": "Globalstar 2-R Mission 1 (x 9)",
-      "date": "2026-08-16",
-      "month": 8,
-      "time": "01:12",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "Cape Canaveral SFS, FL, USA",
-      "status": "Go"
-    },
     {
       "id": "55b79515-ddbf-4198-8a59-29a12ed21330",
       "name": "Falcon 9 Block 5 | USSF-366",
@@ -280,7 +266,32 @@
       "country": "RU",
       "pad": "Baikonur Cosmodrome, Republic of Kazakhstan",
       "status": "TBC"
+    },
+    {
+      "id": "18441371-8b2e-457c-afb5-1ec1b11ab630",
+      "name": "Falcon 9 Block 5 | Crew-13",
+      "rocket": "Falcon 9",
+      "mission": "Crew-13",
+      "date": "2026-09-12",
+      "month": 9,
+      "time": "22:34",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Cape Canaveral SFS, FL, USA",
+      "status": "Go"
     }
   ],
-  "recent": []
+  "recent": [
+    {
+      "id": "be8b4b0d-1989-48a5-a96d-e8e4d59ed8b3",
+      "rocket": "Falcon 9",
+      "mission": "Globalstar 2-R Mission 1 (x 9)",
+      "date": "2026-08-16",
+      "country": "US",
+      "provider": "SpaceX",
+      "result": "success",
+      "resultLabel": "成功"
+    }
+  ]
 }
