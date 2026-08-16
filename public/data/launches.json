@@ -1,20 +1,6 @@
 {
-  "updated": "2026-08-16T01:16:50.025Z",
+  "updated": "2026-08-16T02:59:26.441Z",
   "launches": [
-    {
-      "id": "55b79515-ddbf-4198-8a59-29a12ed21330",
-      "name": "Falcon 9 Block 5 | USSF-366",
-      "rocket": "Falcon 9",
-      "mission": "USSF-366",
-      "date": "2026-08-16",
-      "month": 8,
-      "time": "01:50",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "",
-      "pad": "Vandenberg SFB, CA, USA",
-      "status": "Go"
-    },
     {
       "id": "b0e7d1cc-24dd-4da4-bb60-b15b6791d08e",
       "name": "Long March 12 | Unknown Payload",
@@ -280,13 +266,37 @@
       "country": "US",
       "pad": "Cape Canaveral SFS, FL, USA",
       "status": "Go"
+    },
+    {
+      "id": "8effc13a-c658-4d2e-9f15-8dba4d7fe2dd",
+      "name": "Vega-C | Sentinel-3C & FLEX",
+      "rocket": "Vega-C",
+      "mission": "Sentinel-3C & FLEX",
+      "date": "2026-09-15",
+      "month": 9,
+      "time": "01:21",
+      "tentative": false,
+      "provider": "Avio S.p.A",
+      "country": "FR",
+      "pad": "Guiana Space Centre, French Guiana",
+      "status": "Go"
     }
   ],
   "recent": [
     {
+      "id": "55b79515-ddbf-4198-8a59-29a12ed21330",
+      "rocket": "Falcon 9",
+      "mission": "USSF-366",
+      "date": "2026-08-16",
+      "country": "",
+      "provider": "SpaceX",
+      "result": "success",
+      "resultLabel": "成功"
+    },
+    {
       "id": "be8b4b0d-1989-48a5-a96d-e8e4d59ed8b3",
       "rocket": "Falcon 9",
-      "mission": "Globalstar 2-R Mission 1 (x 9)",
+      "mission": "Globalstar 2-R Mission 1 (x 8)",
       "date": "2026-08-16",
       "country": "US",
       "provider": "SpaceX",
