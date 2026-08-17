@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-17T06:54:24.600Z",
+  "updated": "2026-08-17T07:52:54.495Z",
   "launches": [
     {
       "id": "ef02e2cf-e617-4b38-a526-951ac9204b0a",
@@ -286,7 +286,7 @@
     {
       "id": "cb6f4df1-c045-423b-904c-e63bf1ee5168",
       "rocket": "Long March 2C",
-      "mission": "Unknown Payload",
+      "mission": "Satellite for Earth Observation (SEO)",
       "date": "2026-08-17",
       "country": "CN",
       "provider": "China Aerospace Science and Technology Corporation",
