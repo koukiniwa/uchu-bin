@@ -1,20 +1,6 @@
 {
-  "updated": "2026-08-17T02:59:04.060Z",
+  "updated": "2026-08-17T03:56:32.209Z",
   "launches": [
-    {
-      "id": "cb6f4df1-c045-423b-904c-e63bf1ee5168",
-      "name": "Long March 2C | Unknown Payload",
-      "rocket": "Long March 2C",
-      "mission": "Unknown Payload",
-      "date": "2026-08-17",
-      "month": 8,
-      "time": "03:00",
-      "tentative": false,
-      "provider": "China Aerospace Science and Technology Corporation",
-      "country": "CN",
-      "pad": "Taiyuan Satellite Launch Center, People's Republic of China",
-      "status": "Go"
-    },
     {
       "id": "ef02e2cf-e617-4b38-a526-951ac9204b0a",
       "name": "Zhuque-3 | Flight 2",
@@ -280,9 +266,33 @@
       "country": "US",
       "pad": "Cape Canaveral SFS, FL, USA",
       "status": "TBD"
+    },
+    {
+      "id": "17d0ec68-f466-4916-9dc5-16123eda6484",
+      "name": "GSLV Mk II | GISAT-1A (EOS-05)",
+      "rocket": "GSLV Mk II",
+      "mission": "GISAT-1A (EOS-05)",
+      "date": "2026-09-30",
+      "month": 9,
+      "time": null,
+      "tentative": true,
+      "provider": "Indian Space Research Organization",
+      "country": "IN",
+      "pad": "Satish Dhawan Space Centre, India",
+      "status": "TBD"
     }
   ],
   "recent": [
+    {
+      "id": "cb6f4df1-c045-423b-904c-e63bf1ee5168",
+      "rocket": "Long March 2C",
+      "mission": "Unknown Payload",
+      "date": "2026-08-17",
+      "country": "CN",
+      "provider": "China Aerospace Science and Technology Corporation",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "b0e7d1cc-24dd-4da4-bb60-b15b6791d08e",
       "rocket": "Long March 12",
