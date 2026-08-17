@@ -191,6 +191,12 @@
       "name": "Long March 12 | SatNet LEO Group 24",
       "status": "Launch Successful",
       "date": "2026-08-16T06:50:18.342Z"
+    },
+    {
+      "id": "cb6f4df1-c045-423b-904c-e63bf1ee5168",
+      "name": "Long March 2C | Unknown Payload",
+      "status": "Go for Launch",
+      "date": "2026-08-17T05:10:29.357Z"
     }
   ]
 }
