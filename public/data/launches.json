@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-19T02:57:03.023Z",
+  "updated": "2026-08-19T03:50:20.578Z",
   "launches": [
     {
       "id": "f6958a77-37bb-4559-a108-40ba0ff9e34a",
@@ -184,6 +184,20 @@
       "status": "TBD"
     },
     {
+      "id": "458e2e52-87b0-4707-96d8-6899f92e53ee",
+      "name": "Soyuz 2.1b/Fregat | Glonass-K1 No. 19",
+      "rocket": "Soyuz 2.1b/Fregat",
+      "mission": "Glonass-K1 No. 19",
+      "date": "2026-08-31",
+      "month": 8,
+      "time": null,
+      "tentative": true,
+      "provider": "Russian Space Forces",
+      "country": "RU",
+      "pad": "Plesetsk Cosmodrome, Russian Federation",
+      "status": "TBD"
+    },
+    {
       "id": "1b23eb18-e06e-4058-9b42-e95ca0980511",
       "name": "Spectrum | Onward and Upward",
       "rocket": "Spectrum",
@@ -265,20 +279,6 @@
       "provider": "Indian Space Research Organization",
       "country": "IN",
       "pad": "Satish Dhawan Space Centre, India",
-      "status": "TBD"
-    },
-    {
-      "id": "7d1afb26-6f9c-429b-9ccf-29012fd1e519",
-      "name": "Starship | Flight 14",
-      "rocket": "Starship",
-      "mission": "Flight 14",
-      "date": "2026-09-30",
-      "month": 9,
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "SpaceX Starbase, TX, USA",
       "status": "TBD"
     }
   ],
