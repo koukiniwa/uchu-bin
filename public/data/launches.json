@@ -1,20 +1,6 @@
 {
-  "updated": "2026-08-19T03:50:20.578Z",
+  "updated": "2026-08-19T04:36:17.180Z",
   "launches": [
-    {
-      "id": "f6958a77-37bb-4559-a108-40ba0ff9e34a",
-      "name": "Falcon 9 Block 5 | Starlink Group 17-50",
-      "rocket": "Falcon 9",
-      "mission": "Starlink Group 17-50",
-      "date": "2026-08-19",
-      "month": 8,
-      "time": "04:01",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "",
-      "pad": "Vandenberg SFB, CA, USA",
-      "status": "Go"
-    },
     {
       "id": "bbdc4d47-1de3-428e-9fe1-bbf45d9b1e04",
       "name": "Falcon 9 Block 5 | Starlink Group 10-39",
@@ -280,9 +266,33 @@
       "country": "IN",
       "pad": "Satish Dhawan Space Centre, India",
       "status": "TBD"
+    },
+    {
+      "id": "7d1afb26-6f9c-429b-9ccf-29012fd1e519",
+      "name": "Starship | Flight 14",
+      "rocket": "Starship",
+      "mission": "Flight 14",
+      "date": "2026-09-30",
+      "month": 9,
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "SpaceX Starbase, TX, USA",
+      "status": "TBD"
     }
   ],
   "recent": [
+    {
+      "id": "f6958a77-37bb-4559-a108-40ba0ff9e34a",
+      "rocket": "Falcon 9",
+      "mission": "Starlink Group 17-50",
+      "date": "2026-08-19",
+      "country": "",
+      "provider": "SpaceX",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "ef02e2cf-e617-4b38-a526-951ac9204b0a",
       "rocket": "Zhuque-3",
@@ -298,16 +308,6 @@
       "rocket": "Long March 2C",
       "mission": "Satellite for Earth Observation (SEO)",
       "date": "2026-08-17",
-      "country": "CN",
-      "provider": "China Aerospace Science and Technology Corporation",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "b0e7d1cc-24dd-4da4-bb60-b15b6791d08e",
-      "rocket": "Long March 12",
-      "mission": "SatNet LEO Group 24",
-      "date": "2026-08-16",
       "country": "CN",
       "provider": "China Aerospace Science and Technology Corporation",
       "result": "success",
