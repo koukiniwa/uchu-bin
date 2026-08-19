@@ -294,6 +294,10 @@ export default function SchedulePage() {
                 const { display } = toJST(l.date, l.time)
                 const mission = l.mission && l.mission !== 'Unknown Payload' ? l.mission : '-'
                 const status = l.status || ''
+                const statusLabel = status === 'Go' ? '確定'
+                  : status === 'TBC' ? '暫定'
+                  : status === 'TBD' ? '未定'
+                  : status
                 const statusColor = status === 'Go' ? '#2e7d32'
                   : status === 'TBC' ? '#e65100'
                   : status === 'TBD' ? '#999'
@@ -311,7 +315,7 @@ export default function SchedulePage() {
                     <td style={{ ...td, fontWeight: 700, color: '#1a2744' }}>{l.rocket}</td>
                     <td style={td}>{mission}</td>
                     <td style={{ ...td, fontSize: '12px', color: '#888' }}>{shortenPad(l.pad)}</td>
-                    <td style={{ ...td, color: statusColor, fontWeight: 600, fontSize: '12px' }}>{status}</td>
+                    <td style={{ ...td, color: statusColor, fontWeight: 600, fontSize: '12px' }}>{statusLabel}</td>
                   </tr>
                 )
               })}
@@ -363,9 +367,9 @@ export default function SchedulePage() {
         marginBottom: '32px',
       }}>
         <div style={{ fontWeight: 700, marginBottom: '4px', color: '#555' }}>ステータスの見方</div>
-        <div><span style={{ color: '#2e7d32', fontWeight: 600 }}>Go</span> — 打ち上げ日時確定</div>
-        <div><span style={{ color: '#e65100', fontWeight: 600 }}>TBC</span> — 日時は暫定（変更の可能性あり）</div>
-        <div><span style={{ color: '#999', fontWeight: 600 }}>TBD</span> — 日時未定</div>
+        <div><span style={{ color: '#2e7d32', fontWeight: 600 }}>確定</span> — 打ち上げ日時が確定</div>
+        <div><span style={{ color: '#e65100', fontWeight: 600 }}>暫定</span> — 日時は暫定（変更の可能性あり）</div>
+        <div><span style={{ color: '#999', fontWeight: 600 }}>未定</span> — 日時未定</div>
       </div>
 
       {/* SEO用テキスト */}
