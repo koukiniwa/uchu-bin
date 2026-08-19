@@ -1,6 +1,20 @@
 {
-  "updated": "2026-08-19T21:24:43.774Z",
+  "updated": "2026-08-19T22:24:07.555Z",
   "launches": [
+    {
+      "id": "57280454-470e-4c5d-8de1-1bbd0ea41b49",
+      "name": "Electron | The Lightning God Defends (iQPS Launch 8)",
+      "rocket": "Electron",
+      "mission": "The Lightning God Defends (iQPS Launch 8)",
+      "date": "2026-08-20",
+      "month": 8,
+      "time": "13:00",
+      "tentative": false,
+      "provider": "Rocket Lab",
+      "country": "NZ",
+      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
+      "status": "Go"
+    },
     {
       "id": "bbdc4d47-1de3-428e-9fe1-bbf45d9b1e04",
       "name": "Falcon 9 Block 5 | Starlink Group 10-39",
@@ -265,20 +279,6 @@
       "provider": "Indian Space Research Organization",
       "country": "IN",
       "pad": "Satish Dhawan Space Centre, India",
-      "status": "TBD"
-    },
-    {
-      "id": "7d1afb26-6f9c-429b-9ccf-29012fd1e519",
-      "name": "Starship | Flight 14",
-      "rocket": "Starship",
-      "mission": "Flight 14",
-      "date": "2026-09-30",
-      "month": 9,
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "SpaceX Starbase, TX, USA",
       "status": "TBD"
     }
   ],
