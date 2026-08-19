@@ -197,6 +197,12 @@
       "name": "Long March 2C | Unknown Payload",
       "status": "Go for Launch",
       "date": "2026-08-17T05:10:29.357Z"
+    },
+    {
+      "id": "ef02e2cf-e617-4b38-a526-951ac9204b0a",
+      "name": "Zhuque-3 | Honghu-03",
+      "status": "Launch Successful",
+      "date": "2026-08-19T01:38:07.421Z"
     }
   ]
 }
