@@ -16,7 +16,7 @@ function getCountdown(date, time) {
   }
 }
 
-export default function ScheduleCountdown({ rocket, date, time, mission }) {
+export default function ScheduleCountdown({ date, time }) {
   const [cd, setCd] = useState(null)
 
   useEffect(() => {
@@ -28,41 +28,23 @@ export default function ScheduleCountdown({ rocket, date, time, mission }) {
 
   if (!cd) return null
 
-  const missionLabel = mission && mission !== 'Unknown Payload' ? mission : null
-
   return (
-    <div style={{
-      background: 'linear-gradient(135deg, #0a0e1a 0%, #0f1629 40%, #1a2744 100%)',
-      borderRadius: '6px', padding: '20px 24px', marginBottom: '24px',
-    }}>
-      <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.35)', marginBottom: '8px' }}>
-        次の打ち上げ
-      </div>
-      <div style={{ fontSize: '20px', fontWeight: 800, color: '#fff', marginBottom: '4px' }}>
-        {rocket}
-      </div>
-      {missionLabel && (
-        <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', marginBottom: '14px' }}>
-          {missionLabel}
-        </div>
-      )}
-      <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-        {[
-          { v: cd.days, l: '日' },
-          { v: cd.hours, l: '時間' },
-          { v: cd.minutes, l: '分' },
-          { v: cd.seconds, l: '秒' },
-        ].map(({ v, l }) => (
-          <div key={l} style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '28px', fontWeight: 800, color: '#fff', fontFamily: 'monospace', lineHeight: 1 }}>
-              {String(v).padStart(2, '0')}
-            </div>
-            <div style={{ fontSize: '9px', fontWeight: 600, color: 'rgba(255,255,255,0.4)', marginTop: '4px' }}>
-              {l}
-            </div>
+    <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+      {[
+        { v: cd.days, l: '日' },
+        { v: cd.hours, l: '時間' },
+        { v: cd.minutes, l: '分' },
+        { v: cd.seconds, l: '秒' },
+      ].map(({ v, l }) => (
+        <div key={l} style={{ textAlign: 'center' }}>
+          <div style={{ fontSize: '28px', fontWeight: 800, color: '#fff', fontFamily: 'monospace', lineHeight: 1 }}>
+            {String(v).padStart(2, '0')}
           </div>
-        ))}
-      </div>
+          <div style={{ fontSize: '9px', fontWeight: 600, color: 'rgba(255,255,255,0.4)', marginTop: '4px' }}>
+            {l}
+          </div>
+        </div>
+      ))}
     </div>
   )
 }
