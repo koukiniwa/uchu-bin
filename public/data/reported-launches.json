@@ -209,6 +209,12 @@
       "name": "Falcon 9 Block 5 | Starlink Group 17-50",
       "status": "Launch Successful",
       "date": "2026-08-19T06:58:36.380Z"
+    },
+    {
+      "id": "57280454-470e-4c5d-8de1-1bbd0ea41b49",
+      "name": "Electron | The Lightning God Defends (iQPS Launch 8)",
+      "status": "Launch in Flight",
+      "date": "2026-08-20T15:39:15.512Z"
     }
   ]
 }
