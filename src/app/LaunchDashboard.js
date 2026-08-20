@@ -87,9 +87,13 @@ function toJST(dateStr, timeStr) {
   const [h, min] = timeStr.split(':').map(Number)
   const utc = new Date(Date.UTC(y, m - 1, d, h, min))
   const jst = new Date(utc.getTime() + 9 * 60 * 60 * 1000)
+  const jstMonth = jst.getUTCMonth() + 1
+  const jstDate = jst.getUTCDate()
+  const jstTime = `${String(jst.getUTCHours()).padStart(2, '0')}:${String(jst.getUTCMinutes()).padStart(2, '0')}`
   return {
-    date: `${jst.getUTCMonth() + 1}/${jst.getUTCDate()}`,
-    time: `${String(jst.getUTCHours()).padStart(2, '0')}:${String(jst.getUTCMinutes()).padStart(2, '0')}`,
+    date: `${jstMonth}/${jstDate}`,
+    dateLong: `${jstMonth}月${jstDate}日`,
+    time: jstTime,
     fullDate: utc,
   }
 }
@@ -394,10 +398,10 @@ export default function LaunchDashboard() {
 
               {nextJST && (
                 <div style={{
-                  fontSize: '12px', color: 'rgba(255,255,255,0.35)',
-                  letterSpacing: '0.05em',
+                  fontSize: '14px', color: 'rgba(255,255,255,0.5)',
+                  letterSpacing: '0.03em', fontWeight: 600,
                 }}>
-                  {nextJST.date} {nextJST.time} JST
+                  {nextJST.dateLong} {nextJST.time} JST
                 </div>
               )}
             </div>
@@ -460,9 +464,14 @@ export default function LaunchDashboard() {
                       </div>
                     )}
                     <div style={{ padding: '8px 10px' }}>
-                      <div style={{ fontSize: '11px', fontWeight: 700, color: '#1a2744', marginBottom: '3px' }}>
+                      <div style={{ fontSize: '11px', fontWeight: 700, color: '#1a2744', marginBottom: '1px' }}>
                         {dateLabel}
                       </div>
+                      {rel && (
+                        <div style={{ fontSize: '10px', color: '#aaa', marginBottom: '2px' }}>
+                          {date}{time ? ` ${time}` : ''}
+                        </div>
+                      )}
                       <div style={{ fontSize: '13px', fontWeight: 700, color: '#1a2744', marginBottom: '2px', lineHeight: 1.3 }}>
                         {l.rocket}
                       </div>
