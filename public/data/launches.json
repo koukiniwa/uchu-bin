@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-20T11:25:41.873Z",
+  "updated": "2026-08-20T12:48:54.574Z",
   "launches": [
     {
       "id": "57280454-470e-4c5d-8de1-1bbd0ea41b49",
@@ -8,10 +8,10 @@
       "mission": "The Lightning God Defends (iQPS Launch 8)",
       "date": "2026-08-20",
       "month": 8,
-      "time": "13:00",
+      "time": "13:04",
       "tentative": false,
       "provider": "Rocket Lab",
-      "country": "NZ",
+      "country": "US",
       "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
       "status": "Go"
     },
@@ -50,12 +50,26 @@
       "mission": "Chang'e 7",
       "date": "2026-08-24",
       "month": 8,
-      "time": null,
-      "tentative": true,
+      "time": "00:05",
+      "tentative": false,
       "provider": "China Aerospace Science and Technology Corporation",
       "country": "CN",
       "pad": "Wenchang Space Launch Site, People's Republic of China",
-      "status": "TBC"
+      "status": "Go"
+    },
+    {
+      "id": "48c449c2-3c09-4d36-9c2a-d853b3a39289",
+      "name": "Long March 6C | Unknown Payload",
+      "rocket": "Long March 6C",
+      "mission": "Unknown Payload",
+      "date": "2026-08-25",
+      "month": 8,
+      "time": "03:20",
+      "tentative": false,
+      "provider": "China Aerospace Science and Technology Corporation",
+      "country": "CN",
+      "pad": "Taiyuan Satellite Launch Center, People's Republic of China",
+      "status": "Go"
     },
     {
       "id": "ad501ebd-a357-4305-90c1-c46c6feb2ecf",
@@ -265,20 +279,6 @@
       "provider": "SpaceX",
       "country": "US",
       "pad": "Cape Canaveral SFS, FL, USA",
-      "status": "TBD"
-    },
-    {
-      "id": "17d0ec68-f466-4916-9dc5-16123eda6484",
-      "name": "GSLV Mk II | GISAT-1A (EOS-05)",
-      "rocket": "GSLV Mk II",
-      "mission": "GISAT-1A (EOS-05)",
-      "date": "2026-09-30",
-      "month": 9,
-      "time": null,
-      "tentative": true,
-      "provider": "Indian Space Research Organization",
-      "country": "IN",
-      "pad": "Satish Dhawan Space Centre, India",
       "status": "TBD"
     }
   ],
