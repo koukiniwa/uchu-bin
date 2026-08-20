@@ -469,7 +469,7 @@ export default function LaunchDashboard() {
                       </div>
                       {rel && (
                         <div style={{ fontSize: '10px', color: '#aaa', marginBottom: '2px' }}>
-                          {date}{time ? ` ${time}` : ''}
+                          {date}
                         </div>
                       )}
                       <div style={{ fontSize: '13px', fontWeight: 700, color: '#1a2744', marginBottom: '2px', lineHeight: 1.3 }}>
