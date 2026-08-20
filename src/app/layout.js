@@ -5,8 +5,8 @@ import Script from 'next/script'
 export const metadata = {
   metadataBase: new URL('https://www.uchu-bin.jp'),
   title: '宇宙便 - 宇宙情報メディア',
-  description: 'ロケット打ち上げ速報・スケジュール・宇宙開発ニュースをリアルタイムでお届け。',
-  keywords: ['宇宙便', '宇宙ニュース', 'ロケット', '打ち上げ', '宇宙開発', 'JAXA', 'NASA', 'SpaceX', 'カウントダウン', 'launch schedule'],
+  description: 'ロケット打ち上げ予定・カウントダウン・速報をリアルタイムで配信。世界中の打ち上げスケジュールを日本時間で掲載。',
+  keywords: ['宇宙便', 'ロケット打ち上げ予定', '打ち上げスケジュール', 'カウントダウン', '打ち上げ速報', 'JAXA', 'NASA', 'SpaceX', 'H3', 'Starship'],
   alternates: {
     types: {
       'application/rss+xml': '/feed.xml',
