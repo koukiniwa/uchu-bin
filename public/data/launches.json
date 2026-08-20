@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-20T18:38:31.830Z",
+  "updated": "2026-08-20T20:27:44.245Z",
   "launches": [
     {
       "id": "bbdc4d47-1de3-428e-9fe1-bbf45d9b1e04",
@@ -8,7 +8,7 @@
       "mission": "Starlink Group 10-39",
       "date": "2026-08-21",
       "month": 8,
-      "time": "14:57",
+      "time": "15:14",
       "tentative": false,
       "provider": "SpaceX",
       "country": "US",
@@ -212,6 +212,20 @@
       "status": "TBD"
     },
     {
+      "id": "63181269-b125-4c36-951c-c9bd9bbc4b55",
+      "name": "Falcon 9 Block 5 | Starlink Group 15-23",
+      "rocket": "Falcon 9",
+      "mission": "Starlink Group 15-23",
+      "date": "2026-09-01",
+      "month": 9,
+      "time": "08:01",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "",
+      "pad": "Vandenberg SFB, CA, USA",
+      "status": "Go"
+    },
+    {
       "id": "d793ba47-faf5-4bab-a386-39a9ccc49c90",
       "name": "Soyuz 2.1b | Progress MS-35 (96P)",
       "rocket": "Soyuz 2.1b",
@@ -265,20 +279,6 @@
       "provider": "SpaceX",
       "country": "US",
       "pad": "Cape Canaveral SFS, FL, USA",
-      "status": "TBD"
-    },
-    {
-      "id": "17d0ec68-f466-4916-9dc5-16123eda6484",
-      "name": "GSLV Mk II | GISAT-1A (EOS-05)",
-      "rocket": "GSLV Mk II",
-      "mission": "GISAT-1A (EOS-05)",
-      "date": "2026-09-30",
-      "month": 9,
-      "time": null,
-      "tentative": true,
-      "provider": "Indian Space Research Organization",
-      "country": "IN",
-      "pad": "Satish Dhawan Space Centre, India",
       "status": "TBD"
     }
   ],
