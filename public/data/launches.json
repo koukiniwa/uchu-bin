@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-21T23:23:28.849Z",
+  "updated": "2026-08-22T01:12:39.944Z",
   "launches": [
     {
       "id": "6208f972-18ec-490f-bbe5-6f5c6cfcd48c",
@@ -310,16 +310,6 @@
       "date": "2026-08-19",
       "country": "",
       "provider": "SpaceX",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "ef02e2cf-e617-4b38-a526-951ac9204b0a",
-      "rocket": "Zhuque-3",
-      "mission": "Honghu-03",
-      "date": "2026-08-18",
-      "country": "CN",
-      "provider": "LandSpace",
       "result": "success",
       "resultLabel": "成功"
     }
