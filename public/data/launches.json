@@ -1,14 +1,14 @@
 {
-  "updated": "2026-08-22T14:21:00.789Z",
+  "updated": "2026-08-22T15:20:19.232Z",
   "launches": [
     {
       "id": "9d402fb6-9115-424d-b6f0-bd3b13ee310e",
       "name": "Long March 5 | Chang'e 7",
       "rocket": "Long March 5",
       "mission": "Chang'e 7",
-      "date": "2026-08-24",
+      "date": "2026-08-25",
       "month": 8,
-      "time": "00:05",
+      "time": "00:30",
       "tentative": false,
       "provider": "China Aerospace Science and Technology Corporation",
       "country": "CN",
