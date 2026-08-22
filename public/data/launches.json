@@ -1,20 +1,6 @@
 {
-  "updated": "2026-08-22T06:39:08.468Z",
+  "updated": "2026-08-22T07:31:16.697Z",
   "launches": [
-    {
-      "id": "6208f972-18ec-490f-bbe5-6f5c6cfcd48c",
-      "name": "Falcon 9 Block 5 | Starlink Group 15-20",
-      "rocket": "Falcon 9",
-      "mission": "Starlink Group 15-20",
-      "date": "2026-08-22",
-      "month": 8,
-      "time": "07:25",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "",
-      "pad": "Vandenberg SFB, CA, USA",
-      "status": "Go"
-    },
     {
       "id": "9d402fb6-9115-424d-b6f0-bd3b13ee310e",
       "name": "Long March 5 | Chang'e 7",
@@ -280,9 +266,33 @@
       "country": "US",
       "pad": "Cape Canaveral SFS, FL, USA",
       "status": "TBD"
+    },
+    {
+      "id": "17d0ec68-f466-4916-9dc5-16123eda6484",
+      "name": "GSLV Mk II | GISAT-1A (EOS-05)",
+      "rocket": "GSLV Mk II",
+      "mission": "GISAT-1A (EOS-05)",
+      "date": "2026-09-30",
+      "month": 9,
+      "time": null,
+      "tentative": true,
+      "provider": "Indian Space Research Organization",
+      "country": "IN",
+      "pad": "Satish Dhawan Space Centre, India",
+      "status": "TBD"
     }
   ],
   "recent": [
+    {
+      "id": "6208f972-18ec-490f-bbe5-6f5c6cfcd48c",
+      "rocket": "Falcon 9",
+      "mission": "Starlink Group 15-20",
+      "date": "2026-08-22",
+      "country": "",
+      "provider": "SpaceX",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "bbdc4d47-1de3-428e-9fe1-bbf45d9b1e04",
       "rocket": "Falcon 9",
