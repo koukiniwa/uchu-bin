@@ -1,20 +1,6 @@
 {
-  "updated": "2026-08-23T12:39:15.538Z",
+  "updated": "2026-08-23T13:31:42.767Z",
   "launches": [
-    {
-      "id": "9d402fb6-9115-424d-b6f0-bd3b13ee310e",
-      "name": "Long March 5 | Chang'e 7",
-      "rocket": "Long March 5",
-      "mission": "Chang'e 7",
-      "date": "2026-08-25",
-      "month": 8,
-      "time": "00:30",
-      "tentative": false,
-      "provider": "China Aerospace Science and Technology Corporation",
-      "country": "CN",
-      "pad": "Wenchang Space Launch Site, People's Republic of China",
-      "status": "Go"
-    },
     {
       "id": "48c449c2-3c09-4d36-9c2a-d853b3a39289",
       "name": "Long March 6C | Unknown Payload",
@@ -280,6 +266,20 @@
       "country": "IN",
       "pad": "Satish Dhawan Space Centre, India",
       "status": "TBD"
+    },
+    {
+      "id": "9d402fb6-9115-424d-b6f0-bd3b13ee310e",
+      "name": "Long March 5 | Chang'e 7",
+      "rocket": "Long March 5",
+      "mission": "Chang'e 7",
+      "date": "2026-09-30",
+      "month": 9,
+      "time": null,
+      "tentative": true,
+      "provider": "China Aerospace Science and Technology Corporation",
+      "country": "CN",
+      "pad": "Wenchang Space Launch Site, People's Republic of China",
+      "status": "TBD"
     }
   ],
   "recent": [
@@ -300,16 +300,6 @@
       "date": "2026-08-21",
       "country": "US",
       "provider": "SpaceX",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "57280454-470e-4c5d-8de1-1bbd0ea41b49",
-      "rocket": "Electron",
-      "mission": "The Lightning God Defends (iQPS Launch 8)",
-      "date": "2026-08-20",
-      "country": "US",
-      "provider": "Rocket Lab",
       "result": "success",
       "resultLabel": "成功"
     }
