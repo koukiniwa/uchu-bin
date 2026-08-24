@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-24T11:28:08.763Z",
+  "updated": "2026-08-24T11:34:53.126Z",
   "launches": [
     {
       "id": "48c449c2-3c09-4d36-9c2a-d853b3a39289",
@@ -125,20 +125,6 @@
       "provider": "Galactic Energy",
       "country": "CN",
       "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
-      "status": "TBD"
-    },
-    {
-      "id": "458e2e52-87b0-4707-96d8-6899f92e53ee",
-      "name": "Soyuz 2.1b/Fregat | Glonass-K1 No. 19",
-      "rocket": "Soyuz 2.1b/Fregat",
-      "mission": "Glonass-K1 No. 19",
-      "date": "2026-08-31",
-      "month": 8,
-      "time": null,
-      "tentative": true,
-      "provider": "Russian Space Forces",
-      "country": "RU",
-      "pad": "Plesetsk Cosmodrome, Russian Federation",
       "status": "TBD"
     },
     {
@@ -280,9 +266,33 @@
       "country": "IN",
       "pad": "Satish Dhawan Space Centre, India",
       "status": "TBD"
+    },
+    {
+      "id": "9d402fb6-9115-424d-b6f0-bd3b13ee310e",
+      "name": "Long March 5 | Chang'e 7",
+      "rocket": "Long March 5",
+      "mission": "Chang'e 7",
+      "date": "2026-09-30",
+      "month": 9,
+      "time": null,
+      "tentative": true,
+      "provider": "China Aerospace Science and Technology Corporation",
+      "country": "CN",
+      "pad": "Wenchang Space Launch Site, People's Republic of China",
+      "status": "TBD"
     }
   ],
   "recent": [
+    {
+      "id": "458e2e52-87b0-4707-96d8-6899f92e53ee",
+      "rocket": "Soyuz 2.1b/Fregat",
+      "mission": "Glonass-K1 No. 19",
+      "date": "2026-08-24",
+      "country": "RU",
+      "provider": "Russian Space Forces",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "6208f972-18ec-490f-bbe5-6f5c6cfcd48c",
       "rocket": "Falcon 9",

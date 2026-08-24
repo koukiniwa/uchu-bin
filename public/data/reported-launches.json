@@ -227,6 +227,12 @@
       "name": "Falcon 9 Block 5 | Starlink Group 15-20",
       "status": "Launch Successful",
       "date": "2026-08-22T09:32:28.039Z"
+    },
+    {
+      "id": "458e2e52-87b0-4707-96d8-6899f92e53ee",
+      "name": "Soyuz 2.1b/Fregat | Glonass-K1 No. 19",
+      "status": "Launch Successful",
+      "date": "2026-08-24T11:34:30.695Z"
     }
   ]
 }
