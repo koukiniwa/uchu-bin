@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-24T01:16:16.447Z",
+  "updated": "2026-08-24T03:02:57.311Z",
   "launches": [
     {
       "id": "48c449c2-3c09-4d36-9c2a-d853b3a39289",
@@ -86,20 +86,6 @@
       "status": "TBD"
     },
     {
-      "id": "599ba2df-7483-4b2f-a083-2b5ddc06e069",
-      "name": "Electron | LOXSAT 1",
-      "rocket": "Electron",
-      "mission": "LOXSAT 1",
-      "date": "2026-08-31",
-      "month": 8,
-      "time": null,
-      "tentative": true,
-      "provider": "Rocket Lab",
-      "country": "NZ",
-      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
-      "status": "TBD"
-    },
-    {
       "id": "dc570565-4dcf-4ab9-8174-bf88efef477f",
       "name": "Long March 12A | Flight 2",
       "rocket": "Long March 12A",
@@ -168,6 +154,20 @@
       "country": "DE",
       "pad": "Andøya Spaceport",
       "status": "TBD"
+    },
+    {
+      "id": "9f5a4cb6-63f9-47e1-9512-b468bae2a8e6",
+      "name": "Electron | Owl Around The World (StriX Launch 11)",
+      "rocket": "Electron",
+      "mission": "Owl Around The World (StriX Launch 11)",
+      "date": "2026-08-31",
+      "month": 8,
+      "time": "12:00",
+      "tentative": false,
+      "provider": "Rocket Lab",
+      "country": "NZ",
+      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
+      "status": "Go"
     },
     {
       "id": "63181269-b125-4c36-951c-c9bd9bbc4b55",
@@ -240,6 +240,20 @@
       "status": "Go"
     },
     {
+      "id": "599ba2df-7483-4b2f-a083-2b5ddc06e069",
+      "name": "Electron | LOXSAT 1",
+      "rocket": "Electron",
+      "mission": "LOXSAT 1",
+      "date": "2026-09-30",
+      "month": 9,
+      "time": null,
+      "tentative": true,
+      "provider": "Rocket Lab",
+      "country": "NZ",
+      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
+      "status": "TBD"
+    },
+    {
       "id": "ad358a4d-c541-409b-9366-9c2f2da4aeb9",
       "name": "Falcon 9 Block 5 | O3b mPower 11-13",
       "rocket": "Falcon 9",
@@ -265,20 +279,6 @@
       "provider": "Indian Space Research Organization",
       "country": "IN",
       "pad": "Satish Dhawan Space Centre, India",
-      "status": "TBD"
-    },
-    {
-      "id": "9d402fb6-9115-424d-b6f0-bd3b13ee310e",
-      "name": "Long March 5 | Chang'e 7",
-      "rocket": "Long March 5",
-      "mission": "Chang'e 7",
-      "date": "2026-09-30",
-      "month": 9,
-      "time": null,
-      "tentative": true,
-      "provider": "China Aerospace Science and Technology Corporation",
-      "country": "CN",
-      "pad": "Wenchang Space Launch Site, People's Republic of China",
       "status": "TBD"
     }
   ],
