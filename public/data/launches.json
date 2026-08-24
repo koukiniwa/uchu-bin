@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-24T17:30:39.982Z",
+  "updated": "2026-08-24T18:39:26.795Z",
   "launches": [
     {
       "id": "48c449c2-3c09-4d36-9c2a-d853b3a39289",
@@ -125,20 +125,6 @@
       "provider": "Galactic Energy",
       "country": "CN",
       "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
-      "status": "TBD"
-    },
-    {
-      "id": "1b23eb18-e06e-4058-9b42-e95ca0980511",
-      "name": "Spectrum | Onward and Upward",
-      "rocket": "Spectrum",
-      "mission": "Onward and Upward",
-      "date": "2026-08-31",
-      "month": 8,
-      "time": null,
-      "tentative": true,
-      "provider": "Isar Aerospace",
-      "country": "DE",
-      "pad": "Andøya Spaceport",
       "status": "TBD"
     },
     {
@@ -279,6 +265,20 @@
       "provider": "China Aerospace Science and Technology Corporation",
       "country": "CN",
       "pad": "Wenchang Space Launch Site, People's Republic of China",
+      "status": "TBD"
+    },
+    {
+      "id": "1b23eb18-e06e-4058-9b42-e95ca0980511",
+      "name": "Spectrum | Onward and Upward",
+      "rocket": "Spectrum",
+      "mission": "Onward and Upward",
+      "date": "2026-09-30",
+      "month": 9,
+      "time": null,
+      "tentative": true,
+      "provider": "Isar Aerospace",
+      "country": "DE",
+      "pad": "Andøya Spaceport",
       "status": "TBD"
     }
   ],
