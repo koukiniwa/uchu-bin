@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-24T14:41:30.808Z",
+  "updated": "2026-08-24T15:38:33.611Z",
   "launches": [
     {
       "id": "48c449c2-3c09-4d36-9c2a-d853b3a39289",
@@ -299,16 +299,6 @@
       "mission": "Starlink Group 15-20",
       "date": "2026-08-22",
       "country": "",
-      "provider": "SpaceX",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "bbdc4d47-1de3-428e-9fe1-bbf45d9b1e04",
-      "rocket": "Falcon 9",
-      "mission": "Starlink Group 10-39",
-      "date": "2026-08-21",
-      "country": "US",
       "provider": "SpaceX",
       "result": "success",
       "resultLabel": "成功"
