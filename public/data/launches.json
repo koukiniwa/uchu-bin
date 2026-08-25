@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-25T03:53:57.622Z",
+  "updated": "2026-08-25T04:38:25.112Z",
   "launches": [
     {
       "id": "ad501ebd-a357-4305-90c1-c46c6feb2ecf",
@@ -286,7 +286,7 @@
     {
       "id": "48c449c2-3c09-4d36-9c2a-d853b3a39289",
       "rocket": "Long March 6C",
-      "mission": "Unknown Payload",
+      "mission": "7 satellites",
       "date": "2026-08-25",
       "country": "CN",
       "provider": "China Aerospace Science and Technology Corporation",
