@@ -233,6 +233,12 @@
       "name": "Soyuz 2.1b/Fregat | Glonass-K1 No. 19",
       "status": "Launch Successful",
       "date": "2026-08-24T11:34:30.695Z"
+    },
+    {
+      "id": "48c449c2-3c09-4d36-9c2a-d853b3a39289",
+      "name": "Long March 6C | 7 satellites",
+      "status": "Launch Successful",
+      "date": "2026-08-25T05:59:20.588Z"
     }
   ]
 }
