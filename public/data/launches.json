@@ -1,20 +1,6 @@
 {
-  "updated": "2026-08-25T02:57:59.355Z",
+  "updated": "2026-08-25T03:53:57.622Z",
   "launches": [
-    {
-      "id": "48c449c2-3c09-4d36-9c2a-d853b3a39289",
-      "name": "Long March 6C | Unknown Payload",
-      "rocket": "Long March 6C",
-      "mission": "Unknown Payload",
-      "date": "2026-08-25",
-      "month": 8,
-      "time": "03:20",
-      "tentative": false,
-      "provider": "China Aerospace Science and Technology Corporation",
-      "country": "CN",
-      "pad": "Taiyuan Satellite Launch Center, People's Republic of China",
-      "status": "Go"
-    },
     {
       "id": "ad501ebd-a357-4305-90c1-c46c6feb2ecf",
       "name": "Falcon 9 Block 5 | Starlink Group 10-49",
@@ -280,9 +266,33 @@
       "country": "DE",
       "pad": "Andøya Spaceport",
       "status": "TBD"
+    },
+    {
+      "id": "7d1afb26-6f9c-429b-9ccf-29012fd1e519",
+      "name": "Starship | Flight 14",
+      "rocket": "Starship",
+      "mission": "Flight 14",
+      "date": "2026-09-30",
+      "month": 9,
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "SpaceX Starbase, TX, USA",
+      "status": "TBD"
     }
   ],
   "recent": [
+    {
+      "id": "48c449c2-3c09-4d36-9c2a-d853b3a39289",
+      "rocket": "Long March 6C",
+      "mission": "Unknown Payload",
+      "date": "2026-08-25",
+      "country": "CN",
+      "provider": "China Aerospace Science and Technology Corporation",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "458e2e52-87b0-4707-96d8-6899f92e53ee",
       "rocket": "Soyuz 2.1b/Fregat",
