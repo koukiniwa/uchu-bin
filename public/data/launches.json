@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-25T09:34:40.486Z",
+  "updated": "2026-08-25T10:32:28.283Z",
   "launches": [
     {
       "id": "95653d52-bb77-4860-a815-dd7141778d17",
@@ -226,20 +226,6 @@
       "status": "TBD"
     },
     {
-      "id": "9d402fb6-9115-424d-b6f0-bd3b13ee310e",
-      "name": "Long March 5 | Chang'e 7",
-      "rocket": "Long March 5",
-      "mission": "Chang'e 7",
-      "date": "2026-09-30",
-      "month": 9,
-      "time": null,
-      "tentative": true,
-      "provider": "China Aerospace Science and Technology Corporation",
-      "country": "CN",
-      "pad": "Wenchang Space Launch Site, People's Republic of China",
-      "status": "TBD"
-    },
-    {
       "id": "1b23eb18-e06e-4058-9b42-e95ca0980511",
       "name": "Spectrum | Onward and Upward",
       "rocket": "Spectrum",
@@ -279,6 +265,20 @@
       "provider": "United Launch Alliance",
       "country": "",
       "pad": "Cape Canaveral SFS, FL, USA",
+      "status": "TBD"
+    },
+    {
+      "id": "3b94ad50-3505-496e-8a95-b0bc4c0dadc6",
+      "name": "Themis Demonstrator | T1H-1",
+      "rocket": "Themis Demonstrator",
+      "mission": "T1H-1",
+      "date": "2026-09-30",
+      "month": 9,
+      "time": null,
+      "tentative": true,
+      "provider": "European Space Agency",
+      "country": "FR",
+      "pad": "Esrange Space Center",
       "status": "TBD"
     }
   ],
