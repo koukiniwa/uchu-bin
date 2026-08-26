@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-26T16:17:42.731Z",
+  "updated": "2026-08-26T19:01:47.552Z",
   "launches": [
     {
       "id": "a57aed97-b94f-42e1-905e-9421dbd96ac8",
@@ -120,12 +120,12 @@
       "mission": "Progress MS-35 (96P)",
       "date": "2026-09-09",
       "month": 9,
-      "time": null,
-      "tentative": true,
+      "time": "16:15",
+      "tentative": false,
       "provider": "Russian Federal Space Agency (ROSCOSMOS)",
       "country": "RU",
       "pad": "Baikonur Cosmodrome, Republic of Kazakhstan",
-      "status": "TBC"
+      "status": "Go"
     },
     {
       "id": "18441371-8b2e-457c-afb5-1ec1b11ab630",
