@@ -1,20 +1,6 @@
 {
-  "updated": "2026-08-26T08:42:18.442Z",
+  "updated": "2026-08-26T09:40:48.376Z",
   "launches": [
-    {
-      "id": "95653d52-bb77-4860-a815-dd7141778d17",
-      "name": "Falcon 9 Block 5 | Starlink Group 15-22",
-      "rocket": "Falcon 9",
-      "mission": "Starlink Group 15-22",
-      "date": "2026-08-26",
-      "month": 8,
-      "time": "09:35",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "",
-      "pad": "Vandenberg SFB, CA, USA",
-      "status": "Go"
-    },
     {
       "id": "a57aed97-b94f-42e1-905e-9421dbd96ac8",
       "name": "Ariane 62 | MTG-I2",
@@ -280,9 +266,33 @@
       "country": "FR",
       "pad": "Esrange Space Center",
       "status": "TBD"
+    },
+    {
+      "id": "7bdc412b-c965-4517-a131-f57a01189803",
+      "name": "Ariane 64 Block 2 | Amazon Leo (LE-04)",
+      "rocket": "Ariane 64",
+      "mission": "Amazon Leo (LE-04)",
+      "date": "2026-10-07",
+      "month": 10,
+      "time": null,
+      "tentative": true,
+      "provider": "Arianespace",
+      "country": "FR",
+      "pad": "Guiana Space Centre, French Guiana",
+      "status": "TBD"
     }
   ],
   "recent": [
+    {
+      "id": "95653d52-bb77-4860-a815-dd7141778d17",
+      "rocket": "Falcon 9",
+      "mission": "Starlink Group 15-22",
+      "date": "2026-08-26",
+      "country": "",
+      "provider": "SpaceX",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "ad501ebd-a357-4305-90c1-c46c6feb2ecf",
       "rocket": "Falcon 9",
