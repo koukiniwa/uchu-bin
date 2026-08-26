@@ -505,7 +505,7 @@ const LIBRARY_TOPIC_KEYWORDS = {
   rfaone:         ['rfa one', 'rocket factory augsburg'],
   miura:          ['miura', 'pld space'],
   // ===== ロシアロケット =====
-  soyuz:          ['soyuz rocket', 'ソユーズロケット', 'soyuz-2'],
+  soyuz:          ['soyuz', 'ソユーズ'],
   angara:         ['angara', 'アンガラ'],
   proton:         ['proton', 'プロトン'],
   // ===== 中国ロケット =====
@@ -527,6 +527,7 @@ const LIBRARY_TOPIC_KEYWORDS = {
   smartdragon3:   ['smart dragon', '捷龙', 'sd-3'],
   // ===== 韓国・他ロケット =====
   nuri:           ['nuri', 'ヌリ', 'kslv-ii'],
+  pallas:         ['pallas', 'パラス', 'galactic energy pallas'],
   mir:            ['mir rocket', 'mirロケット', 'mir ロケット', 'mirが', 'mirの'],
   eris:           ['eris', 'gilmour'],
   pslv:           ['pslv'],
@@ -839,6 +840,7 @@ const LIBRARY_CREDIT_MAP = {
   vikram1:      'Vikram-I / Skyroot Aerospace',
   gravity1:     'Gravity-1 / Orienspace',
   gslv:         'GSLV Mk II / ISRO',
+  pallas:       'Pallas-1 / Galactic Energy',
   mir:          'Mir / ADD (Korea)',
   kinetica1:    'Kinetica 1 / CAS Space',
   smartdragon3: 'Smart Dragon 3 / CALT',
