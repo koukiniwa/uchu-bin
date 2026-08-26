@@ -126,22 +126,6 @@ function getLaunches() {
   }
 }
 
-function isNotable(l) {
-  const m = (l.mission || '').toLowerCase()
-  const r = (l.rocket || '').toLowerCase()
-  if (m.includes('starlink')) return false
-  if (m === 'unknown payload') return false
-  if (m.includes('demo flight') || m.includes('flight 2') || m.includes('flight 1')) return true
-  if (r.includes('starship') || r.includes('falcon heavy') || r.includes('sls')) return true
-  if (r.includes('h3') || r.includes('h-3')) return true
-  if (m.includes('crew') || m.includes('chang\'e') || m.includes('roman') || m.includes('mmx')) return true
-  if (m.includes('michibiki') || m.includes('progress') || m.includes('soyuz ms')) return true
-  if (r.includes('ariane')) return true
-  if (r.includes('zhuque') || r.includes('spectrum') || r.includes('mir') || r.includes('pallas')) return true
-  if (r.includes('electron') && !m.includes('starlink')) return true
-  return false
-}
-
 const year = new Date().getFullYear()
 
 export const metadata = {
@@ -165,7 +149,6 @@ export default function SchedulePage() {
   const updated = data.updated
 
   const firstTimed = launches.find(l => l.time && !l.tentative)
-  const notableLaunches = launches.filter(isNotable).slice(0, 5)
 
   return (
     <div style={{ maxWidth: '800px', margin: '0 auto' }}>
@@ -223,54 +206,21 @@ export default function SchedulePage() {
         </div>
       )}
 
-      {/* 今月の注目打ち上げ */}
-      {notableLaunches.length > 0 && (
-        <section style={{ marginBottom: '32px' }}>
-          <h2 style={{ fontSize: '15px', fontWeight: 700, color: '#1a2744', marginBottom: '14px', borderBottom: '2px solid #1a2744', paddingBottom: '6px' }}>
-            注目の打ち上げ
-          </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '12px' }}>
-            {notableLaunches.map((l, i) => {
-              const { display } = toJST(l.date, l.time)
-              const mission = l.mission && l.mission !== 'Unknown Payload' ? l.mission : ''
-              return (
-                <div key={l.id || i} style={{
-                  borderRadius: '4px', overflow: 'hidden', border: '1px solid #e8e8e8',
-                  backgroundColor: '#fff',
-                }}>
-                  <div style={{ position: 'relative', height: '110px' }}>
-                    <img
-                      src={getRocketImage(l.rocket)}
-                      alt={l.rocket}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    />
-                    <div style={{
-                      position: 'absolute', bottom: 0, left: 0, right: 0,
-                      background: 'linear-gradient(transparent, rgba(0,0,0,0.7))',
-                      padding: '8px 10px 6px', color: '#fff',
-                    }}>
-                      <div style={{ fontSize: '14px', fontWeight: 700 }}>{l.rocket}</div>
-                    </div>
-                  </div>
-                  <div style={{ padding: '8px 10px 10px' }}>
-                    {mission && (
-                      <div style={{ fontSize: '12px', color: '#333', fontWeight: 600, marginBottom: '4px', lineHeight: 1.4 }}>
-                        {mission}
-                      </div>
-                    )}
-                    <div style={{ fontSize: '11px', color: '#888' }}>
-                      {display}
-                    </div>
-                    <div style={{ fontSize: '11px', color: '#888', marginTop: '2px' }}>
-                      📍 {shortenPad(l.pad)}{l.country ? `（${countryName(l.country)}）` : ''}
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
+      {/* 注目の打ち上げページへの導線 */}
+      <section style={{ marginBottom: '32px' }}>
+        <a href="/featured" style={{
+          display: 'block', padding: '16px 20px',
+          background: 'linear-gradient(135deg, #0a0e1a 0%, #1a2744 100%)',
+          borderRadius: '6px', textDecoration: 'none', color: '#fff',
+        }}>
+          <div style={{ fontSize: '15px', fontWeight: 700, marginBottom: '4px' }}>
+            注目の打ち上げ &rarr;
           </div>
-        </section>
-      )}
+          <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.6)' }}>
+            Starship、H3、有人飛行など注目ミッションを厳選紹介
+          </div>
+        </a>
+      </section>
 
       {/* 打ち上げ予定一覧 */}
       <section style={{ marginBottom: '32px' }}>

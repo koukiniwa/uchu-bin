@@ -20,20 +20,25 @@ jobs:
         with:
           node-version: '24'
 
+      - name: npm install
+        run: npm install
+
       - name: 打ち上げデータ取得
         run: node scripts/fetch-launches.js
+
+      - name: 注目の打ち上げデータ生成
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/generate-featured.js
 
       - name: 変更があればコミット
         run: |
           git config user.name "宇宙便 Bot"
           git config user.email "bot@uchu-bin.jp"
-          git add public/data/launches.json
+          git add public/data/launches.json public/data/featured.json
           git diff --cached --quiet || git commit -m "打ち上げ予定更新 $(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M')"
           git pull --rebase origin main
           git push
-
-      - name: npm install (ツイート用)
-        run: npm install
 
       - name: 打ち上げ予告ツイート
         env:

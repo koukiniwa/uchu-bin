@@ -91,6 +91,7 @@ export default function RootLayout({ children }) {
               }} />
             </Link>
             <nav className="header-nav">
+              <a href="/featured">注目の打ち上げ</a>
               <a href="/schedule">打ち上げ予定</a>
               <a href="/about">このサイトについて</a>
               <a href="https://x.com/uchubin_jp" target="_blank" rel="noopener noreferrer">X</a>
@@ -125,6 +126,9 @@ export default function RootLayout({ children }) {
             </div>
             {/* Links */}
             <div style={{ display: 'flex', gap: '16px', marginBottom: '24px', flexWrap: 'wrap' }}>
+              <a href="/featured" style={{ fontSize: '12px', color: '#4fc3f7', textDecoration: 'none' }}>
+                注目の打ち上げ
+              </a>
               <a href="/schedule" style={{ fontSize: '12px', color: '#4fc3f7', textDecoration: 'none' }}>
                 打ち上げ予定
               </a>
