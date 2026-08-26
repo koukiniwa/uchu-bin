@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-26T09:40:48.376Z",
+  "updated": "2026-08-26T10:34:26.029Z",
   "launches": [
     {
       "id": "a57aed97-b94f-42e1-905e-9421dbd96ac8",
@@ -55,20 +55,6 @@
       "provider": "China Aerospace Science and Technology Corporation",
       "country": "CN",
       "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
-      "status": "TBD"
-    },
-    {
-      "id": "9e27a1ed-e81a-4918-b32b-0380cf3a9f8f",
-      "name": "Mir | Demo Flight",
-      "rocket": "Mir",
-      "mission": "Demo Flight",
-      "date": "2026-08-31",
-      "month": 8,
-      "time": null,
-      "tentative": true,
-      "provider": "Agency for Defense Development",
-      "country": "KR",
-      "pad": "Sea Launch",
       "status": "TBD"
     },
     {
@@ -280,6 +266,20 @@
       "country": "FR",
       "pad": "Guiana Space Centre, French Guiana",
       "status": "TBD"
+    },
+    {
+      "id": "69ebbcd2-b257-4070-9ef9-21e7d1f8a883",
+      "name": "H3-24 | Martian Moon eXplorer (MMX)",
+      "rocket": "H3-24",
+      "mission": "Martian Moon eXplorer (MMX)",
+      "date": "2026-10-19",
+      "month": 10,
+      "time": "19:41",
+      "tentative": false,
+      "provider": "Mitsubishi Heavy Industries",
+      "country": "JP",
+      "pad": "Tanegashima Space Center, Japan",
+      "status": "Go"
     }
   ],
   "recent": [
