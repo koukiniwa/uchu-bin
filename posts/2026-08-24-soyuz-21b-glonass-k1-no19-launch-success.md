@@ -3,8 +3,8 @@ title: 'ソユーズ2.1b、Glonass-K1衛星の打ち上げに成功'
 description: 'ロシア宇宙軍がプレセツク射場からGlonass-K1 No.19を打ち上げ、成功。GLONASSの第3世代衛星が軌道に投入された。'
 date: '2026-08-24T20:34:50.726+09:00'
 category: 'ロケット'
-image: '/images/library/rocketlaunch_001.jpg'
-imageCredit: 'Rocket Launch / NASA'
+image: '/images/library/soyuz_001.jpg'
+imageCredit: 'Soyuz / Roscosmos'
 ---
 
 ## ソユーズ2.1b/Fregat、26回目の打ち上げで成功
