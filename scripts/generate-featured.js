@@ -16,16 +16,19 @@ const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 function isNotable(launch) {
   const m = (launch.mission?.name || '').toLowerCase()
   const r = (launch.rocket?.configuration?.name || '').toLowerCase()
-  if (m.includes('starlink')) return false
-  if (m === 'unknown payload') return false
-  if (m.includes('demo flight') || m.includes('flight 2') || m.includes('flight 1')) return true
-  if (r.includes('starship') || r.includes('falcon heavy') || r.includes('sls')) return true
+  // Starship（超大型）
+  if (r.includes('starship')) return true
+  // H3（日本の主力ロケット）
   if (r.includes('h3') || r.includes('h-3')) return true
-  if (m.includes('crew') || m.includes('chang\'e') || m.includes('roman') || m.includes('mmx')) return true
-  if (m.includes('michibiki') || m.includes('progress') || m.includes('soyuz ms')) return true
-  if (r.includes('ariane')) return true
-  if (r.includes('zhuque') || r.includes('spectrum') || r.includes('mir') || r.includes('pallas')) return true
-  if (r.includes('electron') && !m.includes('starlink')) return true
+  // 有人飛行
+  if (m.includes('crew')) return true
+  if (m.includes('starliner')) return true
+  // 惑星探査・深宇宙ミッション
+  if (m.includes('chang\'e') || m.includes('mmx') || m.includes('europa') || m.includes('roman')) return true
+  if (m.includes('artemis') || m.includes('lunar') || m.includes('moon')) return true
+  // 新型ロケット初飛行
+  if (r.includes('new glenn') || r.includes('spectrum') || r.includes('neutron')) return true
+  if (m.includes('demo flight') || m.includes('maiden') || m.includes('first flight')) return true
   return false
 }
 
