@@ -51,6 +51,7 @@ const ROCKET_IMAGES = {
   'angara': 'angara_001.jpg',
   'proton': 'proton_001.jpg',
   'zhuque': 'zhuque_001.jpg',
+  'pallas': 'pallas_001.jpg',
   'lijian': 'lijian_001.jpg',
   'agnibaan': 'agnibaan_001.jpg',
   'eris': 'eris_001.jpg',
