@@ -232,17 +232,7 @@ export default function FeaturedPage() {
               <div style={{ padding: '20px 24px' }}>
                 {/* 注目ポイント */}
                 {f.highlight && (
-                  <div style={{
-                    backgroundColor: '#f0f7ff', borderLeft: '4px solid #1a73e8',
-                    padding: '14px 16px', borderRadius: '0 4px 4px 0',
-                    marginBottom: '16px',
-                  }}>
-                    <div style={{
-                      fontSize: '11px', fontWeight: 700, color: '#1a73e8',
-                      letterSpacing: '0.08em', marginBottom: '6px',
-                    }}>
-                      注目ポイント
-                    </div>
+                  <div style={{ marginBottom: '16px' }}>
                     <div style={{
                       fontSize: '14px', color: '#333', lineHeight: 1.8,
                     }}>

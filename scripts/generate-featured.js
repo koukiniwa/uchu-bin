@@ -93,7 +93,8 @@ ${launchList}`
     const regex = new RegExp(`${num}\\.\\s*(.+?)(?=\\n${num + 1}\\.|$)`, 's')
     const match = text.match(regex)
     if (match) {
-      highlights[i] = match[1].trim()
+      // AI生成テキストからヘッダー行（**注目ポイント** 等）を除去
+      highlights[i] = match[1].trim().replace(/^\*\*[^*]+\*\*\s*\n?/, '').trim()
     }
   }
 
@@ -110,7 +111,14 @@ async function main() {
   if (!res.ok) throw new Error(`API error: ${res.status}`)
   const data = await res.json()
 
-  const notableLaunches = data.results.filter(isNotable).slice(0, 8)
+  // 同一ロケットの重複を防止（最も直近の1件だけ残す）
+  const seenRockets = new Set()
+  const notableLaunches = data.results.filter(isNotable).filter(l => {
+    const rocketKey = shortRocketName(l.rocket?.configuration?.name || '').toLowerCase()
+    if (seenRockets.has(rocketKey)) return false
+    seenRockets.add(rocketKey)
+    return true
+  }).slice(0, 8)
   console.log(`Found ${notableLaunches.length} notable launches`)
 
   if (notableLaunches.length === 0) {

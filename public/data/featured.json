@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-26T23:56:21.697Z",
+  "updated": "2026-08-27T00:06:49.595Z",
   "featured": [
     {
       "id": "521f3a1c-f977-4306-9b7f-495858719adf",
@@ -92,32 +92,32 @@
       "orbit": "Mars Orbit"
     },
     {
-      "id": "60f4ba6c-4201-4727-94aa-0015a5a0023f",
-      "rocket": "Spectrum",
-      "mission": "1 x Pelican satellite",
-      "description": "Payload consists of a single Pelican high-resolution imaging satellite for Planet Labs Germany.",
-      "highlight": "イザー・エアロスペースの「スペクトラム」ロケットが、Planet Labs Germany向けの高解像度地球観測衛星「ペリカン」を1機搭載して打ち上げます。商業地球観測の需要が世界的に高まる中、欧州独自のロケットでその衛星を軌道に投入するという、欧州宇宙産業の自立を象徴するミッションです。ロケットと衛星、双方のビジネスが絡み合うこの打ち上げは、欧州の宇宙エコシステムの成熟を示す一例として注目されます。",
+      "id": "3ac1bd74-bf9a-4afe-ae00-3e1d180142dd",
+      "rocket": "Astra Rocket 4",
+      "mission": "Maiden Flight",
+      "description": "First flight of Astra Space's second generation small satellite launch vehicle.",
+      "highlight": "Astra Spaceが開発した第2世代の小型衛星打ち上げロケット「Rocket 4」の初飛行ミッションです。同社はこれまでの機体で複数の失敗を経験しており、再起をかけた一機として注目されています。新世代機がどこまで信頼性を向上させたか、小型ロケット市場での巻き返しを図れるかが最大の見どころです。",
       "date": "2026-12-31",
       "time": null,
       "tentative": true,
-      "provider": "Isar Aerospace",
-      "country": "DE",
-      "pad": "Andøya Spaceport",
+      "provider": "Astra Space",
+      "country": "",
+      "pad": "Kennedy Space Center, FL, USA",
       "status": "TBD",
-      "orbit": "Sun-Synchronous Orbit"
+      "orbit": "Low Earth Orbit"
     },
     {
-      "id": "b48e32c5-3776-4684-a956-5ea4df032e90",
-      "rocket": "Spectrum",
-      "mission": "ΣYNDEO-3",
-      "description": "ΣYNDEO-3 is a satellite built by Redwire Corporation for the European Union/European Space Agency (ESA)’s In-Orbit Demonstration and In-Orbit Validation Programme (IOD/IOV), which will carry 10 different technological demonstration payload from institutions of Spain, France, Germany, Italy, Luxembou",
-      "highlight": "欧州宇宙機関（ESA）の軌道上実証プログラムの一環として、スペイン・フランス・ドイツ・イタリアなど欧州6か国・機関の10種類の技術実証装置を一度に宇宙で試験する衛星「ΣYNDEO-3」の打ち上げです。Redwire社が製造したこの衛星は、欧州全土の宇宙技術を一堂に集めた「宇宙の実験室」とも言えます。多国間の技術協力によって欧州の宇宙産業競争力を高めるという、EUの宇宙戦略の一端を担う意欲的なミッションです。",
+      "id": "07e945c1-2ec6-4d29-a500-1afbe920440f",
+      "rocket": "Atlas V N22",
+      "mission": "Starliner-1",
+      "description": "Starliner-1 is the first operational flight of a Starliner spacecraft to the International Space Station as part of NASA's Commercial Crew Program. Due to problems with the Starliner spacecraft's RCS attitude control system during the Crew Flight Test mission in 2024, this mission has been re-scoped",
+      "highlight": "ボーイングの宇宙船「スターライナー」にとって初の本格運用フライトですが、2024年の有人飛行テストで姿勢制御システムに深刻な不具合が発覚し、NASAはクルーを乗せないことを決断した異例のミッションです。宇宙飛行士を乗せられない「無人の商業クルー輸送船」として国際宇宙ステーションに物資を届けながら、改修されたシステムの検証を行います。スターライナーが信頼を取り戻し、将来的に有人飛行へ復帰できるかどうかを占う重要な試金石となります。",
       "date": "2026-12-31",
       "time": null,
       "tentative": true,
-      "provider": "Isar Aerospace",
-      "country": "DE",
-      "pad": "Andøya Spaceport",
+      "provider": "United Launch Alliance",
+      "country": "",
+      "pad": "Cape Canaveral SFS, FL, USA",
       "status": "TBD",
       "orbit": "Low Earth Orbit"
     }
