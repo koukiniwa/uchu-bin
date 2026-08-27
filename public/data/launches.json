@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-27T04:19:02.571Z",
+  "updated": "2026-08-27T16:08:10.523Z",
   "launches": [
     {
       "id": "a57aed97-b94f-42e1-905e-9421dbd96ac8",
@@ -44,34 +44,6 @@
       "status": "TBD"
     },
     {
-      "id": "dc570565-4dcf-4ab9-8174-bf88efef477f",
-      "name": "Long March 12A | Flight 2",
-      "rocket": "Long March 12A",
-      "mission": "Flight 2",
-      "date": "2026-08-31",
-      "month": 8,
-      "time": null,
-      "tentative": true,
-      "provider": "China Aerospace Science and Technology Corporation",
-      "country": "CN",
-      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
-      "status": "TBD"
-    },
-    {
-      "id": "a927b2f9-f9a5-4196-9abb-2e275e4a6b96",
-      "name": "Pallas-1 | Demo Flight",
-      "rocket": "Pallas-1",
-      "mission": "Demo Flight",
-      "date": "2026-08-31",
-      "month": 8,
-      "time": null,
-      "tentative": true,
-      "provider": "Galactic Energy",
-      "country": "CN",
-      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
-      "status": "TBD"
-    },
-    {
       "id": "9f5a4cb6-63f9-47e1-9512-b468bae2a8e6",
       "name": "Electron | Owl Around The World (StriX Launch 11)",
       "rocket": "Electron",
@@ -83,6 +55,20 @@
       "provider": "Rocket Lab",
       "country": "NZ",
       "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
+      "status": "Go"
+    },
+    {
+      "id": "a927b2f9-f9a5-4196-9abb-2e275e4a6b96",
+      "name": "Pallas-1 | Demo Flight",
+      "rocket": "Pallas-1",
+      "mission": "Demo Flight",
+      "date": "2026-09-01",
+      "month": 9,
+      "time": "02:00",
+      "tentative": false,
+      "provider": "Galactic Energy",
+      "country": "CN",
+      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
       "status": "Go"
     },
     {
@@ -98,6 +84,34 @@
       "country": "",
       "pad": "Vandenberg SFB, CA, USA",
       "status": "Go"
+    },
+    {
+      "id": "17d0ec68-f466-4916-9dc5-16123eda6484",
+      "name": "GSLV Mk II | GISAT-1A (EOS-05)",
+      "rocket": "GSLV Mk II",
+      "mission": "GISAT-1A (EOS-05)",
+      "date": "2026-09-03",
+      "month": 9,
+      "time": null,
+      "tentative": true,
+      "provider": "Indian Space Research Organization",
+      "country": "IN",
+      "pad": "Satish Dhawan Space Centre, India",
+      "status": "TBC"
+    },
+    {
+      "id": "1b23eb18-e06e-4058-9b42-e95ca0980511",
+      "name": "Spectrum | Onward and Upward",
+      "rocket": "Spectrum",
+      "mission": "Onward and Upward",
+      "date": "2026-09-04",
+      "month": 9,
+      "time": null,
+      "tentative": true,
+      "provider": "Isar Aerospace",
+      "country": "DE",
+      "pad": "Andøya Spaceport",
+      "status": "TBC"
     },
     {
       "id": "153ef8ef-b12b-43f4-a4bf-05b225c0cd37",
@@ -184,31 +198,17 @@
       "status": "TBD"
     },
     {
-      "id": "17d0ec68-f466-4916-9dc5-16123eda6484",
-      "name": "GSLV Mk II | GISAT-1A (EOS-05)",
-      "rocket": "GSLV Mk II",
-      "mission": "GISAT-1A (EOS-05)",
+      "id": "dc570565-4dcf-4ab9-8174-bf88efef477f",
+      "name": "Long March 12A | Flight 2",
+      "rocket": "Long March 12A",
+      "mission": "Flight 2",
       "date": "2026-09-30",
       "month": 9,
       "time": null,
       "tentative": true,
-      "provider": "Indian Space Research Organization",
-      "country": "IN",
-      "pad": "Satish Dhawan Space Centre, India",
-      "status": "TBD"
-    },
-    {
-      "id": "1b23eb18-e06e-4058-9b42-e95ca0980511",
-      "name": "Spectrum | Onward and Upward",
-      "rocket": "Spectrum",
-      "mission": "Onward and Upward",
-      "date": "2026-09-30",
-      "month": 9,
-      "time": null,
-      "tentative": true,
-      "provider": "Isar Aerospace",
-      "country": "DE",
-      "pad": "Andøya Spaceport",
+      "provider": "China Aerospace Science and Technology Corporation",
+      "country": "CN",
+      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
       "status": "TBD"
     },
     {
