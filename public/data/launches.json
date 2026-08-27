@@ -1,20 +1,6 @@
 {
-  "updated": "2026-08-27T16:08:10.523Z",
+  "updated": "2026-08-27T23:32:12.452Z",
   "launches": [
-    {
-      "id": "a57aed97-b94f-42e1-905e-9421dbd96ac8",
-      "name": "Ariane 62 | MTG-I2",
-      "rocket": "Ariane 62",
-      "mission": "MTG-I2",
-      "date": "2026-08-27",
-      "month": 8,
-      "time": "20:10",
-      "tentative": false,
-      "provider": "Arianespace",
-      "country": "FR",
-      "pad": "Guiana Space Centre, French Guiana",
-      "status": "Go"
-    },
     {
       "id": "521f3a1c-f977-4306-9b7f-495858719adf",
       "name": "Falcon Heavy | Nancy Grace Roman Space Telescope",
@@ -280,9 +266,33 @@
       "country": "KR",
       "pad": "Naro Space Center, South Korea",
       "status": "Go"
+    },
+    {
+      "id": "69ebbcd2-b257-4070-9ef9-21e7d1f8a883",
+      "name": "H3-24 | Martian Moon eXplorer (MMX)",
+      "rocket": "H3-24",
+      "mission": "Martian Moon eXplorer (MMX)",
+      "date": "2026-10-19",
+      "month": 10,
+      "time": "19:41",
+      "tentative": false,
+      "provider": "Mitsubishi Heavy Industries",
+      "country": "JP",
+      "pad": "Tanegashima Space Center, Japan",
+      "status": "Go"
     }
   ],
   "recent": [
+    {
+      "id": "a57aed97-b94f-42e1-905e-9421dbd96ac8",
+      "rocket": "Ariane 62",
+      "mission": "MTG-I2",
+      "date": "2026-08-27",
+      "country": "FR",
+      "provider": "Arianespace",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "95653d52-bb77-4860-a815-dd7141778d17",
       "rocket": "Falcon 9",
