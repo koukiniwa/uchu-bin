@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-26T22:46:25.708Z",
+  "updated": "2026-08-27T04:19:02.571Z",
   "launches": [
     {
       "id": "a57aed97-b94f-42e1-905e-9421dbd96ac8",
@@ -268,17 +268,17 @@
       "status": "TBD"
     },
     {
-      "id": "69ebbcd2-b257-4070-9ef9-21e7d1f8a883",
-      "name": "H3-24 | Martian Moon eXplorer (MMX)",
-      "rocket": "H3-24",
-      "mission": "Martian Moon eXplorer (MMX)",
-      "date": "2026-10-19",
+      "id": "e0741415-6c63-4236-9736-24a6c04485bc",
+      "name": "Nuri | NeonSat-2 to 6",
+      "rocket": "Nuri",
+      "mission": "NeonSat-2 to 6",
+      "date": "2026-10-07",
       "month": 10,
-      "time": "19:41",
+      "time": "03:23",
       "tentative": false,
-      "provider": "Mitsubishi Heavy Industries",
-      "country": "JP",
-      "pad": "Tanegashima Space Center, Japan",
+      "provider": "Korea Aerospace Research Institute",
+      "country": "KR",
+      "pad": "Naro Space Center, South Korea",
       "status": "Go"
     }
   ],
@@ -310,16 +310,6 @@
       "date": "2026-08-25",
       "country": "CN",
       "provider": "China Aerospace Science and Technology Corporation",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "458e2e52-87b0-4707-96d8-6899f92e53ee",
-      "rocket": "Soyuz 2.1b/Fregat",
-      "mission": "Glonass-K1 No. 19",
-      "date": "2026-08-24",
-      "country": "RU",
-      "provider": "Russian Space Forces",
       "result": "success",
       "resultLabel": "成功"
     }
