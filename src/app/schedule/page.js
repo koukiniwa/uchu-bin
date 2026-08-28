@@ -415,8 +415,8 @@ export default function SchedulePage() {
                   </div>
                   {timePart && timePart !== '時刻未定' && (
                     <div style={{
-                      fontSize: '12px', fontFamily: 'monospace', fontWeight: 700,
-                      color: 'rgba(255,255,255,0.9)', marginTop: '4px',
+                      fontSize: '15px', fontFamily: 'monospace', fontWeight: 800,
+                      color: '#fff', marginTop: '4px',
                     }}>
                       {timePart}
                     </div>
