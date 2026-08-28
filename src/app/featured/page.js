@@ -125,10 +125,15 @@ function countryFlag(code) {
   return COUNTRY_FLAGS[iso2] || ''
 }
 
+const WEEKDAYS = ['日', '月', '火', '水', '木', '金', '土']
+
 function toJST(dateStr, timeStr) {
-  if (!dateStr) return { display: 'TBD' }
+  if (!dateStr) return { datePart: 'TBD', timePart: '' }
   const [y, m, d] = dateStr.split('-').map(Number)
-  if (!timeStr) return { display: `${m}月${d}日（時刻未定）` }
+  if (!timeStr) {
+    const dow = WEEKDAYS[new Date(y, m - 1, d).getDay()]
+    return { datePart: `${m}月${d}日（${dow}）`, timePart: '時刻未定' }
+  }
   const [h, min] = timeStr.split(':').map(Number)
   const utc = new Date(Date.UTC(y, m - 1, d, h, min))
   const jst = new Date(utc.getTime() + 9 * 60 * 60 * 1000)
@@ -136,7 +141,8 @@ function toJST(dateStr, timeStr) {
   const jstDate = jst.getUTCDate()
   const jstH = String(jst.getUTCHours()).padStart(2, '0')
   const jstM = String(jst.getUTCMinutes()).padStart(2, '0')
-  return { display: `${jstMonth}月${jstDate}日 ${jstH}:${jstM} JST` }
+  const dow = WEEKDAYS[new Date(Date.UTC(jst.getUTCFullYear(), jst.getUTCMonth(), jst.getUTCDate())).getUTCDay()]
+  return { datePart: `${jstMonth}月${jstDate}日（${dow}）`, timePart: `${jstH}:${jstM} JST` }
 }
 
 function getFeatured() {
@@ -195,7 +201,7 @@ export default function FeaturedPage() {
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginBottom: '32px' }}>
         {featured.map((f, i) => {
-          const { display } = toJST(f.date, f.time)
+          const { datePart, timePart } = toJST(f.date, f.time)
           const mission = f.mission && f.mission !== 'Unknown Payload' ? f.mission : ''
           const country = countryName(f.country)
           const flag = countryFlag(f.country)
@@ -294,7 +300,10 @@ export default function FeaturedPage() {
                 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <span style={{ color: '#999', fontSize: '14px', width: '20px', textAlign: 'center' }}>📅</span>
-                    <span>{display}</span>
+                    <span>
+                      <span style={{ fontWeight: 700, color: '#333' }}>{datePart}</span>
+                      {timePart && <span style={{ marginLeft: '6px', color: '#777' }}>{timePart}</span>}
+                    </span>
                   </div>
                   {pad && (
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>

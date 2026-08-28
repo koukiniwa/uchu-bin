@@ -126,10 +126,15 @@ function countryFlag(code) {
   return COUNTRY_FLAGS[iso2] || ''
 }
 
+const WEEKDAYS = ['日', '月', '火', '水', '木', '金', '土']
+
 function toJST(dateStr, timeStr) {
-  if (!dateStr) return { display: 'TBD', sortKey: '', short: 'TBD' }
+  if (!dateStr) return { datePart: 'TBD', timePart: '', weekday: '', display: 'TBD' }
   const [y, m, d] = dateStr.split('-').map(Number)
-  if (!timeStr) return { display: `${m}月${d}日（時刻未定）`, sortKey: dateStr, short: `${m}/${d}` }
+  if (!timeStr) {
+    const dow = WEEKDAYS[new Date(y, m - 1, d).getDay()]
+    return { datePart: `${m}/${d}（${dow}）`, timePart: '時刻未定', weekday: dow, display: `${m}月${d}日（${dow}）時刻未定` }
+  }
   const [h, min] = timeStr.split(':').map(Number)
   const utc = new Date(Date.UTC(y, m - 1, d, h, min))
   const jst = new Date(utc.getTime() + 9 * 60 * 60 * 1000)
@@ -137,10 +142,12 @@ function toJST(dateStr, timeStr) {
   const jstDate = jst.getUTCDate()
   const jstH = String(jst.getUTCHours()).padStart(2, '0')
   const jstM = String(jst.getUTCMinutes()).padStart(2, '0')
+  const dow = WEEKDAYS[new Date(Date.UTC(jst.getUTCFullYear(), jst.getUTCMonth(), jst.getUTCDate())).getUTCDay()]
   return {
-    display: `${jstMonth}月${jstDate}日 ${jstH}:${jstM} JST`,
-    sortKey: dateStr + 'T' + timeStr,
-    short: `${jstMonth}/${jstDate} ${jstH}:${jstM}`,
+    datePart: `${jstMonth}/${jstDate}（${dow}）`,
+    timePart: `${jstH}:${jstM}`,
+    weekday: dow,
+    display: `${jstMonth}月${jstDate}日（${dow}）${jstH}:${jstM} JST`,
   }
 }
 
@@ -293,7 +300,7 @@ export default function SchedulePage() {
             </thead>
             <tbody>
               {launches.map((l, i) => {
-                const { display } = toJST(l.date, l.time)
+                const { datePart, timePart } = toJST(l.date, l.time)
                 const mission = l.mission && l.mission !== 'Unknown Payload' ? l.mission : '-'
                 const si = statusInfo(l.status)
                 return (
@@ -305,7 +312,12 @@ export default function SchedulePage() {
                         style={{ width: '36px', height: '36px', objectFit: 'cover', borderRadius: '4px' }}
                       />
                     </td>
-                    <td style={{ ...td, fontSize: '12px', whiteSpace: 'nowrap' }}>{display}</td>
+                    <td style={{ ...td, whiteSpace: 'nowrap' }}>
+                      <span style={{ fontSize: '13px', fontWeight: 700, color: '#111' }}>{datePart}</span>
+                      {timePart && (
+                        <span style={{ fontSize: '11px', color: '#888', marginLeft: '6px' }}>{timePart}</span>
+                      )}
+                    </td>
                     <td style={{ ...td, fontWeight: 700, color: '#1a2744' }}>{l.rocket}</td>
                     <td style={td}>{mission}</td>
                     <td style={{ ...td, fontSize: '12px', color: '#888' }}>
@@ -330,7 +342,7 @@ export default function SchedulePage() {
         {/* スマホ: カード表示 */}
         <div className="schedule-cards-wrap">
           {launches.map((l, i) => {
-            const { display } = toJST(l.date, l.time)
+            const { datePart, timePart } = toJST(l.date, l.time)
             const mission = l.mission && l.mission !== 'Unknown Payload' ? l.mission : ''
             const si = statusInfo(l.status)
             const pad = shortenPad(l.pad)
@@ -373,7 +385,10 @@ export default function SchedulePage() {
                     </div>
                   )}
                   <div style={{ fontSize: '11px', color: '#999', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                    <span>{display}</span>
+                    <span>
+                      <span style={{ fontWeight: 700, color: '#666' }}>{datePart}</span>
+                      {timePart && <span style={{ marginLeft: '4px' }}>{timePart}</span>}
+                    </span>
                     {pad && <span>{flag} {pad}</span>}
                   </div>
                 </div>

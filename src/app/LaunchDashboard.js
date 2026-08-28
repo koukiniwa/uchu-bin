@@ -81,19 +81,26 @@ function countryName(code) {
   return COUNTRY_NAMES[iso2] || iso2
 }
 
+const WEEKDAYS = ['日', '月', '火', '水', '木', '金', '土']
+
 function toJST(dateStr, timeStr) {
-  if (!dateStr) return { date: 'TBD', time: '', fullDate: null }
+  if (!dateStr) return { date: 'TBD', dateDow: 'TBD', time: '', fullDate: null }
   const [y, m, d] = dateStr.split('-').map(Number)
-  if (!timeStr) return { date: `${m}月`, time: '', fullDate: null }
+  if (!timeStr) {
+    const dow = WEEKDAYS[new Date(y, m - 1, d).getDay()]
+    return { date: `${m}/${d}`, dateDow: `${m}/${d}（${dow}）`, dateLong: `${m}月${d}日（${dow}）`, time: '', fullDate: null }
+  }
   const [h, min] = timeStr.split(':').map(Number)
   const utc = new Date(Date.UTC(y, m - 1, d, h, min))
   const jst = new Date(utc.getTime() + 9 * 60 * 60 * 1000)
   const jstMonth = jst.getUTCMonth() + 1
   const jstDate = jst.getUTCDate()
   const jstTime = `${String(jst.getUTCHours()).padStart(2, '0')}:${String(jst.getUTCMinutes()).padStart(2, '0')}`
+  const dow = WEEKDAYS[new Date(Date.UTC(jst.getUTCFullYear(), jst.getUTCMonth(), jst.getUTCDate())).getUTCDay()]
   return {
     date: `${jstMonth}/${jstDate}`,
-    dateLong: `${jstMonth}月${jstDate}日`,
+    dateDow: `${jstMonth}/${jstDate}（${dow}）`,
+    dateLong: `${jstMonth}月${jstDate}日（${dow}）`,
     time: jstTime,
     fullDate: utc,
   }
@@ -189,7 +196,7 @@ function shortenPad(pad) {
 
 function LaunchModal({ launch, onClose }) {
   const [cd, setCd] = useState(null)
-  const { date, time, fullDate } = toJST(launch.date, launch.time, launch.tentative)
+  const { dateLong, time, fullDate } = toJST(launch.date, launch.time, launch.tentative)
   const rocketImg = getRocketImage(launch.rocket)
   const country = countryName(launch.country)
   const mission = launch.mission && launch.mission !== 'Unknown Payload' ? launch.mission : null
@@ -250,8 +257,8 @@ function LaunchModal({ launch, onClose }) {
             </div>
           )}
           <div style={{ fontSize: '13px', color: '#444', lineHeight: 1.8 }}>
-            {time && <div>📅 {date} {time} JST</div>}
-            {!time && <div>📅 {date}（日時未定）</div>}
+            {time && <div>📅 <strong>{dateLong}</strong> {time} JST</div>}
+            {!time && <div>📅 <strong>{dateLong}</strong>（時刻未定）</div>}
             {pad && <div>📍 {pad}</div>}
             {launch.provider && <div>🏢 {launch.provider}</div>}
             {mission && <div>🎯 {mission}</div>}
@@ -398,11 +405,12 @@ export default function LaunchDashboard() {
               )}
 
               {nextJST && (
-                <div style={{
+                <div className="countdown-date" style={{
                   fontSize: '14px', color: 'rgba(255,255,255,0.5)',
-                  letterSpacing: '0.03em', fontWeight: 600,
+                  letterSpacing: '0.03em',
                 }}>
-                  {nextJST.dateLong} {nextJST.time} JST
+                  <span style={{ fontWeight: 700, color: 'rgba(255,255,255,0.7)' }}>{nextJST.dateLong}</span>
+                  {nextJST.time && <span style={{ marginLeft: '8px', fontWeight: 400 }}>{nextJST.time} JST</span>}
                 </div>
               )}
             </div>
@@ -447,14 +455,11 @@ export default function LaunchDashboard() {
             }}>&#8250;</button>
             <div className="launch-cards">
               {upcomingCards.map((l, i) => {
-                const { date, time } = toJST(l.date, l.time, l.tentative)
+                const { dateDow, time } = toJST(l.date, l.time, l.tentative)
                 const rel = relativeDate(l.date, l.time, l.tentative)
                 const country = countryName(l.country)
                 const mission = l.mission && l.mission !== 'Unknown Payload' ? l.mission : ''
                 const rocketImg = getRocketImage(l.rocket)
-                const dateLabel = rel
-                  ? (time ? `${rel} ${time}` : rel)
-                  : (l.tentative ? date : `${date} ${time || ''}`)
                 const cardContent = (
                   <>
                     {rocketImg && (
@@ -465,12 +470,13 @@ export default function LaunchDashboard() {
                       </div>
                     )}
                     <div style={{ padding: '8px 10px' }}>
-                      <div style={{ fontSize: '11px', fontWeight: 700, color: '#1a2744', marginBottom: '1px' }}>
-                        {dateLabel}
+                      <div style={{ marginBottom: '2px' }}>
+                        <span style={{ fontSize: '12px', fontWeight: 700, color: '#1a2744' }}>{dateDow}</span>
+                        {time && <span style={{ fontSize: '10px', color: '#999', marginLeft: '4px' }}>{time}</span>}
                       </div>
                       {rel && (
-                        <div style={{ fontSize: '10px', color: '#aaa', marginBottom: '2px' }}>
-                          {date}
+                        <div style={{ fontSize: '10px', color: '#e65100', fontWeight: 600, marginBottom: '2px' }}>
+                          {rel}
                         </div>
                       )}
                       <div style={{ fontSize: '13px', fontWeight: 700, color: '#1a2744', marginBottom: '2px', lineHeight: 1.3 }}>
