@@ -57,7 +57,16 @@ function getCountryCode(launch) {
 }
 
 function shortRocketName(name) {
-  return name.replace(/\s*Block\s*\d+/i, '').replace(/\/[A-Z]$/, '').trim()
+  return name
+    .replace(/\s*Block\s*\d+/i, '')
+    .replace(/Ariane 6[24]/i, 'Ariane 6')
+    .replace(/H3-\d{2}/i, 'H3')
+    .replace(/Soyuz 2\.1[abv](\/\S+)?/i, 'Soyuz 2')
+    .replace(/Atlas V \d{3}/i, 'Atlas V')
+    .replace(/(Long March \d+[A-Z]?)\/\S+/i, '$1')
+    .replace(/(Zhuque-\d+)[A-Z]/i, '$1')
+    .replace(/\/[A-Z]$/, '')
+    .trim()
 }
 
 // Claude AI で注目理由を一括生成

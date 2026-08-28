@@ -148,6 +148,32 @@ html, body {
   .launch-section-title { margin-bottom: 4px !important; font-size: 12px !important; }
 }
 
+/* スケジュールページ: テーブル/カード切り替え */
+.schedule-table-wrap { display: block; }
+.schedule-cards-wrap { display: none; }
+@media (max-width: 700px) {
+  .schedule-table-wrap { display: none; }
+  .schedule-cards-wrap { display: flex; flex-direction: column; gap: 10px; }
+}
+
+/* スケジュール: カウントダウンのスマホ対応 */
+@media (max-width: 640px) {
+  .schedule-countdown { margin-bottom: 20px !important; }
+  .schedule-countdown > div { padding: 20px 16px 16px !important; }
+}
+
+/* Featured: 画像の高さ */
+.featured-card-img { height: 220px; }
+@media (max-width: 640px) {
+  .featured-card-img { height: 180px; }
+}
+
+/* Featured: 詳細情報のグリッド */
+.featured-details { grid-template-columns: 1fr 1fr; }
+@media (max-width: 640px) {
+  .featured-details { grid-template-columns: 1fr !important; }
+}
+
 /* スマホ対応 */
 @media (max-width: 640px) {
   .article-grid { grid-template-columns: 1fr; gap: 12px; }

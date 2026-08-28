@@ -8,6 +8,12 @@ const COUNTRY_NAMES = {
   GB: 'イギリス', BR: 'ブラジル', IL: 'イスラエル', AU: 'オーストラリア',
 }
 
+const COUNTRY_FLAGS = {
+  US: '🇺🇸', CN: '🇨🇳', IN: '🇮🇳', JP: '🇯🇵', RU: '🇷🇺',
+  FR: '🇪🇺', EU: '🇪🇺', DE: '🇩🇪', KR: '🇰🇷', NZ: '🇳🇿',
+  GB: '🇬🇧', BR: '🇧🇷', IL: '🇮🇱', AU: '🇦🇺',
+}
+
 const PAD_SHORT = {
   'Kennedy': 'ケネディ宇宙センター',
   'Cape Canaveral': 'ケープカナベラル',
@@ -110,6 +116,16 @@ function countryName(code) {
   return COUNTRY_NAMES[iso2] || code
 }
 
+function countryFlag(code) {
+  if (!code) return ''
+  const iso2 = code.length === 2 ? code : {
+    USA: 'US', CHN: 'CN', IND: 'IN', JPN: 'JP', RUS: 'RU', FRA: 'FR',
+    GUF: 'FR', KOR: 'KR', NZL: 'NZ', GBR: 'GB', DEU: 'DE', BRA: 'BR',
+    ISR: 'IL', AUS: 'AU',
+  }[code] || code.slice(0, 2)
+  return COUNTRY_FLAGS[iso2] || ''
+}
+
 function toJST(dateStr, timeStr) {
   if (!dateStr) return { display: 'TBD', sortKey: '', short: 'TBD' }
   const [y, m, d] = dateStr.split('-').map(Number)
@@ -136,6 +152,13 @@ function getLaunches() {
   } catch {
     return { launches: [], recent: [], updated: '' }
   }
+}
+
+function statusInfo(status) {
+  if (status === 'Go') return { label: '確定', color: '#2e7d32', bg: '#e8f5e9' }
+  if (status === 'TBC') return { label: '暫定', color: '#e65100', bg: '#fff3e0' }
+  if (status === 'TBD') return { label: '未定', color: '#777', bg: '#f5f5f5' }
+  return { label: status || '', color: '#333', bg: '#f5f5f5' }
 }
 
 const year = new Date().getFullYear()
@@ -182,29 +205,36 @@ export default function SchedulePage() {
         世界中のロケット打ち上げ予定を日本時間（JST）で掲載。データは自動更新されます。
       </p>
 
-      {/* カウントダウン（画像付き） */}
+      {/* カウントダウン */}
       {firstTimed && (
-        <div style={{
-          position: 'relative', borderRadius: '6px', overflow: 'hidden',
-          marginBottom: '28px', height: '180px',
+        <div className="schedule-countdown" style={{
+          position: 'relative', borderRadius: '10px', overflow: 'hidden',
+          marginBottom: '28px',
         }}>
           <img
             src={getRocketImage(firstTimed.rocket)}
             alt={firstTimed.rocket}
             style={{
               position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
-              objectFit: 'cover', filter: 'brightness(0.35)',
+              objectFit: 'cover', filter: 'brightness(0.3)',
             }}
           />
-          <div style={{ position: 'relative', zIndex: 1, padding: '20px 24px', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-            <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.4)', marginBottom: '6px' }}>
-              次の打ち上げ
+          <div style={{
+            position: 'relative', zIndex: 1, padding: '28px 28px 24px',
+            display: 'flex', flexDirection: 'column', alignItems: 'center',
+            textAlign: 'center',
+          }}>
+            <div style={{
+              fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em',
+              color: 'rgba(255,255,255,0.5)', marginBottom: '8px', textTransform: 'uppercase',
+            }}>
+              NEXT LAUNCH
             </div>
-            <div style={{ fontSize: '22px', fontWeight: 800, color: '#fff', marginBottom: '2px' }}>
+            <div style={{ fontSize: '24px', fontWeight: 800, color: '#fff', marginBottom: '4px' }}>
               {firstTimed.rocket}
             </div>
             {firstTimed.mission && firstTimed.mission !== 'Unknown Payload' && (
-              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.6)', marginBottom: '12px' }}>
+              <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.6)', marginBottom: '16px' }}>
                 {firstTimed.mission}
               </div>
             )}
@@ -219,27 +249,37 @@ export default function SchedulePage() {
       )}
 
       {/* 注目の打ち上げページへの導線 */}
-      <section style={{ marginBottom: '32px' }}>
+      <section style={{ marginBottom: '28px' }}>
         <a href="/featured" style={{
-          display: 'block', padding: '16px 20px',
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          padding: '16px 20px',
           background: 'linear-gradient(135deg, #0a0e1a 0%, #1a2744 100%)',
-          borderRadius: '6px', textDecoration: 'none', color: '#fff',
+          borderRadius: '8px', textDecoration: 'none', color: '#fff',
+          transition: 'transform 0.2s, box-shadow 0.2s',
         }}>
-          <div style={{ fontSize: '15px', fontWeight: 700, marginBottom: '4px' }}>
-            注目の打ち上げ &rarr;
+          <div>
+            <div style={{ fontSize: '15px', fontWeight: 700, marginBottom: '4px' }}>
+              注目の打ち上げ
+            </div>
+            <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)' }}>
+              Starship、H3、有人飛行など注目ミッションを厳選紹介
+            </div>
           </div>
-          <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.6)' }}>
-            Starship、H3、有人飛行など注目ミッションを厳選紹介
-          </div>
+          <div style={{ fontSize: '20px', color: 'rgba(255,255,255,0.4)', marginLeft: '12px' }}>→</div>
         </a>
       </section>
 
       {/* 打ち上げ予定一覧 */}
       <section style={{ marginBottom: '32px' }}>
-        <h2 style={{ fontSize: '15px', fontWeight: 700, color: '#1a2744', marginBottom: '14px', borderBottom: '2px solid #1a2744', paddingBottom: '6px' }}>
+        <h2 style={{
+          fontSize: '15px', fontWeight: 700, color: '#1a2744',
+          marginBottom: '16px', borderBottom: '2px solid #1a2744', paddingBottom: '6px',
+        }}>
           打ち上げ予定一覧
         </h2>
-        <div style={{ overflowX: 'auto' }}>
+
+        {/* PC: テーブル表示 */}
+        <div className="schedule-table-wrap">
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
             <thead>
               <tr style={{ borderBottom: '2px solid #ddd' }}>
@@ -255,41 +295,101 @@ export default function SchedulePage() {
               {launches.map((l, i) => {
                 const { display } = toJST(l.date, l.time)
                 const mission = l.mission && l.mission !== 'Unknown Payload' ? l.mission : '-'
-                const status = l.status || ''
-                const statusLabel = status === 'Go' ? '確定'
-                  : status === 'TBC' ? '暫定'
-                  : status === 'TBD' ? '未定'
-                  : status
-                const statusColor = status === 'Go' ? '#2e7d32'
-                  : status === 'TBC' ? '#e65100'
-                  : status === 'TBD' ? '#999'
-                  : '#333'
+                const si = statusInfo(l.status)
                 return (
                   <tr key={l.id || i} style={{ borderBottom: '1px solid #f0f0f0' }}>
-                    <td style={{ ...td, padding: '6px 4px', width: '36px' }}>
+                    <td style={{ ...td, padding: '8px 4px', width: '40px' }}>
                       <img
                         src={getRocketImage(l.rocket)}
                         alt={l.rocket}
-                        style={{ width: '32px', height: '32px', objectFit: 'cover', borderRadius: '3px' }}
+                        style={{ width: '36px', height: '36px', objectFit: 'cover', borderRadius: '4px' }}
                       />
                     </td>
                     <td style={{ ...td, fontSize: '12px', whiteSpace: 'nowrap' }}>{display}</td>
                     <td style={{ ...td, fontWeight: 700, color: '#1a2744' }}>{l.rocket}</td>
                     <td style={td}>{mission}</td>
-                    <td style={{ ...td, fontSize: '12px', color: '#888' }}>{shortenPad(l.pad)}</td>
-                    <td style={{ ...td, color: statusColor, fontWeight: 600, fontSize: '12px' }}>{statusLabel}</td>
+                    <td style={{ ...td, fontSize: '12px', color: '#888' }}>
+                      {countryFlag(l.country)} {shortenPad(l.pad)}
+                    </td>
+                    <td style={td}>
+                      <span style={{
+                        display: 'inline-block', padding: '2px 8px', borderRadius: '10px',
+                        fontSize: '11px', fontWeight: 600,
+                        color: si.color, backgroundColor: si.bg,
+                      }}>
+                        {si.label}
+                      </span>
+                    </td>
                   </tr>
                 )
               })}
             </tbody>
           </table>
         </div>
+
+        {/* スマホ: カード表示 */}
+        <div className="schedule-cards-wrap">
+          {launches.map((l, i) => {
+            const { display } = toJST(l.date, l.time)
+            const mission = l.mission && l.mission !== 'Unknown Payload' ? l.mission : ''
+            const si = statusInfo(l.status)
+            const pad = shortenPad(l.pad)
+            const flag = countryFlag(l.country)
+
+            return (
+              <div key={l.id || i} className="schedule-card" style={{
+                display: 'flex', gap: '12px', padding: '14px',
+                backgroundColor: '#fff', borderRadius: '8px',
+                border: '1px solid #e8e8e8',
+                boxShadow: '0 1px 4px rgba(0,0,0,0.04)',
+              }}>
+                <img
+                  src={getRocketImage(l.rocket)}
+                  alt={l.rocket}
+                  style={{
+                    width: '64px', height: '64px', objectFit: 'cover',
+                    borderRadius: '6px', flexShrink: 0,
+                  }}
+                />
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                    <span style={{ fontSize: '15px', fontWeight: 700, color: '#1a2744' }}>
+                      {l.rocket}
+                    </span>
+                    <span style={{
+                      display: 'inline-block', padding: '1px 7px', borderRadius: '10px',
+                      fontSize: '10px', fontWeight: 600,
+                      color: si.color, backgroundColor: si.bg, flexShrink: 0,
+                    }}>
+                      {si.label}
+                    </span>
+                  </div>
+                  {mission && (
+                    <div style={{
+                      fontSize: '12px', color: '#555', marginBottom: '4px',
+                      overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                    }}>
+                      {mission}
+                    </div>
+                  )}
+                  <div style={{ fontSize: '11px', color: '#999', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                    <span>{display}</span>
+                    {pad && <span>{flag} {pad}</span>}
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+        </div>
       </section>
 
       {/* 最近の打ち上げ結果 */}
       {recent.length > 0 && (
         <section style={{ marginBottom: '32px' }}>
-          <h2 style={{ fontSize: '15px', fontWeight: 700, color: '#1a2744', marginBottom: '14px', borderBottom: '2px solid #1a2744', paddingBottom: '6px' }}>
+          <h2 style={{
+            fontSize: '15px', fontWeight: 700, color: '#1a2744',
+            marginBottom: '14px', borderBottom: '2px solid #1a2744', paddingBottom: '6px',
+          }}>
             最近の打ち上げ結果
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -298,14 +398,14 @@ export default function SchedulePage() {
               return (
                 <div key={r.id || i} style={{
                   display: 'flex', alignItems: 'center', gap: '10px',
-                  padding: '10px 12px', borderRadius: '4px',
+                  padding: '10px 12px', borderRadius: '8px',
                   backgroundColor: isSuccess ? '#f0fdf4' : '#fef2f2',
                   border: `1px solid ${isSuccess ? '#bbf7d0' : '#fecaca'}`,
                 }}>
                   <img
                     src={getRocketImage(r.rocket)}
                     alt={r.rocket}
-                    style={{ width: '40px', height: '40px', objectFit: 'cover', borderRadius: '3px', flexShrink: 0 }}
+                    style={{ width: '40px', height: '40px', objectFit: 'cover', borderRadius: '4px', flexShrink: 0 }}
                   />
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ fontSize: '13px', fontWeight: 700, color: '#111' }}>
@@ -325,13 +425,13 @@ export default function SchedulePage() {
       {/* ステータス凡例 */}
       <div style={{
         fontSize: '12px', color: '#888', lineHeight: 2,
-        padding: '16px', background: '#f5f5f5', borderRadius: '4px',
+        padding: '16px', background: '#f5f5f5', borderRadius: '8px',
         marginBottom: '32px',
       }}>
         <div style={{ fontWeight: 700, marginBottom: '4px', color: '#555' }}>ステータスの見方</div>
-        <div><span style={{ color: '#2e7d32', fontWeight: 600 }}>確定</span> — 打ち上げ日時が確定</div>
-        <div><span style={{ color: '#e65100', fontWeight: 600 }}>暫定</span> — 日時は暫定（変更の可能性あり）</div>
-        <div><span style={{ color: '#999', fontWeight: 600 }}>未定</span> — 日時未定</div>
+        <div><span style={{ display: 'inline-block', padding: '1px 8px', borderRadius: '10px', backgroundColor: '#e8f5e9', color: '#2e7d32', fontWeight: 600, fontSize: '11px', marginRight: '6px' }}>確定</span>打ち上げ日時が確定</div>
+        <div><span style={{ display: 'inline-block', padding: '1px 8px', borderRadius: '10px', backgroundColor: '#fff3e0', color: '#e65100', fontWeight: 600, fontSize: '11px', marginRight: '6px' }}>暫定</span>日時は暫定（変更の可能性あり）</div>
+        <div><span style={{ display: 'inline-block', padding: '1px 8px', borderRadius: '10px', backgroundColor: '#f0f0f0', color: '#777', fontWeight: 600, fontSize: '11px', marginRight: '6px' }}>未定</span>日時未定</div>
       </div>
 
       {/* SEO用テキスト */}

@@ -26,6 +26,20 @@ function saveReported(data) {
   fs.writeFileSync(REPORTED_PATH, JSON.stringify(data, null, 2), 'utf-8')
 }
 
+// ロケット名を簡潔にする（LL2 APIの型式番号を一般的な名前に正規化）
+function shortRocketName(name) {
+  return name
+    .replace(/\s*Block\s*\d+/i, '')
+    .replace(/Ariane 6[24]/i, 'Ariane 6')
+    .replace(/H3-\d{2}/i, 'H3')
+    .replace(/Soyuz 2\.1[abv](\/\S+)?/i, 'Soyuz 2')
+    .replace(/Atlas V \d{3}/i, 'Atlas V')
+    .replace(/(Long March \d+[A-Z]?)\/\S+/i, '$1')
+    .replace(/(Zhuque-\d+)[A-Z]/i, '$1')
+    .replace(/\/[A-Z]$/, '')
+    .trim()
+}
+
 // Starlink定期便を除外
 function isNotable(launch) {
   const rocket = (launch.rocket?.configuration?.name || '').toLowerCase()
@@ -145,7 +159,7 @@ async function main() {
 
   // 記事生成の情報を GITHUB_OUTPUT に出力
   const status = target.status?.name || 'Unknown'
-  const rocket = target.rocket?.configuration?.name || 'Unknown'
+  const rocket = shortRocketName(target.rocket?.configuration?.name || 'Unknown')
   const mission = target.mission?.name || ''
   const provider = target.launch_service_provider?.name || ''
   const pad = target.pad?.location?.name || ''

@@ -42,10 +42,16 @@ function getCountryCode(launch) {
   return ''
 }
 
-// ロケット名を簡潔にする
+// ロケット名を簡潔にする（LL2 APIの型式番号を一般的な名前に正規化）
 function shortRocketName(name) {
   return name
-    .replace(/\s*Block\s*\d+/i, '')
+    .replace(/\s*Block\s*\d+/i, '')       // "Zhuque-2E Block 2" → "Zhuque-2E"
+    .replace(/Ariane 6[24]/i, 'Ariane 6') // "Ariane 62/64" → "Ariane 6"
+    .replace(/H3-\d{2}/i, 'H3')           // "H3-22/H3-30" → "H3"
+    .replace(/Soyuz 2\.1[abv](\/\S+)?/i, 'Soyuz 2') // "Soyuz 2.1b/Fregat" → "Soyuz 2"
+    .replace(/Atlas V \d{3}/i, 'Atlas V')  // "Atlas V 551" → "Atlas V"
+    .replace(/(Long March \d+[A-Z]?)\/\S+/i, '$1') // "Long March 2F/G" → "Long March 2F"
+    .replace(/(Zhuque-\d+)[A-Z]/i, '$1')  // "Zhuque-2E" → "Zhuque-2"
     .replace(/\/[A-Z]$/, '')
     .trim()
 }

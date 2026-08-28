@@ -7,6 +7,12 @@ const COUNTRY_NAMES = {
   GB: 'イギリス', BR: 'ブラジル', IL: 'イスラエル', AU: 'オーストラリア',
 }
 
+const COUNTRY_FLAGS = {
+  US: '🇺🇸', CN: '🇨🇳', IN: '🇮🇳', JP: '🇯🇵', RU: '🇷🇺',
+  FR: '🇪🇺', EU: '🇪🇺', DE: '🇩🇪', KR: '🇰🇷', NZ: '🇳🇿',
+  GB: '🇬🇧', BR: '🇧🇷', IL: '🇮🇱', AU: '🇦🇺',
+}
+
 const PAD_SHORT = {
   'Kennedy': 'ケネディ宇宙センター',
   'Cape Canaveral': 'ケープカナベラル',
@@ -109,6 +115,16 @@ function countryName(code) {
   return COUNTRY_NAMES[iso2] || code
 }
 
+function countryFlag(code) {
+  if (!code) return ''
+  const iso2 = code.length === 2 ? code : {
+    USA: 'US', CHN: 'CN', IND: 'IN', JPN: 'JP', RUS: 'RU', FRA: 'FR',
+    GUF: 'FR', KOR: 'KR', NZL: 'NZ', GBR: 'GB', DEU: 'DE', BRA: 'BR',
+    ISR: 'IL', AUS: 'AU',
+  }[code] || code.slice(0, 2)
+  return COUNTRY_FLAGS[iso2] || ''
+}
+
 function toJST(dateStr, timeStr) {
   if (!dateStr) return { display: 'TBD' }
   const [y, m, d] = dateStr.split('-').map(Number)
@@ -177,11 +193,12 @@ export default function FeaturedPage() {
         <p style={{ color: '#999', fontSize: '14px' }}>現在、注目の打ち上げ情報はありません。</p>
       )}
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '32px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginBottom: '32px' }}>
         {featured.map((f, i) => {
           const { display } = toJST(f.date, f.time)
           const mission = f.mission && f.mission !== 'Unknown Payload' ? f.mission : ''
           const country = countryName(f.country)
+          const flag = countryFlag(f.country)
           const pad = shortenPad(f.pad)
           const rocketImg = getRocketImage(f.rocket)
           const statusLabel = f.status === 'Go' ? '確定'
@@ -190,38 +207,57 @@ export default function FeaturedPage() {
             : f.status
           const statusColor = f.status === 'Go' ? '#2e7d32'
             : f.status === 'TBC' ? '#e65100'
-            : f.status === 'TBD' ? '#999'
+            : f.status === 'TBD' ? '#777'
             : '#333'
+          const statusBg = f.status === 'Go' ? '#e8f5e9'
+            : f.status === 'TBC' ? '#fff3e0'
+            : '#f5f5f5'
 
           return (
-            <article key={f.id || i} style={{
-              borderRadius: '6px', overflow: 'hidden',
+            <article key={f.id || i} className="featured-card" style={{
+              borderRadius: '10px', overflow: 'hidden',
               border: '1px solid #e0e0e0', backgroundColor: '#fff',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+              boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
             }}>
               {/* ヘッダー画像 */}
-              <div style={{ position: 'relative', height: '200px', overflow: 'hidden' }}>
+              <div style={{ position: 'relative', overflow: 'hidden' }}
+                className="featured-card-img">
                 <img
                   src={rocketImg}
                   alt={f.rocket}
                   style={{
                     width: '100%', height: '100%', objectFit: 'cover',
-                    filter: 'brightness(0.5)',
+                    filter: 'brightness(0.6)',
                   }}
                 />
                 <div style={{
                   position: 'absolute', bottom: 0, left: 0, right: 0,
-                  padding: '20px 24px 16px',
-                  background: 'linear-gradient(transparent, rgba(0,0,0,0.8))',
+                  padding: '24px 24px 20px',
+                  background: 'linear-gradient(transparent, rgba(0,0,0,0.75))',
                 }}>
                   <div style={{
-                    fontSize: '22px', fontWeight: 800, color: '#fff',
-                    lineHeight: 1.3, marginBottom: '4px',
+                    display: 'flex', alignItems: 'center', gap: '10px',
+                    marginBottom: '4px',
                   }}>
-                    {f.rocket}
+                    <span style={{
+                      fontSize: '22px', fontWeight: 800, color: '#fff',
+                      lineHeight: 1.3,
+                    }}>
+                      {f.rocket}
+                    </span>
+                    <span style={{
+                      display: 'inline-block', padding: '2px 10px', borderRadius: '10px',
+                      fontSize: '11px', fontWeight: 600,
+                      color: '#fff',
+                      backgroundColor: f.status === 'Go' ? 'rgba(46,125,50,0.8)'
+                        : f.status === 'TBC' ? 'rgba(230,81,0,0.8)'
+                        : 'rgba(255,255,255,0.2)',
+                    }}>
+                      {statusLabel}
+                    </span>
                   </div>
                   {mission && (
-                    <div style={{ fontSize: '14px', color: 'rgba(255,255,255,0.7)' }}>
+                    <div style={{ fontSize: '14px', color: 'rgba(255,255,255,0.75)' }}>
                       {mission}
                     </div>
                   )}
@@ -232,7 +268,17 @@ export default function FeaturedPage() {
               <div style={{ padding: '20px 24px' }}>
                 {/* 注目ポイント */}
                 {f.highlight && (
-                  <div style={{ marginBottom: '16px' }}>
+                  <div style={{
+                    padding: '16px 18px', marginBottom: '16px',
+                    backgroundColor: '#f8f9ff', borderRadius: '8px',
+                    borderLeft: '3px solid #1a2744',
+                  }}>
+                    <div style={{
+                      fontSize: '11px', fontWeight: 700, color: '#1a2744',
+                      letterSpacing: '0.1em', marginBottom: '8px',
+                    }}>
+                      注目ポイント
+                    </div>
                     <div style={{
                       fontSize: '14px', color: '#333', lineHeight: 1.8,
                     }}>
@@ -242,40 +288,30 @@ export default function FeaturedPage() {
                 )}
 
                 {/* 詳細情報 */}
-                <div style={{
-                  display: 'grid', gridTemplateColumns: '1fr 1fr',
-                  gap: '10px', fontSize: '13px', color: '#555',
+                <div className="featured-details" style={{
+                  display: 'grid',
+                  gap: '8px', fontSize: '13px', color: '#555',
                 }}>
-                  <div>
-                    <span style={{ fontWeight: 700, color: '#333' }}>日時: </span>
-                    {display}
-                  </div>
-                  <div>
-                    <span style={{ fontWeight: 700, color: '#333' }}>状態: </span>
-                    <span style={{ color: statusColor, fontWeight: 600 }}>{statusLabel}</span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <span style={{ color: '#999', fontSize: '14px', width: '20px', textAlign: 'center' }}>📅</span>
+                    <span>{display}</span>
                   </div>
                   {pad && (
-                    <div>
-                      <span style={{ fontWeight: 700, color: '#333' }}>射場: </span>
-                      {pad}
-                    </div>
-                  )}
-                  {country && (
-                    <div>
-                      <span style={{ fontWeight: 700, color: '#333' }}>国: </span>
-                      {country}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <span style={{ color: '#999', fontSize: '14px', width: '20px', textAlign: 'center' }}>📍</span>
+                      <span>{flag} {pad}{country ? `（${country}）` : ''}</span>
                     </div>
                   )}
                   {f.provider && (
-                    <div>
-                      <span style={{ fontWeight: 700, color: '#333' }}>運用: </span>
-                      {f.provider}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <span style={{ color: '#999', fontSize: '14px', width: '20px', textAlign: 'center' }}>🏢</span>
+                      <span>{f.provider}</span>
                     </div>
                   )}
                   {f.orbit && (
-                    <div>
-                      <span style={{ fontWeight: 700, color: '#333' }}>軌道: </span>
-                      {f.orbit}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <span style={{ color: '#999', fontSize: '14px', width: '20px', textAlign: 'center' }}>🌍</span>
+                      <span>{f.orbit}</span>
                     </div>
                   )}
                 </div>
@@ -290,9 +326,10 @@ export default function FeaturedPage() {
         textAlign: 'center', padding: '20px', marginBottom: '32px',
       }}>
         <a href="/schedule" style={{
-          display: 'inline-block', padding: '12px 32px',
-          backgroundColor: '#1a2744', color: '#fff', borderRadius: '6px',
+          display: 'inline-block', padding: '14px 36px',
+          backgroundColor: '#1a2744', color: '#fff', borderRadius: '8px',
           textDecoration: 'none', fontWeight: 700, fontSize: '14px',
+          transition: 'background-color 0.2s',
         }}>
           全打ち上げスケジュールを見る &rarr;
         </a>
