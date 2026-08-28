@@ -36,6 +36,18 @@ export default function sitemap() {
       changeFrequency: 'monthly',
       priority: 0.5,
     },
+    {
+      url: `${baseUrl}/moon-map`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/mars-map`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
     ...['falcon-9', 'falcon-heavy', 'starship', 'electron', 'h3', 'ariane-6',
       'soyuz', 'long-march', 'vega', 'vulcan', 'new-glenn', 'pslv', 'gslv',
       'zhuque', 'kuaizhou'].map(slug => ({

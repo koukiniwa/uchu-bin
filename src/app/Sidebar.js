@@ -46,12 +46,11 @@ const sections = [
   },
 ]
 
-function MapCard({ href, img, alt, title, desc }) {
+function MapCard({ href, img, alt, title, desc, internal }) {
   return (
     <a
       href={href}
-      target="_blank"
-      rel="noopener noreferrer"
+      {...(!internal && { target: '_blank', rel: 'noopener noreferrer' })}
       style={{
         display: 'block',
         textDecoration: 'none',
@@ -77,18 +76,20 @@ export default function Sidebar() {
   return (
     <aside>
       <MapCard
-        href="https://space-map-git-main-koukiniwas-projects.vercel.app/moon"
+        href="/moon-map"
         img="/moon-map-og.png"
         alt="月面探査機マップ"
         title="月面探査機マップ"
         desc="人類が月に送り込んだ全探査機を3Dマップで探索"
+        internal
       />
       <MapCard
-        href="https://space-map-koukiniwas-projects.vercel.app/mars"
+        href="/mars-map"
         img="/mars-map-og.png"
         alt="火星探査機マップ"
         title="火星探査機マップ"
         desc="火星に着陸した探査機・ローバーの位置をインタラクティブな3Dマップで可視化"
+        internal
       />
       {sections.map((section) => (
         <div key={section.label} style={{ marginBottom: '28px' }}>
