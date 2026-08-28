@@ -27,13 +27,13 @@ export const metadata = {
     siteName: '宇宙便',
     type: 'website',
     locale: 'ja_JP',
-    images: [{ url: '/icon-512.png', width: 512, height: 512, alt: '宇宙便' }],
+    images: [{ url: '/images/library/rocketlaunch_001.jpg', width: 1200, height: 630, alt: '宇宙便 - 宇宙情報メディア' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: '宇宙便 - 宇宙情報メディア',
     description: 'ロケット打ち上げ速報・スケジュール・宇宙開発ニュースをリアルタイムでお届け。',
-    images: ['/icon-512.png'],
+    images: ['/images/library/rocketlaunch_001.jpg'],
   },
 }
 

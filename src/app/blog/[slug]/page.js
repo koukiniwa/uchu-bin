@@ -82,7 +82,7 @@ export async function generateMetadata({ params }) {
       type: 'article',
       locale: 'ja_JP',
       publishedTime: post.date,
-      images: [{ url: image, alt: post.title }],
+      images: [{ url: image, width: 1200, height: 630, alt: post.title }],
     },
     twitter: {
       card: 'summary_large_image',

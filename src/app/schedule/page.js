@@ -151,6 +151,22 @@ function toJST(dateStr, timeStr) {
   }
 }
 
+function daysUntil(dateStr) {
+  if (!dateStr) return null
+  const [y, m, d] = dateStr.split('-').map(Number)
+  const target = new Date(Date.UTC(y, m - 1, d))
+  const now = new Date()
+  const nowJST = new Date(now.getTime() + 9 * 60 * 60 * 1000)
+  const todayUTC = new Date(Date.UTC(nowJST.getUTCFullYear(), nowJST.getUTCMonth(), nowJST.getUTCDate()))
+  const diff = Math.round((target - todayUTC) / 86400000)
+  if (diff < 0) return null
+  if (diff === 0) return '今日'
+  if (diff === 1) return '明日'
+  if (diff === 2) return '明後日'
+  if (diff <= 14) return `${diff}日後`
+  return null
+}
+
 function getLaunches() {
   try {
     const filePath = path.join(process.cwd(), 'public', 'data', 'launches.json')
@@ -181,6 +197,13 @@ export const metadata = {
     siteName: '宇宙便',
     type: 'website',
     locale: 'ja_JP',
+    images: [{ url: 'https://www.uchu-bin.jp/images/library/rocketlaunch_001.jpg', width: 1200, height: 630, alt: 'ロケット打ち上げ予定スケジュール' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `ロケット打ち上げ予定スケジュール ${year} - 宇宙便`,
+    description: `${year}年のロケット打ち上げ予定を一覧で掲載。世界中の打ち上げスケジュールをリアルタイム更新。`,
+    images: ['https://www.uchu-bin.jp/images/library/rocketlaunch_001.jpg'],
   },
 }
 
@@ -305,6 +328,7 @@ export default function SchedulePage() {
                 const mission = l.mission && l.mission !== 'Unknown Payload' ? l.mission : '-'
                 const si = statusInfo(l.status)
                 const rowBg = i % 2 === 0 ? '#fff' : '#fafbfc'
+                const rel = daysUntil(l.date)
                 return (
                   <tr key={l.id || i} style={{ backgroundColor: rowBg, borderBottom: '1px solid #f0f0f0' }}>
                     <td style={{ ...td, padding: '8px 4px', width: '40px' }}>
@@ -314,8 +338,19 @@ export default function SchedulePage() {
                         style={{ width: '36px', height: '36px', objectFit: 'cover', borderRadius: '4px' }}
                       />
                     </td>
-                    <td style={{ ...td, fontWeight: 700, color: '#111', whiteSpace: 'nowrap', fontSize: '13px' }}>
-                      {datePart}
+                    <td style={{ ...td, whiteSpace: 'nowrap' }}>
+                      <span style={{ fontWeight: 700, color: '#111', fontSize: '13px' }}>{datePart}</span>
+                      {rel && (
+                        <span style={{
+                          display: 'inline-block', marginLeft: '6px',
+                          fontSize: '10px', fontWeight: 700,
+                          color: rel === '今日' || rel === '明日' ? '#e65100' : '#1a2744',
+                          backgroundColor: rel === '今日' || rel === '明日' ? '#fff3e0' : '#e8eaf6',
+                          padding: '1px 6px', borderRadius: '8px',
+                        }}>
+                          {rel}
+                        </span>
+                      )}
                     </td>
                     <td style={{ ...td, fontSize: '12px', color: '#888', whiteSpace: 'nowrap', fontFamily: 'monospace' }}>
                       {timePart || '—'}
@@ -349,22 +384,29 @@ export default function SchedulePage() {
             const si = statusInfo(l.status)
             const pad = shortenPad(l.pad)
             const flag = countryFlag(l.country)
+            const rel = daysUntil(l.date)
+            const isUrgent = rel === '今日' || rel === '明日'
 
             return (
               <div key={l.id || i} className="schedule-card" style={{
                 display: 'flex', backgroundColor: '#fff', borderRadius: '8px',
-                border: '1px solid #e8e8e8',
-                boxShadow: '0 1px 4px rgba(0,0,0,0.04)',
+                border: isUrgent ? '1px solid #e65100' : '1px solid #e8e8e8',
+                boxShadow: isUrgent ? '0 2px 8px rgba(230,81,0,0.12)' : '0 1px 4px rgba(0,0,0,0.04)',
                 overflow: 'hidden',
               }}>
                 {/* 左: 日付ブロック */}
                 <div style={{
                   width: '72px', flexShrink: 0,
-                  backgroundColor: '#1a2744', color: '#fff',
+                  backgroundColor: isUrgent ? '#e65100' : '#1a2744', color: '#fff',
                   display: 'flex', flexDirection: 'column',
                   alignItems: 'center', justifyContent: 'center',
                   padding: '8px 4px',
                 }}>
+                  {rel && (
+                    <div style={{ fontSize: '10px', fontWeight: 700, marginBottom: '2px', color: 'rgba(255,255,255,0.9)' }}>
+                      {rel}
+                    </div>
+                  )}
                   <div style={{ fontSize: '14px', fontWeight: 800, lineHeight: 1.2 }}>
                     {datePart.split('（')[0]}
                   </div>

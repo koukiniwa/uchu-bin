@@ -167,6 +167,13 @@ export const metadata = {
     siteName: '宇宙便',
     type: 'website',
     locale: 'ja_JP',
+    images: [{ url: 'https://www.uchu-bin.jp/images/library/starship_001.jpg', width: 1200, height: 630, alt: '注目のロケット打ち上げ' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `注目のロケット打ち上げ ${year} - 宇宙便`,
+    description: `${year}年の注目ロケット打ち上げを厳選紹介。見逃せない打ち上げの注目ポイントを解説。`,
+    images: ['https://www.uchu-bin.jp/images/library/starship_001.jpg'],
   },
 }
 
