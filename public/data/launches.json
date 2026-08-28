@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-28T01:17:26.668Z",
+  "updated": "2026-08-28T13:51:14.523Z",
   "launches": [
     {
       "id": "521f3a1c-f977-4306-9b7f-495858719adf",
@@ -116,7 +116,7 @@
     {
       "id": "d793ba47-faf5-4bab-a386-39a9ccc49c90",
       "name": "Soyuz 2.1b | Progress MS-35 (96P)",
-      "rocket": "Soyuz 2.1b",
+      "rocket": "Soyuz 2",
       "mission": "Progress MS-35 (96P)",
       "date": "2026-09-09",
       "month": 9,
@@ -242,7 +242,7 @@
     {
       "id": "7bdc412b-c965-4517-a131-f57a01189803",
       "name": "Ariane 64 Block 2 | Amazon Leo (LE-04)",
-      "rocket": "Ariane 64",
+      "rocket": "Ariane 6",
       "mission": "Amazon Leo (LE-04)",
       "date": "2026-10-07",
       "month": 10,
@@ -270,7 +270,7 @@
     {
       "id": "69ebbcd2-b257-4070-9ef9-21e7d1f8a883",
       "name": "H3-24 | Martian Moon eXplorer (MMX)",
-      "rocket": "H3-24",
+      "rocket": "H3",
       "mission": "Martian Moon eXplorer (MMX)",
       "date": "2026-10-19",
       "month": 10,
@@ -285,7 +285,7 @@
   "recent": [
     {
       "id": "a57aed97-b94f-42e1-905e-9421dbd96ac8",
-      "rocket": "Ariane 62",
+      "rocket": "Ariane 6",
       "mission": "MTG-I2",
       "date": "2026-08-27",
       "country": "FR",
@@ -300,26 +300,6 @@
       "date": "2026-08-26",
       "country": "",
       "provider": "SpaceX",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "ad501ebd-a357-4305-90c1-c46c6feb2ecf",
-      "rocket": "Falcon 9",
-      "mission": "Starlink Group 10-49",
-      "date": "2026-08-25",
-      "country": "US",
-      "provider": "SpaceX",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "48c449c2-3c09-4d36-9c2a-d853b3a39289",
-      "rocket": "Long March 6C",
-      "mission": "7 satellites",
-      "date": "2026-08-25",
-      "country": "CN",
-      "provider": "China Aerospace Science and Technology Corporation",
       "result": "success",
       "resultLabel": "成功"
     }
