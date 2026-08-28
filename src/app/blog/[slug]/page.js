@@ -24,6 +24,8 @@ const PAD_SHORT = {
   'Guiana': 'クールー', 'Baikonur': 'バイコヌール',
 }
 
+const WEEKDAYS = ['日', '月', '火', '水', '木', '金', '土']
+
 function NextLaunchBanner() {
   try {
     const data = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'public', 'data', 'launches.json'), 'utf-8'))
@@ -36,11 +38,15 @@ function NextLaunchBanner() {
     if (!next) return null
     const utc = new Date(next.date + 'T' + next.time + ':00Z')
     const jst = new Date(utc.getTime() + 9 * 3600000)
-    const timeStr = `${jst.getUTCMonth() + 1}/${jst.getUTCDate()} ${String(jst.getUTCHours()).padStart(2, '0')}:${String(jst.getUTCMinutes()).padStart(2, '0')} JST`
+    const jM = jst.getUTCMonth() + 1
+    const jD = jst.getUTCDate()
+    const dow = WEEKDAYS[new Date(Date.UTC(jst.getUTCFullYear(), jst.getUTCMonth(), jst.getUTCDate())).getUTCDay()]
+    const jH = String(jst.getUTCHours()).padStart(2, '0')
+    const jMin = String(jst.getUTCMinutes()).padStart(2, '0')
     let pad = next.pad || ''
     for (const [k, v] of Object.entries(PAD_SHORT)) { if (pad.includes(k)) { pad = v; break } }
     return (
-      <div style={{ margin: '32px 0', padding: '16px 20px', background: 'linear-gradient(135deg, #0a0e1a, #1a2744)', borderRadius: '6px' }}>
+      <div style={{ margin: '32px 0', padding: '16px 20px', background: 'linear-gradient(135deg, #0a0e1a, #1a2744)', borderRadius: '8px' }}>
         <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.35)', marginBottom: '8px' }}>
           🚀 次の打ち上げ予定
         </div>
@@ -48,7 +54,9 @@ function NextLaunchBanner() {
           {next.rocket}
         </div>
         <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.6)', marginBottom: '10px' }}>
-          {timeStr} 📍 {pad}
+          <span style={{ fontWeight: 700, color: 'rgba(255,255,255,0.85)' }}>{jM}月{jD}日（{dow}）</span>
+          <span style={{ marginLeft: '6px' }}>{jH}:{jMin} JST</span>
+          <span style={{ marginLeft: '8px' }}>📍 {pad}</span>
         </div>
         <a href="/schedule" style={{ fontSize: '12px', color: '#4fc3f7', textDecoration: 'none', fontWeight: 600 }}>
           スケジュール一覧を見る →
@@ -188,7 +196,12 @@ export default function BlogPost({ params }) {
           fontSize: '12px', color: '#999999',
           borderBottom: '1px solid #e0e0e0', paddingBottom: '20px',
         }}>
-          {post.date?.slice(0, 10)}
+          {(() => {
+            if (!post.date) return ''
+            const d = new Date(post.date)
+            if (isNaN(d)) return post.date.slice(0, 10)
+            return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日（${WEEKDAYS[d.getDay()]}）`
+          })()}
         </div>
       </div>
 
@@ -282,7 +295,12 @@ export default function BlogPost({ params }) {
                   <img src={p.image} alt={p.title} style={{ width: '80px', height: '56px', objectFit: 'cover', flexShrink: 0, borderRadius: '2px' }} />
                 )}
                 <div>
-                  <div style={{ fontSize: '11px', color: '#999', marginBottom: '4px' }}>{p.date?.slice(0, 10)}</div>
+                  <div style={{ fontSize: '11px', color: '#999', marginBottom: '4px' }}>{(() => {
+                    if (!p.date) return ''
+                    const d = new Date(p.date)
+                    if (isNaN(d)) return p.date.slice(0, 10)
+                    return `${d.getMonth() + 1}/${d.getDate()}（${WEEKDAYS[d.getDay()]}）`
+                  })()}</div>
                   <div style={{ fontSize: '14px', color: '#111', fontWeight: 600, lineHeight: 1.5 }}>{p.title}</div>
                 </div>
               </Link>

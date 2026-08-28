@@ -2,6 +2,17 @@
 
 import { useState } from 'react'
 const PAGE_SIZE = 12
+const WEEKDAYS = ['日', '月', '火', '水', '木', '金', '土']
+
+function formatDate(dateStr) {
+  if (!dateStr) return ''
+  const d = new Date(dateStr)
+  if (isNaN(d)) return dateStr.slice(0, 10)
+  const m = d.getMonth() + 1
+  const day = d.getDate()
+  const dow = WEEKDAYS[d.getDay()]
+  return `${m}/${day}（${dow}）`
+}
 
 function ArticleCard({ post }) {
   return (
@@ -48,7 +59,7 @@ function ArticleCard({ post }) {
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
             marginTop: 'auto', paddingTop: '8px', borderTop: '1px solid #f0f0f0',
           }}>
-            <span className="card-date" style={{ fontSize: '11px', color: '#aaa' }}>{post.date?.slice(0, 10)}</span>
+            <span className="card-date" style={{ fontSize: '11px', color: '#aaa' }}>{formatDate(post.date)}</span>
             <span className="card-more" style={{ fontSize: '11px', color: '#1a2744', fontWeight: 600 }}>
               続きを読む
             </span>
