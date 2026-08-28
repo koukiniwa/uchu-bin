@@ -128,11 +128,11 @@ function countryFlag(code) {
 const WEEKDAYS = ['日', '月', '火', '水', '木', '金', '土']
 
 function toJST(dateStr, timeStr) {
-  if (!dateStr) return { datePart: 'TBD', timePart: '' }
+  if (!dateStr) return { monthDay: 'TBD', weekday: '', timePart: '' }
   const [y, m, d] = dateStr.split('-').map(Number)
   if (!timeStr) {
     const dow = WEEKDAYS[new Date(y, m - 1, d).getDay()]
-    return { datePart: `${m}月${d}日（${dow}）`, timePart: '時刻未定' }
+    return { monthDay: `${m}/${d}`, weekday: dow, timePart: '時刻未定' }
   }
   const [h, min] = timeStr.split(':').map(Number)
   const utc = new Date(Date.UTC(y, m - 1, d, h, min))
@@ -142,7 +142,7 @@ function toJST(dateStr, timeStr) {
   const jstH = String(jst.getUTCHours()).padStart(2, '0')
   const jstM = String(jst.getUTCMinutes()).padStart(2, '0')
   const dow = WEEKDAYS[new Date(Date.UTC(jst.getUTCFullYear(), jst.getUTCMonth(), jst.getUTCDate())).getUTCDay()]
-  return { datePart: `${jstMonth}月${jstDate}日（${dow}）`, timePart: `${jstH}:${jstM} JST` }
+  return { monthDay: `${jstMonth}/${jstDate}`, weekday: dow, timePart: `${jstH}:${jstM} JST` }
 }
 
 function getFeatured() {
@@ -208,7 +208,7 @@ export default function FeaturedPage() {
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginBottom: '32px' }}>
         {featured.map((f, i) => {
-          const { datePart, timePart } = toJST(f.date, f.time)
+          const { monthDay, weekday, timePart } = toJST(f.date, f.time)
           const mission = f.mission && f.mission !== 'Unknown Payload' ? f.mission : ''
           const country = countryName(f.country)
           const flag = countryFlag(f.country)
@@ -247,16 +247,20 @@ export default function FeaturedPage() {
                 <div style={{
                   position: 'absolute', top: '12px', left: '12px',
                   backgroundColor: 'rgba(0,0,0,0.7)', borderRadius: '6px',
-                  padding: '6px 10px', textAlign: 'center',
+                  padding: '8px 12px', textAlign: 'center',
                   backdropFilter: 'blur(4px)',
                 }}>
-                  <div style={{ fontSize: '13px', fontWeight: 800, color: '#fff', lineHeight: 1.2 }}>
-                    {datePart.replace(/（.+）/, '')}
+                  <div style={{ fontSize: '16px', fontWeight: 800, color: '#fff', lineHeight: 1.2 }}>
+                    {monthDay}
                   </div>
-                  <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.6)', marginTop: '1px' }}>
-                    {datePart.match(/（(.+)）/)?.[1] || ''}
-                    {timePart && timePart !== '時刻未定' ? ` ${timePart}` : ''}
+                  <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.7)', marginTop: '2px', fontWeight: 600 }}>
+                    {weekday && `（${weekday}）`}
                   </div>
+                  {timePart && timePart !== '時刻未定' && (
+                    <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.5)', marginTop: '2px', fontFamily: 'monospace' }}>
+                      {timePart}
+                    </div>
+                  )}
                 </div>
                 {/* 右上: ステータス */}
                 <div style={{

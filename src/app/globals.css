@@ -181,6 +181,16 @@ html, body {
   .featured-details { grid-template-columns: 1fr !important; }
 }
 
+/* 記事末尾の回遊リンク */
+.site-links-grid { grid-template-columns: 1fr 1fr; }
+@media (max-width: 640px) {
+  .site-links-grid { grid-template-columns: 1fr; }
+}
+.site-links-grid a:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
 /* スマホ対応 */
 @media (max-width: 640px) {
   .article-grid { grid-template-columns: 1fr; gap: 12px; }

@@ -410,8 +410,8 @@ export default function SchedulePage() {
                   <div style={{ fontSize: '14px', fontWeight: 800, lineHeight: 1.2 }}>
                     {datePart.split('（')[0]}
                   </div>
-                  <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.6)', marginTop: '2px' }}>
-                    ({datePart.match(/（(.+)）/)?.[1] || ''})
+                  <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.7)', marginTop: '2px', fontWeight: 600 }}>
+                    （{datePart.match(/（(.+)）/)?.[1] || ''}）
                   </div>
                   {timePart && timePart !== '時刻未定' && (
                     <div style={{

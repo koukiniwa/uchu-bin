@@ -73,15 +73,29 @@ export async function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }))
 }
 
+const ROCKET_KEYWORDS = [
+  'Falcon 9', 'Falcon Heavy', 'Starship', 'Electron', 'H3', 'H-IIA',
+  'Ariane 6', 'Ariane 5', 'Soyuz', 'Long March', 'Vega', 'PSLV', 'GSLV',
+  'Vulcan', 'New Glenn', 'Atlas V', 'Delta IV', 'Epsilon', 'Zhuque',
+  'Kuaizhou', 'Gravity-1', 'Kinetica', 'Neutron', 'Firefly',
+]
+
+function extractRocketKeywords(title) {
+  const lower = title.toLowerCase()
+  return ROCKET_KEYWORDS.filter(r => lower.includes(r.toLowerCase()))
+}
+
 export async function generateMetadata({ params }) {
   const post = getPostBySlug(params.slug)
   const url = `https://www.uchu-bin.jp/blog/${params.slug}`
   const baseUrl = 'https://www.uchu-bin.jp'
   const image = post.image ? `${baseUrl}${post.image}` : `${baseUrl}/icon-512.png`
+  const rocketKw = extractRocketKeywords(post.title)
+  const keywords = ['宇宙便', post.category, ...rocketKw, 'ロケット', '打ち上げ', '宇宙ニュース'].filter((v, i, a) => a.indexOf(v) === i)
   return {
     title: `${post.title} - 宇宙便`,
     description: post.description,
-    keywords: ['宇宙便', post.category, 'ロケット', '宇宙ニュース', 'JAXA', 'NASA'],
+    keywords,
     openGraph: {
       title: `${post.title} - 宇宙便`,
       description: post.description,
@@ -281,6 +295,36 @@ export default function BlogPost({ params }) {
 
       {/* 次の打ち上げ */}
       <NextLaunchBanner />
+
+      {/* サイト回遊セクション */}
+      <div style={{
+        margin: '32px 0', display: 'grid', gap: '10px',
+      }} className="site-links-grid">
+        <a href="/schedule" style={{
+          display: 'flex', alignItems: 'center', gap: '12px',
+          padding: '14px 16px', borderRadius: '8px',
+          background: 'linear-gradient(135deg, #0a0e1a, #1a2744)',
+          textDecoration: 'none', transition: 'transform 0.15s, box-shadow 0.15s',
+        }}>
+          <span style={{ fontSize: '20px', lineHeight: 1 }}>📅</span>
+          <div>
+            <div style={{ fontSize: '13px', fontWeight: 700, color: '#fff' }}>打ち上げスケジュール</div>
+            <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.5)', marginTop: '2px' }}>世界中の打ち上げ予定を一覧で確認</div>
+          </div>
+        </a>
+        <a href="/featured" style={{
+          display: 'flex', alignItems: 'center', gap: '12px',
+          padding: '14px 16px', borderRadius: '8px',
+          background: 'linear-gradient(135deg, #0a0e1a, #1a2744)',
+          textDecoration: 'none', transition: 'transform 0.15s, box-shadow 0.15s',
+        }}>
+          <span style={{ fontSize: '20px', lineHeight: 1 }}>⭐</span>
+          <div>
+            <div style={{ fontSize: '13px', fontWeight: 700, color: '#fff' }}>注目の打ち上げ</div>
+            <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.5)', marginTop: '2px' }}>見逃せないミッションを厳選紹介</div>
+          </div>
+        </a>
+      </div>
 
       {/* 関連記事 */}
       {relatedPosts.length > 0 && (

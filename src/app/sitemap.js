@@ -36,6 +36,14 @@ export default function sitemap() {
       changeFrequency: 'monthly',
       priority: 0.5,
     },
+    ...['falcon-9', 'falcon-heavy', 'starship', 'electron', 'h3', 'ariane-6',
+      'soyuz', 'long-march', 'vega', 'vulcan', 'new-glenn', 'pslv', 'gslv',
+      'zhuque', 'kuaizhou'].map(slug => ({
+      url: `${baseUrl}/rockets/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    })),
     ...postUrls,
   ]
 }
