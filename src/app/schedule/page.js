@@ -289,9 +289,10 @@ export default function SchedulePage() {
         <div className="schedule-table-wrap">
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
             <thead>
-              <tr style={{ borderBottom: '2px solid #ddd' }}>
+              <tr style={{ borderBottom: '2px solid #1a2744' }}>
                 <th style={th}></th>
-                <th style={th}>日時 (JST)</th>
+                <th style={th}>日付</th>
+                <th style={th}>時刻</th>
                 <th style={th}>ロケット</th>
                 <th style={th}>ミッション</th>
                 <th style={th}>射場</th>
@@ -303,8 +304,9 @@ export default function SchedulePage() {
                 const { datePart, timePart } = toJST(l.date, l.time)
                 const mission = l.mission && l.mission !== 'Unknown Payload' ? l.mission : '-'
                 const si = statusInfo(l.status)
+                const rowBg = i % 2 === 0 ? '#fff' : '#fafbfc'
                 return (
-                  <tr key={l.id || i} style={{ borderBottom: '1px solid #f0f0f0' }}>
+                  <tr key={l.id || i} style={{ backgroundColor: rowBg, borderBottom: '1px solid #f0f0f0' }}>
                     <td style={{ ...td, padding: '8px 4px', width: '40px' }}>
                       <img
                         src={getRocketImage(l.rocket)}
@@ -312,15 +314,15 @@ export default function SchedulePage() {
                         style={{ width: '36px', height: '36px', objectFit: 'cover', borderRadius: '4px' }}
                       />
                     </td>
-                    <td style={{ ...td, whiteSpace: 'nowrap' }}>
-                      <span style={{ fontSize: '13px', fontWeight: 700, color: '#111' }}>{datePart}</span>
-                      {timePart && (
-                        <span style={{ fontSize: '11px', color: '#888', marginLeft: '6px' }}>{timePart}</span>
-                      )}
+                    <td style={{ ...td, fontWeight: 700, color: '#111', whiteSpace: 'nowrap', fontSize: '13px' }}>
+                      {datePart}
+                    </td>
+                    <td style={{ ...td, fontSize: '12px', color: '#888', whiteSpace: 'nowrap', fontFamily: 'monospace' }}>
+                      {timePart || '—'}
                     </td>
                     <td style={{ ...td, fontWeight: 700, color: '#1a2744' }}>{l.rocket}</td>
-                    <td style={td}>{mission}</td>
-                    <td style={{ ...td, fontSize: '12px', color: '#888' }}>
+                    <td style={{ ...td, color: '#555', maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{mission}</td>
+                    <td style={{ ...td, fontSize: '12px', color: '#888', whiteSpace: 'nowrap' }}>
                       {countryFlag(l.country)} {shortenPad(l.pad)}
                     </td>
                     <td style={td}>
@@ -350,46 +352,70 @@ export default function SchedulePage() {
 
             return (
               <div key={l.id || i} className="schedule-card" style={{
-                display: 'flex', gap: '12px', padding: '14px',
-                backgroundColor: '#fff', borderRadius: '8px',
+                display: 'flex', backgroundColor: '#fff', borderRadius: '8px',
                 border: '1px solid #e8e8e8',
                 boxShadow: '0 1px 4px rgba(0,0,0,0.04)',
+                overflow: 'hidden',
               }}>
-                <img
-                  src={getRocketImage(l.rocket)}
-                  alt={l.rocket}
-                  style={{
-                    width: '64px', height: '64px', objectFit: 'cover',
-                    borderRadius: '6px', flexShrink: 0,
-                  }}
-                />
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                    <span style={{ fontSize: '15px', fontWeight: 700, color: '#1a2744' }}>
-                      {l.rocket}
-                    </span>
-                    <span style={{
-                      display: 'inline-block', padding: '1px 7px', borderRadius: '10px',
-                      fontSize: '10px', fontWeight: 600,
-                      color: si.color, backgroundColor: si.bg, flexShrink: 0,
-                    }}>
-                      {si.label}
-                    </span>
+                {/* 左: 日付ブロック */}
+                <div style={{
+                  width: '72px', flexShrink: 0,
+                  backgroundColor: '#1a2744', color: '#fff',
+                  display: 'flex', flexDirection: 'column',
+                  alignItems: 'center', justifyContent: 'center',
+                  padding: '8px 4px',
+                }}>
+                  <div style={{ fontSize: '14px', fontWeight: 800, lineHeight: 1.2 }}>
+                    {datePart.split('（')[0]}
                   </div>
-                  {mission && (
+                  <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.6)', marginTop: '2px' }}>
+                    ({datePart.match(/（(.+)）/)?.[1] || ''})
+                  </div>
+                  {timePart && timePart !== '時刻未定' && (
                     <div style={{
-                      fontSize: '12px', color: '#555', marginBottom: '4px',
-                      overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                      fontSize: '12px', fontFamily: 'monospace', fontWeight: 700,
+                      color: 'rgba(255,255,255,0.9)', marginTop: '4px',
                     }}>
-                      {mission}
+                      {timePart}
                     </div>
                   )}
-                  <div style={{ fontSize: '11px', color: '#999', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                    <span>
-                      <span style={{ fontWeight: 700, color: '#666' }}>{datePart}</span>
-                      {timePart && <span style={{ marginLeft: '4px' }}>{timePart}</span>}
-                    </span>
-                    {pad && <span>{flag} {pad}</span>}
+                </div>
+                {/* 右: 情報 */}
+                <div style={{ flex: 1, minWidth: 0, padding: '10px 12px', display: 'flex', gap: '10px' }}>
+                  <img
+                    src={getRocketImage(l.rocket)}
+                    alt={l.rocket}
+                    style={{
+                      width: '52px', height: '52px', objectFit: 'cover',
+                      borderRadius: '6px', flexShrink: 0,
+                    }}
+                  />
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '3px' }}>
+                      <span style={{ fontSize: '14px', fontWeight: 700, color: '#1a2744' }}>
+                        {l.rocket}
+                      </span>
+                      <span style={{
+                        display: 'inline-block', padding: '1px 7px', borderRadius: '10px',
+                        fontSize: '10px', fontWeight: 600,
+                        color: si.color, backgroundColor: si.bg, flexShrink: 0,
+                      }}>
+                        {si.label}
+                      </span>
+                    </div>
+                    {mission && (
+                      <div style={{
+                        fontSize: '12px', color: '#555', marginBottom: '3px',
+                        overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                      }}>
+                        {mission}
+                      </div>
+                    )}
+                    {pad && (
+                      <div style={{ fontSize: '11px', color: '#999' }}>
+                        {flag} {pad}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -410,6 +436,11 @@ export default function SchedulePage() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             {recent.map((r, i) => {
               const isSuccess = r.result === 'success'
+              const rDate = r.date ? (() => {
+                const [y, m, d] = r.date.split('-').map(Number)
+                const dow = WEEKDAYS[new Date(y, m - 1, d).getDay()]
+                return `${m}/${d}（${dow}）`
+              })() : ''
               return (
                 <div key={r.id || i} style={{
                   display: 'flex', alignItems: 'center', gap: '10px',
@@ -424,10 +455,17 @@ export default function SchedulePage() {
                   />
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ fontSize: '13px', fontWeight: 700, color: '#111' }}>
-                      {isSuccess ? '✅' : '❌'} {r.rocket} / {r.mission || 'Unknown'}
+                      {isSuccess ? '✅' : '❌'} {r.rocket}
+                      {r.mission && r.mission !== 'Unknown Payload' && (
+                        <span style={{ fontWeight: 400, color: '#555' }}> / {r.mission}</span>
+                      )}
                     </div>
                     <div style={{ fontSize: '11px', color: '#888', marginTop: '2px' }}>
-                      {r.date} — {r.resultLabel || (isSuccess ? '成功' : '失敗')}
+                      <span style={{ fontWeight: 600, color: '#666' }}>{rDate}</span>
+                      <span style={{ margin: '0 4px' }}>—</span>
+                      <span style={{ color: isSuccess ? '#2e7d32' : '#c62828', fontWeight: 600 }}>
+                        {r.resultLabel || (isSuccess ? '成功' : '失敗')}
+                      </span>
                     </div>
                   </div>
                 </div>

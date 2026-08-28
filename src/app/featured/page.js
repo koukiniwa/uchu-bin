@@ -236,31 +236,48 @@ export default function FeaturedPage() {
                     filter: 'brightness(0.6)',
                   }}
                 />
+                {/* 左上: 日付バッジ */}
+                <div style={{
+                  position: 'absolute', top: '12px', left: '12px',
+                  backgroundColor: 'rgba(0,0,0,0.7)', borderRadius: '6px',
+                  padding: '6px 10px', textAlign: 'center',
+                  backdropFilter: 'blur(4px)',
+                }}>
+                  <div style={{ fontSize: '13px', fontWeight: 800, color: '#fff', lineHeight: 1.2 }}>
+                    {datePart.replace(/（.+）/, '')}
+                  </div>
+                  <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.6)', marginTop: '1px' }}>
+                    {datePart.match(/（(.+)）/)?.[1] || ''}
+                    {timePart && timePart !== '時刻未定' ? ` ${timePart}` : ''}
+                  </div>
+                </div>
+                {/* 右上: ステータス */}
+                <div style={{
+                  position: 'absolute', top: '12px', right: '12px',
+                }}>
+                  <span style={{
+                    display: 'inline-block', padding: '4px 12px', borderRadius: '10px',
+                    fontSize: '11px', fontWeight: 600,
+                    color: '#fff',
+                    backgroundColor: f.status === 'Go' ? 'rgba(46,125,50,0.85)'
+                      : f.status === 'TBC' ? 'rgba(230,81,0,0.85)'
+                      : 'rgba(255,255,255,0.25)',
+                    backdropFilter: 'blur(4px)',
+                  }}>
+                    {statusLabel}
+                  </span>
+                </div>
+                {/* 下部: ロケット名 */}
                 <div style={{
                   position: 'absolute', bottom: 0, left: 0, right: 0,
                   padding: '24px 24px 20px',
                   background: 'linear-gradient(transparent, rgba(0,0,0,0.75))',
                 }}>
                   <div style={{
-                    display: 'flex', alignItems: 'center', gap: '10px',
-                    marginBottom: '4px',
+                    fontSize: '22px', fontWeight: 800, color: '#fff',
+                    lineHeight: 1.3, marginBottom: '4px',
                   }}>
-                    <span style={{
-                      fontSize: '22px', fontWeight: 800, color: '#fff',
-                      lineHeight: 1.3,
-                    }}>
-                      {f.rocket}
-                    </span>
-                    <span style={{
-                      display: 'inline-block', padding: '2px 10px', borderRadius: '10px',
-                      fontSize: '11px', fontWeight: 600,
-                      color: '#fff',
-                      backgroundColor: f.status === 'Go' ? 'rgba(46,125,50,0.8)'
-                        : f.status === 'TBC' ? 'rgba(230,81,0,0.8)'
-                        : 'rgba(255,255,255,0.2)',
-                    }}>
-                      {statusLabel}
-                    </span>
+                    {f.rocket}
                   </div>
                   {mission && (
                     <div style={{ fontSize: '14px', color: 'rgba(255,255,255,0.75)' }}>
@@ -298,13 +315,6 @@ export default function FeaturedPage() {
                   display: 'grid',
                   gap: '8px', fontSize: '13px', color: '#555',
                 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <span style={{ color: '#999', fontSize: '14px', width: '20px', textAlign: 'center' }}>📅</span>
-                    <span>
-                      <span style={{ fontWeight: 700, color: '#333' }}>{datePart}</span>
-                      {timePart && <span style={{ marginLeft: '6px', color: '#777' }}>{timePart}</span>}
-                    </span>
-                  </div>
                   {pad && (
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                       <span style={{ color: '#999', fontSize: '14px', width: '20px', textAlign: 'center' }}>📍</span>
