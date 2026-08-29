@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-29T12:24:18.786Z",
+  "updated": "2026-08-29T16:59:40.437Z",
   "launches": [
     {
       "id": "521f3a1c-f977-4306-9b7f-495858719adf",
@@ -64,12 +64,12 @@
       "mission": "GISAT-1A (EOS-05)",
       "date": "2026-09-03",
       "month": 9,
-      "time": null,
-      "tentative": true,
+      "time": "21:25",
+      "tentative": false,
       "provider": "Indian Space Research Organization",
       "country": "IN",
       "pad": "Satish Dhawan Space Centre, India",
-      "status": "TBC"
+      "status": "Go"
     },
     {
       "id": "1b23eb18-e06e-4058-9b42-e95ca0980511",
