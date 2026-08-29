@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-28T23:25:37.867Z",
+  "updated": "2026-08-29T12:24:18.786Z",
   "launches": [
     {
       "id": "521f3a1c-f977-4306-9b7f-495858719adf",
@@ -8,7 +8,7 @@
       "mission": "Nancy Grace Roman Space Telescope",
       "date": "2026-08-30",
       "month": 8,
-      "time": "11:26",
+      "time": "11:25",
       "tentative": false,
       "provider": "SpaceX",
       "country": "US",
@@ -290,16 +290,6 @@
       "date": "2026-08-27",
       "country": "FR",
       "provider": "Arianespace",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "95653d52-bb77-4860-a815-dd7141778d17",
-      "rocket": "Falcon 9",
-      "mission": "Starlink Group 15-22",
-      "date": "2026-08-26",
-      "country": "",
-      "provider": "SpaceX",
       "result": "success",
       "resultLabel": "成功"
     }
