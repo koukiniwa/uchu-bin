@@ -1,20 +1,6 @@
 {
-  "updated": "2026-08-30T20:48:19.671Z",
+  "updated": "2026-08-30T23:14:16.493Z",
   "launches": [
-    {
-      "id": "9f5a4cb6-63f9-47e1-9512-b468bae2a8e6",
-      "name": "Electron | Owl Around The World (StriX Launch 11)",
-      "rocket": "Electron",
-      "mission": "Owl Around The World (StriX Launch 11)",
-      "date": "2026-08-31",
-      "month": 8,
-      "time": "12:05",
-      "tentative": false,
-      "provider": "Rocket Lab",
-      "country": "NZ",
-      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
-      "status": "Go"
-    },
     {
       "id": "a927b2f9-f9a5-4196-9abb-2e275e4a6b96",
       "name": "Pallas-1 | Demo Flight",
@@ -27,6 +13,20 @@
       "provider": "Galactic Energy",
       "country": "CN",
       "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
+      "status": "Go"
+    },
+    {
+      "id": "9f5a4cb6-63f9-47e1-9512-b468bae2a8e6",
+      "name": "Electron | Owl Around The World (StriX Launch 11)",
+      "rocket": "Electron",
+      "mission": "Owl Around The World (StriX Launch 11)",
+      "date": "2026-09-01",
+      "month": 9,
+      "time": "11:30",
+      "tentative": false,
+      "provider": "Rocket Lab",
+      "country": "NZ",
+      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
       "status": "Go"
     },
     {
