@@ -1,20 +1,6 @@
 {
-  "updated": "2026-08-30T07:57:10.412Z",
+  "updated": "2026-08-30T13:41:33.756Z",
   "launches": [
-    {
-      "id": "521f3a1c-f977-4306-9b7f-495858719adf",
-      "name": "Falcon Heavy | Nancy Grace Roman Space Telescope",
-      "rocket": "Falcon Heavy",
-      "mission": "Nancy Grace Roman Space Telescope",
-      "date": "2026-08-30",
-      "month": 8,
-      "time": "11:25",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "Kennedy Space Center, FL, USA",
-      "status": "Go"
-    },
     {
       "id": "9f5a4cb6-63f9-47e1-9512-b468bae2a8e6",
       "name": "Electron | Owl Around The World (StriX Launch 11)",
@@ -112,6 +98,20 @@
       "country": "RU",
       "pad": "Baikonur Cosmodrome, Republic of Kazakhstan",
       "status": "Go"
+    },
+    {
+      "id": "63063b9d-ade9-4448-8717-6f910aa81188",
+      "name": "Long March 8A | Unknown Payload",
+      "rocket": "Long March 8A",
+      "mission": "Unknown Payload",
+      "date": "2026-09-11",
+      "month": 9,
+      "time": null,
+      "tentative": true,
+      "provider": "China Aerospace Science and Technology Corporation",
+      "country": "CN",
+      "pad": "Wenchang Space Launch Site, People's Republic of China",
+      "status": "TBC"
     },
     {
       "id": "8effc13a-c658-4d2e-9f15-8dba4d7fe2dd",
@@ -283,6 +283,16 @@
     }
   ],
   "recent": [
+    {
+      "id": "521f3a1c-f977-4306-9b7f-495858719adf",
+      "rocket": "Falcon Heavy",
+      "mission": "Nancy Grace Roman Space Telescope",
+      "date": "2026-08-30",
+      "country": "US",
+      "provider": "SpaceX",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "a57aed97-b94f-42e1-905e-9421dbd96ac8",
       "rocket": "Ariane 6",
