@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-31T11:23:06.658Z",
+  "updated": "2026-08-31T18:51:39.135Z",
   "launches": [
     {
       "id": "a927b2f9-f9a5-4196-9abb-2e275e4a6b96",
@@ -22,7 +22,7 @@
       "mission": "Owl Around The World (StriX Launch 11)",
       "date": "2026-09-01",
       "month": 9,
-      "time": "11:30",
+      "time": "11:38",
       "tentative": false,
       "provider": "Rocket Lab",
       "country": "NZ",
