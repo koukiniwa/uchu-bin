@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-01T09:13:10.542Z",
+  "updated": "2026-09-01T18:10:59.479Z",
   "launches": [
     {
       "id": "63181269-b125-4c36-951c-c9bd9bbc4b55",
@@ -22,7 +22,7 @@
       "mission": "Owl Around The World (StriX Launch 11)",
       "date": "2026-09-02",
       "month": 9,
-      "time": "11:00",
+      "time": "11:11",
       "tentative": false,
       "provider": "Rocket Lab",
       "country": "NZ",
@@ -86,6 +86,20 @@
       "status": "Go"
     },
     {
+      "id": "3e0456da-14b1-4ac3-b59e-35fefb1d1530",
+      "name": "Falcon 9 Block 5 | USSF-xxx (\"R-2\")",
+      "rocket": "Falcon 9",
+      "mission": "USSF-xxx (\"R-2\")",
+      "date": "2026-09-10",
+      "month": 9,
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "",
+      "pad": "Vandenberg SFB, CA, USA",
+      "status": "TBC"
+    },
+    {
       "id": "63063b9d-ade9-4448-8717-6f910aa81188",
       "name": "Long March 8A | Unknown Payload",
       "rocket": "Long March 8A",
@@ -125,20 +139,6 @@
       "provider": "Rocket Lab",
       "country": "NZ",
       "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
-      "status": "TBD"
-    },
-    {
-      "id": "18441371-8b2e-457c-afb5-1ec1b11ab630",
-      "name": "Falcon 9 Block 5 | Crew-13",
-      "rocket": "Falcon 9",
-      "mission": "Crew-13",
-      "date": "2026-09-30",
-      "month": 9,
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "Cape Canaveral SFS, FL, USA",
       "status": "TBD"
     },
     {
