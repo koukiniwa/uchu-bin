@@ -1,11 +1,11 @@
 {
-  "updated": "2026-08-31T23:07:21.386Z",
+  "updated": "2026-09-01T03:51:53.363Z",
   "featured": [
     {
       "id": "a927b2f9-f9a5-4196-9abb-2e275e4a6b96",
       "rocket": "Pallas-1",
       "mission": "Demo Flight",
-      "description": "First test launch of Galactic Energy’s Pallas-1 rocket.",
+      "description": "First test launch of Galactic Energy’s Pallas-1 rocket, with a dummy payload on board.",
       "highlight": "中国の民間宇宙企業「ギャラクティック・エナジー」が開発した新型ロケット「パラス1」の初試験飛行です。中国では国営企業だけでなく民間宇宙企業の台頭が著しく、この打ち上げはその最前線を象徴する一幕です。成否を問わず、民間主導による宇宙アクセスの拡大という世界的な潮流における中国の存在感を示す注目の一戦です。",
       "date": "2026-09-01",
       "time": "02:00",
@@ -13,8 +13,8 @@
       "provider": "Galactic Energy",
       "country": "CN",
       "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
-      "status": "Go",
-      "orbit": "Unknown"
+      "status": "Success",
+      "orbit": "Sun-Synchronous Orbit"
     },
     {
       "id": "1b23eb18-e06e-4058-9b42-e95ca0980511",

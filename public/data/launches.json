@@ -1,20 +1,6 @@
 {
-  "updated": "2026-08-31T23:07:12.836Z",
+  "updated": "2026-09-01T03:51:43.594Z",
   "launches": [
-    {
-      "id": "a927b2f9-f9a5-4196-9abb-2e275e4a6b96",
-      "name": "Pallas-1 | Demo Flight",
-      "rocket": "Pallas-1",
-      "mission": "Demo Flight",
-      "date": "2026-09-01",
-      "month": 9,
-      "time": "02:00",
-      "tentative": false,
-      "provider": "Galactic Energy",
-      "country": "CN",
-      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
-      "status": "Go"
-    },
     {
       "id": "63181269-b125-4c36-951c-c9bd9bbc4b55",
       "name": "Falcon 9 Block 5 | Starlink Group 15-23",
@@ -280,9 +266,33 @@
       "country": "US",
       "pad": "Cape Canaveral SFS, FL, USA",
       "status": "TBD"
+    },
+    {
+      "id": "bff2fc91-eddd-4dfc-af26-ac0674cfab4d",
+      "name": "Soyuz 2.1a/Fregat-M | MKA Kinosputnik, KOEN and others",
+      "rocket": "Soyuz 2",
+      "mission": "MKA Kinosputnik, KOEN and others",
+      "date": "2026-11-19",
+      "month": 11,
+      "time": null,
+      "tentative": true,
+      "provider": "Russian Federal Space Agency (ROSCOSMOS)",
+      "country": "RU",
+      "pad": "Vostochny Cosmodrome, Siberia, Russian Federation",
+      "status": "TBD"
     }
   ],
   "recent": [
+    {
+      "id": "a927b2f9-f9a5-4196-9abb-2e275e4a6b96",
+      "rocket": "Pallas-1",
+      "mission": "Demo Flight",
+      "date": "2026-09-01",
+      "country": "CN",
+      "provider": "Galactic Energy",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "521f3a1c-f977-4306-9b7f-495858719adf",
       "rocket": "Falcon Heavy",
