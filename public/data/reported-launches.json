@@ -275,6 +275,12 @@
       "name": "Falcon 9 Block 5 | Starlink Group 15-23",
       "status": "Launch Successful",
       "date": "2026-09-02T11:01:28.224Z"
+    },
+    {
+      "id": "9f5a4cb6-63f9-47e1-9512-b468bae2a8e6",
+      "name": "Electron | Owl Around The World (StriX Launch 11)",
+      "status": "Launch in Flight",
+      "date": "2026-09-02T15:14:03.605Z"
     }
   ]
 }
