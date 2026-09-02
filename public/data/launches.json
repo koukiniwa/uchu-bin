@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-02T03:11:24.435Z",
+  "updated": "2026-09-02T08:27:20.367Z",
   "launches": [
     {
       "id": "63181269-b125-4c36-951c-c9bd9bbc4b55",
@@ -8,7 +8,7 @@
       "mission": "Starlink Group 15-23",
       "date": "2026-09-02",
       "month": 9,
-      "time": "08:18",
+      "time": "08:42",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
@@ -25,7 +25,7 @@
       "time": "11:11",
       "tentative": false,
       "provider": "Rocket Lab",
-      "country": "NZ",
+      "country": "US",
       "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
       "status": "Go"
     },
