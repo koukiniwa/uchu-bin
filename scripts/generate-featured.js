@@ -113,12 +113,22 @@ ${launchList}`
 async function main() {
   console.log('Fetching upcoming launches for featured page...')
 
-  const res = await fetch(API_URL, {
-    headers: { 'User-Agent': 'uchu-bin/1.0 (space news site)' },
-    signal: AbortSignal.timeout(15000),
-  })
-  if (!res.ok) throw new Error(`API error: ${res.status}`)
-  const data = await res.json()
+  let data
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      const res = await fetch(API_URL, {
+        headers: { 'User-Agent': 'uchu-bin/1.0 (space news site)' },
+        signal: AbortSignal.timeout(30000),
+      })
+      if (!res.ok) throw new Error(`API error: ${res.status}`)
+      data = await res.json()
+      break
+    } catch (e) {
+      console.error(`Attempt ${attempt}/3 failed: ${e.message}`)
+      if (attempt === 3) throw e
+      await new Promise(r => setTimeout(r, 3000))
+    }
+  }
 
   // 同一ロケットの重複を防止（最も直近の1件だけ残す）
   const seenRockets = new Set()

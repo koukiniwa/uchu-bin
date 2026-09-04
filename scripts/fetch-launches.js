@@ -58,15 +58,24 @@ function shortRocketName(name) {
 
 async function main() {
   console.log('Fetching upcoming launches...')
+  async function fetchWithRetry(url, retries = 3) {
+    for (let attempt = 1; attempt <= retries; attempt++) {
+      try {
+        const res = await fetch(url, {
+          headers: { 'User-Agent': 'uchu-bin/1.0 (space news site)' },
+          signal: AbortSignal.timeout(30000),
+        })
+        return res
+      } catch (e) {
+        console.error(`Attempt ${attempt}/${retries} failed for ${url.slice(0, 80)}: ${e.message}`)
+        if (attempt === retries) throw e
+        await new Promise(r => setTimeout(r, 3000))
+      }
+    }
+  }
   const [upcomingRes, recentRes] = await Promise.all([
-    fetch(API_URL, {
-      headers: { 'User-Agent': 'uchu-bin/1.0 (space news site)' },
-      signal: AbortSignal.timeout(15000),
-    }),
-    fetch('https://ll.thespacedevs.com/2.3.0/launches/previous/?limit=10&mode=normal', {
-      headers: { 'User-Agent': 'uchu-bin/1.0 (space news site)' },
-      signal: AbortSignal.timeout(15000),
-    }),
+    fetchWithRetry(API_URL),
+    fetchWithRetry('https://ll.thespacedevs.com/2.3.0/launches/previous/?limit=10&mode=normal'),
   ])
   if (!upcomingRes.ok) throw new Error(`API error: ${upcomingRes.status}`)
   const data = await upcomingRes.json()
