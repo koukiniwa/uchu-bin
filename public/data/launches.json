@@ -1,12 +1,12 @@
 {
-  "updated": "2026-09-04T10:48:59.482Z",
+  "updated": "2026-09-04T14:49:50.981Z",
   "launches": [
     {
       "id": "1b23eb18-e06e-4058-9b42-e95ca0980511",
       "name": "Spectrum | Onward and Upward",
       "rocket": "Spectrum",
       "mission": "Onward and Upward",
-      "date": "2026-09-04",
+      "date": "2026-09-05",
       "month": 9,
       "time": null,
       "tentative": true,
