@@ -5,28 +5,52 @@
   "operator": "JAXA / 三菱重工",
   "country": "JP",
   "image": "/images/library/h3_001.jpg",
+  "firstFlight": "2023-03-07",
   "status": "active",
-  "total": 6,
-  "successRate": 83.3,
-  "thisYear": 2,
-  "lastLaunch": "2026-08-11",
-  "firstFlight": "2020-01-01",
-  "description": "データ準備中",
-  "specs": {},
+  "description": "日本の次世代基幹ロケット。H-IIAの後継として開発され、打ち上げコスト半減と高い信頼性を両立。種子島宇宙センターから運用。",
+  "specs": {
+    "height": "57m",
+    "diameter": "5.2m",
+    "stages": 2,
+    "liftoffMass": "574t",
+    "payloadLEO": "-",
+    "payloadGTO": "6.5t+"
+  },
   "stats": {
-    "total": 6,
-    "success": 5,
-    "failure": 1,
-    "successRate": 83.3,
+    "total": 0,
+    "success": 0,
+    "failure": 0,
+    "successRate": 0,
     "thisYear": {
-      "total": 2,
-      "success": 2,
+      "total": 0,
+      "success": 0,
       "failure": 0
     },
     "yearlyStats": {}
   },
   "recentLaunches": [],
-  "articles": [],
-  "upcoming": [],
-  "updated": "2026-09-04T03:43:25.604Z"
+  "articles": [
+    {
+      "slug": "2026-08-11-h3-22-michibiki-7-qzs-7-launch-success",
+      "title": "H3-22、みちびき7号機打ち上げ成功——QZSSが7機体制へ",
+      "date": "2026-08-11"
+    }
+  ],
+  "upcoming": [
+    {
+      "id": "69ebbcd2-b257-4070-9ef9-21e7d1f8a883",
+      "name": "H3-24 | Martian Moon eXplorer (MMX)",
+      "rocket": "H3",
+      "mission": "Martian Moon eXplorer (MMX)",
+      "date": "2026-10-19",
+      "month": 10,
+      "time": "19:41",
+      "tentative": false,
+      "provider": "Mitsubishi Heavy Industries",
+      "country": "JP",
+      "pad": "Tanegashima Space Center, Japan",
+      "status": "Go"
+    }
+  ],
+  "updated": "2026-09-04T18:35:04.556Z"
 }

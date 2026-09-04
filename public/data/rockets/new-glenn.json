@@ -5,22 +5,25 @@
   "operator": "Blue Origin",
   "country": "US",
   "image": "/images/library/newglenn_001.jpg",
+  "firstFlight": "2025-01-13",
   "status": "active",
-  "total": 3,
-  "successRate": 66.7,
-  "thisYear": 2,
-  "lastLaunch": "2026-05-20",
-  "firstFlight": "2020-01-01",
-  "description": "データ準備中",
-  "specs": {},
+  "description": "Blue Originが開発した大型ロケット。BE-4エンジン7基で第1段を駆動し、第1段の着陸回収による再使用を目指す。",
+  "specs": {
+    "height": "98m",
+    "diameter": "7m",
+    "stages": 2,
+    "liftoffMass": "~590t",
+    "payloadLEO": "45t",
+    "payloadGTO": "13t"
+  },
   "stats": {
-    "total": 3,
-    "success": 2,
-    "failure": 1,
-    "successRate": 66.7,
+    "total": 0,
+    "success": 0,
+    "failure": 0,
+    "successRate": 0,
     "thisYear": {
-      "total": 2,
-      "success": 2,
+      "total": 0,
+      "success": 0,
       "failure": 0
     },
     "yearlyStats": {}
@@ -28,5 +31,5 @@
   "recentLaunches": [],
   "articles": [],
   "upcoming": [],
-  "updated": "2026-09-04T03:43:25.621Z"
+  "updated": "2026-09-04T18:35:04.565Z"
 }

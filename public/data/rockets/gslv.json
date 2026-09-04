@@ -5,28 +5,37 @@
   "operator": "ISRO",
   "country": "IN",
   "image": "/images/library/gslv_001.jpg",
+  "firstFlight": "2001-04-18",
   "status": "active",
-  "total": 22,
-  "successRate": 81.8,
-  "thisYear": 2,
-  "lastLaunch": "2026-09-04",
-  "firstFlight": "2020-01-01",
-  "description": "データ準備中",
-  "specs": {},
+  "description": "インドの大型ロケット。LVM3（旧GSLV Mk III）はチャンドラヤーン3号を月面に送り届けた実績を持つ。",
+  "specs": {
+    "height": "43m",
+    "diameter": "4m",
+    "stages": 3,
+    "liftoffMass": "640t",
+    "payloadLEO": "10t",
+    "payloadGTO": "4t"
+  },
   "stats": {
-    "total": 22,
-    "success": 18,
-    "failure": 4,
-    "successRate": 81.8,
+    "total": 0,
+    "success": 0,
+    "failure": 0,
+    "successRate": 0,
     "thisYear": {
-      "total": 2,
-      "success": 2,
+      "total": 0,
+      "success": 0,
       "failure": 0
     },
     "yearlyStats": {}
   },
   "recentLaunches": [],
-  "articles": [],
+  "articles": [
+    {
+      "slug": "2026-09-04-gslv-mk2-gisat-1a-eos-05-launch-success-2026",
+      "title": "GSLV Mk II、GISAT-1A打ち上げ成功——2021年の失敗から3年",
+      "date": "2026-09-04"
+    }
+  ],
   "upcoming": [],
-  "updated": "2026-09-04T03:43:25.626Z"
+  "updated": "2026-09-04T18:35:04.567Z"
 }

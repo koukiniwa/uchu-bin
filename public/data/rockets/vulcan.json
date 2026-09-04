@@ -5,28 +5,46 @@
   "operator": "ULA",
   "country": "US",
   "image": "/images/library/vulcan_001.jpg",
+  "firstFlight": "2024-01-08",
   "status": "active",
-  "total": 6,
-  "successRate": 100,
-  "thisYear": 3,
-  "lastLaunch": "2026-06-10",
-  "firstFlight": "2020-01-01",
-  "description": "データ準備中",
-  "specs": {},
+  "description": "ULAが開発したAtlas VとDelta IVの後継ロケット。BE-4エンジンを採用し、米国の国家安全保障ミッションの主力を担う。",
+  "specs": {
+    "height": "61.6m",
+    "diameter": "5.4m",
+    "stages": 2,
+    "liftoffMass": "546t",
+    "payloadLEO": "27.2t",
+    "payloadGTO": "14.4t"
+  },
   "stats": {
-    "total": 6,
-    "success": 6,
+    "total": 0,
+    "success": 0,
     "failure": 0,
-    "successRate": 100,
+    "successRate": 0,
     "thisYear": {
-      "total": 3,
-      "success": 3,
+      "total": 0,
+      "success": 0,
       "failure": 0
     },
     "yearlyStats": {}
   },
   "recentLaunches": [],
   "articles": [],
-  "upcoming": [],
-  "updated": "2026-09-04T03:43:25.617Z"
+  "upcoming": [
+    {
+      "id": "ef9850ad-1096-425b-9d27-f7bbd186e61a",
+      "name": "Vulcan VC6L | Amazon Leo (LV-01)",
+      "rocket": "Vulcan VC6L",
+      "mission": "Amazon Leo (LV-01)",
+      "date": "2026-09-30",
+      "month": 9,
+      "time": null,
+      "tentative": true,
+      "provider": "United Launch Alliance",
+      "country": "",
+      "pad": "Cape Canaveral SFS, FL, USA",
+      "status": "TBD"
+    }
+  ],
+  "updated": "2026-09-04T18:35:04.564Z"
 }

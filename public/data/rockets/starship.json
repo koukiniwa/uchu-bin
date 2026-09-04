@@ -2,7 +2,6 @@
   "slug": "starship",
   "nameJa": "スターシップ",
   "nameEn": "Starship",
-  "apiName": "Starship",
   "operator": "SpaceX",
   "country": "US",
   "image": "/images/library/starship_001.jpg",
@@ -18,121 +17,25 @@
     "payloadGTO": "-"
   },
   "stats": {
-    "total": 500,
-    "success": 484,
-    "failure": 16,
-    "successRate": 96.8,
+    "total": 0,
+    "success": 0,
+    "failure": 0,
+    "successRate": 0,
     "thisYear": {
-      "total": 216,
-      "success": 209,
-      "failure": 7
+      "total": 0,
+      "success": 0,
+      "failure": 0
     },
-    "yearlyStats": {
-      "2025": {
-        "total": 284,
-        "success": 275,
-        "failure": 9
-      },
-      "2026": {
-        "total": 216,
-        "success": 209,
-        "failure": 7
-      }
-    }
+    "yearlyStats": {}
   },
-  "recentLaunches": [
+  "recentLaunches": [],
+  "articles": [
     {
-      "date": "2026-09-03",
-      "mission": "GISAT-1A (EOS-05)",
-      "status": "success",
-      "pad": ""
-    },
-    {
-      "date": "2026-09-02",
-      "mission": "Owl Around The World (StriX Launch 11)",
-      "status": "success",
-      "pad": ""
-    },
-    {
-      "date": "2026-09-02",
-      "mission": "Starlink Group 15-23",
-      "status": "success",
-      "pad": ""
-    },
-    {
-      "date": "2026-09-01",
-      "mission": "Demo Flight",
-      "status": "success",
-      "pad": ""
-    },
-    {
-      "date": "2026-08-30",
-      "mission": "Nancy Grace Roman Space Telescope",
-      "status": "success",
-      "pad": ""
-    },
-    {
-      "date": "2026-08-27",
-      "mission": "MTG-I2",
-      "status": "success",
-      "pad": ""
-    },
-    {
-      "date": "2026-08-26",
-      "mission": "Starlink Group 15-22",
-      "status": "success",
-      "pad": ""
-    },
-    {
-      "date": "2026-08-25",
-      "mission": "Starlink Group 10-49",
-      "status": "success",
-      "pad": ""
-    },
-    {
-      "date": "2026-08-25",
-      "mission": "7 satellites",
-      "status": "success",
-      "pad": ""
-    },
-    {
-      "date": "2026-08-24",
-      "mission": "Glonass-K1 No. 19",
-      "status": "success",
-      "pad": ""
-    },
-    {
-      "date": "2026-08-22",
-      "mission": "Starlink Group 15-20",
-      "status": "success",
-      "pad": ""
-    },
-    {
-      "date": "2026-08-21",
-      "mission": "Starlink Group 10-39",
-      "status": "success",
-      "pad": ""
-    },
-    {
-      "date": "2026-08-20",
-      "mission": "The Lightning God Defends (iQPS Launch 8)",
-      "status": "success",
-      "pad": ""
-    },
-    {
-      "date": "2026-08-19",
-      "mission": "Starlink Group 17-50",
-      "status": "success",
-      "pad": ""
-    },
-    {
-      "date": "2026-08-18",
-      "mission": "Honghu-03",
-      "status": "success",
-      "pad": ""
+      "slug": "2026-07-25-starship-flight-13-launch-success-starlink-v3",
+      "title": "Starship Flight 13打ち上げ成功、初めて衛星を軌道投入",
+      "date": "2026-07-25"
     }
   ],
-  "articles": [],
   "upcoming": [
     {
       "id": "7d1afb26-6f9c-429b-9ccf-29012fd1e519",
@@ -147,21 +50,7 @@
       "country": "US",
       "pad": "SpaceX Starbase, TX, USA",
       "status": "TBD"
-    },
-    {
-      "id": "69ebbcd2-b257-4070-9ef9-21e7d1f8a883",
-      "name": "H3-24 | Martian Moon eXplorer (MMX)",
-      "rocket": "H3",
-      "mission": "Martian Moon eXplorer (MMX)",
-      "date": "2026-10-19",
-      "month": 10,
-      "time": "19:41",
-      "tentative": false,
-      "provider": "Mitsubishi Heavy Industries",
-      "country": "JP",
-      "pad": "Tanegashima Space Center, Japan",
-      "status": "Go"
     }
   ],
-  "updated": "2026-09-04T03:38:18.155Z"
+  "updated": "2026-09-04T18:35:04.553Z"
 }

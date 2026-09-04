@@ -5,28 +5,46 @@
   "operator": "Arianespace",
   "country": "EU",
   "image": "/images/library/vegac_001.jpg",
+  "firstFlight": "2012-02-13",
   "status": "active",
-  "total": 25,
-  "successRate": 88,
-  "thisYear": 2,
-  "lastLaunch": "2026-07-20",
-  "firstFlight": "2020-01-01",
-  "description": "データ準備中",
-  "specs": {},
+  "description": "欧州の小型ロケット。Vega-Cは改良型で、ペイロード能力を強化。小中型衛星の打ち上げに使用される。",
+  "specs": {
+    "height": "35m",
+    "diameter": "3.4m",
+    "stages": 4,
+    "liftoffMass": "210t",
+    "payloadLEO": "2.3t",
+    "payloadGTO": "-"
+  },
   "stats": {
-    "total": 25,
-    "success": 22,
-    "failure": 3,
-    "successRate": 88,
+    "total": 0,
+    "success": 0,
+    "failure": 0,
+    "successRate": 0,
     "thisYear": {
-      "total": 2,
-      "success": 2,
+      "total": 0,
+      "success": 0,
       "failure": 0
     },
     "yearlyStats": {}
   },
   "recentLaunches": [],
   "articles": [],
-  "upcoming": [],
-  "updated": "2026-09-04T03:43:25.615Z"
+  "upcoming": [
+    {
+      "id": "8effc13a-c658-4d2e-9f15-8dba4d7fe2dd",
+      "name": "Vega-C | Sentinel-3C & FLEX",
+      "rocket": "Vega-C",
+      "mission": "Sentinel-3C & FLEX",
+      "date": "2026-09-15",
+      "month": 9,
+      "time": "01:21",
+      "tentative": false,
+      "provider": "Avio S.p.A",
+      "country": "FR",
+      "pad": "Guiana Space Centre, French Guiana",
+      "status": "Go"
+    }
+  ],
+  "updated": "2026-09-04T18:35:04.562Z"
 }

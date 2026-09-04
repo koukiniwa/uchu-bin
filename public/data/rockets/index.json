@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-04T03:43:25.575Z",
+  "updated": "2026-09-04T18:35:04.570Z",
   "rockets": [
     {
       "slug": "falcon-9",
@@ -9,10 +9,10 @@
       "country": "US",
       "image": "/images/library/falcon9_001.jpg",
       "status": "active",
-      "total": 430,
-      "successRate": 99.3,
-      "thisYear": 62,
-      "lastLaunch": "2026-09-03"
+      "total": 0,
+      "successRate": 0,
+      "thisYear": 0,
+      "lastLaunch": null
     },
     {
       "slug": "falcon-heavy",
@@ -22,10 +22,10 @@
       "country": "US",
       "image": "/images/library/falconheavy_001.jpg",
       "status": "active",
-      "total": 15,
-      "successRate": 100,
-      "thisYear": 3,
-      "lastLaunch": "2026-08-30"
+      "total": 0,
+      "successRate": 0,
+      "thisYear": 0,
+      "lastLaunch": null
     },
     {
       "slug": "starship",
@@ -35,10 +35,10 @@
       "country": "US",
       "image": "/images/library/starship_001.jpg",
       "status": "development",
-      "total": 8,
-      "successRate": 62.5,
-      "thisYear": 3,
-      "lastLaunch": "2026-07-15"
+      "total": 0,
+      "successRate": 0,
+      "thisYear": 0,
+      "lastLaunch": null
     },
     {
       "slug": "electron",
@@ -48,10 +48,10 @@
       "country": "NZ",
       "image": "/images/library/electron_001.jpg",
       "status": "active",
-      "total": 55,
-      "successRate": 94.5,
-      "thisYear": 9,
-      "lastLaunch": "2026-09-02"
+      "total": 0,
+      "successRate": 0,
+      "thisYear": 0,
+      "lastLaunch": null
     },
     {
       "slug": "h3",
@@ -61,10 +61,10 @@
       "country": "JP",
       "image": "/images/library/h3_001.jpg",
       "status": "active",
-      "total": 6,
-      "successRate": 83.3,
-      "thisYear": 2,
-      "lastLaunch": "2026-08-11"
+      "total": 0,
+      "successRate": 0,
+      "thisYear": 0,
+      "lastLaunch": null
     },
     {
       "slug": "ariane-6",
@@ -74,10 +74,10 @@
       "country": "EU",
       "image": "/images/library/ariane6_001.jpg",
       "status": "active",
-      "total": 14,
-      "successRate": 100,
-      "thisYear": 6,
-      "lastLaunch": "2026-08-27"
+      "total": 0,
+      "successRate": 0,
+      "thisYear": 0,
+      "lastLaunch": null
     },
     {
       "slug": "soyuz",
@@ -87,10 +87,10 @@
       "country": "RU",
       "image": "/images/library/soyuz_001.jpg",
       "status": "active",
-      "total": 1000,
-      "successRate": 97.2,
-      "thisYear": 8,
-      "lastLaunch": "2026-08-24"
+      "total": 0,
+      "successRate": 0,
+      "thisYear": 0,
+      "lastLaunch": null
     },
     {
       "slug": "long-march",
@@ -100,10 +100,10 @@
       "country": "CN",
       "image": "/images/library/longmarch5_001.jpg",
       "status": "active",
-      "total": 520,
-      "successRate": 96.5,
-      "thisYear": 38,
-      "lastLaunch": "2026-08-25"
+      "total": 0,
+      "successRate": 0,
+      "thisYear": 0,
+      "lastLaunch": null
     },
     {
       "slug": "vega",
@@ -113,10 +113,10 @@
       "country": "EU",
       "image": "/images/library/vegac_001.jpg",
       "status": "active",
-      "total": 25,
-      "successRate": 88,
-      "thisYear": 2,
-      "lastLaunch": "2026-07-20"
+      "total": 0,
+      "successRate": 0,
+      "thisYear": 0,
+      "lastLaunch": null
     },
     {
       "slug": "vulcan",
@@ -126,10 +126,10 @@
       "country": "US",
       "image": "/images/library/vulcan_001.jpg",
       "status": "active",
-      "total": 6,
-      "successRate": 100,
-      "thisYear": 3,
-      "lastLaunch": "2026-06-10"
+      "total": 0,
+      "successRate": 0,
+      "thisYear": 0,
+      "lastLaunch": null
     },
     {
       "slug": "new-glenn",
@@ -139,10 +139,10 @@
       "country": "US",
       "image": "/images/library/newglenn_001.jpg",
       "status": "active",
-      "total": 3,
-      "successRate": 66.7,
-      "thisYear": 2,
-      "lastLaunch": "2026-05-20"
+      "total": 0,
+      "successRate": 0,
+      "thisYear": 0,
+      "lastLaunch": null
     },
     {
       "slug": "pslv",
@@ -152,10 +152,10 @@
       "country": "IN",
       "image": "/images/library/pslv_001.jpg",
       "status": "active",
-      "total": 62,
-      "successRate": 93.5,
-      "thisYear": 3,
-      "lastLaunch": "2026-07-15"
+      "total": 0,
+      "successRate": 0,
+      "thisYear": 0,
+      "lastLaunch": null
     },
     {
       "slug": "gslv",
@@ -165,10 +165,10 @@
       "country": "IN",
       "image": "/images/library/gslv_001.jpg",
       "status": "active",
-      "total": 22,
-      "successRate": 81.8,
-      "thisYear": 2,
-      "lastLaunch": "2026-09-04"
+      "total": 0,
+      "successRate": 0,
+      "thisYear": 0,
+      "lastLaunch": null
     },
     {
       "slug": "zhuque",
@@ -178,10 +178,10 @@
       "country": "CN",
       "image": "/images/library/zhuque_001.jpg",
       "status": "active",
-      "total": 10,
-      "successRate": 80,
-      "thisYear": 4,
-      "lastLaunch": "2026-08-19"
+      "total": 0,
+      "successRate": 0,
+      "thisYear": 0,
+      "lastLaunch": null
     },
     {
       "slug": "kuaizhou",
@@ -191,10 +191,10 @@
       "country": "CN",
       "image": "/images/library/kuaizhou_001.jpg",
       "status": "active",
-      "total": 28,
-      "successRate": 85.7,
-      "thisYear": 3,
-      "lastLaunch": "2026-06-30"
+      "total": 0,
+      "successRate": 0,
+      "thisYear": 0,
+      "lastLaunch": null
     }
   ]
 }

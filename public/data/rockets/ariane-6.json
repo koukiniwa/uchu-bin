@@ -5,28 +5,66 @@
   "operator": "Arianespace",
   "country": "EU",
   "image": "/images/library/ariane6_001.jpg",
+  "firstFlight": "2024-07-09",
   "status": "active",
-  "total": 14,
-  "successRate": 100,
-  "thisYear": 6,
-  "lastLaunch": "2026-08-27",
-  "firstFlight": "2020-01-01",
-  "description": "データ準備中",
-  "specs": {},
+  "description": "欧州の次世代大型ロケット。Ariane 5の後継として開発され、62型（SRB2基）と64型（SRB4基）の2構成で運用。",
+  "specs": {
+    "height": "56-62m",
+    "diameter": "5.4m",
+    "stages": 2,
+    "liftoffMass": "530-860t",
+    "payloadLEO": "10.3-21.6t",
+    "payloadGTO": "4.5-11.5t"
+  },
   "stats": {
-    "total": 14,
-    "success": 14,
+    "total": 0,
+    "success": 0,
     "failure": 0,
-    "successRate": 100,
+    "successRate": 0,
     "thisYear": {
-      "total": 6,
-      "success": 6,
+      "total": 0,
+      "success": 0,
       "failure": 0
     },
     "yearlyStats": {}
   },
   "recentLaunches": [],
-  "articles": [],
-  "upcoming": [],
-  "updated": "2026-09-04T03:43:25.606Z"
+  "articles": [
+    {
+      "slug": "2026-08-28-ariane-62-mtg-i2-launch-success-2026",
+      "title": "Ariane 62がMTG-I2打ち上げ成功、14回目のフライト",
+      "date": "2026-08-28"
+    }
+  ],
+  "upcoming": [
+    {
+      "id": "7bdc412b-c965-4517-a131-f57a01189803",
+      "name": "Ariane 64 Block 2 | Amazon Leo (LE-04)",
+      "rocket": "Ariane 6",
+      "mission": "Amazon Leo (LE-04)",
+      "date": "2026-10-07",
+      "month": 10,
+      "time": null,
+      "tentative": true,
+      "provider": "Arianespace",
+      "country": "FR",
+      "pad": "Guiana Space Centre, French Guiana",
+      "status": "TBD"
+    },
+    {
+      "id": "22e117bf-041c-49d5-9d09-7b180036e143",
+      "name": "Ariane 62 | Metop-SG B1",
+      "rocket": "Ariane 6",
+      "mission": "Metop-SG B1",
+      "date": "2026-11-30",
+      "month": 11,
+      "time": null,
+      "tentative": true,
+      "provider": "Arianespace",
+      "country": "FR",
+      "pad": "Guiana Space Centre, French Guiana",
+      "status": "TBD"
+    }
+  ],
+  "updated": "2026-09-04T18:35:04.558Z"
 }

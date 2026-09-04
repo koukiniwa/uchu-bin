@@ -5,28 +5,37 @@
   "operator": "LandSpace",
   "country": "CN",
   "image": "/images/library/zhuque_001.jpg",
+  "firstFlight": "2023-07-12",
   "status": "active",
-  "total": 10,
-  "successRate": 80,
-  "thisYear": 4,
-  "lastLaunch": "2026-08-19",
-  "firstFlight": "2020-01-01",
-  "description": "データ準備中",
-  "specs": {},
+  "description": "LandSpace（藍箭航天）が開発した中国初のメタン燃料ロケット。朱雀2号は世界初のメタン燃料ロケットの軌道投入に成功。",
+  "specs": {
+    "height": "49.5m",
+    "diameter": "3.35m",
+    "stages": 2,
+    "liftoffMass": "219t",
+    "payloadLEO": "4t",
+    "payloadGTO": "-"
+  },
   "stats": {
-    "total": 10,
-    "success": 8,
-    "failure": 2,
-    "successRate": 80,
+    "total": 0,
+    "success": 0,
+    "failure": 0,
+    "successRate": 0,
     "thisYear": {
-      "total": 4,
-      "success": 4,
+      "total": 0,
+      "success": 0,
       "failure": 0
     },
     "yearlyStats": {}
   },
   "recentLaunches": [],
-  "articles": [],
+  "articles": [
+    {
+      "slug": "2026-08-19-zhuque-3-honghu-03-booster-recovery-success",
+      "title": "朱雀3号2回目の打ち上げ成功、中国民間初のブースター回収も達成",
+      "date": "2026-08-19"
+    }
+  ],
   "upcoming": [],
-  "updated": "2026-09-04T03:43:25.629Z"
+  "updated": "2026-09-04T18:35:04.568Z"
 }

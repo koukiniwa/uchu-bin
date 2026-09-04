@@ -5,28 +5,120 @@
   "operator": "CASC",
   "country": "CN",
   "image": "/images/library/longmarch5_001.jpg",
+  "firstFlight": "1970-04-24",
   "status": "active",
-  "total": 520,
-  "successRate": 96.5,
-  "thisYear": 38,
-  "lastLaunch": "2026-08-25",
-  "firstFlight": "2020-01-01",
-  "description": "データ準備中",
-  "specs": {},
+  "description": "中国の主力ロケットファミリー。長征2号から長征12号まで多数のバリエーションがあり、年間40回以上の打ち上げを実現。",
+  "specs": {
+    "height": "各型による",
+    "diameter": "各型による",
+    "stages": "2-3",
+    "liftoffMass": "各型による",
+    "payloadLEO": "最大25t(CZ-5)",
+    "payloadGTO": "最大14t(CZ-5)"
+  },
   "stats": {
-    "total": 520,
-    "success": 502,
-    "failure": 18,
-    "successRate": 96.5,
+    "total": 0,
+    "success": 0,
+    "failure": 0,
+    "successRate": 0,
     "thisYear": {
-      "total": 38,
-      "success": 38,
+      "total": 0,
+      "success": 0,
       "failure": 0
     },
     "yearlyStats": {}
   },
   "recentLaunches": [],
-  "articles": [],
-  "upcoming": [],
-  "updated": "2026-09-04T03:43:25.612Z"
+  "articles": [
+    {
+      "slug": "2026-08-25-long-march-6c-second-flight-7-satellites-taiyuan",
+      "title": "長征6C、太原から7衛星を太陽同期軌道へ打ち上げ成功",
+      "date": "2026-08-25"
+    },
+    {
+      "slug": "2026-08-17-long-march-2c-taiyuan-unknown-payload-2026",
+      "title": "長征2C、太原から打ち上げ成功——ペイロードは非公開",
+      "date": "2026-08-17"
+    },
+    {
+      "slug": "2026-08-16-long-march-12-satnet-leo-group-24-launch",
+      "title": "Long March 12がSatNet衛星9機の打ち上げに成功",
+      "date": "2026-08-16"
+    },
+    {
+      "slug": "2026-08-11-long-march-7a-launch-failure-wenchang-2026",
+      "title": "長征7A、文昌から打ち上げも失敗——18回目のフライト",
+      "date": "2026-08-11"
+    },
+    {
+      "slug": "2026-08-04-long-march-8a-satnet-leo-group-23-launch",
+      "title": "長征8Aが9機のSatNet衛星打ち上げに成功",
+      "date": "2026-08-04"
+    },
+    {
+      "slug": "2026-07-30-long-march-6a-tjsw-27-launch-success",
+      "title": "長征6A、太原からTJSW-27A/B打ち上げ成功",
+      "date": "2026-07-30"
+    },
+    {
+      "slug": "2026-07-29-long-march-7a-tianlian-3-01-launch-success",
+      "title": "長征7A、天鏈3号01星の打ち上げ成功",
+      "date": "2026-07-29"
+    },
+    {
+      "slug": "2026-07-24-long-march-3b-tianlian-2-06-launch-success",
+      "title": "長征3B/E、天鏈2号06星の打ち上げに成功",
+      "date": "2026-07-24"
+    },
+    {
+      "slug": "2026-07-06-china-qianfan-spacesail-long-march-8a-debut",
+      "title": "中国が「千帆」衛星を2日連続打ち上げ、改良型長征8号甲も初飛行",
+      "date": "2026-07-06"
+    }
+  ],
+  "upcoming": [
+    {
+      "id": "95eb9265-bdbe-43ad-b08c-6be7eb4e58f4",
+      "name": "Long March 2D/YZ-3 | Unknown Payload",
+      "rocket": "Long March 2D",
+      "mission": "Unknown Payload",
+      "date": "2026-09-09",
+      "month": 9,
+      "time": "09:00",
+      "tentative": false,
+      "provider": "China Aerospace Science and Technology Corporation",
+      "country": "CN",
+      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
+      "status": "Go"
+    },
+    {
+      "id": "63063b9d-ade9-4448-8717-6f910aa81188",
+      "name": "Long March 8A | Unknown Payload",
+      "rocket": "Long March 8A",
+      "mission": "Unknown Payload",
+      "date": "2026-09-11",
+      "month": 9,
+      "time": null,
+      "tentative": true,
+      "provider": "China Aerospace Science and Technology Corporation",
+      "country": "CN",
+      "pad": "Wenchang Space Launch Site, People's Republic of China",
+      "status": "TBC"
+    },
+    {
+      "id": "dc570565-4dcf-4ab9-8174-bf88efef477f",
+      "name": "Long March 12A | Flight 2",
+      "rocket": "Long March 12A",
+      "mission": "Flight 2",
+      "date": "2026-09-30",
+      "month": 9,
+      "time": null,
+      "tentative": true,
+      "provider": "China Aerospace Science and Technology Corporation",
+      "country": "CN",
+      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
+      "status": "TBD"
+    }
+  ],
+  "updated": "2026-09-04T18:35:04.560Z"
 }

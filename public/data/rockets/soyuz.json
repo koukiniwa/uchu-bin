@@ -5,28 +5,71 @@
   "operator": "Roscosmos",
   "country": "RU",
   "image": "/images/library/soyuz_001.jpg",
+  "firstFlight": "1966-11-28",
   "status": "active",
-  "total": 1000,
-  "successRate": 97.2,
-  "thisYear": 8,
-  "lastLaunch": "2026-08-24",
-  "firstFlight": "2020-01-01",
-  "description": "データ準備中",
-  "specs": {},
+  "description": "世界で最も多く打ち上げられたロケットファミリー。60年以上の運用実績を持ち、有人飛行から衛星打ち上げまで幅広く使用される。",
+  "specs": {
+    "height": "46m",
+    "diameter": "2.95m",
+    "stages": 3,
+    "liftoffMass": "312t",
+    "payloadLEO": "8.2t",
+    "payloadGTO": "-"
+  },
   "stats": {
-    "total": 1000,
-    "success": 972,
-    "failure": 28,
-    "successRate": 97.2,
+    "total": 0,
+    "success": 0,
+    "failure": 0,
+    "successRate": 0,
     "thisYear": {
-      "total": 8,
-      "success": 8,
+      "total": 0,
+      "success": 0,
       "failure": 0
     },
     "yearlyStats": {}
   },
   "recentLaunches": [],
-  "articles": [],
-  "upcoming": [],
-  "updated": "2026-09-04T03:43:25.609Z"
+  "articles": [
+    {
+      "slug": "2026-08-24-soyuz-21b-glonass-k1-no19-launch-success",
+      "title": "ソユーズ2.1b、Glonass-K1衛星の打ち上げに成功",
+      "date": "2026-08-24"
+    },
+    {
+      "slug": "2026-07-15-soyuz-ms29-iss-arrival-menon-dubrov-kikina",
+      "title": "ソユーズMS-29がISSに到着、乗員10名体制へ",
+      "date": "2026-07-15"
+    }
+  ],
+  "upcoming": [
+    {
+      "id": "d793ba47-faf5-4bab-a386-39a9ccc49c90",
+      "name": "Soyuz 2.1b | Progress MS-35 (96P)",
+      "rocket": "Soyuz 2",
+      "mission": "Progress MS-35 (96P)",
+      "date": "2026-09-09",
+      "month": 9,
+      "time": "16:15",
+      "tentative": false,
+      "provider": "Russian Federal Space Agency (ROSCOSMOS)",
+      "country": "RU",
+      "pad": "Baikonur Cosmodrome, Republic of Kazakhstan",
+      "status": "Go"
+    },
+    {
+      "id": "bff2fc91-eddd-4dfc-af26-ac0674cfab4d",
+      "name": "Soyuz 2.1a/Fregat-M | MKA Kinosputnik, KOEN and others",
+      "rocket": "Soyuz 2",
+      "mission": "MKA Kinosputnik, KOEN and others",
+      "date": "2026-11-19",
+      "month": 11,
+      "time": null,
+      "tentative": true,
+      "provider": "Russian Federal Space Agency (ROSCOSMOS)",
+      "country": "RU",
+      "pad": "Vostochny Cosmodrome, Siberia, Russian Federation",
+      "status": "TBD"
+    }
+  ],
+  "updated": "2026-09-04T18:35:04.559Z"
 }

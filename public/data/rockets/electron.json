@@ -5,28 +5,76 @@
   "operator": "Rocket Lab",
   "country": "NZ",
   "image": "/images/library/electron_001.jpg",
+  "firstFlight": "2017-05-25",
   "status": "active",
-  "total": 55,
-  "successRate": 94.5,
-  "thisYear": 9,
-  "lastLaunch": "2026-09-02",
-  "firstFlight": "2020-01-01",
-  "description": "データ準備中",
-  "specs": {},
+  "description": "Rocket Labが開発した小型ロケット。電動ポンプ駆動のRutherfordエンジンを採用し、小型衛星市場で高い打ち上げ頻度を誇る。",
+  "specs": {
+    "height": "18m",
+    "diameter": "1.2m",
+    "stages": 2,
+    "liftoffMass": "12.5t",
+    "payloadLEO": "300kg",
+    "payloadGTO": "-"
+  },
   "stats": {
-    "total": 55,
-    "success": 52,
-    "failure": 3,
-    "successRate": 94.5,
+    "total": 0,
+    "success": 0,
+    "failure": 0,
+    "successRate": 0,
     "thisYear": {
-      "total": 9,
-      "success": 9,
+      "total": 0,
+      "success": 0,
       "failure": 0
     },
     "yearlyStats": {}
   },
   "recentLaunches": [],
-  "articles": [],
-  "upcoming": [],
-  "updated": "2026-09-04T03:43:25.600Z"
+  "articles": [
+    {
+      "slug": "2026-09-03-rocket-lab-electron-synspective-strix-launch-11",
+      "title": "Rocket Lab、Electronでシンスペクティブ衛星を打ち上げ成功",
+      "date": "2026-09-03"
+    },
+    {
+      "slug": "2026-08-21-rocket-lab-electron-iqps-launch-8-lightning-god",
+      "title": "Rocket Lab、iQPS向けSAR衛星をElectronで打ち上げ成功",
+      "date": "2026-08-21"
+    },
+    {
+      "slug": "2026-08-06-rocket-lab-electron-iqps-launch-7-grain-goddess",
+      "title": "Rocket Lab、iQPS向けSARサイト打ち上げ成功",
+      "date": "2026-08-06"
+    }
+  ],
+  "upcoming": [
+    {
+      "id": "599ba2df-7483-4b2f-a083-2b5ddc06e069",
+      "name": "Electron | LOXSAT 1",
+      "rocket": "Electron",
+      "mission": "LOXSAT 1",
+      "date": "2026-09-30",
+      "month": 9,
+      "time": null,
+      "tentative": true,
+      "provider": "Rocket Lab",
+      "country": "NZ",
+      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
+      "status": "TBD"
+    },
+    {
+      "id": "f4c720ce-0cfd-43e6-b8dd-00273073bc01",
+      "name": "Electron | StriX Launch 12",
+      "rocket": "Electron",
+      "mission": "StriX Launch 12",
+      "date": "2026-10-31",
+      "month": 10,
+      "time": null,
+      "tentative": true,
+      "provider": "Rocket Lab",
+      "country": "NZ",
+      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
+      "status": "TBD"
+    }
+  ],
+  "updated": "2026-09-04T18:35:04.554Z"
 }

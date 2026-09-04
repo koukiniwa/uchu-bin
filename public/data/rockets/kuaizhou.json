@@ -5,22 +5,25 @@
   "operator": "ExPace",
   "country": "CN",
   "image": "/images/library/kuaizhou_001.jpg",
+  "firstFlight": "2013-09-25",
   "status": "active",
-  "total": 28,
-  "successRate": 85.7,
-  "thisYear": 3,
-  "lastLaunch": "2026-06-30",
-  "firstFlight": "2020-01-01",
-  "description": "データ準備中",
-  "specs": {},
+  "description": "中国の固体燃料ロケット。「快速」を意味する名前の通り、迅速な打ち上げ準備が特徴。小型衛星の打ち上げに使用される。",
+  "specs": {
+    "height": "20-25m",
+    "diameter": "1.4-2.2m",
+    "stages": 3,
+    "liftoffMass": "30-78t",
+    "payloadLEO": "200-1500kg",
+    "payloadGTO": "-"
+  },
   "stats": {
-    "total": 28,
-    "success": 24,
-    "failure": 4,
-    "successRate": 85.7,
+    "total": 0,
+    "success": 0,
+    "failure": 0,
+    "successRate": 0,
     "thisYear": {
-      "total": 3,
-      "success": 3,
+      "total": 0,
+      "success": 0,
       "failure": 0
     },
     "yearlyStats": {}
@@ -28,5 +31,5 @@
   "recentLaunches": [],
   "articles": [],
   "upcoming": [],
-  "updated": "2026-09-04T03:43:25.632Z"
+  "updated": "2026-09-04T18:35:04.570Z"
 }
