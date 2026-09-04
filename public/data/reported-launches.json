@@ -281,6 +281,12 @@
       "name": "Electron | Owl Around The World (StriX Launch 11)",
       "status": "Launch in Flight",
       "date": "2026-09-02T15:14:03.605Z"
+    },
+    {
+      "id": "17d0ec68-f466-4916-9dc5-16123eda6484",
+      "name": "GSLV Mk II | GISAT-1A (EOS-05)",
+      "status": "Launch Successful",
+      "date": "2026-09-04T01:18:27.792Z"
     }
   ]
 }
