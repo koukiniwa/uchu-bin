@@ -1,0 +1,32 @@
+{
+  "slug": "vega",
+  "nameJa": "ヴェガ",
+  "nameEn": "Vega",
+  "operator": "Arianespace",
+  "country": "EU",
+  "image": "/images/library/vegac_001.jpg",
+  "status": "active",
+  "total": 25,
+  "successRate": 88,
+  "thisYear": 2,
+  "lastLaunch": "2026-07-20",
+  "firstFlight": "2020-01-01",
+  "description": "データ準備中",
+  "specs": {},
+  "stats": {
+    "total": 25,
+    "success": 22,
+    "failure": 3,
+    "successRate": 88,
+    "thisYear": {
+      "total": 2,
+      "success": 2,
+      "failure": 0
+    },
+    "yearlyStats": {}
+  },
+  "recentLaunches": [],
+  "articles": [],
+  "upcoming": [],
+  "updated": "2026-09-04T03:43:25.615Z"
+}

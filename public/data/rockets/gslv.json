@@ -1,0 +1,32 @@
+{
+  "slug": "gslv",
+  "nameJa": "GSLV / LVM3",
+  "nameEn": "GSLV / LVM3",
+  "operator": "ISRO",
+  "country": "IN",
+  "image": "/images/library/gslv_001.jpg",
+  "status": "active",
+  "total": 22,
+  "successRate": 81.8,
+  "thisYear": 2,
+  "lastLaunch": "2026-09-04",
+  "firstFlight": "2020-01-01",
+  "description": "データ準備中",
+  "specs": {},
+  "stats": {
+    "total": 22,
+    "success": 18,
+    "failure": 4,
+    "successRate": 81.8,
+    "thisYear": {
+      "total": 2,
+      "success": 2,
+      "failure": 0
+    },
+    "yearlyStats": {}
+  },
+  "recentLaunches": [],
+  "articles": [],
+  "upcoming": [],
+  "updated": "2026-09-04T03:43:25.626Z"
+}

@@ -93,6 +93,7 @@ export default function RootLayout({ children }) {
             <nav className="header-nav">
               <a href="/featured">注目の打ち上げ</a>
               <a href="/schedule">打ち上げ予定</a>
+              <a href="/rockets">ロケット図鑑</a>
               <a href="/about">このサイトについて</a>
               <a href="https://x.com/uchubin_jp" target="_blank" rel="noopener noreferrer">X</a>
             </nav>
@@ -132,17 +133,16 @@ export default function RootLayout({ children }) {
               <a href="/schedule" style={{ fontSize: '12px', color: '#4fc3f7', textDecoration: 'none' }}>
                 打ち上げ予定
               </a>
+              <a href="/rockets" style={{ fontSize: '12px', color: '#4fc3f7', textDecoration: 'none' }}>
+                ロケット図鑑
+              </a>
               <a href="/about" style={{ fontSize: '12px', color: '#4fc3f7', textDecoration: 'none' }}>
                 このサイトについて
               </a>
-              <a href="https://space-map-git-main-koukiniwas-projects.vercel.app/moon"
-                target="_blank" rel="noopener noreferrer"
-                style={{ fontSize: '12px', color: '#4fc3f7', textDecoration: 'none' }}>
+              <a href="/moon-map" style={{ fontSize: '12px', color: '#4fc3f7', textDecoration: 'none' }}>
                 月面探査機マップ
               </a>
-              <a href="https://space-map-koukiniwas-projects.vercel.app/mars"
-                target="_blank" rel="noopener noreferrer"
-                style={{ fontSize: '12px', color: '#4fc3f7', textDecoration: 'none' }}>
+              <a href="/mars-map" style={{ fontSize: '12px', color: '#4fc3f7', textDecoration: 'none' }}>
                 火星探査機マップ
               </a>
             </div>

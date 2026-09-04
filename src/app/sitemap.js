@@ -48,6 +48,12 @@ export default function sitemap() {
       changeFrequency: 'monthly',
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/rockets`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
     ...['falcon-9', 'falcon-heavy', 'starship', 'electron', 'h3', 'ariane-6',
       'soyuz', 'long-march', 'vega', 'vulcan', 'new-glenn', 'pslv', 'gslv',
       'zhuque', 'kuaizhou'].map(slug => ({

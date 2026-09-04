@@ -324,6 +324,18 @@ export default function BlogPost({ params }) {
             <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.5)', marginTop: '2px' }}>見逃せないミッションを厳選紹介</div>
           </div>
         </a>
+        <a href="/rockets" style={{
+          display: 'flex', alignItems: 'center', gap: '12px',
+          padding: '14px 16px', borderRadius: '8px',
+          background: 'linear-gradient(135deg, #0a0e1a, #1a2744)',
+          textDecoration: 'none', transition: 'transform 0.15s, box-shadow 0.15s',
+        }}>
+          <span style={{ fontSize: '20px', lineHeight: 1 }}>🚀</span>
+          <div>
+            <div style={{ fontSize: '13px', fontWeight: 700, color: '#fff' }}>ロケット図鑑</div>
+            <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.5)', marginTop: '2px' }}>成功率・スペック・打ち上げ履歴を比較</div>
+          </div>
+        </a>
       </div>
 
       {/* 関連記事 */}

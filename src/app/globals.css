@@ -306,3 +306,21 @@ html, body {
   margin-top: -1rem;
   margin-bottom: 1.5rem;
 }
+
+/* ロケット図鑑: カードhover */
+.rocket-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
+}
+
+/* ロケット図鑑: 統計グリッドのスマホ対応 */
+@media (max-width: 640px) {
+  .rocket-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* ロケット詳細: 射場表示（PC） */
+@media (min-width: 768px) {
+  .rocket-launch-pad { display: inline !important; }
+}

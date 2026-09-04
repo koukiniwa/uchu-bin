@@ -1,0 +1,32 @@
+{
+  "slug": "soyuz",
+  "nameJa": "ソユーズ",
+  "nameEn": "Soyuz",
+  "operator": "Roscosmos",
+  "country": "RU",
+  "image": "/images/library/soyuz_001.jpg",
+  "status": "active",
+  "total": 1000,
+  "successRate": 97.2,
+  "thisYear": 8,
+  "lastLaunch": "2026-08-24",
+  "firstFlight": "2020-01-01",
+  "description": "データ準備中",
+  "specs": {},
+  "stats": {
+    "total": 1000,
+    "success": 972,
+    "failure": 28,
+    "successRate": 97.2,
+    "thisYear": {
+      "total": 8,
+      "success": 8,
+      "failure": 0
+    },
+    "yearlyStats": {}
+  },
+  "recentLaunches": [],
+  "articles": [],
+  "upcoming": [],
+  "updated": "2026-09-04T03:43:25.609Z"
+}

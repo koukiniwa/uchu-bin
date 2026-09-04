@@ -1,0 +1,32 @@
+{
+  "slug": "kuaizhou",
+  "nameJa": "快舟",
+  "nameEn": "Kuaizhou",
+  "operator": "ExPace",
+  "country": "CN",
+  "image": "/images/library/kuaizhou_001.jpg",
+  "status": "active",
+  "total": 28,
+  "successRate": 85.7,
+  "thisYear": 3,
+  "lastLaunch": "2026-06-30",
+  "firstFlight": "2020-01-01",
+  "description": "データ準備中",
+  "specs": {},
+  "stats": {
+    "total": 28,
+    "success": 24,
+    "failure": 4,
+    "successRate": 85.7,
+    "thisYear": {
+      "total": 3,
+      "success": 3,
+      "failure": 0
+    },
+    "yearlyStats": {}
+  },
+  "recentLaunches": [],
+  "articles": [],
+  "upcoming": [],
+  "updated": "2026-09-04T03:43:25.632Z"
+}

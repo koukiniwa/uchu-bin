@@ -1,0 +1,32 @@
+{
+  "slug": "pslv",
+  "nameJa": "PSLV",
+  "nameEn": "PSLV",
+  "operator": "ISRO",
+  "country": "IN",
+  "image": "/images/library/pslv_001.jpg",
+  "status": "active",
+  "total": 62,
+  "successRate": 93.5,
+  "thisYear": 3,
+  "lastLaunch": "2026-07-15",
+  "firstFlight": "2020-01-01",
+  "description": "データ準備中",
+  "specs": {},
+  "stats": {
+    "total": 62,
+    "success": 58,
+    "failure": 4,
+    "successRate": 93.5,
+    "thisYear": {
+      "total": 3,
+      "success": 3,
+      "failure": 0
+    },
+    "yearlyStats": {}
+  },
+  "recentLaunches": [],
+  "articles": [],
+  "upcoming": [],
+  "updated": "2026-09-04T03:43:25.624Z"
+}

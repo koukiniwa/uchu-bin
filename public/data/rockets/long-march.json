@@ -1,0 +1,32 @@
+{
+  "slug": "long-march",
+  "nameJa": "長征シリーズ",
+  "nameEn": "Long March",
+  "operator": "CASC",
+  "country": "CN",
+  "image": "/images/library/longmarch5_001.jpg",
+  "status": "active",
+  "total": 520,
+  "successRate": 96.5,
+  "thisYear": 38,
+  "lastLaunch": "2026-08-25",
+  "firstFlight": "2020-01-01",
+  "description": "データ準備中",
+  "specs": {},
+  "stats": {
+    "total": 520,
+    "success": 502,
+    "failure": 18,
+    "successRate": 96.5,
+    "thisYear": {
+      "total": 38,
+      "success": 38,
+      "failure": 0
+    },
+    "yearlyStats": {}
+  },
+  "recentLaunches": [],
+  "articles": [],
+  "upcoming": [],
+  "updated": "2026-09-04T03:43:25.612Z"
+}

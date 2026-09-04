@@ -1,0 +1,32 @@
+{
+  "slug": "ariane-6",
+  "nameJa": "アリアン6",
+  "nameEn": "Ariane 6",
+  "operator": "Arianespace",
+  "country": "EU",
+  "image": "/images/library/ariane6_001.jpg",
+  "status": "active",
+  "total": 14,
+  "successRate": 100,
+  "thisYear": 6,
+  "lastLaunch": "2026-08-27",
+  "firstFlight": "2020-01-01",
+  "description": "データ準備中",
+  "specs": {},
+  "stats": {
+    "total": 14,
+    "success": 14,
+    "failure": 0,
+    "successRate": 100,
+    "thisYear": {
+      "total": 6,
+      "success": 6,
+      "failure": 0
+    },
+    "yearlyStats": {}
+  },
+  "recentLaunches": [],
+  "articles": [],
+  "upcoming": [],
+  "updated": "2026-09-04T03:43:25.606Z"
+}
