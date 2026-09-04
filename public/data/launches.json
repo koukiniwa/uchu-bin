@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-04T01:18:47.936Z",
+  "updated": "2026-09-04T05:34:18.612Z",
   "launches": [
     {
       "id": "1b23eb18-e06e-4058-9b42-e95ca0980511",
@@ -310,16 +310,6 @@
       "date": "2026-09-02",
       "country": "",
       "provider": "SpaceX",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "a927b2f9-f9a5-4196-9abb-2e275e4a6b96",
-      "rocket": "Pallas-1",
-      "mission": "Demo Flight",
-      "date": "2026-09-01",
-      "country": "CN",
-      "provider": "Galactic Energy",
       "result": "success",
       "resultLabel": "成功"
     }
