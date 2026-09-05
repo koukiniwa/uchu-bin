@@ -1,20 +1,6 @@
 {
-  "updated": "2026-09-05T20:08:31.767Z",
+  "updated": "2026-09-05T22:40:23.348Z",
   "launches": [
-    {
-      "id": "1b23eb18-e06e-4058-9b42-e95ca0980511",
-      "name": "Spectrum | Onward and Upward",
-      "rocket": "Spectrum",
-      "mission": "Onward and Upward",
-      "date": "2026-09-05",
-      "month": 9,
-      "time": "20:12",
-      "tentative": false,
-      "provider": "Isar Aerospace",
-      "country": "DE",
-      "pad": "Andøya Spaceport",
-      "status": "Go"
-    },
     {
       "id": "153ef8ef-b12b-43f4-a4bf-05b225c0cd37",
       "name": "Falcon 9 Block 5 | Starlink Group 15-24",
@@ -22,7 +8,7 @@
       "mission": "Starlink Group 15-24",
       "date": "2026-09-06",
       "month": 9,
-      "time": "10:59",
+      "time": "14:26",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
@@ -280,9 +266,33 @@
       "country": "FR",
       "pad": "Guiana Space Centre, French Guiana",
       "status": "TBD"
+    },
+    {
+      "id": "d3bd7fb2-fac6-49fc-ae52-cee07d2fde67",
+      "name": "Falcon Heavy | Griffin Mission One",
+      "rocket": "Falcon Heavy",
+      "mission": "Griffin Mission One",
+      "date": "2026-11-30",
+      "month": 11,
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Kennedy Space Center, FL, USA",
+      "status": "TBD"
     }
   ],
   "recent": [
+    {
+      "id": "1b23eb18-e06e-4058-9b42-e95ca0980511",
+      "rocket": "Spectrum",
+      "mission": "Onward and Upward",
+      "date": "2026-09-05",
+      "country": "DE",
+      "provider": "Isar Aerospace",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "17d0ec68-f466-4916-9dc5-16123eda6484",
       "rocket": "GSLV Mk II",
