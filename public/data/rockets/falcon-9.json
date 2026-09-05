@@ -86,19 +86,19 @@
       "status": "Go"
     },
     {
-      "id": "18441371-8b2e-457c-afb5-1ec1b11ab630",
-      "name": "Falcon 9 Block 5 | Crew-13",
+      "id": "ad358a4d-c541-409b-9366-9c2f2da4aeb9",
+      "name": "Falcon 9 Block 5 | O3b mPower 11-13",
       "rocket": "Falcon 9",
-      "mission": "Crew-13",
-      "date": "2026-09-30",
+      "mission": "O3b mPower 11-13",
+      "date": "2026-09-13",
       "month": 9,
       "time": null,
       "tentative": true,
       "provider": "SpaceX",
       "country": "US",
       "pad": "Cape Canaveral SFS, FL, USA",
-      "status": "TBD"
+      "status": "TBC"
     }
   ],
-  "updated": "2026-09-04T18:35:04.550Z"
+  "updated": "2026-09-05T17:30:06.578Z"
 }
