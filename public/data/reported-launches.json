@@ -287,6 +287,12 @@
       "name": "GSLV Mk II | GISAT-1A (EOS-05)",
       "status": "Launch Successful",
       "date": "2026-09-04T01:18:27.792Z"
+    },
+    {
+      "id": "1b23eb18-e06e-4058-9b42-e95ca0980511",
+      "name": "Spectrum | Onward and Upward",
+      "status": "Launch Successful",
+      "date": "2026-09-05T23:42:12.370Z"
     }
   ]
 }
