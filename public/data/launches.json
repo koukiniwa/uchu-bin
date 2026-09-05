@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-05T17:57:14.079Z",
+  "updated": "2026-09-05T20:08:31.767Z",
   "launches": [
     {
       "id": "1b23eb18-e06e-4058-9b42-e95ca0980511",
@@ -8,7 +8,7 @@
       "mission": "Onward and Upward",
       "date": "2026-09-05",
       "month": 9,
-      "time": "20:00",
+      "time": "20:12",
       "tentative": false,
       "provider": "Isar Aerospace",
       "country": "DE",
