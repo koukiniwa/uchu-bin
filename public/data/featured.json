@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-05T08:06:47.739Z",
+  "updated": "2026-09-05T12:25:58.832Z",
   "featured": [
     {
       "id": "1b23eb18-e06e-4058-9b42-e95ca0980511",
@@ -8,12 +8,12 @@
       "description": "Second test flight of the Isar Spectrum launch vehicle. This launch will carry 5 cubesats and 1 non-separable experiment as part of European Space Agency (ESA)'s “Boost!” program:\r\n\r\n* CyBEEsat (TU Berlin)\r\n* TriSat-S (University of Maribor)\r\n* Platform 6 (EnduroSat)\r\n* FramSat-1 (NTNU)\r\n* SpaceTeam",
       "highlight": "ドイツの新興宇宙企業「イザー・エアロスペース」の「スペクトラム」ロケット2回目の試験飛行で、ESAの「Boost!」プログラムの一環として欧州6大学・機関の超小型衛星を搭載します。欧州が独自の打ち上げ能力の確立を目指す中、ヨーロッパ発の新興ロケットが若き研究者たちの衛星を宇宙へ運ぶという、夢と挑戦が詰まったミッションです。前回の試験を踏まえた2度目の挑戦が成功すれば、欧州の宇宙産業に大きな弾みをつけることになります。",
       "date": "2026-09-05",
-      "time": null,
-      "tentative": true,
+      "time": "20:00",
+      "tentative": false,
       "provider": "Isar Aerospace",
       "country": "DE",
       "pad": "Andøya Spaceport",
-      "status": "TBC",
+      "status": "Go",
       "orbit": "Sun-Synchronous Orbit"
     },
     {

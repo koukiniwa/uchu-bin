@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-05T08:06:39.572Z",
+  "updated": "2026-09-05T12:25:51.437Z",
   "launches": [
     {
       "id": "1b23eb18-e06e-4058-9b42-e95ca0980511",
@@ -8,12 +8,12 @@
       "mission": "Onward and Upward",
       "date": "2026-09-05",
       "month": 9,
-      "time": null,
-      "tentative": true,
+      "time": "20:00",
+      "tentative": false,
       "provider": "Isar Aerospace",
       "country": "DE",
       "pad": "Andøya Spaceport",
-      "status": "TBC"
+      "status": "Go"
     },
     {
       "id": "153ef8ef-b12b-43f4-a4bf-05b225c0cd37",
@@ -290,26 +290,6 @@
       "date": "2026-09-03",
       "country": "IN",
       "provider": "Indian Space Research Organization",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "9f5a4cb6-63f9-47e1-9512-b468bae2a8e6",
-      "rocket": "Electron",
-      "mission": "Owl Around The World (StriX Launch 11)",
-      "date": "2026-09-02",
-      "country": "US",
-      "provider": "Rocket Lab",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "63181269-b125-4c36-951c-c9bd9bbc4b55",
-      "rocket": "Falcon 9",
-      "mission": "Starlink Group 15-23",
-      "date": "2026-09-02",
-      "country": "",
-      "provider": "SpaceX",
       "result": "success",
       "resultLabel": "成功"
     }
