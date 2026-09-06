@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-05T22:40:26.272Z",
+  "updated": "2026-09-06T00:37:20.745Z",
   "featured": [
     {
       "id": "1b23eb18-e06e-4058-9b42-e95ca0980511",
@@ -13,7 +13,7 @@
       "provider": "Isar Aerospace",
       "country": "DE",
       "pad": "Andøya Spaceport",
-      "status": "Deployed",
+      "status": "Success",
       "orbit": "Sun-Synchronous Orbit"
     },
     {
