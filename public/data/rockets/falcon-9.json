@@ -64,7 +64,7 @@
       "mission": "Starlink Group 15-24",
       "date": "2026-09-06",
       "month": 9,
-      "time": "10:59",
+      "time": "14:26",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
@@ -100,5 +100,5 @@
       "status": "TBC"
     }
   ],
-  "updated": "2026-09-05T17:30:06.578Z"
+  "updated": "2026-09-06T17:42:20.730Z"
 }
