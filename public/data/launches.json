@@ -1,20 +1,6 @@
 {
-  "updated": "2026-09-06T13:57:54.115Z",
+  "updated": "2026-09-06T18:52:57.053Z",
   "launches": [
-    {
-      "id": "153ef8ef-b12b-43f4-a4bf-05b225c0cd37",
-      "name": "Falcon 9 Block 5 | Starlink Group 15-24",
-      "rocket": "Falcon 9",
-      "mission": "Starlink Group 15-24",
-      "date": "2026-09-06",
-      "month": 9,
-      "time": "14:26",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "",
-      "pad": "Vandenberg SFB, CA, USA",
-      "status": "Go"
-    },
     {
       "id": "95eb9265-bdbe-43ad-b08c-6be7eb4e58f4",
       "name": "Long March 2D/YZ-3 | Unknown Payload",
@@ -280,9 +266,33 @@
       "country": "US",
       "pad": "Kennedy Space Center, FL, USA",
       "status": "TBD"
+    },
+    {
+      "id": "7c891a0b-7194-4425-8cfd-2e8c75af2924",
+      "name": "HANBIT-Nano | InnoSat-0",
+      "rocket": "HANBIT-Nano",
+      "mission": "InnoSat-0",
+      "date": "2026-11-30",
+      "month": 11,
+      "time": null,
+      "tentative": true,
+      "provider": "Innospace",
+      "country": "KR",
+      "pad": "Alcântara Space Center, Federative Republic of Brazil",
+      "status": "TBD"
     }
   ],
   "recent": [
+    {
+      "id": "153ef8ef-b12b-43f4-a4bf-05b225c0cd37",
+      "rocket": "Falcon 9",
+      "mission": "Starlink Group 15-24",
+      "date": "2026-09-06",
+      "country": "",
+      "provider": "SpaceX",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "1b23eb18-e06e-4058-9b42-e95ca0980511",
       "rocket": "Spectrum",
