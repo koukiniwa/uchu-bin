@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-06T21:05:01.459Z",
+  "updated": "2026-09-06T23:31:47.361Z",
   "launches": [
     {
       "id": "95eb9265-bdbe-43ad-b08c-6be7eb4e58f4",
@@ -300,16 +300,6 @@
       "date": "2026-09-05",
       "country": "DE",
       "provider": "Isar Aerospace",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "17d0ec68-f466-4916-9dc5-16123eda6484",
-      "rocket": "GSLV Mk II",
-      "mission": "GISAT-1A (EOS-05)",
-      "date": "2026-09-03",
-      "country": "IN",
-      "provider": "Indian Space Research Organization",
       "result": "success",
       "resultLabel": "成功"
     }
