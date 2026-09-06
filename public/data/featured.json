@@ -1,21 +1,6 @@
 {
-  "updated": "2026-09-06T18:53:07.513Z",
+  "updated": "2026-09-06T21:05:23.003Z",
   "featured": [
-    {
-      "id": "1b23eb18-e06e-4058-9b42-e95ca0980511",
-      "rocket": "Spectrum",
-      "mission": "Onward and Upward",
-      "description": "Second test flight of the Isar Spectrum launch vehicle. This launch will carry 5 cubesats and 1 non-separable experiment as part of European Space Agency (ESA)'s “Boost!” program:\r\n\r\n* CyBEEsat (TU Berlin)\r\n* TriSat-S (University of Maribor)\r\n* Platform 6 (EnduroSat)\r\n* FramSat-1 (NTNU)\r\n* SpaceTeam",
-      "highlight": "ドイツの新興宇宙企業「イザー・エアロスペース」の「スペクトラム」ロケット2回目の試験飛行で、ESAの「Boost!」プログラムの一環として欧州6大学・機関の超小型衛星を搭載します。欧州が独自の打ち上げ能力の確立を目指す中、ヨーロッパ発の新興ロケットが若き研究者たちの衛星を宇宙へ運ぶという、夢と挑戦が詰まったミッションです。前回の試験を踏まえた2度目の挑戦が成功すれば、欧州の宇宙産業に大きな弾みをつけることになります。",
-      "date": "2026-09-05",
-      "time": "20:12",
-      "tentative": false,
-      "provider": "Isar Aerospace",
-      "country": "DE",
-      "pad": "Andøya Spaceport",
-      "status": "Success",
-      "orbit": "Sun-Synchronous Orbit"
-    },
     {
       "id": "18441371-8b2e-457c-afb5-1ec1b11ab630",
       "rocket": "Falcon 9",
@@ -60,6 +45,21 @@
       "pad": "Tanegashima Space Center, Japan",
       "status": "Go",
       "orbit": "Mars Orbit"
+    },
+    {
+      "id": "60f4ba6c-4201-4727-94aa-0015a5a0023f",
+      "rocket": "Spectrum",
+      "mission": "1 x Pelican satellite",
+      "description": "Payload consists of a single Pelican high-resolution imaging satellite for Planet Labs Germany.",
+      "highlight": "ドイツの新興宇宙企業Isar Aerospaceが開発した小型ロケット「Spectrum」の初飛行として注目されています。ヨーロッパ発の民間商業ロケットとして、SpaceXやRocketLabが牽引してきた小型衛星打ち上げ市場に本格参入する歴史的な一歩です。搭載されるのは高解像度地球観測衛星「Pelican」で、成功すれば欧州の宇宙自立性向上にも貢献する意義深いミッションです。",
+      "date": "2026-12-31",
+      "time": null,
+      "tentative": true,
+      "provider": "Isar Aerospace",
+      "country": "DE",
+      "pad": "Andøya Spaceport",
+      "status": "TBD",
+      "orbit": "Sun-Synchronous Orbit"
     },
     {
       "id": "3ac1bd74-bf9a-4afe-ae00-3e1d180142dd",
