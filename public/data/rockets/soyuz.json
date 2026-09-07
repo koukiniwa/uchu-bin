@@ -27,6 +27,35 @@
   },
   "recentLaunches": [],
   "articles": [],
-  "upcoming": [],
-  "updated": "2026-09-04T03:43:25.609Z"
+  "upcoming": [
+    {
+      "id": "d793ba47-faf5-4bab-a386-39a9ccc49c90",
+      "name": "Soyuz 2.1b | Progress MS-35 (96P)",
+      "rocket": "Soyuz 2",
+      "mission": "Progress MS-35 (96P)",
+      "date": "2026-09-09",
+      "month": 9,
+      "time": "16:15",
+      "tentative": false,
+      "provider": "Russian Federal Space Agency (ROSCOSMOS)",
+      "country": "RU",
+      "pad": "Baikonur Cosmodrome, Republic of Kazakhstan",
+      "status": "Go"
+    },
+    {
+      "id": "bff2fc91-eddd-4dfc-af26-ac0674cfab4d",
+      "name": "Soyuz 2.1a/Fregat-M | MKA Kinosputnik, KOEN and others",
+      "rocket": "Soyuz 2",
+      "mission": "MKA Kinosputnik, KOEN and others",
+      "date": "2026-11-19",
+      "month": 11,
+      "time": null,
+      "tentative": true,
+      "provider": "Russian Federal Space Agency (ROSCOSMOS)",
+      "country": "RU",
+      "pad": "Vostochny Cosmodrome, Siberia, Russian Federation",
+      "status": "TBD"
+    }
+  ],
+  "updated": "2026-09-07T19:19:26.278Z"
 }

@@ -27,6 +27,35 @@
   },
   "recentLaunches": [],
   "articles": [],
-  "upcoming": [],
-  "updated": "2026-09-04T03:43:25.606Z"
+  "upcoming": [
+    {
+      "id": "7bdc412b-c965-4517-a131-f57a01189803",
+      "name": "Ariane 64 Block 2 | Amazon Leo (LE-04)",
+      "rocket": "Ariane 6",
+      "mission": "Amazon Leo (LE-04)",
+      "date": "2026-10-07",
+      "month": 10,
+      "time": null,
+      "tentative": true,
+      "provider": "Arianespace",
+      "country": "FR",
+      "pad": "Guiana Space Centre, French Guiana",
+      "status": "TBD"
+    },
+    {
+      "id": "22e117bf-041c-49d5-9d09-7b180036e143",
+      "name": "Ariane 62 | Metop-SG B1",
+      "rocket": "Ariane 6",
+      "mission": "Metop-SG B1",
+      "date": "2026-11-30",
+      "month": 11,
+      "time": null,
+      "tentative": true,
+      "provider": "Arianespace",
+      "country": "FR",
+      "pad": "Guiana Space Centre, French Guiana",
+      "status": "TBD"
+    }
+  ],
+  "updated": "2026-09-07T19:18:09.316Z"
 }

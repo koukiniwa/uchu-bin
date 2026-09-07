@@ -135,47 +135,19 @@
   "articles": [],
   "upcoming": [
     {
-      "id": "153ef8ef-b12b-43f4-a4bf-05b225c0cd37",
-      "name": "Falcon 9 Block 5 | Starlink Group 15-24",
-      "rocket": "Falcon 9",
-      "mission": "Starlink Group 15-24",
-      "date": "2026-09-06",
-      "month": 9,
-      "time": "10:59",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "",
-      "pad": "Vandenberg SFB, CA, USA",
-      "status": "Go"
-    },
-    {
-      "id": "3e0456da-14b1-4ac3-b59e-35fefb1d1530",
-      "name": "Falcon 9 Block 5 | USSF-153",
-      "rocket": "Falcon 9",
-      "mission": "USSF-153",
-      "date": "2026-09-10",
-      "month": 9,
-      "time": "15:37",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "",
-      "pad": "Vandenberg SFB, CA, USA",
-      "status": "Go"
-    },
-    {
-      "id": "18441371-8b2e-457c-afb5-1ec1b11ab630",
-      "name": "Falcon 9 Block 5 | Crew-13",
-      "rocket": "Falcon 9",
-      "mission": "Crew-13",
-      "date": "2026-09-30",
-      "month": 9,
+      "id": "d3bd7fb2-fac6-49fc-ae52-cee07d2fde67",
+      "name": "Falcon Heavy | Griffin Mission One",
+      "rocket": "Falcon Heavy",
+      "mission": "Griffin Mission One",
+      "date": "2026-11-30",
+      "month": 11,
       "time": null,
       "tentative": true,
       "provider": "SpaceX",
       "country": "US",
-      "pad": "Cape Canaveral SFS, FL, USA",
+      "pad": "Kennedy Space Center, FL, USA",
       "status": "TBD"
     }
   ],
-  "updated": "2026-09-04T03:38:05.549Z"
+  "updated": "2026-09-07T19:17:47.058Z"
 }

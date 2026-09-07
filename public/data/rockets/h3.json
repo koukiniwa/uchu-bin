@@ -27,6 +27,21 @@
   },
   "recentLaunches": [],
   "articles": [],
-  "upcoming": [],
-  "updated": "2026-09-04T03:43:25.604Z"
+  "upcoming": [
+    {
+      "id": "69ebbcd2-b257-4070-9ef9-21e7d1f8a883",
+      "name": "H3-24 | Martian Moon eXplorer (MMX)",
+      "rocket": "H3",
+      "mission": "Martian Moon eXplorer (MMX)",
+      "date": "2026-10-19",
+      "month": 10,
+      "time": "19:41",
+      "tentative": false,
+      "provider": "Mitsubishi Heavy Industries",
+      "country": "JP",
+      "pad": "Tanegashima Space Center, Japan",
+      "status": "Go"
+    }
+  ],
+  "updated": "2026-09-07T19:18:03.775Z"
 }

@@ -27,6 +27,49 @@
   },
   "recentLaunches": [],
   "articles": [],
-  "upcoming": [],
-  "updated": "2026-09-04T03:43:25.612Z"
+  "upcoming": [
+    {
+      "id": "95eb9265-bdbe-43ad-b08c-6be7eb4e58f4",
+      "name": "Long March 2D/YZ-3 | Unknown Payload",
+      "rocket": "Long March 2D",
+      "mission": "Unknown Payload",
+      "date": "2026-09-10",
+      "month": 9,
+      "time": "09:00",
+      "tentative": false,
+      "provider": "China Aerospace Science and Technology Corporation",
+      "country": "CN",
+      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
+      "status": "Go"
+    },
+    {
+      "id": "63063b9d-ade9-4448-8717-6f910aa81188",
+      "name": "Long March 8A | Unknown Payload",
+      "rocket": "Long March 8A",
+      "mission": "Unknown Payload",
+      "date": "2026-09-11",
+      "month": 9,
+      "time": null,
+      "tentative": true,
+      "provider": "China Aerospace Science and Technology Corporation",
+      "country": "CN",
+      "pad": "Wenchang Space Launch Site, People's Republic of China",
+      "status": "TBC"
+    },
+    {
+      "id": "dc570565-4dcf-4ab9-8174-bf88efef477f",
+      "name": "Long March 12A | Flight 2",
+      "rocket": "Long March 12A",
+      "mission": "Flight 2",
+      "date": "2026-09-30",
+      "month": 9,
+      "time": null,
+      "tentative": true,
+      "provider": "China Aerospace Science and Technology Corporation",
+      "country": "CN",
+      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
+      "status": "TBD"
+    }
+  ],
+  "updated": "2026-09-07T19:20:26.584Z"
 }

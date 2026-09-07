@@ -27,6 +27,21 @@
   },
   "recentLaunches": [],
   "articles": [],
-  "upcoming": [],
-  "updated": "2026-09-04T03:43:25.617Z"
+  "upcoming": [
+    {
+      "id": "ef9850ad-1096-425b-9d27-f7bbd186e61a",
+      "name": "Vulcan VC6L | Amazon Leo (LV-01)",
+      "rocket": "Vulcan VC6L",
+      "mission": "Amazon Leo (LV-01)",
+      "date": "2026-09-30",
+      "month": 9,
+      "time": null,
+      "tentative": true,
+      "provider": "United Launch Alliance",
+      "country": "",
+      "pad": "Cape Canaveral SFS, FL, USA",
+      "status": "TBD"
+    }
+  ],
+  "updated": "2026-09-07T19:22:27.424Z"
 }

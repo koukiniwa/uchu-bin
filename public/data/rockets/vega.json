@@ -27,6 +27,21 @@
   },
   "recentLaunches": [],
   "articles": [],
-  "upcoming": [],
-  "updated": "2026-09-04T03:43:25.615Z"
+  "upcoming": [
+    {
+      "id": "8effc13a-c658-4d2e-9f15-8dba4d7fe2dd",
+      "name": "Vega-C | Sentinel-3C & FLEX",
+      "rocket": "Vega-C",
+      "mission": "Sentinel-3C & FLEX",
+      "date": "2026-09-15",
+      "month": 9,
+      "time": "01:21",
+      "tentative": false,
+      "provider": "Avio S.p.A",
+      "country": "FR",
+      "pad": "Guiana Space Centre, French Guiana",
+      "status": "Go"
+    }
+  ],
+  "updated": "2026-09-07T19:21:27.093Z"
 }
