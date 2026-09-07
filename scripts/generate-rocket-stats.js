@@ -1,13 +1,14 @@
 #!/usr/bin/env node
-// ロケット図鑑データ生成スクリプト
-// LL2 API から全打ち上げ履歴を一括取得し、ロケット別に統計を集計してJSONに保存
-// Usage: node scripts/generate-rocket-stats.js
+// ロケット図鑑データ生成スクリプト（差分更新方式）
+// 既存JSONを読み込み、LL2 APIから直近の打ち上げだけ取得してマージ
+// Usage: node scripts/generate-rocket-stats.js [--full]
+//   --full: 全履歴を再取得（初回 or リセット時のみ使用）
 
 const fs = require('fs')
 const path = require('path')
 
 const OUTPUT_DIR = path.join(__dirname, '..', 'public', 'data', 'rockets')
-const POSTS_DIR = path.join(__dirname, '..', 'posts')
+const LAUNCHES_JSON = path.join(__dirname, '..', 'public', 'data', 'launches.json')
 
 // 対象ロケット定義
 const ROCKETS = [
@@ -15,7 +16,7 @@ const ROCKETS = [
     slug: 'falcon-9',
     nameJa: 'ファルコン9',
     nameEn: 'Falcon 9',
-    matchNames: ['falcon 9'],
+    apiNames: ['Falcon 9'],
     operator: 'SpaceX',
     country: 'US',
     image: '/images/library/falcon9_001.jpg',
@@ -28,7 +29,7 @@ const ROCKETS = [
     slug: 'falcon-heavy',
     nameJa: 'ファルコンヘビー',
     nameEn: 'Falcon Heavy',
-    matchNames: ['falcon heavy'],
+    apiNames: ['Falcon Heavy'],
     operator: 'SpaceX',
     country: 'US',
     image: '/images/library/falconheavy_001.jpg',
@@ -41,7 +42,7 @@ const ROCKETS = [
     slug: 'starship',
     nameJa: 'スターシップ',
     nameEn: 'Starship',
-    matchNames: ['starship'],
+    apiNames: ['Starship'],
     operator: 'SpaceX',
     country: 'US',
     image: '/images/library/starship_001.jpg',
@@ -54,7 +55,7 @@ const ROCKETS = [
     slug: 'electron',
     nameJa: 'エレクトロン',
     nameEn: 'Electron',
-    matchNames: ['electron'],
+    apiNames: ['Electron'],
     operator: 'Rocket Lab',
     country: 'NZ',
     image: '/images/library/electron_001.jpg',
@@ -67,7 +68,7 @@ const ROCKETS = [
     slug: 'h3',
     nameJa: 'H3',
     nameEn: 'H3',
-    matchNames: ['h3'],
+    apiNames: ['H3'],
     operator: 'JAXA / 三菱重工',
     country: 'JP',
     image: '/images/library/h3_001.jpg',
@@ -80,7 +81,7 @@ const ROCKETS = [
     slug: 'ariane-6',
     nameJa: 'アリアン6',
     nameEn: 'Ariane 6',
-    matchNames: ['ariane 62', 'ariane 64', 'ariane 6'],
+    apiNames: ['Ariane 6'],
     operator: 'Arianespace',
     country: 'EU',
     image: '/images/library/ariane6_001.jpg',
@@ -93,7 +94,7 @@ const ROCKETS = [
     slug: 'soyuz',
     nameJa: 'ソユーズ',
     nameEn: 'Soyuz',
-    matchNames: ['soyuz 2', 'soyuz-'],
+    apiNames: ['Soyuz 2'],
     operator: 'Roscosmos',
     country: 'RU',
     image: '/images/library/soyuz_001.jpg',
@@ -106,7 +107,7 @@ const ROCKETS = [
     slug: 'long-march',
     nameJa: '長征シリーズ',
     nameEn: 'Long March',
-    matchNames: ['long march'],
+    apiNames: ['Long March'],
     operator: 'CASC',
     country: 'CN',
     image: '/images/library/longmarch5_001.jpg',
@@ -119,7 +120,7 @@ const ROCKETS = [
     slug: 'vega',
     nameJa: 'ヴェガ',
     nameEn: 'Vega',
-    matchNames: ['vega'],
+    apiNames: ['Vega'],
     operator: 'Arianespace',
     country: 'EU',
     image: '/images/library/vegac_001.jpg',
@@ -132,7 +133,7 @@ const ROCKETS = [
     slug: 'vulcan',
     nameJa: 'ヴァルカン',
     nameEn: 'Vulcan Centaur',
-    matchNames: ['vulcan'],
+    apiNames: ['Vulcan'],
     operator: 'ULA',
     country: 'US',
     image: '/images/library/vulcan_001.jpg',
@@ -145,7 +146,7 @@ const ROCKETS = [
     slug: 'new-glenn',
     nameJa: 'ニューグレン',
     nameEn: 'New Glenn',
-    matchNames: ['new glenn'],
+    apiNames: ['New Glenn'],
     operator: 'Blue Origin',
     country: 'US',
     image: '/images/library/newglenn_001.jpg',
@@ -158,7 +159,7 @@ const ROCKETS = [
     slug: 'pslv',
     nameJa: 'PSLV',
     nameEn: 'PSLV',
-    matchNames: ['pslv'],
+    apiNames: ['PSLV'],
     operator: 'ISRO',
     country: 'IN',
     image: '/images/library/pslv_001.jpg',
@@ -171,7 +172,7 @@ const ROCKETS = [
     slug: 'gslv',
     nameJa: 'GSLV / LVM3',
     nameEn: 'GSLV / LVM3',
-    matchNames: ['gslv', 'lvm'],
+    apiNames: ['GSLV', 'LVM3'],
     operator: 'ISRO',
     country: 'IN',
     image: '/images/library/gslv_001.jpg',
@@ -184,7 +185,7 @@ const ROCKETS = [
     slug: 'zhuque',
     nameJa: '朱雀',
     nameEn: 'Zhuque',
-    matchNames: ['zhuque'],
+    apiNames: ['Zhuque'],
     operator: 'LandSpace',
     country: 'CN',
     image: '/images/library/zhuque_001.jpg',
@@ -197,7 +198,7 @@ const ROCKETS = [
     slug: 'kuaizhou',
     nameJa: '快舟',
     nameEn: 'Kuaizhou',
-    matchNames: ['kuaizhou'],
+    apiNames: ['Kuaizhou'],
     operator: 'ExPace',
     country: 'CN',
     image: '/images/library/kuaizhou_001.jpg',
@@ -208,7 +209,9 @@ const ROCKETS = [
   },
 ]
 
-async function fetchWithRetry(url, retries = 5) {
+const FULL_MODE = process.argv.includes('--full')
+
+async function fetchWithRetry(url, retries = 3) {
   for (let attempt = 1; attempt <= retries; attempt++) {
     try {
       const res = await fetch(url, {
@@ -216,40 +219,48 @@ async function fetchWithRetry(url, retries = 5) {
         signal: AbortSignal.timeout(30000),
       })
       if (res.status === 429) {
-        const wait = 15000 * attempt
+        const wait = 10000 * attempt
         console.log(`  Rate limited, waiting ${wait / 1000}s... (attempt ${attempt}/${retries})`)
         await new Promise(r => setTimeout(r, wait))
         continue
       }
+      if (!res.ok) {
+        console.error(`  HTTP ${res.status} for ${url}`)
+        return null
+      }
       return res
     } catch (e) {
       console.error(`  Attempt ${attempt}/${retries}: ${e.message}`)
-      if (attempt === retries) throw e
-      await new Promise(r => setTimeout(r, 5000))
+      if (attempt === retries) return null
+      await new Promise(r => setTimeout(r, 3000))
     }
   }
   return null
 }
 
-// LL2 APIから全打ち上げを一括取得（ページネーション）
-async function fetchAllLaunches() {
-  const allLaunches = []
-  let url = 'https://ll.thespacedevs.com/2.3.0/launches/previous/?limit=100&mode=list&ordering=-net'
-  let page = 0
+// 既存JSONを読み込む
+function loadExisting(slug) {
+  try {
+    return JSON.parse(fs.readFileSync(path.join(OUTPUT_DIR, `${slug}.json`), 'utf-8'))
+  } catch { return null }
+}
 
-  while (url) {
-    page++
-    console.log(`Fetching page ${page}... (${allLaunches.length} launches so far)`)
+// LL2 APIでロケット別に直近の打ち上げを取得（差分更新用）
+async function fetchRecentLaunches(rocket) {
+  const launches = []
+  for (const apiName of rocket.apiNames) {
+    const encoded = encodeURIComponent(apiName)
+    const url = `https://ll.thespacedevs.com/2.2.0/launch/previous/?limit=50&mode=list&ordering=-net&search=${encoded}`
     const res = await fetchWithRetry(url)
-    if (!res || !res.ok) {
-      console.error(`Failed to fetch page ${page}`)
-      break
-    }
+    if (!res) continue
     const data = await res.json()
-    for (const l of data.results) {
-      allLaunches.push({
-        rocketName: (l.rocket?.configuration?.name || '').toLowerCase(),
-        rocketNameRaw: l.rocket?.configuration?.name || '',
+    for (const l of (data.results || [])) {
+      // ロケット名が部分一致するか確認（searchは広くマッチするため）
+      const rocketName = (l.rocket?.configuration?.name || '').toLowerCase()
+      if (!rocketName.includes(apiName.toLowerCase())) continue
+      launches.push({
+        id: l.id,
+        rocketName: l.rocket?.configuration?.name || '',
         name: l.name,
         net: l.net,
         statusName: l.status?.name || '',
@@ -257,80 +268,109 @@ async function fetchAllLaunches() {
         mission: l.mission?.name || '',
       })
     }
-    url = data.next
-    // 2010年以前はスキップ（古すぎるデータは不要）
-    const oldest = data.results[data.results.length - 1]
-    if (oldest && new Date(oldest.net).getFullYear() < 2010) {
-      console.log(`  Reached 2010, stopping pagination`)
-      break
-    }
-    await new Promise(r => setTimeout(r, 2000))
+    await new Promise(r => setTimeout(r, 5000))
   }
-
-  console.log(`Total launches fetched: ${allLaunches.length}`)
-  return allLaunches
+  // IDで重複排除
+  const seen = new Set()
+  return launches.filter(l => {
+    if (seen.has(l.id)) return false
+    seen.add(l.id)
+    return true
+  }).sort((a, b) => new Date(b.net) - new Date(a.net))
 }
 
-// ロケット名マッチング
-function matchRocket(rocketNameLower, rocket) {
-  return rocket.matchNames.some(m => rocketNameLower.includes(m))
-}
-
-// 既存の宇宙便記事とのマッチング
-function findRelatedArticles(rocket) {
-  const articles = []
-  try {
-    const files = fs.readdirSync(POSTS_DIR).filter(f => f.endsWith('.md'))
-    const slugParts = rocket.slug.split('-')
-    const matchTerms = rocket.matchNames.map(n => n.replace(/\s+/g, '-'))
-
-    for (const file of files) {
-      const content = fs.readFileSync(path.join(POSTS_DIR, file), 'utf-8')
-      const frontmatter = content.match(/^---\n([\s\S]*?)\n---/)
-      if (!frontmatter) continue
-
-      const fm = frontmatter[1]
-      const titleMatch = fm.match(/title:\s*'([^']*)'/) || fm.match(/title:\s*"([^"]*)"/)
-      const dateMatch = fm.match(/date:\s*'([^']*)'/) || fm.match(/date:\s*"([^"]*)"/)
-      const title = titleMatch?.[1] || ''
-      const date = dateMatch?.[1] || ''
-      const slug = file.replace(/\.md$/, '')
-      const fileLower = file.toLowerCase()
-      const titleLower = title.toLowerCase()
-
-      const matched = matchTerms.some(t => fileLower.includes(t)) ||
-        rocket.matchNames.some(m => titleLower.includes(m))
-
-      if (matched) {
-        articles.push({ slug, title, date: date.slice(0, 10) })
+// 全履歴取得（--fullモード用）
+async function fetchAllLaunchesForRocket(rocket) {
+  const launches = []
+  for (const apiName of rocket.apiNames) {
+    const encoded = encodeURIComponent(apiName)
+    let url = `https://ll.thespacedevs.com/2.2.0/launch/previous/?limit=100&mode=list&ordering=-net&search=${encoded}`
+    let page = 0
+    while (url) {
+      page++
+      console.log(`  Fetching ${apiName} page ${page}...`)
+      const res = await fetchWithRetry(url)
+      if (!res) break
+      const data = await res.json()
+      for (const l of (data.results || [])) {
+        const rocketName = (l.rocket?.configuration?.name || '').toLowerCase()
+        if (!rocketName.includes(apiName.toLowerCase())) continue
+        launches.push({
+          id: l.id,
+          rocketName: l.rocket?.configuration?.name || '',
+          name: l.name,
+          net: l.net,
+          statusName: l.status?.name || '',
+          pad: l.pad?.location?.name || '',
+          mission: l.mission?.name || '',
+        })
       }
+      url = data.next
+      await new Promise(r => setTimeout(r, 5000))
     }
-  } catch {}
-  return articles.sort((a, b) => b.date.localeCompare(a.date)).slice(0, 10)
+  }
+  const seen = new Set()
+  return launches.filter(l => {
+    if (seen.has(l.id)) return false
+    seen.add(l.id)
+    return true
+  }).sort((a, b) => new Date(b.net) - new Date(a.net))
 }
 
-// 年別統計を計算
-function calcYearlyStats(launches) {
-  const yearly = {}
+function isSuccess(statusName) {
+  return statusName.toLowerCase().includes('success')
+}
+
+function isFailure(statusName) {
+  const s = statusName.toLowerCase()
+  return s.includes('failure') || s.includes('partial')
+}
+
+// 打ち上げリストから統計を計算
+function calcStats(launches) {
+  const total = launches.length
+  const success = launches.filter(l => isSuccess(l.statusName)).length
+  const failure = launches.filter(l => isFailure(l.statusName)).length
+  const successRate = total > 0 ? Math.round((success / total) * 1000) / 10 : 0
+
+  const yearlyStats = {}
+  const currentYear = new Date().getFullYear()
   for (const l of launches) {
     const year = new Date(l.net).getFullYear()
     if (isNaN(year)) continue
-    if (!yearly[year]) yearly[year] = { total: 0, success: 0, failure: 0 }
-    yearly[year].total++
-    const s = l.statusName.toLowerCase()
-    if (s.includes('success')) yearly[year].success++
-    else if (s.includes('failure') || s.includes('partial')) yearly[year].failure++
+    if (!yearlyStats[year]) yearlyStats[year] = { total: 0, success: 0, failure: 0 }
+    yearlyStats[year].total++
+    if (isSuccess(l.statusName)) yearlyStats[year].success++
+    else if (isFailure(l.statusName)) yearlyStats[year].failure++
   }
-  return yearly
+
+  const thisYear = yearlyStats[currentYear] || { total: 0, success: 0, failure: 0 }
+
+  return { total, success, failure, successRate, thisYear, yearlyStats }
+}
+
+// 既存データの打ち上げリストに新しいデータをマージ
+function mergeLaunches(existing, fresh) {
+  const existingIds = new Set((existing || []).map(l => l.id))
+  const merged = [...(existing || [])]
+  let added = 0
+  for (const l of fresh) {
+    if (!existingIds.has(l.id)) {
+      merged.push(l)
+      added++
+    }
+  }
+  merged.sort((a, b) => new Date(b.net) - new Date(a.net))
+  return { merged, added }
 }
 
 // launches.jsonから次の打ち上げ予定を取得
-function getUpcomingForRocket(rocket) {
+function getUpcoming(rocket) {
   try {
-    const data = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'public', 'data', 'launches.json'), 'utf-8'))
+    const data = JSON.parse(fs.readFileSync(LAUNCHES_JSON, 'utf-8'))
     return (data.launches || []).filter(l => {
       const name = (l.rocket || '').toLowerCase()
-      return rocket.matchNames.some(m => name.includes(m))
+      return rocket.apiNames.some(m => name.toLowerCase().includes(m.toLowerCase()))
     }).slice(0, 3)
   } catch { return [] }
 }
@@ -338,60 +378,74 @@ function getUpcomingForRocket(rocket) {
 async function main() {
   if (!fs.existsSync(OUTPUT_DIR)) fs.mkdirSync(OUTPUT_DIR, { recursive: true })
 
-  // 全打ち上げデータを一括取得
-  console.log('Fetching all launches from LL2 API...')
-  const allLaunches = await fetchAllLaunches()
-
-  // セーフガード: API取得が少なすぎる場合は既存データを保持
-  if (allLaunches.length < 100) {
-    console.error(`\nERROR: Only ${allLaunches.length} launches fetched (expected 1000+). API may be down or rate-limited.`)
-    console.error('Skipping update to preserve existing data.')
-    process.exit(1)
-  }
+  console.log(`Mode: ${FULL_MODE ? 'FULL (re-fetch all history)' : 'INCREMENTAL (recent launches only)'}`)
 
   const summaries = []
+  let totalUpdated = 0
 
   for (const rocket of ROCKETS) {
     console.log(`\n--- ${rocket.nameJa} (${rocket.nameEn}) ---`)
 
-    // このロケットに該当する打ち上げをフィルタ
-    const launches = allLaunches.filter(l => matchRocket(l.rocketName, rocket))
-    console.log(`  ${launches.length} launches matched`)
+    const existing = loadExisting(rocket.slug)
 
-    // 統計
-    const total = launches.length
-    const success = launches.filter(l => l.statusName.toLowerCase().includes('success')).length
-    const failure = launches.filter(l => {
-      const s = l.statusName.toLowerCase()
-      return s.includes('failure') || s.includes('partial')
-    }).length
-    const successRate = total > 0 ? Math.round((success / total) * 1000) / 10 : 0
+    // 打ち上げデータ取得
+    let allLaunches
+    if (FULL_MODE || !existing || !existing._launches) {
+      // 初回 or --full: 全履歴取得
+      console.log('  Full fetch...')
+      const fetched = await fetchAllLaunchesForRocket(rocket)
+      if (fetched.length === 0 && existing && existing.stats && existing.stats.total > 0) {
+        console.log('  WARNING: API returned 0 results but existing data has launches. Keeping existing data.')
+        allLaunches = existing._launches || []
+      } else {
+        allLaunches = fetched
+      }
+    } else {
+      // 差分更新: 直近50件を取得してマージ
+      console.log('  Incremental fetch...')
+      const recent = await fetchRecentLaunches(rocket)
+      const { merged, added } = mergeLaunches(existing._launches, recent)
+      allLaunches = merged
+      console.log(`  ${added} new launches added (total: ${allLaunches.length})`)
+    }
 
-    const yearlyStats = calcYearlyStats(launches)
-    const currentYear = new Date().getFullYear()
-    const thisYear = yearlyStats[currentYear] || { total: 0, success: 0, failure: 0 }
+    // 統計計算
+    const stats = calcStats(allLaunches)
+    console.log(`  Total: ${stats.total}, Success: ${stats.success}, Rate: ${stats.successRate}%`)
 
-    // 直近の打ち上げ
-    const recentLaunches = launches.slice(0, 20).map(l => ({
+    // セーフガード: API取得が0件で既存データがある場合のみスキップ
+    // （既存データの件数が異常に多い場合もあるので、比率ではなく0件チェック）
+    if (stats.total === 0 && existing && existing.stats && existing.stats.total > 0) {
+      console.log(`  WARNING: New total (${stats.total}) is much less than existing (${existing.stats.total}). Keeping existing data.`)
+      existing.upcoming = getUpcoming(rocket)
+      existing.updated = new Date().toISOString()
+      fs.writeFileSync(path.join(OUTPUT_DIR, `${rocket.slug}.json`), JSON.stringify(existing, null, 2), 'utf-8')
+      summaries.push({
+        slug: rocket.slug, nameJa: rocket.nameJa, nameEn: rocket.nameEn,
+        operator: rocket.operator, country: rocket.country, image: rocket.image,
+        status: rocket.status,
+        total: existing.stats.total, successRate: existing.stats.successRate,
+        thisYear: existing.stats.thisYear?.total || 0,
+        lastLaunch: existing.recentLaunches?.[0]?.date || null,
+      })
+      continue
+    }
+
+    // 直近の打ち上げ（表示用、15件）
+    const recentLaunches = allLaunches.slice(0, 15).map(l => ({
       date: l.net ? new Date(l.net).toISOString().slice(0, 10) : '',
       mission: l.mission || l.name?.split('|')[1]?.trim() || l.name || '',
-      status: l.statusName.toLowerCase().includes('success') ? 'success'
-        : (l.statusName.toLowerCase().includes('failure') || l.statusName.toLowerCase().includes('partial')) ? 'failure'
-        : 'other',
+      status: isSuccess(l.statusName) ? 'success' : isFailure(l.statusName) ? 'failure' : 'other',
       pad: l.pad,
     }))
 
-    // 関連記事
-    const articles = findRelatedArticles(rocket)
-    console.log(`  ${articles.length} related articles`)
-
-    // 次の打ち上げ
-    const upcoming = getUpcomingForRocket(rocket)
+    const upcoming = getUpcoming(rocket)
 
     const rocketData = {
       slug: rocket.slug,
       nameJa: rocket.nameJa,
       nameEn: rocket.nameEn,
+      apiName: rocket.apiNames[0],
       operator: rocket.operator,
       country: rocket.country,
       image: rocket.image,
@@ -399,53 +453,33 @@ async function main() {
       status: rocket.status,
       description: rocket.description,
       specs: rocket.specs,
-      stats: {
-        total,
-        success,
-        failure,
-        successRate,
-        thisYear,
-        yearlyStats,
-      },
+      stats,
       recentLaunches,
-      articles,
+      articles: [],
       upcoming,
       updated: new Date().toISOString(),
+      // 内部データ: 全打ち上げリスト（差分マージ用）
+      _launches: allLaunches,
     }
 
-    fs.writeFileSync(
-      path.join(OUTPUT_DIR, `${rocket.slug}.json`),
-      JSON.stringify(rocketData, null, 2),
-      'utf-8'
-    )
+    fs.writeFileSync(path.join(OUTPUT_DIR, `${rocket.slug}.json`), JSON.stringify(rocketData, null, 2), 'utf-8')
     console.log(`  Saved ${rocket.slug}.json`)
+    totalUpdated++
 
     summaries.push({
-      slug: rocket.slug,
-      nameJa: rocket.nameJa,
-      nameEn: rocket.nameEn,
-      operator: rocket.operator,
-      country: rocket.country,
-      image: rocket.image,
+      slug: rocket.slug, nameJa: rocket.nameJa, nameEn: rocket.nameEn,
+      operator: rocket.operator, country: rocket.country, image: rocket.image,
       status: rocket.status,
-      total,
-      successRate,
-      thisYear: thisYear.total,
+      total: stats.total, successRate: stats.successRate,
+      thisYear: stats.thisYear.total,
       lastLaunch: recentLaunches[0]?.date || null,
     })
   }
 
-  // 一覧データ
-  const indexData = {
-    updated: new Date().toISOString(),
-    rockets: summaries,
-  }
-  fs.writeFileSync(
-    path.join(OUTPUT_DIR, 'index.json'),
-    JSON.stringify(indexData, null, 2),
-    'utf-8'
-  )
-  console.log(`\nSaved index.json with ${summaries.length} rockets`)
+  // index.json
+  const indexData = { updated: new Date().toISOString(), rockets: summaries }
+  fs.writeFileSync(path.join(OUTPUT_DIR, 'index.json'), JSON.stringify(indexData, null, 2), 'utf-8')
+  console.log(`\nDone. Updated ${totalUpdated}/${ROCKETS.length} rockets.`)
 }
 
 main().catch(e => { console.error(e); process.exit(1) })
