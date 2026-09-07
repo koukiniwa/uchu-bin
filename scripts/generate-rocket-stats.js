@@ -342,6 +342,13 @@ async function main() {
   console.log('Fetching all launches from LL2 API...')
   const allLaunches = await fetchAllLaunches()
 
+  // セーフガード: API取得が少なすぎる場合は既存データを保持
+  if (allLaunches.length < 100) {
+    console.error(`\nERROR: Only ${allLaunches.length} launches fetched (expected 1000+). API may be down or rate-limited.`)
+    console.error('Skipping update to preserve existing data.')
+    process.exit(1)
+  }
+
   const summaries = []
 
   for (const rocket of ROCKETS) {
