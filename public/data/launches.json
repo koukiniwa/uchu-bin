@@ -1,20 +1,6 @@
 {
-  "updated": "2026-09-07T08:59:01.515Z",
+  "updated": "2026-09-07T19:06:22.405Z",
   "launches": [
-    {
-      "id": "95eb9265-bdbe-43ad-b08c-6be7eb4e58f4",
-      "name": "Long March 2D/YZ-3 | Unknown Payload",
-      "rocket": "Long March 2D",
-      "mission": "Unknown Payload",
-      "date": "2026-09-09",
-      "month": 9,
-      "time": "09:00",
-      "tentative": false,
-      "provider": "China Aerospace Science and Technology Corporation",
-      "country": "CN",
-      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
-      "status": "Go"
-    },
     {
       "id": "d793ba47-faf5-4bab-a386-39a9ccc49c90",
       "name": "Soyuz 2.1b | Progress MS-35 (96P)",
@@ -27,6 +13,20 @@
       "provider": "Russian Federal Space Agency (ROSCOSMOS)",
       "country": "RU",
       "pad": "Baikonur Cosmodrome, Republic of Kazakhstan",
+      "status": "Go"
+    },
+    {
+      "id": "95eb9265-bdbe-43ad-b08c-6be7eb4e58f4",
+      "name": "Long March 2D/YZ-3 | Unknown Payload",
+      "rocket": "Long March 2D",
+      "mission": "Unknown Payload",
+      "date": "2026-09-10",
+      "month": 9,
+      "time": "09:00",
+      "tentative": false,
+      "provider": "China Aerospace Science and Technology Corporation",
+      "country": "CN",
+      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
       "status": "Go"
     },
     {
