@@ -1,6 +1,21 @@
 {
-  "updated": "2026-09-08T14:56:17.811Z",
+  "updated": "2026-09-08T18:21:46.854Z",
   "featured": [
+    {
+      "id": "7d1afb26-6f9c-429b-9ccf-29012fd1e519",
+      "rocket": "Starship",
+      "mission": "Flight 14",
+      "description": "14th test flight of the two-stage Starship launch vehicle. 3rd flight of Starship V3 and the first Starship flight to deploy satellites (a group of Starlink satellites) into stable Low Earth Orbit.",
+      "highlight": "SpaceXの巨大ロケット「スターシップ」の14回目となる試験飛行で、最新バージョン「V3」としては3回目のフライトです。将来の月・火星有人探査を見据えた究極の輸送システムを目指すスターシップは、試験を重ねるごとに着実に進化を遂げています。人類の惑星間移住という壮大なビジョンへ向け、今回の試験でどこまで技術的成熟が進むかが注目されます。",
+      "date": "2026-09-15",
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "SpaceX Starbase, TX, USA",
+      "status": "TBD",
+      "orbit": "Low Earth Orbit"
+    },
     {
       "id": "18441371-8b2e-457c-afb5-1ec1b11ab630",
       "rocket": "Falcon 9",
@@ -15,21 +30,6 @@
       "pad": "Cape Canaveral SFS, FL, USA",
       "status": "TBD",
       "orbit": "Low Earth Orbit"
-    },
-    {
-      "id": "7d1afb26-6f9c-429b-9ccf-29012fd1e519",
-      "rocket": "Starship",
-      "mission": "Flight 14",
-      "description": "14th test flight of the two-stage Starship launch vehicle. 3rd flight of Starship V3.",
-      "highlight": "SpaceXの巨大ロケット「スターシップ」の14回目となる試験飛行で、最新バージョン「V3」としては3回目のフライトです。将来の月・火星有人探査を見据えた究極の輸送システムを目指すスターシップは、試験を重ねるごとに着実に進化を遂げています。人類の惑星間移住という壮大なビジョンへ向け、今回の試験でどこまで技術的成熟が進むかが注目されます。",
-      "date": "2026-09-30",
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "SpaceX Starbase, TX, USA",
-      "status": "TBD",
-      "orbit": "Unknown"
     },
     {
       "id": "69ebbcd2-b257-4070-9ef9-21e7d1f8a883",

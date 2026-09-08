@@ -1,20 +1,6 @@
 {
-  "updated": "2026-09-08T14:56:11.502Z",
+  "updated": "2026-09-08T18:21:43.187Z",
   "launches": [
-    {
-      "id": "d793ba47-faf5-4bab-a386-39a9ccc49c90",
-      "name": "Soyuz 2.1b | Progress MS-35 (96P)",
-      "rocket": "Soyuz 2",
-      "mission": "Progress MS-35 (96P)",
-      "date": "2026-09-09",
-      "month": 9,
-      "time": "16:15",
-      "tentative": false,
-      "provider": "Russian Federal Space Agency (ROSCOSMOS)",
-      "country": "RU",
-      "pad": "Baikonur Cosmodrome, Republic of Kazakhstan",
-      "status": "Go"
-    },
     {
       "id": "95eb9265-bdbe-43ad-b08c-6be7eb4e58f4",
       "name": "Long March 2D/YZ-3 | Unknown Payload",
@@ -72,6 +58,20 @@
       "status": "TBC"
     },
     {
+      "id": "7d1afb26-6f9c-429b-9ccf-29012fd1e519",
+      "name": "Starship | Flight 14",
+      "rocket": "Starship",
+      "mission": "Flight 14",
+      "date": "2026-09-15",
+      "month": 9,
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "SpaceX Starbase, TX, USA",
+      "status": "TBD"
+    },
+    {
       "id": "8effc13a-c658-4d2e-9f15-8dba4d7fe2dd",
       "name": "Vega-C | Sentinel-3C & FLEX",
       "rocket": "Vega-C",
@@ -84,6 +84,34 @@
       "country": "FR",
       "pad": "Guiana Space Centre, French Guiana",
       "status": "Go"
+    },
+    {
+      "id": "d793ba47-faf5-4bab-a386-39a9ccc49c90",
+      "name": "Soyuz 2.1b | Progress MS-35 (96P)",
+      "rocket": "Soyuz 2",
+      "mission": "Progress MS-35 (96P)",
+      "date": "2026-09-16",
+      "month": 9,
+      "time": null,
+      "tentative": true,
+      "provider": "Russian Federal Space Agency (ROSCOSMOS)",
+      "country": "RU",
+      "pad": "Baikonur Cosmodrome, Republic of Kazakhstan",
+      "status": "TBD"
+    },
+    {
+      "id": "898f7df0-b6ce-4a5c-80b4-67e81842124e",
+      "name": "Long March 12 | Unknown Payload",
+      "rocket": "Long March 12",
+      "mission": "Unknown Payload",
+      "date": "2026-09-17",
+      "month": 9,
+      "time": null,
+      "tentative": true,
+      "provider": "China Aerospace Science and Technology Corporation",
+      "country": "CN",
+      "pad": "Wenchang Space Launch Site, People's Republic of China",
+      "status": "TBC"
     },
     {
       "id": "d1471f9d-e9d0-4146-8e97-90863e48bfc8",
@@ -125,20 +153,6 @@
       "provider": "China Aerospace Science and Technology Corporation",
       "country": "CN",
       "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
-      "status": "TBD"
-    },
-    {
-      "id": "7d1afb26-6f9c-429b-9ccf-29012fd1e519",
-      "name": "Starship | Flight 14",
-      "rocket": "Starship",
-      "mission": "Flight 14",
-      "date": "2026-09-30",
-      "month": 9,
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "SpaceX Starbase, TX, USA",
       "status": "TBD"
     },
     {
@@ -240,6 +254,20 @@
       "status": "TBD"
     },
     {
+      "id": "4651fd8a-43de-4166-bf8f-c168b3bd1d2c",
+      "name": "Falcon Heavy | NROL-97",
+      "rocket": "Falcon Heavy",
+      "mission": "NROL-97",
+      "date": "2026-10-31",
+      "month": 10,
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Kennedy Space Center, FL, USA",
+      "status": "TBD"
+    },
+    {
       "id": "bff2fc91-eddd-4dfc-af26-ac0674cfab4d",
       "name": "Soyuz 2.1a/Fregat-M | MKA Kinosputnik, KOEN and others",
       "rocket": "Soyuz 2",
@@ -251,34 +279,6 @@
       "provider": "Russian Federal Space Agency (ROSCOSMOS)",
       "country": "RU",
       "pad": "Vostochny Cosmodrome, Siberia, Russian Federation",
-      "status": "TBD"
-    },
-    {
-      "id": "22e117bf-041c-49d5-9d09-7b180036e143",
-      "name": "Ariane 62 | Metop-SG B1",
-      "rocket": "Ariane 6",
-      "mission": "Metop-SG B1",
-      "date": "2026-11-30",
-      "month": 11,
-      "time": null,
-      "tentative": true,
-      "provider": "Arianespace",
-      "country": "FR",
-      "pad": "Guiana Space Centre, French Guiana",
-      "status": "TBD"
-    },
-    {
-      "id": "d3bd7fb2-fac6-49fc-ae52-cee07d2fde67",
-      "name": "Falcon Heavy | Griffin Mission One",
-      "rocket": "Falcon Heavy",
-      "mission": "Griffin Mission One",
-      "date": "2026-11-30",
-      "month": 11,
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "Kennedy Space Center, FL, USA",
       "status": "TBD"
     }
   ],
