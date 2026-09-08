@@ -57,19 +57,19 @@
       "status": "TBC"
     },
     {
-      "id": "dc570565-4dcf-4ab9-8174-bf88efef477f",
-      "name": "Long March 12A | Flight 2",
-      "rocket": "Long March 12A",
-      "mission": "Flight 2",
-      "date": "2026-09-30",
+      "id": "898f7df0-b6ce-4a5c-80b4-67e81842124e",
+      "name": "Long March 12 | Unknown Payload",
+      "rocket": "Long March 12",
+      "mission": "Unknown Payload",
+      "date": "2026-09-17",
       "month": 9,
       "time": null,
       "tentative": true,
       "provider": "China Aerospace Science and Technology Corporation",
       "country": "CN",
-      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
-      "status": "TBD"
+      "pad": "Wenchang Space Launch Site, People's Republic of China",
+      "status": "TBC"
     }
   ],
-  "updated": "2026-09-07T19:20:26.584Z"
+  "updated": "2026-09-08T18:54:13.812Z"
 }
