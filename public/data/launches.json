@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-08T18:21:43.187Z",
+  "updated": "2026-09-08T21:36:38.258Z",
   "launches": [
     {
       "id": "95eb9265-bdbe-43ad-b08c-6be7eb4e58f4",
@@ -290,16 +290,6 @@
       "date": "2026-09-06",
       "country": "",
       "provider": "SpaceX",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "1b23eb18-e06e-4058-9b42-e95ca0980511",
-      "rocket": "Spectrum",
-      "mission": "Onward and Upward",
-      "date": "2026-09-05",
-      "country": "DE",
-      "provider": "Isar Aerospace",
       "result": "success",
       "resultLabel": "成功"
     }
