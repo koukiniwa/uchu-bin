@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-09T13:28:01.061Z",
+  "updated": "2026-09-09T17:36:58.658Z",
   "launches": [
     {
       "id": "95eb9265-bdbe-43ad-b08c-6be7eb4e58f4",
@@ -36,12 +36,12 @@
       "mission": "O3b mPower 11-13",
       "date": "2026-09-13",
       "month": 9,
-      "time": null,
-      "tentative": true,
+      "time": "18:49",
+      "tentative": false,
       "provider": "SpaceX",
       "country": "US",
       "pad": "Cape Canaveral SFS, FL, USA",
-      "status": "TBC"
+      "status": "Go"
     },
     {
       "id": "7d1afb26-6f9c-429b-9ccf-29012fd1e519",
@@ -86,18 +86,32 @@
       "status": "Go"
     },
     {
+      "id": "17c71937-dd80-406f-bb47-0c9ee9a24276",
+      "name": "Falcon 9 Block 5 | USSF-259",
+      "rocket": "Falcon 9",
+      "mission": "USSF-259",
+      "date": "2026-09-16",
+      "month": 9,
+      "time": "01:00",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "",
+      "pad": "Vandenberg SFB, CA, USA",
+      "status": "Go"
+    },
+    {
       "id": "d793ba47-faf5-4bab-a386-39a9ccc49c90",
       "name": "Soyuz 2.1b | Progress MS-35 (96P)",
       "rocket": "Soyuz 2",
       "mission": "Progress MS-35 (96P)",
       "date": "2026-09-16",
       "month": 9,
-      "time": null,
-      "tentative": true,
+      "time": "13:33",
+      "tentative": false,
       "provider": "Russian Federal Space Agency (ROSCOSMOS)",
       "country": "RU",
       "pad": "Baikonur Cosmodrome, Republic of Kazakhstan",
-      "status": "TBD"
+      "status": "Go"
     },
     {
       "id": "898f7df0-b6ce-4a5c-80b4-67e81842124e",
@@ -139,6 +153,20 @@
       "provider": "Rocket Lab",
       "country": "NZ",
       "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
+      "status": "TBD"
+    },
+    {
+      "id": "18441371-8b2e-457c-afb5-1ec1b11ab630",
+      "name": "Falcon 9 Block 5 | Crew-13",
+      "rocket": "Falcon 9",
+      "mission": "Crew-13",
+      "date": "2026-09-30",
+      "month": 9,
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Cape Canaveral SFS, FL, USA",
       "status": "TBD"
     },
     {
@@ -252,46 +280,7 @@
       "country": "NZ",
       "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
       "status": "TBD"
-    },
-    {
-      "id": "3b430f81-0ff1-4d85-8a1a-cef0de326198",
-      "name": "Falcon 9 Block 5 | Bandwagon 5 (Dedicated Mid-Inclination Rideshare)",
-      "rocket": "Falcon 9",
-      "mission": "Bandwagon 5 (Dedicated Mid-Inclination Rideshare)",
-      "date": "2026-10-31",
-      "month": 10,
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "Cape Canaveral SFS, FL, USA",
-      "status": "TBD"
-    },
-    {
-      "id": "4651fd8a-43de-4166-bf8f-c168b3bd1d2c",
-      "name": "Falcon Heavy | NROL-97",
-      "rocket": "Falcon Heavy",
-      "mission": "NROL-97",
-      "date": "2026-10-31",
-      "month": 10,
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "Kennedy Space Center, FL, USA",
-      "status": "TBD"
     }
   ],
-  "recent": [
-    {
-      "id": "153ef8ef-b12b-43f4-a4bf-05b225c0cd37",
-      "rocket": "Falcon 9",
-      "mission": "Starlink Group 15-24",
-      "date": "2026-09-06",
-      "country": "",
-      "provider": "SpaceX",
-      "result": "success",
-      "resultLabel": "成功"
-    }
-  ]
+  "recent": []
 }
