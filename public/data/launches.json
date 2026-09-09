@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-09T08:42:11.106Z",
+  "updated": "2026-09-09T13:28:01.061Z",
   "launches": [
     {
       "id": "95eb9265-bdbe-43ad-b08c-6be7eb4e58f4",
@@ -28,20 +28,6 @@
       "country": "",
       "pad": "Vandenberg SFB, CA, USA",
       "status": "Go"
-    },
-    {
-      "id": "63063b9d-ade9-4448-8717-6f910aa81188",
-      "name": "Long March 8A | Unknown Payload",
-      "rocket": "Long March 8A",
-      "mission": "Unknown Payload",
-      "date": "2026-09-11",
-      "month": 9,
-      "time": null,
-      "tentative": true,
-      "provider": "China Aerospace Science and Technology Corporation",
-      "country": "CN",
-      "pad": "Wenchang Space Launch Site, People's Republic of China",
-      "status": "TBC"
     },
     {
       "id": "ad358a4d-c541-409b-9366-9c2f2da4aeb9",
@@ -86,6 +72,20 @@
       "status": "Go"
     },
     {
+      "id": "767f7827-53d8-4621-803b-f456a1e6b512",
+      "name": "Gravity-1 | Unknown Payload",
+      "rocket": "Gravity-1",
+      "mission": "Unknown Payload",
+      "date": "2026-09-15",
+      "month": 9,
+      "time": "21:55",
+      "tentative": false,
+      "provider": "Orienspace Technology",
+      "country": "CN",
+      "pad": "Haiyang Oriental Spaceport",
+      "status": "Go"
+    },
+    {
       "id": "d793ba47-faf5-4bab-a386-39a9ccc49c90",
       "name": "Soyuz 2.1b | Progress MS-35 (96P)",
       "rocket": "Soyuz 2",
@@ -106,12 +106,12 @@
       "mission": "Unknown Payload",
       "date": "2026-09-17",
       "month": 9,
-      "time": null,
-      "tentative": true,
+      "time": "00:30",
+      "tentative": false,
       "provider": "China Aerospace Science and Technology Corporation",
       "country": "CN",
       "pad": "Wenchang Space Launch Site, People's Republic of China",
-      "status": "TBC"
+      "status": "Go"
     },
     {
       "id": "d1471f9d-e9d0-4146-8e97-90863e48bfc8",
@@ -153,6 +153,20 @@
       "provider": "China Aerospace Science and Technology Corporation",
       "country": "CN",
       "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
+      "status": "TBD"
+    },
+    {
+      "id": "63063b9d-ade9-4448-8717-6f910aa81188",
+      "name": "Long March 8A | Unknown Payload",
+      "rocket": "Long March 8A",
+      "mission": "Unknown Payload",
+      "date": "2026-09-30",
+      "month": 9,
+      "time": null,
+      "tentative": true,
+      "provider": "China Aerospace Science and Technology Corporation",
+      "country": "CN",
+      "pad": "Wenchang Space Launch Site, People's Republic of China",
       "status": "TBD"
     },
     {
@@ -265,20 +279,6 @@
       "provider": "SpaceX",
       "country": "US",
       "pad": "Kennedy Space Center, FL, USA",
-      "status": "TBD"
-    },
-    {
-      "id": "bff2fc91-eddd-4dfc-af26-ac0674cfab4d",
-      "name": "Soyuz 2.1a/Fregat-M | MKA Kinosputnik, KOEN and others",
-      "rocket": "Soyuz 2",
-      "mission": "MKA Kinosputnik, KOEN and others",
-      "date": "2026-11-19",
-      "month": 11,
-      "time": null,
-      "tentative": true,
-      "provider": "Russian Federal Space Agency (ROSCOSMOS)",
-      "country": "RU",
-      "pad": "Vostochny Cosmodrome, Siberia, Russian Federation",
       "status": "TBD"
     }
   ],
