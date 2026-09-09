@@ -155,21 +155,21 @@
       "mission": "O3b mPower 11-13",
       "date": "2026-09-13",
       "month": 9,
-      "time": null,
-      "tentative": true,
+      "time": "18:49",
+      "tentative": false,
       "provider": "SpaceX",
       "country": "US",
       "pad": "Cape Canaveral SFS, FL, USA",
-      "status": "TBC"
+      "status": "Go"
     },
     {
-      "id": "d1471f9d-e9d0-4146-8e97-90863e48bfc8",
-      "name": "Falcon 9 Block 5 | Starlink Group 15-27",
+      "id": "17c71937-dd80-406f-bb47-0c9ee9a24276",
+      "name": "Falcon 9 Block 5 | USSF-259",
       "rocket": "Falcon 9",
-      "mission": "Starlink Group 15-27",
-      "date": "2026-09-20",
+      "mission": "USSF-259",
+      "date": "2026-09-16",
       "month": 9,
-      "time": "01:47",
+      "time": "01:00",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
@@ -177,5 +177,5 @@
       "status": "Go"
     }
   ],
-  "updated": "2026-09-08T18:51:26.997Z"
+  "updated": "2026-09-09T18:45:31.726Z"
 }

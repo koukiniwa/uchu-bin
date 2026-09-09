@@ -133,21 +133,6 @@
     }
   ],
   "articles": [],
-  "upcoming": [
-    {
-      "id": "4651fd8a-43de-4166-bf8f-c168b3bd1d2c",
-      "name": "Falcon Heavy | NROL-97",
-      "rocket": "Falcon Heavy",
-      "mission": "NROL-97",
-      "date": "2026-10-31",
-      "month": 10,
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "Kennedy Space Center, FL, USA",
-      "status": "TBD"
-    }
-  ],
-  "updated": "2026-09-08T18:51:32.550Z"
+  "upcoming": [],
+  "updated": "2026-09-09T18:45:37.176Z"
 }
