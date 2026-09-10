@@ -1,20 +1,6 @@
 {
-  "updated": "2026-09-10T05:47:54.051Z",
+  "updated": "2026-09-10T10:45:23.520Z",
   "launches": [
-    {
-      "id": "95eb9265-bdbe-43ad-b08c-6be7eb4e58f4",
-      "name": "Long March 2D/YZ-3 | Unknown Payload",
-      "rocket": "Long March 2D",
-      "mission": "Unknown Payload",
-      "date": "2026-09-10",
-      "month": 9,
-      "time": "09:00",
-      "tentative": false,
-      "provider": "China Aerospace Science and Technology Corporation",
-      "country": "CN",
-      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
-      "status": "Go"
-    },
     {
       "id": "3e0456da-14b1-4ac3-b59e-35fefb1d1530",
       "name": "Falcon 9 Block 5 | USSF-153",
@@ -69,6 +55,20 @@
       "provider": "Avio S.p.A",
       "country": "FR",
       "pad": "Guiana Space Centre, French Guiana",
+      "status": "Go"
+    },
+    {
+      "id": "de446468-057f-4c9d-a6a1-af99c93b541e",
+      "name": "Zhuque-2E Block 2 | Unknown Payload",
+      "rocket": "Zhuque-2",
+      "mission": "Unknown Payload",
+      "date": "2026-09-15",
+      "month": 9,
+      "time": "06:25",
+      "tentative": false,
+      "provider": "LandSpace",
+      "country": "CN",
+      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
       "status": "Go"
     },
     {
@@ -282,5 +282,16 @@
       "status": "TBD"
     }
   ],
-  "recent": []
+  "recent": [
+    {
+      "id": "95eb9265-bdbe-43ad-b08c-6be7eb4e58f4",
+      "rocket": "Long March 4B",
+      "mission": "Yaogan 53-01 to 03/56-01 to 03",
+      "date": "2026-09-10",
+      "country": "CN",
+      "provider": "China Aerospace Science and Technology Corporation",
+      "result": "success",
+      "resultLabel": "成功"
+    }
+  ]
 }
