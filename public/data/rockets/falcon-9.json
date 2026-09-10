@@ -135,20 +135,6 @@
   "articles": [],
   "upcoming": [
     {
-      "id": "3e0456da-14b1-4ac3-b59e-35fefb1d1530",
-      "name": "Falcon 9 Block 5 | USSF-153",
-      "rocket": "Falcon 9",
-      "mission": "USSF-153",
-      "date": "2026-09-10",
-      "month": 9,
-      "time": "15:37",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "",
-      "pad": "Vandenberg SFB, CA, USA",
-      "status": "Go"
-    },
-    {
       "id": "ad358a4d-c541-409b-9366-9c2f2da4aeb9",
       "name": "Falcon 9 Block 5 | O3b mPower 11-13",
       "rocket": "Falcon 9",
@@ -175,7 +161,21 @@
       "country": "",
       "pad": "Vandenberg SFB, CA, USA",
       "status": "Go"
+    },
+    {
+      "id": "d1471f9d-e9d0-4146-8e97-90863e48bfc8",
+      "name": "Falcon 9 Block 5 | Starlink Group 15-27",
+      "rocket": "Falcon 9",
+      "mission": "Starlink Group 15-27",
+      "date": "2026-09-20",
+      "month": 9,
+      "time": "01:47",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "",
+      "pad": "Vandenberg SFB, CA, USA",
+      "status": "Go"
     }
   ],
-  "updated": "2026-09-09T18:45:31.726Z"
+  "updated": "2026-09-10T18:35:51.257Z"
 }
