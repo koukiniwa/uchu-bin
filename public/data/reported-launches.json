@@ -299,6 +299,12 @@
       "name": "Falcon 9 Block 5 | Starlink Group 15-24",
       "status": "Launch Successful",
       "date": "2026-09-06T18:34:00.118Z"
+    },
+    {
+      "id": "95eb9265-bdbe-43ad-b08c-6be7eb4e58f4",
+      "name": "Long March 4B | Yaogan 53-01 to 03/56-01 to 03",
+      "status": "Launch Successful",
+      "date": "2026-09-10T12:09:27.567Z"
     }
   ]
 }
