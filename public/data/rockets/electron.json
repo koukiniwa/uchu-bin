@@ -41,21 +41,7 @@
       "country": "NZ",
       "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
       "status": "TBD"
-    },
-    {
-      "id": "f4c720ce-0cfd-43e6-b8dd-00273073bc01",
-      "name": "Electron | StriX Launch 12",
-      "rocket": "Electron",
-      "mission": "StriX Launch 12",
-      "date": "2026-10-31",
-      "month": 10,
-      "time": null,
-      "tentative": true,
-      "provider": "Rocket Lab",
-      "country": "NZ",
-      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
-      "status": "TBD"
     }
   ],
-  "updated": "2026-09-10T18:36:09.072Z"
+  "updated": "2026-09-11T18:41:42.525Z"
 }
