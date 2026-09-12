@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-11T20:33:17.648Z",
+  "updated": "2026-09-12T03:24:15.562Z",
   "launches": [
     {
       "id": "ad358a4d-c541-409b-9366-9c2f2da4aeb9",
@@ -125,7 +125,7 @@
       "provider": "SpaceX",
       "country": "US",
       "pad": "SpaceX Starbase, TX, USA",
-      "status": "TBD"
+      "status": "TBC"
     },
     {
       "id": "a527b585-f01f-4ecc-9230-711dcef72ef1",

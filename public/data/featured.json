@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-11T20:33:24.005Z",
+  "updated": "2026-09-12T03:24:23.531Z",
   "featured": [
     {
       "id": "7d1afb26-6f9c-429b-9ccf-29012fd1e519",
@@ -13,7 +13,7 @@
       "provider": "SpaceX",
       "country": "US",
       "pad": "SpaceX Starbase, TX, USA",
-      "status": "TBD",
+      "status": "TBC",
       "orbit": "Low Earth Orbit"
     },
     {
