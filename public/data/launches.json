@@ -1,20 +1,6 @@
 {
-  "updated": "2026-09-13T17:55:58.672Z",
+  "updated": "2026-09-13T20:27:09.665Z",
   "launches": [
-    {
-      "id": "ad358a4d-c541-409b-9366-9c2f2da4aeb9",
-      "name": "Falcon 9 Block 5 | O3b mPower 11-13",
-      "rocket": "Falcon 9",
-      "mission": "O3b mPower 11-13",
-      "date": "2026-09-13",
-      "month": 9,
-      "time": "18:49",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "Cape Canaveral SFS, FL, USA",
-      "status": "Go"
-    },
     {
       "id": "8effc13a-c658-4d2e-9f15-8dba4d7fe2dd",
       "name": "Vega-C | Sentinel-3C & FLEX",
@@ -280,9 +266,33 @@
       "country": "JP",
       "pad": "Tanegashima Space Center, Japan",
       "status": "Go"
+    },
+    {
+      "id": "f4c720ce-0cfd-43e6-b8dd-00273073bc01",
+      "name": "Electron | StriX Launch 12",
+      "rocket": "Electron",
+      "mission": "StriX Launch 12",
+      "date": "2026-10-31",
+      "month": 10,
+      "time": null,
+      "tentative": true,
+      "provider": "Rocket Lab",
+      "country": "NZ",
+      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
+      "status": "TBD"
     }
   ],
   "recent": [
+    {
+      "id": "ad358a4d-c541-409b-9366-9c2f2da4aeb9",
+      "rocket": "Falcon 9",
+      "mission": "O3b mPower 11-13",
+      "date": "2026-09-13",
+      "country": "US",
+      "provider": "SpaceX",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "b81156da-c0b8-46c8-aebd-8af8d2be83cd",
       "rocket": "Electron",
