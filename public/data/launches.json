@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-13T14:05:45.509Z",
+  "updated": "2026-09-13T17:55:58.672Z",
   "launches": [
     {
       "id": "ad358a4d-c541-409b-9366-9c2f2da4aeb9",
@@ -290,16 +290,6 @@
       "date": "2026-09-11",
       "country": "US",
       "provider": "Rocket Lab",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "3e0456da-14b1-4ac3-b59e-35fefb1d1530",
-      "rocket": "Falcon 9",
-      "mission": "USSF-153",
-      "date": "2026-09-10",
-      "country": "",
-      "provider": "SpaceX",
       "result": "success",
       "resultLabel": "成功"
     }
