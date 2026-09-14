@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-14T11:58:28.573Z",
+  "updated": "2026-09-14T22:16:55.030Z",
   "launches": [
     {
       "id": "8effc13a-c658-4d2e-9f15-8dba4d7fe2dd",
@@ -100,20 +100,6 @@
       "status": "Go"
     },
     {
-      "id": "7d1afb26-6f9c-429b-9ccf-29012fd1e519",
-      "name": "Starship | Flight 14",
-      "rocket": "Starship",
-      "mission": "Flight 14",
-      "date": "2026-09-18",
-      "month": 9,
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "SpaceX Starbase, TX, USA",
-      "status": "TBC"
-    },
-    {
       "id": "a527b585-f01f-4ecc-9230-711dcef72ef1",
       "name": "Long March 2D | Unknown Payload",
       "rocket": "Long March 2D",
@@ -140,6 +126,20 @@
       "country": "",
       "pad": "Vandenberg SFB, CA, USA",
       "status": "Go"
+    },
+    {
+      "id": "7d1afb26-6f9c-429b-9ccf-29012fd1e519",
+      "name": "Starship | Flight 14",
+      "rocket": "Starship",
+      "mission": "Flight 14",
+      "date": "2026-09-22",
+      "month": 9,
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "SpaceX Starbase, TX, USA",
+      "status": "TBC"
     },
     {
       "id": "599ba2df-7483-4b2f-a083-2b5ddc06e069",
