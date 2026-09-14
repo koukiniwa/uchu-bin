@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-14T00:47:13.334Z",
+  "updated": "2026-09-14T05:51:59.725Z",
   "launches": [
     {
       "id": "8effc13a-c658-4d2e-9f15-8dba4d7fe2dd",
@@ -290,16 +290,6 @@
       "date": "2026-09-13",
       "country": "US",
       "provider": "SpaceX",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "b81156da-c0b8-46c8-aebd-8af8d2be83cd",
-      "rocket": "Electron",
-      "mission": "Happily Ever Faster (BlackSky Gen-3 5)",
-      "date": "2026-09-11",
-      "country": "US",
-      "provider": "Rocket Lab",
       "result": "success",
       "resultLabel": "成功"
     }
