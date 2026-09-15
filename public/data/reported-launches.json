@@ -323,6 +323,12 @@
       "name": "Falcon 9 Block 5 | O3b mPower 11-13",
       "status": "Launch in Flight",
       "date": "2026-09-13T21:04:08.466Z"
+    },
+    {
+      "id": "8effc13a-c658-4d2e-9f15-8dba4d7fe2dd",
+      "name": "Vega-C | Sentinel-3C & FLEX",
+      "status": "Launch Successful",
+      "date": "2026-09-15T06:34:31.951Z"
     }
   ]
 }
