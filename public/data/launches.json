@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-15T13:10:36.978Z",
+  "updated": "2026-09-15T17:57:36.988Z",
   "launches": [
     {
       "id": "767f7827-53d8-4621-803b-f456a1e6b512",
@@ -22,7 +22,7 @@
       "mission": "USSF-259",
       "date": "2026-09-16",
       "month": 9,
-      "time": "01:00",
+      "time": "01:29",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
@@ -106,11 +106,25 @@
       "mission": "Flight 14",
       "date": "2026-09-22",
       "month": 9,
-      "time": null,
-      "tentative": true,
+      "time": "12:15",
+      "tentative": false,
       "provider": "SpaceX",
       "country": "US",
       "pad": "SpaceX Starbase, TX, USA",
+      "status": "Go"
+    },
+    {
+      "id": "7330d83b-c478-426c-8859-f9e3a335876d",
+      "name": "Falcon 9 Block 5 | USSF-xxx (\"R-3\")",
+      "rocket": "Falcon 9",
+      "mission": "USSF-xxx (\"R-3\")",
+      "date": "2026-09-27",
+      "month": 9,
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "",
+      "pad": "Vandenberg SFB, CA, USA",
       "status": "TBC"
     },
     {
@@ -125,20 +139,6 @@
       "provider": "Rocket Lab",
       "country": "NZ",
       "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
-      "status": "TBD"
-    },
-    {
-      "id": "18441371-8b2e-457c-afb5-1ec1b11ab630",
-      "name": "Falcon 9 Block 5 | Crew-13",
-      "rocket": "Falcon 9",
-      "mission": "Crew-13",
-      "date": "2026-09-30",
-      "month": 9,
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "Cape Canaveral SFS, FL, USA",
       "status": "TBD"
     },
     {
