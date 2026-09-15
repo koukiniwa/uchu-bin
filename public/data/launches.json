@@ -1,20 +1,6 @@
 {
-  "updated": "2026-09-15T21:06:04.335Z",
+  "updated": "2026-09-15T23:59:28.792Z",
   "launches": [
-    {
-      "id": "767f7827-53d8-4621-803b-f456a1e6b512",
-      "name": "Gravity-1 | Unknown Payload",
-      "rocket": "Gravity-1",
-      "mission": "Unknown Payload",
-      "date": "2026-09-15",
-      "month": 9,
-      "time": "21:55",
-      "tentative": false,
-      "provider": "Orienspace Technology",
-      "country": "CN",
-      "pad": "Haiyang Oriental Spaceport",
-      "status": "Go"
-    },
     {
       "id": "17c71937-dd80-406f-bb47-0c9ee9a24276",
       "name": "Falcon 9 Block 5 | USSF-259",
@@ -22,7 +8,7 @@
       "mission": "USSF-259",
       "date": "2026-09-16",
       "month": 9,
-      "time": "01:29",
+      "time": "02:18",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
@@ -69,6 +55,20 @@
       "provider": "ExPace",
       "country": "CN",
       "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
+      "status": "Go"
+    },
+    {
+      "id": "f4c720ce-0cfd-43e6-b8dd-00273073bc01",
+      "name": "Electron | Owl By The Dozen (StriX Launch 12)",
+      "rocket": "Electron",
+      "mission": "Owl By The Dozen (StriX Launch 12)",
+      "date": "2026-09-19",
+      "month": 9,
+      "time": "03:15",
+      "tentative": false,
+      "provider": "Rocket Lab",
+      "country": "NZ",
+      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
       "status": "Go"
     },
     {
@@ -240,20 +240,6 @@
       "status": "Go"
     },
     {
-      "id": "f4c720ce-0cfd-43e6-b8dd-00273073bc01",
-      "name": "Electron | StriX Launch 12",
-      "rocket": "Electron",
-      "mission": "StriX Launch 12",
-      "date": "2026-10-31",
-      "month": 10,
-      "time": null,
-      "tentative": true,
-      "provider": "Rocket Lab",
-      "country": "NZ",
-      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
-      "status": "TBD"
-    },
-    {
       "id": "3b430f81-0ff1-4d85-8a1a-cef0de326198",
       "name": "Falcon 9 Block 5 | Bandwagon 5 (Dedicated Mid-Inclination Rideshare)",
       "rocket": "Falcon 9",
@@ -280,9 +266,33 @@
       "country": "US",
       "pad": "Kennedy Space Center, FL, USA",
       "status": "TBD"
+    },
+    {
+      "id": "8dd5de11-831b-445f-86f0-bffefe0550d9",
+      "name": "Soyuz 2.1b | Progress MS-36 (97P)",
+      "rocket": "Soyuz 2",
+      "mission": "Progress MS-36 (97P)",
+      "date": "2026-11-24",
+      "month": 11,
+      "time": null,
+      "tentative": true,
+      "provider": "Russian Federal Space Agency (ROSCOSMOS)",
+      "country": "RU",
+      "pad": "Baikonur Cosmodrome, Republic of Kazakhstan",
+      "status": "TBC"
     }
   ],
   "recent": [
+    {
+      "id": "767f7827-53d8-4621-803b-f456a1e6b512",
+      "rocket": "Gravity-1",
+      "mission": "SpaceSail Polar Group #16",
+      "date": "2026-09-15",
+      "country": "CN",
+      "provider": "Orienspace Technology",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "de446468-057f-4c9d-a6a1-af99c93b541e",
       "rocket": "Zhuque-2",
