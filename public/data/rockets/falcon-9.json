@@ -141,7 +141,7 @@
       "mission": "USSF-259",
       "date": "2026-09-16",
       "month": 9,
-      "time": "01:00",
+      "time": "01:29",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
@@ -163,19 +163,19 @@
       "status": "Go"
     },
     {
-      "id": "18441371-8b2e-457c-afb5-1ec1b11ab630",
-      "name": "Falcon 9 Block 5 | Crew-13",
+      "id": "7330d83b-c478-426c-8859-f9e3a335876d",
+      "name": "Falcon 9 Block 5 | USSF-xxx (\"R-3\")",
       "rocket": "Falcon 9",
-      "mission": "Crew-13",
-      "date": "2026-09-30",
+      "mission": "USSF-xxx (\"R-3\")",
+      "date": "2026-09-27",
       "month": 9,
       "time": null,
       "tentative": true,
       "provider": "SpaceX",
-      "country": "US",
-      "pad": "Cape Canaveral SFS, FL, USA",
-      "status": "TBD"
+      "country": "",
+      "pad": "Vandenberg SFB, CA, USA",
+      "status": "TBC"
     }
   ],
-  "updated": "2026-09-14T19:53:44.744Z"
+  "updated": "2026-09-15T19:07:30.548Z"
 }

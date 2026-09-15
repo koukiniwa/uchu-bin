@@ -27,21 +27,6 @@
   },
   "recentLaunches": [],
   "articles": [],
-  "upcoming": [
-    {
-      "id": "de446468-057f-4c9d-a6a1-af99c93b541e",
-      "name": "Zhuque-2E Block 2 | Unknown Payload",
-      "rocket": "Zhuque-2",
-      "mission": "Unknown Payload",
-      "date": "2026-09-15",
-      "month": 9,
-      "time": "06:25",
-      "tentative": false,
-      "provider": "LandSpace",
-      "country": "CN",
-      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
-      "status": "Go"
-    }
-  ],
-  "updated": "2026-09-14T20:04:01.470Z"
+  "upcoming": [],
+  "updated": "2026-09-15T19:17:15.811Z"
 }
