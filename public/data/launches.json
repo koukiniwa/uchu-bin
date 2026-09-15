@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-15T06:34:56.697Z",
+  "updated": "2026-09-15T07:15:40.047Z",
   "launches": [
     {
       "id": "767f7827-53d8-4621-803b-f456a1e6b512",
@@ -286,7 +286,7 @@
     {
       "id": "de446468-057f-4c9d-a6a1-af99c93b541e",
       "rocket": "Zhuque-2",
-      "mission": "Unknown Payload",
+      "mission": "SpaceSail Polar Group #15",
       "date": "2026-09-15",
       "country": "CN",
       "provider": "LandSpace",
