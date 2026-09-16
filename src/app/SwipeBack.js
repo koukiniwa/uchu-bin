@@ -79,7 +79,7 @@ export default function SwipeBack() {
       const dy = Math.abs(t.clientY - state.current.startY)
 
       if (!state.current.swiping) {
-        if (dx > 10 && dx > dy * 1.5) {
+        if (dx > 8 && dx > dy) {
           // トップページまたは履歴なしならスワイプしない
           if (!isSubPage() || history.current.length === 0) return
           state.current.swiping = true
