@@ -5,7 +5,7 @@ import { useRouter, usePathname } from 'next/navigation'
 export default function SwipeBack() {
   const router = useRouter()
   const pathname = usePathname()
-  const state = useRef({ startX: 0, startY: 0, swiping: false })
+  const state = useRef({ startX: 0, startY: 0, swiping: false, decided: false })
   const history = useRef([])
   const prevPathname = useRef(null)
 
@@ -61,14 +61,13 @@ export default function SwipeBack() {
     let underlayLoaded = false
 
     function isSubPage() {
-      // トップページ（/）ではスワイプバック無効
       const p = window.location.pathname
       return p !== '/' && p !== ''
     }
 
     function onTouchStart(e) {
       const t = e.touches[0]
-      state.current = { startX: t.clientX, startY: t.clientY, swiping: false }
+      state.current = { startX: t.clientX, startY: t.clientY, swiping: false, decided: false }
       threshold = window.innerWidth * 0.2
       underlayLoaded = false
     }
@@ -78,9 +77,18 @@ export default function SwipeBack() {
       const dx = t.clientX - state.current.startX
       const dy = Math.abs(t.clientY - state.current.startY)
 
+      // すでに縦スクロールと判定済みなら何もしない
+      if (state.current.decided && !state.current.swiping) return
+
       if (!state.current.swiping) {
-        if (dx > 8 && dx > dy) {
-          // トップページまたは履歴なしならスワイプしない
+        // 20px以上動くまで判定を待つ
+        const dist = Math.sqrt(dx * dx + dy * dy)
+        if (dist < 20) return
+
+        state.current.decided = true
+
+        // 横方向の方が大きければスワイプ
+        if (dx > 0 && dx >= dy * 0.8) {
           if (!isSubPage() || history.current.length === 0) return
           state.current.swiping = true
 
@@ -92,9 +100,8 @@ export default function SwipeBack() {
             underlay.src = prevUrl
             underlayLoaded = true
           }
-        } else if (dy > 10) {
-          return
         } else {
+          // 縦スクロール
           return
         }
       }
