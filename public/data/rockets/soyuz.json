@@ -27,21 +27,6 @@
   },
   "recentLaunches": [],
   "articles": [],
-  "upcoming": [
-    {
-      "id": "d793ba47-faf5-4bab-a386-39a9ccc49c90",
-      "name": "Soyuz 2.1b | Progress MS-35 (96P)",
-      "rocket": "Soyuz 2",
-      "mission": "Progress MS-35 (96P)",
-      "date": "2026-09-16",
-      "month": 9,
-      "time": "13:33",
-      "tentative": false,
-      "provider": "Russian Federal Space Agency (ROSCOSMOS)",
-      "country": "RU",
-      "pad": "Baikonur Cosmodrome, Republic of Kazakhstan",
-      "status": "Go"
-    }
-  ],
-  "updated": "2026-09-15T19:09:11.449Z"
+  "upcoming": [],
+  "updated": "2026-09-07T13:07:48.874Z"
 }

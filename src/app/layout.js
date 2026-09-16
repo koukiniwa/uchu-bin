@@ -1,6 +1,7 @@
 import './globals.css'
 import Link from 'next/link'
 import Script from 'next/script'
+import SwipeBack from './SwipeBack'
 
 export const metadata = {
   metadataBase: new URL('https://www.uchu-bin.jp'),
@@ -73,6 +74,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body style={{ backgroundColor: '#f8f9fa', color: '#111111' }}>
+        <SwipeBack />
         {/* Header */}
         <header style={{
           background: 'linear-gradient(135deg, #0a0e1a 0%, #0f1629 40%, #1a2744 100%)',

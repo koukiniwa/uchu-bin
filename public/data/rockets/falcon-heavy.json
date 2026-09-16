@@ -135,12 +135,12 @@
   "articles": [],
   "upcoming": [
     {
-      "id": "4651fd8a-43de-4166-bf8f-c168b3bd1d2c",
-      "name": "Falcon Heavy | NROL-97",
+      "id": "d3bd7fb2-fac6-49fc-ae52-cee07d2fde67",
+      "name": "Falcon Heavy | Griffin Mission One",
       "rocket": "Falcon Heavy",
-      "mission": "NROL-97",
-      "date": "2026-10-31",
-      "month": 10,
+      "mission": "Griffin Mission One",
+      "date": "2026-11-30",
+      "month": 11,
       "time": null,
       "tentative": true,
       "provider": "SpaceX",
@@ -149,5 +149,5 @@
       "status": "TBD"
     }
   ],
-  "updated": "2026-09-15T19:07:36.123Z"
+  "updated": "2026-09-07T12:56:13.442Z"
 }
