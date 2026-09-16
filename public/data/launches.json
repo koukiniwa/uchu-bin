@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-16T14:38:49.249Z",
+  "updated": "2026-09-16T18:21:48.494Z",
   "launches": [
     {
       "id": "898f7df0-b6ce-4a5c-80b4-67e81842124e",
@@ -22,7 +22,7 @@
       "mission": "USSF-259",
       "date": "2026-09-17",
       "month": 9,
-      "time": "01:00",
+      "time": "01:07",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
@@ -117,7 +117,7 @@
       "id": "7330d83b-c478-426c-8859-f9e3a335876d",
       "name": "Falcon 9 Block 5 | USSF-xxx (\"R-3\")",
       "rocket": "Falcon 9",
-      "mission": "USSF-xxx (\"R-3\")",
+      "mission": "USSF-385",
       "date": "2026-09-26",
       "month": 9,
       "time": null,
