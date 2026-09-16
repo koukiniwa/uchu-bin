@@ -6,29 +6,22 @@ export default function SwipeBack() {
   const router = useRouter()
   const pathname = usePathname()
   const state = useRef({ startX: 0, startY: 0, swiping: false })
-  const snapshots = useRef([]) // 履歴スタック
-
-  // ページ遷移のたびに、前のページのスナップショットをスタックに積む
+  const snapshots = useRef([])
   const prevPathname = useRef(null)
   const pendingSnapshot = useRef(null)
 
   useEffect(() => {
-    // 初回は保存だけ
     if (prevPathname.current === null) {
       prevPathname.current = pathname
       return
     }
-
-    // パスが変わった＝遷移した → 遷移前に撮っておいたスナップショットをスタックに積む
     if (prevPathname.current !== pathname && pendingSnapshot.current) {
       snapshots.current.push(pendingSnapshot.current)
-      // 最大5件保持
       if (snapshots.current.length > 5) snapshots.current.shift()
     }
     prevPathname.current = pathname
   }, [pathname])
 
-  // 常に現在のページのスナップショットを更新（次の遷移前用）
   useEffect(() => {
     const timer = setTimeout(() => {
       const scrollY = window.scrollY
@@ -40,43 +33,44 @@ export default function SwipeBack() {
   }, [pathname])
 
   useEffect(() => {
+    // コンテナ：画面全体を覆い、前のページと現在のページを横並びに管理
+    const container = document.createElement('div')
+    Object.assign(container.style, {
+      position: 'fixed', top: '0', left: '0', width: '100%', height: '100%',
+      zIndex: '99999', pointerEvents: 'none', overflow: 'hidden',
+      display: 'none',
+    })
+    document.body.appendChild(container)
+
+    // 前のページ（iframe）
     const underlay = document.createElement('iframe')
     Object.assign(underlay.style, {
-      position: 'fixed', top: '0', left: '0', width: '100%', height: '100%',
-      border: 'none', zIndex: '-2', opacity: '0', pointerEvents: 'none',
-      transform: 'translateX(-30%)',
+      position: 'absolute', top: '0', left: '0', width: '100%', height: '100%',
+      border: 'none', transform: 'translateX(-30%)',
     })
     underlay.setAttribute('sandbox', 'allow-same-origin')
     underlay.setAttribute('aria-hidden', 'true')
-    document.body.appendChild(underlay)
+    container.appendChild(underlay)
 
+    // 前のページの上の暗いオーバーレイ
     const overlay = document.createElement('div')
     Object.assign(overlay.style, {
-      position: 'fixed', top: '0', left: '0', width: '100%', height: '100%',
-      background: 'rgba(0,0,0,0.5)', zIndex: '-1', opacity: '0', pointerEvents: 'none',
+      position: 'absolute', top: '0', left: '0', width: '100%', height: '100%',
+      background: 'rgba(0,0,0,0.5)',
     })
-    document.body.appendChild(overlay)
+    container.appendChild(overlay)
 
+    // 現在ページの左端の影
     const shadow = document.createElement('div')
     Object.assign(shadow.style, {
-      position: 'fixed', top: '0', left: '0', width: '16px', height: '100%',
-      background: 'linear-gradient(to right, rgba(0,0,0,0.2), transparent)',
-      zIndex: '9999', opacity: '0', pointerEvents: 'none',
+      position: 'absolute', top: '0', width: '16px', height: '100%',
+      background: 'linear-gradient(to right, rgba(0,0,0,0.15), transparent)',
+      opacity: '0',
     })
-    document.body.appendChild(shadow)
+    container.appendChild(shadow)
 
     let threshold = 0
     const body = document.body
-
-    function getPageElements() {
-      const els = []
-      for (let i = 0; i < body.children.length; i++) {
-        const el = body.children[i]
-        if (el === underlay || el === overlay || el === shadow) continue
-        els.push(el)
-      }
-      return els
-    }
 
     function onTouchStart(e) {
       const t = e.touches[0]
@@ -91,10 +85,15 @@ export default function SwipeBack() {
 
       if (!state.current.swiping) {
         if (dx > 10 && dx > dy * 1.5) {
+          // スナップショットが無ければスワイプしない
+          if (snapshots.current.length === 0) return
           state.current.swiping = true
+
+          // コンテナを表示
+          container.style.display = 'block'
           body.style.overflow = 'hidden'
 
-          // スタックの一番上（＝直前のページ）を表示
+          // 前のページをiframeに表示
           const snap = snapshots.current[snapshots.current.length - 1]
           if (snap) {
             try {
@@ -105,8 +104,6 @@ export default function SwipeBack() {
               underlay.contentWindow.scrollTo(0, snap.scrollY)
             } catch (err) { /* ignore */ }
           }
-          underlay.style.opacity = '1'
-          overlay.style.opacity = '1'
         } else if (dy > 10) {
           return
         } else {
@@ -118,23 +115,23 @@ export default function SwipeBack() {
 
       const clampedDx = Math.max(0, dx)
       const progress = Math.min(clampedDx / window.innerWidth, 1)
-      const els = getPageElements()
 
-      for (const el of els) {
-        el.style.transform = `translateX(${clampedDx}px)`
-        el.style.transition = 'none'
-      }
+      // body全体をスライド（現在のページ）
+      body.style.transform = `translateX(${clampedDx}px)`
+      body.style.transition = 'none'
 
+      // 前のページが左から出てくる
       const underlayX = -30 + (30 * progress)
       underlay.style.transform = `translateX(${underlayX}%)`
       underlay.style.transition = 'none'
 
-      overlay.style.opacity = String(0.5 * (1 - progress))
+      // オーバーレイを薄く
+      overlay.style.opacity = String(1 - progress)
       overlay.style.transition = 'none'
 
+      // 影
       shadow.style.opacity = String(Math.min(progress * 3, 1))
-      shadow.style.transform = `translateX(${clampedDx - 16}px)`
-      shadow.style.transition = 'none'
+      shadow.style.left = `${clampedDx - 16}px`
     }
 
     function onTouchEnd(e) {
@@ -143,52 +140,42 @@ export default function SwipeBack() {
 
       const t = e.changedTouches[0]
       const dx = t.clientX - state.current.startX
-      const els = getPageElements()
       const dur = '0.25s'
 
       if (dx > threshold) {
-        for (const el of els) {
-          el.style.transition = `transform ${dur} ease-out`
-          el.style.transform = `translateX(${window.innerWidth}px)`
-        }
+        body.style.transition = `transform ${dur} ease-out`
+        body.style.transform = `translateX(${window.innerWidth}px)`
         underlay.style.transition = `transform ${dur} ease-out`
         underlay.style.transform = 'translateX(0%)'
         overlay.style.transition = `opacity ${dur} ease-out`
         overlay.style.opacity = '0'
-        shadow.style.transition = `opacity ${dur} ease-out`
-        shadow.style.opacity = '0'
 
         setTimeout(() => {
-          // スタックからポップ
           snapshots.current.pop()
           router.back()
-          requestAnimationFrame(() => resetStyles(els))
+          requestAnimationFrame(() => resetStyles())
         }, 250)
       } else {
-        for (const el of els) {
-          el.style.transition = `transform ${dur} ease-out`
-          el.style.transform = ''
-        }
+        body.style.transition = `transform ${dur} ease-out`
+        body.style.transform = ''
         underlay.style.transition = `transform ${dur} ease-out`
         underlay.style.transform = 'translateX(-30%)'
         overlay.style.transition = `opacity ${dur} ease-out`
-        overlay.style.opacity = '0'
+        overlay.style.opacity = '0.5'
         shadow.style.transition = `opacity ${dur} ease-out`
         shadow.style.opacity = '0'
-        setTimeout(() => resetStyles(els), 250)
+        setTimeout(() => resetStyles(), 250)
       }
     }
 
-    function resetStyles(els) {
-      for (const el of els) {
-        el.style.transition = ''
-        el.style.transform = ''
-      }
-      underlay.style.opacity = '0'
-      underlay.style.transform = 'translateX(-30%)'
-      overlay.style.opacity = '0'
-      shadow.style.opacity = '0'
+    function resetStyles() {
+      body.style.transition = ''
+      body.style.transform = ''
       body.style.overflow = ''
+      container.style.display = 'none'
+      underlay.style.transform = 'translateX(-30%)'
+      overlay.style.opacity = '0.5'
+      shadow.style.opacity = '0'
     }
 
     window.addEventListener('touchstart', onTouchStart, { passive: true })
@@ -198,9 +185,7 @@ export default function SwipeBack() {
       window.removeEventListener('touchstart', onTouchStart)
       window.removeEventListener('touchmove', onTouchMove)
       window.removeEventListener('touchend', onTouchEnd)
-      underlay.remove()
-      overlay.remove()
-      shadow.remove()
+      container.remove()
     }
   }, [router])
 
