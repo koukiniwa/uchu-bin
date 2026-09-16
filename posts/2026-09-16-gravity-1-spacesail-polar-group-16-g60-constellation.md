@@ -16,7 +16,7 @@ imageCredit: 'Gravity-1 / Orienspace'
 
 ## G60星座——上海市肝いりの国産ブロードバンド網
 
-![SpaceSail Polar Group #16](/images/library/longmarch8_001.jpg)
+![SpaceSail Polar Group #16](/images/library/gravity1_001.jpg)
 *Long March 8 / CNSA*
 
 

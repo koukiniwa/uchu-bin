@@ -16,7 +16,7 @@ imageCredit: 'Zhuque-2 / LandSpace'
 
 ## G60コンステレーション向け、Ku・Q・Vバンド対応衛星10機
 
-![SpaceSail Polar Group #15](/images/library/longmarch8_001.jpg)
+![SpaceSail Polar Group #15](/images/library/zhuque_001.jpg)
 *Long March 8 / CNSA*
 
 
