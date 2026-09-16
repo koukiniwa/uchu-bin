@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-16T07:30:35.857Z",
+  "updated": "2026-09-16T19:02:43.902Z",
   "rockets": [
     {
       "slug": "falcon-9",
@@ -67,71 +67,6 @@
       "lastLaunch": "2026-08-10"
     },
     {
-      "slug": "ariane-6",
-      "nameJa": "アリアン6",
-      "nameEn": "Ariane 6",
-      "operator": "Arianespace",
-      "country": "EU",
-      "image": "/images/library/ariane6_001.jpg",
-      "status": "active",
-      "total": 14,
-      "successRate": 100,
-      "thisYear": 6,
-      "lastLaunch": null
-    },
-    {
-      "slug": "soyuz",
-      "nameJa": "ソユーズ",
-      "nameEn": "Soyuz",
-      "operator": "Roscosmos",
-      "country": "RU",
-      "image": "/images/library/soyuz_001.jpg",
-      "status": "active",
-      "total": 1000,
-      "successRate": 97.2,
-      "thisYear": 8,
-      "lastLaunch": null
-    },
-    {
-      "slug": "long-march",
-      "nameJa": "長征シリーズ",
-      "nameEn": "Long March",
-      "operator": "CASC",
-      "country": "CN",
-      "image": "/images/library/longmarch5_001.jpg",
-      "status": "active",
-      "total": 520,
-      "successRate": 96.5,
-      "thisYear": 38,
-      "lastLaunch": null
-    },
-    {
-      "slug": "vega",
-      "nameJa": "ヴェガ",
-      "nameEn": "Vega",
-      "operator": "Arianespace",
-      "country": "EU",
-      "image": "/images/library/vegac_001.jpg",
-      "status": "active",
-      "total": 25,
-      "successRate": 88,
-      "thisYear": 2,
-      "lastLaunch": null
-    },
-    {
-      "slug": "vulcan",
-      "nameJa": "ヴァルカン",
-      "nameEn": "Vulcan Centaur",
-      "operator": "ULA",
-      "country": "US",
-      "image": "/images/library/vulcan_001.jpg",
-      "status": "active",
-      "total": 6,
-      "successRate": 100,
-      "thisYear": 3,
-      "lastLaunch": null
-    },
-    {
       "slug": "new-glenn",
       "nameJa": "ニューグレン",
       "nameEn": "New Glenn",
@@ -193,6 +128,71 @@
       "status": "active",
       "total": 28,
       "successRate": 85.7,
+      "thisYear": 3,
+      "lastLaunch": null
+    },
+    {
+      "slug": "ariane-6",
+      "nameJa": "アリアン6",
+      "nameEn": "Ariane 6",
+      "operator": "Arianespace",
+      "country": "EU",
+      "image": "/images/library/ariane6_001.jpg",
+      "status": "active",
+      "total": 14,
+      "successRate": 100,
+      "thisYear": 6,
+      "lastLaunch": null
+    },
+    {
+      "slug": "soyuz",
+      "nameJa": "ソユーズ",
+      "nameEn": "Soyuz",
+      "operator": "Roscosmos",
+      "country": "RU",
+      "image": "/images/library/soyuz_001.jpg",
+      "status": "active",
+      "total": 1000,
+      "successRate": 97.2,
+      "thisYear": 8,
+      "lastLaunch": null
+    },
+    {
+      "slug": "long-march",
+      "nameJa": "長征シリーズ",
+      "nameEn": "Long March",
+      "operator": "CASC",
+      "country": "CN",
+      "image": "/images/library/longmarch5_001.jpg",
+      "status": "active",
+      "total": 520,
+      "successRate": 96.5,
+      "thisYear": 38,
+      "lastLaunch": null
+    },
+    {
+      "slug": "vega",
+      "nameJa": "ヴェガ",
+      "nameEn": "Vega",
+      "operator": "Arianespace",
+      "country": "EU",
+      "image": "/images/library/vegac_001.jpg",
+      "status": "active",
+      "total": 25,
+      "successRate": 88,
+      "thisYear": 2,
+      "lastLaunch": null
+    },
+    {
+      "slug": "vulcan",
+      "nameJa": "ヴァルカン",
+      "nameEn": "Vulcan Centaur",
+      "operator": "ULA",
+      "country": "US",
+      "image": "/images/library/vulcan_001.jpg",
+      "status": "active",
+      "total": 6,
+      "successRate": 100,
       "thisYear": 3,
       "lastLaunch": null
     }
