@@ -1,20 +1,6 @@
 {
-  "updated": "2026-09-15T23:59:28.792Z",
+  "updated": "2026-09-16T04:20:16.741Z",
   "launches": [
-    {
-      "id": "17c71937-dd80-406f-bb47-0c9ee9a24276",
-      "name": "Falcon 9 Block 5 | USSF-259",
-      "rocket": "Falcon 9",
-      "mission": "USSF-259",
-      "date": "2026-09-16",
-      "month": 9,
-      "time": "02:18",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "",
-      "pad": "Vandenberg SFB, CA, USA",
-      "status": "Go"
-    },
     {
       "id": "d793ba47-faf5-4bab-a386-39a9ccc49c90",
       "name": "Soyuz 2.1b | Progress MS-35 (96P)",
@@ -41,6 +27,20 @@
       "provider": "China Aerospace Science and Technology Corporation",
       "country": "CN",
       "pad": "Wenchang Space Launch Site, People's Republic of China",
+      "status": "Go"
+    },
+    {
+      "id": "17c71937-dd80-406f-bb47-0c9ee9a24276",
+      "name": "Falcon 9 Block 5 | USSF-259",
+      "rocket": "Falcon 9",
+      "mission": "USSF-259",
+      "date": "2026-09-17",
+      "month": 9,
+      "time": "01:00",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "",
+      "pad": "Vandenberg SFB, CA, USA",
       "status": "Go"
     },
     {
@@ -97,6 +97,20 @@
       "provider": "SpaceX",
       "country": "",
       "pad": "Vandenberg SFB, CA, USA",
+      "status": "Go"
+    },
+    {
+      "id": "5af31461-bce5-4cfb-a0ee-b527cf285d90",
+      "name": "Kinetica 1 | Unknown Payload",
+      "rocket": "Kinetica 1",
+      "mission": "Unknown Payload",
+      "date": "2026-09-20",
+      "month": 9,
+      "time": "04:00",
+      "tentative": false,
+      "provider": "CAS Space",
+      "country": "CN",
+      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
       "status": "Go"
     },
     {
@@ -266,20 +280,6 @@
       "country": "US",
       "pad": "Kennedy Space Center, FL, USA",
       "status": "TBD"
-    },
-    {
-      "id": "8dd5de11-831b-445f-86f0-bffefe0550d9",
-      "name": "Soyuz 2.1b | Progress MS-36 (97P)",
-      "rocket": "Soyuz 2",
-      "mission": "Progress MS-36 (97P)",
-      "date": "2026-11-24",
-      "month": 11,
-      "time": null,
-      "tentative": true,
-      "provider": "Russian Federal Space Agency (ROSCOSMOS)",
-      "country": "RU",
-      "pad": "Baikonur Cosmodrome, Republic of Kazakhstan",
-      "status": "TBC"
     }
   ],
   "recent": [
