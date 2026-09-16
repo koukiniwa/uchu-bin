@@ -139,15 +139,15 @@
       "name": "Starship | Flight 14",
       "rocket": "Starship",
       "mission": "Flight 14",
-      "date": "2026-09-30",
+      "date": "2026-09-22",
       "month": 9,
-      "time": null,
-      "tentative": true,
+      "time": "12:15",
+      "tentative": false,
       "provider": "SpaceX",
       "country": "US",
       "pad": "SpaceX Starbase, TX, USA",
-      "status": "TBD"
+      "status": "Go"
     }
   ],
-  "updated": "2026-09-07T12:56:20.043Z"
+  "updated": "2026-09-16T07:05:00.204Z"
 }

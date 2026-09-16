@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-15T19:18:16.257Z",
+  "updated": "2026-09-16T07:10:07.230Z",
   "rockets": [
     {
       "slug": "falcon-9",
@@ -9,10 +9,10 @@
       "country": "US",
       "image": "/images/library/falcon9_001.jpg",
       "status": "active",
-      "total": 500,
-      "successRate": 96.8,
-      "thisYear": 216,
-      "lastLaunch": "2026-09-03"
+      "total": 686,
+      "successRate": 99.4,
+      "thisYear": 103,
+      "lastLaunch": "2026-09-06"
     },
     {
       "slug": "falcon-heavy",
@@ -48,10 +48,10 @@
       "country": "NZ",
       "image": "/images/library/electron_001.jpg",
       "status": "active",
-      "total": 55,
-      "successRate": 94.5,
-      "thisYear": 9,
-      "lastLaunch": null
+      "total": 94,
+      "successRate": 95.7,
+      "thisYear": 15,
+      "lastLaunch": "2026-09-02"
     },
     {
       "slug": "h3",
@@ -61,10 +61,10 @@
       "country": "JP",
       "image": "/images/library/h3_001.jpg",
       "status": "active",
-      "total": 6,
-      "successRate": 83.3,
+      "total": 9,
+      "successRate": 77.8,
       "thisYear": 2,
-      "lastLaunch": null
+      "lastLaunch": "2026-08-10"
     },
     {
       "slug": "ariane-6",
