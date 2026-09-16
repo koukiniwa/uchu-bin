@@ -56,17 +56,6 @@ export default function SwipeBack() {
     })
     container.appendChild(shadow)
 
-    // デバッグ表示
-    const debug = document.createElement('div')
-    Object.assign(debug.style, {
-      position: 'fixed', bottom: '10px', left: '10px', right: '10px',
-      backgroundColor: 'rgba(0,0,0,0.8)', color: '#0f0', fontSize: '11px',
-      padding: '8px', borderRadius: '6px', zIndex: '999999',
-      fontFamily: 'monospace', pointerEvents: 'none',
-      display: 'none',
-    })
-    document.body.appendChild(debug)
-
     const body = document.body
     let threshold = 0
     let underlayLoaded = false
@@ -76,49 +65,63 @@ export default function SwipeBack() {
       return p !== '/' && p !== ''
     }
 
+    // 戻り先URLを決定
+    function getBackUrl() {
+      // クライアント側の履歴があればそれを使う
+      if (history.current.length > 0) {
+        return history.current[history.current.length - 1]
+      }
+      // 記事ページならトップへ
+      if (window.location.pathname.startsWith('/blog/')) {
+        return '/'
+      }
+      // ロケット詳細ならロケット図鑑へ
+      if (window.location.pathname.startsWith('/rockets/')) {
+        return '/rockets'
+      }
+      // その他の下層ページならトップへ
+      return '/'
+    }
+
+    // スワイプバックが可能か
+    function canSwipeBack() {
+      if (!isSubPage()) return false
+      // ブラウザ履歴があるか、下層ページであればOK
+      return history.current.length > 0 || window.history.length > 1
+    }
+
     function onTouchStart(e) {
       const t = e.touches[0]
       state.current = { startX: t.clientX, startY: t.clientY, swiping: false, decided: false }
       threshold = window.innerWidth * 0.2
       underlayLoaded = false
-
-      debug.style.display = 'block'
-      debug.textContent = `START x=${Math.round(t.clientX)} y=${Math.round(t.clientY)} sub=${isSubPage()} hist=${history.current.length}`
     }
 
     function onTouchMove(e) {
       const t = e.touches[0]
       const dx = t.clientX - state.current.startX
       const dy = Math.abs(t.clientY - state.current.startY)
-      const dist = Math.sqrt(dx * dx + dy * dy)
-
-      debug.textContent = `MOVE dx=${Math.round(dx)} dy=${Math.round(dy)} dist=${Math.round(dist)} decided=${state.current.decided} swiping=${state.current.swiping}`
 
       if (state.current.decided && !state.current.swiping) return
 
       if (!state.current.swiping) {
+        const dist = Math.sqrt(dx * dx + dy * dy)
         if (dist < 15) return
 
         state.current.decided = true
 
         if (dx > 0 && dx >= dy * 0.7) {
-          if (!isSubPage() || history.current.length === 0) {
-            debug.textContent += ' → BLOCKED (top or no history)'
-            return
-          }
+          if (!canSwipeBack()) return
           state.current.swiping = true
-          debug.textContent += ' → SWIPING!'
 
           container.style.display = 'block'
           html.style.overflow = 'hidden'
 
           if (!underlayLoaded) {
-            const prevUrl = history.current[history.current.length - 1]
-            underlay.src = prevUrl
+            underlay.src = getBackUrl()
             underlayLoaded = true
           }
         } else {
-          debug.textContent += ' → SCROLL (vertical)'
           return
         }
       }
@@ -142,18 +145,12 @@ export default function SwipeBack() {
     }
 
     function onTouchEnd(e) {
-      if (!state.current.swiping) {
-        setTimeout(() => { debug.style.display = 'none' }, 2000)
-        return
-      }
+      if (!state.current.swiping) return
       state.current.swiping = false
 
       const t = e.changedTouches[0]
       const dx = t.clientX - state.current.startX
       const dur = '0.25s'
-
-      debug.textContent = `END dx=${Math.round(dx)} threshold=${Math.round(threshold)} → ${dx > threshold ? 'BACK!' : 'CANCEL'}`
-      setTimeout(() => { debug.style.display = 'none' }, 2000)
 
       if (dx > threshold) {
         body.style.transition = `transform ${dur} ease-out`
@@ -164,8 +161,13 @@ export default function SwipeBack() {
         overlay.style.opacity = '0'
 
         setTimeout(() => {
-          history.current.pop()
-          router.back()
+          if (history.current.length > 0) {
+            history.current.pop()
+            router.back()
+          } else {
+            // 履歴がない場合はトップ等に遷移
+            router.push(getBackUrl())
+          }
           requestAnimationFrame(() => resetStyles())
         }, 250)
       } else {
@@ -201,7 +203,6 @@ export default function SwipeBack() {
       window.removeEventListener('touchmove', onTouchMove)
       window.removeEventListener('touchend', onTouchEnd)
       container.remove()
-      debug.remove()
     }
   }, [router])
 
