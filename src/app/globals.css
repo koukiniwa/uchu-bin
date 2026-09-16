@@ -43,7 +43,16 @@ html, body {
   color: rgba(255,255,255,0.9);
 }
 @media (max-width: 640px) {
-  .header-nav { gap: 0; }
+  .header-nav {
+    gap: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    mask-image: linear-gradient(to right, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+  }
+  .header-nav::-webkit-scrollbar { display: none; }
   .header-nav a { font-size: 11px; letter-spacing: 0; padding: 8px 6px; }
 }
 
