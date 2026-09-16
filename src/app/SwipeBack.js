@@ -6,8 +6,9 @@ export default function SwipeBack() {
   const router = useRouter()
   const pathname = usePathname()
   const state = useRef({ startX: 0, startY: 0, swiping: false, decided: false })
-  const history = useRef([])
+  const historyStack = useRef([])
   const prevPathname = useRef(null)
+  const navigating = useRef(false)
 
   useEffect(() => {
     if (prevPathname.current === null) {
@@ -15,15 +16,28 @@ export default function SwipeBack() {
       return
     }
     if (prevPathname.current !== pathname) {
-      history.current.push(prevPathname.current)
-      if (history.current.length > 10) history.current.shift()
+      if (!navigating.current) {
+        historyStack.current.push(prevPathname.current)
+        if (historyStack.current.length > 10) historyStack.current.shift()
+      }
       prevPathname.current = pathname
+      navigating.current = false
+
+      // 遷移完了 → 残っている要素をクリーンアップ
+      const w = document.getElementById('page-wrapper')
+      if (w) {
+        w.style.cssText = 'background-color:#f8f9fa;min-height:100vh;'
+      }
+      const underlay = document.getElementById('swipe-underlay')
+      const overlay = document.getElementById('swipe-overlay')
+      if (underlay) { underlay.style.display = 'none'; underlay.src = 'about:blank' }
+      if (overlay) overlay.style.display = 'none'
     }
   }, [pathname])
 
   useEffect(() => {
-    // 前のページを表示するiframe
     const underlay = document.createElement('iframe')
+    underlay.id = 'swipe-underlay'
     Object.assign(underlay.style, {
       position: 'fixed', top: '0', left: '0', width: '100%', height: '100%',
       border: 'none', zIndex: '0',
@@ -34,8 +48,8 @@ export default function SwipeBack() {
     underlay.setAttribute('aria-hidden', 'true')
     document.body.appendChild(underlay)
 
-    // 暗いオーバーレイ（前のページの上）
     const overlay = document.createElement('div')
+    overlay.id = 'swipe-overlay'
     Object.assign(overlay.style, {
       position: 'fixed', top: '0', left: '0', width: '100%', height: '100%',
       background: 'rgba(0,0,0,0.5)', zIndex: '1',
@@ -45,11 +59,10 @@ export default function SwipeBack() {
 
     let threshold = 0
     let underlayLoaded = false
-    let wrapper = null
+    let savedScrollY = 0
 
     function getWrapper() {
-      if (!wrapper) wrapper = document.getElementById('page-wrapper')
-      return wrapper
+      return document.getElementById('page-wrapper')
     }
 
     function isSubPage() {
@@ -58,8 +71,8 @@ export default function SwipeBack() {
     }
 
     function getBackUrl() {
-      if (history.current.length > 0) {
-        return history.current[history.current.length - 1]
+      if (historyStack.current.length > 0) {
+        return historyStack.current[historyStack.current.length - 1]
       }
       if (window.location.pathname.startsWith('/blog/')) return '/'
       if (window.location.pathname.startsWith('/rockets/')) return '/rockets'
@@ -68,7 +81,7 @@ export default function SwipeBack() {
 
     function canSwipeBack() {
       if (!isSubPage()) return false
-      return history.current.length > 0 || window.history.length > 1
+      return historyStack.current.length > 0 || window.history.length > 1
     }
 
     function onTouchStart(e) {
@@ -93,20 +106,18 @@ export default function SwipeBack() {
 
         if (dx > 0 && dx >= dy * 0.7) {
           if (!canSwipeBack()) return
-          state.current.swiping = true
-
           const w = getWrapper()
           if (!w) return
 
-          // ラッパーを固定位置に切り替え
-          const scrollY = window.scrollY
+          state.current.swiping = true
+          savedScrollY = window.scrollY
+
           w.style.position = 'fixed'
-          w.style.top = `-${scrollY}px`
+          w.style.top = `-${savedScrollY}px`
           w.style.left = '0'
           w.style.right = '0'
           w.style.zIndex = '2'
           w.style.boxShadow = '-8px 0 24px rgba(0,0,0,0.18)'
-          w.dataset.scrollY = scrollY
 
           underlay.style.display = 'block'
           overlay.style.display = 'block'
@@ -149,6 +160,7 @@ export default function SwipeBack() {
       if (!w) return
 
       if (dx > threshold) {
+        // スライドアウト
         w.style.transition = `transform ${dur} ease-out`
         w.style.transform = `translateX(${window.innerWidth}px)`
         underlay.style.transition = `transform ${dur} ease-out`
@@ -157,44 +169,41 @@ export default function SwipeBack() {
         overlay.style.opacity = '0'
 
         setTimeout(() => {
-          if (history.current.length > 0) {
-            history.current.pop()
+          // wrapperを非表示にしてからナビゲーション → 点滅しない
+          w.style.opacity = '0'
+          navigating.current = true
+          if (historyStack.current.length > 0) {
+            historyStack.current.pop()
             router.back()
           } else {
             router.push(getBackUrl())
           }
-          requestAnimationFrame(() => resetStyles(w))
-        }, 250)
+        }, 260)
       } else {
+        // キャンセル
         w.style.transition = `transform ${dur} ease-out`
         w.style.transform = 'translateX(0)'
         underlay.style.transition = `transform ${dur} ease-out`
         underlay.style.transform = 'translateX(-30%)'
         overlay.style.transition = `opacity ${dur} ease-out`
         overlay.style.opacity = '0'
-        setTimeout(() => resetStyles(w), 250)
-      }
-    }
 
-    function resetStyles(w) {
-      if (w) {
-        const scrollY = parseInt(w.dataset.scrollY || '0')
-        w.style.position = ''
-        w.style.top = ''
-        w.style.left = ''
-        w.style.right = ''
-        w.style.zIndex = ''
-        w.style.transform = ''
-        w.style.transition = ''
-        w.style.boxShadow = ''
-        window.scrollTo(0, scrollY)
+        setTimeout(() => {
+          w.style.position = ''
+          w.style.top = ''
+          w.style.left = ''
+          w.style.right = ''
+          w.style.zIndex = ''
+          w.style.transform = ''
+          w.style.transition = ''
+          w.style.boxShadow = ''
+          window.scrollTo(0, savedScrollY)
+          underlay.style.display = 'none'
+          underlay.src = 'about:blank'
+          overlay.style.display = 'none'
+          underlayLoaded = false
+        }, 260)
       }
-      underlay.style.display = 'none'
-      underlay.style.transform = 'translateX(-30%)'
-      underlay.src = 'about:blank'
-      overlay.style.display = 'none'
-      overlay.style.opacity = '0.5'
-      underlayLoaded = false
     }
 
     window.addEventListener('touchstart', onTouchStart, { passive: true })
