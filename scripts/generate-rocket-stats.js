@@ -378,13 +378,37 @@ function getUpcoming(rocket) {
 async function main() {
   if (!fs.existsSync(OUTPUT_DIR)) fs.mkdirSync(OUTPUT_DIR, { recursive: true })
 
-  console.log(`Mode: ${FULL_MODE ? 'FULL (re-fetch all history)' : 'INCREMENTAL (recent launches only)'}`)
+  // 日付ベースでロケットをローテーション（1日5機ずつ更新）
+  const BATCH_SIZE = 5
+  const dayIndex = new Date().getUTCDate() % Math.ceil(ROCKETS.length / BATCH_SIZE)
+  const batchStart = dayIndex * BATCH_SIZE
+  const todayRockets = FULL_MODE ? ROCKETS : ROCKETS.slice(batchStart, batchStart + BATCH_SIZE)
+
+  console.log(`Mode: ${FULL_MODE ? 'FULL' : 'INCREMENTAL'}`)
+  console.log(`Today's batch: ${todayRockets.map(r => r.nameEn).join(', ')} (${todayRockets.length}/${ROCKETS.length})`)
 
   const summaries = []
   let totalUpdated = 0
 
-  for (let ri = 0; ri < ROCKETS.length; ri++) {
-    const rocket = ROCKETS[ri]
+  // 今日更新しないロケットも既存データからsummariesに追加
+  const todaySlugs = new Set(todayRockets.map(r => r.slug))
+  for (const rocket of ROCKETS) {
+    if (todaySlugs.has(rocket.slug)) continue
+    const existing = loadExisting(rocket.slug)
+    if (existing) {
+      summaries.push({
+        slug: rocket.slug, nameJa: rocket.nameJa, nameEn: rocket.nameEn,
+        operator: rocket.operator, country: rocket.country, image: rocket.image,
+        status: rocket.status,
+        total: existing.stats?.total || 0, successRate: existing.stats?.successRate || '0',
+        thisYear: existing.stats?.thisYear?.total || 0,
+        lastLaunch: existing.recentLaunches?.[0]?.date || null,
+      })
+    }
+  }
+
+  for (let ri = 0; ri < todayRockets.length; ri++) {
+    const rocket = todayRockets[ri]
     console.log(`\n--- ${rocket.nameJa} (${rocket.nameEn}) ---`)
 
     // ロケット間に待ち時間を入れてレートリミット回避
