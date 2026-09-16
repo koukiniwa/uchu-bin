@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-16T09:42:14.197Z",
+  "updated": "2026-09-16T14:38:53.359Z",
   "featured": [
     {
       "id": "7d1afb26-6f9c-429b-9ccf-29012fd1e519",
@@ -14,21 +14,6 @@
       "country": "US",
       "pad": "SpaceX Starbase, TX, USA",
       "status": "Go",
-      "orbit": "Low Earth Orbit"
-    },
-    {
-      "id": "18441371-8b2e-457c-afb5-1ec1b11ab630",
-      "rocket": "Falcon 9",
-      "mission": "Crew-13",
-      "description": "SpaceX Crew-13 is the thirteenth crewed operational flight of a Crew Dragon spacecraft to the International Space Station as part of NASA's Commercial Crew Program.",
-      "highlight": "SpaceXのクルードラゴン宇宙船による13回目の有人ISS飛行ミッションです。NASAの商業乗員輸送プログラムの一環として実施され、民間企業が宇宙飛行士の輸送を担うという新時代の宇宙開発の姿を体現しています。着実に回を重ねるこのミッションは、有人宇宙飛行の「日常化」が着々と進んでいることを示しています。",
-      "date": "2026-09-30",
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "Cape Canaveral SFS, FL, USA",
-      "status": "TBD",
       "orbit": "Low Earth Orbit"
     },
     {
@@ -47,6 +32,21 @@
       "orbit": "Mars Orbit"
     },
     {
+      "id": "18441371-8b2e-457c-afb5-1ec1b11ab630",
+      "rocket": "Falcon 9",
+      "mission": "Crew-13",
+      "description": "SpaceX Crew-13 is the thirteenth crewed operational flight of a Crew Dragon spacecraft to the International Space Station as part of NASA's Commercial Crew Program.",
+      "highlight": "SpaceXのクルードラゴン宇宙船による13回目の有人ISS飛行ミッションです。NASAの商業乗員輸送プログラムの一環として実施され、民間企業が宇宙飛行士の輸送を担うという新時代の宇宙開発の姿を体現しています。着実に回を重ねるこのミッションは、有人宇宙飛行の「日常化」が着々と進んでいることを示しています。",
+      "date": "2026-10-31",
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Cape Canaveral SFS, FL, USA",
+      "status": "TBD",
+      "orbit": "Low Earth Orbit"
+    },
+    {
       "id": "60f4ba6c-4201-4727-94aa-0015a5a0023f",
       "rocket": "Spectrum",
       "mission": "1 x Pelican satellite",
@@ -60,21 +60,6 @@
       "pad": "Andøya Spaceport",
       "status": "TBD",
       "orbit": "Sun-Synchronous Orbit"
-    },
-    {
-      "id": "3ac1bd74-bf9a-4afe-ae00-3e1d180142dd",
-      "rocket": "Astra Rocket 4",
-      "mission": "Maiden Flight",
-      "description": "First flight of Astra Space's second generation small satellite launch vehicle.",
-      "highlight": "Astra Spaceが開発した第2世代の小型衛星打ち上げロケット「Rocket 4」の初飛行ミッションです。同社はこれまでの機体で複数の失敗を経験しており、再起をかけた一機として注目されています。新世代機がどこまで信頼性を向上させたか、小型ロケット市場での巻き返しを図れるかが最大の見どころです。",
-      "date": "2026-12-31",
-      "time": null,
-      "tentative": true,
-      "provider": "Astra Space",
-      "country": "",
-      "pad": "Kennedy Space Center, FL, USA",
-      "status": "TBD",
-      "orbit": "Low Earth Orbit"
     },
     {
       "id": "07e945c1-2ec6-4d29-a500-1afbe920440f",

@@ -1,20 +1,6 @@
 {
-  "updated": "2026-09-16T09:42:06.268Z",
+  "updated": "2026-09-16T14:38:49.249Z",
   "launches": [
-    {
-      "id": "d793ba47-faf5-4bab-a386-39a9ccc49c90",
-      "name": "Soyuz 2.1b | Progress MS-35 (96P)",
-      "rocket": "Soyuz 2",
-      "mission": "Progress MS-35 (96P)",
-      "date": "2026-09-16",
-      "month": 9,
-      "time": "13:33",
-      "tentative": false,
-      "provider": "Russian Federal Space Agency (ROSCOSMOS)",
-      "country": "RU",
-      "pad": "Baikonur Cosmodrome, Republic of Kazakhstan",
-      "status": "Go"
-    },
     {
       "id": "898f7df0-b6ce-4a5c-80b4-67e81842124e",
       "name": "Long March 12 | Unknown Payload",
@@ -132,7 +118,7 @@
       "name": "Falcon 9 Block 5 | USSF-xxx (\"R-3\")",
       "rocket": "Falcon 9",
       "mission": "USSF-xxx (\"R-3\")",
-      "date": "2026-09-27",
+      "date": "2026-09-26",
       "month": 9,
       "time": null,
       "tentative": true,
@@ -280,9 +266,33 @@
       "country": "US",
       "pad": "Kennedy Space Center, FL, USA",
       "status": "TBD"
+    },
+    {
+      "id": "8dd5de11-831b-445f-86f0-bffefe0550d9",
+      "name": "Soyuz 2.1b | Progress MS-36 (97P)",
+      "rocket": "Soyuz 2",
+      "mission": "Progress MS-36 (97P)",
+      "date": "2026-11-24",
+      "month": 11,
+      "time": null,
+      "tentative": true,
+      "provider": "Russian Federal Space Agency (ROSCOSMOS)",
+      "country": "RU",
+      "pad": "Baikonur Cosmodrome, Republic of Kazakhstan",
+      "status": "TBC"
     }
   ],
   "recent": [
+    {
+      "id": "d793ba47-faf5-4bab-a386-39a9ccc49c90",
+      "rocket": "Soyuz 2",
+      "mission": "Progress MS-35 (96P)",
+      "date": "2026-09-16",
+      "country": "RU",
+      "provider": "Russian Federal Space Agency (ROSCOSMOS)",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "767f7827-53d8-4621-803b-f456a1e6b512",
       "rocket": "Gravity-1",
