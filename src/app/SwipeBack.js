@@ -9,7 +9,6 @@ export default function SwipeBack() {
   const history = useRef([])
   const prevPathname = useRef(null)
 
-  // ページ遷移のたびに履歴を積む
   useEffect(() => {
     if (prevPathname.current === null) {
       prevPathname.current = pathname
@@ -61,6 +60,12 @@ export default function SwipeBack() {
     let threshold = 0
     let underlayLoaded = false
 
+    function isSubPage() {
+      // トップページ（/）ではスワイプバック無効
+      const p = window.location.pathname
+      return p !== '/' && p !== ''
+    }
+
     function onTouchStart(e) {
       const t = e.touches[0]
       state.current = { startX: t.clientX, startY: t.clientY, swiping: false }
@@ -75,13 +80,13 @@ export default function SwipeBack() {
 
       if (!state.current.swiping) {
         if (dx > 10 && dx > dy * 1.5) {
-          if (history.current.length === 0) return
+          // トップページまたは履歴なしならスワイプしない
+          if (!isSubPage() || history.current.length === 0) return
           state.current.swiping = true
 
           container.style.display = 'block'
           html.style.overflow = 'hidden'
 
-          // 前のページのURLをiframeで読み込む
           if (!underlayLoaded) {
             const prevUrl = history.current[history.current.length - 1]
             underlay.src = prevUrl
