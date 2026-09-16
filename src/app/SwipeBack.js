@@ -10,6 +10,7 @@ export default function SwipeBack() {
   const prevPathname = useRef(null)
   const navigating = useRef(false)
 
+  // ページ遷移が完了したらiframeを消す
   useEffect(() => {
     if (prevPathname.current === null) {
       prevPathname.current = pathname
@@ -21,17 +22,17 @@ export default function SwipeBack() {
         if (historyStack.current.length > 10) historyStack.current.shift()
       }
       prevPathname.current = pathname
-      navigating.current = false
 
-      // 遷移完了 → 残っている要素をクリーンアップ
-      const w = document.getElementById('page-wrapper')
-      if (w) {
-        w.style.cssText = 'background-color:#f8f9fa;min-height:100vh;'
+      if (navigating.current) {
+        navigating.current = false
+        // 遷移完了 → iframeを消してページを表示
+        requestAnimationFrame(() => {
+          const underlay = document.getElementById('swipe-underlay')
+          const overlay = document.getElementById('swipe-overlay')
+          if (underlay) { underlay.style.display = 'none'; underlay.src = 'about:blank' }
+          if (overlay) overlay.style.display = 'none'
+        })
       }
-      const underlay = document.getElementById('swipe-underlay')
-      const overlay = document.getElementById('swipe-overlay')
-      if (underlay) { underlay.style.display = 'none'; underlay.src = 'about:blank' }
-      if (overlay) overlay.style.display = 'none'
     }
   }, [pathname])
 
@@ -169,8 +170,14 @@ export default function SwipeBack() {
         overlay.style.opacity = '0'
 
         setTimeout(() => {
-          // wrapperを非表示にしてからナビゲーション → 点滅しない
-          w.style.opacity = '0'
+          // iframeを全画面で前面に出す（遷移中の目隠し）
+          underlay.style.transform = 'translateX(0)'
+          underlay.style.zIndex = '99999'
+
+          // wrapperを隠す
+          w.style.display = 'none'
+
+          // ナビゲーション実行
           navigating.current = true
           if (historyStack.current.length > 0) {
             historyStack.current.pop()
@@ -178,6 +185,19 @@ export default function SwipeBack() {
           } else {
             router.push(getBackUrl())
           }
+
+          // 遷移が完了したらiframeが消える（useEffectで処理）
+          // フォールバック: 1秒後に強制クリーンアップ
+          setTimeout(() => {
+            w.style.display = ''
+            w.style.cssText = 'background-color:#f8f9fa;min-height:100vh;'
+            underlay.style.display = 'none'
+            underlay.style.zIndex = '0'
+            underlay.style.transform = 'translateX(-30%)'
+            underlay.src = 'about:blank'
+            overlay.style.display = 'none'
+            navigating.current = false
+          }, 1000)
         }, 260)
       } else {
         // キャンセル
