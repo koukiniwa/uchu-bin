@@ -383,15 +383,22 @@ async function main() {
   const summaries = []
   let totalUpdated = 0
 
-  for (const rocket of ROCKETS) {
+  for (let ri = 0; ri < ROCKETS.length; ri++) {
+    const rocket = ROCKETS[ri]
     console.log(`\n--- ${rocket.nameJa} (${rocket.nameEn}) ---`)
+
+    // ロケット間に待ち時間を入れてレートリミット回避
+    if (ri > 0) {
+      console.log('  Waiting 15s before next rocket...')
+      await new Promise(r => setTimeout(r, 15000))
+    }
 
     const existing = loadExisting(rocket.slug)
 
     // 打ち上げデータ取得
     let allLaunches
-    if (FULL_MODE || !existing || !existing._launches) {
-      // 初回 or --full: 全履歴取得
+    if (FULL_MODE || !existing) {
+      // 完全に初回 or --full: 全履歴取得
       console.log('  Full fetch...')
       const fetched = await fetchAllLaunchesForRocket(rocket)
       if (fetched.length === 0 && existing && existing.stats && existing.stats.total > 0) {
@@ -401,10 +408,11 @@ async function main() {
         allLaunches = fetched
       }
     } else {
-      // 差分更新: 直近50件を取得してマージ
+      // 差分更新: 直近50件を取得してマージ（_launchesがなくても空配列からスタート）
       console.log('  Incremental fetch...')
       const recent = await fetchRecentLaunches(rocket)
-      const { merged, added } = mergeLaunches(existing._launches, recent)
+      const existingLaunches = existing._launches || []
+      const { merged, added } = mergeLaunches(existingLaunches, recent)
       allLaunches = merged
       console.log(`  ${added} new launches added (total: ${allLaunches.length})`)
     }
