@@ -6,22 +6,40 @@ export default function SwipeBack() {
   const router = useRouter()
   const pathname = usePathname()
   const state = useRef({ startX: 0, startY: 0, swiping: false })
-  const prevSnapshot = useRef(null)
+  const snapshots = useRef([]) // 履歴スタック
 
-  // ページ遷移のたびに現在ページのスナップショットを保存
+  // ページ遷移のたびに、前のページのスナップショットをスタックに積む
+  const prevPathname = useRef(null)
+  const pendingSnapshot = useRef(null)
+
+  useEffect(() => {
+    // 初回は保存だけ
+    if (prevPathname.current === null) {
+      prevPathname.current = pathname
+      return
+    }
+
+    // パスが変わった＝遷移した → 遷移前に撮っておいたスナップショットをスタックに積む
+    if (prevPathname.current !== pathname && pendingSnapshot.current) {
+      snapshots.current.push(pendingSnapshot.current)
+      // 最大5件保持
+      if (snapshots.current.length > 5) snapshots.current.shift()
+    }
+    prevPathname.current = pathname
+  }, [pathname])
+
+  // 常に現在のページのスナップショットを更新（次の遷移前用）
   useEffect(() => {
     const timer = setTimeout(() => {
       const scrollY = window.scrollY
       const clone = document.documentElement.cloneNode(true)
       clone.querySelectorAll('script').forEach(s => s.remove())
-      const html = clone.outerHTML
-      prevSnapshot.current = { html, scrollY, path: pathname }
+      pendingSnapshot.current = { html: clone.outerHTML, scrollY, path: pathname }
     }, 500)
     return () => clearTimeout(timer)
   }, [pathname])
 
   useEffect(() => {
-    // 前のページを表示するiframe（左側に少し引っ込んだ位置）
     const underlay = document.createElement('iframe')
     Object.assign(underlay.style, {
       position: 'fixed', top: '0', left: '0', width: '100%', height: '100%',
@@ -32,7 +50,6 @@ export default function SwipeBack() {
     underlay.setAttribute('aria-hidden', 'true')
     document.body.appendChild(underlay)
 
-    // 前のページの上に乗る暗いオーバーレイ
     const overlay = document.createElement('div')
     Object.assign(overlay.style, {
       position: 'fixed', top: '0', left: '0', width: '100%', height: '100%',
@@ -40,7 +57,6 @@ export default function SwipeBack() {
     })
     document.body.appendChild(overlay)
 
-    // 現在ページの左端の影
     const shadow = document.createElement('div')
     Object.assign(shadow.style, {
       position: 'fixed', top: '0', left: '0', width: '16px', height: '100%',
@@ -78,14 +94,15 @@ export default function SwipeBack() {
           state.current.swiping = true
           body.style.overflow = 'hidden'
 
-          // 前のページをiframeに表示
-          if (prevSnapshot.current) {
+          // スタックの一番上（＝直前のページ）を表示
+          const snap = snapshots.current[snapshots.current.length - 1]
+          if (snap) {
             try {
               const doc = underlay.contentDocument
               doc.open()
-              doc.write(prevSnapshot.current.html)
+              doc.write(snap.html)
               doc.close()
-              underlay.contentWindow.scrollTo(0, prevSnapshot.current.scrollY)
+              underlay.contentWindow.scrollTo(0, snap.scrollY)
             } catch (err) { /* ignore */ }
           }
           underlay.style.opacity = '1'
@@ -103,22 +120,18 @@ export default function SwipeBack() {
       const progress = Math.min(clampedDx / window.innerWidth, 1)
       const els = getPageElements()
 
-      // 現在のページを右にスライド
       for (const el of els) {
         el.style.transform = `translateX(${clampedDx}px)`
         el.style.transition = 'none'
       }
 
-      // 前のページが左から出てくる（-30% → 0%）
       const underlayX = -30 + (30 * progress)
       underlay.style.transform = `translateX(${underlayX}%)`
       underlay.style.transition = 'none'
 
-      // オーバーレイを薄くしていく
       overlay.style.opacity = String(0.5 * (1 - progress))
       overlay.style.transition = 'none'
 
-      // 影を現在ページの左端に配置
       shadow.style.opacity = String(Math.min(progress * 3, 1))
       shadow.style.transform = `translateX(${clampedDx - 16}px)`
       shadow.style.transition = 'none'
@@ -134,7 +147,6 @@ export default function SwipeBack() {
       const dur = '0.25s'
 
       if (dx > threshold) {
-        // 戻る：現在ページを右に飛ばす、前のページを中央に
         for (const el of els) {
           el.style.transition = `transform ${dur} ease-out`
           el.style.transform = `translateX(${window.innerWidth}px)`
@@ -147,11 +159,12 @@ export default function SwipeBack() {
         shadow.style.opacity = '0'
 
         setTimeout(() => {
+          // スタックからポップ
+          snapshots.current.pop()
           router.back()
           requestAnimationFrame(() => resetStyles(els))
         }, 250)
       } else {
-        // キャンセル：元に戻す
         for (const el of els) {
           el.style.transition = `transform ${dur} ease-out`
           el.style.transform = ''
