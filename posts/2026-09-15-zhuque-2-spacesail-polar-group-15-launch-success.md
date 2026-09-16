@@ -16,10 +16,6 @@ imageCredit: 'Zhuque-2 / LandSpace'
 
 ## G60コンステレーション向け、Ku・Q・Vバンド対応衛星10機
 
-![SpaceSail Polar Group #15](/images/library/zhuque_001.jpg)
-*Long March 8 / CNSA*
-
-
 今回打ち上げられた10機は、Ku・Q・Vバンドのペイロードを搭載した低軌道通信衛星だ。運用主体は上海スペースセイル社で、上海市政府の資金支援を受けている。
 
 G60コンステレーションは2027年までに1,296機体制での初期運用開始を目標としており、長期的には12,000機規模への拡張を計画している。SpaceXのStarlinkや中国国営のGuoWang（国網）と並ぶ大規模コンステレーションとして整備が進んでいる。

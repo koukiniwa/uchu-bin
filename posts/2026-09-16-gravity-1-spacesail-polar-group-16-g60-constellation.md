@@ -16,10 +16,6 @@ imageCredit: 'Gravity-1 / Orienspace'
 
 ## G60星座——上海市肝いりの国産ブロードバンド網
 
-![SpaceSail Polar Group #16](/images/library/gravity1_001.jpg)
-*Long March 8 / CNSA*
-
-
 今回搭載されたのは、Shanghai Spacesail Technologies（上海スペースセイル技術）が運用するG60コンステレーション向けの衛星群だ。同社は上海市地方政府の出資を受けており、G60星座は中国の国産ブロードバンド衛星網として位置づけられている。
 
 Ku帯に加えてQ帯・V帯ペイロードを搭載する点が特徴で、より広い周波数帯域を用いた通信サービスを想定した設計となっている。
