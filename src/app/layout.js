@@ -75,6 +75,7 @@ export default function RootLayout({ children }) {
       </head>
       <body style={{ backgroundColor: '#f8f9fa', color: '#111111' }}>
         <SwipeBack />
+        <div id="page-wrapper" style={{ backgroundColor: '#f8f9fa', minHeight: '100vh' }}>
         {/* Header */}
         <header style={{
           background: 'linear-gradient(135deg, #0a0e1a 0%, #0f1629 40%, #1a2744 100%)',
@@ -162,6 +163,7 @@ export default function RootLayout({ children }) {
             </div>
           </div>
         </footer>
+        </div>
       </body>
     </html>
   )

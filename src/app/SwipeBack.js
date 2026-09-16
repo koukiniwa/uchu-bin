@@ -22,71 +22,52 @@ export default function SwipeBack() {
   }, [pathname])
 
   useEffect(() => {
-    const html = document.documentElement
-
-    const container = document.createElement('div')
-    Object.assign(container.style, {
-      position: 'fixed', top: '0', left: '0', width: '100%', height: '100%',
-      zIndex: '99999', pointerEvents: 'none', overflow: 'hidden',
-      display: 'none',
-    })
-    html.appendChild(container)
-
+    // 前のページを表示するiframe
     const underlay = document.createElement('iframe')
     Object.assign(underlay.style, {
-      position: 'absolute', top: '0', left: '0', width: '100%', height: '100%',
-      border: 'none', transform: 'translateX(-30%)',
+      position: 'fixed', top: '0', left: '0', width: '100%', height: '100%',
+      border: 'none', zIndex: '0',
+      transform: 'translateX(-30%)',
       backgroundColor: '#f8f9fa',
+      display: 'none',
     })
     underlay.setAttribute('aria-hidden', 'true')
-    container.appendChild(underlay)
+    document.body.appendChild(underlay)
 
+    // 暗いオーバーレイ（前のページの上）
     const overlay = document.createElement('div')
     Object.assign(overlay.style, {
-      position: 'absolute', top: '0', left: '0', width: '100%', height: '100%',
-      background: 'rgba(0,0,0,0.5)',
+      position: 'fixed', top: '0', left: '0', width: '100%', height: '100%',
+      background: 'rgba(0,0,0,0.5)', zIndex: '1',
+      display: 'none', pointerEvents: 'none',
     })
-    container.appendChild(overlay)
+    document.body.appendChild(overlay)
 
-    const shadow = document.createElement('div')
-    Object.assign(shadow.style, {
-      position: 'absolute', top: '0', width: '16px', height: '100%',
-      background: 'linear-gradient(to right, rgba(0,0,0,0.15), transparent)',
-      opacity: '0',
-    })
-    container.appendChild(shadow)
-
-    const body = document.body
     let threshold = 0
     let underlayLoaded = false
+    let wrapper = null
+
+    function getWrapper() {
+      if (!wrapper) wrapper = document.getElementById('page-wrapper')
+      return wrapper
+    }
 
     function isSubPage() {
       const p = window.location.pathname
       return p !== '/' && p !== ''
     }
 
-    // 戻り先URLを決定
     function getBackUrl() {
-      // クライアント側の履歴があればそれを使う
       if (history.current.length > 0) {
         return history.current[history.current.length - 1]
       }
-      // 記事ページならトップへ
-      if (window.location.pathname.startsWith('/blog/')) {
-        return '/'
-      }
-      // ロケット詳細ならロケット図鑑へ
-      if (window.location.pathname.startsWith('/rockets/')) {
-        return '/rockets'
-      }
-      // その他の下層ページならトップへ
+      if (window.location.pathname.startsWith('/blog/')) return '/'
+      if (window.location.pathname.startsWith('/rockets/')) return '/rockets'
       return '/'
     }
 
-    // スワイプバックが可能か
     function canSwipeBack() {
       if (!isSubPage()) return false
-      // ブラウザ履歴があるか、下層ページであればOK
       return history.current.length > 0 || window.history.length > 1
     }
 
@@ -114,8 +95,21 @@ export default function SwipeBack() {
           if (!canSwipeBack()) return
           state.current.swiping = true
 
-          container.style.display = 'block'
-          html.style.overflow = 'hidden'
+          const w = getWrapper()
+          if (!w) return
+
+          // ラッパーを固定位置に切り替え
+          const scrollY = window.scrollY
+          w.style.position = 'fixed'
+          w.style.top = `-${scrollY}px`
+          w.style.left = '0'
+          w.style.right = '0'
+          w.style.zIndex = '2'
+          w.style.boxShadow = '-8px 0 24px rgba(0,0,0,0.18)'
+          w.dataset.scrollY = scrollY
+
+          underlay.style.display = 'block'
+          overlay.style.display = 'block'
 
           if (!underlayLoaded) {
             underlay.src = getBackUrl()
@@ -128,20 +122,20 @@ export default function SwipeBack() {
 
       if (!state.current.swiping) return
 
+      const w = getWrapper()
+      if (!w) return
+
       const clampedDx = Math.max(0, dx)
       const progress = Math.min(clampedDx / window.innerWidth, 1)
 
-      body.style.transform = `translateX(${clampedDx}px)`
-      body.style.transition = 'none'
+      w.style.transform = `translateX(${clampedDx}px)`
+      w.style.transition = 'none'
 
       underlay.style.transform = `translateX(${-30 + 30 * progress}%)`
       underlay.style.transition = 'none'
 
       overlay.style.opacity = String(1 - progress)
       overlay.style.transition = 'none'
-
-      shadow.style.opacity = String(Math.min(progress * 3, 1))
-      shadow.style.left = `${clampedDx - 16}px`
     }
 
     function onTouchEnd(e) {
@@ -151,10 +145,12 @@ export default function SwipeBack() {
       const t = e.changedTouches[0]
       const dx = t.clientX - state.current.startX
       const dur = '0.25s'
+      const w = getWrapper()
+      if (!w) return
 
       if (dx > threshold) {
-        body.style.transition = `transform ${dur} ease-out`
-        body.style.transform = `translateX(${window.innerWidth}px)`
+        w.style.transition = `transform ${dur} ease-out`
+        w.style.transform = `translateX(${window.innerWidth}px)`
         underlay.style.transition = `transform ${dur} ease-out`
         underlay.style.transform = 'translateX(0%)'
         overlay.style.transition = `opacity ${dur} ease-out`
@@ -165,33 +161,39 @@ export default function SwipeBack() {
             history.current.pop()
             router.back()
           } else {
-            // 履歴がない場合はトップ等に遷移
             router.push(getBackUrl())
           }
-          requestAnimationFrame(() => resetStyles())
+          requestAnimationFrame(() => resetStyles(w))
         }, 250)
       } else {
-        body.style.transition = `transform ${dur} ease-out`
-        body.style.transform = ''
+        w.style.transition = `transform ${dur} ease-out`
+        w.style.transform = 'translateX(0)'
         underlay.style.transition = `transform ${dur} ease-out`
         underlay.style.transform = 'translateX(-30%)'
         overlay.style.transition = `opacity ${dur} ease-out`
-        overlay.style.opacity = '0.5'
-        shadow.style.transition = `opacity ${dur} ease-out`
-        shadow.style.opacity = '0'
-        setTimeout(() => resetStyles(), 250)
+        overlay.style.opacity = '0'
+        setTimeout(() => resetStyles(w), 250)
       }
     }
 
-    function resetStyles() {
-      body.style.transition = ''
-      body.style.transform = ''
-      html.style.overflow = ''
-      container.style.display = 'none'
+    function resetStyles(w) {
+      if (w) {
+        const scrollY = parseInt(w.dataset.scrollY || '0')
+        w.style.position = ''
+        w.style.top = ''
+        w.style.left = ''
+        w.style.right = ''
+        w.style.zIndex = ''
+        w.style.transform = ''
+        w.style.transition = ''
+        w.style.boxShadow = ''
+        window.scrollTo(0, scrollY)
+      }
+      underlay.style.display = 'none'
       underlay.style.transform = 'translateX(-30%)'
       underlay.src = 'about:blank'
+      overlay.style.display = 'none'
       overlay.style.opacity = '0.5'
-      shadow.style.opacity = '0'
       underlayLoaded = false
     }
 
@@ -202,7 +204,8 @@ export default function SwipeBack() {
       window.removeEventListener('touchstart', onTouchStart)
       window.removeEventListener('touchmove', onTouchMove)
       window.removeEventListener('touchend', onTouchEnd)
-      container.remove()
+      underlay.remove()
+      overlay.remove()
     }
   }, [router])
 
