@@ -389,32 +389,49 @@ async function main() {
 
     // ロケット間に待ち時間を入れてレートリミット回避
     if (ri > 0) {
-      console.log('  Waiting 15s before next rocket...')
-      await new Promise(r => setTimeout(r, 15000))
+      console.log('  Waiting 60s before next rocket...')
+      await new Promise(r => setTimeout(r, 60000))
     }
 
     const existing = loadExisting(rocket.slug)
 
     // 打ち上げデータ取得
     let allLaunches
-    if (FULL_MODE || !existing) {
-      // 完全に初回 or --full: 全履歴取得
-      console.log('  Full fetch...')
+    if (FULL_MODE && !existing) {
+      // 完全に初回 (JSONが存在しない場合のみ): 全履歴取得
+      console.log('  Full fetch (no existing data)...')
       const fetched = await fetchAllLaunchesForRocket(rocket)
-      if (fetched.length === 0 && existing && existing.stats && existing.stats.total > 0) {
-        console.log('  WARNING: API returned 0 results but existing data has launches. Keeping existing data.')
-        allLaunches = existing._launches || []
-      } else {
-        allLaunches = fetched
-      }
+      allLaunches = fetched
     } else {
-      // 差分更新: 直近50件を取得してマージ（_launchesがなくても空配列からスタート）
+      // 差分更新: 直近50件を取得してマージ
       console.log('  Incremental fetch...')
       const recent = await fetchRecentLaunches(rocket)
-      const existingLaunches = existing._launches || []
-      const { merged, added } = mergeLaunches(existingLaunches, recent)
-      allLaunches = merged
-      console.log(`  ${added} new launches added (total: ${allLaunches.length})`)
+      const existingLaunches = existing?._launches || []
+      if (recent.length === 0 && existingLaunches.length > 0) {
+        console.log('  API returned 0, keeping existing launches.')
+        allLaunches = existingLaunches
+      } else if (recent.length === 0 && existingLaunches.length === 0) {
+        console.log('  No data available, skipping.')
+        // 既存statsがあればそのまま保持
+        if (existing && existing.stats && existing.stats.total > 0) {
+          existing.upcoming = getUpcoming(rocket)
+          existing.updated = new Date().toISOString()
+          fs.writeFileSync(path.join(OUTPUT_DIR, `${rocket.slug}.json`), JSON.stringify(existing, null, 2), 'utf-8')
+          summaries.push({
+            slug: rocket.slug, nameJa: rocket.nameJa, nameEn: rocket.nameEn,
+            operator: rocket.operator, country: rocket.country, image: rocket.image,
+            status: rocket.status,
+            total: existing.stats.total, successRate: existing.stats.successRate,
+            thisYear: existing.stats.thisYear?.total || 0,
+            lastLaunch: existing.recentLaunches?.[0]?.date || null,
+          })
+        }
+        continue
+      } else {
+        const { merged, added } = mergeLaunches(existingLaunches, recent)
+        allLaunches = merged
+        console.log(`  ${added} new launches added (total: ${allLaunches.length})`)
+      }
     }
 
     // 統計計算
