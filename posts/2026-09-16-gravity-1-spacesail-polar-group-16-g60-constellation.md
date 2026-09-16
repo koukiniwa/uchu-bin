@@ -3,8 +3,8 @@ title: 'グラビティ1、G60星座向け9機打ち上げに成功'
 description: 'グラビティ1が通信衛星9機の打ち上げに成功。海陽東方宇宙港から2026年9月16日に実施。'
 date: '2026-09-16T13:20:09.347+09:00'
 category: 'ロケット'
-image: '/images/library/longmarch8_001.jpg'
-imageCredit: 'Long March 8 / CNSA'
+image: '/images/library/gravity1_001.jpg'
+imageCredit: 'Gravity-1 / Orienspace'
 ---
 
 ## グラビティ1、4回目の打ち上げも成功——9機をLEOへ投入

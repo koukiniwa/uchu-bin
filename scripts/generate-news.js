@@ -516,7 +516,8 @@ const LIBRARY_TOPIC_KEYWORDS = {
   longmarch5:     ['long march 5', '長征5号', 'cz-5'],
   longmarch6:     ['long march 6', '長征6号', 'cz-6'],
   longmarch7:     ['long march 7', '長征7号', 'cz-7'],
-  longmarch8:     ['long march 8', '長征8号', 'cz-8', '千帆', 'qianfan', 'spacesail'],
+  longmarch4:     ['long march 4', '長征4号', 'cz-4'],
+  longmarch8:     ['long march 8', '長征8号', 'cz-8', '千帆', 'qianfan'],
   longmarch9:     ['long march 9', '長征9号', 'cz-9'],
   kuaizhou:       ['kuaizhou', '快舟'],
   ceres1:         ['ceres', '穀神星', 'galactic energy'],
@@ -807,6 +808,7 @@ const LIBRARY_CREDIT_MAP = {
   spacecraft:   'Spacecraft / NASA',
   // 新規追加
   longmarch2:   'Long March 2 / CNSA',
+  longmarch4:   'Long March 4 / CNSA',
   longmarch3:   'Long March 3 / CNSA',
   longmarch5:   'Long March 5 / CNSA',
   longmarch6:   'Long March 6 / CNSA',

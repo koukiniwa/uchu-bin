@@ -3,8 +3,8 @@ title: '長征4号B、軍事リモートセンシング衛星6機の打ち上げ
 description: '長征4号Bが打ち上げ成功。酒泉衛星発射センターから2026年9月10日に実施。遥感53・56シリーズ計6機を軌道投入。'
 date: '2026-09-10T21:09:50.655+09:00'
 category: 'ロケット'
-image: '/images/library/rocketlaunch_001.jpg'
-imageCredit: 'Rocket Launch / NASA'
+image: '/images/library/longmarch4_001.jpg'
+imageCredit: 'Long March 4 / CNSA'
 ---
 
 ## 長征4号B、遥感衛星6機を同時投入

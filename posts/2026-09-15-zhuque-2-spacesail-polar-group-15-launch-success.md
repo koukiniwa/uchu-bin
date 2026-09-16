@@ -3,8 +3,8 @@ title: '朱雀2号、SpaceSail衛星10機の打ち上げに成功'
 description: '朱雀2号 打ち上げ 成功 2026年9月。LandSpaceの朱雀2号がG60コンステレーション向け通信衛星10機を軌道投入。酒泉衛星発射センターから9月15日に実施。'
 date: '2026-09-15T21:34:43.039+09:00'
 category: 'ロケット'
-image: '/images/library/longmarch8_001.jpg'
-imageCredit: 'Long March 8 / CNSA'
+image: '/images/library/zhuque_001.jpg'
+imageCredit: 'Zhuque-2 / LandSpace'
 ---
 
 ## 朱雀2号、3回目の飛行で10機の通信衛星を軌道投入
