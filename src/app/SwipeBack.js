@@ -69,7 +69,7 @@ export default function SwipeBack() {
     function onTouchStart(e) {
       const t = e.touches[0]
       state.current = { startX: t.clientX, startY: t.clientY, swiping: false }
-      threshold = window.innerWidth * 0.3
+      threshold = window.innerWidth * 0.2
       underlayLoaded = false
     }
 
