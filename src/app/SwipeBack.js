@@ -8,24 +8,19 @@ export default function SwipeBack() {
   useEffect(() => {
     let startX = 0
     let startY = 0
-    let tracking = false
 
     function onTouchStart(e) {
       const touch = e.touches[0]
-      if (touch.clientX < 30) {
-        startX = touch.clientX
-        startY = touch.clientY
-        tracking = true
-      }
+      startX = touch.clientX
+      startY = touch.clientY
     }
 
     function onTouchEnd(e) {
-      if (!tracking) return
-      tracking = false
       const touch = e.changedTouches[0]
       const dx = touch.clientX - startX
       const dy = Math.abs(touch.clientY - startY)
-      if (dx > 80 && dy < 100) {
+      // 右に100px以上スワイプ、かつ縦移動より横移動が大きい場合のみ戻る
+      if (dx > 100 && dx > dy * 2) {
         router.back()
       }
     }
