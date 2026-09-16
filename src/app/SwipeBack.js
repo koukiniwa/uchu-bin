@@ -33,14 +33,16 @@ export default function SwipeBack() {
   }, [pathname])
 
   useEffect(() => {
-    // コンテナ：画面全体を覆い、前のページと現在のページを横並びに管理
+    const html = document.documentElement
+
+    // コンテナをhtml要素に追加（bodyの外）
     const container = document.createElement('div')
     Object.assign(container.style, {
       position: 'fixed', top: '0', left: '0', width: '100%', height: '100%',
       zIndex: '99999', pointerEvents: 'none', overflow: 'hidden',
       display: 'none',
     })
-    document.body.appendChild(container)
+    html.appendChild(container)
 
     // 前のページ（iframe）
     const underlay = document.createElement('iframe')
@@ -52,7 +54,7 @@ export default function SwipeBack() {
     underlay.setAttribute('aria-hidden', 'true')
     container.appendChild(underlay)
 
-    // 前のページの上の暗いオーバーレイ
+    // 暗いオーバーレイ
     const overlay = document.createElement('div')
     Object.assign(overlay.style, {
       position: 'absolute', top: '0', left: '0', width: '100%', height: '100%',
@@ -60,7 +62,7 @@ export default function SwipeBack() {
     })
     container.appendChild(overlay)
 
-    // 現在ページの左端の影
+    // 現在ページ左端の影
     const shadow = document.createElement('div')
     Object.assign(shadow.style, {
       position: 'absolute', top: '0', width: '16px', height: '100%',
@@ -69,8 +71,8 @@ export default function SwipeBack() {
     })
     container.appendChild(shadow)
 
-    let threshold = 0
     const body = document.body
+    let threshold = 0
 
     function onTouchStart(e) {
       const t = e.touches[0]
@@ -85,15 +87,12 @@ export default function SwipeBack() {
 
       if (!state.current.swiping) {
         if (dx > 10 && dx > dy * 1.5) {
-          // スナップショットが無ければスワイプしない
           if (snapshots.current.length === 0) return
           state.current.swiping = true
 
-          // コンテナを表示
           container.style.display = 'block'
-          body.style.overflow = 'hidden'
+          html.style.overflow = 'hidden'
 
-          // 前のページをiframeに表示
           const snap = snapshots.current[snapshots.current.length - 1]
           if (snap) {
             try {
@@ -116,20 +115,17 @@ export default function SwipeBack() {
       const clampedDx = Math.max(0, dx)
       const progress = Math.min(clampedDx / window.innerWidth, 1)
 
-      // body全体をスライド（現在のページ）
+      // bodyをスライド（コンテナはhtml直下なので動かない）
       body.style.transform = `translateX(${clampedDx}px)`
       body.style.transition = 'none'
 
       // 前のページが左から出てくる
-      const underlayX = -30 + (30 * progress)
-      underlay.style.transform = `translateX(${underlayX}%)`
+      underlay.style.transform = `translateX(${-30 + 30 * progress}%)`
       underlay.style.transition = 'none'
 
-      // オーバーレイを薄く
       overlay.style.opacity = String(1 - progress)
       overlay.style.transition = 'none'
 
-      // 影
       shadow.style.opacity = String(Math.min(progress * 3, 1))
       shadow.style.left = `${clampedDx - 16}px`
     }
@@ -171,7 +167,7 @@ export default function SwipeBack() {
     function resetStyles() {
       body.style.transition = ''
       body.style.transform = ''
-      body.style.overflow = ''
+      html.style.overflow = ''
       container.style.display = 'none'
       underlay.style.transform = 'translateX(-30%)'
       overlay.style.opacity = '0.5'
