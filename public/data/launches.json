@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-16T21:55:20.574Z",
+  "updated": "2026-09-17T00:09:29.498Z",
   "launches": [
     {
       "id": "898f7df0-b6ce-4a5c-80b4-67e81842124e",
@@ -184,6 +184,20 @@
       "status": "TBD"
     },
     {
+      "id": "ab3c1e6c-03fe-48a7-b6ce-30c79569bdfb",
+      "name": "Soyuz 2.1b/Fregat | Kosmos (Unknown Payload)",
+      "rocket": "Soyuz 2",
+      "mission": "Kosmos (Unknown Payload)",
+      "date": "2026-09-30",
+      "month": 9,
+      "time": null,
+      "tentative": true,
+      "provider": "Russian Space Forces",
+      "country": "RU",
+      "pad": "Plesetsk Cosmodrome, Russian Federation",
+      "status": "TBD"
+    },
+    {
       "id": "ef9850ad-1096-425b-9d27-f7bbd186e61a",
       "name": "Vulcan VC6L | Amazon Leo (LV-01)",
       "rocket": "Vulcan VC6L",
@@ -265,20 +279,6 @@
       "provider": "SpaceX",
       "country": "US",
       "pad": "Cape Canaveral SFS, FL, USA",
-      "status": "TBD"
-    },
-    {
-      "id": "4651fd8a-43de-4166-bf8f-c168b3bd1d2c",
-      "name": "Falcon Heavy | NROL-97",
-      "rocket": "Falcon Heavy",
-      "mission": "NROL-97",
-      "date": "2026-10-31",
-      "month": 10,
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "Kennedy Space Center, FL, USA",
       "status": "TBD"
     }
   ],
