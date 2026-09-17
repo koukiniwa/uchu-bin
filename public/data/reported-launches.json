@@ -347,6 +347,12 @@
       "name": "Soyuz 2.1b | Progress MS-35 (96P)",
       "status": "Launch Successful",
       "date": "2026-09-16T18:21:23.934Z"
+    },
+    {
+      "id": "71aa4d56-0ce9-4c7d-a808-cc22f2ac5a84",
+      "name": "Kuaizhou 11 | SpaceTY-51 & 52",
+      "status": "Launch Successful",
+      "date": "2026-09-17T05:11:41.729Z"
     }
   ]
 }
