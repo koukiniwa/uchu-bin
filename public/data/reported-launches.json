@@ -359,6 +359,12 @@
       "name": "Falcon 9 Block 5 | USSF-259",
       "status": "Launch in Flight",
       "date": "2026-09-17T10:19:51.672Z"
+    },
+    {
+      "id": "898f7df0-b6ce-4a5c-80b4-67e81842124e",
+      "name": "Long March 12 | SatNet LEO Group 25",
+      "status": "Launch Successful",
+      "date": "2026-09-17T15:14:32.389Z"
     }
   ]
 }
