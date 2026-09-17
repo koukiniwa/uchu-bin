@@ -27,21 +27,6 @@
   },
   "recentLaunches": [],
   "articles": [],
-  "upcoming": [
-    {
-      "id": "71aa4d56-0ce9-4c7d-a808-cc22f2ac5a84",
-      "name": "Kuaizhou 11 | Unknown Payload",
-      "rocket": "Kuaizhou 11",
-      "mission": "Unknown Payload",
-      "date": "2026-09-17",
-      "month": 9,
-      "time": "02:35",
-      "tentative": false,
-      "provider": "ExPace",
-      "country": "CN",
-      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
-      "status": "Go"
-    }
-  ],
-  "updated": "2026-09-16T07:30:35.852Z"
+  "upcoming": [],
+  "updated": "2026-09-17T19:12:11.230Z"
 }

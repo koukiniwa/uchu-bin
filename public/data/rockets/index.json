@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-16T19:02:43.902Z",
+  "updated": "2026-09-17T19:12:11.230Z",
   "rockets": [
     {
       "slug": "falcon-9",
@@ -67,71 +67,6 @@
       "lastLaunch": "2026-08-10"
     },
     {
-      "slug": "new-glenn",
-      "nameJa": "ニューグレン",
-      "nameEn": "New Glenn",
-      "operator": "Blue Origin",
-      "country": "US",
-      "image": "/images/library/newglenn_001.jpg",
-      "status": "active",
-      "total": 3,
-      "successRate": 66.7,
-      "thisYear": 2,
-      "lastLaunch": null
-    },
-    {
-      "slug": "pslv",
-      "nameJa": "PSLV",
-      "nameEn": "PSLV",
-      "operator": "ISRO",
-      "country": "IN",
-      "image": "/images/library/pslv_001.jpg",
-      "status": "active",
-      "total": 62,
-      "successRate": 93.5,
-      "thisYear": 3,
-      "lastLaunch": null
-    },
-    {
-      "slug": "gslv",
-      "nameJa": "GSLV / LVM3",
-      "nameEn": "GSLV / LVM3",
-      "operator": "ISRO",
-      "country": "IN",
-      "image": "/images/library/gslv_001.jpg",
-      "status": "active",
-      "total": 22,
-      "successRate": 81.8,
-      "thisYear": 2,
-      "lastLaunch": null
-    },
-    {
-      "slug": "zhuque",
-      "nameJa": "朱雀",
-      "nameEn": "Zhuque",
-      "operator": "LandSpace",
-      "country": "CN",
-      "image": "/images/library/zhuque_001.jpg",
-      "status": "active",
-      "total": 10,
-      "successRate": 80,
-      "thisYear": 4,
-      "lastLaunch": null
-    },
-    {
-      "slug": "kuaizhou",
-      "nameJa": "快舟",
-      "nameEn": "Kuaizhou",
-      "operator": "ExPace",
-      "country": "CN",
-      "image": "/images/library/kuaizhou_001.jpg",
-      "status": "active",
-      "total": 28,
-      "successRate": 85.7,
-      "thisYear": 3,
-      "lastLaunch": null
-    },
-    {
       "slug": "ariane-6",
       "nameJa": "アリアン6",
       "nameEn": "Ariane 6",
@@ -193,6 +128,71 @@
       "status": "active",
       "total": 6,
       "successRate": 100,
+      "thisYear": 3,
+      "lastLaunch": null
+    },
+    {
+      "slug": "new-glenn",
+      "nameJa": "ニューグレン",
+      "nameEn": "New Glenn",
+      "operator": "Blue Origin",
+      "country": "US",
+      "image": "/images/library/newglenn_001.jpg",
+      "status": "active",
+      "total": 3,
+      "successRate": 66.7,
+      "thisYear": 2,
+      "lastLaunch": null
+    },
+    {
+      "slug": "pslv",
+      "nameJa": "PSLV",
+      "nameEn": "PSLV",
+      "operator": "ISRO",
+      "country": "IN",
+      "image": "/images/library/pslv_001.jpg",
+      "status": "active",
+      "total": 62,
+      "successRate": 93.5,
+      "thisYear": 3,
+      "lastLaunch": null
+    },
+    {
+      "slug": "gslv",
+      "nameJa": "GSLV / LVM3",
+      "nameEn": "GSLV / LVM3",
+      "operator": "ISRO",
+      "country": "IN",
+      "image": "/images/library/gslv_001.jpg",
+      "status": "active",
+      "total": 22,
+      "successRate": 81.8,
+      "thisYear": 2,
+      "lastLaunch": null
+    },
+    {
+      "slug": "zhuque",
+      "nameJa": "朱雀",
+      "nameEn": "Zhuque",
+      "operator": "LandSpace",
+      "country": "CN",
+      "image": "/images/library/zhuque_001.jpg",
+      "status": "active",
+      "total": 10,
+      "successRate": 80,
+      "thisYear": 4,
+      "lastLaunch": null
+    },
+    {
+      "slug": "kuaizhou",
+      "nameJa": "快舟",
+      "nameEn": "Kuaizhou",
+      "operator": "ExPace",
+      "country": "CN",
+      "image": "/images/library/kuaizhou_001.jpg",
+      "status": "active",
+      "total": 28,
+      "successRate": 85.7,
       "thisYear": 3,
       "lastLaunch": null
     }
