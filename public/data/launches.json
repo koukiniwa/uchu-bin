@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-17T16:22:37.695Z",
+  "updated": "2026-09-17T20:02:23.720Z",
   "launches": [
     {
       "id": "f4c720ce-0cfd-43e6-b8dd-00273073bc01",
@@ -58,20 +58,6 @@
       "status": "Go"
     },
     {
-      "id": "7d1afb26-6f9c-429b-9ccf-29012fd1e519",
-      "name": "Starship | Starlink Group 31-1 (Starship Flight 14)",
-      "rocket": "Starship",
-      "mission": "Starlink Group 31-1 (Starship Flight 14)",
-      "date": "2026-09-22",
-      "month": 9,
-      "time": "12:15",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "SpaceX Starbase, TX, USA",
-      "status": "Go"
-    },
-    {
       "id": "7330d83b-c478-426c-8859-f9e3a335876d",
       "name": "Falcon 9 Block 5 | USSF-385",
       "rocket": "Falcon 9",
@@ -84,6 +70,20 @@
       "country": "",
       "pad": "Vandenberg SFB, CA, USA",
       "status": "Go"
+    },
+    {
+      "id": "7d1afb26-6f9c-429b-9ccf-29012fd1e519",
+      "name": "Starship | Starlink Group 31-1 (Starship Flight 14)",
+      "rocket": "Starship",
+      "mission": "Starlink Group 31-1 (Starship Flight 14)",
+      "date": "2026-09-28",
+      "month": 9,
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "SpaceX Starbase, TX, USA",
+      "status": "TBC"
     },
     {
       "id": "599ba2df-7483-4b2f-a083-2b5ddc06e069",
