@@ -365,6 +365,12 @@
       "name": "Long March 12 | SatNet LEO Group 25",
       "status": "Launch Successful",
       "date": "2026-09-17T15:14:32.389Z"
+    },
+    {
+      "id": "ab3c1e6c-03fe-48a7-b6ce-30c79569bdfb",
+      "name": "Soyuz 2.1b/Fregat | Kosmos (Unknown Payload)",
+      "status": "Launch Successful",
+      "date": "2026-09-18T10:57:26.799Z"
     }
   ]
 }
