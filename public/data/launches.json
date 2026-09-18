@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-18T13:26:15.665Z",
+  "updated": "2026-09-18T17:31:50.974Z",
   "launches": [
     {
       "id": "f4c720ce-0cfd-43e6-b8dd-00273073bc01",
@@ -55,6 +55,34 @@
       "provider": "CAS Space",
       "country": "CN",
       "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
+      "status": "Go"
+    },
+    {
+      "id": "63063b9d-ade9-4448-8717-6f910aa81188",
+      "name": "Long March 8A | Unknown Payload",
+      "rocket": "Long March 8A",
+      "mission": "Unknown Payload",
+      "date": "2026-09-23",
+      "month": 9,
+      "time": "13:30",
+      "tentative": false,
+      "provider": "China Aerospace Science and Technology Corporation",
+      "country": "CN",
+      "pad": "Wenchang Space Launch Site, People's Republic of China",
+      "status": "Go"
+    },
+    {
+      "id": "aed67837-b567-43e0-8071-c3ccc24aa496",
+      "name": "Long March 6A | Unknown Payload",
+      "rocket": "Long March 6A",
+      "mission": "Unknown Payload",
+      "date": "2026-09-24",
+      "month": 9,
+      "time": "08:45",
+      "tentative": false,
+      "provider": "China Aerospace Science and Technology Corporation",
+      "country": "CN",
+      "pad": "Taiyuan Satellite Launch Center, People's Republic of China",
       "status": "Go"
     },
     {
@@ -114,20 +142,6 @@
       "status": "TBD"
     },
     {
-      "id": "63063b9d-ade9-4448-8717-6f910aa81188",
-      "name": "Long March 8A | Unknown Payload",
-      "rocket": "Long March 8A",
-      "mission": "Unknown Payload",
-      "date": "2026-09-30",
-      "month": 9,
-      "time": null,
-      "tentative": true,
-      "provider": "China Aerospace Science and Technology Corporation",
-      "country": "CN",
-      "pad": "Wenchang Space Launch Site, People's Republic of China",
-      "status": "TBD"
-    },
-    {
       "id": "ef9850ad-1096-425b-9d27-f7bbd186e61a",
       "name": "Vulcan VC6L | Amazon Leo (LV-01)",
       "rocket": "Vulcan VC6L",
@@ -140,6 +154,20 @@
       "country": "",
       "pad": "Cape Canaveral SFS, FL, USA",
       "status": "TBD"
+    },
+    {
+      "id": "18441371-8b2e-457c-afb5-1ec1b11ab630",
+      "name": "Falcon 9 Block 5 | Crew-13",
+      "rocket": "Falcon 9",
+      "mission": "Crew-13",
+      "date": "2026-10-01",
+      "month": 10,
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Cape Canaveral SFS, FL, USA",
+      "status": "TBC"
     },
     {
       "id": "6b89cfc8-8880-4b5b-856c-0e547d45b639",
@@ -198,20 +226,6 @@
       "status": "Go"
     },
     {
-      "id": "3b430f81-0ff1-4d85-8a1a-cef0de326198",
-      "name": "Falcon 9 Block 5 | Bandwagon 5 (Dedicated Mid-Inclination Rideshare)",
-      "rocket": "Falcon 9",
-      "mission": "Bandwagon 5 (Dedicated Mid-Inclination Rideshare)",
-      "date": "2026-10-31",
-      "month": 10,
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "Cape Canaveral SFS, FL, USA",
-      "status": "TBD"
-    },
-    {
       "id": "4651fd8a-43de-4166-bf8f-c168b3bd1d2c",
       "name": "Falcon Heavy | NROL-97",
       "rocket": "Falcon Heavy",
@@ -266,27 +280,13 @@
       "country": "US",
       "pad": "Kennedy Space Center, FL, USA",
       "status": "TBD"
-    },
-    {
-      "id": "7c891a0b-7194-4425-8cfd-2e8c75af2924",
-      "name": "HANBIT-Nano | InnoSat-0",
-      "rocket": "HANBIT-Nano",
-      "mission": "InnoSat-0",
-      "date": "2026-11-30",
-      "month": 11,
-      "time": null,
-      "tentative": true,
-      "provider": "Innospace",
-      "country": "KR",
-      "pad": "Alcântara Space Center, Federative Republic of Brazil",
-      "status": "TBD"
     }
   ],
   "recent": [
     {
       "id": "ab3c1e6c-03fe-48a7-b6ce-30c79569bdfb",
       "rocket": "Soyuz 2",
-      "mission": "Kosmos (Unknown Payload)",
+      "mission": "Glonass-K1 No. 20 (?)",
       "date": "2026-09-17",
       "country": "RU",
       "provider": "Russian Space Forces",

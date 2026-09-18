@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-18T13:26:23.207Z",
+  "updated": "2026-09-18T17:31:59.971Z",
   "featured": [
     {
       "id": "7d1afb26-6f9c-429b-9ccf-29012fd1e519",
@@ -17,6 +17,21 @@
       "orbit": "Low Earth Orbit"
     },
     {
+      "id": "18441371-8b2e-457c-afb5-1ec1b11ab630",
+      "rocket": "Falcon 9",
+      "mission": "Crew-13",
+      "description": "SpaceX Crew-13 is the thirteenth crewed operational flight of a Crew Dragon spacecraft to the International Space Station as part of NASA's Commercial Crew Program.",
+      "highlight": "SpaceXのクルードラゴン宇宙船による13回目の有人ISS飛行ミッションです。NASAの商業乗員輸送プログラムの一環として実施され、民間企業が宇宙飛行士の輸送を担うという新時代の宇宙開発の姿を体現しています。着実に回を重ねるこのミッションは、有人宇宙飛行の「日常化」が着々と進んでいることを示しています。",
+      "date": "2026-10-01",
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Cape Canaveral SFS, FL, USA",
+      "status": "TBC",
+      "orbit": "Low Earth Orbit"
+    },
+    {
       "id": "69ebbcd2-b257-4070-9ef9-21e7d1f8a883",
       "rocket": "H3",
       "mission": "Martian Moon eXplorer (MMX)",
@@ -30,21 +45,6 @@
       "pad": "Tanegashima Space Center, Japan",
       "status": "Go",
       "orbit": "Mars Orbit"
-    },
-    {
-      "id": "18441371-8b2e-457c-afb5-1ec1b11ab630",
-      "rocket": "Falcon 9",
-      "mission": "Crew-13",
-      "description": "SpaceX Crew-13 is the thirteenth crewed operational flight of a Crew Dragon spacecraft to the International Space Station as part of NASA's Commercial Crew Program.",
-      "highlight": "SpaceXのクルードラゴン宇宙船による13回目の有人ISS飛行ミッションです。NASAの商業乗員輸送プログラムの一環として実施され、民間企業が宇宙飛行士の輸送を担うという新時代の宇宙開発の姿を体現しています。着実に回を重ねるこのミッションは、有人宇宙飛行の「日常化」が着々と進んでいることを示しています。",
-      "date": "2026-10-31",
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "Cape Canaveral SFS, FL, USA",
-      "status": "TBD",
-      "orbit": "Low Earth Orbit"
     },
     {
       "id": "60f4ba6c-4201-4727-94aa-0015a5a0023f",
