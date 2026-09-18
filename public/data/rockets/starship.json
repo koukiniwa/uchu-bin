@@ -136,18 +136,18 @@
   "upcoming": [
     {
       "id": "7d1afb26-6f9c-429b-9ccf-29012fd1e519",
-      "name": "Starship | Flight 14",
+      "name": "Starship | Starlink Group 31-1 (Starship Flight 14)",
       "rocket": "Starship",
-      "mission": "Flight 14",
-      "date": "2026-09-22",
+      "mission": "Starlink Group 31-1 (Starship Flight 14)",
+      "date": "2026-09-28",
       "month": 9,
-      "time": "12:15",
-      "tentative": false,
+      "time": null,
+      "tentative": true,
       "provider": "SpaceX",
       "country": "US",
       "pad": "SpaceX Starbase, TX, USA",
-      "status": "Go"
+      "status": "TBC"
     }
   ],
-  "updated": "2026-09-16T07:17:04.132Z"
+  "updated": "2026-09-18T18:36:41.958Z"
 }

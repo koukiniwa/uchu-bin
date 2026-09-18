@@ -184,7 +184,7 @@
       "time": "03:15",
       "tentative": false,
       "provider": "Rocket Lab",
-      "country": "NZ",
+      "country": "US",
       "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
       "status": "Go"
     },
@@ -203,7 +203,7 @@
       "status": "TBD"
     }
   ],
-  "updated": "2026-09-16T07:17:25.358Z",
+  "updated": "2026-09-18T18:37:47.490Z",
   "_launches": [
     {
       "id": "9f5a4cb6-63f9-47e1-9512-b468bae2a8e6",
