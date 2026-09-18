@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-18T20:30:20.503Z",
+  "updated": "2026-09-18T23:03:34.456Z",
   "launches": [
     {
       "id": "f4c720ce-0cfd-43e6-b8dd-00273073bc01",
@@ -330,16 +330,6 @@
       "date": "2026-09-16",
       "country": "RU",
       "provider": "Russian Federal Space Agency (ROSCOSMOS)",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "767f7827-53d8-4621-803b-f456a1e6b512",
-      "rocket": "Gravity-1",
-      "mission": "SpaceSail Polar Group #16",
-      "date": "2026-09-15",
-      "country": "CN",
-      "provider": "Orienspace Technology",
       "result": "success",
       "resultLabel": "成功"
     }
