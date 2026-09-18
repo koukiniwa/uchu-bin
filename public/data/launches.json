@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-17T23:24:22.433Z",
+  "updated": "2026-09-18T03:29:16.175Z",
   "launches": [
     {
       "id": "f4c720ce-0cfd-43e6-b8dd-00273073bc01",
@@ -100,20 +100,6 @@
       "status": "TBD"
     },
     {
-      "id": "da43dc2c-00af-4cc1-8ef1-90a60b2eb9e5",
-      "name": "Falcon 9 Block 5 | SDA Tranche 1 Transport Layer A",
-      "rocket": "Falcon 9",
-      "mission": "SDA Tranche 1 Transport Layer A",
-      "date": "2026-09-30",
-      "month": 9,
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "",
-      "pad": "Vandenberg SFB, CA, USA",
-      "status": "TBD"
-    },
-    {
       "id": "dc570565-4dcf-4ab9-8174-bf88efef477f",
       "name": "Long March 12A | Flight 2",
       "rocket": "Long March 12A",
@@ -170,17 +156,17 @@
       "status": "TBD"
     },
     {
-      "id": "3b94ad50-3505-496e-8a95-b0bc4c0dadc6",
-      "name": "Themis Demonstrator | T1H-1",
-      "rocket": "Themis Demonstrator",
-      "mission": "T1H-1",
-      "date": "2026-09-30",
-      "month": 9,
+      "id": "6b89cfc8-8880-4b5b-856c-0e547d45b639",
+      "name": "SR75 | Flight 2",
+      "rocket": "SR75",
+      "mission": "Flight 2",
+      "date": "2026-10-05",
+      "month": 10,
       "time": null,
       "tentative": true,
-      "provider": "European Space Agency",
-      "country": "FR",
-      "pad": "Esrange Space Center",
+      "provider": "HyImpulse",
+      "country": "",
+      "pad": "SaxaVord Spaceport",
       "status": "TBD"
     },
     {
@@ -280,6 +266,20 @@
       "country": "FR",
       "pad": "Guiana Space Centre, French Guiana",
       "status": "TBD"
+    },
+    {
+      "id": "d3bd7fb2-fac6-49fc-ae52-cee07d2fde67",
+      "name": "Falcon Heavy | Griffin Mission One",
+      "rocket": "Falcon Heavy",
+      "mission": "Griffin Mission One",
+      "date": "2026-11-30",
+      "month": 11,
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Kennedy Space Center, FL, USA",
+      "status": "TBD"
     }
   ],
   "recent": [
@@ -340,16 +340,6 @@
       "date": "2026-09-15",
       "country": "CN",
       "provider": "LandSpace",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "8effc13a-c658-4d2e-9f15-8dba4d7fe2dd",
-      "rocket": "Vega-C",
-      "mission": "Sentinel-3C & FLEX",
-      "date": "2026-09-15",
-      "country": "FR",
-      "provider": "Avio S.p.A",
       "result": "success",
       "resultLabel": "成功"
     }
