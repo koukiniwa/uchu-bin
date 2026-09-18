@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-18T03:29:16.175Z",
+  "updated": "2026-09-18T08:49:06.885Z",
   "launches": [
     {
       "id": "f4c720ce-0cfd-43e6-b8dd-00273073bc01",
@@ -11,7 +11,7 @@
       "time": "03:15",
       "tentative": false,
       "provider": "Rocket Lab",
-      "country": "NZ",
+      "country": "US",
       "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
       "status": "Go"
     },
@@ -125,20 +125,6 @@
       "provider": "China Aerospace Science and Technology Corporation",
       "country": "CN",
       "pad": "Wenchang Space Launch Site, People's Republic of China",
-      "status": "TBD"
-    },
-    {
-      "id": "ab3c1e6c-03fe-48a7-b6ce-30c79569bdfb",
-      "name": "Soyuz 2.1b/Fregat | Kosmos (Unknown Payload)",
-      "rocket": "Soyuz 2",
-      "mission": "Kosmos (Unknown Payload)",
-      "date": "2026-09-30",
-      "month": 9,
-      "time": null,
-      "tentative": true,
-      "provider": "Russian Space Forces",
-      "country": "RU",
-      "pad": "Plesetsk Cosmodrome, Russian Federation",
       "status": "TBD"
     },
     {
@@ -280,9 +266,33 @@
       "country": "US",
       "pad": "Kennedy Space Center, FL, USA",
       "status": "TBD"
+    },
+    {
+      "id": "7c891a0b-7194-4425-8cfd-2e8c75af2924",
+      "name": "HANBIT-Nano | InnoSat-0",
+      "rocket": "HANBIT-Nano",
+      "mission": "InnoSat-0",
+      "date": "2026-11-30",
+      "month": 11,
+      "time": null,
+      "tentative": true,
+      "provider": "Innospace",
+      "country": "KR",
+      "pad": "Alcântara Space Center, Federative Republic of Brazil",
+      "status": "TBD"
     }
   ],
   "recent": [
+    {
+      "id": "ab3c1e6c-03fe-48a7-b6ce-30c79569bdfb",
+      "rocket": "Soyuz 2",
+      "mission": "Kosmos (Unknown Payload)",
+      "date": "2026-09-17",
+      "country": "RU",
+      "provider": "Russian Space Forces",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "71aa4d56-0ce9-4c7d-a808-cc22f2ac5a84",
       "rocket": "Kuaizhou 11",
@@ -330,16 +340,6 @@
       "date": "2026-09-15",
       "country": "CN",
       "provider": "Orienspace Technology",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "de446468-057f-4c9d-a6a1-af99c93b541e",
-      "rocket": "Zhuque-2",
-      "mission": "SpaceSail Polar Group #15",
-      "date": "2026-09-15",
-      "country": "CN",
-      "provider": "LandSpace",
       "result": "success",
       "resultLabel": "成功"
     }
