@@ -29,13 +29,13 @@
   "articles": [],
   "upcoming": [
     {
-      "id": "898f7df0-b6ce-4a5c-80b4-67e81842124e",
-      "name": "Long March 12 | Unknown Payload",
-      "rocket": "Long March 12",
+      "id": "63063b9d-ade9-4448-8717-6f910aa81188",
+      "name": "Long March 8A | Unknown Payload",
+      "rocket": "Long March 8A",
       "mission": "Unknown Payload",
-      "date": "2026-09-17",
+      "date": "2026-09-23",
       "month": 9,
-      "time": "00:30",
+      "time": "13:30",
       "tentative": false,
       "provider": "China Aerospace Science and Technology Corporation",
       "country": "CN",
@@ -43,13 +43,13 @@
       "status": "Go"
     },
     {
-      "id": "a527b585-f01f-4ecc-9230-711dcef72ef1",
-      "name": "Long March 2D | Unknown Payload",
-      "rocket": "Long March 2D",
+      "id": "aed67837-b567-43e0-8071-c3ccc24aa496",
+      "name": "Long March 6A | Unknown Payload",
+      "rocket": "Long March 6A",
       "mission": "Unknown Payload",
-      "date": "2026-09-19",
+      "date": "2026-09-24",
       "month": 9,
-      "time": "10:50",
+      "time": "08:45",
       "tentative": false,
       "provider": "China Aerospace Science and Technology Corporation",
       "country": "CN",
@@ -71,5 +71,5 @@
       "status": "TBD"
     }
   ],
-  "updated": "2026-09-16T19:00:32.514Z"
+  "updated": "2026-09-19T18:10:23.210Z"
 }

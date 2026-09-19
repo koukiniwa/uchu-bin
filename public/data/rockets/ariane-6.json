@@ -41,7 +41,21 @@
       "country": "FR",
       "pad": "Guiana Space Centre, French Guiana",
       "status": "TBD"
+    },
+    {
+      "id": "22e117bf-041c-49d5-9d09-7b180036e143",
+      "name": "Ariane 62 | Metop-SG B1",
+      "rocket": "Ariane 6",
+      "mission": "Metop-SG B1",
+      "date": "2026-11-30",
+      "month": 11,
+      "time": null,
+      "tentative": true,
+      "provider": "Arianespace",
+      "country": "FR",
+      "pad": "Guiana Space Centre, French Guiana",
+      "status": "TBD"
     }
   ],
-  "updated": "2026-09-16T18:58:07.693Z"
+  "updated": "2026-09-19T18:08:11.993Z"
 }
