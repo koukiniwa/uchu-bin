@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-19T03:25:51.742Z",
+  "updated": "2026-09-19T08:35:19.987Z",
   "launches": [
     {
       "id": "a527b585-f01f-4ecc-9230-711dcef72ef1",
@@ -72,6 +72,20 @@
       "status": "Go"
     },
     {
+      "id": "9e24bef7-c44b-4fdc-ba52-68545ce9457e",
+      "name": "Electron | Owlright, Owlright, Owlright (StriX Launch 13)",
+      "rocket": "Electron",
+      "mission": "Owlright, Owlright, Owlright (StriX Launch 13)",
+      "date": "2026-09-26",
+      "month": 9,
+      "time": "00:15",
+      "tentative": false,
+      "provider": "Rocket Lab",
+      "country": "US",
+      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
+      "status": "Go"
+    },
+    {
       "id": "7330d83b-c478-426c-8859-f9e3a335876d",
       "name": "Falcon 9 Block 5 | USSF-385",
       "rocket": "Falcon 9",
@@ -98,20 +112,6 @@
       "country": "US",
       "pad": "SpaceX Starbase, TX, USA",
       "status": "TBC"
-    },
-    {
-      "id": "599ba2df-7483-4b2f-a083-2b5ddc06e069",
-      "name": "Electron | LOXSAT 1",
-      "rocket": "Electron",
-      "mission": "LOXSAT 1",
-      "date": "2026-09-30",
-      "month": 9,
-      "time": null,
-      "tentative": true,
-      "provider": "Rocket Lab",
-      "country": "NZ",
-      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
-      "status": "TBD"
     },
     {
       "id": "dc570565-4dcf-4ab9-8174-bf88efef477f",
