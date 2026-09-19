@@ -1,20 +1,6 @@
 {
-  "updated": "2026-09-19T08:56:52.217Z",
+  "updated": "2026-09-19T12:54:56.403Z",
   "launches": [
-    {
-      "id": "a527b585-f01f-4ecc-9230-711dcef72ef1",
-      "name": "Long March 2D | Unknown Payload",
-      "rocket": "Long March 2D",
-      "mission": "Unknown Payload",
-      "date": "2026-09-19",
-      "month": 9,
-      "time": "10:50",
-      "tentative": false,
-      "provider": "China Aerospace Science and Technology Corporation",
-      "country": "CN",
-      "pad": "Taiyuan Satellite Launch Center, People's Republic of China",
-      "status": "Go"
-    },
     {
       "id": "d1471f9d-e9d0-4146-8e97-90863e48bfc8",
       "name": "Falcon 9 Block 5 | Starlink Group 15-27",
@@ -280,9 +266,33 @@
       "country": "KR",
       "pad": "Alcântara Space Center, Federative Republic of Brazil",
       "status": "TBD"
+    },
+    {
+      "id": "d74afbc7-0de5-491c-be05-4e9c31f736ac",
+      "name": "Falcon 9 Block 5 | Cygnus CRS-2 NG-25",
+      "rocket": "Falcon 9",
+      "mission": "Cygnus CRS-2 NG-25",
+      "date": "2026-12-31",
+      "month": 12,
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Cape Canaveral SFS, FL, USA",
+      "status": "TBD"
     }
   ],
   "recent": [
+    {
+      "id": "a527b585-f01f-4ecc-9230-711dcef72ef1",
+      "rocket": "Long March 2D",
+      "mission": "PIESAT-2 13-16",
+      "date": "2026-09-19",
+      "country": "CN",
+      "provider": "China Aerospace Science and Technology Corporation",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "f4c720ce-0cfd-43e6-b8dd-00273073bc01",
       "rocket": "Electron",
