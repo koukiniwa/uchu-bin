@@ -1,20 +1,6 @@
 {
-  "updated": "2026-09-18T23:03:34.456Z",
+  "updated": "2026-09-19T03:25:51.742Z",
   "launches": [
-    {
-      "id": "f4c720ce-0cfd-43e6-b8dd-00273073bc01",
-      "name": "Electron | Owl By The Dozen (StriX Launch 12)",
-      "rocket": "Electron",
-      "mission": "Owl By The Dozen (StriX Launch 12)",
-      "date": "2026-09-19",
-      "month": 9,
-      "time": "03:15",
-      "tentative": false,
-      "provider": "Rocket Lab",
-      "country": "US",
-      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
-      "status": "Go"
-    },
     {
       "id": "a527b585-f01f-4ecc-9230-711dcef72ef1",
       "name": "Long March 2D | Unknown Payload",
@@ -280,9 +266,33 @@
       "country": "US",
       "pad": "Kennedy Space Center, FL, USA",
       "status": "TBD"
+    },
+    {
+      "id": "7c891a0b-7194-4425-8cfd-2e8c75af2924",
+      "name": "HANBIT-Nano | InnoSat-0",
+      "rocket": "HANBIT-Nano",
+      "mission": "InnoSat-0",
+      "date": "2026-11-30",
+      "month": 11,
+      "time": null,
+      "tentative": true,
+      "provider": "Innospace",
+      "country": "KR",
+      "pad": "Alcântara Space Center, Federative Republic of Brazil",
+      "status": "TBD"
     }
   ],
   "recent": [
+    {
+      "id": "f4c720ce-0cfd-43e6-b8dd-00273073bc01",
+      "rocket": "Electron",
+      "mission": "Owl By The Dozen (StriX Launch 12)",
+      "date": "2026-09-19",
+      "country": "US",
+      "provider": "Rocket Lab",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "ab3c1e6c-03fe-48a7-b6ce-30c79569bdfb",
       "rocket": "Soyuz 2",
