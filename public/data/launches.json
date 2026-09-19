@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-19T19:11:24.655Z",
+  "updated": "2026-09-19T22:09:42.040Z",
   "launches": [
     {
       "id": "d1471f9d-e9d0-4146-8e97-90863e48bfc8",
@@ -126,6 +126,20 @@
       "country": "",
       "pad": "Cape Canaveral SFS, FL, USA",
       "status": "TBD"
+    },
+    {
+      "id": "97c6f5e1-299e-4652-b72d-9618ac047076",
+      "name": "Falcon 9 Block 5 | Starlink Group 15-25",
+      "rocket": "Falcon 9",
+      "mission": "Starlink Group 15-25",
+      "date": "2026-09-30",
+      "month": 9,
+      "time": "14:00",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "",
+      "pad": "Vandenberg SFB, CA, USA",
+      "status": "Go"
     },
     {
       "id": "18441371-8b2e-457c-afb5-1ec1b11ab630",
@@ -265,20 +279,6 @@
       "provider": "Innospace",
       "country": "KR",
       "pad": "Alcântara Space Center, Federative Republic of Brazil",
-      "status": "TBD"
-    },
-    {
-      "id": "d74afbc7-0de5-491c-be05-4e9c31f736ac",
-      "name": "Falcon 9 Block 5 | Cygnus CRS-2 NG-25",
-      "rocket": "Falcon 9",
-      "mission": "Cygnus CRS-2 NG-25",
-      "date": "2026-12-31",
-      "month": 12,
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "Cape Canaveral SFS, FL, USA",
       "status": "TBD"
     }
   ],
