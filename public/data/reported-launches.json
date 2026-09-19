@@ -371,6 +371,12 @@
       "name": "Soyuz 2.1b/Fregat | Kosmos (Unknown Payload)",
       "status": "Launch Successful",
       "date": "2026-09-18T10:57:26.799Z"
+    },
+    {
+      "id": "f4c720ce-0cfd-43e6-b8dd-00273073bc01",
+      "name": "Electron | Owl By The Dozen (StriX Launch 12)",
+      "status": "Launch in Flight",
+      "date": "2026-09-19T08:56:25.277Z"
     }
   ]
 }
