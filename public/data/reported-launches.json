@@ -389,6 +389,12 @@
       "name": "Falcon 9 Block 5 | Starlink Group 15-27",
       "status": "Launch Successful",
       "date": "2026-09-20T04:46:12.891Z"
+    },
+    {
+      "id": "5af31461-bce5-4cfb-a0ee-b527cf285d90",
+      "name": "Kinetica 1 | 9 satellites",
+      "status": "Launch Successful",
+      "date": "2026-09-20T09:40:51.065Z"
     }
   ]
 }
