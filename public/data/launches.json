@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-20T14:32:28.127Z",
+  "updated": "2026-09-20T20:43:32.666Z",
   "launches": [
     {
       "id": "63063b9d-ade9-4448-8717-6f910aa81188",
@@ -78,7 +78,7 @@
       "mission": "Starlink Group 15-25",
       "date": "2026-09-30",
       "month": 9,
-      "time": "14:00",
+      "time": "16:00",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
@@ -320,16 +320,6 @@
       "date": "2026-09-19",
       "country": "US",
       "provider": "Rocket Lab",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "ab3c1e6c-03fe-48a7-b6ce-30c79569bdfb",
-      "rocket": "Soyuz 2",
-      "mission": "Glonass-K1 No. 20 (?)",
-      "date": "2026-09-17",
-      "country": "RU",
-      "provider": "Russian Space Forces",
       "result": "success",
       "resultLabel": "成功"
     }
