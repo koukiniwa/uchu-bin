@@ -1,34 +1,6 @@
 {
-  "updated": "2026-09-20T00:43:06.149Z",
+  "updated": "2026-09-20T05:46:40.921Z",
   "launches": [
-    {
-      "id": "d1471f9d-e9d0-4146-8e97-90863e48bfc8",
-      "name": "Falcon 9 Block 5 | Starlink Group 15-27",
-      "rocket": "Falcon 9",
-      "mission": "Starlink Group 15-27",
-      "date": "2026-09-20",
-      "month": 9,
-      "time": "01:47",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "",
-      "pad": "Vandenberg SFB, CA, USA",
-      "status": "Go"
-    },
-    {
-      "id": "5af31461-bce5-4cfb-a0ee-b527cf285d90",
-      "name": "Kinetica 1 | Unknown Payload",
-      "rocket": "Kinetica 1",
-      "mission": "Unknown Payload",
-      "date": "2026-09-20",
-      "month": 9,
-      "time": "04:00",
-      "tentative": false,
-      "provider": "CAS Space",
-      "country": "CN",
-      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
-      "status": "Go"
-    },
     {
       "id": "63063b9d-ade9-4448-8717-6f910aa81188",
       "name": "Long March 8A | Unknown Payload",
@@ -98,34 +70,6 @@
       "country": "US",
       "pad": "SpaceX Starbase, TX, USA",
       "status": "TBC"
-    },
-    {
-      "id": "dc570565-4dcf-4ab9-8174-bf88efef477f",
-      "name": "Long March 12A | Flight 2",
-      "rocket": "Long March 12A",
-      "mission": "Flight 2",
-      "date": "2026-09-30",
-      "month": 9,
-      "time": null,
-      "tentative": true,
-      "provider": "China Aerospace Science and Technology Corporation",
-      "country": "CN",
-      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
-      "status": "TBD"
-    },
-    {
-      "id": "ef9850ad-1096-425b-9d27-f7bbd186e61a",
-      "name": "Vulcan VC6L | Amazon Leo (LV-01)",
-      "rocket": "Vulcan VC6L",
-      "mission": "Amazon Leo (LV-01)",
-      "date": "2026-09-30",
-      "month": 9,
-      "time": null,
-      "tentative": true,
-      "provider": "United Launch Alliance",
-      "country": "",
-      "pad": "Cape Canaveral SFS, FL, USA",
-      "status": "TBD"
     },
     {
       "id": "97c6f5e1-299e-4652-b72d-9618ac047076",
@@ -212,6 +156,34 @@
       "status": "Go"
     },
     {
+      "id": "dc570565-4dcf-4ab9-8174-bf88efef477f",
+      "name": "Long March 12A | Flight 2",
+      "rocket": "Long March 12A",
+      "mission": "Flight 2",
+      "date": "2026-10-31",
+      "month": 10,
+      "time": null,
+      "tentative": true,
+      "provider": "China Aerospace Science and Technology Corporation",
+      "country": "CN",
+      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
+      "status": "TBD"
+    },
+    {
+      "id": "ef9850ad-1096-425b-9d27-f7bbd186e61a",
+      "name": "Vulcan VC6L | Amazon Leo (LV-01)",
+      "rocket": "Vulcan VC6L",
+      "mission": "Amazon Leo (LV-01)",
+      "date": "2026-10-31",
+      "month": 10,
+      "time": null,
+      "tentative": true,
+      "provider": "United Launch Alliance",
+      "country": "",
+      "pad": "Cape Canaveral SFS, FL, USA",
+      "status": "TBD"
+    },
+    {
       "id": "4651fd8a-43de-4166-bf8f-c168b3bd1d2c",
       "name": "Falcon Heavy | NROL-97",
       "rocket": "Falcon Heavy",
@@ -280,9 +252,57 @@
       "country": "KR",
       "pad": "Alcântara Space Center, Federative Republic of Brazil",
       "status": "TBD"
+    },
+    {
+      "id": "d74afbc7-0de5-491c-be05-4e9c31f736ac",
+      "name": "Falcon 9 Block 5 | Cygnus CRS-2 NG-25",
+      "rocket": "Falcon 9",
+      "mission": "Cygnus CRS-2 NG-25",
+      "date": "2026-12-31",
+      "month": 12,
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Cape Canaveral SFS, FL, USA",
+      "status": "TBD"
+    },
+    {
+      "id": "0b85fcca-5252-48d7-9ccb-c10b1da9d183",
+      "name": "Ariane 62 | Galileo L15 (FOC FM28 & FM31)",
+      "rocket": "Ariane 6",
+      "mission": "Galileo L15 (FOC FM28 & FM31)",
+      "date": "2026-12-31",
+      "month": 12,
+      "time": null,
+      "tentative": true,
+      "provider": "Arianespace",
+      "country": "FR",
+      "pad": "Guiana Space Centre, French Guiana",
+      "status": "TBD"
     }
   ],
   "recent": [
+    {
+      "id": "5af31461-bce5-4cfb-a0ee-b527cf285d90",
+      "rocket": "Kinetica 1",
+      "mission": "9 satellites",
+      "date": "2026-09-20",
+      "country": "CN",
+      "provider": "CAS Space",
+      "result": "success",
+      "resultLabel": "成功"
+    },
+    {
+      "id": "d1471f9d-e9d0-4146-8e97-90863e48bfc8",
+      "rocket": "Falcon 9",
+      "mission": "Starlink Group 15-27",
+      "date": "2026-09-20",
+      "country": "",
+      "provider": "SpaceX",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "a527b585-f01f-4ecc-9230-711dcef72ef1",
       "rocket": "Long March 2D",
@@ -310,26 +330,6 @@
       "date": "2026-09-17",
       "country": "RU",
       "provider": "Russian Space Forces",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "71aa4d56-0ce9-4c7d-a808-cc22f2ac5a84",
-      "rocket": "Kuaizhou 11",
-      "mission": "SpaceTY-51 & 52",
-      "date": "2026-09-17",
-      "country": "CN",
-      "provider": "ExPace",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "17c71937-dd80-406f-bb47-0c9ee9a24276",
-      "rocket": "Falcon 9",
-      "mission": "USSF-259",
-      "date": "2026-09-17",
-      "country": "",
-      "provider": "SpaceX",
       "result": "success",
       "resultLabel": "成功"
     }
