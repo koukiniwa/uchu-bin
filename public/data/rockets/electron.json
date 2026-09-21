@@ -175,35 +175,21 @@
   "articles": [],
   "upcoming": [
     {
-      "id": "f4c720ce-0cfd-43e6-b8dd-00273073bc01",
-      "name": "Electron | Owl By The Dozen (StriX Launch 12)",
+      "id": "9e24bef7-c44b-4fdc-ba52-68545ce9457e",
+      "name": "Electron | Owlright, Owlright, Owlright (StriX Launch 13)",
       "rocket": "Electron",
-      "mission": "Owl By The Dozen (StriX Launch 12)",
-      "date": "2026-09-19",
+      "mission": "Owlright, Owlright, Owlright (StriX Launch 13)",
+      "date": "2026-09-26",
       "month": 9,
-      "time": "03:15",
+      "time": "00:15",
       "tentative": false,
       "provider": "Rocket Lab",
       "country": "US",
       "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
       "status": "Go"
-    },
-    {
-      "id": "599ba2df-7483-4b2f-a083-2b5ddc06e069",
-      "name": "Electron | LOXSAT 1",
-      "rocket": "Electron",
-      "mission": "LOXSAT 1",
-      "date": "2026-09-30",
-      "month": 9,
-      "time": null,
-      "tentative": true,
-      "provider": "Rocket Lab",
-      "country": "NZ",
-      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
-      "status": "TBD"
     }
   ],
-  "updated": "2026-09-18T18:37:47.490Z",
+  "updated": "2026-09-21T20:05:49.432Z",
   "_launches": [
     {
       "id": "9f5a4cb6-63f9-47e1-9512-b468bae2a8e6",
