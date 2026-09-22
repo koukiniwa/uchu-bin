@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-22T09:04:44.354Z",
+  "updated": "2026-09-22T14:23:13.230Z",
   "launches": [
     {
       "id": "63063b9d-ade9-4448-8717-6f910aa81188",
@@ -300,16 +300,6 @@
       "date": "2026-09-20",
       "country": "",
       "provider": "SpaceX",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "a527b585-f01f-4ecc-9230-711dcef72ef1",
-      "rocket": "Long March 2D",
-      "mission": "PIESAT-2 13-16",
-      "date": "2026-09-19",
-      "country": "CN",
-      "provider": "China Aerospace Science and Technology Corporation",
       "result": "success",
       "resultLabel": "成功"
     }
