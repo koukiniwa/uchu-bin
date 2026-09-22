@@ -33,8 +33,8 @@
       "name": "Vulcan VC6L | Amazon Leo (LV-01)",
       "rocket": "Vulcan VC6L",
       "mission": "Amazon Leo (LV-01)",
-      "date": "2026-09-30",
-      "month": 9,
+      "date": "2026-10-31",
+      "month": 10,
       "time": null,
       "tentative": true,
       "provider": "United Launch Alliance",
@@ -43,5 +43,5 @@
       "status": "TBD"
     }
   ],
-  "updated": "2026-09-19T18:12:34.619Z"
+  "updated": "2026-09-22T19:04:52.962Z"
 }

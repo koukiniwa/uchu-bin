@@ -55,7 +55,21 @@
       "country": "FR",
       "pad": "Guiana Space Centre, French Guiana",
       "status": "TBD"
+    },
+    {
+      "id": "0b85fcca-5252-48d7-9ccb-c10b1da9d183",
+      "name": "Ariane 62 | Galileo L15 (FOC FM28 & FM31)",
+      "rocket": "Ariane 6",
+      "mission": "Galileo L15 (FOC FM28 & FM31)",
+      "date": "2026-12-31",
+      "month": 12,
+      "time": null,
+      "tentative": true,
+      "provider": "Arianespace",
+      "country": "FR",
+      "pad": "Guiana Space Centre, French Guiana",
+      "status": "TBD"
     }
   ],
-  "updated": "2026-09-19T18:08:11.993Z"
+  "updated": "2026-09-22T19:00:30.722Z"
 }
