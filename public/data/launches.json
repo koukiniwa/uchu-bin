@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-22T18:32:34.339Z",
+  "updated": "2026-09-22T21:48:52.131Z",
   "launches": [
     {
       "id": "63063b9d-ade9-4448-8717-6f910aa81188",
@@ -142,6 +142,20 @@
       "status": "Go"
     },
     {
+      "id": "20d5676e-111b-40e3-8923-b218c3665ca2",
+      "name": "GSLV Mk II | IRNSS-1L (NVS-03)",
+      "rocket": "GSLV Mk II",
+      "mission": "IRNSS-1L (NVS-03)",
+      "date": "2026-10-15",
+      "month": 10,
+      "time": null,
+      "tentative": true,
+      "provider": "Indian Space Research Organization",
+      "country": "IN",
+      "pad": "Satish Dhawan Space Centre, India",
+      "status": "TBD"
+    },
+    {
       "id": "69ebbcd2-b257-4070-9ef9-21e7d1f8a883",
       "name": "H3-24 | Martian Moon eXplorer (MMX)",
       "rocket": "H3",
@@ -265,20 +279,6 @@
       "provider": "SpaceX",
       "country": "US",
       "pad": "Cape Canaveral SFS, FL, USA",
-      "status": "TBD"
-    },
-    {
-      "id": "0b85fcca-5252-48d7-9ccb-c10b1da9d183",
-      "name": "Ariane 62 | Galileo L15 (FOC FM28 & FM31)",
-      "rocket": "Ariane 6",
-      "mission": "Galileo L15 (FOC FM28 & FM31)",
-      "date": "2026-12-31",
-      "month": 12,
-      "time": null,
-      "tentative": true,
-      "provider": "Arianespace",
-      "country": "FR",
-      "pad": "Guiana Space Centre, French Guiana",
       "status": "TBD"
     }
   ],
