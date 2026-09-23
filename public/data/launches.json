@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-23T00:02:35.447Z",
+  "updated": "2026-09-23T05:32:38.064Z",
   "launches": [
     {
       "id": "63063b9d-ade9-4448-8717-6f910aa81188",
@@ -282,26 +282,5 @@
       "status": "TBD"
     }
   ],
-  "recent": [
-    {
-      "id": "5af31461-bce5-4cfb-a0ee-b527cf285d90",
-      "rocket": "Kinetica 1",
-      "mission": "9 satellites",
-      "date": "2026-09-20",
-      "country": "CN",
-      "provider": "CAS Space",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "d1471f9d-e9d0-4146-8e97-90863e48bfc8",
-      "rocket": "Falcon 9",
-      "mission": "Starlink Group 15-27",
-      "date": "2026-09-20",
-      "country": "",
-      "provider": "SpaceX",
-      "result": "success",
-      "resultLabel": "成功"
-    }
-  ]
+  "recent": []
 }
