@@ -27,6 +27,21 @@
   },
   "recentLaunches": [],
   "articles": [],
-  "upcoming": [],
-  "updated": "2026-09-20T18:16:41.221Z"
+  "upcoming": [
+    {
+      "id": "20d5676e-111b-40e3-8923-b218c3665ca2",
+      "name": "GSLV Mk II | IRNSS-1L (NVS-03)",
+      "rocket": "GSLV Mk II",
+      "mission": "IRNSS-1L (NVS-03)",
+      "date": "2026-10-15",
+      "month": 10,
+      "time": null,
+      "tentative": true,
+      "provider": "Indian Space Research Organization",
+      "country": "IN",
+      "pad": "Satish Dhawan Space Centre, India",
+      "status": "TBD"
+    }
+  ],
+  "updated": "2026-09-23T19:10:31.556Z"
 }
