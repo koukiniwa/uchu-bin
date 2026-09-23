@@ -395,6 +395,12 @@
       "name": "Kinetica 1 | 9 satellites",
       "status": "Launch Successful",
       "date": "2026-09-20T09:40:51.065Z"
+    },
+    {
+      "id": "63063b9d-ade9-4448-8717-6f910aa81188",
+      "name": "Long March 8A | SatNet LEO Group 26",
+      "status": "Launch Successful",
+      "date": "2026-09-23T18:33:06.227Z"
     }
   ]
 }
