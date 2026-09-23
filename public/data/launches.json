@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-22T21:48:52.131Z",
+  "updated": "2026-09-23T00:02:35.447Z",
   "launches": [
     {
       "id": "63063b9d-ade9-4448-8717-6f910aa81188",
@@ -78,11 +78,25 @@
       "mission": "Crew-13",
       "date": "2026-10-01",
       "month": 10,
-      "time": null,
-      "tentative": true,
+      "time": "15:10",
+      "tentative": false,
       "provider": "SpaceX",
       "country": "US",
       "pad": "Cape Canaveral SFS, FL, USA",
+      "status": "Go"
+    },
+    {
+      "id": "67213393-7983-4c06-8b44-b8c785a5ed79",
+      "name": "Falcon 9 Block 5 | Transporter 18 (Dedicated SSO Rideshare)",
+      "rocket": "Falcon 9",
+      "mission": "Transporter 18 (Dedicated SSO Rideshare)",
+      "date": "2026-10-01",
+      "month": 10,
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "",
+      "pad": "Vandenberg SFB, CA, USA",
       "status": "TBC"
     },
     {
@@ -265,20 +279,6 @@
       "provider": "Innospace",
       "country": "KR",
       "pad": "Alcântara Space Center, Federative Republic of Brazil",
-      "status": "TBD"
-    },
-    {
-      "id": "d74afbc7-0de5-491c-be05-4e9c31f736ac",
-      "name": "Falcon 9 Block 5 | Cygnus CRS-2 NG-25",
-      "rocket": "Falcon 9",
-      "mission": "Cygnus CRS-2 NG-25",
-      "date": "2026-12-31",
-      "month": 12,
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "Cape Canaveral SFS, FL, USA",
       "status": "TBD"
     }
   ],
