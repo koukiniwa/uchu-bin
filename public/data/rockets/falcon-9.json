@@ -219,35 +219,35 @@
       "status": "Go"
     },
     {
-      "id": "97c6f5e1-299e-4652-b72d-9618ac047076",
-      "name": "Falcon 9 Block 5 | Starlink Group 15-25",
-      "rocket": "Falcon 9",
-      "mission": "Starlink Group 15-25",
-      "date": "2026-09-30",
-      "month": 9,
-      "time": "16:00",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "",
-      "pad": "Vandenberg SFB, CA, USA",
-      "status": "Go"
-    },
-    {
       "id": "18441371-8b2e-457c-afb5-1ec1b11ab630",
       "name": "Falcon 9 Block 5 | Crew-13",
       "rocket": "Falcon 9",
       "mission": "Crew-13",
       "date": "2026-10-01",
       "month": 10,
-      "time": null,
-      "tentative": true,
+      "time": "15:10",
+      "tentative": false,
       "provider": "SpaceX",
       "country": "US",
       "pad": "Cape Canaveral SFS, FL, USA",
+      "status": "Go"
+    },
+    {
+      "id": "67213393-7983-4c06-8b44-b8c785a5ed79",
+      "name": "Falcon 9 Block 5 | Transporter 18 (Dedicated SSO Rideshare)",
+      "rocket": "Falcon 9",
+      "mission": "Transporter 18 (Dedicated SSO Rideshare)",
+      "date": "2026-10-01",
+      "month": 10,
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "",
+      "pad": "Vandenberg SFB, CA, USA",
       "status": "TBC"
     }
   ],
-  "updated": "2026-09-21T20:02:32.765Z",
+  "updated": "2026-09-24T19:20:15.284Z",
   "_launches": [
     {
       "id": "153ef8ef-b12b-43f4-a4bf-05b225c0cd37",

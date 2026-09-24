@@ -139,14 +139,14 @@
       "name": "Falcon Heavy | NROL-97",
       "rocket": "Falcon Heavy",
       "mission": "NROL-97",
-      "date": "2026-10-31",
+      "date": "2026-10-02",
       "month": 10,
-      "time": null,
-      "tentative": true,
+      "time": "03:53",
+      "tentative": false,
       "provider": "SpaceX",
       "country": "US",
       "pad": "Kennedy Space Center, FL, USA",
-      "status": "TBD"
+      "status": "Go"
     },
     {
       "id": "d3bd7fb2-fac6-49fc-ae52-cee07d2fde67",
@@ -163,5 +163,5 @@
       "status": "TBD"
     }
   ],
-  "updated": "2026-09-21T20:03:38.367Z"
+  "updated": "2026-09-24T19:21:20.864Z"
 }

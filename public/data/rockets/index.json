@@ -1,71 +1,6 @@
 {
-  "updated": "2026-09-23T19:12:42.777Z",
+  "updated": "2026-09-24T19:24:37.682Z",
   "rockets": [
-    {
-      "slug": "falcon-9",
-      "nameJa": "ファルコン9",
-      "nameEn": "Falcon 9",
-      "operator": "SpaceX",
-      "country": "US",
-      "image": "/images/library/falcon9_001.jpg",
-      "status": "active",
-      "total": 686,
-      "successRate": 99.4,
-      "thisYear": 103,
-      "lastLaunch": "2026-09-06"
-    },
-    {
-      "slug": "falcon-heavy",
-      "nameJa": "ファルコンヘビー",
-      "nameEn": "Falcon Heavy",
-      "operator": "SpaceX",
-      "country": "US",
-      "image": "/images/library/falconheavy_001.jpg",
-      "status": "active",
-      "total": 500,
-      "successRate": 96.8,
-      "thisYear": 216,
-      "lastLaunch": "2026-09-03"
-    },
-    {
-      "slug": "starship",
-      "nameJa": "スターシップ",
-      "nameEn": "Starship",
-      "operator": "SpaceX",
-      "country": "US",
-      "image": "/images/library/starship_001.jpg",
-      "status": "development",
-      "total": 500,
-      "successRate": 96.8,
-      "thisYear": 216,
-      "lastLaunch": "2026-09-03"
-    },
-    {
-      "slug": "electron",
-      "nameJa": "エレクトロン",
-      "nameEn": "Electron",
-      "operator": "Rocket Lab",
-      "country": "NZ",
-      "image": "/images/library/electron_001.jpg",
-      "status": "active",
-      "total": 94,
-      "successRate": 95.7,
-      "thisYear": 15,
-      "lastLaunch": "2026-09-02"
-    },
-    {
-      "slug": "h3",
-      "nameJa": "H3",
-      "nameEn": "H3",
-      "operator": "JAXA / 三菱重工",
-      "country": "JP",
-      "image": "/images/library/h3_001.jpg",
-      "status": "active",
-      "total": 9,
-      "successRate": 77.8,
-      "thisYear": 2,
-      "lastLaunch": "2026-08-10"
-    },
     {
       "slug": "ariane-6",
       "nameJa": "アリアン6",
@@ -195,6 +130,71 @@
       "successRate": 85.7,
       "thisYear": 3,
       "lastLaunch": null
+    },
+    {
+      "slug": "falcon-9",
+      "nameJa": "ファルコン9",
+      "nameEn": "Falcon 9",
+      "operator": "SpaceX",
+      "country": "US",
+      "image": "/images/library/falcon9_001.jpg",
+      "status": "active",
+      "total": 686,
+      "successRate": 99.4,
+      "thisYear": 103,
+      "lastLaunch": "2026-09-06"
+    },
+    {
+      "slug": "falcon-heavy",
+      "nameJa": "ファルコンヘビー",
+      "nameEn": "Falcon Heavy",
+      "operator": "SpaceX",
+      "country": "US",
+      "image": "/images/library/falconheavy_001.jpg",
+      "status": "active",
+      "total": 500,
+      "successRate": 96.8,
+      "thisYear": 216,
+      "lastLaunch": "2026-09-03"
+    },
+    {
+      "slug": "starship",
+      "nameJa": "スターシップ",
+      "nameEn": "Starship",
+      "operator": "SpaceX",
+      "country": "US",
+      "image": "/images/library/starship_001.jpg",
+      "status": "development",
+      "total": 500,
+      "successRate": 96.8,
+      "thisYear": 216,
+      "lastLaunch": "2026-09-03"
+    },
+    {
+      "slug": "electron",
+      "nameJa": "エレクトロン",
+      "nameEn": "Electron",
+      "operator": "Rocket Lab",
+      "country": "NZ",
+      "image": "/images/library/electron_001.jpg",
+      "status": "active",
+      "total": 94,
+      "successRate": 95.7,
+      "thisYear": 15,
+      "lastLaunch": "2026-09-02"
+    },
+    {
+      "slug": "h3",
+      "nameJa": "H3",
+      "nameEn": "H3",
+      "operator": "JAXA / 三菱重工",
+      "country": "JP",
+      "image": "/images/library/h3_001.jpg",
+      "status": "active",
+      "total": 9,
+      "successRate": 77.8,
+      "thisYear": 2,
+      "lastLaunch": "2026-08-10"
     }
   ]
 }
