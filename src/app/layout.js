@@ -148,6 +148,9 @@ export default function RootLayout({ children }) {
               <a href="/mars-map" style={{ fontSize: '12px', color: '#4fc3f7', textDecoration: 'none' }}>
                 火星探査機マップ
               </a>
+              <a href="/birthday" style={{ fontSize: '12px', color: '#4fc3f7', textDecoration: 'none' }}>
+                あの日の打ち上げ
+              </a>
             </div>
             <div style={{
               borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '16px',

@@ -3,6 +3,11 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  async rewrites() {
+    return [
+      { source: '/birthday', destination: '/birthday/index.html' },
+    ]
+  },
   async redirects() {
     return [
       { source: '/blog/2026-03-:slug*', destination: '/', permanent: true },
