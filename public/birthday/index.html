@@ -255,4 +255,5 @@ $('copy').addEventListener('click',()=>{
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,fallback);}else{fallback();}
 });
 fromInput();
+if(typeof gtag==='function'){var _f=new URLSearchParams(location.search).get('from');if(_f==='top')gtag('event','誕生日ツール_カードクリック');if(_f==='banner')gtag('event','誕生日ツール_バナークリック');if(_f==='article')gtag('event','誕生日ツール_記事下クリック');}
 </script>

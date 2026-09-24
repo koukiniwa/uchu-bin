@@ -244,9 +244,23 @@ export default function BlogPost({ params }) {
         <Markdown options={{ overrides: { p: AutoTweet } }}>{post.content}</Markdown>
       </div>
 
+      {/* あの日の打ち上げ 誘導 */}
+      <a href="/birthday?from=article" style={{
+        display: 'flex', alignItems: 'center', gap: '14px',
+        padding: '16px 20px', margin: '40px 0 0',
+        background: 'linear-gradient(135deg, #0a0e1a, #1a2744)', borderRadius: '8px',
+        textDecoration: 'none', transition: 'box-shadow 0.15s',
+      }}>
+        <span style={{ fontSize: '28px', lineHeight: 1, flexShrink: 0 }}>🚀</span>
+        <div>
+          <div style={{ fontSize: '14px', fontWeight: 700, color: '#fff', marginBottom: '4px' }}>あなたの誕生日には、どんなロケットが打ち上がった?</div>
+          <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.5)' }}>あの日の打ち上げで調べる →</div>
+        </div>
+      </a>
+
       {/* フッター */}
       <div style={{
-        marginTop: '56px',
+        marginTop: '24px',
         paddingTop: '20px',
         borderTop: '1px solid #e0e0e0',
       }}>

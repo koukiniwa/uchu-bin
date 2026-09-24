@@ -131,6 +131,12 @@ html, body {
 @media (max-width: 1200px) {
   .sidebar-right { display: none; }
 }
+/* スマホバナー: サイドバーが見える幅では非表示 */
+.birthday-banner-mobile { display: flex; }
+@media (min-width: 1201px) {
+  .birthday-banner-mobile { display: none !important; }
+}
+.birthday-banner-mobile:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
 
 /* ヒーローロケット画像（スマホでは背景として表示） */
 @media (max-width: 700px) {
