@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-24T13:17:16.293Z",
+  "updated": "2026-09-24T18:14:49.158Z",
   "launches": [
     {
       "id": "9e24bef7-c44b-4fdc-ba52-68545ce9457e",
@@ -70,6 +70,20 @@
       "country": "",
       "pad": "Vandenberg SFB, CA, USA",
       "status": "TBC"
+    },
+    {
+      "id": "4651fd8a-43de-4166-bf8f-c168b3bd1d2c",
+      "name": "Falcon Heavy | NROL-97",
+      "rocket": "Falcon Heavy",
+      "mission": "NROL-97",
+      "date": "2026-10-02",
+      "month": 10,
+      "time": "03:53",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Kennedy Space Center, FL, USA",
+      "status": "Go"
     },
     {
       "id": "6b89cfc8-8880-4b5b-856c-0e547d45b639",
@@ -181,20 +195,6 @@
       "provider": "United Launch Alliance",
       "country": "",
       "pad": "Cape Canaveral SFS, FL, USA",
-      "status": "TBD"
-    },
-    {
-      "id": "4651fd8a-43de-4166-bf8f-c168b3bd1d2c",
-      "name": "Falcon Heavy | NROL-97",
-      "rocket": "Falcon Heavy",
-      "mission": "NROL-97",
-      "date": "2026-10-31",
-      "month": 10,
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "Kennedy Space Center, FL, USA",
       "status": "TBD"
     },
     {
