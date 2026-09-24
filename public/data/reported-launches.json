@@ -401,6 +401,12 @@
       "name": "Long March 8A | SatNet LEO Group 26",
       "status": "Launch Successful",
       "date": "2026-09-23T18:33:06.227Z"
+    },
+    {
+      "id": "aed67837-b567-43e0-8071-c3ccc24aa496",
+      "name": "Long March 6A | Yaogan 40 Group 04",
+      "status": "Launch Successful",
+      "date": "2026-09-24T11:36:31.397Z"
     }
   ]
 }
