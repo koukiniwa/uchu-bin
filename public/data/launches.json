@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-25T07:11:25.242Z",
+  "updated": "2026-09-25T13:17:25.963Z",
   "launches": [
     {
       "id": "9e24bef7-c44b-4fdc-ba52-68545ce9457e",
@@ -100,20 +100,6 @@
       "status": "TBD"
     },
     {
-      "id": "7bdc412b-c965-4517-a131-f57a01189803",
-      "name": "Ariane 64 Block 2 | Amazon Leo (LE-04)",
-      "rocket": "Ariane 6",
-      "mission": "Amazon Leo (LE-04)",
-      "date": "2026-10-07",
-      "month": 10,
-      "time": null,
-      "tentative": true,
-      "provider": "Arianespace",
-      "country": "FR",
-      "pad": "Guiana Space Centre, French Guiana",
-      "status": "TBD"
-    },
-    {
       "id": "e0741415-6c63-4236-9736-24a6c04485bc",
       "name": "Nuri | NeonSat-2 to 6",
       "rocket": "Nuri",
@@ -168,6 +154,20 @@
       "country": "JP",
       "pad": "Tanegashima Space Center, Japan",
       "status": "Go"
+    },
+    {
+      "id": "7bdc412b-c965-4517-a131-f57a01189803",
+      "name": "Ariane 64 Block 2 | Amazon Leo (LE-04)",
+      "rocket": "Ariane 6",
+      "mission": "Amazon Leo (LE-04)",
+      "date": "2026-10-31",
+      "month": 10,
+      "time": null,
+      "tentative": true,
+      "provider": "Arianespace",
+      "country": "FR",
+      "pad": "Guiana Space Centre, French Guiana",
+      "status": "TBD"
     },
     {
       "id": "3b430f81-0ff1-4d85-8a1a-cef0de326198",
