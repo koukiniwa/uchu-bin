@@ -29,34 +29,6 @@
   "articles": [],
   "upcoming": [
     {
-      "id": "63063b9d-ade9-4448-8717-6f910aa81188",
-      "name": "Long March 8A | Unknown Payload",
-      "rocket": "Long March 8A",
-      "mission": "Unknown Payload",
-      "date": "2026-09-23",
-      "month": 9,
-      "time": "13:30",
-      "tentative": false,
-      "provider": "China Aerospace Science and Technology Corporation",
-      "country": "CN",
-      "pad": "Wenchang Space Launch Site, People's Republic of China",
-      "status": "Go"
-    },
-    {
-      "id": "aed67837-b567-43e0-8071-c3ccc24aa496",
-      "name": "Long March 6A | Unknown Payload",
-      "rocket": "Long March 6A",
-      "mission": "Unknown Payload",
-      "date": "2026-09-24",
-      "month": 9,
-      "time": "08:45",
-      "tentative": false,
-      "provider": "China Aerospace Science and Technology Corporation",
-      "country": "CN",
-      "pad": "Taiyuan Satellite Launch Center, People's Republic of China",
-      "status": "Go"
-    },
-    {
       "id": "dc570565-4dcf-4ab9-8174-bf88efef477f",
       "name": "Long March 12A | Flight 2",
       "rocket": "Long March 12A",
@@ -71,5 +43,5 @@
       "status": "TBD"
     }
   ],
-  "updated": "2026-09-22T19:02:41.782Z"
+  "updated": "2026-09-25T19:24:31.523Z"
 }
