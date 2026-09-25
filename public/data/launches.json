@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-24T22:01:11.135Z",
+  "updated": "2026-09-25T01:10:01.350Z",
   "launches": [
     {
       "id": "9e24bef7-c44b-4fdc-ba52-68545ce9457e",
@@ -8,7 +8,7 @@
       "mission": "Owlright, Owlright, Owlright (StriX Launch 13)",
       "date": "2026-09-26",
       "month": 9,
-      "time": "00:15",
+      "time": "00:26",
       "tentative": false,
       "provider": "Rocket Lab",
       "country": "US",
@@ -64,12 +64,12 @@
       "mission": "Transporter 18 (Dedicated SSO Rideshare)",
       "date": "2026-10-01",
       "month": 10,
-      "time": null,
-      "tentative": true,
+      "time": "18:18",
+      "tentative": false,
       "provider": "SpaceX",
       "country": "",
       "pad": "Vandenberg SFB, CA, USA",
-      "status": "TBC"
+      "status": "Go"
     },
     {
       "id": "4651fd8a-43de-4166-bf8f-c168b3bd1d2c",
@@ -170,6 +170,20 @@
       "status": "Go"
     },
     {
+      "id": "3b430f81-0ff1-4d85-8a1a-cef0de326198",
+      "name": "Falcon 9 Block 5 | Bandwagon 5 (Dedicated Mid-Inclination Rideshare)",
+      "rocket": "Falcon 9",
+      "mission": "Bandwagon 5 (Dedicated Mid-Inclination Rideshare)",
+      "date": "2026-10-31",
+      "month": 10,
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Cape Canaveral SFS, FL, USA",
+      "status": "TBD"
+    },
+    {
       "id": "dc570565-4dcf-4ab9-8174-bf88efef477f",
       "name": "Long March 12A | Flight 2",
       "rocket": "Long March 12A",
@@ -265,20 +279,6 @@
       "provider": "SpaceX",
       "country": "US",
       "pad": "Cape Canaveral SFS, FL, USA",
-      "status": "TBD"
-    },
-    {
-      "id": "0b85fcca-5252-48d7-9ccb-c10b1da9d183",
-      "name": "Ariane 62 | Galileo L15 (FOC FM28 & FM31)",
-      "rocket": "Ariane 6",
-      "mission": "Galileo L15 (FOC FM28 & FM31)",
-      "date": "2026-12-31",
-      "month": 12,
-      "time": null,
-      "tentative": true,
-      "provider": "Arianespace",
-      "country": "FR",
-      "pad": "Guiana Space Centre, French Guiana",
       "status": "TBD"
     }
   ],
