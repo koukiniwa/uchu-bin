@@ -1,20 +1,6 @@
 {
-  "updated": "2026-09-26T00:31:06.655Z",
+  "updated": "2026-09-26T05:21:16.297Z",
   "launches": [
-    {
-      "id": "9e24bef7-c44b-4fdc-ba52-68545ce9457e",
-      "name": "Electron | Owlright, Owlright, Owlright (StriX Launch 13)",
-      "rocket": "Electron",
-      "mission": "Owlright, Owlright, Owlright (StriX Launch 13)",
-      "date": "2026-09-26",
-      "month": 9,
-      "time": "00:39",
-      "tentative": false,
-      "provider": "Rocket Lab",
-      "country": "US",
-      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
-      "status": "Go"
-    },
     {
       "id": "7330d83b-c478-426c-8859-f9e3a335876d",
       "name": "Falcon 9 Block 5 | USSF-385",
@@ -280,9 +266,33 @@
       "country": "US",
       "pad": "Cape Canaveral SFS, FL, USA",
       "status": "TBD"
+    },
+    {
+      "id": "0b85fcca-5252-48d7-9ccb-c10b1da9d183",
+      "name": "Ariane 62 | Galileo L15 (FOC FM28 & FM31)",
+      "rocket": "Ariane 6",
+      "mission": "Galileo L15 (FOC FM28 & FM31)",
+      "date": "2026-12-31",
+      "month": 12,
+      "time": null,
+      "tentative": true,
+      "provider": "Arianespace",
+      "country": "FR",
+      "pad": "Guiana Space Centre, French Guiana",
+      "status": "TBD"
     }
   ],
   "recent": [
+    {
+      "id": "9e24bef7-c44b-4fdc-ba52-68545ce9457e",
+      "rocket": "Electron",
+      "mission": "Owlright, Owlright, Owlright (StriX Launch 13)",
+      "date": "2026-09-26",
+      "country": "US",
+      "provider": "Rocket Lab",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "aed67837-b567-43e0-8071-c3ccc24aa496",
       "rocket": "Long March 6A",
