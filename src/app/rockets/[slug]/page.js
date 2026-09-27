@@ -71,12 +71,12 @@ export async function generateMetadata({ params }) {
   const url = `https://www.uchu-bin.jp/rockets/${params.slug}`
   const image = data.image ? `https://www.uchu-bin.jp${data.image}` : 'https://www.uchu-bin.jp/icon-512.png'
   return {
-    title: `${data.nameJa}（${data.nameEn}）打ち上げ実績・成功率・スペック | 宇宙便`,
-    description: `${data.nameJa}の打ち上げ成功率${data.stats?.successRate || 0}%、通算${data.stats?.total || 0}回。${data.operator}が運用。${data.description?.slice(0, 50) || ''}`,
-    keywords: [data.nameJa, data.nameEn, `${data.nameJa} 打ち上げ`, `${data.nameJa} 成功率`, `${data.nameEn} launch`, 'ロケット図鑑', data.operator, '宇宙便'],
+    title: `${data.nameJa}（${data.nameEn}）スペック・打ち上げ予定 | 宇宙便`,
+    description: `${data.nameJa}のスペック・打ち上げ予定。${data.operator}が運用。${data.description?.slice(0, 80) || ''}`,
+    keywords: [data.nameJa, data.nameEn, `${data.nameJa} 打ち上げ`, `${data.nameJa} スペック`, `${data.nameEn} launch`, 'ロケット図鑑', data.operator, '宇宙便'],
     openGraph: {
-      title: `${data.nameJa}（${data.nameEn}）打ち上げ実績・成功率 | 宇宙便`,
-      description: `${data.nameJa}の打ち上げ成功率${data.stats?.successRate || 0}%、通算${data.stats?.total || 0}回。`,
+      title: `${data.nameJa}（${data.nameEn}）スペック・打ち上げ予定 | 宇宙便`,
+      description: `${data.nameJa}のスペック・打ち上げ予定。${data.operator}が運用。`,
       url,
       siteName: '宇宙便',
       type: 'article',
@@ -86,17 +86,10 @@ export async function generateMetadata({ params }) {
     twitter: {
       card: 'summary_large_image',
       title: `${data.nameJa}（${data.nameEn}） | 宇宙便`,
-      description: `打ち上げ成功率${data.stats?.successRate || 0}%、通算${data.stats?.total || 0}回。`,
+      description: `${data.nameJa}のスペック・打ち上げ予定。${data.operator}が運用。`,
       images: [image],
     },
   }
-}
-
-function formatDateShort(dateStr) {
-  if (!dateStr) return ''
-  const d = new Date(dateStr)
-  if (isNaN(d)) return dateStr
-  return `${d.getMonth() + 1}/${d.getDate()}（${WEEKDAYS[d.getDay()]}）`
 }
 
 function formatDateFull(dateStr) {
@@ -112,21 +105,8 @@ export default function RocketDetailPage({ params }) {
 
   const flag = COUNTRY_FLAGS[data.country] || ''
   const statusInfo = STATUS_LABEL[data.status] || STATUS_LABEL.active
-  const stats = data.stats || {}
-  const yearlyStats = stats.yearlyStats || {}
-  const thisYear = stats.thisYear || { total: 0, success: 0, failure: 0 }
-
   // 記事をpostsから動的に取得（データ生成時のキャッシュより新しい記事も含む）
   const posts = getPostsForRocket(params.slug)
-
-  // 年別データ（直近7年分）
-  const currentYear = new Date().getFullYear()
-  const yearRange = []
-  for (let y = currentYear; y >= currentYear - 6; y--) {
-    if (yearlyStats[y]) yearRange.push({ year: y, ...yearlyStats[y] })
-  }
-  yearRange.reverse()
-  const maxYearTotal = Math.max(...yearRange.map(y => y.total), 1)
 
   // 他のロケット一覧
   let otherRockets = []
@@ -201,46 +181,15 @@ export default function RocketDetailPage({ params }) {
         </p>
       )}
 
-      {/* 統計カード */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px', marginBottom: '32px' }}
-        className="rocket-stats-grid"
-      >
-        <div style={{ textAlign: 'center', padding: '16px', background: '#f8f9fa', borderRadius: '8px' }}>
-          <div style={{ fontSize: '10px', color: '#888', fontWeight: 600, letterSpacing: '0.08em', marginBottom: '6px' }}>通算打ち上げ</div>
-          <div style={{ fontSize: '28px', fontWeight: 800, color: '#111' }}>{stats.total || 0}</div>
-          <div style={{ fontSize: '11px', color: '#888' }}>回</div>
+      {/* 初飛行 */}
+      {data.firstFlight && (
+        <div style={{ marginBottom: '28px', fontSize: '14px', color: '#555' }}>
+          初飛行: {(() => {
+            const d = new Date(data.firstFlight)
+            return isNaN(d) ? data.firstFlight : `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`
+          })()}
         </div>
-        <div style={{ textAlign: 'center', padding: '16px', background: '#f8f9fa', borderRadius: '8px' }}>
-          <div style={{ fontSize: '10px', color: '#888', fontWeight: 600, letterSpacing: '0.08em', marginBottom: '6px' }}>成功率</div>
-          <div style={{
-            fontSize: '28px', fontWeight: 800,
-            color: (stats.successRate || 0) >= 95 ? '#4caf50' : (stats.successRate || 0) >= 80 ? '#ff9800' : '#f44336',
-          }}>
-            {stats.successRate || 0}%
-          </div>
-          <div style={{ fontSize: '11px', color: '#888' }}>{stats.success || 0}成功 / {stats.failure || 0}失敗</div>
-        </div>
-        <div style={{ textAlign: 'center', padding: '16px', background: '#f8f9fa', borderRadius: '8px' }}>
-          <div style={{ fontSize: '10px', color: '#888', fontWeight: 600, letterSpacing: '0.08em', marginBottom: '6px' }}>{currentYear}年</div>
-          <div style={{ fontSize: '28px', fontWeight: 800, color: '#111' }}>{thisYear.total}</div>
-          <div style={{ fontSize: '11px', color: '#888' }}>回</div>
-        </div>
-        <div style={{ textAlign: 'center', padding: '16px', background: '#f8f9fa', borderRadius: '8px' }}>
-          <div style={{ fontSize: '10px', color: '#888', fontWeight: 600, letterSpacing: '0.08em', marginBottom: '6px' }}>初飛行</div>
-          <div style={{ fontSize: '16px', fontWeight: 700, color: '#333', marginTop: '6px' }}>
-            {data.firstFlight ? (() => {
-              const d = new Date(data.firstFlight)
-              return isNaN(d) ? '-' : `${d.getFullYear()}年`
-            })() : '-'}
-          </div>
-          <div style={{ fontSize: '11px', color: '#888' }}>
-            {data.firstFlight ? (() => {
-              const d = new Date(data.firstFlight)
-              return isNaN(d) ? '' : `${d.getMonth() + 1}月${d.getDate()}日`
-            })() : ''}
-          </div>
-        </div>
-      </div>
+      )}
 
       {/* スペック */}
       {data.specs && Object.keys(data.specs).length > 0 && (
@@ -260,63 +209,6 @@ export default function RocketDetailPage({ params }) {
               <div key={s.key} style={{ padding: '10px 12px', background: '#f8f9fa', borderRadius: '6px' }}>
                 <div style={{ fontSize: '10px', color: '#888', fontWeight: 600, letterSpacing: '0.08em', marginBottom: '4px' }}>{s.label}</div>
                 <div style={{ fontSize: '15px', fontWeight: 700, color: '#333' }}>{data.specs[s.key]}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* 年別打ち上げ回数 */}
-      {yearRange.length > 0 && (
-        <div style={{ marginBottom: '32px' }}>
-          <h2 style={{ fontSize: '18px', fontWeight: 700, color: '#111', marginBottom: '16px', borderLeft: '3px solid #1a2744', paddingLeft: '10px' }}>
-            年別打ち上げ回数
-          </h2>
-          <div style={{ display: 'flex', alignItems: 'flex-end', gap: '8px', height: '140px', padding: '0 4px' }}>
-            {yearRange.map(y => {
-              const barHeight = Math.max((y.total / maxYearTotal) * 110, 4)
-              const failureHeight = y.failure > 0 ? Math.max((y.failure / maxYearTotal) * 110, 3) : 0
-              return (
-                <div key={y.year} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                  <div style={{ fontSize: '12px', fontWeight: 700, color: '#333', marginBottom: '4px' }}>{y.total}</div>
-                  <div style={{ width: '100%', maxWidth: '48px' }}>
-                    <div style={{ height: `${barHeight}px`, background: '#1a2744', borderRadius: '3px 3px 0 0' }} />
-                    {failureHeight > 0 && (
-                      <div style={{ height: `${failureHeight}px`, background: '#f44336', borderRadius: '0 0 3px 3px' }} />
-                    )}
-                  </div>
-                  <div style={{ fontSize: '10px', color: '#888', marginTop: '4px' }}>{y.year}</div>
-                </div>
-              )
-            })}
-          </div>
-          <div style={{ display: 'flex', gap: '16px', marginTop: '8px', fontSize: '10px', color: '#888' }}>
-            <span><span style={{ display: 'inline-block', width: '10px', height: '10px', background: '#1a2744', borderRadius: '2px', marginRight: '4px', verticalAlign: 'middle' }} />成功</span>
-            <span><span style={{ display: 'inline-block', width: '10px', height: '10px', background: '#f44336', borderRadius: '2px', marginRight: '4px', verticalAlign: 'middle' }} />失敗</span>
-          </div>
-        </div>
-      )}
-
-      {/* 直近の打ち上げ履歴 */}
-      {data.recentLaunches && data.recentLaunches.length > 0 && (
-        <div style={{ marginBottom: '32px' }}>
-          <h2 style={{ fontSize: '18px', fontWeight: 700, color: '#111', marginBottom: '12px', borderLeft: '3px solid #1a2744', paddingLeft: '10px' }}>
-            直近の打ち上げ
-          </h2>
-          <div style={{ border: '1px solid #e0e0e0', borderRadius: '8px', overflow: 'hidden' }}>
-            {data.recentLaunches.map((l, i) => (
-              <div key={i} style={{
-                display: 'flex', alignItems: 'center', gap: '10px',
-                padding: '10px 14px', borderBottom: i < data.recentLaunches.length - 1 ? '1px solid #f0f0f0' : 'none',
-                fontSize: '13px',
-              }}>
-                <span style={{ fontSize: '14px', width: '20px', textAlign: 'center' }}>
-                  {l.status === 'success' ? '\u2705' : l.status === 'failure' ? '\u274C' : '\u2B1C'}
-                </span>
-                <span style={{ color: '#888', fontSize: '12px', fontFamily: 'monospace', minWidth: '80px' }}>
-                  {formatDateShort(l.date)}
-                </span>
-                <span style={{ color: '#333', fontWeight: 500, flex: 1 }}>{l.mission}</span>
               </div>
             ))}
           </div>
@@ -418,7 +310,7 @@ export default function RocketDetailPage({ params }) {
                 style={{ width: '32px', height: '32px', objectFit: 'cover', borderRadius: '4px' }} />
               <div>
                 <div>{r.nameJa}</div>
-                <div style={{ fontSize: '10px', color: '#888', fontWeight: 400 }}>{r.successRate}% / {r.total}回</div>
+                <div style={{ fontSize: '10px', color: '#888', fontWeight: 400 }}>{r.operator}</div>
               </div>
             </Link>
           ))}

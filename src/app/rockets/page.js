@@ -16,11 +16,11 @@ const STATUS_LABEL = {
 
 export const metadata = {
   title: 'ロケット図鑑 - 世界の主要ロケット一覧 | 宇宙便',
-  description: '世界の主要ロケットの打ち上げ成功率・回数・スペックを一覧で比較。Falcon 9、H3、Ariane 6、長征、Soyuzなど15機種以上を網羅。',
-  keywords: ['ロケット図鑑', 'ロケット一覧', '打ち上げ成功率', 'Falcon 9', 'H3', 'アリアン6', '長征', 'ソユーズ', '宇宙ロケット', 'スペック比較'],
+  description: '世界の主要ロケットのスペック・打ち上げ予定を一覧で比較。Falcon 9、H3、Ariane 6、長征、Soyuzなど15機種以上を網羅。',
+  keywords: ['ロケット図鑑', 'ロケット一覧', 'ロケット スペック', 'Falcon 9', 'H3', 'アリアン6', '長征', 'ソユーズ', '宇宙ロケット', 'スペック比較'],
   openGraph: {
     title: 'ロケット図鑑 - 世界の主要ロケット一覧 | 宇宙便',
-    description: '世界の主要ロケットの打ち上げ成功率・回数・スペックを一覧で比較。',
+    description: '世界の主要ロケットのスペック・打ち上げ予定を一覧で比較。',
     url: 'https://www.uchu-bin.jp/rockets',
     siteName: '宇宙便',
     type: 'website',
@@ -30,7 +30,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'ロケット図鑑 - 世界の主要ロケット一覧 | 宇宙便',
-    description: '世界の主要ロケットの打ち上げ成功率・回数・スペックを一覧で比較。',
+    description: '世界の主要ロケットのスペック・打ち上げ予定を一覧で比較。',
     images: ['https://www.uchu-bin.jp/images/library/falcon9_001.jpg'],
   },
 }
@@ -48,7 +48,7 @@ export default function RocketsPage() {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: 'ロケット図鑑',
-    description: '世界の主要ロケットの打ち上げ成功率・回数・スペックを一覧で比較',
+    description: '世界の主要ロケットのスペック・打ち上げ予定を一覧で比較',
     url: 'https://www.uchu-bin.jp/rockets',
     publisher: { '@type': 'Organization', name: '宇宙便', url: 'https://www.uchu-bin.jp' },
   }
@@ -63,7 +63,7 @@ export default function RocketsPage() {
           ロケット図鑑
         </h1>
         <p style={{ fontSize: '14px', color: '#666', margin: 0, lineHeight: 1.6 }}>
-          世界の主要ロケットの打ち上げ実績・成功率・スペックを一覧で確認できます。
+          世界の主要ロケットのスペック・打ち上げ予定を一覧で確認できます。
         </p>
       </div>
 
@@ -123,46 +123,12 @@ export default function RocketsPage() {
                     {r.operator}
                   </div>
 
-                  {/* 統計バー */}
-                  <div style={{ display: 'flex', gap: '16px', fontSize: '13px' }}>
-                    <div>
-                      <div style={{ color: '#999', fontSize: '10px', fontWeight: 600, letterSpacing: '0.08em', marginBottom: '2px' }}>
-                        成功率
-                      </div>
-                      <div style={{ fontWeight: 800, color: r.successRate >= 95 ? '#4caf50' : r.successRate >= 80 ? '#ff9800' : '#f44336' }}>
-                        {r.successRate}%
-                      </div>
+                  {/* 説明文 */}
+                  {r.description && (
+                    <div style={{ fontSize: '12px', color: '#666', lineHeight: 1.5 }}>
+                      {r.description}
                     </div>
-                    <div>
-                      <div style={{ color: '#999', fontSize: '10px', fontWeight: 600, letterSpacing: '0.08em', marginBottom: '2px' }}>
-                        通算
-                      </div>
-                      <div style={{ fontWeight: 800, color: '#333' }}>
-                        {r.total}回
-                      </div>
-                    </div>
-                    <div>
-                      <div style={{ color: '#999', fontSize: '10px', fontWeight: 600, letterSpacing: '0.08em', marginBottom: '2px' }}>
-                        今年
-                      </div>
-                      <div style={{ fontWeight: 800, color: '#333' }}>
-                        {r.thisYear}回
-                      </div>
-                    </div>
-                    {r.lastLaunch && (
-                      <div style={{ marginLeft: 'auto' }}>
-                        <div style={{ color: '#999', fontSize: '10px', fontWeight: 600, letterSpacing: '0.08em', marginBottom: '2px' }}>
-                          直近
-                        </div>
-                        <div style={{ fontWeight: 600, color: '#555', fontSize: '12px' }}>
-                          {(() => {
-                            const d = new Date(r.lastLaunch)
-                            return `${d.getMonth() + 1}/${d.getDate()}`
-                          })()}
-                        </div>
-                      </div>
-                    )}
-                  </div>
+                  )}
                 </div>
               </div>
             </Link>
