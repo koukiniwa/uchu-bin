@@ -1,12 +1,5 @@
 import fs from 'fs'
 import path from 'path'
-import ScheduleCountdown from './ScheduleCountdown'
-
-const COUNTRY_NAMES = {
-  US: 'アメリカ', CN: '中国', IN: 'インド', JP: '日本', RU: 'ロシア',
-  FR: '欧州', EU: '欧州', DE: 'ドイツ', KR: '韓国', NZ: 'ニュージーランド',
-  GB: 'イギリス', BR: 'ブラジル', IL: 'イスラエル', AU: 'オーストラリア',
-}
 
 const COUNTRY_FLAGS = {
   US: '🇺🇸', CN: '🇨🇳', IN: '🇮🇳', JP: '🇯🇵', RU: '🇷🇺',
@@ -106,16 +99,6 @@ function shortenPad(pad) {
   return pad.split(',')[0].trim()
 }
 
-function countryName(code) {
-  if (!code) return ''
-  const iso2 = code.length === 2 ? code : {
-    USA: 'US', CHN: 'CN', IND: 'IN', JPN: 'JP', RUS: 'RU', FRA: 'FR',
-    GUF: 'FR', KOR: 'KR', NZL: 'NZ', GBR: 'GB', DEU: 'DE', BRA: 'BR',
-    ISR: 'IL', AUS: 'AU',
-  }[code] || code.slice(0, 2)
-  return COUNTRY_NAMES[iso2] || code
-}
-
 function countryFlag(code) {
   if (!code) return ''
   const iso2 = code.length === 2 ? code : {
@@ -213,10 +196,8 @@ export default function SchedulePage() {
   const recent = data.recent || []
   const updated = data.updated
 
-  const firstTimed = launches.find(l => l.time && !l.tentative)
-
   return (
-    <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+    <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
       <a href="/" style={{
         display: 'inline-flex', alignItems: 'center', gap: '6px',
         fontSize: '13px', color: '#1a2744', textDecoration: 'none',
@@ -229,75 +210,11 @@ export default function SchedulePage() {
         fontSize: '22px', fontWeight: 800, color: '#111',
         lineHeight: 1.6, margin: '0 0 6px 0',
       }}>
-        ロケット打ち上げ予定スケジュール {year}
+        ロケット打ち上げ予定スケジュール
       </h1>
       <p style={{ fontSize: '13px', color: '#888', margin: '0 0 20px 0' }}>
         世界中のロケット打ち上げ予定を日本時間（JST）で掲載。データは自動更新されます。
       </p>
-
-      {/* カウントダウン */}
-      {firstTimed && (
-        <div className="schedule-countdown" style={{
-          position: 'relative', borderRadius: '10px', overflow: 'hidden',
-          marginBottom: '28px',
-        }}>
-          <img
-            src={getRocketImage(firstTimed.rocket)}
-            alt={firstTimed.rocket}
-            style={{
-              position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
-              objectFit: 'cover', filter: 'brightness(0.3)',
-            }}
-          />
-          <div style={{
-            position: 'relative', zIndex: 1, padding: '28px 28px 24px',
-            display: 'flex', flexDirection: 'column', alignItems: 'center',
-            textAlign: 'center',
-          }}>
-            <div style={{
-              fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em',
-              color: 'rgba(255,255,255,0.5)', marginBottom: '8px', textTransform: 'uppercase',
-            }}>
-              NEXT LAUNCH
-            </div>
-            <div style={{ fontSize: '24px', fontWeight: 800, color: '#fff', marginBottom: '4px' }}>
-              {firstTimed.rocket}
-            </div>
-            {firstTimed.mission && firstTimed.mission !== 'Unknown Payload' && (
-              <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.6)', marginBottom: '16px' }}>
-                {firstTimed.mission}
-              </div>
-            )}
-            <ScheduleCountdown
-              rocket={firstTimed.rocket}
-              date={firstTimed.date}
-              time={firstTimed.time}
-              mission={firstTimed.mission}
-            />
-          </div>
-        </div>
-      )}
-
-      {/* 注目の打ち上げページへの導線 */}
-      <section style={{ marginBottom: '28px' }}>
-        <a href="/featured" style={{
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          padding: '16px 20px',
-          background: 'linear-gradient(135deg, #0a0e1a 0%, #1a2744 100%)',
-          borderRadius: '8px', textDecoration: 'none', color: '#fff',
-          transition: 'transform 0.2s, box-shadow 0.2s',
-        }}>
-          <div>
-            <div style={{ fontSize: '15px', fontWeight: 700, marginBottom: '4px' }}>
-              注目の打ち上げ
-            </div>
-            <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)' }}>
-              Starship、H3、有人飛行など注目ミッションを厳選紹介
-            </div>
-          </div>
-          <div style={{ fontSize: '20px', color: 'rgba(255,255,255,0.4)', marginLeft: '12px' }}>→</div>
-        </a>
-      </section>
 
       {/* 打ち上げ予定一覧 */}
       <section style={{ marginBottom: '32px' }}>
@@ -310,7 +227,7 @@ export default function SchedulePage() {
 
         {/* PC: テーブル表示 */}
         <div className="schedule-table-wrap">
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '15px' }}>
             <thead>
               <tr style={{ borderBottom: '2px solid #1a2744' }}>
                 <th style={th}></th>
@@ -331,15 +248,15 @@ export default function SchedulePage() {
                 const rel = daysUntil(l.date)
                 return (
                   <tr key={l.id || i} style={{ backgroundColor: rowBg, borderBottom: '1px solid #f0f0f0' }}>
-                    <td style={{ ...td, padding: '8px 4px', width: '40px' }}>
+                    <td style={{ ...td, padding: '10px 6px', width: '48px' }}>
                       <img
                         src={getRocketImage(l.rocket)}
                         alt={l.rocket}
-                        style={{ width: '36px', height: '36px', objectFit: 'cover', borderRadius: '4px' }}
+                        style={{ width: '44px', height: '44px', objectFit: 'cover', borderRadius: '4px' }}
                       />
                     </td>
                     <td style={{ ...td, whiteSpace: 'nowrap' }}>
-                      <span style={{ fontWeight: 700, color: '#111', fontSize: '13px' }}>{datePart}</span>
+                      <span style={{ fontWeight: 700, color: '#111', fontSize: '15px' }}>{datePart}</span>
                       {rel && (
                         <span style={{
                           display: 'inline-block', marginLeft: '6px',
@@ -352,12 +269,12 @@ export default function SchedulePage() {
                         </span>
                       )}
                     </td>
-                    <td style={{ ...td, fontSize: '12px', color: '#888', whiteSpace: 'nowrap', fontFamily: 'monospace' }}>
+                    <td style={{ ...td, fontSize: '14px', color: '#888', whiteSpace: 'nowrap', fontFamily: 'monospace' }}>
                       {timePart || '—'}
                     </td>
-                    <td style={{ ...td, fontWeight: 700, color: '#1a2744' }}>{l.rocket}</td>
-                    <td style={{ ...td, color: '#555', maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{mission}</td>
-                    <td style={{ ...td, fontSize: '12px', color: '#888', whiteSpace: 'nowrap' }}>
+                    <td style={{ ...td, fontWeight: 700, color: '#1a2744', fontSize: '15px' }}>{l.rocket}</td>
+                    <td style={{ ...td, color: '#555', maxWidth: '240px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{mission}</td>
+                    <td style={{ ...td, fontSize: '13px', color: '#888', whiteSpace: 'nowrap' }}>
                       {countryFlag(l.country)} {shortenPad(l.pad)}
                     </td>
                     <td style={td}>
@@ -556,11 +473,11 @@ export default function SchedulePage() {
 }
 
 const th = {
-  textAlign: 'left', padding: '8px 6px', fontSize: '11px',
+  textAlign: 'left', padding: '10px 8px', fontSize: '12px',
   fontWeight: 700, color: '#555', letterSpacing: '0.05em',
   whiteSpace: 'nowrap',
 }
 
 const td = {
-  padding: '8px 6px', verticalAlign: 'middle', color: '#333',
+  padding: '12px 8px', verticalAlign: 'middle', color: '#333',
 }
