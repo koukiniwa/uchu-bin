@@ -12,23 +12,27 @@ const API_URL = 'https://ll.thespacedevs.com/2.3.0/launches/upcoming/?limit=80&m
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
-// 注目の打ち上げ判定（schedule/page.js の isNotable と同じロジック）
+// 注目の打ち上げ判定
 function isNotable(launch) {
   const m = (launch.mission?.name || '').toLowerCase()
   const r = (launch.rocket?.configuration?.name || '').toLowerCase()
   // Starship（超大型）
   if (r.includes('starship')) return true
-  // H3（日本の主力ロケット）
-  if (r.includes('h3') || r.includes('h-3')) return true
+  // Falcon Heavy（年数回の大型）
+  if (r.includes('falcon heavy')) return true
+  // 日本のロケット
+  if (r.includes('h3') || r.includes('h-3') || r.includes('epsilon')) return true
   // 有人飛行
   if (m.includes('crew')) return true
   if (m.includes('starliner')) return true
   // 惑星探査・深宇宙ミッション
   if (m.includes('chang\'e') || m.includes('mmx') || m.includes('europa') || m.includes('roman')) return true
   if (m.includes('artemis') || m.includes('lunar') || m.includes('moon')) return true
-  // 新型ロケット初飛行
-  if (r.includes('new glenn') || r.includes('spectrum') || r.includes('neutron')) return true
+  // ミッション名に初飛行を含む
   if (m.includes('demo flight') || m.includes('maiden') || m.includes('first flight')) return true
+  // 新型ロケット（打ち上げ実績3回以下）
+  const totalCount = launch.rocket?.configuration?.total_launch_count
+  if (typeof totalCount === 'number' && totalCount <= 3) return true
   return false
 }
 
@@ -130,9 +134,19 @@ async function main() {
     }
   }
 
+  // TBDかつ日付が月末/年末のプレースホルダーを除外
+  const filtered = data.results.filter(l => {
+    if (l.status?.abbrev !== 'TBD') return true
+    const net = l.net ? new Date(l.net) : null
+    if (!net) return false
+    const day = net.getUTCDate()
+    const lastDay = new Date(Date.UTC(net.getUTCFullYear(), net.getUTCMonth() + 1, 0)).getUTCDate()
+    return day !== lastDay
+  })
+
   // 同一ロケットの重複を防止（最も直近の1件だけ残す）
   const seenRockets = new Set()
-  const notableLaunches = data.results.filter(isNotable).filter(l => {
+  const notableLaunches = filtered.filter(isNotable).filter(l => {
     const rocketKey = shortRocketName(l.rocket?.configuration?.name || '').toLowerCase()
     if (seenRockets.has(rocketKey)) return false
     seenRockets.add(rocketKey)
