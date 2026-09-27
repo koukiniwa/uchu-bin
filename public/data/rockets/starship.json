@@ -141,13 +141,13 @@
       "mission": "Starlink Group 31-1 (Starship Flight 14)",
       "date": "2026-09-28",
       "month": 9,
-      "time": null,
-      "tentative": true,
+      "time": "12:15",
+      "tentative": false,
       "provider": "SpaceX",
       "country": "US",
       "pad": "SpaceX Starbase, TX, USA",
-      "status": "TBC"
+      "status": "Go"
     }
   ],
-  "updated": "2026-09-24T19:22:26.478Z"
+  "updated": "2026-09-27T19:08:45.809Z"
 }

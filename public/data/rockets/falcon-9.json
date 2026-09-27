@@ -205,20 +205,6 @@
   "articles": [],
   "upcoming": [
     {
-      "id": "7330d83b-c478-426c-8859-f9e3a335876d",
-      "name": "Falcon 9 Block 5 | USSF-385",
-      "rocket": "Falcon 9",
-      "mission": "USSF-385",
-      "date": "2026-09-26",
-      "month": 9,
-      "time": "11:56",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "",
-      "pad": "Vandenberg SFB, CA, USA",
-      "status": "Go"
-    },
-    {
       "id": "18441371-8b2e-457c-afb5-1ec1b11ab630",
       "name": "Falcon 9 Block 5 | Crew-13",
       "rocket": "Falcon 9",
@@ -239,6 +225,20 @@
       "mission": "Transporter 18 (Dedicated SSO Rideshare)",
       "date": "2026-10-01",
       "month": 10,
+      "time": "18:18",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "",
+      "pad": "Vandenberg SFB, CA, USA",
+      "status": "Go"
+    },
+    {
+      "id": "da43dc2c-00af-4cc1-8ef1-90a60b2eb9e5",
+      "name": "Falcon 9 Block 5 | SDA Tranche 1 Transport Layer A",
+      "rocket": "Falcon 9",
+      "mission": "SDA Tranche 1 Transport Layer A",
+      "date": "2026-10-05",
+      "month": 10,
       "time": null,
       "tentative": true,
       "provider": "SpaceX",
@@ -247,7 +247,7 @@
       "status": "TBC"
     }
   ],
-  "updated": "2026-09-24T19:20:15.284Z",
+  "updated": "2026-09-27T19:06:34.548Z",
   "_launches": [
     {
       "id": "153ef8ef-b12b-43f4-a4bf-05b225c0cd37",
