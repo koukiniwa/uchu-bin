@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-27T06:19:02.130Z",
+  "updated": "2026-09-27T12:45:29.991Z",
   "featured": [
     {
       "id": "7d1afb26-6f9c-429b-9ccf-29012fd1e519",
@@ -32,6 +32,36 @@
       "orbit": "Low Earth Orbit"
     },
     {
+      "id": "4651fd8a-43de-4166-bf8f-c168b3bd1d2c",
+      "rocket": "Falcon Heavy",
+      "mission": "NROL-97",
+      "description": "Classified payload for the US National Reconnaissance Office.",
+      "highlight": "アメリカの国家偵察局（NRO）向けの機密衛星を搭載したミッション。世界最強クラスの大型ロケット「ファルコン・ヘビー」が軍の極秘ペイロードを運ぶという点で、その能力の高さが改めて示される注目の打ち上げだ。詳細は非公開だが、アメリカの宇宙偵察能力の強化につながるとみられている。",
+      "date": "2026-10-02",
+      "time": "03:53",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Kennedy Space Center, FL, USA",
+      "status": "Go",
+      "orbit": "Unknown"
+    },
+    {
+      "id": "6b89cfc8-8880-4b5b-856c-0e547d45b639",
+      "rocket": "SR75",
+      "mission": "Flight 2",
+      "description": "Test flight of HyImpulse's SR75 sounding rocket.",
+      "highlight": "ドイツのスタートアップ企業HyImpulseが開発した観測ロケット「SR75」の2回目の試験飛行。同社は従来の液体・固体燃料ではなく、パラフィン（ろう）を燃料に使うハイブリッドエンジンを採用しており、低コストかつ安全な打ち上げ技術として世界から注目を集めている。前回の初飛行に続く今回のテストは、欧州の新興宇宙産業の実力を測る重要な一歩となる。",
+      "date": "2026-10-05",
+      "time": null,
+      "tentative": true,
+      "provider": "HyImpulse",
+      "country": "",
+      "pad": "SaxaVord Spaceport",
+      "status": "TBD",
+      "orbit": "Suborbital"
+    },
+    {
       "id": "69ebbcd2-b257-4070-9ef9-21e7d1f8a883",
       "rocket": "H3",
       "mission": "Martian Moon eXplorer (MMX)",
@@ -45,36 +75,6 @@
       "pad": "Tanegashima Space Center, Japan",
       "status": "Go",
       "orbit": "Mars Orbit"
-    },
-    {
-      "id": "60f4ba6c-4201-4727-94aa-0015a5a0023f",
-      "rocket": "Spectrum",
-      "mission": "1 x Pelican satellite",
-      "description": "Payload consists of a single Pelican high-resolution imaging satellite for Planet Labs Germany.",
-      "highlight": "ドイツの新興宇宙企業Isar Aerospaceが開発した小型ロケット「Spectrum」の初飛行として注目されています。ヨーロッパ発の民間商業ロケットとして、SpaceXやRocketLabが牽引してきた小型衛星打ち上げ市場に本格参入する歴史的な一歩です。搭載されるのは高解像度地球観測衛星「Pelican」で、成功すれば欧州の宇宙自立性向上にも貢献する意義深いミッションです。",
-      "date": "2026-12-31",
-      "time": null,
-      "tentative": true,
-      "provider": "Isar Aerospace",
-      "country": "DE",
-      "pad": "Andøya Spaceport",
-      "status": "TBD",
-      "orbit": "Sun-Synchronous Orbit"
-    },
-    {
-      "id": "07e945c1-2ec6-4d29-a500-1afbe920440f",
-      "rocket": "Atlas V N22",
-      "mission": "Starliner-1",
-      "description": "Starliner-1 is the first operational flight of a Starliner spacecraft to the International Space Station as part of NASA's Commercial Crew Program. Due to problems with the Starliner spacecraft's RCS attitude control system during the Crew Flight Test mission in 2024, this mission has been re-scoped",
-      "highlight": "ボーイングの宇宙船「スターライナー」にとって初の本格運用フライトですが、2024年の有人飛行テストで姿勢制御システムに深刻な不具合が発覚し、NASAはクルーを乗せないことを決断した異例のミッションです。宇宙飛行士を乗せられない「無人の商業クルー輸送船」として国際宇宙ステーションに物資を届けながら、改修されたシステムの検証を行います。スターライナーが信頼を取り戻し、将来的に有人飛行へ復帰できるかどうかを占う重要な試金石となります。",
-      "date": "2026-12-31",
-      "time": null,
-      "tentative": true,
-      "provider": "United Launch Alliance",
-      "country": "",
-      "pad": "Cape Canaveral SFS, FL, USA",
-      "status": "TBD",
-      "orbit": "Low Earth Orbit"
     }
   ]
 }
