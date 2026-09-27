@@ -208,7 +208,10 @@ export default function FeaturedPage() {
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginBottom: '32px' }}>
         {featured.map((f, i) => {
-          const { monthDay, weekday, timePart } = toJST(f.date, f.time)
+          const jst = toJST(f.date, f.time)
+          const monthDay = f.status === 'TBD' ? '時期未定' : jst.monthDay
+          const weekday = f.status === 'TBD' ? '' : jst.weekday
+          const timePart = f.status === 'TBD' ? '' : jst.timePart
           const mission = f.mission && f.mission !== 'Unknown Payload' ? f.mission : ''
           const country = countryName(f.country)
           const flag = countryFlag(f.country)
