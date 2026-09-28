@@ -220,7 +220,7 @@ export default function SchedulePage() {
       location: {
         '@type': 'Place',
         name: l.pad || '射場未定',
-        address: l.pad || '',
+        address: { '@type': 'PostalAddress', name: l.pad || '', addressCountry: l.country || '' },
       },
       description: `${l.rocket}ロケットによる${l.mission && l.mission !== 'Unknown Payload' ? l.mission + 'ミッションの' : ''}打ち上げ予定。${l.provider ? l.provider + 'が実施。' : ''}`,
       image: `https://www.uchu-bin.jp${getRocketImage(l.rocket)}`,
@@ -228,6 +228,14 @@ export default function SchedulePage() {
     }
     if (l.provider) {
       event.organizer = { '@type': 'Organization', name: l.provider }
+    }
+    event.offers = {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'JPY',
+      availability: 'https://schema.org/InStock',
+      validFrom: l.date || '',
+      url: 'https://www.uchu-bin.jp/schedule',
     }
     return event
   })
