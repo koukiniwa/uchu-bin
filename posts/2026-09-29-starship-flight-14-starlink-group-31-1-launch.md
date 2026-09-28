@@ -18,8 +18,8 @@ SpaceXのStarshipは日本時間2026年9月29日午前0時48分（UTC：9月28�
 
 ## 26機のStarlink V3衛星を初めて軌道へ
 
-![Starlink Group 31-1 (Starship Flight 14)](/images/library/starship_001.jpg)
-*Starship / SpaceX*
+![Starlink V3衛星](/images/library/starlinkv3_001.jpg)
+*Starlink V3 / SpaceX*
 
 
 今回のペイロードはStarlink Group 31-1として分類された26機のStarlink V3衛星群だ。V3衛星は1機あたり1Tbpsの通信容量をコンステレーションに追加する設計で、既存のStarlink V1/V2と比べて大幅な容量増強を実現する世代となる。
