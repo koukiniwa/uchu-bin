@@ -197,8 +197,48 @@ export default function SchedulePage() {
   const recent = data.recent || []
   const updated = data.updated
 
+  // Event構造化データ(JSON-LD)
+  const eventJsonLd = launches.map(l => {
+    const statusMap = {
+      'Go': 'https://schema.org/EventScheduled',
+      'TBC': 'https://schema.org/EventScheduled',
+      'TBD': 'https://schema.org/EventScheduled',
+      'Hold': 'https://schema.org/EventPostponed',
+      'In Flight': 'https://schema.org/EventScheduled',
+      'Failure': 'https://schema.org/EventCancelled',
+    }
+    let startDate = l.date || ''
+    if (l.date && l.time) {
+      startDate = `${l.date}T${l.time}:00Z`
+    }
+    const event = {
+      '@type': 'Event',
+      name: `${l.rocket}${l.mission && l.mission !== 'Unknown Payload' ? ' | ' + l.mission : ''} 打ち上げ`,
+      startDate,
+      eventStatus: statusMap[l.status] || 'https://schema.org/EventScheduled',
+      eventAttendanceMode: 'https://schema.org/OnlineEventAttendanceMode',
+      location: {
+        '@type': 'Place',
+        name: l.pad || '射場未定',
+        address: l.pad || '',
+      },
+      description: `${l.rocket}ロケットによる${l.mission && l.mission !== 'Unknown Payload' ? l.mission + 'ミッションの' : ''}打ち上げ予定。${l.provider ? l.provider + 'が実施。' : ''}`,
+      image: `https://www.uchu-bin.jp${getRocketImage(l.rocket)}`,
+      url: 'https://www.uchu-bin.jp/schedule',
+    }
+    if (l.provider) {
+      event.organizer = { '@type': 'Organization', name: l.provider }
+    }
+    return event
+  })
+  const structuredData = { '@context': 'https://schema.org', '@graph': eventJsonLd }
+
   return (
     <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <a href="/" style={{
         display: 'inline-flex', alignItems: 'center', gap: '6px',
         fontSize: '13px', color: '#1a2744', textDecoration: 'none',
