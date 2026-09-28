@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-28T15:51:33.158Z",
+  "updated": "2026-09-28T23:45:19.092Z",
   "launches": [
     {
       "id": "18441371-8b2e-457c-afb5-1ec1b11ab630",
@@ -268,16 +268,16 @@
       "status": "TBD"
     },
     {
-      "id": "d74afbc7-0de5-491c-be05-4e9c31f736ac",
-      "name": "Falcon 9 Block 5 | Cygnus CRS-2 NG-25",
-      "rocket": "Falcon 9",
-      "mission": "Cygnus CRS-2 NG-25",
+      "id": "07e945c1-2ec6-4d29-a500-1afbe920440f",
+      "name": "Atlas V N22 | Starliner-1",
+      "rocket": "Atlas V N22",
+      "mission": "Starliner-1",
       "date": "2026-12-31",
       "month": 12,
       "time": null,
       "tentative": true,
-      "provider": "SpaceX",
-      "country": "US",
+      "provider": "United Launch Alliance",
+      "country": "",
       "pad": "Cape Canaveral SFS, FL, USA",
       "status": "TBD"
     }
