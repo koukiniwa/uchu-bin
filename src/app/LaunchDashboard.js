@@ -195,7 +195,7 @@ function shortenPad(pad) {
   return pad
 }
 
-function LaunchModal({ launch, onClose, previewArticles = [], rocketStats = {} }) {
+function LaunchModal({ launch, onClose, previewArticles = [] }) {
   const [cd, setCd] = useState(null)
   const { dateLong, time, fullDate } = toJST(launch.date, launch.time, launch.tentative)
   const country = countryName(launch.country)
@@ -213,10 +213,6 @@ function LaunchModal({ launch, onClose, previewArticles = [], rocketStats = {} }
     }
     return s.includes('preview') && s.includes(missionSlug)
   })
-
-  // ロケット実績
-  const rocketSlug = (launch.rocket || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')
-  const stats = rocketStats[rocketSlug] || null
 
   // ステータスバッジ
   const statusBadge = launch.status === 'Go'
@@ -344,21 +340,6 @@ function LaunchModal({ launch, onClose, previewArticles = [], rocketStats = {} }
             </div>
           )}
 
-          {/* ロケット実績 */}
-          {stats && stats.total > 0 && (
-            <a href={`/rockets/${rocketSlug}`} style={{
-              display: 'block', marginTop: '14px', padding: '10px 12px',
-              background: '#f0f4f8', borderRadius: '6px', textDecoration: 'none',
-              fontSize: '12px', color: '#1a2744',
-            }}>
-              <div style={{ fontWeight: 700, marginBottom: '4px' }}>🚀 {launch.rocket} の実績</div>
-              <div style={{ color: '#666' }}>
-                通算 {stats.total}回（成功率 {stats.successRate}%）
-                {stats.thisYear > 0 && ` ・今年 ${stats.thisYear}回`}
-              </div>
-            </a>
-          )}
-
           {/* 配信リンク */}
           {launch.vidURLs && launch.vidURLs.length > 0 && (
             <div style={{ marginTop: '14px' }}>
@@ -404,7 +385,6 @@ export default function LaunchDashboard({ previewArticles = [] }) {
   const [recent, setRecent] = useState([])
   const [countdown, setCountdown] = useState(null)
   const [selectedLaunch, setSelectedLaunch] = useState(null)
-  const [rocketStats, setRocketStats] = useState({})
 
   useEffect(() => {
     const load = () => {
@@ -419,20 +399,6 @@ export default function LaunchDashboard({ previewArticles = [] }) {
     load()
     const fetchInterval = setInterval(load, 30 * 60 * 1000)
     return () => clearInterval(fetchInterval)
-  }, [])
-
-  // ロケット実績データの読み込み
-  useEffect(() => {
-    fetch('/data/rockets/index.json')
-      .then(r => r.json())
-      .then(data => {
-        const stats = {}
-        for (const r of (data.rockets || [])) {
-          stats[r.slug] = { total: r.total, successRate: r.successRate, thisYear: r.thisYear }
-        }
-        setRocketStats(stats)
-      })
-      .catch(() => {})
   }, [])
 
   const nextLaunch = useMemo(() => {
@@ -645,7 +611,7 @@ export default function LaunchDashboard({ previewArticles = [] }) {
         </div>
       )}
       {selectedLaunch && (
-        <LaunchModal launch={selectedLaunch} onClose={() => setSelectedLaunch(null)} previewArticles={previewArticles} rocketStats={rocketStats} />
+        <LaunchModal launch={selectedLaunch} onClose={() => setSelectedLaunch(null)} previewArticles={previewArticles} />
       )}
     </div>
   )
