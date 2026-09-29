@@ -3,9 +3,9 @@
 import { useState, useEffect, useMemo } from 'react'
 
 const COUNTRY_NAMES = {
-  US: 'USA', CN: '中国', IN: 'インド', JP: '日本', RU: 'ロシア',
-  FR: '欧州', EU: '欧州', DE: 'ドイツ', KR: '韓国', NZ: 'NZ',
-  GB: 'UK', BR: 'ブラジル', IL: 'イスラエル', AU: '豪州',
+  US: '米国', CN: '中国', IN: 'インド', JP: '日本', RU: 'ロシア',
+  FR: '欧州', EU: '欧州', DE: 'ドイツ', KR: '韓国', NZ: 'ニュージーランド',
+  GB: '英国', BR: 'ブラジル', IL: 'イスラエル', AU: 'オーストラリア',
 }
 
 const ROCKET_IMAGES = {
@@ -195,12 +195,28 @@ function shortenPad(pad) {
   return pad
 }
 
+// TZ名からUTC→現地時間を計算（夏時間はIntl APIで自動処理）
+function toLocalTime(dateStr, timeStr, timezone) {
+  if (!dateStr || !timeStr || !timezone) return null
+  try {
+    const utc = new Date(dateStr + 'T' + timeStr + ':00Z')
+    const fmt = new Intl.DateTimeFormat('en-US', {
+      timeZone: timezone,
+      hour: '2-digit', minute: '2-digit', hour12: false,
+      timeZoneName: 'short',
+    })
+    return fmt.format(utc)
+  } catch { return null }
+}
+
 function LaunchModal({ launch, onClose, previewArticles = [] }) {
   const [cd, setCd] = useState(null)
+  const [descExpanded, setDescExpanded] = useState(false)
   const { dateLong, time, fullDate } = toJST(launch.date, launch.time, launch.tentative)
   const country = countryName(launch.country)
   const mission = launch.mission && launch.mission !== 'Unknown Payload' ? launch.mission : null
   const padDisplay = launch.padDetail || shortenPad(launch.pad)
+  const localTime = toLocalTime(launch.date, launch.time, launch.timezone)
 
   // 予定記事があるかチェック
   const missionSlug = (launch.mission || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')
@@ -295,26 +311,49 @@ function LaunchModal({ launch, onClose, previewArticles = [] }) {
 
           {/* 打ち上げ情報 */}
           <div style={{ fontSize: '13px', color: '#444', lineHeight: 2.0 }}>
-            {time && <div>📅 <strong>{dateLong}</strong> {time} JST</div>}
+            {time && (
+              <div>
+                📅 <strong>{dateLong}</strong> {time} JST
+                {localTime && <span style={{ fontSize: '11px', color: '#888', marginLeft: '6px' }}>（現地 {localTime}）</span>}
+              </div>
+            )}
             {!time && <div>📅 <strong>{dateLong}</strong>（時刻未定）</div>}
             {padDisplay && <div>📍 {padDisplay}</div>}
-            {launch.orbit && <div>🌐 {launch.orbit}</div>}
+            {launch.orbit && launch.orbit !== 'Unknown' && <div>🌐 {launch.orbit}</div>}
             {country && <div>🌍 {country}</div>}
           </div>
 
-          {/* ミッション概要 */}
-          {(launch.descriptionJa || launch.descriptionEn) && (
-            <div style={{
-              marginTop: '14px', padding: '12px', background: '#f8f9fa',
-              borderRadius: '6px', fontSize: '12.5px', color: '#333',
-              lineHeight: 1.8,
-            }}>
-              <div style={{ fontSize: '11px', fontWeight: 700, color: '#888', marginBottom: '6px', letterSpacing: '0.08em' }}>
-                ミッション概要
+          {/* ミッション概要（長い場合は折りたたみ） */}
+          {(launch.descriptionJa || launch.descriptionEn) && (() => {
+            const desc = launch.descriptionJa || launch.descriptionEn
+            const isLong = desc.length > 120
+            return (
+              <div style={{
+                marginTop: '14px', padding: '12px', background: '#f8f9fa',
+                borderRadius: '6px', fontSize: '12.5px', color: '#333',
+                lineHeight: 1.8,
+              }}>
+                <div style={{ fontSize: '11px', fontWeight: 700, color: '#888', marginBottom: '6px', letterSpacing: '0.08em' }}>
+                  ミッション概要
+                </div>
+                <div style={isLong && !descExpanded ? {
+                  display: '-webkit-box', WebkitLineClamp: 3,
+                  WebkitBoxOrient: 'vertical', overflow: 'hidden',
+                } : {}}>
+                  {desc}
+                </div>
+                {isLong && !descExpanded && (
+                  <button onClick={() => setDescExpanded(true)} style={{
+                    background: 'none', border: 'none', color: '#1565c0',
+                    fontSize: '12px', fontWeight: 600, cursor: 'pointer',
+                    padding: '4px 0 0', marginTop: '4px',
+                  }}>
+                    続きを読む
+                  </button>
+                )}
               </div>
-              {launch.descriptionJa || launch.descriptionEn}
-            </div>
-          )}
+            )
+          })()}
 
           {/* 追記メモ */}
           {launch.notes && (

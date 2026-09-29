@@ -64,6 +64,29 @@ const ORBIT_JA = {
   'Elliptical Orbit': '楕円軌道',
 }
 
+// 運用機関名の日本語対応表
+const PROVIDER_JA = {
+  'SpaceX': 'SpaceX',
+  'United Launch Alliance': 'ULA（ユナイテッド・ローンチ・アライアンス）',
+  'Arianespace': 'Arianespace（アリアンスペース）',
+  'Rocket Lab': 'Rocket Lab',
+  'Blue Origin': 'Blue Origin（ブルーオリジン）',
+  'Mitsubishi Heavy Industries': '三菱重工業',
+  'Japan Aerospace Exploration Agency': 'JAXA（宇宙航空研究開発機構）',
+  'Indian Space Research Organization': 'ISRO（インド宇宙研究機関）',
+  'China Aerospace Science and Technology Corporation': 'CASC（中国航天科技集団）',
+  'Roscosmos': 'ロスコスモス',
+  'Korea Aerospace Research Institute': 'KARI（韓国航空宇宙研究院）',
+  'Korea Aerospace Industries': 'KAI（韓国航空宇宙産業）',
+  'Northrop Grumman': 'ノースロップ・グラマン',
+  'LandSpace': 'LandSpace（藍箭航天）',
+  'Galactic Energy': 'Galactic Energy（星河動力）',
+  'ExPace': 'ExPace（航天科工火箭技術）',
+  'iSpace': 'iSpace（星際栄耀）',
+  'HyImpulse': 'HyImpulse',
+  'Innospace': 'Innospace（イノスペース）',
+}
+
 // 配信URLのドメインフィルタ（公式・信頼できるもののみ）
 const TRUSTED_VID_DOMAINS = [
   'youtube.com', 'youtu.be',
@@ -113,12 +136,20 @@ async function translateDescription(text, missionName) {
     const translated = data.content?.[0]?.text?.trim()
     if (!translated) return null
 
-    // 自動照合: 元の文にある数字・固有名詞が翻訳にも含まれるか
+    // 自動照合1: 元の文にある数字が翻訳にも含まれるか
     const numbers = text.match(/\d+/g) || []
     const allNumbersPresent = numbers.every(n => translated.includes(n))
     if (!allNumbersPresent && numbers.length > 0) {
       console.log(`  Translation check FAILED for ${missionName}: number mismatch`)
       return null
+    }
+    // 自動照合2: 翻訳に残っている英語の用語（2語以上の連続）が元の文に存在するか
+    const englishTerms = translated.match(/[A-Z][a-zA-Z]+(?:\s+[A-Z][a-zA-Z]+)+/g) || []
+    for (const term of englishTerms) {
+      if (!text.includes(term)) {
+        console.log(`  Translation check FAILED for ${missionName}: "${term}" not in original`)
+        return null
+      }
     }
     return translated
   } catch (e) {
@@ -251,12 +282,14 @@ async function main() {
         || vidUrls[0]?.url
         || null
 
-      // 射場名（詳細 + 日本語）
+      // 射場名（詳細 + 日本語、Unknown Padはロケーション名にフォールバック）
       const padName = l.pad?.name || ''
       const padLocation = l.pad?.location?.name || ''
-      const padJa = PAD_NAME_JA[padName] || null
-      if (padName && !padJa) {
-        // 未登録の射場名をログに残す
+      let padJa = PAD_NAME_JA[padName] || null
+      if (padName === 'Unknown Pad' || !padName) {
+        // Unknown Pad → ロケーション名をそのまま使う
+        padJa = null // padDetailはundefinedにして、padLocationを使う
+      } else if (padName && !padJa) {
         console.log(`  [PAD] 未登録: "${padName}" (${padLocation})`)
       }
 
@@ -282,7 +315,7 @@ async function main() {
         month,
         time: isTentative ? null : timeStr,
         tentative: isTentative || false,
-        provider: l.launch_service_provider?.name || '',
+        provider: PROVIDER_JA[l.launch_service_provider?.name] || l.launch_service_provider?.name || '',
         country: getCountryCode(l),
         pad: padLocation,
         padDetail: padJa || padName || undefined,
