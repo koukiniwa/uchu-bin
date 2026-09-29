@@ -332,8 +332,8 @@ export default function BlogPost({ params }) {
         </div>
       </div>
 
-      {/* 次の打ち上げ */}
-      <NextLaunchBanner />
+      {/* 次の打ち上げ（予定記事では非表示） */}
+      {post.type !== 'preview' && <NextLaunchBanner />}
 
       {/* サイト回遊セクション */}
       <div style={{
