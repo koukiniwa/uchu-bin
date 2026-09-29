@@ -1,28 +1,26 @@
 ---
-title: '【日本時間】NROL-97 打ち上げ予定｜10月2日 12:53 ファルコンヘビー'
+title: '【日本時間】NROL-97 打ち上げ予定｜Falcon Heavy ケネディ宇宙センター'
 description: 'Falcon Heavy（ファルコンヘビー）によるNROL-97の打ち上げ予定を日本時間で解説。ケネディ宇宙センターLC-39Aから打ち上げ。同日のCrew-13との関係や見どころをまとめています。'
 date: '2026-09-29T18:00:00+09:00'
 category: 'ロケット'
 type: 'preview'
 image: '/images/library/falconheavy_001.jpg'
-imageCredit: 'Falcon Heavy / SpaceX'
+imageCredit: '過去のFalcon Heavy打ち上げ / SpaceX'
 ---
 
-## NROL-97 打ち上げ予定：日本時間 10月2日（金）12:53
+## NROL-97 打ち上げ予定
 
 米国家偵察局（NRO）向けの機密ミッション「NROL-97」が、SpaceXのFalcon Heavy（ファルコンヘビー）ロケットで打ち上げ予定です。フロリダ州ケネディ宇宙センターの第39A発射施設（LC-39A）から打ち上げられます。
 
-現地時間では10月1日（木）午後11時53分（米東部夏時間 EDT）を目標としています。予備日は現地10月2日（金）午後11時48分（EDT）です。
-
 | 項目 | 詳細 |
 |------|------|
-| 打ち上げ日時 | 日本時間 10月2日（金）12:53 JST（現地 10月1日 23:53 EDT） |
 | ロケット | Falcon Heavy（ファルコンヘビー） |
 | 射場 | ケネディ宇宙センター LC-39A（フロリダ州） |
 | 運用機関 | SpaceX |
 | ミッション | NROL-97（米国家偵察局） |
 | ペイロード | 非公開（機密ミッション） |
-| 予備日 | 日本時間 10月3日（土）12:48 JST |
+
+※最新の日時は記事上部のバナーに表示されます。
 
 ## ミッション概要
 
@@ -42,23 +40,20 @@ Falcon Heavyは、Falcon 9の第1段を中央コアとして強化し、さら�
 
 サイドブースターの着陸は打ち上げの約8分後に予定されており、フロリダ周辺ではソニックブーム（衝撃波の音）が聞こえる可能性があります（Orlando Sentinel報道）。
 
-## 同日にCrew-13も打ち上げ
+## 同日に[Crew-13](/blog/2026-09-29-crew-13-launch-preview-falcon-9-iss)も打ち上げ予定
 
-同じ10月2日（日本時間）に、Crew-13も打ち上げ予定です。
+2026年9月末時点の予定では、同じ日に[Crew-13](/blog/2026-09-29-crew-13-launch-preview-falcon-9-iss)もケープカナベラル宇宙軍基地SLC-40からFalcon 9で打ち上げ予定です。発射台が異なるため干渉しません。
 
-- **Crew-13**: 日本時間 10月2日（金）00:10 — ケープカナベラル宇宙軍基地 SLC-40からFalcon 9で打ち上げ
-- **NROL-97**: 日本時間 10月2日（金）12:53 — ケネディ宇宙センター LC-39AからFalcon Heavyで打ち上げ
-
-日本時間で約12時間43分の間隔です。発射台が異なるため干渉しません。報道によると、同日にCrew-13のブースターとFalcon Heavyのサイドブースター2本、合わせて3本のブースターが着陸する予定です。
+報道によると、同日にCrew-13のブースターとFalcon Heavyのサイドブースター2本、合わせて3本のブースターが着陸する予定です。両方の最新の日時は[打ち上げスケジュール](/schedule)で確認できます。
 
 ## ライブ配信
 
-ライブ配信はSpaceX公式サイトとX（@SpaceX）で、打ち上げの約10分前（日本時間 約12:43頃）から開始される予定です。
+ライブ配信はSpaceX公式サイトとX（@SpaceX）で、打ち上げの約10分前から開始される予定です。
 
 ## 参考記事
 
 - [SpaceX – NROL-97 Mission](https://www.spacex.com/launches/nrol97)
 - [Next Spaceflight – NROL-97](https://nextspaceflight.com/launches/details/7826/)
-- [Orlando Sentinel（Decatur Daily転載） – Falcon Heavy and Crew-13 同日打ち上げ](https://www.decaturdaily.com/news/spacex-falcon-heavy-aims-to-launch-same-day-as-crew-13-next-week-on-space/article_b9119da3-77ee-419e-aa43-7b4a7a8a8b2a.html)
-- [Hoodline – Crew-13 and NROL-97 同日打ち上げ](https://hoodline.com/2026/09/space-coast-braces-for-rare-double-launch-as-crew-13-and-nrol-97-aim-for-same-day/)
+- [Orlando Sentinel（Decatur Daily転載）– SpaceX Falcon Heavy aims to launch same day as Crew-13](https://www.decaturdaily.com/news/spacex-falcon-heavy-aims-to-launch-same-day-as-crew-13-next-week-on-space/article_b9119da3-77ee-419e-aa43-7b4a7a8a8b2a.html)
+- [Hoodline – Space Coast Braces for Rare Double Launch as Crew-13 and NROL-97 Aim for Same Day](https://hoodline.com/2026/09/space-coast-braces-for-rare-double-launch-as-crew-13-and-nrol-97-aim-for-same-day/)
 - [Supercluster – NROL-97](https://www.supercluster.com/launches/nrol-97)
