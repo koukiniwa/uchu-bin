@@ -21,6 +21,8 @@ function MapCard({ href, img, alt, title, desc }) {
 
 export default function Home() {
   const posts = getAllPosts()
+  // ニュース一覧から予定記事を除外
+  const newsPosts = posts.filter(p => p.type !== 'preview')
   // 予定記事のslugとタイトルをLaunchDashboardに渡す
   const previewArticles = posts
     .filter(p => p.type === 'preview')
@@ -80,10 +82,10 @@ export default function Home() {
         display: 'flex', justifyContent: 'space-between',
       }}>
         <span>ニュース</span>
-        <span style={{ fontWeight: 400, letterSpacing: '0.05em' }}>{posts.length}件</span>
+        <span style={{ fontWeight: 400, letterSpacing: '0.05em' }}>{newsPosts.length}件</span>
       </div>
 
-      <ArticleList posts={posts} />
+      <ArticleList posts={newsPosts} />
     </div>
   )
 }
