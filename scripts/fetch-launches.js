@@ -6,7 +6,126 @@ const fs = require('fs')
 const path = require('path')
 
 const OUTPUT_PATH = path.join(__dirname, '..', 'public', 'data', 'launches.json')
-const API_URL = 'https://ll.thespacedevs.com/2.3.0/launches/upcoming/?limit=80&mode=normal'
+const OVERRIDES_PATH = path.join(__dirname, '..', 'public', 'data', 'launch-overrides.json')
+const API_URL = 'https://ll.thespacedevs.com/2.3.0/launches/upcoming/?limit=80&mode=detailed'
+
+// 射場名の日本語対応表
+const PAD_NAME_JA = {
+  'Space Launch Complex 40': 'ケープカナベラル宇宙軍基地 SLC-40',
+  'Space Launch Complex 4E': 'ヴァンデンバーグ宇宙軍基地 SLC-4E',
+  'Launch Complex 39A': 'ケネディ宇宙センター LC-39A',
+  'Launch Complex 39B': 'ケネディ宇宙センター LC-39B',
+  'Orbital Launch Pad 2': 'スターベース（テキサス州）',
+  'Orbital Launch Mount A': 'スターベース（テキサス州）',
+  'Yoshinobu Launch Complex LP-2': '種子島宇宙センター 吉信射点',
+  'Yoshinobu Launch Complex LP-1': '種子島宇宙センター 吉信射点',
+  'Uchinoura Space Center': '内之浦宇宙空間観測所',
+  'LC-2': '羅老宇宙センター',
+  'Satish Dhawan Space Centre First Launch Pad': 'サティッシュ・ダワン宇宙センター 第1射点',
+  'Satish Dhawan Space Centre Second Launch Pad': 'サティッシュ・ダワン宇宙センター 第2射点',
+  'Launch Area 4 (SLS-2 / 603)': '酒泉衛星発射センター',
+  'Pad 9401 (SLS-2)': '酒泉衛星発射センター',
+  'Launch Complex 201': '文昌宇宙発射場',
+  'Launch Complex 2': '文昌宇宙発射場',
+  'Pad 16': '太原衛星発射センター',
+  'Launch Complex 2 (LC-2)': '西昌衛星発射センター',
+  'Launch Complex 3 (LC-3)': '西昌衛星発射センター',
+  'Site 43/4': 'プレセツク宇宙基地',
+  'Site 31/6': 'バイコヌール宇宙基地',
+  'Pad 1S': 'ボストチヌイ宇宙基地',
+  'ELA-4': 'クールー宇宙センター ELA-4',
+  'ELV': 'クールー宇宙センター ELV',
+  'Ariane Launch Area 4': 'クールー宇宙センター ELA-4',
+  'Launch Complex 1': 'マヒア半島射場 LC-1',
+  'Launch Complex 2': 'マヒア半島射場 LC-2',
+  'Space Launch Complex 41': 'ケープカナベラル宇宙軍基地 SLC-41',
+  'Space Launch Complex 2W': 'ヴァンデンバーグ宇宙軍基地 SLC-2W',
+  '31/6': 'バイコヌール宇宙基地',
+  'Mu Center': '内之浦宇宙空間観測所',
+  'Long March 12 series Pad': '酒泉衛星発射センター',
+  'Launch Area 91 (SLS-1 / 921)': '酒泉衛星発射センター',
+  'HANBIT Pad': 'アルカンタラ射場（ブラジル）',
+}
+
+// 軌道名の日本語対応表
+const ORBIT_JA = {
+  'Low Earth Orbit': '低軌道（LEO）',
+  'Sun-Synchronous Orbit': '太陽同期軌道（SSO）',
+  'Geostationary Transfer Orbit': '静止遷移軌道（GTO）',
+  'Geostationary Orbit': '静止軌道（GEO）',
+  'Medium Earth Orbit': '中軌道（MEO）',
+  'Highly Elliptical Orbit': '長楕円軌道（HEO）',
+  'Polar Orbit': '極軌道',
+  'Sub-Orbital': '弾道飛行',
+  'Suborbital': '弾道飛行',
+  'Mars Orbit': '火星軌道',
+  'Lunar Orbit': '月軌道',
+  'Direct Geostationary': '直接静止軌道投入',
+  'Elliptical Orbit': '楕円軌道',
+}
+
+// 配信URLのドメインフィルタ（公式・信頼できるもののみ）
+const TRUSTED_VID_DOMAINS = [
+  'youtube.com', 'youtu.be',
+  'spacex.com',
+  'nasa.gov',
+  'esa.int',
+  'jaxa.jp',
+  'x.com', 'twitter.com',
+  'twitch.tv',
+]
+
+function isTrustedVidUrl(url) {
+  try {
+    const host = new URL(url).hostname.replace(/^www\./, '')
+    return TRUSTED_VID_DOMAINS.some(d => host === d || host.endsWith('.' + d))
+  } catch { return false }
+}
+
+// 手動上書きデータを読み込む
+function loadOverrides() {
+  try {
+    return JSON.parse(fs.readFileSync(OVERRIDES_PATH, 'utf-8'))
+  } catch { return {} }
+}
+
+// ミッション概要をClaudeで翻訳（ANTHROPIC_API_KEYがある場合のみ）
+async function translateDescription(text, missionName) {
+  const apiKey = process.env.ANTHROPIC_API_KEY
+  if (!apiKey || !text || text.length < 10) return null
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 500,
+        messages: [{ role: 'user', content: `以下の英文を日本語に翻訳してください。元の文の内容だけを訳し、情報を足さないでください。固有名詞（人名・組織名・衛星名）は英語のまま残してください。日時に関する文（scheduled for〜、set to launch〜等）は訳さず削除してください。翻訳文のみを返してください。\n\n${text}` }],
+      }),
+      signal: AbortSignal.timeout(15000),
+    })
+    if (!res.ok) return null
+    const data = await res.json()
+    const translated = data.content?.[0]?.text?.trim()
+    if (!translated) return null
+
+    // 自動照合: 元の文にある数字・固有名詞が翻訳にも含まれるか
+    const numbers = text.match(/\d+/g) || []
+    const allNumbersPresent = numbers.every(n => translated.includes(n))
+    if (!allNumbersPresent && numbers.length > 0) {
+      console.log(`  Translation check FAILED for ${missionName}: number mismatch`)
+      return null
+    }
+    return translated
+  } catch (e) {
+    console.log(`  Translation error for ${missionName}: ${e.message}`)
+    return null
+  }
+}
 
 // スケジュール表示: 全打ち上げを含める（Starlink含む）
 // 記事生成のみStarlinkを除外（check-launch-results.js側で制御）
@@ -122,12 +241,37 @@ async function main() {
       // TBDの場合は「○月」表示用に月だけ保持
       const month = net ? net.getUTCMonth() + 1 : null
 
-      // ライブ配信URL（YouTube優先）
-      const vidUrls = l.vidURLs || []
+      // ライブ配信URL（信頼できるドメインのみ、タイトル付き）
+      const vidUrls = (l.vidURLs || [])
+        .filter(v => v.url && isTrustedVidUrl(v.url))
+        .map(v => ({ url: v.url, title: v.title || '' }))
+
       const webcast = vidUrls.find(v => v.url?.includes('youtube'))?.url
         || vidUrls.find(v => v.url?.includes('youtu.be'))?.url
         || vidUrls[0]?.url
         || null
+
+      // 射場名（詳細 + 日本語）
+      const padName = l.pad?.name || ''
+      const padLocation = l.pad?.location?.name || ''
+      const padJa = PAD_NAME_JA[padName] || null
+      if (padName && !padJa) {
+        // 未登録の射場名をログに残す
+        console.log(`  [PAD] 未登録: "${padName}" (${padLocation})`)
+      }
+
+      // 軌道名（日本語）
+      const orbitEn = l.mission?.orbit?.name || ''
+      const orbitJa = ORBIT_JA[orbitEn] || null
+      if (orbitEn && !orbitJa && orbitEn !== 'Unknown') {
+        console.log(`  [ORBIT] 未登録: "${orbitEn}"`)
+      }
+
+      // タイムゾーン
+      const timezone = l.pad?.location?.timezone_name || ''
+
+      // ミッション概要（英語）
+      const descriptionEn = l.mission?.description || ''
 
       return {
         id: l.id,
@@ -140,9 +284,14 @@ async function main() {
         tentative: isTentative || false,
         provider: l.launch_service_provider?.name || '',
         country: getCountryCode(l),
-        pad: l.pad?.location?.name || '',
+        pad: padLocation,
+        padDetail: padJa || padName || undefined,
+        orbit: orbitJa || orbitEn || undefined,
+        timezone: timezone || undefined,
+        descriptionEn: descriptionEn || undefined,
         status: l.status?.abbrev || '',
         webcast: webcast || undefined,
+        vidURLs: vidUrls.length > 0 ? vidUrls : undefined,
       }
     })
 
@@ -159,6 +308,48 @@ async function main() {
     if (launches.length >= 20) break
   }
 
+  // 既存データから翻訳キャッシュを読み込む
+  let existingTranslations = {}
+  try {
+    const existing = JSON.parse(fs.readFileSync(OUTPUT_PATH, 'utf-8'))
+    for (const l of (existing.launches || [])) {
+      if (l.descriptionJa && l.descriptionEn) {
+        existingTranslations[l.descriptionEn] = l.descriptionJa
+      }
+    }
+  } catch {}
+
+  // ミッション概要の翻訳（直近10件のみ、キャッシュがない場合のみ）
+  const overrides = loadOverrides()
+  let translationCount = 0
+  for (const l of launches.slice(0, 10)) {
+    // 手動上書きがあればそれを使う
+    const override = overrides[l.mission] || overrides[l.id]
+    if (override) {
+      if (override.descriptionJa) l.descriptionJa = override.descriptionJa
+      if (override.crew) l.crew = override.crew
+      if (override.vidURLs) l.vidURLs = override.vidURLs
+      if (override.notes) l.notes = override.notes
+      continue
+    }
+    // キャッシュにあればそれを使う
+    if (l.descriptionEn && existingTranslations[l.descriptionEn]) {
+      l.descriptionJa = existingTranslations[l.descriptionEn]
+      continue
+    }
+    // 翻訳（1回の実行で最大5件）
+    if (l.descriptionEn && translationCount < 5) {
+      console.log(`  Translating: ${l.mission}...`)
+      const ja = await translateDescription(l.descriptionEn, l.mission)
+      if (ja) {
+        l.descriptionJa = ja
+        translationCount++
+      }
+      // レートリミット対策
+      await new Promise(r => setTimeout(r, 1000))
+    }
+  }
+
   // 出力ディレクトリがなければ作成
   const outDir = path.dirname(OUTPUT_PATH)
   if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true })
@@ -170,6 +361,7 @@ async function main() {
   }
   fs.writeFileSync(OUTPUT_PATH, JSON.stringify(output, null, 2), 'utf-8')
   console.log(`Saved ${launches.length} notable launches to ${OUTPUT_PATH}`)
+  console.log(`Translations: ${translationCount} new, ${Object.keys(existingTranslations).length} cached`)
   for (const l of launches) {
     const dateInfo = l.tentative ? `${l.date} (TBD)` : `${l.date} ${l.time || ''}UTC`
     console.log(`  ${dateInfo.padEnd(22)} ${l.rocket.padEnd(20)} ${l.mission.slice(0, 30)}`)

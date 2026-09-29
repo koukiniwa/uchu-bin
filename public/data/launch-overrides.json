@@ -1,0 +1,17 @@
+{
+  "_comment": "注目の打ち上げの手動追記データ。キーはミッション名またはランチID。ポップアップと予定記事の両方で使用。",
+  "Crew-13": {
+    "descriptionJa": "SpaceX Crew-13は、NASAの商業クルー輸送プログラムの一環として実施されるISS長期滞在ミッション。Crew Dragonカプセルで4名の宇宙飛行士がISSに向かう。",
+    "crew": [
+      { "name": "ジェシカ・ワトキンス（Jessica Watkins）", "role": "船長", "agency": "NASA" },
+      { "name": "ルーク・デラニー（Luke Delaney）", "role": "パイロット", "agency": "NASA" },
+      { "name": "ジョシュア・クトリク（Joshua Kutryk）", "role": "ミッションスペシャリスト", "agency": "CSA" },
+      { "name": "セルゲイ・テテリャトニコフ（Sergey Teteryatnikov）", "role": "ミッションスペシャリスト", "agency": "ロスコスモス" }
+    ],
+    "notes": "ISS到着後、第75次長期滞在（Expedition 75）のメンバーとなる。"
+  },
+  "NROL-97": {
+    "descriptionJa": "米国家偵察局（NRO）向けの機密ミッション。ペイロードの内容は非公開。Falcon Heavy 14回目の飛行。",
+    "notes": "同日にCrew-13も打ち上げ予定。サイドブースター2本はケープカナベラル宇宙軍基地の着陸帯に戻る予定。"
+  }
+}

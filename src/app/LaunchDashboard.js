@@ -195,27 +195,37 @@ function shortenPad(pad) {
   return pad
 }
 
-function LaunchModal({ launch, onClose, previewArticles = [] }) {
+function LaunchModal({ launch, onClose, previewArticles = [], rocketStats = {} }) {
   const [cd, setCd] = useState(null)
   const { dateLong, time, fullDate } = toJST(launch.date, launch.time, launch.tentative)
-  const rocketImg = getRocketImage(launch.rocket)
   const country = countryName(launch.country)
   const mission = launch.mission && launch.mission !== 'Unknown Payload' ? launch.mission : null
-  const pad = shortenPad(launch.pad)
+  const padDisplay = launch.padDetail || shortenPad(launch.pad)
 
-  // 予定記事があるかチェック（ミッション名でマッチ）
+  // 予定記事があるかチェック
   const missionSlug = (launch.mission || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')
   const previewArticle = previewArticles.find(a => {
     if (!missionSlug || missionSlug.length < 3) return false
     const s = (a.slug || '').toLowerCase()
-    // 手動記事: slugにpreviewとミッション名を含む
-    // 自動記事: missionNameでマッチ or slugがミッション名スラッグと一致
     if (a.missionName) {
       const aMSlug = a.missionName.toLowerCase().replace(/[^a-z0-9]+/g, '-')
       return aMSlug === missionSlug
     }
     return s.includes('preview') && s.includes(missionSlug)
   })
+
+  // ロケット実績
+  const rocketSlug = (launch.rocket || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')
+  const stats = rocketStats[rocketSlug] || null
+
+  // ステータスバッジ
+  const statusBadge = launch.status === 'Go'
+    ? { label: '確定', color: '#2e7d32', bg: '#e8f5e9' }
+    : launch.status === 'TBC'
+    ? { label: '暫定', color: '#e65100', bg: '#fff3e0' }
+    : launch.tentative
+    ? { label: '未定', color: '#757575', bg: '#f5f5f5' }
+    : null
 
   useEffect(() => {
     if (!fullDate) return
@@ -233,30 +243,45 @@ function LaunchModal({ launch, onClose, previewArticles = [] }) {
       padding: '20px',
     }}>
       <div onClick={e => e.stopPropagation()} style={{
-        background: '#fff', borderRadius: '8px', maxWidth: '360px', width: '100%',
+        background: '#fff', borderRadius: '10px', maxWidth: '400px', width: '100%',
         overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
+        maxHeight: '85vh', overflowY: 'auto',
       }}>
-        {rocketImg && (
-          <div style={{ height: '180px', overflow: 'hidden', position: 'relative' }}>
-            <img src={rocketImg} alt={launch.rocket} style={{
-              width: '100%', height: '100%', objectFit: 'cover',
-            }} />
-            <button onClick={onClose} style={{
-              position: 'absolute', top: '8px', right: '8px',
-              background: 'rgba(0,0,0,0.5)', color: '#fff', border: 'none',
-              borderRadius: '50%', width: '28px', height: '28px',
-              cursor: 'pointer', fontSize: '14px', lineHeight: '28px',
-            }}>✕</button>
+        {/* ヘッダー */}
+        <div style={{
+          background: 'linear-gradient(135deg, #0a0e1a, #1a2744)',
+          padding: '16px 20px', position: 'relative',
+        }}>
+          <button onClick={onClose} style={{
+            position: 'absolute', top: '10px', right: '10px',
+            background: 'rgba(255,255,255,0.15)', color: '#fff', border: 'none',
+            borderRadius: '50%', width: '28px', height: '28px',
+            cursor: 'pointer', fontSize: '14px', lineHeight: '28px',
+          }}>✕</button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+            <div style={{ fontSize: '18px', fontWeight: 800, color: '#fff' }}>
+              {mission || launch.rocket}
+            </div>
+            {statusBadge && (
+              <span style={{
+                fontSize: '10px', fontWeight: 700, color: statusBadge.color,
+                background: statusBadge.bg, padding: '2px 8px', borderRadius: '10px',
+              }}>
+                {statusBadge.label}
+              </span>
+            )}
           </div>
-        )}
+          <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.6)' }}>
+            {launch.rocket}{mission ? ` — ${launch.provider || ''}` : ''}
+          </div>
+        </div>
+
         <div style={{ padding: '16px 20px' }}>
-          <div style={{ fontSize: '18px', fontWeight: 700, color: '#1a2744', marginBottom: '12px' }}>
-            {launch.rocket}
-          </div>
+          {/* カウントダウン */}
           {cd && (
             <div style={{
               background: '#0a0e1a', borderRadius: '6px', padding: '10px',
-              display: 'flex', justifyContent: 'center', gap: '8px', marginBottom: '14px',
+              display: 'flex', justifyContent: 'center', gap: '8px', marginBottom: '16px',
             }}>
               {[
                 { v: cd.days, l: '日' }, { v: cd.hours, l: '時間' },
@@ -271,23 +296,94 @@ function LaunchModal({ launch, onClose, previewArticles = [] }) {
               ))}
             </div>
           )}
-          <div style={{ fontSize: '13px', color: '#444', lineHeight: 1.8 }}>
+
+          {/* 打ち上げ情報 */}
+          <div style={{ fontSize: '13px', color: '#444', lineHeight: 2.0 }}>
             {time && <div>📅 <strong>{dateLong}</strong> {time} JST</div>}
             {!time && <div>📅 <strong>{dateLong}</strong>（時刻未定）</div>}
-            {pad && <div>📍 {pad}</div>}
-            {launch.provider && <div>🏢 {launch.provider}</div>}
-            {mission && <div>🎯 {mission}</div>}
+            {padDisplay && <div>📍 {padDisplay}</div>}
+            {launch.orbit && <div>🌐 {launch.orbit}</div>}
             {country && <div>🌍 {country}</div>}
           </div>
-          {launch.webcast && (
+
+          {/* ミッション概要 */}
+          {(launch.descriptionJa || launch.descriptionEn) && (
+            <div style={{
+              marginTop: '14px', padding: '12px', background: '#f8f9fa',
+              borderRadius: '6px', fontSize: '12.5px', color: '#333',
+              lineHeight: 1.8,
+            }}>
+              <div style={{ fontSize: '11px', fontWeight: 700, color: '#888', marginBottom: '6px', letterSpacing: '0.08em' }}>
+                ミッション概要
+              </div>
+              {launch.descriptionJa || launch.descriptionEn}
+            </div>
+          )}
+
+          {/* 追記メモ */}
+          {launch.notes && (
+            <div style={{
+              marginTop: '8px', fontSize: '12px', color: '#666',
+              lineHeight: 1.7, padding: '0 2px',
+            }}>
+              💡 {launch.notes}
+            </div>
+          )}
+
+          {/* 乗組員（有人ミッション） */}
+          {launch.crew && launch.crew.length > 0 && (
+            <div style={{ marginTop: '14px' }}>
+              <div style={{ fontSize: '11px', fontWeight: 700, color: '#888', marginBottom: '6px', letterSpacing: '0.08em' }}>
+                搭乗クルー
+              </div>
+              {launch.crew.map((c, i) => (
+                <div key={i} style={{ fontSize: '12px', color: '#444', lineHeight: 1.8 }}>
+                  {c.name} — {c.role}（{c.agency}）
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* ロケット実績 */}
+          {stats && stats.total > 0 && (
+            <a href={`/rockets/${rocketSlug}`} style={{
+              display: 'block', marginTop: '14px', padding: '10px 12px',
+              background: '#f0f4f8', borderRadius: '6px', textDecoration: 'none',
+              fontSize: '12px', color: '#1a2744',
+            }}>
+              <div style={{ fontWeight: 700, marginBottom: '4px' }}>🚀 {launch.rocket} の実績</div>
+              <div style={{ color: '#666' }}>
+                通算 {stats.total}回（成功率 {stats.successRate}%）
+                {stats.thisYear > 0 && ` ・今年 ${stats.thisYear}回`}
+              </div>
+            </a>
+          )}
+
+          {/* 配信リンク */}
+          {launch.vidURLs && launch.vidURLs.length > 0 && (
+            <div style={{ marginTop: '14px' }}>
+              {launch.vidURLs.map((v, i) => (
+                <a key={i} href={v.url} target="_blank" rel="noopener noreferrer" style={{
+                  display: 'block', textAlign: 'center', marginTop: i > 0 ? '6px' : '0',
+                  background: '#ff0000', color: '#fff', padding: '9px',
+                  borderRadius: '6px', textDecoration: 'none', fontWeight: 700, fontSize: '12px',
+                }}>
+                  ▶ {v.title || 'ライブ配信を見る'}
+                </a>
+              ))}
+            </div>
+          )}
+          {!launch.vidURLs && launch.webcast && (
             <a href={launch.webcast} target="_blank" rel="noopener noreferrer" style={{
               display: 'block', textAlign: 'center', marginTop: '14px',
-              background: '#ff0000', color: '#fff', padding: '10px',
-              borderRadius: '6px', textDecoration: 'none', fontWeight: 700, fontSize: '13px',
+              background: '#ff0000', color: '#fff', padding: '9px',
+              borderRadius: '6px', textDecoration: 'none', fontWeight: 700, fontSize: '12px',
             }}>
               ▶ ライブ配信を見る
             </a>
           )}
+
+          {/* 予定記事リンク */}
           {previewArticle && (
             <a href={previewArticle.url || `/blog/${previewArticle.slug}`} style={{
               display: 'block', textAlign: 'center', marginTop: '10px',
@@ -308,6 +404,7 @@ export default function LaunchDashboard({ previewArticles = [] }) {
   const [recent, setRecent] = useState([])
   const [countdown, setCountdown] = useState(null)
   const [selectedLaunch, setSelectedLaunch] = useState(null)
+  const [rocketStats, setRocketStats] = useState({})
 
   useEffect(() => {
     const load = () => {
@@ -322,6 +419,20 @@ export default function LaunchDashboard({ previewArticles = [] }) {
     load()
     const fetchInterval = setInterval(load, 30 * 60 * 1000)
     return () => clearInterval(fetchInterval)
+  }, [])
+
+  // ロケット実績データの読み込み
+  useEffect(() => {
+    fetch('/data/rockets/index.json')
+      .then(r => r.json())
+      .then(data => {
+        const stats = {}
+        for (const r of (data.rockets || [])) {
+          stats[r.slug] = { total: r.total, successRate: r.successRate, thisYear: r.thisYear }
+        }
+        setRocketStats(stats)
+      })
+      .catch(() => {})
   }, [])
 
   const nextLaunch = useMemo(() => {
@@ -534,7 +645,7 @@ export default function LaunchDashboard({ previewArticles = [] }) {
         </div>
       )}
       {selectedLaunch && (
-        <LaunchModal launch={selectedLaunch} onClose={() => setSelectedLaunch(null)} previewArticles={previewArticles} />
+        <LaunchModal launch={selectedLaunch} onClose={() => setSelectedLaunch(null)} previewArticles={previewArticles} rocketStats={rocketStats} />
       )}
     </div>
   )

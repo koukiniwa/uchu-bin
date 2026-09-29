@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-29T11:09:25.701Z",
+  "updated": "2026-09-29T13:03:03.997Z",
   "launches": [
     {
       "id": "18441371-8b2e-457c-afb5-1ec1b11ab630",
@@ -13,7 +13,35 @@
       "provider": "SpaceX",
       "country": "US",
       "pad": "Cape Canaveral SFS, FL, USA",
-      "status": "Go"
+      "padDetail": "ケープカナベラル宇宙軍基地 SLC-40",
+      "orbit": "低軌道（LEO）",
+      "timezone": "America/New_York",
+      "descriptionEn": "SpaceX Crew-13 is the thirteenth crewed operational flight of a Crew Dragon spacecraft to the International Space Station as part of NASA's Commercial Crew Program.",
+      "status": "Go",
+      "descriptionJa": "SpaceX Crew-13は、NASAの商業クルー輸送プログラムの一環として実施されるISS長期滞在ミッション。Crew Dragonカプセルで4名の宇宙飛行士がISSに向かう。",
+      "crew": [
+        {
+          "name": "ジェシカ・ワトキンス（Jessica Watkins）",
+          "role": "船長",
+          "agency": "NASA"
+        },
+        {
+          "name": "ルーク・デラニー（Luke Delaney）",
+          "role": "パイロット",
+          "agency": "NASA"
+        },
+        {
+          "name": "ジョシュア・クトリク（Joshua Kutryk）",
+          "role": "ミッションスペシャリスト",
+          "agency": "CSA"
+        },
+        {
+          "name": "セルゲイ・テテリャトニコフ（Sergey Teteryatnikov）",
+          "role": "ミッションスペシャリスト",
+          "agency": "ロスコスモス"
+        }
+      ],
+      "notes": "ISS到着後、第75次長期滞在（Expedition 75）のメンバーとなる。"
     },
     {
       "id": "67213393-7983-4c06-8b44-b8c785a5ed79",
@@ -27,7 +55,12 @@
       "provider": "SpaceX",
       "country": "",
       "pad": "Vandenberg SFB, CA, USA",
-      "status": "Go"
+      "padDetail": "ヴァンデンバーグ宇宙軍基地 SLC-4E",
+      "orbit": "太陽同期軌道（SSO）",
+      "timezone": "America/Los_Angeles",
+      "descriptionEn": "Dedicated rideshare flight to a sun-synchronous orbit with dozens of small microsatellites and nanosatellites for commercial and government customers.",
+      "status": "Go",
+      "descriptionJa": "商業顧客および政府顧客向けの数十個の小型マイクロサテライトおよびナノサテライトを搭載して太陽同期軌道への専用ライドシェアフライト。"
     },
     {
       "id": "4651fd8a-43de-4166-bf8f-c168b3bd1d2c",
@@ -41,7 +74,13 @@
       "provider": "SpaceX",
       "country": "US",
       "pad": "Kennedy Space Center, FL, USA",
-      "status": "Go"
+      "padDetail": "ケネディ宇宙センター LC-39A",
+      "orbit": "Unknown",
+      "timezone": "America/New_York",
+      "descriptionEn": "Classified payload for the US National Reconnaissance Office.",
+      "status": "Go",
+      "descriptionJa": "米国家偵察局（NRO）向けの機密ミッション。ペイロードの内容は非公開。Falcon Heavy 14回目の飛行。",
+      "notes": "同日にCrew-13も打ち上げ予定。サイドブースター2本はケープカナベラル宇宙軍基地の着陸帯に戻る予定。"
     },
     {
       "id": "6b89cfc8-8880-4b5b-856c-0e547d45b639",
@@ -55,7 +94,12 @@
       "provider": "HyImpulse",
       "country": "",
       "pad": "SaxaVord Spaceport",
-      "status": "TBD"
+      "padDetail": "Unknown Pad",
+      "orbit": "弾道飛行",
+      "timezone": "Europe/London",
+      "descriptionEn": "Test flight of HyImpulse's SR75 sounding rocket.",
+      "status": "TBD",
+      "descriptionJa": "HyImpulseのSR75探査ロケットの試験飛行。"
     },
     {
       "id": "da43dc2c-00af-4cc1-8ef1-90a60b2eb9e5",
@@ -69,7 +113,12 @@
       "provider": "SpaceX",
       "country": "",
       "pad": "Vandenberg SFB, CA, USA",
-      "status": "TBC"
+      "padDetail": "ヴァンデンバーグ宇宙軍基地 SLC-4E",
+      "orbit": "極軌道",
+      "timezone": "America/Los_Angeles",
+      "descriptionEn": "Tranche 1 Transport Layer A is one of six missions by the United States Space Force Space Development Agency (SDA) for the Proliferated Warfighter Space Architecture (PWSA) Tranche 1 Transport Layer constellation, which will provide assured, resilient, low-latency military data and connectivity worldwide to the full range of warfighter platforms from Low Earth Orbit satellites.\r\n\r\nThe constellation will be interconnected with Optical Inter-Satellite Links (OISLs) which have significantly increased performance over existing radio frequency crosslinks. It is expected to operate over Ka band, have stereo coverage and be dynamically networked for simpler hand-offs, greater bandwidth and fault tolerance.\r\n\r\nThis launch carries 21 satellites manufactured by Northrop Grumman.",
+      "status": "TBC",
+      "descriptionJa": "Tranche 1 Transport Layer Aは、United States Space Force Space Development Agency (SDA)がProlerated Warfighter Space Architecture (PWSA) Tranche 1 Transport Layer衛星群向けに実施する6つのミッションの1つであり、Low Earth Orbit衛星から世界中の各種の戦闘員プラットフォームに対して確実で耐障害性を備えた低遅延の軍事データと通信接続を提供する。\n\n衛星群はOptical Inter-Satellite Links (OISLs)で相互接続され、既存の無線周波数クロスリンクより大幅に性能が向上している。Ka帯で運用され、ステレオカバレッジを有し、より簡単なハンドオフ、より大きな帯域幅、および耐障害性のために動的にネットワーク化されることが期待されている。\n\n本打ち上げはNorthrop Grummanによって製造された21個の衛星を搭載している。"
     },
     {
       "id": "e0741415-6c63-4236-9736-24a6c04485bc",
@@ -83,7 +132,12 @@
       "provider": "Korea Aerospace Research Institute",
       "country": "KR",
       "pad": "Naro Space Center, South Korea",
-      "status": "Go"
+      "padDetail": "羅老宇宙センター",
+      "orbit": "太陽同期軌道（SSO）",
+      "timezone": "Asia/Seoul",
+      "descriptionEn": "NeonSat-2 to 6 are part of the South Korean government's Earth observation micro-satellite constellation NeonSat (New-space Earth Observation Satellite). The NeonSat constellation is the first satellite system developed by the government using a mass-production approach for precise monitoring of the Korean Peninsula.",
+      "status": "Go",
+      "descriptionJa": "NeonSat-2〜6は、韓国政府の地球観測マイクロ衛星コンステレーションNeonSat（New-space Earth Observation Satellite）の一部である。NeonSatコンステレーションは、朝鮮半島の正確な監視のために政府が大量生産アプローチを用いて開発した初の衛星システムである。"
     },
     {
       "id": "97c6f5e1-299e-4652-b72d-9618ac047076",
@@ -97,21 +151,30 @@
       "provider": "SpaceX",
       "country": "",
       "pad": "Vandenberg SFB, CA, USA",
-      "status": "Go"
+      "padDetail": "ヴァンデンバーグ宇宙軍基地 SLC-4E",
+      "orbit": "低軌道（LEO）",
+      "timezone": "America/Los_Angeles",
+      "descriptionEn": "A batch of 27 satellites for the Starlink mega-constellation - SpaceX's project for space-based Internet communication system.",
+      "status": "Go",
+      "descriptionJa": "Starlink巨大衛星群用の27基の衛星のバッチ。これはSpaceXの宇宙ベースのインターネット通信システムプロジェクトである。"
     },
     {
       "id": "20d5676e-111b-40e3-8923-b218c3665ca2",
       "name": "GSLV Mk II | IRNSS-1L (NVS-03)",
       "rocket": "GSLV Mk II",
       "mission": "IRNSS-1L (NVS-03)",
-      "date": "2026-10-15",
+      "date": "2026-10-13",
       "month": 10,
       "time": null,
       "tentative": true,
       "provider": "Indian Space Research Organization",
       "country": "IN",
       "pad": "Satish Dhawan Space Centre, India",
-      "status": "TBD"
+      "padDetail": "サティッシュ・ダワン宇宙センター 第2射点",
+      "orbit": "静止遷移軌道（GTO）",
+      "timezone": "Asia/Kolkata",
+      "descriptionEn": "This is a replacement satellite for the Indian Regional Navigation Satellite System. The constellation will provide India with an alternative to GPS and will be used for military and civilian use. Located at a geosynchronous orbit, the system will be operated by the Indian government.",
+      "status": "TBC"
     },
     {
       "id": "69ebbcd2-b257-4070-9ef9-21e7d1f8a883",
@@ -125,6 +188,10 @@
       "provider": "Mitsubishi Heavy Industries",
       "country": "JP",
       "pad": "Tanegashima Space Center, Japan",
+      "padDetail": "種子島宇宙センター 吉信射点",
+      "orbit": "火星軌道",
+      "timezone": "Asia/Tokyo",
+      "descriptionEn": "MMX is a Japanese scientific mission to land on Phobos, one of the two moons of Mars, to collect samples before bringing them back to Earth.\r\n\r\nThe mission includes a small French/German rover to explore the surface of Phobos.",
       "status": "Go"
     },
     {
@@ -139,6 +206,10 @@
       "provider": "Arianespace",
       "country": "FR",
       "pad": "Guiana Space Centre, French Guiana",
+      "padDetail": "Ariane Launch Area 4",
+      "orbit": "低軌道（LEO）",
+      "timezone": "America/Cayenne",
+      "descriptionEn": "Amazon Leo, formerly known as Project Kuiper, is a mega constellation of satellites in Low Earth Orbit that will offer broadband internet access, this constellation will be managed by Kuiper Systems LLC, a subsidiary of Amazon. This constellation is planned to be composed of 3,276 satellites. The satellites are projected to be placed in 98 orbital planes in three orbital layers, one at 590 km, 610 km and 630 km altitude.\r\n\r\n35-40 satellites will be carried on each Ariane 6 launch.",
       "status": "TBD"
     },
     {
@@ -153,6 +224,10 @@
       "provider": "China Aerospace Science and Technology Corporation",
       "country": "CN",
       "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
+      "padDetail": "Long March 12 series Pad",
+      "orbit": "低軌道（LEO）",
+      "timezone": "Asia/Shanghai",
+      "descriptionEn": "Second test launch of CASC/SAST’s Long March 12A rocket. Payload identities are TBD.",
       "status": "TBD"
     },
     {
@@ -167,6 +242,10 @@
       "provider": "Indian Space Research Organization",
       "country": "IN",
       "pad": "Satish Dhawan Space Centre, India",
+      "padDetail": "サティッシュ・ダワン宇宙センター 第1射点",
+      "orbit": "低軌道（LEO）",
+      "timezone": "Asia/Kolkata",
+      "descriptionEn": "Ride-share launch of multiple satellites, including the in-orbit refueling demonstration satellite AayulSAT-1A from OrbitAID Aerospace. Other payload's identities TBD.",
       "status": "TBD"
     },
     {
@@ -181,6 +260,10 @@
       "provider": "United Launch Alliance",
       "country": "",
       "pad": "Cape Canaveral SFS, FL, USA",
+      "padDetail": "Space Launch Complex 41",
+      "orbit": "低軌道（LEO）",
+      "timezone": "America/New_York",
+      "descriptionEn": "Amazon Leo, formerly known as Project Kuiper, is a mega constellation of satellites in Low Earth Orbit that will offer broadband internet access, this constellation will be managed by Kuiper Systems LLC, a subsidiary of Amazon. This constellation is planned to be composed of 3,276 satellites. The satellites are projected to be placed in 98 orbital planes in three orbital layers, one at 590 km, 610 km and 630 km altitude.\r\n\r\n45 satellites will be carried on each Vulcan launch.",
       "status": "TBD"
     },
     {
@@ -195,6 +278,10 @@
       "provider": "Russian Federal Space Agency (ROSCOSMOS)",
       "country": "RU",
       "pad": "Baikonur Cosmodrome, Republic of Kazakhstan",
+      "padDetail": "31/6",
+      "orbit": "低軌道（LEO）",
+      "timezone": "Asia/Qyzylorda",
+      "descriptionEn": "Progress resupply mission to the International Space Station.",
       "status": "TBC"
     },
     {
@@ -209,6 +296,10 @@
       "provider": "Arianespace",
       "country": "FR",
       "pad": "Guiana Space Centre, French Guiana",
+      "padDetail": "Ariane Launch Area 4",
+      "orbit": "太陽同期軌道（SSO）",
+      "timezone": "America/Cayenne",
+      "descriptionEn": "Second of EUMETSAT's second generation of Metop weather satellites.",
       "status": "TBD"
     },
     {
@@ -223,6 +314,10 @@
       "provider": "SpaceX",
       "country": "US",
       "pad": "Kennedy Space Center, FL, USA",
+      "padDetail": "ケネディ宇宙センター LC-39A",
+      "orbit": "月軌道",
+      "timezone": "America/New_York",
+      "descriptionEn": "Demonstration flight of the Astrobotic Griffin lander and its engines, initially contracted for the cancelled NASA VIPER (Volatiles Investigating Polar Exploration Rover) mission. The vacated payload spot will now host the FLIP (FLEX Lunar Innovation Platform) lunar rover from Astrolab.",
       "status": "TBD"
     },
     {
@@ -237,6 +332,10 @@
       "provider": "Innospace",
       "country": "KR",
       "pad": "Alcântara Space Center, Federative Republic of Brazil",
+      "padDetail": "HANBIT Pad",
+      "orbit": "低軌道（LEO）",
+      "timezone": "America/Fortaleza",
+      "descriptionEn": "Innospace's first in-house test satellite, 'InnoSat-0', will test various technologies for future development of satellites by Innospace themselves. The satellite will be deployed using Korean company SpaceBey’s specialized deployer.",
       "status": "TBD"
     },
     {
@@ -251,6 +350,10 @@
       "provider": "Indian Space Research Organization",
       "country": "IN",
       "pad": "Satish Dhawan Space Centre, India",
+      "padDetail": "サティッシュ・ダワン宇宙センター 第2射点",
+      "orbit": "低軌道（LEO）",
+      "timezone": "Asia/Kolkata",
+      "descriptionEn": "First uncrewed orbital test flight of the Gaganyaan capsule.",
       "status": "TBD"
     },
     {
@@ -265,6 +368,10 @@
       "provider": "Indian Space Research Organization",
       "country": "IN",
       "pad": "Satish Dhawan Space Centre, India",
+      "padDetail": "サティッシュ・ダワン宇宙センター 第1射点",
+      "orbit": "静止遷移軌道（GTO）",
+      "timezone": "Asia/Kolkata",
+      "descriptionEn": "TDS-01 (Technology Demonstration Satellite-01) is an Indian geostationary orbit technology demonstration satellite carrying payloads for the Indian Space Research Organisation (ISRO)’s Institute of Plasma Research, Gandhinagar and the CSIR-CEERI, Pilani. \r\n\r\nPayloads to be tested included an internally developed 300 mN electric powered thrusters, atomic clocks, travelling wave tube amplifiers (TWTA) & a quantum communication suite (QuTDS).",
       "status": "TBD"
     },
     {
@@ -279,6 +386,10 @@
       "provider": "United Launch Alliance",
       "country": "",
       "pad": "Cape Canaveral SFS, FL, USA",
+      "padDetail": "Space Launch Complex 41",
+      "orbit": "低軌道（LEO）",
+      "timezone": "America/New_York",
+      "descriptionEn": "Starliner-1 is the first operational flight of a Starliner spacecraft to the International Space Station as part of NASA's Commercial Crew Program. Due to problems with the Starliner spacecraft's RCS attitude control system during the Crew Flight Test mission in 2024, this mission has been re-scoped to not carry a crew by NASA. It will instead deliver necessary cargo to the orbital laboratory and allow in-flight validation of the system upgrades implemented following the Crew Flight Test mission last year.",
       "status": "TBD"
     }
   ],
