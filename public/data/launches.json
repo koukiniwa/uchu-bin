@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-28T23:45:19.092Z",
+  "updated": "2026-09-29T04:33:42.785Z",
   "launches": [
     {
       "id": "18441371-8b2e-457c-afb5-1ec1b11ab630",
@@ -300,16 +300,6 @@
       "date": "2026-09-26",
       "country": "",
       "provider": "SpaceX",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "9e24bef7-c44b-4fdc-ba52-68545ce9457e",
-      "rocket": "Electron",
-      "mission": "Owlright, Owlright, Owlright (StriX Launch 13)",
-      "date": "2026-09-26",
-      "country": "US",
-      "provider": "Rocket Lab",
       "result": "success",
       "resultLabel": "成功"
     }
