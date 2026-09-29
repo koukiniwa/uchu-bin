@@ -203,13 +203,12 @@ function LaunchModal({ launch, onClose, previewArticles = [] }) {
   const mission = launch.mission && launch.mission !== 'Unknown Payload' ? launch.mission : null
   const pad = shortenPad(launch.pad)
 
-  // 予定記事があるかチェック（ミッション名 or ロケット名でslugに含まれるか）
+  // 予定記事があるかチェック（ミッション名でのみマッチ）
   const missionSlug = (launch.mission || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')
-  const rocketSlug = (launch.rocket || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')
   const previewArticle = previewArticles.find(a => {
+    if (!missionSlug || missionSlug.length < 3) return false
     const s = a.slug.toLowerCase()
-    return (missionSlug && missionSlug.length > 2 && s.includes(missionSlug)) ||
-           (s.includes('preview') && rocketSlug && s.includes(rocketSlug))
+    return s.includes('preview') && s.includes(missionSlug)
   })
 
   useEffect(() => {
