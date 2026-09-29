@@ -132,23 +132,32 @@ export async function generateMetadata({ params }) {
   const image = post.image ? `${baseUrl}${post.image}` : `${baseUrl}/icon-512.png`
   const rocketKw = extractRocketKeywords(post.title)
   const keywords = ['宇宙便', post.category, ...rocketKw, 'ロケット', '打ち上げ', '宇宙ニュース'].filter((v, i, a) => a.indexOf(v) === i)
+  // preview記事: タイトルに最新日時を動的に入れる
+  let title = post.title
+  if (post.type === 'preview') {
+    const ld = getLaunchByMission(decodeURIComponent(params.slug))
+    if (ld) {
+      const lj = formatLaunchJST(ld)
+      if (lj) title = title.replace(/\d+月\d+日\s*\d+:\d+/, `${lj.shortDate.replace('（', ' ').replace('）', '')} ${lj.timeStr.replace(' JST', '')}`)
+    }
+  }
   return {
-    title: `${post.title} - 宇宙便`,
+    title: `${title} - 宇宙便`,
     description: post.description,
     keywords,
     openGraph: {
-      title: `${post.title} - 宇宙便`,
+      title: `${title} - 宇宙便`,
       description: post.description,
       url,
       siteName: '宇宙便',
       type: 'article',
       locale: 'ja_JP',
       publishedTime: post.date,
-      images: [{ url: image, width: 1200, height: 630, alt: post.title }],
+      images: [{ url: image, width: 1200, height: 630, alt: title }],
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${post.title} - 宇宙便`,
+      title: `${title} - 宇宙便`,
       description: post.description,
       images: [image],
     },
@@ -273,25 +282,29 @@ export default function BlogPost({ params }) {
           )}
         </div>
 
-        {/* タイトル */}
+        {/* タイトル（preview記事は動的日時を反映） */}
         <h1 className="post-title" style={{
           fontSize: '28px', fontWeight: 800, color: '#111111',
           lineHeight: 1.6, margin: '0 0 16px 0',
         }}>
-          {post.title}
+          {post.type === 'preview' && launchJST
+            ? post.title.replace(/\d+月\d+日\s*\d+:\d+/, `${launchJST.shortDate.replace('（', ' ').replace('）', '')} ${launchJST.timeStr.replace(' JST', '')}`)
+            : post.title}
         </h1>
 
-        {/* 日付 */}
+        {/* 日付（preview記事は打ち上げ予定日を表示） */}
         <div style={{
           fontSize: '12px', color: '#999999',
           borderBottom: '1px solid #e0e0e0', paddingBottom: '20px',
         }}>
-          {(() => {
-            if (!post.date) return ''
-            const d = new Date(post.date)
-            if (isNaN(d)) return post.date.slice(0, 10)
-            return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日（${WEEKDAYS[d.getDay()]}）`
-          })()}
+          {post.type === 'preview' && launchJST
+            ? `打ち上げ予定: ${launchJST.dateStr} ${launchJST.timeStr}`
+            : (() => {
+                if (!post.date) return ''
+                const d = new Date(post.date)
+                if (isNaN(d)) return post.date.slice(0, 10)
+                return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日（${WEEKDAYS[d.getDay()]}）`
+              })()}
         </div>
       </div>
 
