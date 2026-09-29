@@ -8,6 +8,46 @@ import TweetLoader from '@/app/TweetLoader'
 
 const TWEET_REGEX = /^https?:\/\/(twitter\.com|x\.com)\/\S+\/status\/\d+/
 
+// 予定記事用: launches.jsonからミッション名で打ち上げデータを取得
+function getLaunchByMission(slug) {
+  try {
+    const data = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'public', 'data', 'launches.json'), 'utf-8'))
+    // slugからミッション名を推測（例: crew-13-launch-preview → crew-13）
+    const slugParts = slug.replace(/.*?-preview-?/, '').replace(/-launch.*|falcon.*|electron.*|h3.*/g, '')
+    // slugに含まれるミッション名でマッチ
+    return (data.launches || []).find(l => {
+      if (!l.mission) return false
+      const mSlug = l.mission.toLowerCase().replace(/[^a-z0-9]+/g, '-')
+      return slug.includes(mSlug) && mSlug.length >= 3
+    })
+  } catch { return null }
+}
+
+// UTC日時をJST表示用に変換
+function formatLaunchJST(launch) {
+  if (!launch || !launch.date) return null
+  const hasTime = launch.time && !launch.tentative
+  const utc = hasTime
+    ? new Date(launch.date + 'T' + launch.time + ':00Z')
+    : new Date(launch.date + 'T00:00:00Z')
+  const jst = new Date(utc.getTime() + 9 * 3600000)
+  const y = jst.getUTCFullYear()
+  const m = jst.getUTCMonth() + 1
+  const d = jst.getUTCDate()
+  const dow = WEEKDAYS[new Date(Date.UTC(y, jst.getUTCMonth(), d)).getUTCDay()]
+  const h = String(jst.getUTCHours()).padStart(2, '0')
+  const min = String(jst.getUTCMinutes()).padStart(2, '0')
+  return {
+    dateStr: `${y}年${m}月${d}日（${dow}）`,
+    timeStr: hasTime ? `${h}:${min} JST` : '時刻未定',
+    shortDate: `${m}月${d}日（${dow}）`,
+    shortTime: hasTime ? `${h}:${min}` : '',
+    pad: launch.pad || '',
+    status: launch.status || '',
+    tentative: launch.tentative,
+  }
+}
+
 function AutoTweet({ children }) {
   const text = typeof children === 'string' ? children.trim() : ''
   if (TWEET_REGEX.test(text)) {
@@ -126,6 +166,10 @@ export default function BlogPost({ params }) {
     .filter(p => p.slug !== currentSlug && p.category === post.category)
     .slice(0, 3)
 
+  // 予定記事: launches.jsonから最新の日時を取得
+  const launchData = post.type === 'preview' ? getLaunchByMission(currentSlug) : null
+  const launchJST = launchData ? formatLaunchJST(launchData) : null
+
   const baseUrl = 'https://www.uchu-bin.jp'
   const articleUrl = `${baseUrl}/blog/${params.slug}`
   const articleSchema = {
@@ -184,15 +228,22 @@ export default function BlogPost({ params }) {
       {/* 予定記事バナー */}
       {post.type === 'preview' && (
         <div style={{
-          margin: '0 0 20px 0', padding: '14px 18px',
+          margin: '0 0 20px 0', padding: '16px 18px',
           background: 'linear-gradient(135deg, #e3f2fd, #bbdefb)',
           borderRadius: '8px', borderLeft: '4px solid #1565c0',
         }}>
-          <div style={{ fontSize: '13px', fontWeight: 700, color: '#0d47a1', marginBottom: '4px' }}>
+          <div style={{ fontSize: '13px', fontWeight: 700, color: '#0d47a1', marginBottom: '6px' }}>
             打ち上げ予定の解説記事
           </div>
+          {launchJST ? (
+            <div style={{ fontSize: '13px', color: '#0d47a1', marginBottom: '4px' }}>
+              <strong>最新の予定: {launchJST.shortDate} {launchJST.timeStr}</strong>
+              {launchJST.status === 'Go' && <span style={{ marginLeft: '8px', fontSize: '11px', color: '#2e7d32', fontWeight: 700 }}>✅ 確定</span>}
+              {launchJST.tentative && <span style={{ marginLeft: '8px', fontSize: '11px', color: '#e65100', fontWeight: 700 }}>⏳ 暫定</span>}
+            </div>
+          ) : null}
           <div style={{ fontSize: '12px', color: '#1565c0' }}>
-            この記事は打ち上げ前の情報です。日時や内容は変更される可能性があります。
+            日時は変更される可能性があります。最新情報は打ち上げスケジュールで自動更新されます。
           </div>
         </div>
       )}
