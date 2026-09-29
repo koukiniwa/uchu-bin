@@ -203,11 +203,17 @@ function LaunchModal({ launch, onClose, previewArticles = [] }) {
   const mission = launch.mission && launch.mission !== 'Unknown Payload' ? launch.mission : null
   const pad = shortenPad(launch.pad)
 
-  // 予定記事があるかチェック（ミッション名でのみマッチ）
+  // 予定記事があるかチェック（ミッション名でマッチ）
   const missionSlug = (launch.mission || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')
   const previewArticle = previewArticles.find(a => {
     if (!missionSlug || missionSlug.length < 3) return false
-    const s = a.slug.toLowerCase()
+    const s = (a.slug || '').toLowerCase()
+    // 手動記事: slugにpreviewとミッション名を含む
+    // 自動記事: missionNameでマッチ or slugがミッション名スラッグと一致
+    if (a.missionName) {
+      const aMSlug = a.missionName.toLowerCase().replace(/[^a-z0-9]+/g, '-')
+      return aMSlug === missionSlug
+    }
     return s.includes('preview') && s.includes(missionSlug)
   })
 
@@ -283,7 +289,7 @@ function LaunchModal({ launch, onClose, previewArticles = [] }) {
             </a>
           )}
           {previewArticle && (
-            <a href={`/blog/${previewArticle.slug}`} style={{
+            <a href={previewArticle.url || `/blog/${previewArticle.slug}`} style={{
               display: 'block', textAlign: 'center', marginTop: '10px',
               background: '#1a2744', color: '#fff', padding: '10px',
               borderRadius: '6px', textDecoration: 'none', fontWeight: 700, fontSize: '13px',

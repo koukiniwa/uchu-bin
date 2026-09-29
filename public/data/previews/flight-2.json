@@ -1,0 +1,31 @@
+{
+  "slug": "flight-2",
+  "launchId": "6b89cfc8-8880-4b5b-856c-0e547d45b639",
+  "missionName": "Flight 2",
+  "rocketName": "SR75",
+  "rocketJa": "SR75",
+  "padName": "Unknown Pad",
+  "padDetail": "Unknown Pad",
+  "padLocation": "SaxaVord Spaceport",
+  "countryCode": "GBR",
+  "countryJa": "GBR",
+  "missionDescription": "Test flight of HyImpulse's SR75 sounding rocket.",
+  "missionType": "Test Flight",
+  "orbit": "Suborbital",
+  "image": "/images/library/rocketlaunch_001.jpg",
+  "net": "2026-10-05T00:00:00Z",
+  "status": "To Be Determined",
+  "tentative": false,
+  "jst": {
+    "dateStr": "10月5日（月）",
+    "timeStr": "09:00",
+    "full": "2026年10月5日（月）09:00 JST"
+  },
+  "vidURLs": [],
+  "provider": "HyImpulse",
+  "title": "【日本時間】Flight 2 打ち上げ予定｜10月5日（月） 09:00 SR75",
+  "description": "Flight 2の打ち上げ予定を日本時間で解説。SR75ロケットでUnknown Padから打ち上げ。",
+  "category": "ロケット",
+  "generated": "2026-09-29T11:59:42.906Z",
+  "firstGenerated": "2026-09-29T11:59:42.906Z"
+}

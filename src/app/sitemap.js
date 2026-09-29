@@ -1,8 +1,22 @@
+import fs from 'fs'
+import path from 'path'
 import { getAllPosts } from '@/lib/posts'
 
 export default function sitemap() {
   const posts = getAllPosts()
   const baseUrl = 'https://www.uchu-bin.jp'
+
+  // 予定記事のURL
+  let previewUrls = []
+  try {
+    const index = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'public', 'data', 'previews', 'index.json'), 'utf-8'))
+    previewUrls = (index.previews || []).map(p => ({
+      url: `${baseUrl}/blog/preview/${p.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 0.8,
+    }))
+  } catch {}
 
   const postUrls = posts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
@@ -68,6 +82,7 @@ export default function sitemap() {
       changeFrequency: 'weekly',
       priority: 0.7,
     })),
+    ...previewUrls,
     ...postUrls,
   ]
 }

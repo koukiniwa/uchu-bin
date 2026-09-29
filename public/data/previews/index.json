@@ -1,0 +1,49 @@
+{
+  "updated": "2026-09-29T11:59:42.922Z",
+  "previews": [
+    {
+      "slug": "transporter-18-dedicated-sso-rideshare",
+      "title": "【日本時間】Transporter 18 (Dedicated SSO Rideshare) 打ち上げ予定｜10月2日（金） 03:18 ファルコン9",
+      "missionName": "Transporter 18 (Dedicated SSO Rideshare)",
+      "rocketName": "Falcon 9",
+      "rocketJa": "ファルコン9",
+      "net": "2026-10-01T18:18:00Z",
+      "status": "Go for Launch",
+      "image": "/images/library/falcon9_001.jpg",
+      "category": "ロケット"
+    },
+    {
+      "slug": "nrol-97",
+      "title": "【日本時間】NROL-97 打ち上げ予定｜10月2日（金） 12:53 ファルコンヘビー",
+      "missionName": "NROL-97",
+      "rocketName": "Falcon Heavy",
+      "rocketJa": "ファルコンヘビー",
+      "net": "2026-10-02T03:53:00Z",
+      "status": "Go for Launch",
+      "image": "/images/library/falconheavy_001.jpg",
+      "category": "ロケット"
+    },
+    {
+      "slug": "flight-2",
+      "title": "【日本時間】Flight 2 打ち上げ予定｜10月5日（月） 09:00 SR75",
+      "missionName": "Flight 2",
+      "rocketName": "SR75",
+      "rocketJa": "SR75",
+      "net": "2026-10-05T00:00:00Z",
+      "status": "To Be Determined",
+      "image": "/images/library/rocketlaunch_001.jpg",
+      "category": "ロケット"
+    },
+    {
+      "slug": "sda-tranche-1-transport-layer-a",
+      "title": "【日本時間】SDA Tranche 1 Transport Layer A 打ち上げ予定｜10月5日（月） 17:06 ファルコン9",
+      "missionName": "SDA Tranche 1 Transport Layer A",
+      "rocketName": "Falcon 9",
+      "rocketJa": "ファルコン9",
+      "net": "2026-10-05T08:06:00Z",
+      "status": "To Be Confirmed",
+      "image": "/images/library/falcon9_001.jpg",
+      "category": "ロケット"
+    }
+  ]
+}

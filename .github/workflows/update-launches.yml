@@ -31,11 +31,15 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: node scripts/generate-featured.js
 
+      - name: 予定記事生成
+        run: node scripts/generate-preview-articles.js
+        continue-on-error: true
+
       - name: 変更があればコミット
         run: |
           git config user.name "宇宙便 Bot"
           git config user.email "bot@uchu-bin.jp"
-          git add public/data/launches.json public/data/featured.json
+          git add public/data/launches.json public/data/featured.json public/data/previews/
           git diff --cached --quiet || git commit -m "打ち上げ予定更新 $(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M')"
           git pull --rebase origin main
           git push
