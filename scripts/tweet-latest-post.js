@@ -69,8 +69,19 @@ async function main() {
     return
   }
 
-  // 未ツイートの中で最初の1件をツイート
-  const file = files[0]
+  // 予定記事(type: preview)を除外し、未ツイートの中で最初の1件をツイート
+  const candidates = files.filter(f => {
+    const c = fs.readFileSync(path.join(POSTS_DIR, f), 'utf-8')
+    const m = parseFrontmatter(c)
+    return m.type !== 'preview'
+  })
+
+  if (candidates.length === 0) {
+    console.log('未ツイートの本日記事はありません（予定記事を除外）')
+    return
+  }
+
+  const file = candidates[0]
   const content = fs.readFileSync(path.join(POSTS_DIR, file), 'utf-8')
   const meta = parseFrontmatter(content)
   const slug = file.replace(/\.md$/, '')

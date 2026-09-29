@@ -20,6 +20,7 @@ export function getAllPosts() {
         description: data.description || '',
         category: data.category || '未分類',
         image: data.image || '',
+        type: data.type || '',
       }
     })
     .sort((a, b) => {

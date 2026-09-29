@@ -181,10 +181,26 @@ export default function BlogPost({ params }) {
         ← 記事一覧へ
       </Link>
 
+      {/* 予定記事バナー */}
+      {post.type === 'preview' && (
+        <div style={{
+          margin: '0 0 20px 0', padding: '14px 18px',
+          background: 'linear-gradient(135deg, #e3f2fd, #bbdefb)',
+          borderRadius: '8px', borderLeft: '4px solid #1565c0',
+        }}>
+          <div style={{ fontSize: '13px', fontWeight: 700, color: '#0d47a1', marginBottom: '4px' }}>
+            打ち上げ予定の解説記事
+          </div>
+          <div style={{ fontSize: '12px', color: '#1565c0' }}>
+            この記事は打ち上げ前の情報です。日時や内容は変更される可能性があります。
+          </div>
+        </div>
+      )}
+
       {/* タイトルエリア */}
       <div style={{ marginBottom: '28px' }}>
         {/* カテゴリバッジ */}
-        <div style={{ marginBottom: '14px' }}>
+        <div style={{ marginBottom: '14px', display: 'flex', gap: '8px', alignItems: 'center' }}>
           <Link
             href={`/?category=${encodeURIComponent(post.category)}`}
             style={{
@@ -195,6 +211,15 @@ export default function BlogPost({ params }) {
           >
             {post.category}
           </Link>
+          {post.type === 'preview' && (
+            <span style={{
+              fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em',
+              color: '#e65100', padding: '3px 10px',
+              border: '1px solid #e65100', borderRadius: '2px',
+            }}>
+              打ち上げ予定
+            </span>
+          )}
         </div>
 
         {/* タイトル */}

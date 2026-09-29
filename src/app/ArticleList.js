@@ -35,6 +35,15 @@ function ArticleCard({ post }) {
           ) : (
             <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #0f1629 0%, #1a2744 100%)' }} />
           )}
+          {post.type === 'preview' && (
+            <span style={{
+              position: 'absolute', top: '8px', left: '8px',
+              fontSize: '10px', fontWeight: 700, color: '#fff',
+              background: '#e65100', padding: '2px 8px', borderRadius: '3px',
+            }}>
+              打ち上げ予定
+            </span>
+          )}
         </div>
         <div style={{ padding: '12px 14px 14px', display: 'flex', flexDirection: 'column', flex: 1 }}>
           <h2 className="card-title" style={{
