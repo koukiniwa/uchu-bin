@@ -21,6 +21,10 @@ function MapCard({ href, img, alt, title, desc }) {
 
 export default function Home() {
   const posts = getAllPosts()
+  // 予定記事のslugとタイトルをLaunchDashboardに渡す
+  const previewArticles = posts
+    .filter(p => p.type === 'preview')
+    .map(p => ({ slug: p.slug, title: p.title }))
   return (
     <div style={{ position: 'relative' }}>
       <div className="sidebar-right">
@@ -51,7 +55,7 @@ export default function Home() {
           LOADING...
         </div>
       }>
-        <LaunchDashboard />
+        <LaunchDashboard previewArticles={previewArticles} />
       </Suspense>
 
       {/* スマホ専用バナー（サイドバー非表示時のみ） */}

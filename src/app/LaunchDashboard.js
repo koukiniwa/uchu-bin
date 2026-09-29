@@ -195,13 +195,22 @@ function shortenPad(pad) {
   return pad
 }
 
-function LaunchModal({ launch, onClose }) {
+function LaunchModal({ launch, onClose, previewArticles = [] }) {
   const [cd, setCd] = useState(null)
   const { dateLong, time, fullDate } = toJST(launch.date, launch.time, launch.tentative)
   const rocketImg = getRocketImage(launch.rocket)
   const country = countryName(launch.country)
   const mission = launch.mission && launch.mission !== 'Unknown Payload' ? launch.mission : null
   const pad = shortenPad(launch.pad)
+
+  // 予定記事があるかチェック（ミッション名 or ロケット名でslugに含まれるか）
+  const missionSlug = (launch.mission || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')
+  const rocketSlug = (launch.rocket || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')
+  const previewArticle = previewArticles.find(a => {
+    const s = a.slug.toLowerCase()
+    return (missionSlug && missionSlug.length > 2 && s.includes(missionSlug)) ||
+           (s.includes('preview') && rocketSlug && s.includes(rocketSlug))
+  })
 
   useEffect(() => {
     if (!fullDate) return
@@ -274,13 +283,22 @@ function LaunchModal({ launch, onClose }) {
               ▶ ライブ配信を見る
             </a>
           )}
+          {previewArticle && (
+            <a href={`/blog/${previewArticle.slug}`} style={{
+              display: 'block', textAlign: 'center', marginTop: '10px',
+              background: '#1a2744', color: '#fff', padding: '10px',
+              borderRadius: '6px', textDecoration: 'none', fontWeight: 700, fontSize: '13px',
+            }}>
+              📄 打ち上げ予定の詳しい解説を読む
+            </a>
+          )}
         </div>
       </div>
     </div>
   )
 }
 
-export default function LaunchDashboard() {
+export default function LaunchDashboard({ previewArticles = [] }) {
   const [launches, setLaunches] = useState([])
   const [recent, setRecent] = useState([])
   const [countdown, setCountdown] = useState(null)
@@ -511,7 +529,7 @@ export default function LaunchDashboard() {
         </div>
       )}
       {selectedLaunch && (
-        <LaunchModal launch={selectedLaunch} onClose={() => setSelectedLaunch(null)} />
+        <LaunchModal launch={selectedLaunch} onClose={() => setSelectedLaunch(null)} previewArticles={previewArticles} />
       )}
     </div>
   )
