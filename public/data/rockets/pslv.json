@@ -37,11 +37,15 @@
       "month": 11,
       "time": null,
       "tentative": true,
-      "provider": "Indian Space Research Organization",
+      "provider": "ISRO（インド宇宙研究機関）",
       "country": "IN",
       "pad": "Satish Dhawan Space Centre, India",
+      "padDetail": "サティッシュ・ダワン宇宙センター 第1射点",
+      "orbit": "静止遷移軌道（GTO）",
+      "timezone": "Asia/Kolkata",
+      "descriptionEn": "TDS-01 (Technology Demonstration Satellite-01) is an Indian geostationary orbit technology demonstration satellite carrying payloads for the Indian Space Research Organisation (ISRO)’s Institute of Plasma Research, Gandhinagar and the CSIR-CEERI, Pilani. \r\n\r\nPayloads to be tested included an internally developed 300 mN electric powered thrusters, atomic clocks, travelling wave tube amplifiers (TWTA) & a quantum communication suite (QuTDS).",
       "status": "TBD"
     }
   ],
-  "updated": "2026-09-26T18:40:23.999Z"
+  "updated": "2026-09-29T20:05:04.500Z"
 }
