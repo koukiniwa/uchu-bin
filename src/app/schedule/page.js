@@ -171,12 +171,12 @@ function statusInfo(status) {
 const year = new Date().getFullYear()
 
 export const metadata = {
-  title: `ロケット打ち上げ予定スケジュール ${year} - 宇宙便`,
-  description: `${year}年のロケット打ち上げ予定を一覧で掲載。SpaceX Falcon 9、H3ロケット、Starship、Long Marchなど世界中の打ち上げスケジュールをリアルタイム更新。`,
+  title: `ロケット打ち上げ予定 ${year}｜日本時間で世界の打ち上げを一覧【宇宙便】`,
+  description: `世界のロケット打ち上げ予定を日本時間で一覧表示。H3、Falcon Heavy、長征など直近の打ち上げを毎日自動更新しています。`,
   keywords: ['ロケット打ち上げ予定', '打ち上げスケジュール', `${year}`, 'H3', 'Starship', 'Falcon 9', 'SpaceX', 'JAXA', '宇宙便'],
   openGraph: {
-    title: `ロケット打ち上げ予定スケジュール ${year} - 宇宙便`,
-    description: `${year}年のロケット打ち上げ予定を一覧で掲載。世界中の打ち上げスケジュールをリアルタイム更新。`,
+    title: `ロケット打ち上げ予定 ${year}｜日本時間で世界の打ち上げを一覧【宇宙便】`,
+    description: `世界のロケット打ち上げ予定を日本時間で一覧表示。H3、Falcon Heavy、長征など直近の打ち上げを毎日自動更新しています。`,
     url: 'https://www.uchu-bin.jp/schedule',
     siteName: '宇宙便',
     type: 'website',
@@ -185,8 +185,8 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: `ロケット打ち上げ予定スケジュール ${year} - 宇宙便`,
-    description: `${year}年のロケット打ち上げ予定を一覧で掲載。世界中の打ち上げスケジュールをリアルタイム更新。`,
+    title: `ロケット打ち上げ予定 ${year}｜日本時間で世界の打ち上げを一覧【宇宙便】`,
+    description: `世界のロケット打ち上げ予定を日本時間で一覧表示。H3、Falcon Heavy、長征など直近の打ち上げを毎日自動更新しています。`,
     images: ['https://www.uchu-bin.jp/images/library/rocketlaunch_001.jpg'],
   },
 }
@@ -262,7 +262,7 @@ export default function SchedulePage() {
         ロケット打ち上げ予定スケジュール
       </h1>
       <p style={{ fontSize: '13px', color: '#888', margin: '0 0 20px 0' }}>
-        世界中のロケット打ち上げ予定を日本時間（JST）で掲載。データは自動更新されます。
+        世界中のロケット打ち上げ予定を日本時間（JST）で一覧。日時が確定か暫定かも、ひと目で分かります。データは自動更新。
       </p>
 
       {/* 打ち上げ予定一覧 */}
