@@ -117,13 +117,18 @@
       "month": 10,
       "time": "19:41",
       "tentative": false,
-      "provider": "Mitsubishi Heavy Industries",
+      "provider": "三菱重工業",
       "country": "JP",
       "pad": "Tanegashima Space Center, Japan",
-      "status": "Go"
+      "padDetail": "種子島宇宙センター 吉信射点",
+      "orbit": "火星軌道",
+      "timezone": "Asia/Tokyo",
+      "descriptionEn": "MMX is a Japanese scientific mission to land on Phobos, one of the two moons of Mars, to collect samples before bringing them back to Earth.\r\n\r\nThe mission includes a small French/German rover to explore the surface of Phobos.",
+      "status": "Go",
+      "descriptionJa": "MMXは、火星の2つの衛星の1つであるPhobosに着陸し、サンプルを採集してから地球に持ち帰るための日本の科学ミッションです。\n\nこのミッションには、Phobosの表面を探査するためのフランス/ドイツの小型ローバーが含まれています。"
     }
   ],
-  "updated": "2026-09-27T19:10:56.893Z",
+  "updated": "2026-09-30T20:14:15.134Z",
   "_launches": [
     {
       "id": "b89ab080-66c3-4831-85a9-38d85da71d30",

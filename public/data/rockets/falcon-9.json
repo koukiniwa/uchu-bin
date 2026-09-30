@@ -216,7 +216,35 @@
       "provider": "SpaceX",
       "country": "US",
       "pad": "Cape Canaveral SFS, FL, USA",
-      "status": "Go"
+      "padDetail": "ケープカナベラル宇宙軍基地 SLC-40",
+      "orbit": "低軌道（LEO）",
+      "timezone": "America/New_York",
+      "descriptionEn": "SpaceX Crew-13 is the thirteenth crewed operational flight of a Crew Dragon spacecraft to the International Space Station as part of NASA's Commercial Crew Program.",
+      "status": "Go",
+      "descriptionJa": "SpaceX Crew-13は、NASAの商業クルー輸送プログラムの一環として実施されるISS長期滞在ミッション。Crew Dragonカプセルで4名の宇宙飛行士がISSに向かう。",
+      "crew": [
+        {
+          "name": "ジェシカ・ワトキンス（Jessica Watkins）",
+          "role": "船長",
+          "agency": "NASA"
+        },
+        {
+          "name": "ルーク・デラニー（Luke Delaney）",
+          "role": "パイロット",
+          "agency": "NASA"
+        },
+        {
+          "name": "ジョシュア・クトリク（Joshua Kutryk）",
+          "role": "ミッションスペシャリスト",
+          "agency": "CSA"
+        },
+        {
+          "name": "セルゲイ・テテリャトニコフ（Sergey Teteryatnikov）",
+          "role": "ミッションスペシャリスト",
+          "agency": "ロスコスモス"
+        }
+      ],
+      "notes": "ISS到着後、第75次長期滞在（Expedition 75）のメンバーとなる。"
     },
     {
       "id": "67213393-7983-4c06-8b44-b8c785a5ed79",
@@ -230,7 +258,12 @@
       "provider": "SpaceX",
       "country": "",
       "pad": "Vandenberg SFB, CA, USA",
-      "status": "Go"
+      "padDetail": "ヴァンデンバーグ宇宙軍基地 SLC-4E",
+      "orbit": "太陽同期軌道（SSO）",
+      "timezone": "America/Los_Angeles",
+      "descriptionEn": "Dedicated rideshare flight to a sun-synchronous orbit with dozens of small microsatellites and nanosatellites for commercial and government customers.",
+      "status": "Go",
+      "descriptionJa": "商業顧客および政府顧客向けの数十個の小型マイクロサテライトおよびナノサテライトを搭載して太陽同期軌道への専用ライドシェアフライト。"
     },
     {
       "id": "da43dc2c-00af-4cc1-8ef1-90a60b2eb9e5",
@@ -244,10 +277,15 @@
       "provider": "SpaceX",
       "country": "",
       "pad": "Vandenberg SFB, CA, USA",
-      "status": "TBC"
+      "padDetail": "ヴァンデンバーグ宇宙軍基地 SLC-4E",
+      "orbit": "極軌道",
+      "timezone": "America/Los_Angeles",
+      "descriptionEn": "Tranche 1 Transport Layer A is one of six missions by the United States Space Force Space Development Agency (SDA) for the Proliferated Warfighter Space Architecture (PWSA) Tranche 1 Transport Layer constellation, which will provide assured, resilient, low-latency military data and connectivity worldwide to the full range of warfighter platforms from Low Earth Orbit satellites.\r\n\r\nThe constellation will be interconnected with Optical Inter-Satellite Links (OISLs) which have significantly increased performance over existing radio frequency crosslinks. It is expected to operate over Ka band, have stereo coverage and be dynamically networked for simpler hand-offs, greater bandwidth and fault tolerance.\r\n\r\nThis launch carries 21 satellites manufactured by Northrop Grumman.",
+      "status": "TBC",
+      "descriptionJa": "Tranche 1 Transport Layer Aは、United States Space Force Space Development Agency (SDA)がProlerated Warfighter Space Architecture (PWSA) Tranche 1 Transport Layer衛星群向けに実施する6つのミッションの1つであり、Low Earth Orbit衛星から世界中の各種の戦闘員プラットフォームに対して確実で耐障害性を備えた低遅延の軍事データと通信接続を提供する。\n\n衛星群はOptical Inter-Satellite Links (OISLs)で相互接続され、既存の無線周波数クロスリンクより大幅に性能が向上している。Ka帯で運用され、ステレオカバレッジを有し、より簡単なハンドオフ、より大きな帯域幅、および耐障害性のために動的にネットワーク化されることが期待されている。\n\n本打ち上げはNorthrop Grummanによって製造された21個の衛星を搭載している。"
     }
   ],
-  "updated": "2026-09-27T19:06:34.548Z",
+  "updated": "2026-09-30T20:09:52.197Z",
   "_launches": [
     {
       "id": "153ef8ef-b12b-43f4-a4bf-05b225c0cd37",
