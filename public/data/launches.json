@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-30T15:41:33.757Z",
+  "updated": "2026-09-30T20:35:58.303Z",
   "launches": [
     {
       "id": "18441371-8b2e-457c-afb5-1ec1b11ab630",
@@ -108,8 +108,8 @@
       "mission": "SDA Tranche 1 Transport Layer A",
       "date": "2026-10-05",
       "month": 10,
-      "time": null,
-      "tentative": true,
+      "time": "08:16",
+      "tentative": false,
       "provider": "SpaceX",
       "country": "",
       "pad": "Vandenberg SFB, CA, USA",
@@ -117,7 +117,7 @@
       "orbit": "極軌道",
       "timezone": "America/Los_Angeles",
       "descriptionEn": "Tranche 1 Transport Layer A is one of six missions by the United States Space Force Space Development Agency (SDA) for the Proliferated Warfighter Space Architecture (PWSA) Tranche 1 Transport Layer constellation, which will provide assured, resilient, low-latency military data and connectivity worldwide to the full range of warfighter platforms from Low Earth Orbit satellites.\r\n\r\nThe constellation will be interconnected with Optical Inter-Satellite Links (OISLs) which have significantly increased performance over existing radio frequency crosslinks. It is expected to operate over Ka band, have stereo coverage and be dynamically networked for simpler hand-offs, greater bandwidth and fault tolerance.\r\n\r\nThis launch carries 21 satellites manufactured by Northrop Grumman.",
-      "status": "TBC",
+      "status": "Go",
       "descriptionJa": "Tranche 1 Transport Layer Aは、United States Space Force Space Development Agency (SDA)がProlerated Warfighter Space Architecture (PWSA) Tranche 1 Transport Layer衛星群向けに実施する6つのミッションの1つであり、Low Earth Orbit衛星から世界中の各種の戦闘員プラットフォームに対して確実で耐障害性を備えた低遅延の軍事データと通信接続を提供する。\n\n衛星群はOptical Inter-Satellite Links (OISLs)で相互接続され、既存の無線周波数クロスリンクより大幅に性能が向上している。Ka帯で運用され、ステレオカバレッジを有し、より簡単なハンドオフ、より大きな帯域幅、および耐障害性のために動的にネットワーク化されることが期待されている。\n\n本打ち上げはNorthrop Grummanによって製造された21個の衛星を搭載している。"
     },
     {
@@ -230,6 +230,24 @@
       "orbit": "低軌道（LEO）",
       "timezone": "America/Cayenne",
       "descriptionEn": "Amazon Leo, formerly known as Project Kuiper, is a mega constellation of satellites in Low Earth Orbit that will offer broadband internet access, this constellation will be managed by Kuiper Systems LLC, a subsidiary of Amazon. This constellation is planned to be composed of 3,276 satellites. The satellites are projected to be placed in 98 orbital planes in three orbital layers, one at 590 km, 610 km and 630 km altitude.\r\n\r\n35-40 satellites will be carried on each Ariane 6 launch.",
+      "status": "TBD"
+    },
+    {
+      "id": "3b430f81-0ff1-4d85-8a1a-cef0de326198",
+      "name": "Falcon 9 Block 5 | Bandwagon 5 (Dedicated Mid-Inclination Rideshare)",
+      "rocket": "Falcon 9",
+      "mission": "Bandwagon 5 (Dedicated Mid-Inclination Rideshare)",
+      "date": "2026-10-31",
+      "month": 10,
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Cape Canaveral SFS, FL, USA",
+      "padDetail": "ケープカナベラル宇宙軍基地 SLC-40",
+      "orbit": "低軌道（LEO）",
+      "timezone": "America/New_York",
+      "descriptionEn": "Dedicated rideshare flight to a mid-inclination orbit with dozens of small microsatellites and nanosatellites for commercial and government customers.",
       "status": "TBD"
     },
     {
@@ -374,24 +392,6 @@
       "orbit": "低軌道（LEO）",
       "timezone": "Asia/Kolkata",
       "descriptionEn": "First uncrewed orbital test flight of the Gaganyaan capsule.",
-      "status": "TBD"
-    },
-    {
-      "id": "b5a9bccb-30d7-4af6-8ad1-fabb563be53c",
-      "name": "PSLV-XL | TDS-01",
-      "rocket": "PSLV-XL",
-      "mission": "TDS-01",
-      "date": "2026-11-30",
-      "month": 11,
-      "time": null,
-      "tentative": true,
-      "provider": "ISRO（インド宇宙研究機関）",
-      "country": "IN",
-      "pad": "Satish Dhawan Space Centre, India",
-      "padDetail": "サティッシュ・ダワン宇宙センター 第1射点",
-      "orbit": "静止遷移軌道（GTO）",
-      "timezone": "Asia/Kolkata",
-      "descriptionEn": "TDS-01 (Technology Demonstration Satellite-01) is an Indian geostationary orbit technology demonstration satellite carrying payloads for the Indian Space Research Organisation (ISRO)’s Institute of Plasma Research, Gandhinagar and the CSIR-CEERI, Pilani. \r\n\r\nPayloads to be tested included an internally developed 300 mN electric powered thrusters, atomic clocks, travelling wave tube amplifiers (TWTA) & a quantum communication suite (QuTDS).",
       "status": "TBD"
     }
   ],
