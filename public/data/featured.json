@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-01T06:54:26.661Z",
+  "updated": "2026-10-01T14:15:35.139Z",
   "featured": [
     {
       "id": "18441371-8b2e-457c-afb5-1ec1b11ab630",
@@ -30,21 +30,6 @@
       "pad": "Kennedy Space Center, FL, USA",
       "status": "Go",
       "orbit": "Unknown"
-    },
-    {
-      "id": "6b89cfc8-8880-4b5b-856c-0e547d45b639",
-      "rocket": "SR75",
-      "mission": "Flight 2",
-      "description": "Test flight of HyImpulse's SR75 sounding rocket.",
-      "highlight": "ドイツのスタートアップ企業HyImpulseが開発した観測ロケット「SR75」の2回目の試験飛行。同社は従来の液体・固体燃料ではなく、パラフィン（ろう）を燃料に使うハイブリッドエンジンを採用しており、低コストかつ安全な打ち上げ技術として世界から注目を集めている。前回の初飛行に続く今回のテストは、欧州の新興宇宙産業の実力を測る重要な一歩となる。",
-      "date": "2026-10-05",
-      "time": null,
-      "tentative": true,
-      "provider": "HyImpulse",
-      "country": "",
-      "pad": "SaxaVord Spaceport",
-      "status": "TBD",
-      "orbit": "Suborbital"
     },
     {
       "id": "69ebbcd2-b257-4070-9ef9-21e7d1f8a883",
