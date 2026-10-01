@@ -40,8 +40,12 @@
       "provider": "Russian Federal Space Agency (ROSCOSMOS)",
       "country": "RU",
       "pad": "Baikonur Cosmodrome, Republic of Kazakhstan",
+      "padDetail": "バイコヌール宇宙基地",
+      "orbit": "低軌道（LEO）",
+      "timezone": "Asia/Qyzylorda",
+      "descriptionEn": "Progress resupply mission to the International Space Station.",
       "status": "TBC"
     }
   ],
-  "updated": "2026-09-28T21:18:55.763Z"
+  "updated": "2026-10-01T20:25:27.108Z"
 }

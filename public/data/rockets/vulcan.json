@@ -37,11 +37,15 @@
       "month": 10,
       "time": null,
       "tentative": true,
-      "provider": "United Launch Alliance",
+      "provider": "ULA（ユナイテッド・ローンチ・アライアンス）",
       "country": "",
       "pad": "Cape Canaveral SFS, FL, USA",
+      "padDetail": "ケープカナベラル宇宙軍基地 SLC-41",
+      "orbit": "低軌道（LEO）",
+      "timezone": "America/New_York",
+      "descriptionEn": "Amazon Leo, formerly known as Project Kuiper, is a mega constellation of satellites in Low Earth Orbit that will offer broadband internet access, this constellation will be managed by Kuiper Systems LLC, a subsidiary of Amazon. This constellation is planned to be composed of 3,276 satellites. The satellites are projected to be placed in 98 orbital planes in three orbital layers, one at 590 km, 610 km and 630 km altitude.\r\n\r\n45 satellites will be carried on each Vulcan launch.",
       "status": "TBD"
     }
   ],
-  "updated": "2026-09-28T21:22:13.165Z"
+  "updated": "2026-10-01T20:28:43.798Z"
 }
