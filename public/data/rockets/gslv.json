@@ -33,7 +33,7 @@
       "name": "GSLV Mk II | IRNSS-1L (NVS-03)",
       "rocket": "GSLV Mk II",
       "mission": "IRNSS-1L (NVS-03)",
-      "date": "2026-10-13",
+      "date": "2026-10-31",
       "month": 10,
       "time": null,
       "tentative": true,
@@ -44,7 +44,7 @@
       "orbit": "静止遷移軌道（GTO）",
       "timezone": "Asia/Kolkata",
       "descriptionEn": "This is a replacement satellite for the Indian Regional Navigation Satellite System. The constellation will provide India with an alternative to GPS and will be used for military and civilian use. Located at a geosynchronous orbit, the system will be operated by the Indian government.",
-      "status": "TBC",
+      "status": "TBD",
       "descriptionJa": "これはIndian Regional Navigation Satellite Systemの代替衛星です。このコンステレーションはインドにGPSの代替手段を提供し、軍事および民間用途に使用されます。静止軌道に位置するこのシステムはインド政府によって運用されます。"
     },
     {
@@ -64,7 +64,25 @@
       "timezone": "Asia/Kolkata",
       "descriptionEn": "First uncrewed orbital test flight of the Gaganyaan capsule.",
       "status": "TBD"
+    },
+    {
+      "id": "0cf92611-82a8-4095-a0b4-dda2e74b1fff",
+      "name": "LVM-3 | GSAT-32 (GSAT-N3)",
+      "rocket": "LVM-3 (GSLV Mk III)",
+      "mission": "GSAT-32 (GSAT-N3)",
+      "date": "2026-12-31",
+      "month": 12,
+      "time": null,
+      "tentative": true,
+      "provider": "ISRO（インド宇宙研究機関）",
+      "country": "IN",
+      "pad": "Satish Dhawan Space Centre, India",
+      "padDetail": "サティッシュ・ダワン宇宙センター 第2射点",
+      "orbit": "静止遷移軌道（GTO）",
+      "timezone": "Asia/Kolkata",
+      "descriptionEn": "GSAT-32 is a geostationary communications satellite for the Indian Space Research Organization (ISRO). The spacecraft is a replacement for GSAT-6A that failed before reaching geostationary orbit after launch in 2018.",
+      "status": "TBD"
     }
   ],
-  "updated": "2026-09-29T20:06:15.919Z"
+  "updated": "2026-10-02T20:02:13.451Z"
 }
