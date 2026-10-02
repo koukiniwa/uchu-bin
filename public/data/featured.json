@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-02T06:45:31.110Z",
+  "updated": "2026-10-02T13:37:40.371Z",
   "featured": [
     {
       "id": "18441371-8b2e-457c-afb5-1ec1b11ab630",
@@ -28,7 +28,7 @@
       "provider": "SpaceX",
       "country": "US",
       "pad": "Kennedy Space Center, FL, USA",
-      "status": "In Flight",
+      "status": "Success",
       "orbit": "Unknown"
     },
     {
