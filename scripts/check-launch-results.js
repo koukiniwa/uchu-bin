@@ -200,7 +200,7 @@ async function main() {
   try {
     const rocketConfigId = target.rocket?.configuration?.id
     if (rocketConfigId) {
-      const countRes = await fetch(`https://ll.thespacedevs.com/2.2.0/launch/?rocket__configuration__id=${rocketConfigId}&limit=1&format=json`)
+      const countRes = await fetch(`https://ll.thespacedevs.com/2.2.0/launch/previous/?rocket__configuration__id=${rocketConfigId}&limit=1&format=json`)
       const countData = await countRes.json()
       const totalLaunches = countData.count || 0
       if (totalLaunches > 0 && totalLaunches <= 50) {
