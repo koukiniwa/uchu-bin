@@ -431,6 +431,12 @@
       "name": "Falcon 9 Block 5 | Crew-13",
       "status": "Launch Successful",
       "date": "2026-10-01T20:15:30.169Z"
+    },
+    {
+      "id": "67213393-7983-4c06-8b44-b8c785a5ed79",
+      "name": "Falcon 9 Block 5 | Transporter 18 (Dedicated SSO Rideshare)",
+      "status": "Launch Successful",
+      "date": "2026-10-02T00:04:54.789Z"
     }
   ]
 }
