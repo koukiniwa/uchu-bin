@@ -1,26 +1,6 @@
 {
-  "updated": "2026-10-02T00:33:52.721Z",
+  "updated": "2026-10-02T06:04:18.754Z",
   "launches": [
-    {
-      "id": "4651fd8a-43de-4166-bf8f-c168b3bd1d2c",
-      "name": "Falcon Heavy | NROL-97",
-      "rocket": "Falcon Heavy",
-      "mission": "NROL-97",
-      "date": "2026-10-02",
-      "month": 10,
-      "time": "03:53",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "Kennedy Space Center, FL, USA",
-      "padDetail": "ケネディ宇宙センター LC-39A",
-      "orbit": "Unknown",
-      "timezone": "America/New_York",
-      "descriptionEn": "Classified payload for the US National Reconnaissance Office.",
-      "status": "Go",
-      "descriptionJa": "米国家偵察局（NRO）向けの機密ミッション。ペイロードの内容は非公開。Falcon Heavy 14回目の飛行。",
-      "notes": "同日にCrew-13も打ち上げ予定。サイドブースター2本はケープカナベラル宇宙軍基地の着陸帯に戻る予定。"
-    },
     {
       "id": "da43dc2c-00af-4cc1-8ef1-90a60b2eb9e5",
       "name": "Falcon 9 Block 5 | SDA Tranche 1 Transport Layer A",
@@ -261,24 +241,6 @@
       "status": "TBD"
     },
     {
-      "id": "7c891a0b-7194-4425-8cfd-2e8c75af2924",
-      "name": "HANBIT-Nano | InnoSat-0",
-      "rocket": "HANBIT-Nano",
-      "mission": "InnoSat-0",
-      "date": "2026-11-30",
-      "month": 11,
-      "time": null,
-      "tentative": true,
-      "provider": "Innospace（イノスペース）",
-      "country": "KR",
-      "pad": "Alcântara Space Center, Federative Republic of Brazil",
-      "padDetail": "アルカンタラ射場（ブラジル）",
-      "orbit": "低軌道（LEO）",
-      "timezone": "America/Fortaleza",
-      "descriptionEn": "Innospace's first in-house test satellite, 'InnoSat-0', will test various technologies for future development of satellites by Innospace themselves. The satellite will be deployed using Korean company SpaceBey’s specialized deployer.",
-      "status": "TBD"
-    },
-    {
       "id": "dfac5ab7-7017-454f-b6cf-eeed277a97b5",
       "name": "LVM-3 | Gaganyaan-1",
       "rocket": "LVM-3 (GSLV Mk III)",
@@ -367,9 +329,55 @@
       "timezone": "America/New_York",
       "descriptionEn": "Demonstration flight of the Astrobotic Griffin lander and its engines, initially contracted for the cancelled NASA VIPER (Volatiles Investigating Polar Exploration Rover) mission. The vacated payload spot will now host the FLIP (FLEX Lunar Innovation Platform) lunar rover from Astrolab.",
       "status": "TBD"
+    },
+    {
+      "id": "0cf92611-82a8-4095-a0b4-dda2e74b1fff",
+      "name": "LVM-3 | GSAT-32 (GSAT-N3)",
+      "rocket": "LVM-3 (GSLV Mk III)",
+      "mission": "GSAT-32 (GSAT-N3)",
+      "date": "2026-12-31",
+      "month": 12,
+      "time": null,
+      "tentative": true,
+      "provider": "ISRO（インド宇宙研究機関）",
+      "country": "IN",
+      "pad": "Satish Dhawan Space Centre, India",
+      "padDetail": "サティッシュ・ダワン宇宙センター 第2射点",
+      "orbit": "静止遷移軌道（GTO）",
+      "timezone": "Asia/Kolkata",
+      "descriptionEn": "GSAT-32 is a geostationary communications satellite for the Indian Space Research Organization (ISRO). The spacecraft is a replacement for GSAT-6A that failed before reaching geostationary orbit after launch in 2018.",
+      "status": "TBD"
+    },
+    {
+      "id": "0b85fcca-5252-48d7-9ccb-c10b1da9d183",
+      "name": "Ariane 62 | Galileo L15 (FOC FM28 & FM31)",
+      "rocket": "Ariane 6",
+      "mission": "Galileo L15 (FOC FM28 & FM31)",
+      "date": "2026-12-31",
+      "month": 12,
+      "time": null,
+      "tentative": true,
+      "provider": "Arianespace（アリアンスペース）",
+      "country": "FR",
+      "pad": "Guiana Space Centre, French Guiana",
+      "padDetail": "クールー宇宙センター ELA-4",
+      "orbit": "中軌道（MEO）",
+      "timezone": "America/Cayenne",
+      "descriptionEn": "Payload consists of two satellites for Europe's Galileo navigation system.",
+      "status": "TBD"
     }
   ],
   "recent": [
+    {
+      "id": "4651fd8a-43de-4166-bf8f-c168b3bd1d2c",
+      "rocket": "Falcon Heavy",
+      "mission": "NROL-97",
+      "date": "2026-10-02",
+      "country": "US",
+      "provider": "SpaceX",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "67213393-7983-4c06-8b44-b8c785a5ed79",
       "rocket": "Falcon 9",
