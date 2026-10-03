@@ -1,21 +1,6 @@
 {
-  "updated": "2026-10-02T23:34:41.954Z",
+  "updated": "2026-10-03T04:03:51.167Z",
   "featured": [
-    {
-      "id": "4651fd8a-43de-4166-bf8f-c168b3bd1d2c",
-      "rocket": "Falcon Heavy",
-      "mission": "NROL-97",
-      "description": "Classified payload for the US National Reconnaissance Office.",
-      "highlight": "アメリカの国家偵察局（NRO）向けの機密衛星を搭載したミッション。世界最強クラスの大型ロケット「ファルコン・ヘビー」が軍の極秘ペイロードを運ぶという点で、その能力の高さが改めて示される注目の打ち上げだ。詳細は非公開だが、アメリカの宇宙偵察能力の強化につながるとみられている。",
-      "date": "2026-10-02",
-      "time": "03:54",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "Kennedy Space Center, FL, USA",
-      "status": "Success",
-      "orbit": "Unknown"
-    },
     {
       "id": "69ebbcd2-b257-4070-9ef9-21e7d1f8a883",
       "rocket": "H3",
