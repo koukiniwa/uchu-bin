@@ -135,32 +135,12 @@
   "articles": [],
   "upcoming": [
     {
-      "id": "4651fd8a-43de-4166-bf8f-c168b3bd1d2c",
-      "name": "Falcon Heavy | NROL-97",
-      "rocket": "Falcon Heavy",
-      "mission": "NROL-97",
-      "date": "2026-10-02",
-      "month": 10,
-      "time": "03:53",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "Kennedy Space Center, FL, USA",
-      "padDetail": "ケネディ宇宙センター LC-39A",
-      "orbit": "Unknown",
-      "timezone": "America/New_York",
-      "descriptionEn": "Classified payload for the US National Reconnaissance Office.",
-      "status": "Go",
-      "descriptionJa": "米国家偵察局（NRO）向けの機密ミッション。ペイロードの内容は非公開。Falcon Heavy 14回目の飛行。",
-      "notes": "同日にCrew-13も打ち上げ予定。サイドブースター2本はケープカナベラル宇宙軍基地の着陸帯に戻る予定。"
-    },
-    {
       "id": "d3bd7fb2-fac6-49fc-ae52-cee07d2fde67",
       "name": "Falcon Heavy | Griffin Mission One",
       "rocket": "Falcon Heavy",
       "mission": "Griffin Mission One",
-      "date": "2026-11-30",
-      "month": 11,
+      "date": "2026-12-31",
+      "month": 12,
       "time": null,
       "tentative": true,
       "provider": "SpaceX",
@@ -173,5 +153,5 @@
       "status": "TBD"
     }
   ],
-  "updated": "2026-09-30T20:10:57.727Z"
+  "updated": "2026-10-03T18:46:01.647Z"
 }
