@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-04T09:24:03.344Z",
+  "updated": "2026-10-04T15:10:32.099Z",
   "launches": [
     {
       "id": "da43dc2c-00af-4cc1-8ef1-90a60b2eb9e5",
@@ -384,16 +384,6 @@
       "mission": "Transporter 18 (Dedicated SSO Rideshare)",
       "date": "2026-10-01",
       "country": "",
-      "provider": "SpaceX",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "18441371-8b2e-457c-afb5-1ec1b11ab630",
-      "rocket": "Falcon 9",
-      "mission": "Crew-13",
-      "date": "2026-10-01",
-      "country": "US",
       "provider": "SpaceX",
       "result": "success",
       "resultLabel": "成功"
