@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-04T15:10:32.099Z",
+  "updated": "2026-10-04T19:14:55.347Z",
   "launches": [
     {
       "id": "da43dc2c-00af-4cc1-8ef1-90a60b2eb9e5",
@@ -259,6 +259,24 @@
       "status": "TBD"
     },
     {
+      "id": "d74afbc7-0de5-491c-be05-4e9c31f736ac",
+      "name": "Falcon 9 Block 5 | Cygnus CRS-2 NG-25",
+      "rocket": "Falcon 9",
+      "mission": "Cygnus CRS-2 NG-25",
+      "date": "2026-11-30",
+      "month": 11,
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Cape Canaveral SFS, FL, USA",
+      "padDetail": "ケープカナベラル宇宙軍基地 SLC-40",
+      "orbit": "低軌道（LEO）",
+      "timezone": "America/New_York",
+      "descriptionEn": "This is the 25th flight of the Orbital ATK's uncrewed resupply spacecraft Cygnus and its 24th flight to the International Space Station under the Commercial Resupply Services contract with NASA.",
+      "status": "TBD"
+    },
+    {
       "id": "dfac5ab7-7017-454f-b6cf-eeed277a97b5",
       "name": "LVM-3 | Gaganyaan-1",
       "rocket": "LVM-3 (GSLV Mk III)",
@@ -313,21 +331,21 @@
       "status": "TBD"
     },
     {
-      "id": "d74afbc7-0de5-491c-be05-4e9c31f736ac",
-      "name": "Falcon 9 Block 5 | Cygnus CRS-2 NG-25",
+      "id": "71df1dd0-d658-4762-b0bc-0fca6886aea7",
+      "name": "Falcon 9 Block 5 | SDA Tranche 2 Transport Layer D",
       "rocket": "Falcon 9",
-      "mission": "Cygnus CRS-2 NG-25",
+      "mission": "SDA Tranche 2 Transport Layer D",
       "date": "2026-12-31",
       "month": 12,
       "time": null,
       "tentative": true,
       "provider": "SpaceX",
-      "country": "US",
+      "country": "",
       "pad": "Cape Canaveral SFS, FL, USA",
-      "padDetail": "ケープカナベラル宇宙軍基地 SLC-40",
-      "orbit": "低軌道（LEO）",
+      "padDetail": "Unknown Pad",
+      "orbit": "極軌道",
       "timezone": "America/New_York",
-      "descriptionEn": "This is the 25th flight of the Orbital ATK's uncrewed resupply spacecraft Cygnus and its 24th flight to the International Space Station under the Commercial Resupply Services contract with NASA.",
+      "descriptionEn": "Classified mission launched by the Space Development Agency (SDA) for Tranche 2 Transport Layer.",
       "status": "TBD"
     },
     {
@@ -347,24 +365,6 @@
       "timezone": "America/New_York",
       "descriptionEn": "Demonstration flight of the Astrobotic Griffin lander and its engines, initially contracted for the cancelled NASA VIPER (Volatiles Investigating Polar Exploration Rover) mission. The vacated payload spot will now host the FLIP (FLEX Lunar Innovation Platform) lunar rover from Astrolab.",
       "status": "TBD"
-    },
-    {
-      "id": "0cf92611-82a8-4095-a0b4-dda2e74b1fff",
-      "name": "LVM-3 | GSAT-32 (GSAT-N3)",
-      "rocket": "LVM-3 (GSLV Mk III)",
-      "mission": "GSAT-32 (GSAT-N3)",
-      "date": "2026-12-31",
-      "month": 12,
-      "time": null,
-      "tentative": true,
-      "provider": "ISRO（インド宇宙研究機関）",
-      "country": "IN",
-      "pad": "Satish Dhawan Space Centre, India",
-      "padDetail": "サティッシュ・ダワン宇宙センター 第2射点",
-      "orbit": "静止遷移軌道（GTO）",
-      "timezone": "Asia/Kolkata",
-      "descriptionEn": "GSAT-32 is a geostationary communications satellite for the Indian Space Research Organization (ISRO). The spacecraft is a replacement for GSAT-6A that failed before reaching geostationary orbit after launch in 2018.",
-      "status": "TBD"
     }
   ],
   "recent": [
@@ -374,16 +374,6 @@
       "mission": "NROL-97",
       "date": "2026-10-02",
       "country": "US",
-      "provider": "SpaceX",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "67213393-7983-4c06-8b44-b8c785a5ed79",
-      "rocket": "Falcon 9",
-      "mission": "Transporter 18 (Dedicated SSO Rideshare)",
-      "date": "2026-10-01",
-      "country": "",
       "provider": "SpaceX",
       "result": "success",
       "resultLabel": "成功"
