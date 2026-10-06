@@ -1,25 +1,6 @@
 {
-  "updated": "2026-10-05T17:58:51.812Z",
+  "updated": "2026-10-06T06:06:27.043Z",
   "launches": [
-    {
-      "id": "da43dc2c-00af-4cc1-8ef1-90a60b2eb9e5",
-      "name": "Falcon 9 Block 5 | SDA Tranche 1 Transport Layer A",
-      "rocket": "Falcon 9",
-      "mission": "SDA Tranche 1 Transport Layer A",
-      "date": "2026-10-06",
-      "month": 10,
-      "time": "08:17",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "",
-      "pad": "Vandenberg SFB, CA, USA",
-      "padDetail": "ヴァンデンバーグ宇宙軍基地 SLC-4E",
-      "orbit": "極軌道",
-      "timezone": "America/Los_Angeles",
-      "descriptionEn": "Tranche 1 Transport Layer A is one of six missions by the United States Space Force Space Development Agency (SDA) for the Proliferated Warfighter Space Architecture (PWSA) Tranche 1 Transport Layer constellation, which will provide assured, resilient, low-latency military data and connectivity worldwide to the full range of warfighter platforms from Low Earth Orbit satellites.\r\n\r\nThe constellation will be interconnected with Optical Inter-Satellite Links (OISLs) which have significantly increased performance over existing radio frequency crosslinks. It is expected to operate over Ka band, have stereo coverage and be dynamically networked for simpler hand-offs, greater bandwidth and fault tolerance.\r\n\r\nThis launch carries 21 satellites manufactured by Northrop Grumman.",
-      "status": "Go",
-      "descriptionJa": "Tranche 1 Transport Layer Aは、United States Space Force Space Development Agency (SDA)がProlerated Warfighter Space Architecture (PWSA) Tranche 1 Transport Layer衛星群向けに実施する6つのミッションの1つであり、Low Earth Orbit衛星から世界中の各種の戦闘員プラットフォームに対して確実で耐障害性を備えた低遅延の軍事データと通信接続を提供する。\n\n衛星群はOptical Inter-Satellite Links (OISLs)で相互接続され、既存の無線周波数クロスリンクより大幅に性能が向上している。Ka帯で運用され、ステレオカバレッジを有し、より簡単なハンドオフ、より大きな帯域幅、および耐障害性のために動的にネットワーク化されることが期待されている。\n\n本打ち上げはNorthrop Grummanによって製造された21個の衛星を搭載している。"
-    },
     {
       "id": "e0741415-6c63-4236-9736-24a6c04485bc",
       "name": "Nuri | NeonSat-2 to 6",
@@ -38,6 +19,25 @@
       "descriptionEn": "NeonSat-2 to 6 are part of the South Korean government's Earth observation micro-satellite constellation NeonSat (New-space Earth Observation Satellite). The NeonSat constellation is the first satellite system developed by the government using a mass-production approach for precise monitoring of the Korean Peninsula.",
       "status": "Go",
       "descriptionJa": "NeonSat-2〜6は、韓国政府の地球観測マイクロ衛星コンステレーションNeonSat（New-space Earth Observation Satellite）の一部である。NeonSatコンステレーションは、朝鮮半島の正確な監視のために政府が大量生産アプローチを用いて開発した初の衛星システムである。"
+    },
+    {
+      "id": "da43dc2c-00af-4cc1-8ef1-90a60b2eb9e5",
+      "name": "Falcon 9 Block 5 | SDA Tranche 1 Transport Layer A",
+      "rocket": "Falcon 9",
+      "mission": "SDA Tranche 1 Transport Layer A",
+      "date": "2026-10-08",
+      "month": 10,
+      "time": "07:54",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "",
+      "pad": "Vandenberg SFB, CA, USA",
+      "padDetail": "ヴァンデンバーグ宇宙軍基地 SLC-4E",
+      "orbit": "極軌道",
+      "timezone": "America/Los_Angeles",
+      "descriptionEn": "Tranche 1 Transport Layer A is one of six missions by the United States Space Force Space Development Agency (SDA) for the Proliferated Warfighter Space Architecture (PWSA) Tranche 1 Transport Layer constellation, which will provide assured, resilient, low-latency military data and connectivity worldwide to the full range of warfighter platforms from Low Earth Orbit satellites.\r\n\r\nThe constellation will be interconnected with Optical Inter-Satellite Links (OISLs) which have significantly increased performance over existing radio frequency crosslinks. It is expected to operate over Ka band, have stereo coverage and be dynamically networked for simpler hand-offs, greater bandwidth and fault tolerance.\r\n\r\nThis launch carries 21 satellites manufactured by Northrop Grumman.",
+      "status": "Go",
+      "descriptionJa": "Tranche 1 Transport Layer Aは、United States Space Force Space Development Agency (SDA)がProlerated Warfighter Space Architecture (PWSA) Tranche 1 Transport Layer衛星群向けに実施する6つのミッションの1つであり、Low Earth Orbit衛星から世界中の各種の戦闘員プラットフォームに対して確実で耐障害性を備えた低遅延の軍事データと通信接続を提供する。\n\n衛星群はOptical Inter-Satellite Links (OISLs)で相互接続され、既存の無線周波数クロスリンクより大幅に性能が向上している。Ka帯で運用され、ステレオカバレッジを有し、より簡単なハンドオフ、より大きな帯域幅、および耐障害性のために動的にネットワーク化されることが期待されている。\n\n本打ち上げはNorthrop Grummanによって製造された21個の衛星を搭載している。"
     },
     {
       "id": "a1bb0984-19d4-4b47-9bba-706d225573e2",
@@ -95,6 +95,24 @@
       "status": "Go"
     },
     {
+      "id": "df88cfbf-f504-4e11-8370-e33dd6280b5b",
+      "name": "Falcon 9 Block 5 | USSF-xxx (\"TH-2\")",
+      "rocket": "Falcon 9",
+      "mission": "USSF-xxx (\"TH-2\")",
+      "date": "2026-10-15",
+      "month": 10,
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "",
+      "pad": "Vandenberg SFB, CA, USA",
+      "padDetail": "ヴァンデンバーグ宇宙軍基地 SLC-4E",
+      "orbit": "極軌道",
+      "timezone": "America/Los_Angeles",
+      "descriptionEn": "Classified mission for the United States Space Force. It is possibly a batch of classified LEO satellites based on SpaceX’s Starshield satellite bus, based on locations of ascent rocket stage drop zones being fits with previous SDA Transport Layer launches.",
+      "status": "TBC"
+    },
+    {
       "id": "69ebbcd2-b257-4070-9ef9-21e7d1f8a883",
       "name": "H3-24 | Martian Moon eXplorer (MMX)",
       "rocket": "H3",
@@ -129,24 +147,6 @@
       "orbit": "低軌道（LEO）",
       "timezone": "America/Cayenne",
       "descriptionEn": "Amazon Leo, formerly known as Project Kuiper, is a mega constellation of satellites in Low Earth Orbit that will offer broadband internet access, this constellation will be managed by Kuiper Systems LLC, a subsidiary of Amazon. This constellation is planned to be composed of 3,276 satellites. The satellites are projected to be placed in 98 orbital planes in three orbital layers, one at 590 km, 610 km and 630 km altitude.\r\n\r\n35-40 satellites will be carried on each Ariane 6 launch.",
-      "status": "TBD"
-    },
-    {
-      "id": "3b430f81-0ff1-4d85-8a1a-cef0de326198",
-      "name": "Falcon 9 Block 5 | Bandwagon 5 (Dedicated Mid-Inclination Rideshare)",
-      "rocket": "Falcon 9",
-      "mission": "Bandwagon 5 (Dedicated Mid-Inclination Rideshare)",
-      "date": "2026-10-31",
-      "month": 10,
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "Cape Canaveral SFS, FL, USA",
-      "padDetail": "ケープカナベラル宇宙軍基地 SLC-40",
-      "orbit": "低軌道（LEO）",
-      "timezone": "America/New_York",
-      "descriptionEn": "Dedicated rideshare flight to a mid-inclination orbit with dozens of small microsatellites and nanosatellites for commercial and government customers.",
       "status": "TBD"
     },
     {
