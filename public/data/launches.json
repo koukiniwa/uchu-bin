@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-06T19:22:14.712Z",
+  "updated": "2026-10-06T23:36:40.493Z",
   "launches": [
     {
       "id": "e0741415-6c63-4236-9736-24a6c04485bc",
@@ -16,9 +16,8 @@
       "padDetail": "羅老宇宙センター",
       "orbit": "太陽同期軌道（SSO）",
       "timezone": "Asia/Seoul",
-      "descriptionEn": "NeonSat-2 to 6 are part of the South Korean government's Earth observation micro-satellite constellation NeonSat (New-space Earth Observation Satellite). The NeonSat constellation is the first satellite system developed by the government using a mass-production approach for precise monitoring of the Korean Peninsula.",
-      "status": "Go",
-      "descriptionJa": "NeonSat-2〜6は、韓国政府の地球観測マイクロ衛星コンステレーションNeonSat（New-space Earth Observation Satellite）の一部である。NeonSatコンステレーションは、朝鮮半島の正確な監視のために政府が大量生産アプローチを用いて開発した初の衛星システムである。"
+      "descriptionEn": "NeonSat-2 to 6 are part of the South Korean government's Earth observation micro-satellite constellation NeonSat (New-space Earth Observation Satellite). The NeonSat constellation is the first satellite system developed by the government using a mass-production approach for precise monitoring of the Korean Peninsula.\r\n\r\n10 ride-sharing small satellites from various Korean institutes and organizations will also fly on this launch:\r\n* SLEDGE\r\n* GBSAT\r\n* PERSAT02\r\n* UEL-Y-Sys\r\n* SD-1 SAT\r\n* E3_TESTER-KARI-2\r\n* DaejonSat-1\r\n* BEE-1012\r\n* JACK-007\r\n* CPSat",
+      "status": "Go"
     },
     {
       "id": "da43dc2c-00af-4cc1-8ef1-90a60b2eb9e5",
@@ -313,24 +312,6 @@
       "status": "TBD"
     },
     {
-      "id": "07e945c1-2ec6-4d29-a500-1afbe920440f",
-      "name": "Atlas V N22 | Starliner-1",
-      "rocket": "Atlas V N22",
-      "mission": "Starliner-1",
-      "date": "2026-12-31",
-      "month": 12,
-      "time": null,
-      "tentative": true,
-      "provider": "ULA（ユナイテッド・ローンチ・アライアンス）",
-      "country": "",
-      "pad": "Cape Canaveral SFS, FL, USA",
-      "padDetail": "ケープカナベラル宇宙軍基地 SLC-41",
-      "orbit": "低軌道（LEO）",
-      "timezone": "America/New_York",
-      "descriptionEn": "Starliner-1 is the first operational flight of a Starliner spacecraft to the International Space Station as part of NASA's Commercial Crew Program. Due to problems with the Starliner spacecraft's RCS attitude control system during the Crew Flight Test mission in 2024, this mission has been re-scoped to not carry a crew by NASA. It will instead deliver necessary cargo to the orbital laboratory and allow in-flight validation of the system upgrades implemented following the Crew Flight Test mission.",
-      "status": "TBD"
-    },
-    {
       "id": "71df1dd0-d658-4762-b0bc-0fca6886aea7",
       "name": "Falcon 9 Block 5 | SDA Tranche 2 Transport Layer D",
       "rocket": "Falcon 9",
@@ -364,6 +345,24 @@
       "orbit": "月軌道",
       "timezone": "America/New_York",
       "descriptionEn": "Demonstration flight of the Astrobotic Griffin lander and its engines, initially contracted for the cancelled NASA VIPER (Volatiles Investigating Polar Exploration Rover) mission. The vacated payload spot will now host the FLIP (FLEX Lunar Innovation Platform) lunar rover from Astrolab.",
+      "status": "TBD"
+    },
+    {
+      "id": "0cf92611-82a8-4095-a0b4-dda2e74b1fff",
+      "name": "LVM-3 | GSAT-32 (GSAT-N3)",
+      "rocket": "LVM-3 (GSLV Mk III)",
+      "mission": "GSAT-32 (GSAT-N3)",
+      "date": "2026-12-31",
+      "month": 12,
+      "time": null,
+      "tentative": true,
+      "provider": "ISRO（インド宇宙研究機関）",
+      "country": "IN",
+      "pad": "Satish Dhawan Space Centre, India",
+      "padDetail": "サティッシュ・ダワン宇宙センター 第2射点",
+      "orbit": "静止遷移軌道（GTO）",
+      "timezone": "Asia/Kolkata",
+      "descriptionEn": "GSAT-32 is a geostationary communications satellite for the Indian Space Research Organization (ISRO). The spacecraft is a replacement for GSAT-6A that failed before reaching geostationary orbit after launch in 2018.",
       "status": "TBD"
     }
   ],
