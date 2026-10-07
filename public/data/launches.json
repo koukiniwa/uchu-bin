@@ -1,24 +1,6 @@
 {
-  "updated": "2026-10-06T23:36:40.493Z",
+  "updated": "2026-10-07T04:37:39.247Z",
   "launches": [
-    {
-      "id": "e0741415-6c63-4236-9736-24a6c04485bc",
-      "name": "Nuri | NeonSat-2 to 6",
-      "rocket": "Nuri",
-      "mission": "NeonSat-2 to 6",
-      "date": "2026-10-07",
-      "month": 10,
-      "time": "03:23",
-      "tentative": false,
-      "provider": "KARI（韓国航空宇宙研究院）",
-      "country": "KR",
-      "pad": "Naro Space Center, South Korea",
-      "padDetail": "羅老宇宙センター",
-      "orbit": "太陽同期軌道（SSO）",
-      "timezone": "Asia/Seoul",
-      "descriptionEn": "NeonSat-2 to 6 are part of the South Korean government's Earth observation micro-satellite constellation NeonSat (New-space Earth Observation Satellite). The NeonSat constellation is the first satellite system developed by the government using a mass-production approach for precise monitoring of the Korean Peninsula.\r\n\r\n10 ride-sharing small satellites from various Korean institutes and organizations will also fly on this launch:\r\n* SLEDGE\r\n* GBSAT\r\n* PERSAT02\r\n* UEL-Y-Sys\r\n* SD-1 SAT\r\n* E3_TESTER-KARI-2\r\n* DaejonSat-1\r\n* BEE-1012\r\n* JACK-007\r\n* CPSat",
-      "status": "Go"
-    },
     {
       "id": "da43dc2c-00af-4cc1-8ef1-90a60b2eb9e5",
       "name": "Falcon 9 Block 5 | SDA Tranche 1 Transport Layer A",
@@ -364,7 +346,36 @@
       "timezone": "Asia/Kolkata",
       "descriptionEn": "GSAT-32 is a geostationary communications satellite for the Indian Space Research Organization (ISRO). The spacecraft is a replacement for GSAT-6A that failed before reaching geostationary orbit after launch in 2018.",
       "status": "TBD"
+    },
+    {
+      "id": "0b85fcca-5252-48d7-9ccb-c10b1da9d183",
+      "name": "Ariane 62 | Galileo L15 (FOC FM28 & FM31)",
+      "rocket": "Ariane 6",
+      "mission": "Galileo L15 (FOC FM28 & FM31)",
+      "date": "2026-12-31",
+      "month": 12,
+      "time": null,
+      "tentative": true,
+      "provider": "Arianespace（アリアンスペース）",
+      "country": "FR",
+      "pad": "Guiana Space Centre, French Guiana",
+      "padDetail": "クールー宇宙センター ELA-4",
+      "orbit": "中軌道（MEO）",
+      "timezone": "America/Cayenne",
+      "descriptionEn": "Payload consists of two satellites for Europe's Galileo navigation system.",
+      "status": "TBD"
     }
   ],
-  "recent": []
+  "recent": [
+    {
+      "id": "e0741415-6c63-4236-9736-24a6c04485bc",
+      "rocket": "Nuri",
+      "mission": "NeonSat-2 to 6",
+      "date": "2026-10-07",
+      "country": "KR",
+      "provider": "Korea Aerospace Research Institute",
+      "result": "success",
+      "resultLabel": "成功"
+    }
+  ]
 }
