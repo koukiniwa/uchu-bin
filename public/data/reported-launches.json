@@ -443,6 +443,12 @@
       "name": "Falcon Heavy | NROL-97",
       "status": "Launch in Flight",
       "date": "2026-10-02T06:03:43.891Z"
+    },
+    {
+      "id": "e0741415-6c63-4236-9736-24a6c04485bc",
+      "name": "Nuri | NeonSat-2 to 6",
+      "status": "Launch Successful",
+      "date": "2026-10-07T07:39:19.625Z"
     }
   ]
 }
