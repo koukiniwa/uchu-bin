@@ -63,7 +63,25 @@
       "timezone": "America/Cayenne",
       "descriptionEn": "Second of EUMETSAT's second generation of Metop weather satellites.",
       "status": "TBD"
+    },
+    {
+      "id": "0b85fcca-5252-48d7-9ccb-c10b1da9d183",
+      "name": "Ariane 62 | Galileo L15 (FOC FM28 & FM31)",
+      "rocket": "Ariane 6",
+      "mission": "Galileo L15 (FOC FM28 & FM31)",
+      "date": "2026-12-31",
+      "month": 12,
+      "time": null,
+      "tentative": true,
+      "provider": "Arianespace（アリアンスペース）",
+      "country": "FR",
+      "pad": "Guiana Space Centre, French Guiana",
+      "padDetail": "クールー宇宙センター ELA-4",
+      "orbit": "中軌道（MEO）",
+      "timezone": "America/Cayenne",
+      "descriptionEn": "Payload consists of two satellites for Europe's Galileo navigation system.",
+      "status": "TBD"
     }
   ],
-  "updated": "2026-10-04T18:41:46.403Z"
+  "updated": "2026-10-07T20:41:21.345Z"
 }
