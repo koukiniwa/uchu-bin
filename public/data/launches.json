@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-08T11:48:22.634Z",
+  "updated": "2026-10-08T23:39:29.834Z",
   "launches": [
     {
       "id": "a1bb0984-19d4-4b47-9bba-706d225573e2",
@@ -43,7 +43,7 @@
       "name": "Falcon 9 Block 5 | Starlink Group 15-25",
       "rocket": "Falcon 9",
       "mission": "Starlink Group 15-25",
-      "date": "2026-10-11",
+      "date": "2026-10-12",
       "month": 10,
       "time": "23:00",
       "tentative": false,
@@ -77,21 +77,21 @@
     },
     {
       "id": "df88cfbf-f504-4e11-8370-e33dd6280b5b",
-      "name": "Falcon 9 Block 5 | USSF-xxx (\"TH-2\")",
+      "name": "Falcon 9 Block 5 | USSF-481",
       "rocket": "Falcon 9",
-      "mission": "USSF-xxx (\"TH-2\")",
+      "mission": "USSF-481",
       "date": "2026-10-15",
       "month": 10,
-      "time": null,
-      "tentative": true,
+      "time": "23:44",
+      "tentative": false,
       "provider": "SpaceX",
       "country": "",
       "pad": "Vandenberg SFB, CA, USA",
       "padDetail": "ヴァンデンバーグ宇宙軍基地 SLC-4E",
       "orbit": "極軌道",
       "timezone": "America/Los_Angeles",
-      "descriptionEn": "Classified mission for the United States Space Force. It is possibly a batch of classified LEO satellites based on SpaceX’s Starshield satellite bus, based on locations of ascent rocket stage drop zones being fits with previous SDA Transport Layer launches.",
-      "status": "TBC"
+      "descriptionEn": "A classified mission for the United States Space Force. It is possibly a batch of classified LEO satellites based on SpaceX’s Starshield satellite bus, based on locations of ascent rocket stage drop zones being fits with previous SDA Transport Layer launches.",
+      "status": "Go"
     },
     {
       "id": "69ebbcd2-b257-4070-9ef9-21e7d1f8a883",
@@ -113,6 +113,24 @@
       "descriptionJa": "MMXは、火星の2つの衛星の1つであるPhobosに着陸し、サンプルを採集してから地球に持ち帰るための日本の科学ミッションです。\n\nこのミッションには、Phobosの表面を探査するためのフランス/ドイツの小型ローバーが含まれています。"
     },
     {
+      "id": "ef9850ad-1096-425b-9d27-f7bbd186e61a",
+      "name": "Vulcan VC6L | Amazon Leo (LV-01)",
+      "rocket": "Vulcan VC6L",
+      "mission": "Amazon Leo (LV-01)",
+      "date": "2026-10-29",
+      "month": 10,
+      "time": null,
+      "tentative": true,
+      "provider": "ULA（ユナイテッド・ローンチ・アライアンス）",
+      "country": "",
+      "pad": "Cape Canaveral SFS, FL, USA",
+      "padDetail": "ケープカナベラル宇宙軍基地 SLC-41",
+      "orbit": "低軌道（LEO）",
+      "timezone": "America/New_York",
+      "descriptionEn": "Amazon Leo, formerly known as Project Kuiper, is a mega constellation of satellites in Low Earth Orbit that will offer broadband internet access, this constellation will be managed by Kuiper Systems LLC, a subsidiary of Amazon. This constellation is planned to be composed of 3,276 satellites. The satellites are projected to be placed in 98 orbital planes in three orbital layers, one at 590 km, 610 km and 630 km altitude.\r\n\r\n45 satellites will be carried on each Vulcan launch.",
+      "status": "TBD"
+    },
+    {
       "id": "7bdc412b-c965-4517-a131-f57a01189803",
       "name": "Ariane 64 Block 2 | Amazon Leo (LE-04)",
       "rocket": "Ariane 6",
@@ -128,6 +146,24 @@
       "orbit": "低軌道（LEO）",
       "timezone": "America/Cayenne",
       "descriptionEn": "Amazon Leo, formerly known as Project Kuiper, is a mega constellation of satellites in Low Earth Orbit that will offer broadband internet access, this constellation will be managed by Kuiper Systems LLC, a subsidiary of Amazon. This constellation is planned to be composed of 3,276 satellites. The satellites are projected to be placed in 98 orbital planes in three orbital layers, one at 590 km, 610 km and 630 km altitude.\r\n\r\n35-40 satellites will be carried on each Ariane 6 launch.",
+      "status": "TBD"
+    },
+    {
+      "id": "3b430f81-0ff1-4d85-8a1a-cef0de326198",
+      "name": "Falcon 9 Block 5 | Bandwagon 5 (Dedicated Mid-Inclination Rideshare)",
+      "rocket": "Falcon 9",
+      "mission": "Bandwagon 5 (Dedicated Mid-Inclination Rideshare)",
+      "date": "2026-10-31",
+      "month": 10,
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Cape Canaveral SFS, FL, USA",
+      "padDetail": "ケープカナベラル宇宙軍基地 SLC-40",
+      "orbit": "低軌道（LEO）",
+      "timezone": "America/New_York",
+      "descriptionEn": "Dedicated rideshare flight to a mid-inclination orbit with dozens of small microsatellites and nanosatellites for commercial and government customers.",
       "status": "TBD"
     },
     {
@@ -183,24 +219,6 @@
       "orbit": "低軌道（LEO）",
       "timezone": "Asia/Kolkata",
       "descriptionEn": "Ride-share launch of multiple satellites, including the in-orbit refueling demonstration satellite AayulSAT-1A from OrbitAID Aerospace. Other payload's identities TBD.",
-      "status": "TBD"
-    },
-    {
-      "id": "ef9850ad-1096-425b-9d27-f7bbd186e61a",
-      "name": "Vulcan VC6L | Amazon Leo (LV-01)",
-      "rocket": "Vulcan VC6L",
-      "mission": "Amazon Leo (LV-01)",
-      "date": "2026-10-31",
-      "month": 10,
-      "time": null,
-      "tentative": true,
-      "provider": "ULA（ユナイテッド・ローンチ・アライアンス）",
-      "country": "",
-      "pad": "Cape Canaveral SFS, FL, USA",
-      "padDetail": "ケープカナベラル宇宙軍基地 SLC-41",
-      "orbit": "低軌道（LEO）",
-      "timezone": "America/New_York",
-      "descriptionEn": "Amazon Leo, formerly known as Project Kuiper, is a mega constellation of satellites in Low Earth Orbit that will offer broadband internet access, this constellation will be managed by Kuiper Systems LLC, a subsidiary of Amazon. This constellation is planned to be composed of 3,276 satellites. The satellites are projected to be placed in 98 orbital planes in three orbital layers, one at 590 km, 610 km and 630 km altitude.\r\n\r\n45 satellites will be carried on each Vulcan launch.",
       "status": "TBD"
     },
     {
@@ -345,24 +363,6 @@
       "orbit": "静止遷移軌道（GTO）",
       "timezone": "Asia/Kolkata",
       "descriptionEn": "GSAT-32 is a geostationary communications satellite for the Indian Space Research Organization (ISRO). The spacecraft is a replacement for GSAT-6A that failed before reaching geostationary orbit after launch in 2018.",
-      "status": "TBD"
-    },
-    {
-      "id": "0b85fcca-5252-48d7-9ccb-c10b1da9d183",
-      "name": "Ariane 62 | Galileo L15 (FOC FM28 & FM31)",
-      "rocket": "Ariane 6",
-      "mission": "Galileo L15 (FOC FM28 & FM31)",
-      "date": "2026-12-31",
-      "month": 12,
-      "time": null,
-      "tentative": true,
-      "provider": "Arianespace（アリアンスペース）",
-      "country": "FR",
-      "pad": "Guiana Space Centre, French Guiana",
-      "padDetail": "クールー宇宙センター ELA-4",
-      "orbit": "中軌道（MEO）",
-      "timezone": "America/Cayenne",
-      "descriptionEn": "Payload consists of two satellites for Europe's Galileo navigation system.",
       "status": "TBD"
     }
   ],

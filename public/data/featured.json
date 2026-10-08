@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-08T11:48:23.093Z",
+  "updated": "2026-10-08T23:39:34.944Z",
   "featured": [
     {
       "id": "69ebbcd2-b257-4070-9ef9-21e7d1f8a883",
@@ -15,6 +15,21 @@
       "pad": "Tanegashima Space Center, Japan",
       "status": "Go",
       "orbit": "Mars Orbit"
+    },
+    {
+      "id": "ef9850ad-1096-425b-9d27-f7bbd186e61a",
+      "rocket": "Vulcan VC6L",
+      "mission": "Amazon Leo (LV-01)",
+      "description": "Amazon Leo, formerly known as Project Kuiper, is a mega constellation of satellites in Low Earth Orbit that will offer broadband internet access, this constellation will be managed by Kuiper Systems LLC, a subsidiary of Amazon. This constellation is planned to be composed of 3,276 satellites. The sa",
+      "highlight": "AmazonがSpaceXのStarlinkに対抗するため、独自の衛星インターネット網「Project Kuiper」をついに本格展開する記念すべき初打ち上げです。全3,276機という巨大なコンステレーション構築に向けた第一歩であり、今後の宇宙ビジネス競争を大きく左右する重要なミッションです。また、ULAの次世代ロケット「Vulcan」が商業衛星の大量輸送という実力を示す機会としても注目されています。",
+      "date": "2026-10-29",
+      "time": null,
+      "tentative": true,
+      "provider": "United Launch Alliance",
+      "country": "",
+      "pad": "Cape Canaveral SFS, FL, USA",
+      "status": "TBD",
+      "orbit": "Low Earth Orbit"
     }
   ]
 }
