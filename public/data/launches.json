@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-09T11:40:45.670Z",
+  "updated": "2026-10-09T18:01:57.026Z",
   "launches": [
     {
       "id": "a1bb0984-19d4-4b47-9bba-706d225573e2",
@@ -26,7 +26,7 @@
       "mission": "SDA Tranche 1 Transport Layer A",
       "date": "2026-10-10",
       "month": 10,
-      "time": "07:29",
+      "time": "07:39",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
