@@ -209,9 +209,9 @@
       "name": "Falcon 9 Block 5 | SDA Tranche 1 Transport Layer A",
       "rocket": "Falcon 9",
       "mission": "SDA Tranche 1 Transport Layer A",
-      "date": "2026-10-08",
+      "date": "2026-10-10",
       "month": 10,
-      "time": "07:54",
+      "time": "07:39",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
@@ -228,7 +228,7 @@
       "name": "Falcon 9 Block 5 | Starlink Group 15-25",
       "rocket": "Falcon 9",
       "mission": "Starlink Group 15-25",
-      "date": "2026-10-10",
+      "date": "2026-10-12",
       "month": 10,
       "time": "23:00",
       "tentative": false,
@@ -261,7 +261,7 @@
       "status": "Go"
     }
   ],
-  "updated": "2026-10-06T20:25:58.856Z",
+  "updated": "2026-10-09T20:10:02.310Z",
   "_launches": [
     {
       "id": "153ef8ef-b12b-43f4-a4bf-05b225c0cd37",
