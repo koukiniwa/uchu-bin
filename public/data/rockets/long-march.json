@@ -29,24 +29,6 @@
   "articles": [],
   "upcoming": [
     {
-      "id": "a1bb0984-19d4-4b47-9bba-706d225573e2",
-      "name": "Long March 12 | Unknown Payload",
-      "rocket": "Long March 12",
-      "mission": "Unknown Payload",
-      "date": "2026-10-09",
-      "month": 10,
-      "time": "19:25",
-      "tentative": false,
-      "provider": "CASC（中国航天科技集団）",
-      "country": "CN",
-      "pad": "Wenchang Space Launch Site, People's Republic of China",
-      "padDetail": "Commercial LC-2",
-      "orbit": "Unknown",
-      "timezone": "Asia/Shanghai",
-      "descriptionEn": "Details TBD.",
-      "status": "Go"
-    },
-    {
       "id": "dc570565-4dcf-4ab9-8174-bf88efef477f",
       "name": "Long March 12A | Flight 2",
       "rocket": "Long March 12A",
@@ -65,5 +47,5 @@
       "status": "TBD"
     }
   ],
-  "updated": "2026-10-07T20:43:32.378Z"
+  "updated": "2026-10-10T19:25:27.832Z"
 }
