@@ -449,6 +449,12 @@
       "name": "Nuri | NeonSat-2 to 6",
       "status": "Launch Successful",
       "date": "2026-10-07T07:39:19.625Z"
+    },
+    {
+      "id": "a1bb0984-19d4-4b47-9bba-706d225573e2",
+      "name": "Long March 12 | SatNet LEO Group 27",
+      "status": "Launch Successful",
+      "date": "2026-10-10T00:16:06.349Z"
     }
   ]
 }
