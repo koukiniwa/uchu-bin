@@ -1,1 +1,16 @@
-{"updated":"2026-09-29T12:33:42Z","previews":[]}
+{
+  "updated": "2026-10-10T12:00:00Z",
+  "previews": [
+    {
+      "slug": "2026-10-10-h3-mmx-mars-moons-exploration-launch-preview",
+      "title": "【日本時間】H3ロケットでMMX打ち上げ予定｜10月20日 04:41 種子島",
+      "missionName": "Martian Moons eXploration (MMX)",
+      "rocketName": "H3-24",
+      "rocketJa": "H3",
+      "net": "2026-10-19T19:41:03Z",
+      "status": "Go",
+      "image": "/images/library/h3_001.jpg",
+      "category": "ロケット"
+    }
+  ]
+}
