@@ -352,10 +352,10 @@ async function main() {
     }
   } catch {}
 
-  // ミッション概要の翻訳（直近10件のみ、キャッシュがない場合のみ）
+  // ミッション概要の翻訳（全件対象、キャッシュがない場合のみ）
   const overrides = loadOverrides()
   let translationCount = 0
-  for (const l of launches.slice(0, 10)) {
+  for (const l of launches) {
     // 手動上書きがあればそれを使う
     const override = overrides[l.mission] || overrides[l.id]
     if (override) {
@@ -370,8 +370,8 @@ async function main() {
       l.descriptionJa = existingTranslations[l.descriptionEn]
       continue
     }
-    // 翻訳（1回の実行で最大5件）
-    if (l.descriptionEn && translationCount < 5) {
+    // 翻訳（1回の実行で最大10件）
+    if (l.descriptionEn && translationCount < 10) {
       console.log(`  Translating: ${l.mission}...`)
       const ja = await translateDescription(l.descriptionEn, l.mission)
       if (ja) {
