@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-10T12:57:54.205Z",
+  "updated": "2026-10-10T16:10:32.821Z",
   "launches": [
     {
       "id": "97c6f5e1-299e-4652-b72d-9618ac047076",
@@ -329,6 +329,24 @@
       "status": "TBD"
     },
     {
+      "id": "a5e81552-ecdd-4d89-b6bd-b594e22ca891",
+      "name": "New Glenn | Blue Ring-1",
+      "rocket": "New Glenn",
+      "mission": "Blue Ring-1",
+      "date": "2026-12-31",
+      "month": 12,
+      "time": null,
+      "tentative": true,
+      "provider": "Blue Origin（ブルーオリジン）",
+      "country": "US",
+      "pad": "Cape Canaveral SFS, FL, USA",
+      "padDetail": "Launch Complex 36A",
+      "orbit": "静止遷移軌道（GTO）",
+      "timezone": "America/New_York",
+      "descriptionEn": "The first mission of Blue Ring, Blue Origin's all-in-one, high-powered hybrid solar electric and chemical propelled spacecraft, will test the spacecraft's operations in Geostationary Transfer Orbit (GTO), as well as subsequent operations after reaching Geostationary Orbit (GEO).\r\n\r\nIt will carry one of Scout Space's flagship next-generation space domain awareness (SDA) Owl sensors, which is designed to enhance real-time tracking, characterization, and assessment of space objects by integrating advanced optical sensing, onboard artificial intelligence-driven processing, and autonomous decision-making capabilities to deliver domain-wide intelligence in space in support of the U.S. Space Force’s space control mission set.\r\n\r\nBlue Ring will also carry Optimum Technologies (OpTech)'s next-generation Caracal optical payload, which is designed to provide actionable insights on resident space objects and orbital activity and includes onboard image storage, object detection algorithms, and passive thermal control. The payload is designed to operate flexibly across dynamic orbits over a year-long mission profile.\r\n\r\nSeveral internal Blue Origin payloads will also be hosted.",
+      "status": "TBD"
+    },
+    {
       "id": "0b85fcca-5252-48d7-9ccb-c10b1da9d183",
       "name": "Ariane 62 | Galileo L15 (FOC FM28 & FM31)",
       "rocket": "Ariane 6",
@@ -344,24 +362,6 @@
       "orbit": "中軌道（MEO）",
       "timezone": "America/Cayenne",
       "descriptionEn": "Payload consists of two satellites for Europe's Galileo navigation system.",
-      "status": "TBD"
-    },
-    {
-      "id": "875ba957-be5f-42bd-8a6e-ed98254f572a",
-      "name": "Firefly Alpha Block 2 | ConnectedCosmos Launch 1",
-      "rocket": "Firefly Alpha",
-      "mission": "ConnectedCosmos Launch 1",
-      "date": "2026-12-31",
-      "month": 12,
-      "time": null,
-      "tentative": true,
-      "provider": "Firefly Aerospace",
-      "country": "US",
-      "pad": "Vandenberg SFB, CA, USA",
-      "padDetail": "ヴァンデンバーグ宇宙軍基地 SLC-2W",
-      "orbit": "極軌道",
-      "timezone": "America/Los_Angeles",
-      "descriptionEn": "First of at least four missions carrying 6 satellites for Open Cosmos' secure LEO broadband constellation, designed to provide independent and resilient connectivity infrastructure for Europe and the world using high-priority Ka-band spectrum filings by the Principality of Liechtenstein.",
       "status": "TBD"
     }
   ],
