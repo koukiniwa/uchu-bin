@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-10T00:16:33.214Z",
+  "updated": "2026-10-10T04:37:18.452Z",
   "launches": [
     {
       "id": "da43dc2c-00af-4cc1-8ef1-90a60b2eb9e5",
@@ -374,16 +374,6 @@
       "date": "2026-10-09",
       "country": "CN",
       "provider": "China Aerospace Science and Technology Corporation",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "e0741415-6c63-4236-9736-24a6c04485bc",
-      "rocket": "Nuri",
-      "mission": "NeonSat-2 to 6",
-      "date": "2026-10-07",
-      "country": "KR",
-      "provider": "Korea Aerospace Research Institute",
       "result": "success",
       "resultLabel": "成功"
     }
