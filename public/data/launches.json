@@ -1,14 +1,14 @@
 {
-  "updated": "2026-10-11T22:41:40.169Z",
+  "updated": "2026-10-12T02:06:33.400Z",
   "launches": [
     {
       "id": "97c6f5e1-299e-4652-b72d-9618ac047076",
       "name": "Falcon 9 Block 5 | Starlink Group 15-25",
       "rocket": "Falcon 9",
       "mission": "Starlink Group 15-25",
-      "date": "2026-10-12",
+      "date": "2026-10-13",
       "month": 10,
-      "time": "23:00",
+      "time": "00:11",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
