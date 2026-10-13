@@ -1,25 +1,6 @@
 {
-  "updated": "2026-10-12T20:08:07.923Z",
+  "updated": "2026-10-13T02:26:28.012Z",
   "launches": [
-    {
-      "id": "97c6f5e1-299e-4652-b72d-9618ac047076",
-      "name": "Falcon 9 Block 5 | Starlink Group 15-25",
-      "rocket": "Falcon 9",
-      "mission": "Starlink Group 15-25",
-      "date": "2026-10-13",
-      "month": 10,
-      "time": "00:11",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "",
-      "pad": "Vandenberg SFB, CA, USA",
-      "padDetail": "ヴァンデンバーグ宇宙軍基地 SLC-4E",
-      "orbit": "低軌道（LEO）",
-      "timezone": "America/Los_Angeles",
-      "descriptionEn": "A batch of 27 satellites for the Starlink mega-constellation - SpaceX's project for space-based Internet communication system.",
-      "status": "Go",
-      "descriptionJa": "Starlink巨大衛星群用の27基の衛星のバッチ。これはSpaceXの宇宙ベースのインターネット通信システムプロジェクトである。"
-    },
     {
       "id": "bf2c3027-a314-403e-a416-2bfd5d165ad1",
       "name": "Falcon 9 Block 5 | Dragon CRS-2 SpX-35",
@@ -39,6 +20,24 @@
       "status": "Go"
     },
     {
+      "id": "dfcabb3c-078b-4f5b-a47c-0161f248cee9",
+      "name": "Zhuque-2E | Unknown Payload",
+      "rocket": "Zhuque-2",
+      "mission": "Unknown Payload",
+      "date": "2026-10-14",
+      "month": 10,
+      "time": "11:40",
+      "tentative": false,
+      "provider": "LandSpace（藍箭航天）",
+      "country": "CN",
+      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
+      "padDetail": "Launch Area 96A",
+      "orbit": "Unknown",
+      "timezone": "Asia/Shanghai",
+      "descriptionEn": "Details TBD.",
+      "status": "Go"
+    },
+    {
       "id": "df88cfbf-f504-4e11-8370-e33dd6280b5b",
       "name": "Falcon 9 Block 5 | USSF-481",
       "rocket": "Falcon 9",
@@ -55,6 +54,24 @@
       "timezone": "America/Los_Angeles",
       "descriptionEn": "A classified mission for the United States Space Force. It is possibly a batch of classified LEO satellites based on SpaceX’s Starshield satellite bus, based on locations of ascent rocket stage drop zones being fits with previous SDA Transport Layer launches.",
       "status": "Go"
+    },
+    {
+      "id": "3b430f81-0ff1-4d85-8a1a-cef0de326198",
+      "name": "Falcon 9 Block 5 | Bandwagon 5 (Dedicated Mid-Inclination Rideshare)",
+      "rocket": "Falcon 9",
+      "mission": "Bandwagon 5 (Dedicated Mid-Inclination Rideshare)",
+      "date": "2026-10-19",
+      "month": 10,
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Cape Canaveral SFS, FL, USA",
+      "padDetail": "ケープカナベラル宇宙軍基地 SLC-40",
+      "orbit": "低軌道（LEO）",
+      "timezone": "America/New_York",
+      "descriptionEn": "Dedicated rideshare flight to a mid-inclination orbit with dozens of small microsatellites and nanosatellites for commercial and government customers.",
+      "status": "TBC"
     },
     {
       "id": "69ebbcd2-b257-4070-9ef9-21e7d1f8a883",
@@ -95,6 +112,24 @@
       "descriptionJa": "Starlink巨大衛星群用の27基の衛星のバッチ。これはSpaceXの宇宙ベースのインターネット通信システムプロジェクトである。"
     },
     {
+      "id": "7766f3bb-674c-4c71-b986-963bd633fcfe",
+      "name": "Electron | We're Not Hawking Around (3x HawkEye 360)",
+      "rocket": "Electron",
+      "mission": "We're Not Hawking Around (3x HawkEye 360)",
+      "date": "2026-10-21",
+      "month": 10,
+      "time": null,
+      "tentative": true,
+      "provider": "Rocket Lab",
+      "country": "NZ",
+      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
+      "padDetail": "Unknown Pad",
+      "orbit": "太陽同期軌道（SSO）",
+      "timezone": "Pacific/Auckland",
+      "descriptionEn": "HawkEye 360 is a a space-based civil global intelligence satellite network using radio frequency (RF) technology to help monitor transportation across air, land and sea and assist with emergencies, and to provide civil SIGINT (Signal Intelligence) mission.\r\n\r\nThe constellation of small satellites (named Hawk ) will collect information on specific radio signals worldwide to provide high-precision radio frequency mapping and analytics from Low Earth orbit (LEO).",
+      "status": "TBD"
+    },
+    {
       "id": "ef9850ad-1096-425b-9d27-f7bbd186e61a",
       "name": "Vulcan VC6L | Amazon Leo (LV-01)",
       "rocket": "Vulcan VC6L",
@@ -128,24 +163,6 @@
       "orbit": "低軌道（LEO）",
       "timezone": "America/Cayenne",
       "descriptionEn": "Amazon Leo, formerly known as Project Kuiper, is a mega constellation of satellites in Low Earth Orbit that will offer broadband internet access, this constellation will be managed by Kuiper Systems LLC, a subsidiary of Amazon. This constellation is planned to be composed of 3,276 satellites. The satellites are projected to be placed in 98 orbital planes in three orbital layers, one at 590 km, 610 km and 630 km altitude.\r\n\r\n35-40 satellites will be carried on each Ariane 6 launch.",
-      "status": "TBD"
-    },
-    {
-      "id": "3b430f81-0ff1-4d85-8a1a-cef0de326198",
-      "name": "Falcon 9 Block 5 | Bandwagon 5 (Dedicated Mid-Inclination Rideshare)",
-      "rocket": "Falcon 9",
-      "mission": "Bandwagon 5 (Dedicated Mid-Inclination Rideshare)",
-      "date": "2026-10-31",
-      "month": 10,
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "Cape Canaveral SFS, FL, USA",
-      "padDetail": "ケープカナベラル宇宙軍基地 SLC-40",
-      "orbit": "低軌道（LEO）",
-      "timezone": "America/New_York",
-      "descriptionEn": "Dedicated rideshare flight to a mid-inclination orbit with dozens of small microsatellites and nanosatellites for commercial and government customers.",
       "status": "TBD"
     },
     {
@@ -201,6 +218,24 @@
       "orbit": "低軌道（LEO）",
       "timezone": "Asia/Kolkata",
       "descriptionEn": "Ride-share launch of multiple satellites, including the in-orbit refueling demonstration satellite AayulSAT-1A from OrbitAID Aerospace. Other payload's identities TBD.",
+      "status": "TBD"
+    },
+    {
+      "id": "426bd2a5-02dd-4fbd-9f4d-2b8439c3a1ff",
+      "name": "Electron | The Sea God Surveys (iQPS Launch 9)",
+      "rocket": "Electron",
+      "mission": "The Sea God Surveys (iQPS Launch 9)",
+      "date": "2026-11-04",
+      "month": 11,
+      "time": null,
+      "tentative": true,
+      "provider": "Rocket Lab",
+      "country": "NZ",
+      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
+      "padDetail": "Unknown Pad",
+      "orbit": "低軌道（LEO）",
+      "timezone": "Pacific/Auckland",
+      "descriptionEn": "Synthetic aperture radar Earth observation satellite for Japanese Earth imaging company iQPS.",
       "status": "TBD"
     },
     {
@@ -328,45 +363,19 @@
       "timezone": "America/New_York",
       "descriptionEn": "Demonstration flight of the Astrobotic Griffin lander and its engines, initially contracted for the cancelled NASA VIPER (Volatiles Investigating Polar Exploration Rover) mission. The vacated payload spot will now host the FLIP (FLEX Lunar Innovation Platform) lunar rover from Astrolab.",
       "status": "TBD"
-    },
-    {
-      "id": "0cf92611-82a8-4095-a0b4-dda2e74b1fff",
-      "name": "LVM-3 | GSAT-32 (GSAT-N3)",
-      "rocket": "LVM-3 (GSLV Mk III)",
-      "mission": "GSAT-32 (GSAT-N3)",
-      "date": "2026-12-31",
-      "month": 12,
-      "time": null,
-      "tentative": true,
-      "provider": "ISRO（インド宇宙研究機関）",
-      "country": "IN",
-      "pad": "Satish Dhawan Space Centre, India",
-      "padDetail": "サティッシュ・ダワン宇宙センター 第2射点",
-      "orbit": "静止遷移軌道（GTO）",
-      "timezone": "Asia/Kolkata",
-      "descriptionEn": "GSAT-32 is a geostationary communications satellite for the Indian Space Research Organization (ISRO). The spacecraft is a replacement for GSAT-6A that failed before reaching geostationary orbit after launch in 2018.",
-      "status": "TBD"
-    },
-    {
-      "id": "a5e81552-ecdd-4d89-b6bd-b594e22ca891",
-      "name": "New Glenn | Blue Ring-1",
-      "rocket": "New Glenn",
-      "mission": "Blue Ring-1",
-      "date": "2026-12-31",
-      "month": 12,
-      "time": null,
-      "tentative": true,
-      "provider": "Blue Origin（ブルーオリジン）",
-      "country": "US",
-      "pad": "Cape Canaveral SFS, FL, USA",
-      "padDetail": "Launch Complex 36A",
-      "orbit": "静止遷移軌道（GTO）",
-      "timezone": "America/New_York",
-      "descriptionEn": "The first mission of Blue Ring, Blue Origin's all-in-one, high-powered hybrid solar electric and chemical propelled spacecraft, will test the spacecraft's operations in Geostationary Transfer Orbit (GTO), as well as subsequent operations after reaching Geostationary Orbit (GEO).\r\n\r\nIt will carry one of Scout Space's flagship next-generation space domain awareness (SDA) Owl sensors, which is designed to enhance real-time tracking, characterization, and assessment of space objects by integrating advanced optical sensing, onboard artificial intelligence-driven processing, and autonomous decision-making capabilities to deliver domain-wide intelligence in space in support of the U.S. Space Force’s space control mission set.\r\n\r\nBlue Ring will also carry Optimum Technologies (OpTech)'s next-generation Caracal optical payload, which is designed to provide actionable insights on resident space objects and orbital activity and includes onboard image storage, object detection algorithms, and passive thermal control. The payload is designed to operate flexibly across dynamic orbits over a year-long mission profile.\r\n\r\nSeveral internal Blue Origin payloads will also be hosted.",
-      "status": "TBD"
     }
   ],
   "recent": [
+    {
+      "id": "97c6f5e1-299e-4652-b72d-9618ac047076",
+      "rocket": "Falcon 9",
+      "mission": "Starlink Group 15-25",
+      "date": "2026-10-13",
+      "country": "",
+      "provider": "SpaceX",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "da43dc2c-00af-4cc1-8ef1-90a60b2eb9e5",
       "rocket": "Falcon 9",
