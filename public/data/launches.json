@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-13T17:58:04.110Z",
+  "updated": "2026-10-13T22:30:09.186Z",
   "launches": [
     {
       "id": "dfcabb3c-078b-4f5b-a47c-0161f248cee9",
@@ -149,24 +149,6 @@
       "status": "TBD"
     },
     {
-      "id": "7bdc412b-c965-4517-a131-f57a01189803",
-      "name": "Ariane 64 Block 2 | Amazon Leo (LE-04)",
-      "rocket": "Ariane 6",
-      "mission": "Amazon Leo (LE-04)",
-      "date": "2026-10-31",
-      "month": 10,
-      "time": null,
-      "tentative": true,
-      "provider": "Arianespace（アリアンスペース）",
-      "country": "FR",
-      "pad": "Guiana Space Centre, French Guiana",
-      "padDetail": "クールー宇宙センター ELA-4",
-      "orbit": "低軌道（LEO）",
-      "timezone": "America/Cayenne",
-      "descriptionEn": "Amazon Leo, formerly known as Project Kuiper, is a mega constellation of satellites in Low Earth Orbit that will offer broadband internet access, this constellation will be managed by Kuiper Systems LLC, a subsidiary of Amazon. This constellation is planned to be composed of 3,276 satellites. The satellites are projected to be placed in 98 orbital planes in three orbital layers, one at 590 km, 610 km and 630 km altitude.\r\n\r\n35-40 satellites will be carried on each Ariane 6 launch.",
-      "status": "TBD"
-    },
-    {
       "id": "20d5676e-111b-40e3-8923-b218c3665ca2",
       "name": "GSLV Mk II | IRNSS-1L (NVS-03)",
       "rocket": "GSLV Mk II",
@@ -258,10 +240,10 @@
       "status": "TBC"
     },
     {
-      "id": "22e117bf-041c-49d5-9d09-7b180036e143",
-      "name": "Ariane 62 | Metop-SG B1",
+      "id": "7bdc412b-c965-4517-a131-f57a01189803",
+      "name": "Ariane 64 Block 2 | Amazon Leo (LE-04)",
       "rocket": "Ariane 6",
-      "mission": "Metop-SG B1",
+      "mission": "Amazon Leo (LE-04)",
       "date": "2026-11-30",
       "month": 11,
       "time": null,
@@ -270,9 +252,9 @@
       "country": "FR",
       "pad": "Guiana Space Centre, French Guiana",
       "padDetail": "クールー宇宙センター ELA-4",
-      "orbit": "太陽同期軌道（SSO）",
+      "orbit": "低軌道（LEO）",
       "timezone": "America/Cayenne",
-      "descriptionEn": "Second of EUMETSAT's second generation of Metop weather satellites.",
+      "descriptionEn": "Amazon Leo, formerly known as Project Kuiper, is a mega constellation of satellites in Low Earth Orbit that will offer broadband internet access, this constellation will be managed by Kuiper Systems LLC, a subsidiary of Amazon. This constellation is planned to be composed of 3,276 satellites. The satellites are projected to be placed in 98 orbital planes in three orbital layers, one at 590 km, 610 km and 630 km altitude.\r\n\r\n35-40 satellites will be carried on each Ariane 6 launch.",
       "status": "TBD"
     },
     {
@@ -327,6 +309,24 @@
       "orbit": "静止遷移軌道（GTO）",
       "timezone": "Asia/Kolkata",
       "descriptionEn": "TDS-01 (Technology Demonstration Satellite-01) is an Indian geostationary orbit technology demonstration satellite carrying payloads for the Indian Space Research Organisation (ISRO)’s Institute of Plasma Research, Gandhinagar and the CSIR-CEERI, Pilani. \r\n\r\nPayloads to be tested included an internally developed 300 mN electric powered thrusters, atomic clocks, travelling wave tube amplifiers (TWTA) & a quantum communication suite (QuTDS).",
+      "status": "TBD"
+    },
+    {
+      "id": "22e117bf-041c-49d5-9d09-7b180036e143",
+      "name": "Ariane 62 | Metop-SG B1",
+      "rocket": "Ariane 6",
+      "mission": "Metop-SG B1",
+      "date": "2026-12-31",
+      "month": 12,
+      "time": null,
+      "tentative": true,
+      "provider": "Arianespace（アリアンスペース）",
+      "country": "FR",
+      "pad": "Guiana Space Centre, French Guiana",
+      "padDetail": "クールー宇宙センター ELA-4",
+      "orbit": "太陽同期軌道（SSO）",
+      "timezone": "America/Cayenne",
+      "descriptionEn": "Second of EUMETSAT's second generation of Metop weather satellites.",
       "status": "TBD"
     },
     {
