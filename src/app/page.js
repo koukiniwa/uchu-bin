@@ -26,17 +26,20 @@ export default function Home() {
   // 予定記事のslugとタイトルをLaunchDashboardに渡す（手動 + 自動生成）
   const manualPreviews = posts
     .filter(p => p.type === 'preview')
-    .map(p => ({ slug: p.slug, title: p.title, url: `/blog/${p.slug}` }))
+    .map(p => ({ slug: p.slug, title: p.title, missionName: p.missionName || '', url: `/blog/${p.slug}` }))
   // 自動生成のpreview記事
   let autoPreviews = []
   try {
     const fs = require('fs')
     const path = require('path')
     const index = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'public', 'data', 'previews', 'index.json'), 'utf-8'))
-    autoPreviews = (index.previews || []).map(p => ({
-      slug: p.slug, title: p.title, missionName: p.missionName,
-      url: `/blog/preview/${p.slug}`,
-    }))
+    const manualSlugs = new Set(manualPreviews.map(p => p.slug))
+    autoPreviews = (index.previews || [])
+      .filter(p => !manualSlugs.has(p.slug))
+      .map(p => ({
+        slug: p.slug, title: p.title, missionName: p.missionName,
+        url: `/blog/preview/${p.slug}`,
+      }))
   } catch {}
   const previewArticles = [...manualPreviews, ...autoPreviews]
   return (

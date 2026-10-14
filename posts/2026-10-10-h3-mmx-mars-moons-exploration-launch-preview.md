@@ -5,6 +5,7 @@ date: '2026-10-10T12:00:00+09:00'
 category: 'ロケット'
 tags: ['打ち上げ予定']
 type: 'preview'
+missionName: 'Martian Moon eXplorer (MMX)'
 image: '/images/library/h3_001.jpg'
 imageCredit: 'H3ロケット / JAXA'
 ---

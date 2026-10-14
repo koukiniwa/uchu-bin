@@ -4,6 +4,7 @@ description: 'NASA SpaceX Crew-13の打ち上げ予定を日本時間で解説�
 date: '2026-09-29T12:00:00+09:00'
 category: '有人宇宙飛行'
 type: 'preview'
+missionName: 'Crew-13'
 image: '/images/library/falcon9_001.jpg'
 imageCredit: 'Falcon 9 / SpaceX'
 ---

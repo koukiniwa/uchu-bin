@@ -4,6 +4,7 @@ description: 'Falcon Heavy（ファルコンヘビー）によるNROL-97の打�
 date: '2026-09-29T18:00:00+09:00'
 category: 'ロケット'
 type: 'preview'
+missionName: 'NROL-97'
 image: '/images/library/falconheavy_001.jpg'
 imageCredit: '過去のFalcon Heavy打ち上げ / SpaceX'
 ---
