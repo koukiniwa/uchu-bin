@@ -21,6 +21,7 @@ export function getAllPosts() {
         category: data.category || '未分類',
         image: data.image || '',
         type: data.type || '',
+        missionName: data.missionName || '',
       }
     })
     .sort((a, b) => {
