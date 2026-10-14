@@ -1,21 +1,6 @@
 {
-  "updated": "2026-10-14T07:10:14.855Z",
+  "updated": "2026-10-14T13:21:08.205Z",
   "featured": [
-    {
-      "id": "dfcabb3c-078b-4f5b-a47c-0161f248cee9",
-      "rocket": "Zhuque-2",
-      "mission": "Unknown Payload",
-      "description": "Details TBD.",
-      "highlight": "中国の民間宇宙企業LandSpaceが開発した「朱雀2号E型」による打ち上げです。朱雀2号は2023年に世界初の液体メタンロケットとして軌道投入に成功した歴史的な機体であり、その改良版となる今回のミッションは中国民間宇宙産業の実力を示す重要な一歩です。ペイロードの詳細は非公表ですが、商業打ち上げ市場における中国民間企業の台頭を象徴するミッションとして注目されています。",
-      "date": "2026-10-14",
-      "time": "11:40",
-      "tentative": false,
-      "provider": "LandSpace",
-      "country": "CN",
-      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
-      "status": "Go",
-      "orbit": "Unknown"
-    },
     {
       "id": "69ebbcd2-b257-4070-9ef9-21e7d1f8a883",
       "rocket": "H3",
