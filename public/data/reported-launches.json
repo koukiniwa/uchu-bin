@@ -473,6 +473,12 @@
       "name": "Falcon 9 Block 5 | Dragon CRS-2 SpX-35",
       "status": "Launch Successful",
       "date": "2026-10-13T16:19:48.870Z"
+    },
+    {
+      "id": "dfcabb3c-078b-4f5b-a47c-0161f248cee9",
+      "name": "Zhuque-2E Block 2 | 10 satellites",
+      "status": "Launch Successful",
+      "date": "2026-10-14T16:56:15.694Z"
     }
   ]
 }
