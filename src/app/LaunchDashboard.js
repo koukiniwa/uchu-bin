@@ -220,12 +220,16 @@ function LaunchModal({ launch, onClose, previewArticles = [] }) {
 
   // 予定記事があるかチェック
   const missionSlug = (launch.mission || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')
+  const missionAbbrev = (launch.mission || '').match(/\(([^)]+)\)/)?.[1]?.toLowerCase() || ''
   const previewArticle = previewArticles.find(a => {
     if (!missionSlug || missionSlug.length < 3) return false
     const s = (a.slug || '').toLowerCase()
     if (a.missionName) {
       const aMSlug = a.missionName.toLowerCase().replace(/[^a-z0-9]+/g, '-')
-      return aMSlug === missionSlug
+      if (aMSlug === missionSlug) return true
+      // 括弧内の略称で一致（MMX, NROL-97等）
+      const aAbbrev = (a.missionName || '').match(/\(([^)]+)\)/)?.[1]?.toLowerCase() || ''
+      if (missionAbbrev && aAbbrev && missionAbbrev === aAbbrev) return true
     }
     return s.includes('preview') && s.includes(missionSlug)
   })
