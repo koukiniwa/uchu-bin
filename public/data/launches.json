@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-15T13:07:06.514Z",
+  "updated": "2026-10-15T18:02:39.214Z",
   "launches": [
     {
       "id": "df88cfbf-f504-4e11-8370-e33dd6280b5b",
@@ -91,7 +91,7 @@
       "orbit": "太陽同期軌道（SSO）",
       "timezone": "Pacific/Auckland",
       "descriptionEn": "HawkEye 360 is a a space-based civil global intelligence satellite network using radio frequency (RF) technology to help monitor transportation across air, land and sea and assist with emergencies, and to provide civil SIGINT (Signal Intelligence) mission.\r\n\r\nThe constellation of small satellites (named Hawk ) will collect information on specific radio signals worldwide to provide high-precision radio frequency mapping and analytics from Low Earth orbit (LEO).",
-      "status": "TBD"
+      "status": "TBC"
     },
     {
       "id": "e2886a96-5ce9-4f45-872f-4e25a00be837",
