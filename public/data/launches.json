@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-15T07:02:14.034Z",
+  "updated": "2026-10-15T13:07:06.514Z",
   "launches": [
     {
       "id": "df88cfbf-f504-4e11-8370-e33dd6280b5b",
@@ -8,7 +8,7 @@
       "mission": "USSF-481",
       "date": "2026-10-15",
       "month": 10,
-      "time": "23:44",
+      "time": "23:57",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
