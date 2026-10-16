@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-16T05:41:14.110Z",
+  "updated": "2026-10-16T15:15:04.534Z",
   "launches": [
     {
       "id": "3b430f81-0ff1-4d85-8a1a-cef0de326198",
@@ -100,8 +100,8 @@
       "mission": "Unknown Payload",
       "date": "2026-10-22",
       "month": 10,
-      "time": null,
-      "tentative": true,
+      "time": "02:57",
+      "tentative": false,
       "provider": "CASC（中国航天科技集団）",
       "country": "CN",
       "pad": "Wenchang Space Launch Site, People's Republic of China",
@@ -109,7 +109,7 @@
       "orbit": "Unknown",
       "timezone": "Asia/Shanghai",
       "descriptionEn": "Details TBD.",
-      "status": "TBC"
+      "status": "Go"
     },
     {
       "id": "3621085f-deae-4f89-bd54-c0f96ee44421",
@@ -384,16 +384,6 @@
       "date": "2026-10-14",
       "country": "CN",
       "provider": "LandSpace",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "bf2c3027-a314-403e-a416-2bfd5d165ad1",
-      "rocket": "Falcon 9",
-      "mission": "Dragon CRS-2 SpX-35",
-      "date": "2026-10-13",
-      "country": "US",
-      "provider": "SpaceX",
       "result": "success",
       "resultLabel": "成功"
     }
