@@ -33,8 +33,8 @@
       "name": "Ariane 64 Block 2 | Amazon Leo (LE-04)",
       "rocket": "Ariane 6",
       "mission": "Amazon Leo (LE-04)",
-      "date": "2026-10-31",
-      "month": 10,
+      "date": "2026-11-23",
+      "month": 11,
       "time": null,
       "tentative": true,
       "provider": "Arianespace（アリアンスペース）",
@@ -51,8 +51,8 @@
       "name": "Ariane 62 | Metop-SG B1",
       "rocket": "Ariane 6",
       "mission": "Metop-SG B1",
-      "date": "2026-11-30",
-      "month": 11,
+      "date": "2026-12-31",
+      "month": 12,
       "time": null,
       "tentative": true,
       "provider": "Arianespace（アリアンスペース）",
@@ -65,5 +65,5 @@
       "status": "TBD"
     }
   ],
-  "updated": "2026-10-13T20:44:56.150Z"
+  "updated": "2026-10-16T18:52:15.544Z"
 }

@@ -29,6 +29,42 @@
   "articles": [],
   "upcoming": [
     {
+      "id": "6b95bcc8-1f88-4539-84fe-f63630138766",
+      "name": "Long March 8A | Unknown Payload",
+      "rocket": "Long March 8A",
+      "mission": "Unknown Payload",
+      "date": "2026-10-22",
+      "month": 10,
+      "time": "02:57",
+      "tentative": false,
+      "provider": "CASC（中国航天科技集団）",
+      "country": "CN",
+      "pad": "Wenchang Space Launch Site, People's Republic of China",
+      "padDetail": "Commercial LC-1",
+      "orbit": "Unknown",
+      "timezone": "Asia/Shanghai",
+      "descriptionEn": "Details TBD.",
+      "status": "Go"
+    },
+    {
+      "id": "3621085f-deae-4f89-bd54-c0f96ee44421",
+      "name": "Long March 4B | Unknown Payload",
+      "rocket": "Long March 4B",
+      "mission": "Unknown Payload",
+      "date": "2026-10-23",
+      "month": 10,
+      "time": null,
+      "tentative": true,
+      "provider": "CASC（中国航天科技集団）",
+      "country": "CN",
+      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
+      "padDetail": "Launch Area 94 (SLS-2 / 603)",
+      "orbit": "Unknown",
+      "timezone": "Asia/Shanghai",
+      "descriptionEn": "Details TBD.",
+      "status": "TBC"
+    },
+    {
       "id": "dc570565-4dcf-4ab9-8174-bf88efef477f",
       "name": "Long March 12A | Flight 2",
       "rocket": "Long March 12A",
@@ -47,5 +83,5 @@
       "status": "TBD"
     }
   ],
-  "updated": "2026-10-13T20:47:07.645Z"
+  "updated": "2026-10-16T18:54:27.614Z"
 }
