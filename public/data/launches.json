@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-17T11:25:04.552Z",
+  "updated": "2026-10-17T12:05:49.535Z",
   "launches": [
     {
       "id": "3b430f81-0ff1-4d85-8a1a-cef0de326198",
@@ -390,16 +390,6 @@
       "date": "2026-10-16",
       "country": "",
       "provider": "SpaceX",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "dfcabb3c-078b-4f5b-a47c-0161f248cee9",
-      "rocket": "Zhuque-2",
-      "mission": "10 satellites",
-      "date": "2026-10-14",
-      "country": "CN",
-      "provider": "LandSpace",
       "result": "success",
       "resultLabel": "成功"
     }
