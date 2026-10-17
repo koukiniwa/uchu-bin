@@ -24,6 +24,8 @@ jobs:
         run: npm install
 
       - name: 打ち上げデータ取得
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: node scripts/fetch-launches.js
 
       - name: 注目の打ち上げデータ生成
