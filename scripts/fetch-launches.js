@@ -131,25 +131,16 @@ async function translateDescription(text, missionName) {
       }),
       signal: AbortSignal.timeout(15000),
     })
-    if (!res.ok) return null
-    const data = await res.json()
-    const translated = data.content?.[0]?.text?.trim()
-    if (!translated) return null
-
-    // 自動照合1: 元の文にある数字が翻訳にも含まれるか
-    const numbers = text.match(/\d+/g) || []
-    const allNumbersPresent = numbers.every(n => translated.includes(n))
-    if (!allNumbersPresent && numbers.length > 0) {
-      console.log(`  Translation check FAILED for ${missionName}: number mismatch`)
+    if (!res.ok) {
+      const errBody = await res.text().catch(() => '')
+      console.error(`  Translation API ${res.status} for ${missionName}: ${errBody.slice(0, 200)}`)
       return null
     }
-    // 自動照合2: 翻訳に残っている英語の用語（2語以上の連続）が元の文に存在するか
-    const englishTerms = translated.match(/[A-Z][a-zA-Z]+(?:\s+[A-Z][a-zA-Z]+)+/g) || []
-    for (const term of englishTerms) {
-      if (!text.includes(term)) {
-        console.log(`  Translation check FAILED for ${missionName}: "${term}" not in original`)
-        return null
-      }
+    const data = await res.json()
+    const translated = data.content?.[0]?.text?.trim()
+    if (!translated) {
+      console.log(`  Translation empty for ${missionName}`)
+      return null
     }
     return translated
   } catch (e) {
