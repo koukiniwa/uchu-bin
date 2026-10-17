@@ -218,20 +218,65 @@ async function main() {
         return res
       } catch (e) {
         console.error(`Attempt ${attempt}/${retries} failed for ${url.slice(0, 80)}: ${e.message}`)
-        if (attempt === retries) throw e
+        if (attempt === retries) return null
         await new Promise(r => setTimeout(r, 3000))
       }
     }
   }
-  const [upcomingRes, recentRes] = await Promise.all([
-    fetchWithRetry(API_URL),
-    fetchWithRetry('https://ll.thespacedevs.com/2.3.0/launches/previous/?limit=10&mode=normal'),
-  ])
-  if (!upcomingRes.ok) throw new Error(`API error: ${upcomingRes.status}`)
-  const data = await upcomingRes.json()
+
+  let data, recentData
+  try {
+    const [upcomingRes, recentRes] = await Promise.all([
+      fetchWithRetry(API_URL),
+      fetchWithRetry('https://ll.thespacedevs.com/2.3.0/launches/previous/?limit=10&mode=normal'),
+    ])
+    if (!upcomingRes || !upcomingRes.ok) throw new Error(`API error: ${upcomingRes?.status || 'no response'}`)
+    data = await upcomingRes.json()
+    recentData = (recentRes && recentRes.ok) ? await recentRes.json() : { results: [] }
+  } catch (apiError) {
+    console.error(`API取得失敗: ${apiError.message}`)
+    console.log('既存データで翻訳のみ実行します...')
+    // 既存データを読み込んで翻訳だけ実行
+    try {
+      const existing = JSON.parse(fs.readFileSync(OUTPUT_PATH, 'utf-8'))
+      const overrides = loadOverrides()
+      let translationCount = 0
+      let existingTranslations = {}
+      for (const l of (existing.launches || [])) {
+        if (l.descriptionJa && l.descriptionEn) {
+          existingTranslations[l.descriptionEn] = l.descriptionJa
+        }
+      }
+      for (const l of (existing.launches || [])) {
+        const override = overrides[l.mission] || overrides[l.id]
+        if (override) {
+          if (override.descriptionJa) l.descriptionJa = override.descriptionJa
+          continue
+        }
+        if (l.descriptionJa) continue
+        if (l.descriptionEn && translationCount < 10) {
+          console.log(`  Translating: ${l.mission}...`)
+          const ja = await translateDescription(l.descriptionEn, l.mission)
+          if (ja) {
+            l.descriptionJa = ja
+            translationCount++
+          }
+          await new Promise(r => setTimeout(r, 1000))
+        }
+      }
+      if (translationCount > 0) {
+        fs.writeFileSync(OUTPUT_PATH, JSON.stringify(existing, null, 2), 'utf-8')
+        console.log(`API失敗時フォールバック: ${translationCount}件翻訳完了`)
+      } else {
+        console.log('翻訳対象なし（全て翻訳済み or APIキーなし）')
+      }
+    } catch (e2) {
+      console.error(`フォールバックも失敗: ${e2.message}`)
+    }
+    return // API取得失敗時はここで終了（翻訳は実行済み）
+  }
 
   // 直近3日の完了した打ち上げを取得
-  const recentData = recentRes.ok ? await recentRes.json() : { results: [] }
   const threeDaysAgo = Date.now() - 3 * 24 * 60 * 60 * 1000
   const recent = recentData.results
     .filter(l => {
