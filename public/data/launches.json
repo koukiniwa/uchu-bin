@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-17T06:38:22.963Z",
+  "updated": "2026-10-17T11:25:04.552Z",
   "launches": [
     {
       "id": "3b430f81-0ff1-4d85-8a1a-cef0de326198",
@@ -283,7 +283,8 @@
       "orbit": "低軌道（LEO）",
       "timezone": "Asia/Qyzylorda",
       "descriptionEn": "Progress resupply mission to the International Space Station.",
-      "status": "TBC"
+      "status": "TBC",
+      "descriptionJa": "国際宇宙ステーションへの進捗補給ミッション。"
     },
     {
       "id": "d74afbc7-0de5-491c-be05-4e9c31f736ac",
@@ -301,7 +302,8 @@
       "orbit": "低軌道（LEO）",
       "timezone": "America/New_York",
       "descriptionEn": "This is the 25th flight of the Orbital ATK's uncrewed resupply spacecraft Cygnus and its 24th flight to the International Space Station under the Commercial Resupply Services contract with NASA.",
-      "status": "TBD"
+      "status": "TBD",
+      "descriptionJa": "これはOrbital ATKの無人補給宇宙船Cygnusの25回目のフライトであり、NASAとの商業補給サービス契約に基づく国際宇宙ステーションへの24回目のフライトである。"
     },
     {
       "id": "dfac5ab7-7017-454f-b6cf-eeed277a97b5",
@@ -319,7 +321,8 @@
       "orbit": "低軌道（LEO）",
       "timezone": "Asia/Kolkata",
       "descriptionEn": "First uncrewed orbital test flight of the Gaganyaan capsule.",
-      "status": "TBD"
+      "status": "TBD",
+      "descriptionJa": "Gaganyaan カプセルの初期の無人軌道試験飛行。"
     },
     {
       "id": "b5a9bccb-30d7-4af6-8ad1-fabb563be53c",
@@ -337,7 +340,8 @@
       "orbit": "静止遷移軌道（GTO）",
       "timezone": "Asia/Kolkata",
       "descriptionEn": "TDS-01 (Technology Demonstration Satellite-01) is an Indian geostationary orbit technology demonstration satellite carrying payloads for the Indian Space Research Organisation (ISRO)’s Institute of Plasma Research, Gandhinagar and the CSIR-CEERI, Pilani. \r\n\r\nPayloads to be tested included an internally developed 300 mN electric powered thrusters, atomic clocks, travelling wave tube amplifiers (TWTA) & a quantum communication suite (QuTDS).",
-      "status": "TBD"
+      "status": "TBD",
+      "descriptionJa": "TDS-01（Technology Demonstration Satellite-01）はインドの静止軌道技術実証衛星で、インド宇宙研究機関（ISRO）のPlasma Research Institute（ガンディナガル）とCSIR-CEERI（ピラニ）のペイロードを搭載している。\n\nテストするペイロードには、内部開発された300 mN電動推進器、原子時計、進行波管増幅器（TWTA）および量子通信スイート（QuTDS）が含まれた。"
     },
     {
       "id": "22e117bf-041c-49d5-9d09-7b180036e143",
@@ -355,7 +359,8 @@
       "orbit": "太陽同期軌道（SSO）",
       "timezone": "America/Cayenne",
       "descriptionEn": "Second of EUMETSAT's second generation of Metop weather satellites.",
-      "status": "TBD"
+      "status": "TBD",
+      "descriptionJa": "EUMETSAT の第二世代Metop気象衛星の2番目。"
     },
     {
       "id": "71df1dd0-d658-4762-b0bc-0fca6886aea7",
@@ -373,7 +378,8 @@
       "orbit": "極軌道",
       "timezone": "America/New_York",
       "descriptionEn": "Classified mission launched by the Space Development Agency (SDA) for Tranche 2 Transport Layer.",
-      "status": "TBD"
+      "status": "TBD",
+      "descriptionJa": "Space Development Agency（SDA）がTranche 2 Transport Layerのために打ち上げた機密ミッション。"
     }
   ],
   "recent": [
