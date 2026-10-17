@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-17T15:04:22.383Z",
+  "updated": "2026-10-17T18:12:49.612Z",
   "launches": [
     {
       "id": "3b430f81-0ff1-4d85-8a1a-cef0de326198",
@@ -16,9 +16,9 @@
       "padDetail": "ケープカナベラル宇宙軍基地 SLC-40",
       "orbit": "低軌道（LEO）",
       "timezone": "America/New_York",
-      "descriptionEn": "Dedicated rideshare flight to a mid-inclination orbit with dozens of small microsatellites and nanosatellites for commercial and government customers.",
+      "descriptionEn": "Dedicated rideshare flight to a mid-inclination orbit with dozens of small microsatellites and nanosatellites for commercial and government customers.\r\n\r\nThis launch also carries the second demonstration mission for SpaceX’s Project Starfall, which aims to mass-produce reentry capsules designed to autonomously transport valuable customer experiments and other payloads safely back from space to Earth, including for in-orbit manufacturing. \r\n\r\nStarfall is a cylindrical shaped capsule approximately 0.75 meters tall with a diameter of 3.1 meters, weighing approximately 2100 kilograms, and capable of carrying 1000 kilograms of payload. It is designed to be carried on Starship flights.",
       "status": "Go",
-      "descriptionJa": "商業および政府の顧客向けの小型マイクロサテライトおよびナノサテライトを数十個搭載した、中程度の傾斜軌道への専用ライドシェアフライト。"
+      "descriptionJa": "複数の小型マイクロサテライトおよびナノサテライトを商業および政府の顧客向けに中程度の軌道傾斜角の軌道に投入する専用相乗りフライト。\n\n本打ち上げはまた、SpaceXのProject Starfallの第2次デモンストレーションミッションも搭載している。このプロジェクトは、軌道上製造を含む、価値のある顧客の実験およびその他のペイロードを宇宙から地球へ安全に自律的に輸送するように設計された再突入カプセルを大量生産することを目的としている。\n\nStarfallは円筒形のカプセルで、高さ約0.75メートル、直径3.1メートル、重量約2100キログラムであり、1000キログラムのペイロードを搭載することができる。Starshipフライトで運搬されるように設計されている。"
     },
     {
       "id": "69ebbcd2-b257-4070-9ef9-21e7d1f8a883",
