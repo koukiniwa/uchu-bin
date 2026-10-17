@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-17T05:21:32.618Z",
+  "updated": "2026-10-17T06:38:22.963Z",
   "launches": [
     {
       "id": "3b430f81-0ff1-4d85-8a1a-cef0de326198",
@@ -17,7 +17,8 @@
       "orbit": "低軌道（LEO）",
       "timezone": "America/New_York",
       "descriptionEn": "Dedicated rideshare flight to a mid-inclination orbit with dozens of small microsatellites and nanosatellites for commercial and government customers.",
-      "status": "Go"
+      "status": "Go",
+      "descriptionJa": "商業および政府の顧客向けの小型マイクロサテライトおよびナノサテライトを数十個搭載した、中程度の傾斜軌道への専用ライドシェアフライト。"
     },
     {
       "id": "69ebbcd2-b257-4070-9ef9-21e7d1f8a883",
@@ -73,7 +74,8 @@
       "orbit": "Unknown",
       "timezone": "Asia/Shanghai",
       "descriptionEn": "Details TBD.",
-      "status": "Go"
+      "status": "Go",
+      "descriptionJa": "詳細は未定。"
     },
     {
       "id": "7766f3bb-674c-4c71-b986-963bd633fcfe",
@@ -91,7 +93,8 @@
       "orbit": "太陽同期軌道（SSO）",
       "timezone": "Pacific/Auckland",
       "descriptionEn": "HawkEye 360 is a a space-based civil global intelligence satellite network using radio frequency (RF) technology to help monitor transportation across air, land and sea and assist with emergencies, and to provide civil SIGINT (Signal Intelligence) mission.\r\n\r\nThe constellation of small satellites (named Hawk ) will collect information on specific radio signals worldwide to provide high-precision radio frequency mapping and analytics from Low Earth orbit (LEO).",
-      "status": "TBC"
+      "status": "TBC",
+      "descriptionJa": "HawkEye 360は、無線周波数（RF）技術を使用した宇宙ベースの民間グローバル情報衛星ネットワークであり、空、陸、海にわたる輸送の監視を支援し、緊急事態を支援し、民間SIGINT（信号情報）任務を提供します。\n\n小型衛星のコンステレーション（Hawkという名称）は、世界中の特定の無線信号に関する情報を収集し、低軌道（LEO）から高精度の無線周波数マッピングと分析を提供します。"
     },
     {
       "id": "6b95bcc8-1f88-4539-84fe-f63630138766",
@@ -109,7 +112,8 @@
       "orbit": "Unknown",
       "timezone": "Asia/Shanghai",
       "descriptionEn": "Details TBD.",
-      "status": "Go"
+      "status": "Go",
+      "descriptionJa": "詳細は未定。"
     },
     {
       "id": "3621085f-deae-4f89-bd54-c0f96ee44421",
@@ -127,7 +131,8 @@
       "orbit": "Unknown",
       "timezone": "Asia/Shanghai",
       "descriptionEn": "Details TBD.",
-      "status": "TBC"
+      "status": "TBC",
+      "descriptionJa": "詳細は未定。"
     },
     {
       "id": "e2886a96-5ce9-4f45-872f-4e25a00be837",
@@ -164,7 +169,8 @@
       "orbit": "低軌道（LEO）",
       "timezone": "America/New_York",
       "descriptionEn": "Amazon Leo, formerly known as Project Kuiper, is a mega constellation of satellites in Low Earth Orbit that will offer broadband internet access, this constellation will be managed by Kuiper Systems LLC, a subsidiary of Amazon. This constellation is planned to be composed of 3,276 satellites. The satellites are projected to be placed in 98 orbital planes in three orbital layers, one at 590 km, 610 km and 630 km altitude.\r\n\r\n45 satellites will be carried on each Vulcan launch.",
-      "status": "TBD"
+      "status": "TBD",
+      "descriptionJa": "Amazon Leoは、かつてProject Kuiperとして知られており、低軌道の巨大な衛星コンステレーションで、ブロードバンドインターネットアクセスを提供します。このコンステレーションはAmazonの子会社であるKuiper Systems LLCによって管理されます。このコンステレーションは3,276個の衛星で構成される予定です。衛星は高度590 km、610 km、630 kmの3つの軌道層にある98個の軌道面に配置される予定です。\n\n各Vulcan打ち上げで45個の衛星が運ばれます。"
     },
     {
       "id": "20d5676e-111b-40e3-8923-b218c3665ca2",
@@ -201,7 +207,8 @@
       "orbit": "低軌道（LEO）",
       "timezone": "Asia/Shanghai",
       "descriptionEn": "Second test launch of CASC/SAST’s Long March 12A rocket. Payload identities are TBD.",
-      "status": "TBD"
+      "status": "TBD",
+      "descriptionJa": "CASC/SASTのLong March 12Aロケットの2番目のテスト打ち上げ。ペイロードの詳細は未定。"
     },
     {
       "id": "e59ff9a4-f72f-4841-8546-3c94346ecdba",
@@ -219,7 +226,8 @@
       "orbit": "低軌道（LEO）",
       "timezone": "Asia/Kolkata",
       "descriptionEn": "Ride-share launch of multiple satellites, including the in-orbit refueling demonstration satellite AayulSAT-1A from OrbitAID Aerospace. Other payload's identities TBD.",
-      "status": "TBD"
+      "status": "TBD",
+      "descriptionJa": "複数の衛星の相乗り打ち上げで、OrbitAID AerospaceのAayulSAT-1Aを含む。その他のペイロードのアイデンティティは未定。"
     },
     {
       "id": "426bd2a5-02dd-4fbd-9f4d-2b8439c3a1ff",
@@ -237,7 +245,8 @@
       "orbit": "低軌道（LEO）",
       "timezone": "Pacific/Auckland",
       "descriptionEn": "Synthetic aperture radar Earth observation satellite for Japanese Earth imaging company iQPS.",
-      "status": "TBD"
+      "status": "TBD",
+      "descriptionJa": "日本の地球観測会社iQPSのための合成開口レーダー地球観測衛星。"
     },
     {
       "id": "7bdc412b-c965-4517-a131-f57a01189803",
@@ -255,7 +264,8 @@
       "orbit": "低軌道（LEO）",
       "timezone": "America/Cayenne",
       "descriptionEn": "Amazon Leo, formerly known as Project Kuiper, is a mega constellation of satellites in Low Earth Orbit that will offer broadband internet access, this constellation will be managed by Kuiper Systems LLC, a subsidiary of Amazon. This constellation is planned to be composed of 3,276 satellites. The satellites are projected to be placed in 98 orbital planes in three orbital layers, one at 590 km, 610 km and 630 km altitude.\r\n\r\n35-40 satellites will be carried on each Ariane 6 launch.",
-      "status": "TBD"
+      "status": "TBD",
+      "descriptionJa": "Amazon Leoは以前Project Kuiperとして知られていた低軌道の巨大衛星群であり、ブロードバンドインターネットアクセスを提供する予定です。この衛星群はAmazonの子会社であるKuiper Systems LLCによって管理されます。この衛星群は3,276個の衛星で構成される予定です。衛星は98個の軌道面に配置され、3つの軌道層に分かれており、高度590km、610km、630kmに位置します。\n\n各Ariane 6の打ち上げで35～40個の衛星が運ばれます。"
     },
     {
       "id": "8dd5de11-831b-445f-86f0-bffefe0550d9",
