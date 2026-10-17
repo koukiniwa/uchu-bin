@@ -115,7 +115,8 @@ function loadOverrides() {
 // ミッション概要をClaudeで翻訳（ANTHROPIC_API_KEYがある場合のみ）
 async function translateDescription(text, missionName) {
   const apiKey = process.env.ANTHROPIC_API_KEY
-  if (!apiKey || !text || text.length < 10) return null
+  if (!apiKey) { console.log(`  Translation skipped (no API key)`); return null }
+  if (!text || text.length < 10) { console.log(`  Translation skipped (text too short: ${text?.length})`); return null }
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
