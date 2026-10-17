@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-17T12:05:49.535Z",
+  "updated": "2026-10-17T15:04:22.383Z",
   "launches": [
     {
       "id": "3b430f81-0ff1-4d85-8a1a-cef0de326198",
@@ -116,14 +116,33 @@
       "descriptionJa": "詳細は未定。"
     },
     {
+      "id": "9648124f-8568-46d2-86d7-4b4d6f12187f",
+      "name": "Long March 6A | Unknown Payload",
+      "rocket": "Long March 6A",
+      "mission": "Unknown Payload",
+      "date": "2026-10-23",
+      "month": 10,
+      "time": "10:15",
+      "tentative": false,
+      "provider": "CASC（中国航天科技集団）",
+      "country": "CN",
+      "pad": "Taiyuan Satellite Launch Center, People's Republic of China",
+      "padDetail": "Launch Complex 9A",
+      "orbit": "Unknown",
+      "timezone": "Asia/Shanghai",
+      "descriptionEn": "Details TBD.",
+      "status": "Go",
+      "descriptionJa": "詳細は未定。"
+    },
+    {
       "id": "3621085f-deae-4f89-bd54-c0f96ee44421",
       "name": "Long March 4B | Unknown Payload",
       "rocket": "Long March 4B",
       "mission": "Unknown Payload",
       "date": "2026-10-23",
       "month": 10,
-      "time": null,
-      "tentative": true,
+      "time": "19:25",
+      "tentative": false,
       "provider": "CASC（中国航天科技集団）",
       "country": "CN",
       "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
@@ -131,7 +150,7 @@
       "orbit": "Unknown",
       "timezone": "Asia/Shanghai",
       "descriptionEn": "Details TBD.",
-      "status": "TBC",
+      "status": "Go",
       "descriptionJa": "詳細は未定。"
     },
     {
@@ -361,25 +380,6 @@
       "descriptionEn": "Second of EUMETSAT's second generation of Metop weather satellites.",
       "status": "TBD",
       "descriptionJa": "EUMETSAT の第二世代Metop気象衛星の2番目。"
-    },
-    {
-      "id": "71df1dd0-d658-4762-b0bc-0fca6886aea7",
-      "name": "Falcon 9 Block 5 | SDA Tranche 2 Transport Layer D",
-      "rocket": "Falcon 9",
-      "mission": "SDA Tranche 2 Transport Layer D",
-      "date": "2026-12-31",
-      "month": 12,
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "",
-      "pad": "Cape Canaveral SFS, FL, USA",
-      "padDetail": "Unknown Pad",
-      "orbit": "極軌道",
-      "timezone": "America/New_York",
-      "descriptionEn": "Classified mission launched by the Space Development Agency (SDA) for Tranche 2 Transport Layer.",
-      "status": "TBD",
-      "descriptionJa": "Space Development Agency（SDA）がTranche 2 Transport Layerのために打ち上げた機密ミッション。"
     }
   ],
   "recent": [
