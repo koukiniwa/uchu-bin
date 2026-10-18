@@ -205,24 +205,6 @@
   "articles": [],
   "upcoming": [
     {
-      "id": "df88cfbf-f504-4e11-8370-e33dd6280b5b",
-      "name": "Falcon 9 Block 5 | USSF-481",
-      "rocket": "Falcon 9",
-      "mission": "USSF-481",
-      "date": "2026-10-15",
-      "month": 10,
-      "time": "23:57",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "",
-      "pad": "Vandenberg SFB, CA, USA",
-      "padDetail": "ヴァンデンバーグ宇宙軍基地 SLC-4E",
-      "orbit": "極軌道",
-      "timezone": "America/Los_Angeles",
-      "descriptionEn": "A classified mission for the United States Space Force. It is possibly a batch of classified LEO satellites based on SpaceX’s Starshield satellite bus, based on locations of ascent rocket stage drop zones being fits with previous SDA Transport Layer launches.",
-      "status": "Go"
-    },
-    {
       "id": "3b430f81-0ff1-4d85-8a1a-cef0de326198",
       "name": "Falcon 9 Block 5 | Bandwagon 5 (Dedicated Mid-Inclination Rideshare)",
       "rocket": "Falcon 9",
@@ -237,8 +219,9 @@
       "padDetail": "ケープカナベラル宇宙軍基地 SLC-40",
       "orbit": "低軌道（LEO）",
       "timezone": "America/New_York",
-      "descriptionEn": "Dedicated rideshare flight to a mid-inclination orbit with dozens of small microsatellites and nanosatellites for commercial and government customers.",
-      "status": "Go"
+      "descriptionEn": "Dedicated rideshare flight to a mid-inclination orbit with dozens of small microsatellites and nanosatellites for commercial and government customers.\r\n\r\nThis launch also carries the second demonstration mission for SpaceX’s Project Starfall, which aims to mass-produce reentry capsules designed to autonomously transport valuable customer experiments and other payloads safely back from space to Earth, including for in-orbit manufacturing. \r\n\r\nStarfall is a cylindrical shaped capsule approximately 0.75 meters tall with a diameter of 3.1 meters, weighing approximately 2100 kilograms, and capable of carrying 1000 kilograms of payload. It is designed to be carried on Starship flights.",
+      "status": "Go",
+      "descriptionJa": "複数の小型マイクロサテライトおよびナノサテライトを商業および政府の顧客向けに中程度の軌道傾斜角の軌道に投入する専用相乗りフライト。\n\n本打ち上げはまた、SpaceXのProject Starfallの第2次デモンストレーションミッションも搭載している。このプロジェクトは、軌道上製造を含む、価値のある顧客の実験およびその他のペイロードを宇宙から地球へ安全に自律的に輸送するように設計された再突入カプセルを大量生産することを目的としている。\n\nStarfallは円筒形のカプセルで、高さ約0.75メートル、直径3.1メートル、重量約2100キログラムであり、1000キログラムのペイロードを搭載することができる。Starshipフライトで運搬されるように設計されている。"
     },
     {
       "id": "f6af629d-39b5-4f86-bc0c-f8776444a858",
@@ -258,9 +241,28 @@
       "descriptionEn": "A batch of 27 satellites for the Starlink mega-constellation - SpaceX's project for space-based Internet communication system.",
       "status": "Go",
       "descriptionJa": "Starlink巨大衛星群用の27基の衛星のバッチ。これはSpaceXの宇宙ベースのインターネット通信システムプロジェクトである。"
+    },
+    {
+      "id": "e2886a96-5ce9-4f45-872f-4e25a00be837",
+      "name": "Falcon 9 Block 5 | Starlink Group 15-16",
+      "rocket": "Falcon 9",
+      "mission": "Starlink Group 15-16",
+      "date": "2026-10-24",
+      "month": 10,
+      "time": "05:29",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "",
+      "pad": "Vandenberg SFB, CA, USA",
+      "padDetail": "ヴァンデンバーグ宇宙軍基地 SLC-4E",
+      "orbit": "低軌道（LEO）",
+      "timezone": "America/Los_Angeles",
+      "descriptionEn": "A batch of 27 satellites for the Starlink mega-constellation - SpaceX's project for space-based Internet communication system.",
+      "status": "Go",
+      "descriptionJa": "Starlink巨大衛星群用の27基の衛星のバッチ。これはSpaceXの宇宙ベースのインターネット通信システムプロジェクトである。"
     }
   ],
-  "updated": "2026-10-15T19:16:56.660Z",
+  "updated": "2026-10-18T18:13:11.037Z",
   "_launches": [
     {
       "id": "153ef8ef-b12b-43f4-a4bf-05b225c0cd37",

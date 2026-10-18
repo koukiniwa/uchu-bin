@@ -190,7 +190,8 @@
       "orbit": "太陽同期軌道（SSO）",
       "timezone": "Pacific/Auckland",
       "descriptionEn": "HawkEye 360 is a a space-based civil global intelligence satellite network using radio frequency (RF) technology to help monitor transportation across air, land and sea and assist with emergencies, and to provide civil SIGINT (Signal Intelligence) mission.\r\n\r\nThe constellation of small satellites (named Hawk ) will collect information on specific radio signals worldwide to provide high-precision radio frequency mapping and analytics from Low Earth orbit (LEO).",
-      "status": "TBC"
+      "status": "TBC",
+      "descriptionJa": "HawkEye 360は、無線周波数（RF）技術を使用した宇宙ベースの民間グローバル情報衛星ネットワークであり、空、陸、海にわたる輸送の監視を支援し、緊急事態を支援し、民間SIGINT（信号情報）任務を提供します。\n\n小型衛星のコンステレーション（Hawkという名称）は、世界中の特定の無線信号に関する情報を収集し、低軌道（LEO）から高精度の無線周波数マッピングと分析を提供します。"
     },
     {
       "id": "426bd2a5-02dd-4fbd-9f4d-2b8439c3a1ff",
@@ -208,10 +209,11 @@
       "orbit": "低軌道（LEO）",
       "timezone": "Pacific/Auckland",
       "descriptionEn": "Synthetic aperture radar Earth observation satellite for Japanese Earth imaging company iQPS.",
-      "status": "TBD"
+      "status": "TBD",
+      "descriptionJa": "日本の地球観測会社iQPSのための合成開口レーダー地球観測衛星。"
     }
   ],
-  "updated": "2026-10-15T19:20:14.484Z",
+  "updated": "2026-10-18T18:16:27.811Z",
   "_launches": [
     {
       "id": "9f5a4cb6-63f9-47e1-9512-b468bae2a8e6",

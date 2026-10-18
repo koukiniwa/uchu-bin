@@ -133,25 +133,6 @@
     }
   ],
   "articles": [],
-  "upcoming": [
-    {
-      "id": "d3bd7fb2-fac6-49fc-ae52-cee07d2fde67",
-      "name": "Falcon Heavy | Griffin Mission One",
-      "rocket": "Falcon Heavy",
-      "mission": "Griffin Mission One",
-      "date": "2026-12-31",
-      "month": 12,
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "Kennedy Space Center, FL, USA",
-      "padDetail": "ケネディ宇宙センター LC-39A",
-      "orbit": "月軌道",
-      "timezone": "America/New_York",
-      "descriptionEn": "Demonstration flight of the Astrobotic Griffin lander and its engines, initially contracted for the cancelled NASA VIPER (Volatiles Investigating Polar Exploration Rover) mission. The vacated payload spot will now host the FLIP (FLEX Lunar Innovation Platform) lunar rover from Astrolab.",
-      "status": "TBD"
-    }
-  ],
-  "updated": "2026-10-15T19:18:02.317Z"
+  "upcoming": [],
+  "updated": "2026-10-18T18:14:16.656Z"
 }
