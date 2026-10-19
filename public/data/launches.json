@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-19T12:18:50.709Z",
+  "updated": "2026-10-19T19:03:31.655Z",
   "launches": [
     {
       "id": "69ebbcd2-b257-4070-9ef9-21e7d1f8a883",
@@ -173,6 +173,25 @@
       "descriptionJa": "Starlink巨大衛星群用の27基の衛星のバッチ。これはSpaceXの宇宙ベースのインターネット通信システムプロジェクトである。"
     },
     {
+      "id": "57ce0a39-d035-4f16-a418-bd6108f78199",
+      "name": "Falcon 9 Block 5 | Starlink Group 15-18",
+      "rocket": "Falcon 9",
+      "mission": "Starlink Group 15-18",
+      "date": "2026-10-28",
+      "month": 10,
+      "time": "04:31",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "",
+      "pad": "Vandenberg SFB, CA, USA",
+      "padDetail": "ヴァンデンバーグ宇宙軍基地 SLC-4E",
+      "orbit": "低軌道（LEO）",
+      "timezone": "America/Los_Angeles",
+      "descriptionEn": "A batch of 27 satellites for the Starlink mega-constellation - SpaceX's project for space-based Internet communication system.",
+      "status": "Go",
+      "descriptionJa": "Starlink巨大衛星群用の27基の衛星のバッチ。これはSpaceXの宇宙ベースのインターネット通信システムプロジェクトである。"
+    },
+    {
       "id": "ef9850ad-1096-425b-9d27-f7bbd186e61a",
       "name": "Vulcan VC6L | Amazon Leo (LV-01)",
       "rocket": "Vulcan VC6L",
@@ -247,6 +266,25 @@
       "descriptionEn": "Ride-share launch of multiple satellites, including the in-orbit refueling demonstration satellite AayulSAT-1A from OrbitAID Aerospace. Other payload's identities TBD.",
       "status": "TBD",
       "descriptionJa": "複数の衛星の相乗り打ち上げで、OrbitAID AerospaceのAayulSAT-1Aを含む。その他のペイロードのアイデンティティは未定。"
+    },
+    {
+      "id": "3cdb9dee-b5cb-406c-bbd1-06a219930fb7",
+      "name": "Falcon 9 Block 5 | Starlink Group 15-21",
+      "rocket": "Falcon 9",
+      "mission": "Starlink Group 15-21",
+      "date": "2026-11-01",
+      "month": 11,
+      "time": "05:11",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "",
+      "pad": "Vandenberg SFB, CA, USA",
+      "padDetail": "ヴァンデンバーグ宇宙軍基地 SLC-4E",
+      "orbit": "低軌道（LEO）",
+      "timezone": "America/Los_Angeles",
+      "descriptionEn": "A batch of 27 satellites for the Starlink mega-constellation - SpaceX's project for space-based Internet communication system.",
+      "status": "Go",
+      "descriptionJa": "Starlink巨大衛星群用の27基の衛星のバッチ。これはSpaceXの宇宙ベースのインターネット通信システムプロジェクトである。"
     },
     {
       "id": "426bd2a5-02dd-4fbd-9f4d-2b8439c3a1ff",
@@ -342,44 +380,6 @@
       "descriptionEn": "First uncrewed orbital test flight of the Gaganyaan capsule.",
       "status": "TBD",
       "descriptionJa": "Gaganyaan カプセルの初期の無人軌道試験飛行。"
-    },
-    {
-      "id": "b5a9bccb-30d7-4af6-8ad1-fabb563be53c",
-      "name": "PSLV-XL | TDS-01",
-      "rocket": "PSLV-XL",
-      "mission": "TDS-01",
-      "date": "2026-11-30",
-      "month": 11,
-      "time": null,
-      "tentative": true,
-      "provider": "ISRO（インド宇宙研究機関）",
-      "country": "IN",
-      "pad": "Satish Dhawan Space Centre, India",
-      "padDetail": "サティッシュ・ダワン宇宙センター 第1射点",
-      "orbit": "静止遷移軌道（GTO）",
-      "timezone": "Asia/Kolkata",
-      "descriptionEn": "TDS-01 (Technology Demonstration Satellite-01) is an Indian geostationary orbit technology demonstration satellite carrying payloads for the Indian Space Research Organisation (ISRO)’s Institute of Plasma Research, Gandhinagar and the CSIR-CEERI, Pilani. \r\n\r\nPayloads to be tested included an internally developed 300 mN electric powered thrusters, atomic clocks, travelling wave tube amplifiers (TWTA) & a quantum communication suite (QuTDS).",
-      "status": "TBD",
-      "descriptionJa": "TDS-01（Technology Demonstration Satellite-01）はインドの静止軌道技術実証衛星で、インド宇宙研究機関（ISRO）のPlasma Research Institute（ガンディナガル）とCSIR-CEERI（ピラニ）のペイロードを搭載している。\n\nテストするペイロードには、内部開発された300 mN電動推進器、原子時計、進行波管増幅器（TWTA）および量子通信スイート（QuTDS）が含まれた。"
-    },
-    {
-      "id": "22e117bf-041c-49d5-9d09-7b180036e143",
-      "name": "Ariane 62 | Metop-SG B1",
-      "rocket": "Ariane 6",
-      "mission": "Metop-SG B1",
-      "date": "2026-12-31",
-      "month": 12,
-      "time": null,
-      "tentative": true,
-      "provider": "Arianespace（アリアンスペース）",
-      "country": "FR",
-      "pad": "Guiana Space Centre, French Guiana",
-      "padDetail": "クールー宇宙センター ELA-4",
-      "orbit": "太陽同期軌道（SSO）",
-      "timezone": "America/Cayenne",
-      "descriptionEn": "Second of EUMETSAT's second generation of Metop weather satellites.",
-      "status": "TBD",
-      "descriptionJa": "EUMETSAT の第二世代Metop気象衛星の2番目。"
     }
   ],
   "recent": []
