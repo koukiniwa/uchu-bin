@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-18T19:14:59.568Z",
+  "updated": "2026-10-19T00:51:45.376Z",
   "launches": [
     {
       "id": "3b430f81-0ff1-4d85-8a1a-cef0de326198",
@@ -382,16 +382,5 @@
       "descriptionJa": "EUMETSAT の第二世代Metop気象衛星の2番目。"
     }
   ],
-  "recent": [
-    {
-      "id": "df88cfbf-f504-4e11-8370-e33dd6280b5b",
-      "rocket": "Falcon 9",
-      "mission": "USSF-481",
-      "date": "2026-10-16",
-      "country": "",
-      "provider": "SpaceX",
-      "result": "success",
-      "resultLabel": "成功"
-    }
-  ]
+  "recent": []
 }
