@@ -44,8 +44,9 @@
       "orbit": "低軌道（LEO）",
       "timezone": "Asia/Qyzylorda",
       "descriptionEn": "Progress resupply mission to the International Space Station.",
-      "status": "TBC"
+      "status": "TBC",
+      "descriptionJa": "国際宇宙ステーションへの進捗補給ミッション。"
     }
   ],
-  "updated": "2026-10-16T18:53:21.275Z"
+  "updated": "2026-10-19T20:40:18.321Z"
 }

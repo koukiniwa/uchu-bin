@@ -44,26 +44,9 @@
       "orbit": "低軌道（LEO）",
       "timezone": "America/Cayenne",
       "descriptionEn": "Amazon Leo, formerly known as Project Kuiper, is a mega constellation of satellites in Low Earth Orbit that will offer broadband internet access, this constellation will be managed by Kuiper Systems LLC, a subsidiary of Amazon. This constellation is planned to be composed of 3,276 satellites. The satellites are projected to be placed in 98 orbital planes in three orbital layers, one at 590 km, 610 km and 630 km altitude.\r\n\r\n35-40 satellites will be carried on each Ariane 6 launch.",
-      "status": "TBD"
-    },
-    {
-      "id": "22e117bf-041c-49d5-9d09-7b180036e143",
-      "name": "Ariane 62 | Metop-SG B1",
-      "rocket": "Ariane 6",
-      "mission": "Metop-SG B1",
-      "date": "2026-12-31",
-      "month": 12,
-      "time": null,
-      "tentative": true,
-      "provider": "Arianespace（アリアンスペース）",
-      "country": "FR",
-      "pad": "Guiana Space Centre, French Guiana",
-      "padDetail": "クールー宇宙センター ELA-4",
-      "orbit": "太陽同期軌道（SSO）",
-      "timezone": "America/Cayenne",
-      "descriptionEn": "Second of EUMETSAT's second generation of Metop weather satellites.",
-      "status": "TBD"
+      "status": "TBD",
+      "descriptionJa": "Amazon Leoは以前Project Kuiperとして知られていた低軌道の巨大衛星群であり、ブロードバンドインターネットアクセスを提供する予定です。この衛星群はAmazonの子会社であるKuiper Systems LLCによって管理されます。この衛星群は3,276個の衛星で構成される予定です。衛星は98個の軌道面に配置され、3つの軌道層に分かれており、高度590km、610km、630kmに位置します。\n\n各Ariane 6の打ち上げで35～40個の衛星が運ばれます。"
     }
   ],
-  "updated": "2026-10-16T18:52:15.544Z"
+  "updated": "2026-10-19T20:39:12.524Z"
 }

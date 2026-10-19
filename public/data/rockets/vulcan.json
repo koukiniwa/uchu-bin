@@ -44,8 +44,9 @@
       "orbit": "低軌道（LEO）",
       "timezone": "America/New_York",
       "descriptionEn": "Amazon Leo, formerly known as Project Kuiper, is a mega constellation of satellites in Low Earth Orbit that will offer broadband internet access, this constellation will be managed by Kuiper Systems LLC, a subsidiary of Amazon. This constellation is planned to be composed of 3,276 satellites. The satellites are projected to be placed in 98 orbital planes in three orbital layers, one at 590 km, 610 km and 630 km altitude.\r\n\r\n45 satellites will be carried on each Vulcan launch.",
-      "status": "TBD"
+      "status": "TBD",
+      "descriptionJa": "Amazon Leoは、かつてProject Kuiperとして知られており、低軌道の巨大な衛星コンステレーションで、ブロードバンドインターネットアクセスを提供します。このコンステレーションはAmazonの子会社であるKuiper Systems LLCによって管理されます。このコンステレーションは3,276個の衛星で構成される予定です。衛星は高度590 km、610 km、630 kmの3つの軌道層にある98個の軌道面に配置される予定です。\n\n各Vulcan打ち上げで45個の衛星が運ばれます。"
     }
   ],
-  "updated": "2026-10-16T18:56:38.853Z"
+  "updated": "2026-10-19T20:43:37.526Z"
 }
