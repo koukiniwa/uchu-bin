@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-19T19:03:32.176Z",
+  "updated": "2026-10-19T23:21:36.666Z",
   "featured": [
     {
       "id": "69ebbcd2-b257-4070-9ef9-21e7d1f8a883",
@@ -13,7 +13,7 @@
       "provider": "Mitsubishi Heavy Industries",
       "country": "JP",
       "pad": "Tanegashima Space Center, Japan",
-      "status": "Go",
+      "status": "Success",
       "orbit": "Mars Orbit"
     },
     {

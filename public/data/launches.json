@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-19T22:12:51.627Z",
+  "updated": "2026-10-19T23:21:36.298Z",
   "launches": [
     {
       "id": "3b430f81-0ff1-4d85-8a1a-cef0de326198",
@@ -65,16 +65,16 @@
       "mission": "We're Not Hawking Around (3x HawkEye 360)",
       "date": "2026-10-21",
       "month": 10,
-      "time": null,
-      "tentative": true,
+      "time": "07:00",
+      "tentative": false,
       "provider": "Rocket Lab",
-      "country": "NZ",
+      "country": "US",
       "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
-      "padDetail": "Unknown Pad",
+      "padDetail": "Rocket Lab Launch Complex 1A",
       "orbit": "太陽同期軌道（SSO）",
       "timezone": "Pacific/Auckland",
       "descriptionEn": "HawkEye 360 is a a space-based civil global intelligence satellite network using radio frequency (RF) technology to help monitor transportation across air, land and sea and assist with emergencies, and to provide civil SIGINT (Signal Intelligence) mission.\r\n\r\nThe constellation of small satellites (named Hawk ) will collect information on specific radio signals worldwide to provide high-precision radio frequency mapping and analytics from Low Earth orbit (LEO).",
-      "status": "TBC",
+      "status": "Go",
       "descriptionJa": "HawkEye 360は、無線周波数（RF）技術を使用した宇宙ベースの民間グローバル情報衛星ネットワークであり、空、陸、海にわたる輸送の監視を支援し、緊急事態を支援し、民間SIGINT（信号情報）任務を提供します。\n\n小型衛星のコンステレーション（Hawkという名称）は、世界中の特定の無線信号に関する情報を収集し、低軌道（LEO）から高精度の無線周波数マッピングと分析を提供します。"
     },
     {
@@ -378,7 +378,8 @@
       "orbit": "静止遷移軌道（GTO）",
       "timezone": "Asia/Kolkata",
       "descriptionEn": "TDS-01 (Technology Demonstration Satellite-01) is an Indian geostationary orbit technology demonstration satellite carrying payloads for the Indian Space Research Organisation (ISRO)’s Institute of Plasma Research, Gandhinagar and the CSIR-CEERI, Pilani. \r\n\r\nPayloads to be tested included an internally developed 300 mN electric powered thrusters, atomic clocks, travelling wave tube amplifiers (TWTA) & a quantum communication suite (QuTDS).",
-      "status": "TBD"
+      "status": "TBD",
+      "descriptionJa": "TDS-01（技術実証衛星-01）はインドの静止軌道技術実証衛星であり、インド宇宙研究機関（ISRO）のPlasma Research Institute（ガンディナガル）とCSIR-CEERI（ピラニ）のペイロードを搭載している。\n\nテストされるペイロードには、内部開発の300 mN電力推進スラスタ、原子時計、進行波管増幅器（TWTA）およびQuantum Communication Suite（QuTDS）が含まれている。"
     }
   ],
   "recent": [
