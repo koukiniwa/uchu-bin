@@ -45,8 +45,8 @@
       "timezone": "Asia/Kolkata",
       "descriptionEn": "TDS-01 (Technology Demonstration Satellite-01) is an Indian geostationary orbit technology demonstration satellite carrying payloads for the Indian Space Research Organisation (ISRO)’s Institute of Plasma Research, Gandhinagar and the CSIR-CEERI, Pilani. \r\n\r\nPayloads to be tested included an internally developed 300 mN electric powered thrusters, atomic clocks, travelling wave tube amplifiers (TWTA) & a quantum communication suite (QuTDS).",
       "status": "TBD",
-      "descriptionJa": "TDS-01（Technology Demonstration Satellite-01）はインドの静止軌道技術実証衛星で、インド宇宙研究機関（ISRO）のPlasma Research Institute（ガンディナガル）とCSIR-CEERI（ピラニ）のペイロードを搭載している。\n\nテストするペイロードには、内部開発された300 mN電動推進器、原子時計、進行波管増幅器（TWTA）および量子通信スイート（QuTDS）が含まれた。"
+      "descriptionJa": "TDS-01（技術実証衛星-01）はインドの静止軌道技術実証衛星であり、インド宇宙研究機関（ISRO）のPlasma Research Institute（ガンディナガル）とCSIR-CEERI（ピラニ）のペイロードを搭載している。\n\nテストされるペイロードには、内部開発の300 mN電力推進スラスタ、原子時計、進行波管増幅器（TWTA）およびQuantum Communication Suite（QuTDS）が含まれている。"
     }
   ],
-  "updated": "2026-10-17T17:54:20.136Z"
+  "updated": "2026-10-20T19:25:48.153Z"
 }
