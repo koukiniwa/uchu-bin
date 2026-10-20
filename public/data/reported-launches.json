@@ -1,18 +1,6 @@
 {
   "launches": [
     {
-      "id": "0f6780cf-edae-4d7c-99d6-ce7de784d140",
-      "name": "Falcon 9 Block 5 | MRV-1",
-      "status": "Payload Deployed",
-      "date": "2026-07-22T00:57:22.479Z"
-    },
-    {
-      "id": "d8eb4b68-5307-4b3b-b585-5598958defc2",
-      "name": "Gravity-1 | 9 satellites",
-      "status": "Launch Successful",
-      "date": "2026-07-22T07:14:47.084Z"
-    },
-    {
       "id": "5421e43a-1623-40ac-9dac-201075064e24",
       "name": "Long March 3B/E | Tianlian 2-06",
       "status": "Launch Successful",
@@ -479,6 +467,12 @@
       "name": "H3-24 | Martian Moons eXploration (MMX)",
       "status": "Launch in Flight",
       "date": "2026-10-19T22:12:08.578Z"
+    },
+    {
+      "id": "3b430f81-0ff1-4d85-8a1a-cef0de326198",
+      "name": "Falcon 9 Block 5 | Bandwagon 5 (Dedicated Mid-Inclination Rideshare)",
+      "status": "Launch Successful",
+      "date": "2026-10-20T16:51:20.592Z"
     }
   ]
 }
