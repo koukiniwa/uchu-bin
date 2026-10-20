@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-20T03:41:11.235Z",
+  "updated": "2026-10-20T09:11:25.637Z",
   "launches": [
     {
       "id": "3b430f81-0ff1-4d85-8a1a-cef0de326198",
@@ -27,7 +27,7 @@
       "mission": "Starlink Group 15-15",
       "date": "2026-10-20",
       "month": 10,
-      "time": "23:09",
+      "time": "23:10",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
@@ -249,25 +249,6 @@
       "descriptionJa": "複数の衛星の相乗り打ち上げで、OrbitAID AerospaceのAayulSAT-1Aを含む。その他のペイロードのアイデンティティは未定。"
     },
     {
-      "id": "3cdb9dee-b5cb-406c-bbd1-06a219930fb7",
-      "name": "Falcon 9 Block 5 | Starlink Group 15-21",
-      "rocket": "Falcon 9",
-      "mission": "Starlink Group 15-21",
-      "date": "2026-11-01",
-      "month": 11,
-      "time": "05:11",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "",
-      "pad": "Vandenberg SFB, CA, USA",
-      "padDetail": "ヴァンデンバーグ宇宙軍基地 SLC-4E",
-      "orbit": "低軌道（LEO）",
-      "timezone": "America/Los_Angeles",
-      "descriptionEn": "A batch of 27 satellites for the Starlink mega-constellation - SpaceX's project for space-based Internet communication system.",
-      "status": "Go",
-      "descriptionJa": "Starlink巨大衛星群用の27基の衛星のバッチ。これはSpaceXの宇宙ベースのインターネット通信システムプロジェクトである。"
-    },
-    {
       "id": "426bd2a5-02dd-4fbd-9f4d-2b8439c3a1ff",
       "name": "Electron | The Sea God Surveys (iQPS Launch 9)",
       "rocket": "Electron",
@@ -285,6 +266,25 @@
       "descriptionEn": "Synthetic aperture radar Earth observation satellite for Japanese Earth imaging company iQPS.",
       "status": "TBD",
       "descriptionJa": "日本の地球観測会社iQPSのための合成開口レーダー地球観測衛星。"
+    },
+    {
+      "id": "3cdb9dee-b5cb-406c-bbd1-06a219930fb7",
+      "name": "Falcon 9 Block 5 | Starlink Group 15-21",
+      "rocket": "Falcon 9",
+      "mission": "Starlink Group 15-21",
+      "date": "2026-11-10",
+      "month": 11,
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "",
+      "pad": "Vandenberg SFB, CA, USA",
+      "padDetail": "ヴァンデンバーグ宇宙軍基地 SLC-4E",
+      "orbit": "低軌道（LEO）",
+      "timezone": "America/Los_Angeles",
+      "descriptionEn": "A batch of 27 satellites for the Starlink mega-constellation - SpaceX's project for space-based Internet communication system.",
+      "status": "TBD",
+      "descriptionJa": "Starlink巨大衛星群用の27基の衛星のバッチ。これはSpaceXの宇宙ベースのインターネット通信システムプロジェクトである。"
     },
     {
       "id": "7bdc412b-c965-4517-a131-f57a01189803",
@@ -325,25 +325,6 @@
       "descriptionJa": "国際宇宙ステーションへの進捗補給ミッション。"
     },
     {
-      "id": "d74afbc7-0de5-491c-be05-4e9c31f736ac",
-      "name": "Falcon 9 Block 5 | Cygnus CRS-2 NG-25",
-      "rocket": "Falcon 9",
-      "mission": "Cygnus CRS-2 NG-25",
-      "date": "2026-11-30",
-      "month": 11,
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "Cape Canaveral SFS, FL, USA",
-      "padDetail": "ケープカナベラル宇宙軍基地 SLC-40",
-      "orbit": "低軌道（LEO）",
-      "timezone": "America/New_York",
-      "descriptionEn": "This is the 25th flight of the Orbital ATK's uncrewed resupply spacecraft Cygnus and its 24th flight to the International Space Station under the Commercial Resupply Services contract with NASA.",
-      "status": "TBD",
-      "descriptionJa": "これはOrbital ATKの無人補給宇宙船Cygnusの25回目のフライトであり、NASAとの商業補給サービス契約に基づく国際宇宙ステーションへの24回目のフライトである。"
-    },
-    {
       "id": "dfac5ab7-7017-454f-b6cf-eeed277a97b5",
       "name": "LVM-3 | Gaganyaan-1",
       "rocket": "LVM-3 (GSLV Mk III)",
@@ -380,6 +361,25 @@
       "descriptionEn": "TDS-01 (Technology Demonstration Satellite-01) is an Indian geostationary orbit technology demonstration satellite carrying payloads for the Indian Space Research Organisation (ISRO)’s Institute of Plasma Research, Gandhinagar and the CSIR-CEERI, Pilani. \r\n\r\nPayloads to be tested included an internally developed 300 mN electric powered thrusters, atomic clocks, travelling wave tube amplifiers (TWTA) & a quantum communication suite (QuTDS).",
       "status": "TBD",
       "descriptionJa": "TDS-01（技術実証衛星-01）はインドの静止軌道技術実証衛星であり、インド宇宙研究機関（ISRO）のPlasma Research Institute（ガンディナガル）とCSIR-CEERI（ピラニ）のペイロードを搭載している。\n\nテストされるペイロードには、内部開発の300 mN電力推進スラスタ、原子時計、進行波管増幅器（TWTA）およびQuantum Communication Suite（QuTDS）が含まれている。"
+    },
+    {
+      "id": "22e117bf-041c-49d5-9d09-7b180036e143",
+      "name": "Ariane 62 | Metop-SG B1",
+      "rocket": "Ariane 6",
+      "mission": "Metop-SG B1",
+      "date": "2026-12-31",
+      "month": 12,
+      "time": null,
+      "tentative": true,
+      "provider": "Arianespace（アリアンスペース）",
+      "country": "FR",
+      "pad": "Guiana Space Centre, French Guiana",
+      "padDetail": "クールー宇宙センター ELA-4",
+      "orbit": "太陽同期軌道（SSO）",
+      "timezone": "America/Cayenne",
+      "descriptionEn": "Second of EUMETSAT's second generation of Metop weather satellites.",
+      "status": "TBD",
+      "descriptionJa": "EUMETSAT第二世代のMetop気象衛星の2番目。"
     }
   ],
   "recent": [
