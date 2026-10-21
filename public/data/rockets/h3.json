@@ -107,28 +107,8 @@
     }
   ],
   "articles": [],
-  "upcoming": [
-    {
-      "id": "69ebbcd2-b257-4070-9ef9-21e7d1f8a883",
-      "name": "H3-24 | Martian Moons eXploration (MMX)",
-      "rocket": "H3",
-      "mission": "Martian Moons eXploration (MMX)",
-      "date": "2026-10-19",
-      "month": 10,
-      "time": "19:41",
-      "tentative": false,
-      "provider": "三菱重工業",
-      "country": "JP",
-      "pad": "Tanegashima Space Center, Japan",
-      "padDetail": "種子島宇宙センター 吉信射点",
-      "orbit": "火星軌道",
-      "timezone": "Asia/Tokyo",
-      "descriptionEn": "MMX is a Japanese scientific mission to land on Phobos, one of the two moons of Mars, to collect samples before bringing them back to Earth.\r\n\r\nThe mission includes a small French/German rover to explore the surface of Phobos.",
-      "status": "Go",
-      "descriptionJa": "MMXは、火星の2つの衛星の1つであるPhobosに着陸し、サンプルを採集してから地球に持ち帰るための日本の科学ミッションです。\n\nこのミッションには、Phobosの表面を探査するためのフランス/ドイツの小型ローバーが含まれています。"
-    }
-  ],
-  "updated": "2026-10-18T18:17:33.579Z",
+  "upcoming": [],
+  "updated": "2026-10-21T19:29:36.553Z",
   "_launches": [
     {
       "id": "b89ab080-66c3-4831-85a9-38d85da71d30",
