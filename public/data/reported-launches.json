@@ -473,6 +473,12 @@
       "name": "Falcon 9 Block 5 | Bandwagon 5 (Dedicated Mid-Inclination Rideshare)",
       "status": "Launch Successful",
       "date": "2026-10-20T16:51:20.592Z"
+    },
+    {
+      "id": "c6f8b6b0-6bae-460a-99bb-c12a3d29effd",
+      "name": "Ceres-1S | Xiguang-4 01",
+      "status": "Launch Successful",
+      "date": "2026-10-21T07:22:08.837Z"
     }
   ]
 }
