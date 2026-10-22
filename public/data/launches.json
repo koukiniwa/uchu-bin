@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-22T18:20:32.315Z",
+  "updated": "2026-10-22T22:08:47.804Z",
   "launches": [
     {
       "id": "f6af629d-39b5-4f86-bc0c-f8776444a858",
@@ -399,16 +399,6 @@
       "date": "2026-10-20",
       "country": "US",
       "provider": "SpaceX",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "69ebbcd2-b257-4070-9ef9-21e7d1f8a883",
-      "rocket": "H3",
-      "mission": "Martian Moons eXploration (MMX)",
-      "date": "2026-10-19",
-      "country": "JP",
-      "provider": "Mitsubishi Heavy Industries",
       "result": "success",
       "resultLabel": "成功"
     }
