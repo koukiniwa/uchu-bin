@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-22T13:31:13.031Z",
+  "updated": "2026-10-22T18:20:32.315Z",
   "launches": [
     {
       "id": "f6af629d-39b5-4f86-bc0c-f8776444a858",
@@ -8,7 +8,7 @@
       "mission": "Starlink Group 15-15",
       "date": "2026-10-22",
       "month": 10,
-      "time": "22:40",
+      "time": "22:51",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
@@ -158,7 +158,7 @@
       "name": "GSLV Mk II | IRNSS-1L (NVS-03)",
       "rocket": "GSLV Mk II",
       "mission": "IRNSS-1L (NVS-03)",
-      "date": "2026-10-31",
+      "date": "2026-10-30",
       "month": 10,
       "time": null,
       "tentative": true,
@@ -192,25 +192,6 @@
       "descriptionJa": "CASC/SASTのLong March 12Aロケットの2番目のテスト打ち上げ。ペイロードの詳細は未定。"
     },
     {
-      "id": "e59ff9a4-f72f-4841-8546-3c94346ecdba",
-      "name": "SSLV | AayulSAT-1A & others",
-      "rocket": "SSLV",
-      "mission": "AayulSAT-1A & others",
-      "date": "2026-10-31",
-      "month": 10,
-      "time": null,
-      "tentative": true,
-      "provider": "ISRO（インド宇宙研究機関）",
-      "country": "IN",
-      "pad": "Satish Dhawan Space Centre, India",
-      "padDetail": "サティッシュ・ダワン宇宙センター 第1射点",
-      "orbit": "低軌道（LEO）",
-      "timezone": "Asia/Kolkata",
-      "descriptionEn": "Ride-share launch of multiple satellites, including the in-orbit refueling demonstration satellite AayulSAT-1A from OrbitAID Aerospace. Other payload's identities TBD.",
-      "status": "TBD",
-      "descriptionJa": "複数の衛星の相乗り打ち上げで、OrbitAID AerospaceのAayulSAT-1Aを含む。その他のペイロードのアイデンティティは未定。"
-    },
-    {
       "id": "426bd2a5-02dd-4fbd-9f4d-2b8439c3a1ff",
       "name": "Electron | The Sea God Surveys (iQPS Launch 9)",
       "rocket": "Electron",
@@ -228,6 +209,25 @@
       "descriptionEn": "Synthetic aperture radar Earth observation satellite for Japanese Earth imaging company iQPS.",
       "status": "TBD",
       "descriptionJa": "日本の地球観測会社iQPSのための合成開口レーダー地球観測衛星。"
+    },
+    {
+      "id": "3cdb9dee-b5cb-406c-bbd1-06a219930fb7",
+      "name": "Falcon 9 Block 5 | Starlink Group 15-21",
+      "rocket": "Falcon 9",
+      "mission": "Starlink Group 15-21",
+      "date": "2026-11-05",
+      "month": 11,
+      "time": "05:14",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "",
+      "pad": "Vandenberg SFB, CA, USA",
+      "padDetail": "ヴァンデンバーグ宇宙軍基地 SLC-4E",
+      "orbit": "低軌道（LEO）",
+      "timezone": "America/Los_Angeles",
+      "descriptionEn": "A batch of 27 satellites for the Starlink mega-constellation - SpaceX's project for space-based Internet communication system.",
+      "status": "Go",
+      "descriptionJa": "Starlink巨大衛星群用の27基の衛星のバッチ。これはSpaceXの宇宙ベースのインターネット通信システムプロジェクトである。"
     },
     {
       "id": "56ca6058-7ccc-4ec0-b1b0-fb49f3bfee49",
