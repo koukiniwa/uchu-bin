@@ -1,25 +1,6 @@
 {
-  "updated": "2026-10-22T01:16:34.151Z",
+  "updated": "2026-10-22T07:10:40.295Z",
   "launches": [
-    {
-      "id": "7766f3bb-674c-4c71-b986-963bd633fcfe",
-      "name": "Electron | We're Not Hawking Around (3x HawkEye 360)",
-      "rocket": "Electron",
-      "mission": "We're Not Hawking Around (3x HawkEye 360)",
-      "date": "2026-10-22",
-      "month": 10,
-      "time": null,
-      "tentative": true,
-      "provider": "Rocket Lab",
-      "country": "US",
-      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
-      "padDetail": "Rocket Lab Launch Complex 1A",
-      "orbit": "太陽同期軌道（SSO）",
-      "timezone": "Pacific/Auckland",
-      "descriptionEn": "HawkEye 360 is a a space-based civil global intelligence satellite network using radio frequency (RF) technology to help monitor transportation across air, land and sea and assist with emergencies, and to provide civil SIGINT (Signal Intelligence) mission.\r\n\r\nThe constellation of small satellites (named Hawk ) will collect information on specific radio signals worldwide to provide high-precision radio frequency mapping and analytics from Low Earth orbit (LEO).",
-      "status": "TBC",
-      "descriptionJa": "HawkEye 360は、無線周波数（RF）技術を使用した宇宙ベースの民間グローバル情報衛星ネットワークであり、空、陸、海にわたる輸送の監視を支援し、緊急事態を支援し、民間SIGINT（信号情報）任務を提供します。\n\n小型衛星のコンステレーション（Hawkという名称）は、世界中の特定の無線信号に関する情報を収集し、低軌道（LEO）から高精度の無線周波数マッピングと分析を提供します。"
-    },
     {
       "id": "f6af629d-39b5-4f86-bc0c-f8776444a858",
       "name": "Falcon 9 Block 5 | Starlink Group 15-15",
@@ -38,6 +19,25 @@
       "descriptionEn": "A batch of 27 satellites for the Starlink mega-constellation - SpaceX's project for space-based Internet communication system.",
       "status": "Go",
       "descriptionJa": "Starlink巨大衛星群用の27基の衛星のバッチ。これはSpaceXの宇宙ベースのインターネット通信システムプロジェクトである。"
+    },
+    {
+      "id": "7766f3bb-674c-4c71-b986-963bd633fcfe",
+      "name": "Electron | We're Not Hawking Around (3x HawkEye 360)",
+      "rocket": "Electron",
+      "mission": "We're Not Hawking Around (3x HawkEye 360)",
+      "date": "2026-10-23",
+      "month": 10,
+      "time": null,
+      "tentative": true,
+      "provider": "Rocket Lab",
+      "country": "US",
+      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
+      "padDetail": "Rocket Lab Launch Complex 1A",
+      "orbit": "太陽同期軌道（SSO）",
+      "timezone": "Pacific/Auckland",
+      "descriptionEn": "HawkEye 360 is a a space-based civil global intelligence satellite network using radio frequency (RF) technology to help monitor transportation across air, land and sea and assist with emergencies, and to provide civil SIGINT (Signal Intelligence) mission.\r\n\r\nThe constellation of small satellites (named Hawk ) will collect information on specific radio signals worldwide to provide high-precision radio frequency mapping and analytics from Low Earth orbit (LEO).",
+      "status": "TBC",
+      "descriptionJa": "HawkEye 360は、無線周波数（RF）技術を使用した宇宙ベースの民間グローバル情報衛星ネットワークであり、空、陸、海にわたる輸送の監視を支援し、緊急事態を支援し、民間SIGINT（信号情報）任務を提供します。\n\n小型衛星のコンステレーション（Hawkという名称）は、世界中の特定の無線信号に関する情報を収集し、低軌道（LEO）から高精度の無線周波数マッピングと分析を提供します。"
     },
     {
       "id": "9648124f-8568-46d2-86d7-4b4d6f12187f",
