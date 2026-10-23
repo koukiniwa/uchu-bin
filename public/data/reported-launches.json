@@ -473,6 +473,12 @@
       "name": "Long March 6A | Yaogan 50-03",
       "status": "Launch Successful",
       "date": "2026-10-23T14:23:15.802Z"
+    },
+    {
+      "id": "3621085f-deae-4f89-bd54-c0f96ee44421",
+      "name": "Long March 4B | Yaogan 53-07 to 09/56-19 to 21",
+      "status": "Launch Successful",
+      "date": "2026-10-23T21:57:11.464Z"
     }
   ]
 }
