@@ -1,24 +1,6 @@
 {
   "launches": [
     {
-      "id": "5421e43a-1623-40ac-9dac-201075064e24",
-      "name": "Long March 3B/E | Tianlian 2-06",
-      "status": "Launch Successful",
-      "date": "2026-07-23T15:33:28.429Z"
-    },
-    {
-      "id": "fa42624c-1e30-4b4b-a06b-59b6153bc4e5",
-      "name": "Kinetica 1 | 5 satellites",
-      "status": "Launch Successful",
-      "date": "2026-07-24T07:36:19.883Z"
-    },
-    {
-      "id": "ac897b9f-44d2-4ff4-8416-1a0a076e98a2",
-      "name": "Starship | Flight 13",
-      "status": "Launch Successful",
-      "date": "2026-07-25T03:50:31.477Z"
-    },
-    {
       "id": "beac6ac1-97dd-4eb2-912c-8b4d4d15cd4e",
       "name": "Long March 7A | Tianlian 3-01",
       "status": "Launch Successful",
@@ -479,6 +461,12 @@
       "name": "Ceres-1S | Xiguang-4 01",
       "status": "Launch Successful",
       "date": "2026-10-21T07:22:08.837Z"
+    },
+    {
+      "id": "7766f3bb-674c-4c71-b986-963bd633fcfe",
+      "name": "Electron | We're Not Hawking Around (3x HawkEye 360)",
+      "status": "Launch in Flight",
+      "date": "2026-10-23T09:29:52.447Z"
     }
   ]
 }
