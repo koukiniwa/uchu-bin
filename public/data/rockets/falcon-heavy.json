@@ -149,10 +149,10 @@
       "padDetail": "ケネディ宇宙センター LC-39A",
       "orbit": "月軌道",
       "timezone": "America/New_York",
-      "descriptionEn": "Demonstration flight of the Astrobotic Griffin lander and its engines, initially contracted for the cancelled NASA VIPER (Volatiles Investigating Polar Exploration Rover) mission. The vacated payload spot will now host the FLIP (FLEX Lunar Innovation Platform) lunar rover from Astrolab.",
+      "descriptionEn": "Demonstration flight of the Astrobotic Griffin lander and its engines, initially contracted for the NASA VIPER (Volatiles Investigating Polar Exploration Rover) mission. The vacated payload spot will now host the FLIP (FLEX Lunar Innovation Platform) lunar rover from Astrolab.",
       "status": "TBD",
-      "descriptionJa": "Astrobotic Griffinランダーとそのエンジンのデモンストレーションフライト。当初はキャンセルされたNASA VIPER（Volatiles Investigating Polar Exploration Rover）ミッション向けに契約されていた。空いたペイロード枠には、AstrolabのFLIP（FLEX Lunar Innovation Platform）月面ローバーが搭載される予定である。"
+      "descriptionJa": "Astrobotic Griffinランダーとそのエンジンのデモンストレーションフライト。空いたペイロード搭載位置には、AstrolabのFLIP（FLEX Lunar Innovation Platform）月面ローバーが搭載される。"
     }
   ],
-  "updated": "2026-10-21T19:26:19.040Z"
+  "updated": "2026-10-24T18:16:50.035Z"
 }

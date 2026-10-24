@@ -175,30 +175,11 @@
   "articles": [],
   "upcoming": [
     {
-      "id": "7766f3bb-674c-4c71-b986-963bd633fcfe",
-      "name": "Electron | We're Not Hawking Around (3x HawkEye 360)",
-      "rocket": "Electron",
-      "mission": "We're Not Hawking Around (3x HawkEye 360)",
-      "date": "2026-10-22",
-      "month": 10,
-      "time": null,
-      "tentative": true,
-      "provider": "Rocket Lab",
-      "country": "US",
-      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
-      "padDetail": "Rocket Lab Launch Complex 1A",
-      "orbit": "太陽同期軌道（SSO）",
-      "timezone": "Pacific/Auckland",
-      "descriptionEn": "HawkEye 360 is a a space-based civil global intelligence satellite network using radio frequency (RF) technology to help monitor transportation across air, land and sea and assist with emergencies, and to provide civil SIGINT (Signal Intelligence) mission.\r\n\r\nThe constellation of small satellites (named Hawk ) will collect information on specific radio signals worldwide to provide high-precision radio frequency mapping and analytics from Low Earth orbit (LEO).",
-      "status": "TBC",
-      "descriptionJa": "HawkEye 360は、無線周波数（RF）技術を使用した宇宙ベースの民間グローバル情報衛星ネットワークであり、空、陸、海にわたる輸送の監視を支援し、緊急事態を支援し、民間SIGINT（信号情報）任務を提供します。\n\n小型衛星のコンステレーション（Hawkという名称）は、世界中の特定の無線信号に関する情報を収集し、低軌道（LEO）から高精度の無線周波数マッピングと分析を提供します。"
-    },
-    {
       "id": "426bd2a5-02dd-4fbd-9f4d-2b8439c3a1ff",
       "name": "Electron | The Sea God Surveys (iQPS Launch 9)",
       "rocket": "Electron",
       "mission": "The Sea God Surveys (iQPS Launch 9)",
-      "date": "2026-11-04",
+      "date": "2026-11-03",
       "month": 11,
       "time": null,
       "tentative": true,
@@ -213,7 +194,7 @@
       "descriptionJa": "日本の地球観測会社iQPSのための合成開口レーダー地球観測衛星。"
     }
   ],
-  "updated": "2026-10-21T19:28:30.868Z",
+  "updated": "2026-10-24T18:19:01.277Z",
   "_launches": [
     {
       "id": "9f5a4cb6-63f9-47e1-9512-b468bae2a8e6",
