@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-24T00:18:30.554Z",
+  "updated": "2026-10-24T05:26:19.075Z",
   "launches": [
     {
       "id": "6b95bcc8-1f88-4539-84fe-f63630138766",
@@ -419,16 +419,6 @@
       "date": "2026-10-23",
       "country": "US",
       "provider": "Rocket Lab",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "c6f8b6b0-6bae-460a-99bb-c12a3d29effd",
-      "rocket": "Ceres-1S",
-      "mission": "Xiguang-4 01",
-      "date": "2026-10-21",
-      "country": "CN",
-      "provider": "Galactic Energy",
       "result": "success",
       "resultLabel": "成功"
     }
