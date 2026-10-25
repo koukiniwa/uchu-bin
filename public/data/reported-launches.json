@@ -485,6 +485,12 @@
       "name": "Falcon 9 Block 5 | Starlink Group 15-15",
       "status": "Launch Successful",
       "date": "2026-10-24T17:17:55.050Z"
+    },
+    {
+      "id": "6b95bcc8-1f88-4539-84fe-f63630138766",
+      "name": "Long March 8A | SatNet LEO Group 28",
+      "status": "Launch Successful",
+      "date": "2026-10-25T05:11:52.854Z"
     }
   ]
 }
