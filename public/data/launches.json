@@ -377,7 +377,8 @@
       "orbit": "極軌道",
       "timezone": "America/Los_Angeles",
       "descriptionEn": "First of at least four missions carrying 6 satellites for Open Cosmos' secure LEO broadband constellation, designed to provide independent and resilient connectivity infrastructure for Europe and the world using high-priority Ka-band spectrum filings by the Principality of Liechtenstein.",
-      "status": "TBD"
+      "status": "TBD",
+      "descriptionJa": "Open Cosmosの安全なLEO広帯域衛星群のための少なくとも4つのミッションの最初のもので、6つの衛星を運搬し、Principality of Liechtensteinによる高優先度Ka帯域スペクトラム申請を使用して、ヨーロッパと世界に独立した耐性のある接続インフラストラクチャを提供するよう設計されている。"
     }
   ],
   "recent": [
