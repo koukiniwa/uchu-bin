@@ -35,8 +35,8 @@
       "mission": "IRNSS-1L (NVS-03)",
       "date": "2026-10-30",
       "month": 10,
-      "time": null,
-      "tentative": true,
+      "time": "18:21",
+      "tentative": false,
       "provider": "ISRO（インド宇宙研究機関）",
       "country": "IN",
       "pad": "Satish Dhawan Space Centre, India",
@@ -44,7 +44,7 @@
       "orbit": "静止遷移軌道（GTO）",
       "timezone": "Asia/Kolkata",
       "descriptionEn": "This is a replacement satellite for the Indian Regional Navigation Satellite System. The constellation will provide India with an alternative to GPS and will be used for military and civilian use. Located at a geosynchronous orbit, the system will be operated by the Indian government.",
-      "status": "TBC",
+      "status": "Go",
       "descriptionJa": "これはIndian Regional Navigation Satellite Systemの代替衛星です。このコンステレーションはインドにGPSの代替手段を提供し、軍事および民間用途に使用されます。静止軌道に位置するこのシステムはインド政府によって運用されます。"
     },
     {
@@ -86,5 +86,5 @@
       "descriptionJa": "GSAT-32はIndian Space Research Organization (ISRO)の静止通信衛星である。この宇宙機は、2018年の打ち上げ後に静止軌道に到達する前に機能停止したGSAT-6Aの代替機である。"
     }
   ],
-  "updated": "2026-10-23T19:24:14.182Z"
+  "updated": "2026-10-26T20:41:14.707Z"
 }
