@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-26T16:33:22.978Z",
+  "updated": "2026-10-26T21:24:22.288Z",
   "launches": [
     {
       "id": "e2886a96-5ce9-4f45-872f-4e25a00be837",
@@ -8,7 +8,7 @@
       "mission": "Starlink Group 15-16",
       "date": "2026-10-27",
       "month": 10,
-      "time": "04:45",
+      "time": "05:46",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
@@ -59,6 +59,25 @@
       "descriptionJa": "これはIndian Regional Navigation Satellite Systemの代替衛星です。このコンステレーションはインドにGPSの代替手段を提供し、軍事および民間用途に使用されます。静止軌道に位置するこのシステムはインド政府によって運用されます。"
     },
     {
+      "id": "54d471e8-695c-4fa7-a3cf-dbd8b389e8ae",
+      "name": "Falcon 9 Block 5 | USSF-432",
+      "rocket": "Falcon 9",
+      "mission": "USSF-432",
+      "date": "2026-11-02",
+      "month": 11,
+      "time": "01:56",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "",
+      "pad": "Vandenberg SFB, CA, USA",
+      "padDetail": "ヴァンデンバーグ宇宙軍基地 SLC-4E",
+      "orbit": "低軌道（LEO）",
+      "timezone": "America/Los_Angeles",
+      "descriptionEn": "A classified mission for the United States Space Force. It is possibly a batch of classified LEO satellites based on SpaceX’s Starshield satellite bus, based on locations of rocket stage drop zones being exact fits with previous Starlink Group 15 launches.",
+      "status": "Go",
+      "descriptionJa": "米国宇宙軍向けの機密任務。ロケット段階の落下区域の位置が過去のStarlink Group 15打ち上げと正確に一致していることに基づくと、SpaceXのStarshield衛星バスに基づいた機密LEO衛星の一群の可能性がある。"
+    },
+    {
       "id": "426bd2a5-02dd-4fbd-9f4d-2b8439c3a1ff",
       "name": "Electron | The Sea God Surveys (iQPS Launch 9)",
       "rocket": "Electron",
@@ -95,25 +114,6 @@
       "descriptionEn": "A batch of 27 satellites for the Starlink mega-constellation - SpaceX's project for space-based Internet communication system.",
       "status": "Go",
       "descriptionJa": "Starlink巨大衛星群用の27基の衛星のバッチ。これはSpaceXの宇宙ベースのインターネット通信システムプロジェクトである。"
-    },
-    {
-      "id": "56ca6058-7ccc-4ec0-b1b0-fb49f3bfee49",
-      "name": "Falcon 9 Block 5 | NROL-195",
-      "rocket": "Falcon 9",
-      "mission": "NROL-195",
-      "date": "2026-11-05",
-      "month": 11,
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "",
-      "pad": "Vandenberg SFB, CA, USA",
-      "padDetail": "ヴァンデンバーグ宇宙軍基地 SLC-4E",
-      "orbit": "低軌道（LEO）",
-      "timezone": "America/Los_Angeles",
-      "descriptionEn": "Fifteenth batch of satellites for a reconnaissance satellite constellation built by SpaceX and Northrop Grumman for the National Reconnaissance Office to provide imaging and other reconnaissance capabilities.",
-      "status": "TBC",
-      "descriptionJa": "SpaceXとNorthrop Grummanによって構築され、National Reconnaissance Officeのための偵察衛星コンステレーションの15番目のバッチであり、画像化およびその他の偵察能力を提供する。"
     },
     {
       "id": "7bdc412b-c965-4517-a131-f57a01189803",
@@ -171,6 +171,25 @@
       "descriptionEn": "Shenzhou 24 will be the 24th flight of the Shenzhou program.\r\n\r\nThe first astronaut from Pakistan is expected to fly on this on a short duration mission, with another Chinese astronaut to undergo a year long expedition.",
       "status": "TBD",
       "descriptionJa": "Shenzhou 24はShenzhou計画の24番目のフライトである。\n\nパキスタンからの最初の宇宇宙飛行士がこのミッションで短期間のミッションで飛行することが予想されており、別の中国人宇宙飛行士は1年間の探査に従事することになる。"
+    },
+    {
+      "id": "d74afbc7-0de5-491c-be05-4e9c31f736ac",
+      "name": "Falcon 9 Block 5 | Cygnus CRS-2 NG-25",
+      "rocket": "Falcon 9",
+      "mission": "Cygnus CRS-2 NG-25",
+      "date": "2026-11-30",
+      "month": 11,
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Cape Canaveral SFS, FL, USA",
+      "padDetail": "ケープカナベラル宇宙軍基地 SLC-40",
+      "orbit": "低軌道（LEO）",
+      "timezone": "America/New_York",
+      "descriptionEn": "This is the 25th flight of the Orbital ATK's uncrewed resupply spacecraft Cygnus and its 24th flight to the International Space Station under the Commercial Resupply Services contract with NASA.",
+      "status": "TBD",
+      "descriptionJa": "これはOrbital ATKの無人補給宇宙船Cygnusの25番目のフライトであり、NASAとの商業補給サービス契約下での国際宇宙ステーションへの24番目のフライトである。"
     },
     {
       "id": "dfac5ab7-7017-454f-b6cf-eeed277a97b5",
@@ -360,25 +379,6 @@
       "descriptionEn": "First of at least four missions carrying 6 satellites for Open Cosmos' secure LEO broadband constellation, designed to provide independent and resilient connectivity infrastructure for Europe and the world using high-priority Ka-band spectrum filings by the Principality of Liechtenstein.",
       "status": "TBD",
       "descriptionJa": "Open Cosmosの安全なLEO広帯域衛星群のための少なくとも4つのミッションの最初のもので、6つの衛星を運搬し、Principality of Liechtensteinによる高優先度Ka帯域スペクトラム申請を使用して、ヨーロッパと世界に独立した耐性のある接続インフラストラクチャを提供するよう設計されている。"
-    },
-    {
-      "id": "60f4ba6c-4201-4727-94aa-0015a5a0023f",
-      "name": "Spectrum | 1 x Pelican satellite",
-      "rocket": "Spectrum",
-      "mission": "1 x Pelican satellite",
-      "date": "2026-12-31",
-      "month": 12,
-      "time": null,
-      "tentative": true,
-      "provider": "Isar Aerospace",
-      "country": "DE",
-      "pad": "Andøya Spaceport",
-      "padDetail": "Orbital Launch Pad",
-      "orbit": "太陽同期軌道（SSO）",
-      "timezone": "Europe/Oslo",
-      "descriptionEn": "Payload consists of a single Pelican high-resolution imaging satellite for Planet Labs Germany.",
-      "status": "TBD",
-      "descriptionJa": "ペイロードはPlanet Labs Germanyの単一のPelicanハイレゾリューション画像衛星で構成されています。"
     }
   ],
   "recent": [
@@ -399,16 +399,6 @@
       "date": "2026-10-23",
       "country": "",
       "provider": "SpaceX",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "3621085f-deae-4f89-bd54-c0f96ee44421",
-      "rocket": "Long March 4B",
-      "mission": "Yaogan 53-07 to 09/56-19 to 21",
-      "date": "2026-10-23",
-      "country": "CN",
-      "provider": "China Aerospace Science and Technology Corporation",
       "result": "success",
       "resultLabel": "成功"
     }
