@@ -205,25 +205,6 @@
   "articles": [],
   "upcoming": [
     {
-      "id": "e2886a96-5ce9-4f45-872f-4e25a00be837",
-      "name": "Falcon 9 Block 5 | Starlink Group 15-16",
-      "rocket": "Falcon 9",
-      "mission": "Starlink Group 15-16",
-      "date": "2026-10-27",
-      "month": 10,
-      "time": "04:45",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "",
-      "pad": "Vandenberg SFB, CA, USA",
-      "padDetail": "ヴァンデンバーグ宇宙軍基地 SLC-4E",
-      "orbit": "低軌道（LEO）",
-      "timezone": "America/Los_Angeles",
-      "descriptionEn": "A batch of 27 satellites for the Starlink mega-constellation - SpaceX's project for space-based Internet communication system.",
-      "status": "Go",
-      "descriptionJa": "Starlink巨大衛星群用の27基の衛星のバッチ。これはSpaceXの宇宙ベースのインターネット通信システムプロジェクトである。"
-    },
-    {
       "id": "57ce0a39-d035-4f16-a418-bd6108f78199",
       "name": "Falcon 9 Block 5 | Starlink Group 15-18",
       "rocket": "Falcon 9",
@@ -243,13 +224,32 @@
       "descriptionJa": "Starlink巨大衛星群用の27基の衛星のバッチ。これはSpaceXの宇宙ベースのインターネット通信システムプロジェクトである。"
     },
     {
+      "id": "54d471e8-695c-4fa7-a3cf-dbd8b389e8ae",
+      "name": "Falcon 9 Block 5 | USSF-432",
+      "rocket": "Falcon 9",
+      "mission": "USSF-432",
+      "date": "2026-11-02",
+      "month": 11,
+      "time": "01:56",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "",
+      "pad": "Vandenberg SFB, CA, USA",
+      "padDetail": "ヴァンデンバーグ宇宙軍基地 SLC-4E",
+      "orbit": "低軌道（LEO）",
+      "timezone": "America/Los_Angeles",
+      "descriptionEn": "A classified mission for the United States Space Force. It is possibly a batch of classified LEO satellites based on SpaceX’s Starshield satellite bus, based on locations of rocket stage drop zones being exact fits with previous Starlink Group 15 launches.",
+      "status": "Go",
+      "descriptionJa": "米国宇宙軍向けの機密任務。ロケット段階の落下区域の位置が過去のStarlink Group 15打ち上げと正確に一致していることに基づくと、SpaceXのStarshield衛星バスに基づいた機密LEO衛星の一群の可能性がある。"
+    },
+    {
       "id": "3cdb9dee-b5cb-406c-bbd1-06a219930fb7",
       "name": "Falcon 9 Block 5 | Starlink Group 15-21",
       "rocket": "Falcon 9",
       "mission": "Starlink Group 15-21",
       "date": "2026-11-05",
       "month": 11,
-      "time": "05:14",
+      "time": "02:35",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
@@ -262,7 +262,7 @@
       "descriptionJa": "Starlink巨大衛星群用の27基の衛星のバッチ。これはSpaceXの宇宙ベースのインターネット通信システムプロジェクトである。"
     }
   ],
-  "updated": "2026-10-24T18:15:44.537Z",
+  "updated": "2026-10-27T20:09:30.603Z",
   "_launches": [
     {
       "id": "153ef8ef-b12b-43f4-a4bf-05b225c0cd37",
