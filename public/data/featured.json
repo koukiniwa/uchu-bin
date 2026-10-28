@@ -1,6 +1,51 @@
 {
-  "updated": "2026-10-28T17:08:21.684Z",
+  "updated": "2026-10-28T22:16:14.168Z",
   "featured": [
+    {
+      "id": "f3f201cd-0ff9-4ff7-9aaa-1d22c399c75a",
+      "rocket": "Kinetica 2",
+      "mission": "SpaceSail Polar Group TBD?",
+      "description": "Low Earth Orbit communication satellites with Ku, Q and V band payloads for the G60 constellation operated by Shanghai Spacesail Technologies with funding backed by the Shanghai local government.\r\n\r\nInitial constellation will consist of 1296 satellites by 2027 with long term plans to expand it to 12",
+      "highlight": "中国・上海市が資金援助する通信衛星コンステレーション「G60」の構築に向けた打ち上げ。2027年までに1,296機、将来的には1万2,000機規模への拡張を目指す大規模計画であり、SpaceXのStarlinkに対抗する中国版メガコンステレーションとして世界から注目を集めている。Ku・Q・Vバンドという複数の周波数帯を活用する点も技術的な見どころだ。",
+      "date": "2026-11-03",
+      "time": "00:10",
+      "tentative": false,
+      "provider": "CAS Space",
+      "country": "CN",
+      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
+      "status": "Go",
+      "orbit": "Polar Orbit"
+    },
+    {
+      "id": "9e27a1ed-e81a-4918-b32b-0380cf3a9f8f",
+      "rocket": "Mir",
+      "mission": "Demo Flight",
+      "description": "Note: Launch vehicle name is provisional.\r\n\r\nFirst orbital full version launch of the South Korean military small satellite launch vehicle, after 2 sub-orbital tests of individual stages on 30 March and 30 December 2022, and 1 orbital test flight without the 2nd stage on 4 December 2023. Details TBD",
+      "highlight": "韓国軍が独自開発を進める小型衛星打ち上げロケット「Mir」の初の軌道投入デモフライト。2022年の各段階の単独試験、2023年の第2段なしでの軌道試験と段階を踏んできた開発の集大成となる一戦で、成否は韓国の軍事宇宙能力の自立化を占う重要な試金石となる。純粋な軍事目的のロケット開発という点でも、地政学的な観点から国際社会が注目している。",
+      "date": "2026-11-04",
+      "time": null,
+      "tentative": true,
+      "provider": "Agency for Defense Development",
+      "country": "",
+      "pad": "Sea Launch",
+      "status": "TBC",
+      "orbit": "Low Earth Orbit"
+    },
+    {
+      "id": "e91d1da2-819b-4523-95bf-39ac7daa871d",
+      "rocket": "Ceres-2",
+      "mission": "Unknown Payload",
+      "description": "Details TBD.",
+      "highlight": "中国の民間宇宙企業Galactic Energy（星河動力）が開発するCeres-2（穀神星2号）ロケットによる打ち上げ。詳細は現時点で非公表だが、同社は中国の民間ロケット企業の中でも先駆的な存在であり、その動向は中国商業宇宙産業の成熟度を測るバロメーターとして業界関係者から注目されている。",
+      "date": "2026-11-04",
+      "time": null,
+      "tentative": true,
+      "provider": "Galactic Energy",
+      "country": "CN",
+      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
+      "status": "TBC",
+      "orbit": "Unknown"
+    },
     {
       "id": "ef9850ad-1096-425b-9d27-f7bbd186e61a",
       "rocket": "Vulcan VC6L",
