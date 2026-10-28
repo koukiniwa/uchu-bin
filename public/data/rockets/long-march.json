@@ -29,23 +29,23 @@
   "articles": [],
   "upcoming": [
     {
-      "id": "dc570565-4dcf-4ab9-8174-bf88efef477f",
-      "name": "Long March 12A | Flight 2",
-      "rocket": "Long March 12A",
-      "mission": "Flight 2",
-      "date": "2026-10-31",
-      "month": 10,
+      "id": "a2423132-f965-423f-8b03-6891b775dc54",
+      "name": "Long March 12 | SatNet LEO Group TBD?",
+      "rocket": "Long March 12",
+      "mission": "SatNet LEO Group TBD?",
+      "date": "2026-11-05",
+      "month": 11,
       "time": null,
       "tentative": true,
       "provider": "CASC（中国航天科技集団）",
       "country": "CN",
-      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
-      "padDetail": "酒泉衛星発射センター",
+      "pad": "Wenchang Space Launch Site, People's Republic of China",
+      "padDetail": "Commercial LC-2",
       "orbit": "低軌道（LEO）",
       "timezone": "Asia/Shanghai",
-      "descriptionEn": "Second test launch of CASC/SAST’s Long March 12A rocket. Payload identities are TBD.",
-      "status": "TBD",
-      "descriptionJa": "CASC/SASTのLong March 12Aロケットの2番目のテスト打ち上げ。ペイロードの詳細は未定。"
+      "descriptionEn": "A batch of 9 Low Earth Orbit communication satellites for the Chinese state owned SatNet constellation operated by the China Satellite Network Group.\r\n\r\nThe constellation will eventually consists of 13000 satellites.",
+      "status": "TBC",
+      "descriptionJa": "中国の国有企業China Satellite Network Groupが運営するSatNet衛星群向けの低軌道通信衛星9機。\n\nこの衛星群は最終的に13000機の衛星で構成される予定である。"
     },
     {
       "id": "c9605b67-8a53-4239-a8ae-577fe3b79799",
@@ -67,5 +67,5 @@
       "descriptionJa": "Shenzhou 24はShenzhou計画の24番目のフライトである。\n\nパキスタンからの最初の宇宇宙飛行士がこのミッションで短期間のミッションで飛行することが予想されており、別の中国人宇宙飛行士は1年間の探査に従事することになる。"
     }
   ],
-  "updated": "2026-10-25T18:31:10.425Z"
+  "updated": "2026-10-28T20:26:25.692Z"
 }
