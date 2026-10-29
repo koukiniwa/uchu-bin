@@ -27,26 +27,6 @@
   },
   "recentLaunches": [],
   "articles": [],
-  "upcoming": [
-    {
-      "id": "a5e81552-ecdd-4d89-b6bd-b594e22ca891",
-      "name": "New Glenn | Blue Ring-1",
-      "rocket": "New Glenn",
-      "mission": "Blue Ring-1",
-      "date": "2026-12-31",
-      "month": 12,
-      "time": null,
-      "tentative": true,
-      "provider": "Blue Origin（ブルーオリジン）",
-      "country": "US",
-      "pad": "Cape Canaveral SFS, FL, USA",
-      "padDetail": "Launch Complex 36A",
-      "orbit": "静止遷移軌道（GTO）",
-      "timezone": "America/New_York",
-      "descriptionEn": "The first mission of Blue Ring, Blue Origin's all-in-one, high-powered hybrid solar electric and chemical propelled spacecraft, will test the spacecraft's operations in Geostationary Transfer Orbit (GTO), as well as subsequent operations after reaching Geostationary Orbit (GEO).\r\n\r\nIt will carry one of Scout Space's flagship next-generation space domain awareness (SDA) Owl sensors, which is designed to enhance real-time tracking, characterization, and assessment of space objects by integrating advanced optical sensing, onboard artificial intelligence-driven processing, and autonomous decision-making capabilities to deliver domain-wide intelligence in space in support of the U.S. Space Force’s space control mission set.\r\n\r\nBlue Ring will also carry Optimum Technologies (OpTech)'s next-generation Caracal optical payload, which is designed to provide actionable insights on resident space objects and orbital activity and includes onboard image storage, object detection algorithms, and passive thermal control. The payload is designed to operate flexibly across dynamic orbits over a year-long mission profile.\r\n\r\nSeveral internal Blue Origin payloads will also be hosted.",
-      "status": "TBD",
-      "descriptionJa": "Blue Originのオールインワンハイパワーハイブリッド太陽電池・化学推進宇宙機Blue Ringの最初のミッションは、静止トランスファー軌道（GTO）での宇宙機の操作、および静止軌道（GEO）到達後の操作をテストする。\n\nScout Spaceの旗艦次世代宇宙領域認識（SDA）Owlセンサーを搭載し、これは高度な光学センシング、オンボード人工知能駆動処理、および自律意思決定能力を統合して、宇宙領域全体のインテリジェンスをリアルタイム追跡、特性評価、宇宙物体の評価を強化し、U.S. Space Forceの宇宙統制ミッションセットをサポートするために設計されている。\n\nBlue Ringはまた、Optimum Technologies（OpTech）の次世代Caracal光学ペイロードを搭載し、これは駐留宇宙物体および軌道活動に関する実行可能な洞察を提供するために設計されており、オンボード画像ストレージ、物体検出アルゴリズム、および受動的熱制御を含む。ペイロードは1年間のミッションプロファイルにわたって動的軌道全体で柔軟に操作するように設計されている。\n\nいくつかのBlue Origin内部ペイロードもホストされる。"
-    }
-  ],
-  "updated": "2026-10-26T20:38:52.163Z"
+  "upcoming": [],
+  "updated": "2026-10-29T20:22:38.256Z"
 }
