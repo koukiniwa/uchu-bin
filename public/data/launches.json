@@ -1,25 +1,6 @@
 {
-  "updated": "2026-10-30T15:35:49.661Z",
+  "updated": "2026-10-30T20:27:10.865Z",
   "launches": [
-    {
-      "id": "20d5676e-111b-40e3-8923-b218c3665ca2",
-      "name": "GSLV Mk II | IRNSS-1L (NVS-03)",
-      "rocket": "GSLV Mk II",
-      "mission": "IRNSS-1L (NVS-03)",
-      "date": "2026-10-30",
-      "month": 10,
-      "time": "18:21",
-      "tentative": false,
-      "provider": "ISRO（インド宇宙研究機関）",
-      "country": "IN",
-      "pad": "Satish Dhawan Space Centre, India",
-      "padDetail": "サティッシュ・ダワン宇宙センター 第2射点",
-      "orbit": "静止遷移軌道（GTO）",
-      "timezone": "Asia/Kolkata",
-      "descriptionEn": "This is a replacement satellite for the Indian Regional Navigation Satellite System. The constellation will provide India with an alternative to GPS and will be used for military and civilian use. Located at a geosynchronous orbit, the system will be operated by the Indian government.",
-      "status": "Go",
-      "descriptionJa": "これはIndian Regional Navigation Satellite Systemの代替衛星です。このコンステレーションはインドにGPSの代替手段を提供し、軍事および民間用途に使用されます。静止軌道に位置するこのシステムはインド政府によって運用されます。"
-    },
     {
       "id": "57ce0a39-d035-4f16-a418-bd6108f78199",
       "name": "Falcon 9 Block 5 | Starlink Group 15-18",
@@ -379,7 +360,37 @@
       "descriptionEn": "TDS-01 (Technology Demonstration Satellite-01) is an Indian geostationary orbit technology demonstration satellite carrying payloads for the Indian Space Research Organisation (ISRO)’s Institute of Plasma Research, Gandhinagar and the CSIR-CEERI, Pilani. \r\n\r\nPayloads to be tested included an internally developed 300 mN electric powered thrusters, atomic clocks, travelling wave tube amplifiers (TWTA) & a quantum communication suite (QuTDS).",
       "status": "TBD",
       "descriptionJa": "TDS-01（技術実証衛星-01）はインドの静止軌道技術実証衛星であり、インド宇宙研究機関（ISRO）のPlasma Research Institute（ガンディナガル）とCSIR-CEERI（ピラニ）のペイロードを搭載している。\n\nテストされるペイロードには、内部開発の300 mN電力推進スラスタ、原子時計、進行波管増幅器（TWTA）およびQuantum Communication Suite（QuTDS）が含まれている。"
+    },
+    {
+      "id": "0f867f0c-5422-4d44-93b8-d7faaae7019b",
+      "name": "Starship | Flight 15",
+      "rocket": "Starship",
+      "mission": "Flight 15",
+      "date": "2026-11-30",
+      "month": 11,
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "SpaceX Starbase, TX, USA",
+      "padDetail": "スターベース（テキサス州）",
+      "orbit": "低軌道（LEO）",
+      "timezone": "America/Chicago",
+      "descriptionEn": "15th test flight of the two-stage Starship launch vehicle and 4th flight of Starship V3.",
+      "status": "TBD",
+      "descriptionJa": "Starship打ち上げ機の2段式ロケットの15回目の試験飛行、およびStarship V3の4回目の飛行。"
     }
   ],
-  "recent": []
+  "recent": [
+    {
+      "id": "20d5676e-111b-40e3-8923-b218c3665ca2",
+      "rocket": "GSLV Mk II",
+      "mission": "IRNSS-1L (NVS-03)",
+      "date": "2026-10-30",
+      "country": "IN",
+      "provider": "Indian Space Research Organization",
+      "result": "success",
+      "resultLabel": "成功"
+    }
+  ]
 }
