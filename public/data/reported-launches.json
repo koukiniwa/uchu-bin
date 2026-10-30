@@ -1,48 +1,6 @@
 {
   "launches": [
     {
-      "id": "beac6ac1-97dd-4eb2-912c-8b4d4d15cd4e",
-      "name": "Long March 7A | Tianlian 3-01",
-      "status": "Launch Successful",
-      "date": "2026-07-29T14:53:12.320Z"
-    },
-    {
-      "id": "394d2745-610b-409e-b4ea-2071a35f8668",
-      "name": "Long March 6A | TJSW-27A & B",
-      "status": "Launch Successful",
-      "date": "2026-07-30T05:48:01.352Z"
-    },
-    {
-      "id": "24675e3d-2458-48a3-8c70-5196e44d4dc3",
-      "name": "Falcon 9 Block 5 | NROL-95",
-      "status": "Launch in Flight",
-      "date": "2026-07-30T11:13:06.115Z"
-    },
-    {
-      "id": "aafe107e-46d8-420c-bcb9-192069d80893",
-      "name": "Soyuz 2.1b | 16 x Rassvet-3",
-      "skipped": true,
-      "date": "2026-08-01T10:04:33.450Z"
-    },
-    {
-      "id": "a556b963-0f36-4660-95a8-fdffdba653e2",
-      "name": "Soyuz 2.1a | Soyuz MS-29",
-      "skipped": true,
-      "date": "2026-08-01T10:04:33.450Z"
-    },
-    {
-      "id": "1e79a5e9-c02c-470f-882f-884120100fef",
-      "name": "Long March 10B | Demo Flight",
-      "skipped": true,
-      "date": "2026-08-01T10:04:33.451Z"
-    },
-    {
-      "id": "e7e55b53-6f69-4c22-9fc5-df00df653a3f",
-      "name": "Falcon 9 Block 5 | Starlink Group 17-52",
-      "status": "Launch Successful",
-      "date": "2026-08-01T10:04:33.451Z"
-    },
-    {
       "id": "5b2f05d7-9052-49fb-9bd7-2a05d4910576",
       "name": "Falcon 9 Block 5 | Starlink Group 17-51",
       "skipped": true,
@@ -497,6 +455,12 @@
       "name": "Falcon 9 Block 5 | Starlink Group 15-16",
       "status": "Launch Successful",
       "date": "2026-10-27T16:19:05.576Z"
+    },
+    {
+      "id": "20d5676e-111b-40e3-8923-b218c3665ca2",
+      "name": "GSLV Mk II | IRNSS-1L (NVS-03)",
+      "status": "Launch Successful",
+      "date": "2026-10-30T23:59:03.714Z"
     }
   ]
 }
