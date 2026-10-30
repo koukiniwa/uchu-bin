@@ -209,7 +209,7 @@
       "name": "Falcon 9 Block 5 | Starlink Group 15-18",
       "rocket": "Falcon 9",
       "mission": "Starlink Group 15-18",
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "month": 10,
       "time": "04:02",
       "tentative": false,
@@ -228,9 +228,9 @@
       "name": "Falcon 9 Block 5 | USSF-432",
       "rocket": "Falcon 9",
       "mission": "USSF-432",
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "month": 11,
-      "time": "01:56",
+      "time": "01:42",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
@@ -247,9 +247,9 @@
       "name": "Falcon 9 Block 5 | Starlink Group 15-21",
       "rocket": "Falcon 9",
       "mission": "Starlink Group 15-21",
-      "date": "2026-11-05",
+      "date": "2026-11-06",
       "month": 11,
-      "time": "02:35",
+      "time": "02:21",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
@@ -262,7 +262,7 @@
       "descriptionJa": "Starlink巨大衛星群用の27基の衛星のバッチ。これはSpaceXの宇宙ベースのインターネット通信システムプロジェクトである。"
     }
   ],
-  "updated": "2026-10-27T20:09:30.603Z",
+  "updated": "2026-10-30T19:58:14.472Z",
   "_launches": [
     {
       "id": "153ef8ef-b12b-43f4-a4bf-05b225c0cd37",
