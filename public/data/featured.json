@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-29T21:33:57.410Z",
+  "updated": "2026-10-30T01:36:14.860Z",
   "featured": [
     {
       "id": "f3f201cd-0ff9-4ff7-9aaa-1d22c399c75a",
@@ -75,6 +75,21 @@
       "pad": "Guiana Space Centre, French Guiana",
       "status": "TBD",
       "orbit": "Low Earth Orbit"
+    },
+    {
+      "id": "dff42a2e-f047-48d7-b260-3888d3a4fe33",
+      "rocket": "Spectrum",
+      "mission": "AT-Astra and Others (Spectrum Flight 3)",
+      "description": "Third test flight of the Isar Spectrum launch vehicle. This launch will carry various satellites including R-Space’s AT-Astra/IOD-01, which will perform in-orbit demonstrations for ENPULSION, SUNBOOSTER GmbH, and Synopsis Planet.",
+      "highlight": "ドイツのスタートアップ企業Isar Aerospaceが開発した小型ロケット「Spectrum」の3回目のテスト飛行で、欧州発の民間ロケットとして商業打ち上げ市場への本格参入を目指す重要な節目となります。搭載されるAT-Astra衛星では、電気推進システムや太陽光関連技術など複数の革新的技術の軌道上実証が行われる予定で、欧州の宇宙ベンチャーエコシステムの成熟度を示す一打ともいえます。SpaceXが独占しがちな小型衛星打ち上げ市場に欧州独自の選択肢を生み出せるか、世界中の宇宙業界関係者が注視しています。",
+      "date": "2026-11-26",
+      "time": null,
+      "tentative": true,
+      "provider": "Isar Aerospace",
+      "country": "DE",
+      "pad": "Andøya Spaceport",
+      "status": "TBC",
+      "orbit": "Sun-Synchronous Orbit"
     }
   ]
 }

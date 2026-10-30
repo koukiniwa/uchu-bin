@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-29T21:33:56.893Z",
+  "updated": "2026-10-30T01:36:08.776Z",
   "launches": [
     {
       "id": "20d5676e-111b-40e3-8923-b218c3665ca2",
@@ -267,6 +267,25 @@
       "descriptionJa": "Shenzhou 24はShenzhou計画の24番目のフライトである。\n\nパキスタンからの最初の宇宇宙飛行士がこのミッションで短期間のミッションで飛行することが予想されており、別の中国人宇宙飛行士は1年間の探査に従事することになる。"
     },
     {
+      "id": "dff42a2e-f047-48d7-b260-3888d3a4fe33",
+      "name": "Spectrum | AT-Astra and Others (Spectrum Flight 3)",
+      "rocket": "Spectrum",
+      "mission": "AT-Astra and Others (Spectrum Flight 3)",
+      "date": "2026-11-26",
+      "month": 11,
+      "time": null,
+      "tentative": true,
+      "provider": "Isar Aerospace",
+      "country": "DE",
+      "pad": "Andøya Spaceport",
+      "padDetail": "Orbital Launch Pad",
+      "orbit": "太陽同期軌道（SSO）",
+      "timezone": "Europe/Oslo",
+      "descriptionEn": "Third test flight of the Isar Spectrum launch vehicle. This launch will carry various satellites including R-Space’s AT-Astra/IOD-01, which will perform in-orbit demonstrations for ENPULSION, SUNBOOSTER GmbH, and Synopsis Planet.",
+      "status": "TBC",
+      "descriptionJa": "Isar Spectrumロケットの3番目の試験飛行。このロケットはR-Space社のAT-Astra/IOD-01を含む様々な衛星を搭載し、ENPULSION、SUNBOOSTER GmbH、Synopsis Planetのための軌道上実証を実行する。"
+    },
+    {
       "id": "dfac5ab7-7017-454f-b6cf-eeed277a97b5",
       "name": "LVM-3 | Gaganyaan-1",
       "rocket": "LVM-3 (GSLV Mk III)",
@@ -360,25 +379,6 @@
       "descriptionEn": "Classified mission launched by the Space Development Agency (SDA) for Tranche 2 Transport Layer.",
       "status": "TBD",
       "descriptionJa": "Space Development Agency (SDA)によって打ち上げられたTrack 2 Transport Layerの機密ミッション。"
-    },
-    {
-      "id": "d3bd7fb2-fac6-49fc-ae52-cee07d2fde67",
-      "name": "Falcon Heavy | Griffin Mission One",
-      "rocket": "Falcon Heavy",
-      "mission": "Griffin Mission One",
-      "date": "2026-12-31",
-      "month": 12,
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "Kennedy Space Center, FL, USA",
-      "padDetail": "ケネディ宇宙センター LC-39A",
-      "orbit": "月軌道",
-      "timezone": "America/New_York",
-      "descriptionEn": "Demonstration flight of the Astrobotic Griffin lander and its engines, initially contracted for the NASA VIPER (Volatiles Investigating Polar Exploration Rover) mission. The vacated payload spot will now host the FLIP (FLEX Lunar Innovation Platform) lunar rover from Astrolab.",
-      "status": "TBD",
-      "descriptionJa": "Astrobotic Griffinランダーとそのエンジンのデモンストレーションフライト。空いたペイロード搭載位置には、AstrolabのFLIP（FLEX Lunar Innovation Platform）月面ローバーが搭載される。"
     }
   ],
   "recent": [
