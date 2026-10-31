@@ -1,25 +1,6 @@
 {
-  "updated": "2026-10-31T00:26:39.390Z",
+  "updated": "2026-10-31T06:41:26.745Z",
   "launches": [
-    {
-      "id": "57ce0a39-d035-4f16-a418-bd6108f78199",
-      "name": "Falcon 9 Block 5 | Starlink Group 15-18",
-      "rocket": "Falcon 9",
-      "mission": "Starlink Group 15-18",
-      "date": "2026-10-31",
-      "month": 10,
-      "time": "04:02",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "",
-      "pad": "Vandenberg SFB, CA, USA",
-      "padDetail": "ヴァンデンバーグ宇宙軍基地 SLC-4E",
-      "orbit": "低軌道（LEO）",
-      "timezone": "America/Los_Angeles",
-      "descriptionEn": "A batch of 27 satellites for the Starlink mega-constellation - SpaceX's project for space-based Internet communication system.",
-      "status": "Go",
-      "descriptionJa": "Starlink巨大衛星群用の27基の衛星のバッチ。これはSpaceXの宇宙ベースのインターネット通信システムプロジェクトである。"
-    },
     {
       "id": "426bd2a5-02dd-4fbd-9f4d-2b8439c3a1ff",
       "name": "Electron | The Sea God Surveys (iQPS Launch 9)",
@@ -379,9 +360,38 @@
       "descriptionEn": "15th test flight of the two-stage Starship launch vehicle and 4th flight of Starship V3.",
       "status": "TBD",
       "descriptionJa": "Starship打ち上げ機の2段式ロケットの15回目の試験飛行、およびStarship V3の4回目の飛行。"
+    },
+    {
+      "id": "22e117bf-041c-49d5-9d09-7b180036e143",
+      "name": "Ariane 62 | Metop-SG B1",
+      "rocket": "Ariane 6",
+      "mission": "Metop-SG B1",
+      "date": "2026-12-31",
+      "month": 12,
+      "time": null,
+      "tentative": true,
+      "provider": "Arianespace（アリアンスペース）",
+      "country": "FR",
+      "pad": "Guiana Space Centre, French Guiana",
+      "padDetail": "クールー宇宙センター ELA-4",
+      "orbit": "太陽同期軌道（SSO）",
+      "timezone": "America/Cayenne",
+      "descriptionEn": "Second of EUMETSAT's second generation of Metop weather satellites.",
+      "status": "TBD",
+      "descriptionJa": "EUMETSAT の第2世代Metop気象衛星の2番目。"
     }
   ],
   "recent": [
+    {
+      "id": "57ce0a39-d035-4f16-a418-bd6108f78199",
+      "rocket": "Falcon 9",
+      "mission": "Starlink Group 15-18",
+      "date": "2026-10-31",
+      "country": "",
+      "provider": "SpaceX",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "20d5676e-111b-40e3-8923-b218c3665ca2",
       "rocket": "GSLV Mk II",
