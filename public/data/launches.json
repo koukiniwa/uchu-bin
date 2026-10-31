@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-31T13:21:56.549Z",
+  "updated": "2026-10-31T18:14:54.796Z",
   "launches": [
     {
       "id": "426bd2a5-02dd-4fbd-9f4d-2b8439c3a1ff",
@@ -8,8 +8,8 @@
       "mission": "The Sea God Surveys (iQPS Launch 9)",
       "date": "2026-11-02",
       "month": 11,
-      "time": null,
-      "tentative": true,
+      "time": "16:41",
+      "tentative": false,
       "provider": "Rocket Lab",
       "country": "NZ",
       "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
@@ -17,7 +17,7 @@
       "orbit": "低軌道（LEO）",
       "timezone": "Pacific/Auckland",
       "descriptionEn": "Synthetic aperture radar Earth observation satellite for Japanese Earth imaging company iQPS.",
-      "status": "TBC",
+      "status": "Go",
       "descriptionJa": "日本の地球観測会社iQPSのための合成開口レーダー地球観測衛星。"
     },
     {
@@ -151,6 +151,25 @@
       "descriptionEn": "A batch of 27 satellites for the Starlink mega-constellation - SpaceX's project for space-based Internet communication system.",
       "status": "Go",
       "descriptionJa": "Starlink巨大衛星群用の27基の衛星のバッチ。これはSpaceXの宇宙ベースのインターネット通信システムプロジェクトである。"
+    },
+    {
+      "id": "db3500ac-965b-4ad8-b417-cb8d8d005586",
+      "name": "Electron | The Mountain God Rises (iQPS Launch 10)",
+      "rocket": "Electron",
+      "mission": "The Mountain God Rises (iQPS Launch 10)",
+      "date": "2026-11-10",
+      "month": 11,
+      "time": null,
+      "tentative": true,
+      "provider": "Rocket Lab",
+      "country": "NZ",
+      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
+      "padDetail": "Unknown Pad",
+      "orbit": "低軌道（LEO）",
+      "timezone": "Pacific/Auckland",
+      "descriptionEn": "Synthetic aperture radar Earth observation satellite for Japanese Earth imaging company iQPS.",
+      "status": "TBD",
+      "descriptionJa": "日本の地球観測会社iQPSのための合成開口レーダー地球観測衛星。"
     },
     {
       "id": "6aa7b90b-e5ed-45d8-a52e-04fbf399d178",
@@ -360,25 +379,6 @@
       "descriptionEn": "15th test flight of the two-stage Starship launch vehicle and 4th flight of Starship V3.",
       "status": "TBD",
       "descriptionJa": "Starship打ち上げ機の2段式ロケットの15回目の試験飛行、およびStarship V3の4回目の飛行。"
-    },
-    {
-      "id": "22e117bf-041c-49d5-9d09-7b180036e143",
-      "name": "Ariane 62 | Metop-SG B1",
-      "rocket": "Ariane 6",
-      "mission": "Metop-SG B1",
-      "date": "2026-12-31",
-      "month": 12,
-      "time": null,
-      "tentative": true,
-      "provider": "Arianespace（アリアンスペース）",
-      "country": "FR",
-      "pad": "Guiana Space Centre, French Guiana",
-      "padDetail": "クールー宇宙センター ELA-4",
-      "orbit": "太陽同期軌道（SSO）",
-      "timezone": "America/Cayenne",
-      "descriptionEn": "Second of EUMETSAT's second generation of Metop weather satellites.",
-      "status": "TBD",
-      "descriptionJa": "EUMETSAT の第2世代Metop気象衛星の2番目。"
     }
   ],
   "recent": [
