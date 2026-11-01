@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-01T15:49:11.471Z",
+  "updated": "2026-11-01T20:16:02.172Z",
   "launches": [
     {
       "id": "426bd2a5-02dd-4fbd-9f4d-2b8439c3a1ff",
@@ -44,9 +44,9 @@
       "name": "Falcon 9 Block 5 | USSF-432",
       "rocket": "Falcon 9",
       "mission": "USSF-432",
-      "date": "2026-11-03",
+      "date": "2026-11-04",
       "month": 11,
-      "time": "01:42",
+      "time": "01:28",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
