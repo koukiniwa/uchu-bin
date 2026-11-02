@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-02T00:19:48.209Z",
+  "updated": "2026-11-02T07:19:07.163Z",
   "launches": [
     {
       "id": "426bd2a5-02dd-4fbd-9f4d-2b8439c3a1ff",
@@ -77,25 +77,6 @@
       "descriptionJa": "注記：打ち上げ車両の名称は暫定的なものです。\n\n韓国軍の小型衛星打ち上げ車両の初の軌道上フル版打ち上げ。2022年3月30日と12月30日の段階別2回の準軌道試験、および2023年12月4日の第2段階なしの1回の軌道試験飛行の後に行われます。詳細は未定です。"
     },
     {
-      "id": "e91d1da2-819b-4523-95bf-39ac7daa871d",
-      "name": "Ceres-2 | Unknown Payload",
-      "rocket": "Ceres-2",
-      "mission": "Unknown Payload",
-      "date": "2026-11-04",
-      "month": 11,
-      "time": null,
-      "tentative": true,
-      "provider": "Galactic Energy（星河動力）",
-      "country": "CN",
-      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
-      "padDetail": "Launch Area 95A",
-      "orbit": "Unknown",
-      "timezone": "Asia/Shanghai",
-      "descriptionEn": "Details TBD.",
-      "status": "TBC",
-      "descriptionJa": "詳細は未定。"
-    },
-    {
       "id": "711de6bc-f755-475b-a12f-ec5240da3a11",
       "name": "Long March 2C | Unknown Payload",
       "rocket": "Long March 2C",
@@ -134,23 +115,23 @@
       "descriptionJa": "中国の国有企業China Satellite Network Groupが運営するSatNet衛星群向けの低軌道通信衛星9機。\n\nこの衛星群は最終的に13000機の衛星で構成される予定である。"
     },
     {
-      "id": "3cdb9dee-b5cb-406c-bbd1-06a219930fb7",
-      "name": "Falcon 9 Block 5 | Starlink Group 15-21",
-      "rocket": "Falcon 9",
-      "mission": "Starlink Group 15-21",
+      "id": "e91d1da2-819b-4523-95bf-39ac7daa871d",
+      "name": "Ceres-2 | Unknown Payload",
+      "rocket": "Ceres-2",
+      "mission": "Unknown Payload",
       "date": "2026-11-06",
       "month": 11,
-      "time": "02:21",
+      "time": "23:35",
       "tentative": false,
-      "provider": "SpaceX",
-      "country": "",
-      "pad": "Vandenberg SFB, CA, USA",
-      "padDetail": "ヴァンデンバーグ宇宙軍基地 SLC-4E",
-      "orbit": "低軌道（LEO）",
-      "timezone": "America/Los_Angeles",
-      "descriptionEn": "A batch of 27 satellites for the Starlink mega-constellation - SpaceX's project for space-based Internet communication system.",
+      "provider": "Galactic Energy（星河動力）",
+      "country": "CN",
+      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
+      "padDetail": "Launch Area 95A",
+      "orbit": "Unknown",
+      "timezone": "Asia/Shanghai",
+      "descriptionEn": "Details TBD.",
       "status": "Go",
-      "descriptionJa": "Starlink巨大衛星群用の27基の衛星のバッチ。これはSpaceXの宇宙ベースのインターネット通信システムプロジェクトである。"
+      "descriptionJa": "詳細は未定。"
     },
     {
       "id": "db3500ac-965b-4ad8-b417-cb8d8d005586",
@@ -379,6 +360,25 @@
       "descriptionEn": "15th test flight of the two-stage Starship launch vehicle and 4th flight of Starship V3.",
       "status": "TBD",
       "descriptionJa": "Starship打ち上げ機の2段式ロケットの15回目の試験飛行、およびStarship V3の4回目の飛行。"
+    },
+    {
+      "id": "22e117bf-041c-49d5-9d09-7b180036e143",
+      "name": "Ariane 62 | Metop-SG B1",
+      "rocket": "Ariane 6",
+      "mission": "Metop-SG B1",
+      "date": "2026-12-31",
+      "month": 12,
+      "time": null,
+      "tentative": true,
+      "provider": "Arianespace（アリアンスペース）",
+      "country": "FR",
+      "pad": "Guiana Space Centre, French Guiana",
+      "padDetail": "クールー宇宙センター ELA-4",
+      "orbit": "太陽同期軌道（SSO）",
+      "timezone": "America/Cayenne",
+      "descriptionEn": "Second of EUMETSAT's second generation of Metop weather satellites.",
+      "status": "TBD",
+      "descriptionJa": "EUMETSAT の第2世代Metop気象衛星の2番目。"
     }
   ],
   "recent": [
