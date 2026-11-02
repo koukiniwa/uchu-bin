@@ -29,25 +29,6 @@
   "articles": [],
   "upcoming": [
     {
-      "id": "20d5676e-111b-40e3-8923-b218c3665ca2",
-      "name": "GSLV Mk II | IRNSS-1L (NVS-03)",
-      "rocket": "GSLV Mk II",
-      "mission": "IRNSS-1L (NVS-03)",
-      "date": "2026-10-30",
-      "month": 10,
-      "time": "18:21",
-      "tentative": false,
-      "provider": "ISRO（インド宇宙研究機関）",
-      "country": "IN",
-      "pad": "Satish Dhawan Space Centre, India",
-      "padDetail": "サティッシュ・ダワン宇宙センター 第2射点",
-      "orbit": "静止遷移軌道（GTO）",
-      "timezone": "Asia/Kolkata",
-      "descriptionEn": "This is a replacement satellite for the Indian Regional Navigation Satellite System. The constellation will provide India with an alternative to GPS and will be used for military and civilian use. Located at a geosynchronous orbit, the system will be operated by the Indian government.",
-      "status": "Go",
-      "descriptionJa": "これはIndian Regional Navigation Satellite Systemの代替衛星です。このコンステレーションはインドにGPSの代替手段を提供し、軍事および民間用途に使用されます。静止軌道に位置するこのシステムはインド政府によって運用されます。"
-    },
-    {
       "id": "dfac5ab7-7017-454f-b6cf-eeed277a97b5",
       "name": "LVM-3 | Gaganyaan-1",
       "rocket": "LVM-3 (GSLV Mk III)",
@@ -67,5 +48,5 @@
       "descriptionJa": "Gaganyaan カプセルの初期の無人軌道試験飛行。"
     }
   ],
-  "updated": "2026-10-29T20:24:54.876Z"
+  "updated": "2026-11-02T23:12:16.733Z"
 }
