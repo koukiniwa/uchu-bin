@@ -1,25 +1,6 @@
 {
-  "updated": "2026-11-02T07:19:07.163Z",
+  "updated": "2026-11-02T17:53:42.692Z",
   "launches": [
-    {
-      "id": "426bd2a5-02dd-4fbd-9f4d-2b8439c3a1ff",
-      "name": "Electron | The Sea God Surveys (iQPS Launch 9)",
-      "rocket": "Electron",
-      "mission": "The Sea God Surveys (iQPS Launch 9)",
-      "date": "2026-11-02",
-      "month": 11,
-      "time": "16:41",
-      "tentative": false,
-      "provider": "Rocket Lab",
-      "country": "NZ",
-      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
-      "padDetail": "Unknown Pad",
-      "orbit": "低軌道（LEO）",
-      "timezone": "Pacific/Auckland",
-      "descriptionEn": "Synthetic aperture radar Earth observation satellite for Japanese Earth imaging company iQPS.",
-      "status": "Go",
-      "descriptionJa": "日本の地球観測会社iQPSのための合成開口レーダー地球観測衛星。"
-    },
     {
       "id": "f3f201cd-0ff9-4ff7-9aaa-1d22c399c75a",
       "name": "Kinetica 2 | SpaceSail Polar Group TBD?",
@@ -134,30 +115,11 @@
       "descriptionJa": "詳細は未定。"
     },
     {
-      "id": "db3500ac-965b-4ad8-b417-cb8d8d005586",
-      "name": "Electron | The Mountain God Rises (iQPS Launch 10)",
-      "rocket": "Electron",
-      "mission": "The Mountain God Rises (iQPS Launch 10)",
-      "date": "2026-11-10",
-      "month": 11,
-      "time": null,
-      "tentative": true,
-      "provider": "Rocket Lab",
-      "country": "NZ",
-      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
-      "padDetail": "Unknown Pad",
-      "orbit": "低軌道（LEO）",
-      "timezone": "Pacific/Auckland",
-      "descriptionEn": "Synthetic aperture radar Earth observation satellite for Japanese Earth imaging company iQPS.",
-      "status": "TBD",
-      "descriptionJa": "日本の地球観測会社iQPSのための合成開口レーダー地球観測衛星。"
-    },
-    {
       "id": "6aa7b90b-e5ed-45d8-a52e-04fbf399d178",
       "name": "Falcon 9 Block 5 | USSF-xxx (\"R-5\")",
       "rocket": "Falcon 9",
       "mission": "USSF-xxx (\"R-5\")",
-      "date": "2026-11-10",
+      "date": "2026-11-09",
       "month": 11,
       "time": null,
       "tentative": true,
@@ -189,6 +151,25 @@
       "descriptionEn": "Amazon Leo, formerly known as Project Kuiper, is a mega constellation of satellites in Low Earth Orbit that will offer broadband internet access, this constellation will be managed by Kuiper Systems LLC, a subsidiary of Amazon. This constellation is planned to be composed of 3,276 satellites. The satellites are projected to be placed in 98 orbital planes in three orbital layers, one at 590 km, 610 km and 630 km altitude.\r\n\r\n45 satellites will be carried on each Vulcan launch.",
       "status": "TBD",
       "descriptionJa": "Amazon Leoは、かつてProject Kuiperとして知られており、低軌道の巨大な衛星コンステレーションで、ブロードバンドインターネットアクセスを提供します。このコンステレーションはAmazonの子会社であるKuiper Systems LLCによって管理されます。このコンステレーションは3,276個の衛星で構成される予定です。衛星は高度590 km、610 km、630 kmの3つの軌道層にある98個の軌道面に配置される予定です。\n\n各Vulcan打ち上げで45個の衛星が運ばれます。"
+    },
+    {
+      "id": "db3500ac-965b-4ad8-b417-cb8d8d005586",
+      "name": "Electron | The Mountain God Rises (iQPS Launch 10)",
+      "rocket": "Electron",
+      "mission": "The Mountain God Rises (iQPS Launch 10)",
+      "date": "2026-11-14",
+      "month": 11,
+      "time": null,
+      "tentative": true,
+      "provider": "Rocket Lab",
+      "country": "NZ",
+      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
+      "padDetail": "Unknown Pad",
+      "orbit": "低軌道（LEO）",
+      "timezone": "Pacific/Auckland",
+      "descriptionEn": "Synthetic aperture radar Earth observation satellite for Japanese Earth imaging company iQPS.",
+      "status": "TBD",
+      "descriptionJa": "日本の地球観測会社iQPSのための合成開口レーダー地球観測衛星。"
     },
     {
       "id": "a2975167-7c6f-4403-99e1-b40df17c8140",
@@ -379,9 +360,38 @@
       "descriptionEn": "Second of EUMETSAT's second generation of Metop weather satellites.",
       "status": "TBD",
       "descriptionJa": "EUMETSAT の第2世代Metop気象衛星の2番目。"
+    },
+    {
+      "id": "71df1dd0-d658-4762-b0bc-0fca6886aea7",
+      "name": "Falcon 9 Block 5 | SDA Tranche 2 Transport Layer D",
+      "rocket": "Falcon 9",
+      "mission": "SDA Tranche 2 Transport Layer D",
+      "date": "2026-12-31",
+      "month": 12,
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "",
+      "pad": "Cape Canaveral SFS, FL, USA",
+      "padDetail": "Unknown Pad",
+      "orbit": "極軌道",
+      "timezone": "America/New_York",
+      "descriptionEn": "Classified mission launched by the Space Development Agency (SDA) for Tranche 2 Transport Layer.",
+      "status": "TBD",
+      "descriptionJa": "Space Development Agency (SDA)によって打ち上げられたTranche 2 Transport Layerの機密ミッション。"
     }
   ],
   "recent": [
+    {
+      "id": "426bd2a5-02dd-4fbd-9f4d-2b8439c3a1ff",
+      "rocket": "Electron",
+      "mission": "The Sea God Surveys (iQPS Launch 9)",
+      "date": "2026-11-02",
+      "country": "US",
+      "provider": "Rocket Lab",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "57ce0a39-d035-4f16-a418-bd6108f78199",
       "rocket": "Falcon 9",
