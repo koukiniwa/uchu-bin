@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-03T08:32:08.259Z",
+  "updated": "2026-11-03T15:53:25.451Z",
   "launches": [
     {
       "id": "9e27a1ed-e81a-4918-b32b-0380cf3a9f8f",
@@ -37,25 +37,6 @@
       "descriptionEn": "Details TBD.",
       "status": "Go",
       "descriptionJa": "詳細は未定。"
-    },
-    {
-      "id": "a2423132-f965-423f-8b03-6891b775dc54",
-      "name": "Long March 12 | SatNet LEO Group TBD?",
-      "rocket": "Long March 12",
-      "mission": "SatNet LEO Group TBD?",
-      "date": "2026-11-05",
-      "month": 11,
-      "time": "21:15",
-      "tentative": false,
-      "provider": "CASC（中国航天科技集団）",
-      "country": "CN",
-      "pad": "Wenchang Space Launch Site, People's Republic of China",
-      "padDetail": "Commercial LC-2",
-      "orbit": "低軌道（LEO）",
-      "timezone": "Asia/Shanghai",
-      "descriptionEn": "A batch of 9 Low Earth Orbit communication satellites for the Chinese state owned SatNet constellation operated by the China Satellite Network Group.\r\n\r\nThe constellation will eventually consists of 13000 satellites.",
-      "status": "Go",
-      "descriptionJa": "中国の国有企業China Satellite Network Groupが運営するSatNet衛星群向けの低軌道通信衛星9機。\n\nこの衛星群は最終的に13000機の衛星で構成される予定である。"
     },
     {
       "id": "e91d1da2-819b-4523-95bf-39ac7daa871d",
@@ -96,11 +77,30 @@
       "descriptionJa": "米国宇宙軍向けの機密任務。ロケット段階の落下区域の位置が過去のStarlink Group 15打ち上げと正確に一致していることに基づくと、SpaceXのStarshield衛星バスに基づいた機密LEO衛星の一群の可能性がある。"
     },
     {
+      "id": "a2423132-f965-423f-8b03-6891b775dc54",
+      "name": "Long March 12 | SatNet LEO Group TBD?",
+      "rocket": "Long March 12",
+      "mission": "SatNet LEO Group TBD?",
+      "date": "2026-11-08",
+      "month": 11,
+      "time": "20:25",
+      "tentative": false,
+      "provider": "CASC（中国航天科技集団）",
+      "country": "CN",
+      "pad": "Wenchang Space Launch Site, People's Republic of China",
+      "padDetail": "Commercial LC-2",
+      "orbit": "低軌道（LEO）",
+      "timezone": "Asia/Shanghai",
+      "descriptionEn": "A batch of 9 Low Earth Orbit communication satellites for the Chinese state owned SatNet constellation operated by the China Satellite Network Group.\r\n\r\nThe constellation will eventually consists of 13000 satellites.",
+      "status": "Go",
+      "descriptionJa": "中国の国有企業China Satellite Network Groupが運営するSatNet衛星群向けの低軌道通信衛星9機。\n\nこの衛星群は最終的に13000機の衛星で構成される予定である。"
+    },
+    {
       "id": "6aa7b90b-e5ed-45d8-a52e-04fbf399d178",
       "name": "Falcon 9 Block 5 | USSF-xxx (\"R-5\")",
       "rocket": "Falcon 9",
       "mission": "USSF-xxx (\"R-5\")",
-      "date": "2026-11-09",
+      "date": "2026-11-10",
       "month": 11,
       "time": null,
       "tentative": true,
