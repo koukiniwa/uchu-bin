@@ -1,18 +1,6 @@
 {
   "launches": [
     {
-      "id": "0448d030-5175-4c1f-bd0b-4f3f87072921",
-      "name": "Falcon 9 Block 5 | Starlink Group 17-53",
-      "status": "Launch Successful",
-      "date": "2026-08-04T20:11:30.638Z"
-    },
-    {
-      "id": "d46cab82-dcf5-4d70-b698-d7bead7f638c",
-      "name": "Smart Dragon 3 | OSE HS-01 & 02",
-      "status": "Launch Successful",
-      "date": "2026-08-05T07:17:15.078Z"
-    },
-    {
       "id": "56a85c82-ea71-449b-828c-b583f6f4a18b",
       "name": "Falcon 9 Block 5 | BlueBird 11-13 (Block 2 #6-8)",
       "status": "Launch in Flight",
@@ -437,6 +425,12 @@
       "name": "Electron | The Sea God Surveys (iQPS Launch 9)",
       "status": "Launch in Flight",
       "date": "2026-11-02T18:44:53.315Z"
+    },
+    {
+      "id": "f3f201cd-0ff9-4ff7-9aaa-1d22c399c75a",
+      "name": "Kinetica 2 | SpaceSail Polar Group #17",
+      "status": "Launch Successful",
+      "date": "2026-11-03T08:31:42.847Z"
     }
   ]
 }
