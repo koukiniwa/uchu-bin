@@ -175,11 +175,11 @@
   "articles": [],
   "upcoming": [
     {
-      "id": "426bd2a5-02dd-4fbd-9f4d-2b8439c3a1ff",
-      "name": "Electron | The Sea God Surveys (iQPS Launch 9)",
+      "id": "db3500ac-965b-4ad8-b417-cb8d8d005586",
+      "name": "Electron | The Mountain God Rises (iQPS Launch 10)",
       "rocket": "Electron",
-      "mission": "The Sea God Surveys (iQPS Launch 9)",
-      "date": "2026-11-02",
+      "mission": "The Mountain God Rises (iQPS Launch 10)",
+      "date": "2026-11-14",
       "month": 11,
       "time": null,
       "tentative": true,
@@ -190,11 +190,11 @@
       "orbit": "低軌道（LEO）",
       "timezone": "Pacific/Auckland",
       "descriptionEn": "Synthetic aperture radar Earth observation satellite for Japanese Earth imaging company iQPS.",
-      "status": "TBC",
+      "status": "TBD",
       "descriptionJa": "日本の地球観測会社iQPSのための合成開口レーダー地球観測衛星。"
     }
   ],
-  "updated": "2026-10-30T20:01:31.857Z",
+  "updated": "2026-11-03T21:12:59.184Z",
   "_launches": [
     {
       "id": "9f5a4cb6-63f9-47e1-9512-b468bae2a8e6",
