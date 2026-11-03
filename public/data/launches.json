@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-03T00:37:24.163Z",
+  "updated": "2026-11-03T07:38:15.932Z",
   "launches": [
     {
       "id": "9e27a1ed-e81a-4918-b32b-0380cf3a9f8f",
@@ -385,7 +385,7 @@
     {
       "id": "f3f201cd-0ff9-4ff7-9aaa-1d22c399c75a",
       "rocket": "Kinetica 2",
-      "mission": "SpaceSail Polar Group TBD?",
+      "mission": "SpaceSail Polar Group #17",
       "date": "2026-11-03",
       "country": "CN",
       "provider": "CAS Space",
@@ -399,16 +399,6 @@
       "date": "2026-11-02",
       "country": "US",
       "provider": "Rocket Lab",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "57ce0a39-d035-4f16-a418-bd6108f78199",
-      "rocket": "Falcon 9",
-      "mission": "Starlink Group 15-18",
-      "date": "2026-10-31",
-      "country": "",
-      "provider": "SpaceX",
       "result": "success",
       "resultLabel": "成功"
     }

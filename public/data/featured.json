@@ -1,19 +1,19 @@
 {
-  "updated": "2026-11-03T00:37:24.509Z",
+  "updated": "2026-11-03T07:38:16.277Z",
   "featured": [
     {
       "id": "f3f201cd-0ff9-4ff7-9aaa-1d22c399c75a",
       "rocket": "Kinetica 2",
-      "mission": "SpaceSail Polar Group TBD?",
-      "description": "Low Earth Orbit communication satellites with Ku, Q and V band payloads for the G60 constellation operated by Shanghai Spacesail Technologies with funding backed by the Shanghai local government.\r\n\r\nInitial constellation will consist of 1296 satellites by 2027 with long term plans to expand it to 12",
+      "mission": "SpaceSail Polar Group #17",
+      "description": "18 Low Earth Orbit communication satellites with Ku, Q and V band payloads for the G60 constellation operated by Shanghai Spacesail Technologies with funding backed by the Shanghai local government.\r\n\r\nInitial constellation will consist of 1296 satellites by 2027 with long term plans to expand it to",
       "highlight": "中国・上海市が資金援助する通信衛星コンステレーション「G60」の構築に向けた打ち上げ。2027年までに1,296機、将来的には1万2,000機規模への拡張を目指す大規模計画であり、SpaceXのStarlinkに対抗する中国版メガコンステレーションとして世界から注目を集めている。Ku・Q・Vバンドという複数の周波数帯を活用する点も技術的な見どころだ。",
       "date": "2026-11-03",
-      "time": "00:10",
+      "time": "00:15",
       "tentative": false,
       "provider": "CAS Space",
       "country": "CN",
       "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
-      "status": "Go",
+      "status": "Success",
       "orbit": "Polar Orbit"
     },
     {
