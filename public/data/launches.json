@@ -1,24 +1,6 @@
 {
-  "updated": "2026-11-03T15:53:25.451Z",
+  "updated": "2026-11-03T21:32:14.178Z",
   "launches": [
-    {
-      "id": "9e27a1ed-e81a-4918-b32b-0380cf3a9f8f",
-      "name": "Mir | Demo Flight",
-      "rocket": "Mir",
-      "mission": "Demo Flight",
-      "date": "2026-11-04",
-      "month": 11,
-      "time": null,
-      "tentative": true,
-      "provider": "Agency for Defense Development",
-      "country": "KR",
-      "pad": "Sea Launch",
-      "padDetail": "ADD Offshore launch platform",
-      "orbit": "低軌道（LEO）",
-      "descriptionEn": "Note: Launch vehicle name is provisional.\r\n\r\nFirst orbital full version launch of the South Korean military small satellite launch vehicle, after 2 sub-orbital tests of individual stages on 30 March and 30 December 2022, and 1 orbital test flight without the 2nd stage on 4 December 2023. Details TBD.",
-      "status": "TBC",
-      "descriptionJa": "注記：打ち上げ車両の名称は暫定的なものです。\n\n韓国軍の小型衛星打ち上げ車両の初の軌道上フル版打ち上げ。2022年3月30日と12月30日の段階別2回の準軌道試験、および2023年12月4日の第2段階なしの1回の軌道試験飛行の後に行われます。詳細は未定です。"
-    },
     {
       "id": "711de6bc-f755-475b-a12f-ec5240da3a11",
       "name": "Long March 2C | Unknown Payload",
@@ -121,8 +103,8 @@
       "mission": "Amazon Leo (LV-01)",
       "date": "2026-11-13",
       "month": 11,
-      "time": null,
-      "tentative": true,
+      "time": "17:54",
+      "tentative": false,
       "provider": "ULA（ユナイテッド・ローンチ・アライアンス）",
       "country": "",
       "pad": "Cape Canaveral SFS, FL, USA",
@@ -130,7 +112,7 @@
       "orbit": "低軌道（LEO）",
       "timezone": "America/New_York",
       "descriptionEn": "Amazon Leo, formerly known as Project Kuiper, is a mega constellation of satellites in Low Earth Orbit that will offer broadband internet access, this constellation will be managed by Kuiper Systems LLC, a subsidiary of Amazon. This constellation is planned to be composed of 3,276 satellites. The satellites are projected to be placed in 98 orbital planes in three orbital layers, one at 590 km, 610 km and 630 km altitude.\r\n\r\n45 satellites will be carried on each Vulcan launch.",
-      "status": "TBD",
+      "status": "Go",
       "descriptionJa": "Amazon Leoは、かつてProject Kuiperとして知られており、低軌道の巨大な衛星コンステレーションで、ブロードバンドインターネットアクセスを提供します。このコンステレーションはAmazonの子会社であるKuiper Systems LLCによって管理されます。このコンステレーションは3,276個の衛星で構成される予定です。衛星は高度590 km、610 km、630 kmの3つの軌道層にある98個の軌道面に配置される予定です。\n\n各Vulcan打ち上げで45個の衛星が運ばれます。"
     },
     {
@@ -303,6 +285,24 @@
       "descriptionEn": "First uncrewed orbital test flight of the Gaganyaan capsule.",
       "status": "TBD",
       "descriptionJa": "Gaganyaan カプセルの初期の無人軌道試験飛行。"
+    },
+    {
+      "id": "9e27a1ed-e81a-4918-b32b-0380cf3a9f8f",
+      "name": "Mir | Demo Flight",
+      "rocket": "Mir",
+      "mission": "Demo Flight",
+      "date": "2026-11-30",
+      "month": 11,
+      "time": null,
+      "tentative": true,
+      "provider": "Agency for Defense Development",
+      "country": "KR",
+      "pad": "Sea Launch",
+      "padDetail": "ADD Offshore launch platform",
+      "orbit": "低軌道（LEO）",
+      "descriptionEn": "Note: Launch vehicle name is provisional.\r\n\r\nFirst orbital full version launch of the South Korean military small satellite launch vehicle, after 2 sub-orbital tests of individual stages on 30 March and 30 December 2022, and 1 orbital test flight without the 2nd stage on 4 December 2023. Details TBD.",
+      "status": "TBD",
+      "descriptionJa": "注記：打ち上げ車両の名称は暫定的なものです。\n\n韓国軍の小型衛星打ち上げ車両の初の軌道上フル版打ち上げ。2022年3月30日と12月30日の段階別2回の準軌道試験、および2023年12月4日の第2段階なしの1回の軌道試験飛行の後に行われます。詳細は未定です。"
     },
     {
       "id": "b5a9bccb-30d7-4af6-8ad1-fabb563be53c",

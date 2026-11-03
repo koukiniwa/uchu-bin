@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-03T15:53:26.016Z",
+  "updated": "2026-11-03T21:32:15.133Z",
   "featured": [
     {
       "id": "f3f201cd-0ff9-4ff7-9aaa-1d22c399c75a",
@@ -15,21 +15,6 @@
       "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
       "status": "Success",
       "orbit": "Polar Orbit"
-    },
-    {
-      "id": "9e27a1ed-e81a-4918-b32b-0380cf3a9f8f",
-      "rocket": "Mir",
-      "mission": "Demo Flight",
-      "description": "Note: Launch vehicle name is provisional.\r\n\r\nFirst orbital full version launch of the South Korean military small satellite launch vehicle, after 2 sub-orbital tests of individual stages on 30 March and 30 December 2022, and 1 orbital test flight without the 2nd stage on 4 December 2023. Details TBD",
-      "highlight": "韓国軍が独自開発を進める小型衛星打ち上げロケット「Mir」の初の軌道投入デモフライト。2022年の各段階の単独試験、2023年の第2段なしでの軌道試験と段階を踏んできた開発の集大成となる一戦で、成否は韓国の軍事宇宙能力の自立化を占う重要な試金石となる。純粋な軍事目的のロケット開発という点でも、地政学的な観点から国際社会が注目している。",
-      "date": "2026-11-04",
-      "time": null,
-      "tentative": true,
-      "provider": "Agency for Defense Development",
-      "country": "",
-      "pad": "Sea Launch",
-      "status": "TBC",
-      "orbit": "Low Earth Orbit"
     },
     {
       "id": "e91d1da2-819b-4523-95bf-39ac7daa871d",
@@ -53,12 +38,12 @@
       "description": "Amazon Leo, formerly known as Project Kuiper, is a mega constellation of satellites in Low Earth Orbit that will offer broadband internet access, this constellation will be managed by Kuiper Systems LLC, a subsidiary of Amazon. This constellation is planned to be composed of 3,276 satellites. The sa",
       "highlight": "AmazonがSpaceXのStarlinkに対抗すべく進める巨大衛星コンステレーション「Project Kuiper」の量産打ち上げがいよいよ本格始動する歴史的な一歩です。総数3,276機という膨大な衛星群を使って世界中にブロードバンドを届ける壮大な構想であり、宇宙インターネット市場での覇権争いがさらに激化します。また、ULAの新型ロケット「Vulcan」が1回で45機もの衛星を投入する大量輸送能力を実証する点でも、ロケット技術の観点から見逃せないミッションです。",
       "date": "2026-11-13",
-      "time": null,
-      "tentative": true,
+      "time": "17:54",
+      "tentative": false,
       "provider": "United Launch Alliance",
       "country": "",
       "pad": "Cape Canaveral SFS, FL, USA",
-      "status": "TBD",
+      "status": "Go",
       "orbit": "Low Earth Orbit"
     },
     {
