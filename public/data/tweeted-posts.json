@@ -1,9 +1,5 @@
 [
   {
-    "slug": "2026-08-06-rocket-lab-electron-iqps-launch-7-grain-goddess",
-    "date": "2026-08-06"
-  },
-  {
     "slug": "2026-08-11-long-march-7a-launch-failure-wenchang-2026",
     "date": "2026-08-11"
   },
@@ -206,5 +202,9 @@
   {
     "slug": "2026-11-03-kinetica-2-spacesail-polar-group-17-g60-constellation",
     "date": "2026-11-03"
+  },
+  {
+    "slug": "2026-11-06-long-march-2c-yaogan-51-07-09-launch-success",
+    "date": "2026-11-06"
   }
 ]
