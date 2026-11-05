@@ -1,18 +1,6 @@
 {
   "launches": [
     {
-      "id": "56a85c82-ea71-449b-828c-b583f6f4a18b",
-      "name": "Falcon 9 Block 5 | BlueBird 11-13 (Block 2 #6-8)",
-      "status": "Launch in Flight",
-      "date": "2026-08-05T10:10:02.805Z"
-    },
-    {
-      "id": "8b7e748c-6ed5-4681-a898-827b4a23b8d7",
-      "name": "Electron | The Grain Goddess Provides (iQPS Launch 7)",
-      "status": "Launch in Flight",
-      "date": "2026-08-06T12:27:48.491Z"
-    },
-    {
       "id": "e4316d4c-9eb8-4a18-9b0d-4307c3970ef6",
       "name": "Falcon 9 Block 5 | Starlink Group 17-38",
       "status": "Launch Successful",
@@ -431,6 +419,12 @@
       "name": "Kinetica 2 | SpaceSail Polar Group #17",
       "status": "Launch Successful",
       "date": "2026-11-03T08:31:42.847Z"
+    },
+    {
+      "id": "711de6bc-f755-475b-a12f-ec5240da3a11",
+      "name": "Long March 2C | Yaogan 51-07 to 09",
+      "status": "Launch Successful",
+      "date": "2026-11-05T21:52:19.975Z"
     }
   ]
 }
