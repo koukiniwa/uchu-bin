@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-05T03:13:57.836Z",
+  "updated": "2026-11-05T11:55:30.321Z",
   "launches": [
     {
       "id": "711de6bc-f755-475b-a12f-ec5240da3a11",
@@ -113,6 +113,25 @@
       "descriptionEn": "Note: Launch vehicle name is provisional.\r\n\r\nFirst orbital full version launch of the South Korean military small satellite launch vehicle, after 2 sub-orbital tests of individual stages on 30 March and 30 December 2022, and 1 orbital test flight without the 2nd stage on 4 December 2023. Details TBD.",
       "status": "Go",
       "descriptionJa": "注記：打ち上げ車両の名称は暫定的なものです。\n\n韓国軍の小型衛星打ち上げ車両の初の軌道上フル版打ち上げ。2022年3月30日と12月30日の段階別2回の準軌道試験、および2023年12月4日の第2段階なしの1回の軌道試験飛行の後に行われます。詳細は未定です。"
+    },
+    {
+      "id": "d66590ab-b273-47ff-b85a-608b62851b4b",
+      "name": "Long March 2D | Unknown Payload",
+      "rocket": "Long March 2D",
+      "mission": "Unknown Payload",
+      "date": "2026-11-11",
+      "month": 11,
+      "time": "11:40",
+      "tentative": false,
+      "provider": "CASC（中国航天科技集団）",
+      "country": "CN",
+      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
+      "padDetail": "Launch Area 94 (SLS-2 / 603)",
+      "orbit": "Unknown",
+      "timezone": "Asia/Shanghai",
+      "descriptionEn": "Details TBD.",
+      "status": "Go",
+      "descriptionJa": "詳細は未定。"
     },
     {
       "id": "76617033-4dc0-4448-b50c-e5b0d5a18539",
@@ -360,25 +379,6 @@
       "descriptionEn": "TDS-01 (Technology Demonstration Satellite-01) is an Indian geostationary orbit technology demonstration satellite carrying payloads for the Indian Space Research Organisation (ISRO)’s Institute of Plasma Research, Gandhinagar and the CSIR-CEERI, Pilani. \r\n\r\nPayloads to be tested included an internally developed 300 mN electric powered thrusters, atomic clocks, travelling wave tube amplifiers (TWTA) & a quantum communication suite (QuTDS).",
       "status": "TBD",
       "descriptionJa": "TDS-01（技術実証衛星-01）はインドの静止軌道技術実証衛星であり、インド宇宙研究機関（ISRO）のPlasma Research Institute（ガンディナガル）とCSIR-CEERI（ピラニ）のペイロードを搭載している。\n\nテストされるペイロードには、内部開発の300 mN電力推進スラスタ、原子時計、進行波管増幅器（TWTA）およびQuantum Communication Suite（QuTDS）が含まれている。"
-    },
-    {
-      "id": "0f867f0c-5422-4d44-93b8-d7faaae7019b",
-      "name": "Starship | Flight 15",
-      "rocket": "Starship",
-      "mission": "Flight 15",
-      "date": "2026-11-30",
-      "month": 11,
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "SpaceX Starbase, TX, USA",
-      "padDetail": "スターベース（テキサス州）",
-      "orbit": "低軌道（LEO）",
-      "timezone": "America/Chicago",
-      "descriptionEn": "15th test flight of the two-stage Starship launch vehicle and 4th flight of Starship V3.",
-      "status": "TBD",
-      "descriptionJa": "Starship打ち上げ機の2段式ロケットの15回目の試験飛行、およびStarship V3の4回目の飛行。"
     }
   ],
   "recent": [
