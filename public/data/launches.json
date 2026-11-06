@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-06T07:42:30.037Z",
+  "updated": "2026-11-06T15:43:11.325Z",
   "launches": [
     {
       "id": "e91d1da2-819b-4523-95bf-39ac7daa871d",
@@ -27,7 +27,7 @@
       "mission": "USSF-432",
       "date": "2026-11-07",
       "month": 11,
-      "time": "00:46",
+      "time": "00:48",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
@@ -82,9 +82,9 @@
       "name": "Mir | Demo Flight",
       "rocket": "Mir",
       "mission": "Demo Flight",
-      "date": "2026-11-10",
+      "date": "2026-11-11",
       "month": 11,
-      "time": "06:00",
+      "time": "05:00",
       "tentative": false,
       "provider": "Agency for Defense Development",
       "country": "KR",
