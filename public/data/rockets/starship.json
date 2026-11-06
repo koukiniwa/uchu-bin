@@ -139,7 +139,7 @@
       "name": "Starship | Flight 15",
       "rocket": "Starship",
       "mission": "Flight 15",
-      "date": "2026-11-30",
+      "date": "2026-11-13",
       "month": 11,
       "time": null,
       "tentative": true,
@@ -151,8 +151,8 @@
       "timezone": "America/Chicago",
       "descriptionEn": "15th test flight of the two-stage Starship launch vehicle and 4th flight of Starship V3.",
       "status": "TBD",
-      "descriptionJa": "Starship打ち上げ機の2段式ロケットの15回目の試験飛行、およびStarship V3の4回目の飛行。"
+      "descriptionJa": "2段式Starship打ち上げ機体の15番目のテスト飛行およびStarship V3の4番目の飛行。"
     }
   ],
-  "updated": "2026-11-03T21:11:53.559Z"
+  "updated": "2026-11-06T21:00:30.345Z"
 }
