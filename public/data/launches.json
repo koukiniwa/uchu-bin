@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-06T00:48:48.519Z",
+  "updated": "2026-11-06T07:42:30.037Z",
   "launches": [
     {
       "id": "e91d1da2-819b-4523-95bf-39ac7daa871d",
@@ -178,8 +178,8 @@
       "mission": "The Mountain God Rises (iQPS Launch 10)",
       "date": "2026-11-14",
       "month": 11,
-      "time": null,
-      "tentative": true,
+      "time": "05:30",
+      "tentative": false,
       "provider": "Rocket Lab",
       "country": "NZ",
       "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
@@ -187,7 +187,7 @@
       "orbit": "低軌道（LEO）",
       "timezone": "Pacific/Auckland",
       "descriptionEn": "Synthetic aperture radar Earth observation satellite for Japanese Earth imaging company iQPS.",
-      "status": "TBD",
+      "status": "Go",
       "descriptionJa": "日本の地球観測会社iQPSのための合成開口レーダー地球観測衛星。"
     },
     {
