@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-05T21:52:44.288Z",
+  "updated": "2026-11-06T00:48:48.519Z",
   "launches": [
     {
       "id": "e91d1da2-819b-4523-95bf-39ac7daa871d",
@@ -389,16 +389,6 @@
       "date": "2026-11-05",
       "country": "CN",
       "provider": "China Aerospace Science and Technology Corporation",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "f3f201cd-0ff9-4ff7-9aaa-1d22c399c75a",
-      "rocket": "Kinetica 2",
-      "mission": "SpaceSail Polar Group #17",
-      "date": "2026-11-03",
-      "country": "CN",
-      "provider": "CAS Space",
       "result": "success",
       "resultLabel": "成功"
     }
