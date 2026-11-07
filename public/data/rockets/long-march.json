@@ -29,25 +29,6 @@
   "articles": [],
   "upcoming": [
     {
-      "id": "711de6bc-f755-475b-a12f-ec5240da3a11",
-      "name": "Long March 2C | Unknown Payload",
-      "rocket": "Long March 2C",
-      "mission": "Unknown Payload",
-      "date": "2026-11-05",
-      "month": 11,
-      "time": "16:00",
-      "tentative": false,
-      "provider": "CASC（中国航天科技集団）",
-      "country": "CN",
-      "pad": "Xichang Satellite Launch Center, People's Republic of China",
-      "padDetail": "Launch Complex 3 (LC-3/LA-1)",
-      "orbit": "Unknown",
-      "timezone": "Asia/Shanghai",
-      "descriptionEn": "Details TBD.",
-      "status": "Go",
-      "descriptionJa": "詳細は未定。"
-    },
-    {
       "id": "a2423132-f965-423f-8b03-6891b775dc54",
       "name": "Long March 12 | SatNet LEO Group TBD?",
       "rocket": "Long March 12",
@@ -65,6 +46,25 @@
       "descriptionEn": "A batch of 9 Low Earth Orbit communication satellites for the Chinese state owned SatNet constellation operated by the China Satellite Network Group.\r\n\r\nThe constellation will eventually consists of 13000 satellites.",
       "status": "Go",
       "descriptionJa": "中国の国有企業China Satellite Network Groupが運営するSatNet衛星群向けの低軌道通信衛星9機。\n\nこの衛星群は最終的に13000機の衛星で構成される予定である。"
+    },
+    {
+      "id": "d66590ab-b273-47ff-b85a-608b62851b4b",
+      "name": "Long March 2D | Unknown Payload",
+      "rocket": "Long March 2D",
+      "mission": "Unknown Payload",
+      "date": "2026-11-11",
+      "month": 11,
+      "time": "11:40",
+      "tentative": false,
+      "provider": "CASC（中国航天科技集団）",
+      "country": "CN",
+      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
+      "padDetail": "Launch Area 94 (SLS-2 / 603)",
+      "orbit": "Unknown",
+      "timezone": "Asia/Shanghai",
+      "descriptionEn": "Details TBD.",
+      "status": "Go",
+      "descriptionJa": "詳細は未定。"
     },
     {
       "id": "a2975167-7c6f-4403-99e1-b40df17c8140",
@@ -86,5 +86,5 @@
       "descriptionJa": "中国の国有企業China Satellite Network Groupが運営するSatNet衛星群向けの低軌道通信衛星9機。\n\nこの衛星群は最終的に13000機の衛星で構成される予定である。"
     }
   ],
-  "updated": "2026-11-04T21:25:12.511Z"
+  "updated": "2026-11-07T19:32:43.919Z"
 }
