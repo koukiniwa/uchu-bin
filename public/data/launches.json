@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-07T02:17:01.985Z",
+  "updated": "2026-11-07T08:25:28.710Z",
   "launches": [
     {
       "id": "a2423132-f965-423f-8b03-6891b775dc54",
@@ -358,7 +358,8 @@
       "orbit": "太陽同期軌道（SSO）",
       "timezone": "America/Cayenne",
       "descriptionEn": "Second of EUMETSAT's second generation of Metop weather satellites.",
-      "status": "TBD"
+      "status": "TBD",
+      "descriptionJa": "EUMETSAT の第2世代 Metop 気象衛星の2番目。"
     },
     {
       "id": "8bf5f61e-a7e1-41e6-aede-7b87e4beebab",
@@ -376,7 +377,8 @@
       "orbit": "低軌道（LEO）",
       "timezone": "America/New_York",
       "descriptionEn": "CHORUS is MDA's next generation Earth observation constellation, consisting of 2 radar satellites (C-band SAR and X-band SAR), in a 53.5 degree 600 km altitude LEO, with the X-band trailing the C-band by 60 minutes. A collaborative multi-sensor constellation, CHORUS will bring together diverse and unique imagery and data sources and provide a new level of near real-time insight and innovative Earth observation services. Operating in a unique mid-inclination orbit, CHORUS will be able to image day or night, regardless of weather conditions, with daily access of up to 95% of the coverage area. From an industry-leading 700km-wide imaging swath down to sub-metre high resolution, CHORUS will provide the most extensive and unrivalled Earth observation radar imaging capacity available on the market in a single mission.",
-      "status": "TBD"
+      "status": "TBD",
+      "descriptionJa": "CHORUSはMDAの次世代地球観測コンステレーションであり、C帯SARとX帯SARの2つのレーダー衛星で構成されています。これらは53.5度の傾斜角、高度600kmの低軌道（LEO）に配置されており、X帯衛星はC帯衛星より60分後ろを追従しています。複合マルチセンサーコンステレーションであるCHORUSは、多様でユニークな画像およびデータソースをもたらし、新しいレベルのほぼリアルタイムの洞察と革新的な地球観測サービスを提供します。ユニークな中間傾斜軌道で運用されるCHORUSは、昼夜を問わず、気象条件に関係なく画像化でき、観測エリアの最大95%への毎日のアクセスが可能です。業界トップクラスの700km幅の撮像スワスから1メートル以下の高解像度まで、CHORUSは単一のミッションで市場で利用可能な最も広範で比類のない地球観測レーダー撮像能力を提供します。"
     }
   ],
   "recent": [
