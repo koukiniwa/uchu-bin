@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-07T09:07:55.647Z",
+  "updated": "2026-11-07T15:28:27.123Z",
   "launches": [
     {
       "id": "a2423132-f965-423f-8b03-6891b775dc54",
@@ -382,6 +382,16 @@
     }
   ],
   "recent": [
+    {
+      "id": "c476fea7-7814-4adb-91d1-98918bc2cc57",
+      "rocket": "Soyuz 2",
+      "mission": "Glonass-K1? (Kosmos 2621?)",
+      "date": "2026-11-07",
+      "country": "RU",
+      "provider": "Russian Space Forces",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "54d471e8-695c-4fa7-a3cf-dbd8b389e8ae",
       "rocket": "Falcon 9",
