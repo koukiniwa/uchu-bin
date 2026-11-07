@@ -1,20 +1,20 @@
 {
-  "updated": "2026-11-06T21:19:09.337Z",
+  "updated": "2026-11-07T01:40:47.327Z",
   "featured": [
     {
       "id": "e91d1da2-819b-4523-95bf-39ac7daa871d",
       "rocket": "Ceres-2",
-      "mission": "Unknown Payload",
-      "description": "Details TBD.",
+      "mission": "4 satellites",
+      "description": "Share-ride of 4 commercial Earth observation and technology demonstration satellites to SSO, details TBD.",
       "highlight": "中国の民間宇宙企業Galactic Energy（星河動力）が開発するCeres-2（穀神星2号）ロケットによる打ち上げ。詳細は現時点で非公表だが、同社は中国の民間ロケット企業の中でも先駆的な存在であり、その動向は中国商業宇宙産業の成熟度を測るバロメーターとして業界関係者から注目されている。",
       "date": "2026-11-06",
-      "time": "23:35",
+      "time": "23:37",
       "tentative": false,
       "provider": "Galactic Energy",
       "country": "CN",
       "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
-      "status": "Go",
-      "orbit": "Unknown"
+      "status": "Success",
+      "orbit": "Sun-Synchronous Orbit"
     },
     {
       "id": "9e27a1ed-e81a-4918-b32b-0380cf3a9f8f",
