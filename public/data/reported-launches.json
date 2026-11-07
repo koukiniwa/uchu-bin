@@ -431,6 +431,12 @@
       "name": "Falcon 9 Block 5 | USSF-432",
       "status": "Launch Successful",
       "date": "2026-11-07T09:07:28.597Z"
+    },
+    {
+      "id": "c476fea7-7814-4adb-91d1-98918bc2cc57",
+      "name": "Soyuz 2.1b/Fregat | Glonass-K1? (Kosmos 2621?)",
+      "status": "Launch in Flight",
+      "date": "2026-11-07T15:51:47.560Z"
     }
   ]
 }
