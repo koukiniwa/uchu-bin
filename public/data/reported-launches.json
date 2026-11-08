@@ -1,18 +1,6 @@
 {
   "launches": [
     {
-      "id": "cff704ab-8098-4f65-899e-50adaf908e59",
-      "name": "Long March 7A | Unknown Payload",
-      "status": "Launch Failure",
-      "date": "2026-08-10T15:06:20.953Z"
-    },
-    {
-      "id": "b89ab080-66c3-4831-85a9-38d85da71d30",
-      "name": "H3-22 | Michibiki 7 (QZS-7)",
-      "status": "Launch in Flight",
-      "date": "2026-08-10T21:49:08.394Z"
-    },
-    {
       "id": "36ab6924-bb36-416a-b71d-cda9e88004be",
       "name": "Falcon 9 Block 5 | Starlink Group 10-19",
       "status": "Launch Successful",
@@ -437,6 +425,12 @@
       "name": "Soyuz 2.1b/Fregat | Glonass-K1? (Kosmos 2621?)",
       "status": "Launch in Flight",
       "date": "2026-11-07T15:51:47.560Z"
+    },
+    {
+      "id": "a2423132-f965-423f-8b03-6891b775dc54",
+      "name": "Long March 12 | SatNet LEO Group TBD?",
+      "status": "Launch in Flight",
+      "date": "2026-11-08T22:24:21.099Z"
     }
   ]
 }
