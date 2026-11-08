@@ -1,25 +1,6 @@
 {
-  "updated": "2026-11-08T17:41:19.576Z",
+  "updated": "2026-11-08T21:45:20.722Z",
   "launches": [
-    {
-      "id": "a2423132-f965-423f-8b03-6891b775dc54",
-      "name": "Long March 12 | SatNet LEO Group TBD?",
-      "rocket": "Long March 12",
-      "mission": "SatNet LEO Group TBD?",
-      "date": "2026-11-08",
-      "month": 11,
-      "time": "20:25",
-      "tentative": false,
-      "provider": "CASC（中国航天科技集団）",
-      "country": "CN",
-      "pad": "Wenchang Space Launch Site, People's Republic of China",
-      "padDetail": "Commercial LC-2",
-      "orbit": "低軌道（LEO）",
-      "timezone": "Asia/Shanghai",
-      "descriptionEn": "A batch of 9 Low Earth Orbit communication satellites for the Chinese state owned SatNet constellation operated by the China Satellite Network Group.\r\n\r\nThe constellation will eventually consists of 13000 satellites.",
-      "status": "Go",
-      "descriptionJa": "中国の国有企業China Satellite Network Groupが運営するSatNet衛星群向けの低軌道通信衛星9機。\n\nこの衛星群は最終的に13000機の衛星で構成される予定である。"
-    },
     {
       "id": "6aa7b90b-e5ed-45d8-a52e-04fbf399d178",
       "name": "Falcon 9 Block 5 | USSF-627",
@@ -379,9 +360,38 @@
       "descriptionEn": "CHORUS is MDA's next generation Earth observation constellation, consisting of 2 radar satellites (C-band SAR and X-band SAR), in a 53.5 degree 600 km altitude LEO, with the X-band trailing the C-band by 60 minutes. A collaborative multi-sensor constellation, CHORUS will bring together diverse and unique imagery and data sources and provide a new level of near real-time insight and innovative Earth observation services. Operating in a unique mid-inclination orbit, CHORUS will be able to image day or night, regardless of weather conditions, with daily access of up to 95% of the coverage area. From an industry-leading 700km-wide imaging swath down to sub-metre high resolution, CHORUS will provide the most extensive and unrivalled Earth observation radar imaging capacity available on the market in a single mission.",
       "status": "TBD",
       "descriptionJa": "CHORUSはMDAの次世代地球観測コンステレーションであり、C帯SARとX帯SARの2つのレーダー衛星で構成されています。これらは53.5度の傾斜角、高度600kmの低軌道（LEO）に配置されており、X帯衛星はC帯衛星より60分後ろを追従しています。複合マルチセンサーコンステレーションであるCHORUSは、多様でユニークな画像およびデータソースをもたらし、新しいレベルのほぼリアルタイムの洞察と革新的な地球観測サービスを提供します。ユニークな中間傾斜軌道で運用されるCHORUSは、昼夜を問わず、気象条件に関係なく画像化でき、観測エリアの最大95%への毎日のアクセスが可能です。業界トップクラスの700km幅の撮像スワスから1メートル以下の高解像度まで、CHORUSは単一のミッションで市場で利用可能な最も広範で比類のない地球観測レーダー撮像能力を提供します。"
+    },
+    {
+      "id": "0cf92611-82a8-4095-a0b4-dda2e74b1fff",
+      "name": "LVM-3 | GSAT-32 (GSAT-N3)",
+      "rocket": "LVM-3 (GSLV Mk III)",
+      "mission": "GSAT-32 (GSAT-N3)",
+      "date": "2026-12-31",
+      "month": 12,
+      "time": null,
+      "tentative": true,
+      "provider": "ISRO（インド宇宙研究機関）",
+      "country": "IN",
+      "pad": "Satish Dhawan Space Centre, India",
+      "padDetail": "サティッシュ・ダワン宇宙センター 第2射点",
+      "orbit": "静止遷移軌道（GTO）",
+      "timezone": "Asia/Kolkata",
+      "descriptionEn": "GSAT-32 is a geostationary communications satellite for the Indian Space Research Organization (ISRO). The spacecraft is a replacement for GSAT-6A that failed before reaching geostationary orbit after launch in 2018.",
+      "status": "TBD",
+      "descriptionJa": "GSAT-32はインド宇宙研究機関（ISRO）のための静止通信衛星である。この宇宙機は2018年の打ち上げ後、静止軌道に到達する前に失敗したGSAT-6Aの代替機である。"
     }
   ],
   "recent": [
+    {
+      "id": "a2423132-f965-423f-8b03-6891b775dc54",
+      "rocket": "Long March 12",
+      "mission": "SatNet LEO Group TBD?",
+      "date": "2026-11-08",
+      "country": "CN",
+      "provider": "China Aerospace Science and Technology Corporation",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "c476fea7-7814-4adb-91d1-98918bc2cc57",
       "rocket": "Soyuz 2",
