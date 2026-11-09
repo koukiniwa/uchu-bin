@@ -136,9 +136,9 @@
   "upcoming": [
     {
       "id": "0f867f0c-5422-4d44-93b8-d7faaae7019b",
-      "name": "Starship | Flight 15",
+      "name": "Starship | Starlink Group 31-2 (Starship Flight 15)",
       "rocket": "Starship",
-      "mission": "Flight 15",
+      "mission": "Starlink Group 31-2 (Starship Flight 15)",
       "date": "2026-11-13",
       "month": 11,
       "time": null,
@@ -149,10 +149,10 @@
       "padDetail": "スターベース（テキサス州）",
       "orbit": "低軌道（LEO）",
       "timezone": "America/Chicago",
-      "descriptionEn": "15th test flight of the two-stage Starship launch vehicle and 4th flight of Starship V3.",
-      "status": "TBD",
-      "descriptionJa": "2段式Starship打ち上げ機体の15番目のテスト飛行およびStarship V3の4番目の飛行。"
+      "descriptionEn": "15th test flight of the two-stage Starship launch vehicle and 4th flight of Starship V3. Second Starship flight to deploy satellites (a group of Starlink satellites known as Starlink Group 31-2) into stable Low Earth Orbit and first ever to attempt returning the Starship 2nd stage back to the launch site.\r\n\r\nThe ship is expected to fly at an altitude approximately 275 km above Earth and complete approximately 14 orbits around the planet for more than 22 hours, with the ship expected to attempt returning back to Starbase, Texas on its launch pad by pad arms catching.\r\n\r\nThe booster’s primary test objective on Flight 15 will be executing a successful launch, ascent, stage separation, boostback burn, and landing by pad arms catching. This will also be the 1st Starship V3 booster to attempt returning to its launch site.\r\n\r\nStarship will deliver 26 Starlink V3 satellites to orbit for the second time, which aim to greatly expand the network's capacity and user speeds. Each Starlink V3 satellite will add 1 Tbps of capacity to the constellation. 3 of the satellites have been modified with a suite of cameras to scan Starship’s heatshield and transmit imagery down to operators.",
+      "status": "TBC",
+      "descriptionJa": "2段式Starship打ち上げロケットの15回目の試験飛行であり、Starship V3の4回目の飛行である。衛星を安定した低地球軌道に配置するStarshipの2番目の飛行（Starlink Group 31-2として知られるStarlink衛星グループ）であり、Starship2段目を打ち上げサイトに戻す試みを行う初めての飛行である。\n\n宇宙船は地球上空約275km の高度で飛行し、22時間以上かけて地球の周りを約14周回すると予想されており、パッドアームのキャッチにより、Starbase Texasの打ち上げパッドに戻るための試みが期待されている。\n\n飛行15でのブースターの主要なテスト目標は、成功した打ち上げ、上昇、段間分離、ブースターバック燃焼、およびパッドアームキャッチによる着陸を実行することである。これはまた、打ち上げサイトへの復帰を試みる最初のStarship V3ブースターでもある。\n\nStarshipは2度目のStarlink V3衛星26機をを軌道に投入する。これらはネットワークの容量とユーザー速度を大幅に拡張することを目指している。各Starlink V3衛星は、コンステレーションに1Tbpsの容量を追加する。衛星のうち3機は、Starshipの熱シールドをスキャンし、画像をオペレータに送信するカメラスイートで改造されている。"
     }
   ],
-  "updated": "2026-11-06T21:00:30.345Z"
+  "updated": "2026-11-09T23:51:44.871Z"
 }
