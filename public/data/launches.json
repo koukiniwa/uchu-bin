@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-08T22:24:37.090Z",
+  "updated": "2026-11-09T01:28:21.848Z",
   "launches": [
     {
       "id": "6aa7b90b-e5ed-45d8-a52e-04fbf399d178",
@@ -385,7 +385,7 @@
     {
       "id": "a2423132-f965-423f-8b03-6891b775dc54",
       "rocket": "Long March 12",
-      "mission": "SatNet LEO Group TBD?",
+      "mission": "SatNet LEO Group 29",
       "date": "2026-11-08",
       "country": "CN",
       "provider": "China Aerospace Science and Technology Corporation",
