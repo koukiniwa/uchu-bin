@@ -5,6 +5,7 @@ date: '2026-11-10T12:00:00.000+09:00'
 category: 'ロケット'
 image: '/images/library/starship_001.jpg'
 imageCredit: 'Starship / SpaceX'
+missionName: 'Starlink Group 31-2 (Starship Flight 15)'
 ---
 
 ## 軌道ロケット史上初、全段回収に挑むフライト
