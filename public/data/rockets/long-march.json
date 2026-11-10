@@ -29,25 +29,6 @@
   "articles": [],
   "upcoming": [
     {
-      "id": "a2423132-f965-423f-8b03-6891b775dc54",
-      "name": "Long March 12 | SatNet LEO Group TBD?",
-      "rocket": "Long March 12",
-      "mission": "SatNet LEO Group TBD?",
-      "date": "2026-11-08",
-      "month": 11,
-      "time": "20:25",
-      "tentative": false,
-      "provider": "CASC（中国航天科技集団）",
-      "country": "CN",
-      "pad": "Wenchang Space Launch Site, People's Republic of China",
-      "padDetail": "Commercial LC-2",
-      "orbit": "低軌道（LEO）",
-      "timezone": "Asia/Shanghai",
-      "descriptionEn": "A batch of 9 Low Earth Orbit communication satellites for the Chinese state owned SatNet constellation operated by the China Satellite Network Group.\r\n\r\nThe constellation will eventually consists of 13000 satellites.",
-      "status": "Go",
-      "descriptionJa": "中国の国有企業China Satellite Network Groupが運営するSatNet衛星群向けの低軌道通信衛星9機。\n\nこの衛星群は最終的に13000機の衛星で構成される予定である。"
-    },
-    {
       "id": "d66590ab-b273-47ff-b85a-608b62851b4b",
       "name": "Long March 2D | Unknown Payload",
       "rocket": "Long March 2D",
@@ -84,7 +65,26 @@
       "descriptionEn": "A batch of 9 Low Earth Orbit communication satellites for the Chinese state owned SatNet constellation operated by the China Satellite Network Group.\r\n\r\nThe constellation will eventually consists of 13000 satellites.",
       "status": "TBC",
       "descriptionJa": "中国の国有企業China Satellite Network Groupが運営するSatNet衛星群向けの低軌道通信衛星9機。\n\nこの衛星群は最終的に13000機の衛星で構成される予定である。"
+    },
+    {
+      "id": "5ce59e3a-c343-430f-ae4e-e608ba536754",
+      "name": "Long March 12 | SatNet LEO Group TBD?",
+      "rocket": "Long March 12",
+      "mission": "SatNet LEO Group TBD?",
+      "date": "2026-11-24",
+      "month": 11,
+      "time": null,
+      "tentative": true,
+      "provider": "CASC（中国航天科技集団）",
+      "country": "CN",
+      "pad": "Wenchang Space Launch Site, People's Republic of China",
+      "padDetail": "Commercial LC-2",
+      "orbit": "低軌道（LEO）",
+      "timezone": "Asia/Shanghai",
+      "descriptionEn": "A batch of 9 Low Earth Orbit communication satellites for the Chinese state owned SatNet constellation operated by the China Satellite Network Group.\r\n\r\nThe constellation will eventually consists of 13000 satellites.",
+      "status": "TBC",
+      "descriptionJa": "中国の国有企業China Satellite Network Groupが運営するSatNet衛星群向けの低軌道通信衛星9機。\n\nこの衛星群は最終的に13000機の衛星で構成される予定である。"
     }
   ],
-  "updated": "2026-11-07T19:32:43.919Z"
+  "updated": "2026-11-10T21:24:27.366Z"
 }
