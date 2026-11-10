@@ -6,6 +6,7 @@ category: 'ロケット'
 image: '/images/library/starship_001.jpg'
 imageCredit: 'Starship / SpaceX'
 missionName: 'Starlink Group 31-2 (Starship Flight 15)'
+type: 'preview'
 ---
 
 ## 軌道ロケット史上初、全段回収に挑むフライト
