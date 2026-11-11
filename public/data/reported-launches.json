@@ -1,18 +1,6 @@
 {
   "launches": [
     {
-      "id": "36ab6924-bb36-416a-b71d-cda9e88004be",
-      "name": "Falcon 9 Block 5 | Starlink Group 10-19",
-      "status": "Launch Successful",
-      "date": "2026-08-11T19:09:43.684Z"
-    },
-    {
-      "id": "6f94dbe4-1318-4ffb-a53d-351bbdcba733",
-      "name": "Falcon 9 Block 5 | Starlink Group 17-49",
-      "status": "Launch in Flight",
-      "date": "2026-08-12T06:55:00.958Z"
-    },
-    {
       "id": "55b79515-ddbf-4198-8a59-29a12ed21330",
       "name": "Falcon 9 Block 5 | USSF-366",
       "status": "Launch in Flight",
@@ -431,6 +419,12 @@
       "name": "Long March 12 | SatNet LEO Group TBD?",
       "status": "Launch in Flight",
       "date": "2026-11-08T22:24:21.099Z"
+    },
+    {
+      "id": "d66590ab-b273-47ff-b85a-608b62851b4b",
+      "name": "Long March 2D | CAS Pathfinder-1",
+      "status": "Launch Successful",
+      "date": "2026-11-11T14:01:29.615Z"
     }
   ]
 }
