@@ -1,25 +1,6 @@
 {
-  "updated": "2026-11-11T23:20:42.087Z",
+  "updated": "2026-11-12T05:59:35.189Z",
   "launches": [
-    {
-      "id": "6aa7b90b-e5ed-45d8-a52e-04fbf399d178",
-      "name": "Falcon 9 Block 5 | USSF-627",
-      "rocket": "Falcon 9",
-      "mission": "USSF-627",
-      "date": "2026-11-12",
-      "month": 11,
-      "time": "04:36",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "",
-      "pad": "Vandenberg SFB, CA, USA",
-      "padDetail": "ヴァンデンバーグ宇宙軍基地 SLC-4E",
-      "orbit": "低軌道（LEO）",
-      "timezone": "America/Los_Angeles",
-      "descriptionEn": "A classified mission for the United States Space Force. It is possibly a batch of classified LEO satellites based on SpaceX’s Starshield satellite bus, based on locations of rocket stage drop zones being exact fits with previous Starlink Group 15 launches.",
-      "status": "Go",
-      "descriptionJa": "米国宇宙軍向けの機密任務。ロケット段階の落下区域の位置が過去のStarlink Group 15打ち上げと正確に一致していることに基づくと、SpaceXのStarshield衛星バスに基づいた機密LEO衛星の一群の可能性がある。"
-    },
     {
       "id": "e2523821-9760-4cb4-ad1f-7ce2e30419bd",
       "name": "Kuaizhou 11 | Unknown Payload",
@@ -38,24 +19,6 @@
       "descriptionEn": "Details TBD.",
       "status": "Go",
       "descriptionJa": "詳細は未定。"
-    },
-    {
-      "id": "9e27a1ed-e81a-4918-b32b-0380cf3a9f8f",
-      "name": "Mir | Demo Flight",
-      "rocket": "Mir",
-      "mission": "Demo Flight",
-      "date": "2026-11-13",
-      "month": 11,
-      "time": "05:00",
-      "tentative": false,
-      "provider": "Agency for Defense Development",
-      "country": "KR",
-      "pad": "Sea Launch",
-      "padDetail": "ADD Offshore launch platform",
-      "orbit": "低軌道（LEO）",
-      "descriptionEn": "Note: Launch vehicle name is provisional.\r\n\r\nFirst orbital full version launch of the South Korean military small satellite launch vehicle, after 2 sub-orbital tests of individual stages on 30 March and 30 December 2022, and 1 orbital test flight without the 2nd stage on 4 December 2023. Details TBD.",
-      "status": "Go",
-      "descriptionJa": "注記：打ち上げ車両の名称は暫定的なものです。\n\n韓国軍の小型衛星打ち上げ車両の初の軌道上フル版打ち上げ。2022年3月30日と12月30日の段階別2回の準軌道試験、および2023年12月4日の第2段階なしの1回の軌道試験飛行の後に行われます。詳細は未定です。"
     },
     {
       "id": "ef9850ad-1096-425b-9d27-f7bbd186e61a",
@@ -324,6 +287,24 @@
       "descriptionJa": "Gaganyaan カプセルの初期の無人軌道試験飛行。"
     },
     {
+      "id": "9e27a1ed-e81a-4918-b32b-0380cf3a9f8f",
+      "name": "Mir | Demo Flight",
+      "rocket": "Mir",
+      "mission": "Demo Flight",
+      "date": "2026-11-30",
+      "month": 11,
+      "time": null,
+      "tentative": true,
+      "provider": "Agency for Defense Development",
+      "country": "KR",
+      "pad": "Sea Launch",
+      "padDetail": "ADD Offshore launch platform",
+      "orbit": "低軌道（LEO）",
+      "descriptionEn": "Note: Launch vehicle name is provisional.\r\n\r\nFirst orbital full version launch of the South Korean military small satellite launch vehicle, after 2 sub-orbital tests of individual stages on 30 March and 30 December 2022, and 1 orbital test flight without the 2nd stage on 4 December 2023. Details TBD.",
+      "status": "TBD",
+      "descriptionJa": "注記：打ち上げ車両の名称は暫定的なものです。\n\n韓国軍の小型衛星打ち上げ車両の初の軌道上フル版打ち上げ。2022年3月30日と12月30日の段階別2回の準軌道試験、および2023年12月4日の第2段階なしの1回の軌道試験飛行の後に行われます。詳細は未定です。"
+    },
+    {
       "id": "b5a9bccb-30d7-4af6-8ad1-fabb563be53c",
       "name": "PSLV-XL | TDS-01",
       "rocket": "PSLV-XL",
@@ -379,9 +360,38 @@
       "descriptionEn": "CHORUS is MDA's next generation Earth observation constellation, consisting of 2 radar satellites (C-band SAR and X-band SAR), in a 53.5 degree 600 km altitude LEO, with the X-band trailing the C-band by 60 minutes. A collaborative multi-sensor constellation, CHORUS will bring together diverse and unique imagery and data sources and provide a new level of near real-time insight and innovative Earth observation services. Operating in a unique mid-inclination orbit, CHORUS will be able to image day or night, regardless of weather conditions, with daily access of up to 95% of the coverage area. From an industry-leading 700km-wide imaging swath down to sub-metre high resolution, CHORUS will provide the most extensive and unrivalled Earth observation radar imaging capacity available on the market in a single mission.",
       "status": "TBD",
       "descriptionJa": "CHORUSはMDAの次世代地球観測コンステレーションであり、C帯SARとX帯SARの2つのレーダー衛星で構成されています。これらは53.5度の傾斜角、高度600kmの低軌道（LEO）に配置され、X帯衛星はC帯衛星より60分遅れた軌道を周回します。マルチセンサーコンステレーションの協調体制により、CHORUSは多様でユニークな画像とデータソースを統合し、新たなレベルのほぼリアルタイムの洞察と革新的な地球観測サービスを提供します。独特の中程度傾斜軌道での運用により、CHORUSは昼夜を問わず、気象条件に関わらず撮像でき、カバレッジエリアの最大95%への毎日のアクセスが可能です。業界トップレベルの700km幅撮像スワスから1メートル未満の高解像度まで、CHORUSは単一のミッションで市場で入手可能な最も広範で比類のない地球観測レーダー撮像能力を提供します。"
+    },
+    {
+      "id": "0cf92611-82a8-4095-a0b4-dda2e74b1fff",
+      "name": "LVM-3 | GSAT-32 (GSAT-N3)",
+      "rocket": "LVM-3 (GSLV Mk III)",
+      "mission": "GSAT-32 (GSAT-N3)",
+      "date": "2026-12-31",
+      "month": 12,
+      "time": null,
+      "tentative": true,
+      "provider": "ISRO（インド宇宙研究機関）",
+      "country": "IN",
+      "pad": "Satish Dhawan Space Centre, India",
+      "padDetail": "サティッシュ・ダワン宇宙センター 第2射点",
+      "orbit": "静止遷移軌道（GTO）",
+      "timezone": "Asia/Kolkata",
+      "descriptionEn": "GSAT-32 is a geostationary communications satellite for the Indian Space Research Organization (ISRO). The spacecraft is a replacement for GSAT-6A that failed before reaching geostationary orbit after launch in 2018.",
+      "status": "TBD",
+      "descriptionJa": "GSAT-32はIndian Space Research Organization (ISRO)のための静止通信衛星である。このspacecraft（宇宙船）はGSAT-6Aの代替品であり、2018年の打ち上げ後に静止軌道に到達する前に失敗した。"
     }
   ],
   "recent": [
+    {
+      "id": "6aa7b90b-e5ed-45d8-a52e-04fbf399d178",
+      "rocket": "Falcon 9",
+      "mission": "USSF-627",
+      "date": "2026-11-12",
+      "country": "",
+      "provider": "SpaceX",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "d66590ab-b273-47ff-b85a-608b62851b4b",
       "rocket": "Long March 2D",
