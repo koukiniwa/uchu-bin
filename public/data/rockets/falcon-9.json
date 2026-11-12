@@ -205,13 +205,13 @@
   "articles": [],
   "upcoming": [
     {
-      "id": "6aa7b90b-e5ed-45d8-a52e-04fbf399d178",
-      "name": "Falcon 9 Block 5 | USSF-627",
+      "id": "76617033-4dc0-4448-b50c-e5b0d5a18539",
+      "name": "Falcon 9 Block 5 | USSF-317",
       "rocket": "Falcon 9",
-      "mission": "USSF-627",
-      "date": "2026-11-10",
+      "mission": "USSF-317",
+      "date": "2026-11-15",
       "month": 11,
-      "time": "04:59",
+      "time": "03:55",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
@@ -224,23 +224,23 @@
       "descriptionJa": "米国宇宙軍向けの機密任務。ロケット段階の落下区域の位置が過去のStarlink Group 15打ち上げと正確に一致していることに基づくと、SpaceXのStarshield衛星バスに基づいた機密LEO衛星の一群の可能性がある。"
     },
     {
-      "id": "76617033-4dc0-4448-b50c-e5b0d5a18539",
-      "name": "Falcon 9 Block 5 | USSF-317",
+      "id": "460d9db7-eaf6-4cd9-b095-cff433534c09",
+      "name": "Falcon 9 Block 5 | USSF-266",
       "rocket": "Falcon 9",
-      "mission": "USSF-317",
-      "date": "2026-11-13",
+      "mission": "USSF-266",
+      "date": "2026-11-18",
       "month": 11,
-      "time": "04:23",
+      "time": "16:49",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
       "pad": "Vandenberg SFB, CA, USA",
       "padDetail": "ヴァンデンバーグ宇宙軍基地 SLC-4E",
-      "orbit": "低軌道（LEO）",
+      "orbit": "極軌道",
       "timezone": "America/Los_Angeles",
-      "descriptionEn": "A classified mission for the United States Space Force. It is possibly a batch of classified LEO satellites based on SpaceX’s Starshield satellite bus, based on locations of rocket stage drop zones being exact fits with previous Starlink Group 15 launches.",
+      "descriptionEn": "A classified mission for the United States Space Force. It is possibly a batch of classified LEO satellites based on SpaceX’s Starshield satellite bus, based on locations of ascent rocket stage drop zones being fits with previous SDA Transport Layer launches.",
       "status": "Go",
-      "descriptionJa": "米国宇宙軍向けの機密任務。ロケット段階の落下区域の位置が過去のStarlink Group 15打ち上げと正確に一致していることに基づくと、SpaceXのStarshield衛星バスに基づいた機密LEO衛星の一群の可能性がある。"
+      "descriptionJa": "米国宇宙軍向けの機密任務。SpaceXのStarshieldサテライトバスに基づいた機密LEO衛星のバッチである可能性があり、これは上昇ロケット段階の落下区域の位置が以前のSDA Transport Layer打上げと一致していることに基づいている。"
     },
     {
       "id": "d74afbc7-0de5-491c-be05-4e9c31f736ac",
@@ -262,7 +262,7 @@
       "descriptionJa": "これはOrbital ATKの無人補給宇宙船Cygnusの25回目のフライトであり、NASAとの商業補給サービス契約の下でInternational Space Stationへの24回目のフライトである。"
     }
   ],
-  "updated": "2026-11-09T23:49:33.332Z",
+  "updated": "2026-11-12T21:52:54.816Z",
   "_launches": [
     {
       "id": "153ef8ef-b12b-43f4-a4bf-05b225c0cd37",
