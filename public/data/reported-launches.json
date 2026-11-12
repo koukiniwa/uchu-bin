@@ -425,6 +425,12 @@
       "name": "Long March 2D | CAS Pathfinder-1",
       "status": "Launch Successful",
       "date": "2026-11-11T14:01:29.615Z"
+    },
+    {
+      "id": "6aa7b90b-e5ed-45d8-a52e-04fbf399d178",
+      "name": "Falcon 9 Block 5 | USSF-627",
+      "status": "Launch Successful",
+      "date": "2026-11-12T10:09:56.441Z"
     }
   ]
 }
