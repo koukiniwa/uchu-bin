@@ -29,6 +29,25 @@
   "articles": [],
   "upcoming": [
     {
+      "id": "bff2fc91-eddd-4dfc-af26-ac0674cfab4d",
+      "name": "Soyuz 2.1b/Fregat-M | MKA Kinosputnik, KOEN and others",
+      "rocket": "Soyuz 2",
+      "mission": "MKA Kinosputnik, KOEN and others",
+      "date": "2026-11-14",
+      "month": 11,
+      "time": "01:16",
+      "tentative": false,
+      "provider": "Russian Federal Space Agency (ROSCOSMOS)",
+      "country": "RU",
+      "pad": "Vostochny Cosmodrome, Siberia, Russian Federation",
+      "padDetail": "Cosmodrome Site 1S",
+      "orbit": "太陽同期軌道（SSO）",
+      "timezone": "Asia/Yakutsk",
+      "descriptionEn": "Share-ride of multiple satellites, including dual-use optical Earth observation satellites and drone-guiding satellites:\r\n\r\n* MKA Kinosputnik\r\n* KOEN, KA MT-LAB\r\n* NPO Kaisant 6U cubesat with a Germes modem\r\n* NPO Kaisant 16U cubesat with Gonets modems",
+      "status": "Go",
+      "descriptionJa": "複数の衛星の相乗り。双用途光学地球観測衛星とドローン誘導衛星を含む：\n\n* MKA Kinosputnik\n* KOEN、KA MT-LAB\n* Germes モデムを搭載したNPO Kaisant 6U キューブサット\n* Gonets モデムを搭載したNPO Kaisant 16U キューブサット"
+    },
+    {
       "id": "8dd5de11-831b-445f-86f0-bffefe0550d9",
       "name": "Soyuz 2.1b | Progress MS-36 (97P)",
       "rocket": "Soyuz 2",
@@ -48,5 +67,5 @@
       "descriptionJa": "国際宇宙ステーションへの進捗補給ミッション。"
     }
   ],
-  "updated": "2026-11-10T21:23:21.359Z"
+  "updated": "2026-11-13T21:29:38.604Z"
 }

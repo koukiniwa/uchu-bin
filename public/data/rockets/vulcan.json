@@ -33,9 +33,9 @@
       "name": "Vulcan VC6L | Amazon Leo (LV-01)",
       "rocket": "Vulcan VC6L",
       "mission": "Amazon Leo (LV-01)",
-      "date": "2026-11-13",
+      "date": "2026-11-14",
       "month": 11,
-      "time": "17:54",
+      "time": "17:32",
       "tentative": false,
       "provider": "ULA（ユナイテッド・ローンチ・アライアンス）",
       "country": "",
@@ -48,5 +48,5 @@
       "descriptionJa": "Amazon Leoは、かつてProject Kuiperとして知られており、低軌道の巨大な衛星コンステレーションで、ブロードバンドインターネットアクセスを提供します。このコンステレーションはAmazonの子会社であるKuiper Systems LLCによって管理されます。このコンステレーションは3,276個の衛星で構成される予定です。衛星は高度590 km、610 km、630 kmの3つの軌道層にある98個の軌道面に配置される予定です。\n\n各Vulcan打ち上げで45個の衛星が運ばれます。"
     }
   ],
-  "updated": "2026-11-10T21:26:38.854Z"
+  "updated": "2026-11-13T21:32:55.634Z"
 }
