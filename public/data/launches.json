@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-12T22:04:34.224Z",
+  "updated": "2026-11-13T03:10:50.897Z",
   "launches": [
     {
       "id": "ef9850ad-1096-425b-9d27-f7bbd186e61a",
@@ -68,9 +68,9 @@
       "time": "05:30",
       "tentative": false,
       "provider": "Rocket Lab",
-      "country": "NZ",
+      "country": "US",
       "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
-      "padDetail": "Unknown Pad",
+      "padDetail": "Rocket Lab Launch Complex 1A",
       "orbit": "低軌道（LEO）",
       "timezone": "Pacific/Auckland",
       "descriptionEn": "Synthetic aperture radar Earth observation satellite for Japanese Earth imaging company iQPS.",
@@ -82,9 +82,9 @@
       "name": "Falcon 9 Block 5 | USSF-317",
       "rocket": "Falcon 9",
       "mission": "USSF-317",
-      "date": "2026-11-15",
+      "date": "2026-11-18",
       "month": 11,
-      "time": "03:55",
+      "time": "03:14",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
