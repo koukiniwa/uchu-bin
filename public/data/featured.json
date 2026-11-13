@@ -1,21 +1,6 @@
 {
-  "updated": "2026-11-13T11:54:27.230Z",
+  "updated": "2026-11-13T19:17:16.384Z",
   "featured": [
-    {
-      "id": "ef9850ad-1096-425b-9d27-f7bbd186e61a",
-      "rocket": "Vulcan VC6L",
-      "mission": "Amazon Leo (LV-01)",
-      "description": "Amazon Leo, formerly known as Project Kuiper, is a mega constellation of satellites in Low Earth Orbit that will offer broadband internet access, this constellation will be managed by Kuiper Systems LLC, a subsidiary of Amazon. This constellation is planned to be composed of 3,276 satellites. The sa",
-      "highlight": "AmazonがSpaceXのStarlinkに対抗すべく進める巨大衛星コンステレーション「Project Kuiper」の量産打ち上げがいよいよ本格始動する歴史的な一歩です。総数3,276機という膨大な衛星群を使って世界中にブロードバンドを届ける壮大な構想であり、宇宙インターネット市場での覇権争いがさらに激化します。また、ULAの新型ロケット「Vulcan」が1回で45機もの衛星を投入する大量輸送能力を実証する点でも、ロケット技術の観点から見逃せないミッションです。",
-      "date": "2026-11-13",
-      "time": "17:54",
-      "tentative": false,
-      "provider": "United Launch Alliance",
-      "country": "",
-      "pad": "Cape Canaveral SFS, FL, USA",
-      "status": "Go",
-      "orbit": "Low Earth Orbit"
-    },
     {
       "id": "0f867f0c-5422-4d44-93b8-d7faaae7019b",
       "rocket": "Starship",
@@ -29,6 +14,21 @@
       "country": "US",
       "pad": "SpaceX Starbase, TX, USA",
       "status": "TBC",
+      "orbit": "Low Earth Orbit"
+    },
+    {
+      "id": "ef9850ad-1096-425b-9d27-f7bbd186e61a",
+      "rocket": "Vulcan VC6L",
+      "mission": "Amazon Leo (LV-01)",
+      "description": "Amazon Leo, formerly known as Project Kuiper, is a mega constellation of satellites in Low Earth Orbit that will offer broadband internet access, this constellation will be managed by Kuiper Systems LLC, a subsidiary of Amazon. This constellation is planned to be composed of 3,276 satellites. The sa",
+      "highlight": "AmazonがSpaceXのStarlinkに対抗すべく進める巨大衛星コンステレーション「Project Kuiper」の量産打ち上げがいよいよ本格始動する歴史的な一歩です。総数3,276機という膨大な衛星群を使って世界中にブロードバンドを届ける壮大な構想であり、宇宙インターネット市場での覇権争いがさらに激化します。また、ULAの新型ロケット「Vulcan」が1回で45機もの衛星を投入する大量輸送能力を実証する点でも、ロケット技術の観点から見逃せないミッションです。",
+      "date": "2026-11-14",
+      "time": "17:32",
+      "tentative": false,
+      "provider": "United Launch Alliance",
+      "country": "",
+      "pad": "Cape Canaveral SFS, FL, USA",
+      "status": "Go",
       "orbit": "Low Earth Orbit"
     },
     {
