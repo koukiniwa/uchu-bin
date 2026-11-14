@@ -1,24 +1,6 @@
 {
   "launches": [
     {
-      "id": "55b79515-ddbf-4198-8a59-29a12ed21330",
-      "name": "Falcon 9 Block 5 | USSF-366",
-      "status": "Launch in Flight",
-      "date": "2026-08-16T04:09:26.414Z"
-    },
-    {
-      "id": "be8b4b0d-1989-48a5-a96d-e8e4d59ed8b3",
-      "name": "Falcon 9 Block 5 | Globalstar 2-R Mission 1 (x 8)",
-      "status": "Launch Successful",
-      "date": "2026-08-16T05:02:27.087Z"
-    },
-    {
-      "id": "b0e7d1cc-24dd-4da4-bb60-b15b6791d08e",
-      "name": "Long March 12 | SatNet LEO Group 24",
-      "status": "Launch Successful",
-      "date": "2026-08-16T06:50:18.342Z"
-    },
-    {
       "id": "cb6f4df1-c045-423b-904c-e63bf1ee5168",
       "name": "Long March 2C | Unknown Payload",
       "status": "Go for Launch",
@@ -437,6 +419,12 @@
       "name": "Starship | Starlink Group 31-2 (Starship Flight 15)",
       "status": "Launch in Flight",
       "date": "2026-11-14T02:09:10.411Z"
+    },
+    {
+      "id": "db3500ac-965b-4ad8-b417-cb8d8d005586",
+      "name": "Electron | The Mountain God Rises (iQPS Launch 10)",
+      "status": "Launch Successful",
+      "date": "2026-11-14T09:18:19.682Z"
     }
   ]
 }
