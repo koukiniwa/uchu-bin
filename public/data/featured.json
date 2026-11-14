@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-14T00:42:31.548Z",
+  "updated": "2026-11-14T07:24:53.142Z",
   "featured": [
     {
       "id": "0f867f0c-5422-4d44-93b8-d7faaae7019b",
@@ -13,7 +13,7 @@
       "provider": "SpaceX",
       "country": "US",
       "pad": "SpaceX Starbase, TX, USA",
-      "status": "In Flight",
+      "status": "Deployed",
       "orbit": "Low Earth Orbit"
     },
     {
