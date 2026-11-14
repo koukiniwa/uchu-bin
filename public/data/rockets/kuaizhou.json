@@ -33,10 +33,10 @@
       "name": "Kuaizhou 11 | Unknown Payload",
       "rocket": "Kuaizhou 11",
       "mission": "Unknown Payload",
-      "date": "2026-11-12",
+      "date": "2026-11-30",
       "month": 11,
-      "time": "19:50",
-      "tentative": false,
+      "time": null,
+      "tentative": true,
       "provider": "ExPace（航天科工火箭技術）",
       "country": "CN",
       "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
@@ -44,9 +44,9 @@
       "orbit": "Unknown",
       "timezone": "Asia/Shanghai",
       "descriptionEn": "Details TBD.",
-      "status": "Go",
+      "status": "TBD",
       "descriptionJa": "詳細は未定。"
     }
   ],
-  "updated": "2026-11-11T22:09:37.238Z"
+  "updated": "2026-11-14T20:04:27.890Z"
 }
