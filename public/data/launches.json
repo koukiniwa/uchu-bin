@@ -1,25 +1,6 @@
 {
-  "updated": "2026-11-14T00:42:30.708Z",
+  "updated": "2026-11-14T02:09:46.221Z",
   "launches": [
-    {
-      "id": "bff2fc91-eddd-4dfc-af26-ac0674cfab4d",
-      "name": "Soyuz 2.1b/Fregat-M | MKA Kinosputnik, KOEN and others",
-      "rocket": "Soyuz 2",
-      "mission": "MKA Kinosputnik, KOEN and others",
-      "date": "2026-11-14",
-      "month": 11,
-      "time": "01:16",
-      "tentative": false,
-      "provider": "Russian Federal Space Agency (ROSCOSMOS)",
-      "country": "RU",
-      "pad": "Vostochny Cosmodrome, Siberia, Russian Federation",
-      "padDetail": "Cosmodrome Site 1S",
-      "orbit": "太陽同期軌道（SSO）",
-      "timezone": "Asia/Yakutsk",
-      "descriptionEn": "Share-ride of multiple satellites, including dual-use optical Earth observation satellites and drone-guiding satellites:\r\n\r\n* MKA Kinosputnik\r\n* KOEN, KA MT-LAB\r\n* NPO Kaisant 6U cubesat with a Germes modem\r\n* NPO Kaisant 16U cubesat with Gonets modems",
-      "status": "Go",
-      "descriptionJa": "複数の衛星の相乗り。双用途光学地球観測衛星とドローン誘導衛星を含む：\n\n* MKA Kinosputnik\n* KOEN、KA MT-LAB\n* Germes モデムを搭載したNPO Kaisant 6U キューブサット\n* Gonets モデムを搭載したNPO Kaisant 16U キューブサット"
-    },
     {
       "id": "db3500ac-965b-4ad8-b417-cb8d8d005586",
       "name": "Electron | The Mountain God Rises (iQPS Launch 10)",
@@ -379,9 +360,37 @@
       "descriptionEn": "Second of EUMETSAT's second generation of Metop weather satellites.",
       "status": "TBD",
       "descriptionJa": "EUMETSAT の第2世代Metop気象衛星の2番目。"
+    },
+    {
+      "id": "8bf5f61e-a7e1-41e6-aede-7b87e4beebab",
+      "name": "Falcon 9 Block 5 | CHORUS",
+      "rocket": "Falcon 9",
+      "mission": "CHORUS",
+      "date": "2026-12-31",
+      "month": 12,
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "",
+      "pad": "Cape Canaveral SFS, FL, USA",
+      "padDetail": "Unknown Pad",
+      "orbit": "低軌道（LEO）",
+      "timezone": "America/New_York",
+      "descriptionEn": "CHORUS is MDA's next generation Earth observation constellation, consisting of 2 radar satellites (C-band SAR and X-band SAR), in a 53.5 degree 600 km altitude LEO, with the X-band trailing the C-band by 60 minutes. A collaborative multi-sensor constellation, CHORUS will bring together diverse and unique imagery and data sources and provide a new level of near real-time insight and innovative Earth observation services. Operating in a unique mid-inclination orbit, CHORUS will be able to image day or night, regardless of weather conditions, with daily access of up to 95% of the coverage area. From an industry-leading 700km-wide imaging swath down to sub-metre high resolution, CHORUS will provide the most extensive and unrivalled Earth observation radar imaging capacity available on the market in a single mission.",
+      "status": "TBD"
     }
   ],
   "recent": [
+    {
+      "id": "bff2fc91-eddd-4dfc-af26-ac0674cfab4d",
+      "rocket": "Soyuz 2",
+      "mission": "MKA Kinosputnik, KOEN and others",
+      "date": "2026-11-14",
+      "country": "RU",
+      "provider": "Russian Federal Space Agency (ROSCOSMOS)",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "0f867f0c-5422-4d44-93b8-d7faaae7019b",
       "rocket": "Starship",
