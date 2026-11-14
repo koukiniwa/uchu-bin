@@ -1,14 +1,14 @@
 {
-  "updated": "2026-11-14T09:18:44.061Z",
+  "updated": "2026-11-14T14:49:00.470Z",
   "launches": [
     {
       "id": "ef9850ad-1096-425b-9d27-f7bbd186e61a",
       "name": "Vulcan VC6L | Amazon Leo (LV-01)",
       "rocket": "Vulcan VC6L",
       "mission": "Amazon Leo (LV-01)",
-      "date": "2026-11-14",
+      "date": "2026-11-15",
       "month": 11,
-      "time": "17:32",
+      "time": "17:11",
       "tentative": false,
       "provider": "ULA（ユナイテッド・ローンチ・アライアンス）",
       "country": "",
@@ -419,16 +419,6 @@
       "date": "2026-11-12",
       "country": "",
       "provider": "SpaceX",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "d66590ab-b273-47ff-b85a-608b62851b4b",
-      "rocket": "Long March 2D",
-      "mission": "CAS Pathfinder-1",
-      "date": "2026-11-11",
-      "country": "CN",
-      "provider": "China Aerospace Science and Technology Corporation",
       "result": "success",
       "resultLabel": "成功"
     }
