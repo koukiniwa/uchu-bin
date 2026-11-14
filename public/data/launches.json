@@ -1,25 +1,6 @@
 {
-  "updated": "2026-11-13T19:17:15.965Z",
+  "updated": "2026-11-14T00:42:30.708Z",
   "launches": [
-    {
-      "id": "0f867f0c-5422-4d44-93b8-d7faaae7019b",
-      "name": "Starship | Starlink Group 31-2 (Starship Flight 15)",
-      "rocket": "Starship",
-      "mission": "Starlink Group 31-2 (Starship Flight 15)",
-      "date": "2026-11-13",
-      "month": 11,
-      "time": null,
-      "tentative": true,
-      "provider": "SpaceX",
-      "country": "US",
-      "pad": "SpaceX Starbase, TX, USA",
-      "padDetail": "スターベース（テキサス州）",
-      "orbit": "低軌道（LEO）",
-      "timezone": "America/Chicago",
-      "descriptionEn": "15th test flight of the two-stage Starship launch vehicle and 4th flight of Starship V3. Second Starship flight to deploy satellites (a group of Starlink satellites known as Starlink Group 31-2) into stable Low Earth Orbit and first ever to attempt returning the Starship 2nd stage back to the launch site.\r\n\r\nThe ship is expected to fly at an altitude approximately 275 km above Earth and complete approximately 14 orbits around the planet for more than 22 hours, with the ship expected to attempt returning back to Starbase, Texas on its launch pad by pad arms catching.\r\n\r\nThe booster’s primary test objective on Flight 15 will be executing a successful launch, ascent, stage separation, boostback burn, and landing by pad arms catching. This will also be the 1st Starship V3 booster to attempt returning to its launch site.\r\n\r\nStarship will deliver 26 Starlink V3 satellites to orbit for the second time, which aim to greatly expand the network's capacity and user speeds. Each Starlink V3 satellite will add 1 Tbps of capacity to the constellation. 3 of the satellites have been modified with a suite of cameras to scan Starship’s heatshield and transmit imagery down to operators.",
-      "status": "TBC",
-      "descriptionJa": "2段式Starship打ち上げロケットの15回目の試験飛行であり、Starship V3の4回目の飛行である。衛星を安定した低地球軌道に配置するStarshipの2番目の飛行（Starlink Group 31-2として知られるStarlink衛星グループ）であり、Starship2段目を打ち上げサイトに戻す試みを行う初めての飛行である。\n\n宇宙船は地球上空約275km の高度で飛行し、22時間以上かけて地球の周りを約14周回すると予想されており、パッドアームのキャッチにより、Starbase Texasの打ち上げパッドに戻るための試みが期待されている。\n\n飛行15でのブースターの主要なテスト目標は、成功した打ち上げ、上昇、段間分離、ブースターバック燃焼、およびパッドアームキャッチによる着陸を実行することである。これはまた、打ち上げサイトへの復帰を試みる最初のStarship V3ブースターでもある。\n\nStarshipは2度目のStarlink V3衛星26機をを軌道に投入する。これらはネットワークの容量とユーザー速度を大幅に拡張することを目指している。各Starlink V3衛星は、コンステレーションに1Tbpsの容量を追加する。衛星のうち3機は、Starshipの熱シールドをスキャンし、画像をオペレータに送信するカメラスイートで改造されている。"
-    },
     {
       "id": "bff2fc91-eddd-4dfc-af26-ac0674cfab4d",
       "name": "Soyuz 2.1b/Fregat-M | MKA Kinosputnik, KOEN and others",
@@ -379,9 +360,38 @@
       "descriptionEn": "TDS-01 (Technology Demonstration Satellite-01) is an Indian geostationary orbit technology demonstration satellite carrying payloads for the Indian Space Research Organisation (ISRO)’s Institute of Plasma Research, Gandhinagar and the CSIR-CEERI, Pilani. \r\n\r\nPayloads to be tested included an internally developed 300 mN electric powered thrusters, atomic clocks, travelling wave tube amplifiers (TWTA) & a quantum communication suite (QuTDS).",
       "status": "TBD",
       "descriptionJa": "TDS-01（技術実証衛星-01）はインドの静止軌道技術実証衛星であり、インド宇宙研究機関（ISRO）のPlasma Research Institute（ガンディナガル）とCSIR-CEERI（ピラニ）のペイロードを搭載している。\n\nテストされるペイロードには、内部開発の300 mN電力推進スラスタ、原子時計、進行波管増幅器（TWTA）およびQuantum Communication Suite（QuTDS）が含まれている。"
+    },
+    {
+      "id": "22e117bf-041c-49d5-9d09-7b180036e143",
+      "name": "Ariane 62 | Metop-SG B1",
+      "rocket": "Ariane 6",
+      "mission": "Metop-SG B1",
+      "date": "2026-12-31",
+      "month": 12,
+      "time": null,
+      "tentative": true,
+      "provider": "Arianespace（アリアンスペース）",
+      "country": "FR",
+      "pad": "Guiana Space Centre, French Guiana",
+      "padDetail": "クールー宇宙センター ELA-4",
+      "orbit": "太陽同期軌道（SSO）",
+      "timezone": "America/Cayenne",
+      "descriptionEn": "Second of EUMETSAT's second generation of Metop weather satellites.",
+      "status": "TBD",
+      "descriptionJa": "EUMETSAT の第2世代Metop気象衛星の2番目。"
     }
   ],
   "recent": [
+    {
+      "id": "0f867f0c-5422-4d44-93b8-d7faaae7019b",
+      "rocket": "Starship",
+      "mission": "Starlink Group 31-2 (Starship Flight 15)",
+      "date": "2026-11-13",
+      "country": "US",
+      "provider": "SpaceX",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "6aa7b90b-e5ed-45d8-a52e-04fbf399d178",
       "rocket": "Falcon 9",
