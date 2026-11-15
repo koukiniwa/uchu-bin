@@ -1,13 +1,5 @@
 [
   {
-    "slug": "2026-08-16-spacex-falcon9-ussf-366-vandenberg-launch",
-    "date": "2026-08-16"
-  },
-  {
-    "slug": "2026-08-16-falcon-9-globalstar-2r-mission-1-launch-success",
-    "date": "2026-08-16"
-  },
-  {
     "slug": "2026-08-17-long-march-2c-taiyuan-unknown-payload-2026",
     "date": "2026-08-17"
   },
@@ -234,5 +226,9 @@
   {
     "slug": "2026-11-15-soyuz-2-kinosputnik-koen-multi-satellite-launch-2026",
     "date": "2026-11-15"
+  },
+  {
+    "slug": "2026-11-16-vulcan-vc6l-amazon-leo-lv01-launch-failure",
+    "date": "2026-11-16"
   }
 ]
