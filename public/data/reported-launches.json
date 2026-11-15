@@ -1,12 +1,6 @@
 {
   "launches": [
     {
-      "id": "cb6f4df1-c045-423b-904c-e63bf1ee5168",
-      "name": "Long March 2C | Unknown Payload",
-      "status": "Go for Launch",
-      "date": "2026-08-17T05:10:29.357Z"
-    },
-    {
       "id": "ef02e2cf-e617-4b38-a526-951ac9204b0a",
       "name": "Zhuque-3 | Honghu-03",
       "status": "Launch Successful",
@@ -431,6 +425,12 @@
       "name": "Soyuz 2.1b/Fregat-M | MKA Kinosputnik, KOEN and others",
       "status": "Launch Successful",
       "date": "2026-11-14T15:59:30.220Z"
+    },
+    {
+      "id": "ef9850ad-1096-425b-9d27-f7bbd186e61a",
+      "name": "Vulcan VC6L | Amazon Leo (LV-01)",
+      "status": "Launch Failure",
+      "date": "2026-11-15T20:56:46.678Z"
     }
   ]
 }
