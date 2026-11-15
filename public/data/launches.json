@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-14T23:41:16.047Z",
+  "updated": "2026-11-15T05:06:15.467Z",
   "launches": [
     {
       "id": "ef9850ad-1096-425b-9d27-f7bbd186e61a",
@@ -408,16 +408,6 @@
       "mission": "Starlink Group 31-2 (Starship Flight 15)",
       "date": "2026-11-13",
       "country": "US",
-      "provider": "SpaceX",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "6aa7b90b-e5ed-45d8-a52e-04fbf399d178",
-      "rocket": "Falcon 9",
-      "mission": "USSF-627",
-      "date": "2026-11-12",
-      "country": "",
       "provider": "SpaceX",
       "result": "success",
       "resultLabel": "成功"
