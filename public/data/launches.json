@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-16T14:58:04.463Z",
+  "updated": "2026-11-16T23:42:21.179Z",
   "launches": [
     {
       "id": "e0a11eb1-0bda-4872-b36b-140247fd5c60",
@@ -409,16 +409,6 @@
       "date": "2026-11-14",
       "country": "RU",
       "provider": "Russian Federal Space Agency (ROSCOSMOS)",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "0f867f0c-5422-4d44-93b8-d7faaae7019b",
-      "rocket": "Starship",
-      "mission": "Starlink Group 31-2 (Starship Flight 15)",
-      "date": "2026-11-13",
-      "country": "US",
-      "provider": "SpaceX",
       "result": "success",
       "resultLabel": "成功"
     }
