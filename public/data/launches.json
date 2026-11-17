@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-17T06:51:27.694Z",
+  "updated": "2026-11-17T16:44:03.551Z",
   "launches": [
     {
       "id": "e0a11eb1-0bda-4872-b36b-140247fd5c60",
@@ -25,9 +25,9 @@
       "name": "Falcon 9 Block 5 | USSF-317",
       "rocket": "Falcon 9",
       "mission": "USSF-317",
-      "date": "2026-11-19",
+      "date": "2026-11-20",
       "month": 11,
-      "time": "03:00",
+      "time": "02:46",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
