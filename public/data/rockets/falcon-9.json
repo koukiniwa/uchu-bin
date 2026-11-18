@@ -209,9 +209,9 @@
       "name": "Falcon 9 Block 5 | USSF-317",
       "rocket": "Falcon 9",
       "mission": "USSF-317",
-      "date": "2026-11-19",
+      "date": "2026-11-20",
       "month": 11,
-      "time": "03:00",
+      "time": "02:46",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
@@ -262,7 +262,7 @@
       "descriptionJa": "米国宇宙軍向けの機密任務。SpaceXのStarshieldサテライトバスに基づいた機密LEO衛星のバッチである可能性があり、これは上昇ロケット段階の落下区域の位置が以前のSDA Transport Layer打上げと一致していることに基づいている。"
     }
   ],
-  "updated": "2026-11-15T20:27:41.702Z",
+  "updated": "2026-11-18T22:39:45.307Z",
   "_launches": [
     {
       "id": "153ef8ef-b12b-43f4-a4bf-05b225c0cd37",
