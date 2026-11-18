@@ -1,25 +1,6 @@
 {
-  "updated": "2026-11-18T16:13:54.944Z",
+  "updated": "2026-11-18T23:18:09.897Z",
   "launches": [
-    {
-      "id": "e0a11eb1-0bda-4872-b36b-140247fd5c60",
-      "name": "Long March 2D | Unknown Payload",
-      "rocket": "Long March 2D",
-      "mission": "Unknown Payload",
-      "date": "2026-11-18",
-      "month": 11,
-      "time": "22:50",
-      "tentative": false,
-      "provider": "CASC（中国航天科技集団）",
-      "country": "CN",
-      "pad": "Taiyuan Satellite Launch Center, People's Republic of China",
-      "padDetail": "Launch Complex 9",
-      "orbit": "Unknown",
-      "timezone": "Asia/Shanghai",
-      "descriptionEn": "Details TBD.",
-      "status": "Go",
-      "descriptionJa": "詳細は未定。"
-    },
     {
       "id": "76617033-4dc0-4448-b50c-e5b0d5a18539",
       "name": "Falcon 9 Block 5 | USSF-317",
@@ -211,6 +192,25 @@
       "descriptionJa": "Isar Spectrumロケットの3番目の試験飛行。このロケットはR-Space社のAT-Astra/IOD-01を含む様々な衛星を搭載し、ENPULSION、SUNBOOSTER GmbH、Synopsis Planetのための軌道上実証を実行する。"
     },
     {
+      "id": "b0d27def-0a88-44c3-a947-1fd5b8503e2c",
+      "name": "Falcon 9 Block 5 | USSF-380",
+      "rocket": "Falcon 9",
+      "mission": "USSF-380",
+      "date": "2026-11-28",
+      "month": 11,
+      "time": "04:53",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "",
+      "pad": "Vandenberg SFB, CA, USA",
+      "padDetail": "ヴァンデンバーグ宇宙軍基地 SLC-4E",
+      "orbit": "低軌道（LEO）",
+      "timezone": "America/Los_Angeles",
+      "descriptionEn": "A classified mission for the United States Space Force. It is possibly a batch of classified LEO satellites based on SpaceX’s Starshield satellite bus, based on locations of rocket stage drop zones being exact fits with previous Starlink Group 15 launches.",
+      "status": "Go",
+      "descriptionJa": "米国宇宙軍向けの機密任務。ロケット段階の落下区域の位置が過去のStarlink Group 15打ち上げと正確に一致していることに基づくと、SpaceXのStarshield衛星バスに基づいた機密LEO衛星の一群の可能性がある。"
+    },
+    {
       "id": "d74afbc7-0de5-491c-be05-4e9c31f736ac",
       "name": "Falcon 9 Block 5 | Cygnus CRS-2 NG-25",
       "rocket": "Falcon 9",
@@ -383,14 +383,14 @@
   ],
   "recent": [
     {
-      "id": "ef9850ad-1096-425b-9d27-f7bbd186e61a",
-      "rocket": "Vulcan VC6L",
-      "mission": "Amazon Leo (LV-01)",
-      "date": "2026-11-15",
-      "country": "",
-      "provider": "United Launch Alliance",
-      "result": "failure",
-      "resultLabel": "失敗"
+      "id": "e0a11eb1-0bda-4872-b36b-140247fd5c60",
+      "rocket": "Long March 2D",
+      "mission": "Unknown Payload",
+      "date": "2026-11-18",
+      "country": "CN",
+      "provider": "China Aerospace Science and Technology Corporation",
+      "result": "success",
+      "resultLabel": "成功"
     }
   ]
 }
