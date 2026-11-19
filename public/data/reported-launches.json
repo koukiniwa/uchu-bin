@@ -1,24 +1,6 @@
 {
   "launches": [
     {
-      "id": "ef02e2cf-e617-4b38-a526-951ac9204b0a",
-      "name": "Zhuque-3 | Honghu-03",
-      "status": "Launch Successful",
-      "date": "2026-08-19T01:38:07.421Z"
-    },
-    {
-      "id": "f6958a77-37bb-4559-a108-40ba0ff9e34a",
-      "name": "Falcon 9 Block 5 | Starlink Group 17-50",
-      "status": "Launch Successful",
-      "date": "2026-08-19T06:58:36.380Z"
-    },
-    {
-      "id": "57280454-470e-4c5d-8de1-1bbd0ea41b49",
-      "name": "Electron | The Lightning God Defends (iQPS Launch 8)",
-      "status": "Launch in Flight",
-      "date": "2026-08-20T15:39:15.512Z"
-    },
-    {
       "id": "bbdc4d47-1de3-428e-9fe1-bbf45d9b1e04",
       "name": "Falcon 9 Block 5 | Starlink Group 10-39",
       "status": "Launch Successful",
@@ -431,6 +413,12 @@
       "name": "Vulcan VC6L | Amazon Leo (LV-01)",
       "status": "Launch Failure",
       "date": "2026-11-15T20:56:46.678Z"
+    },
+    {
+      "id": "e0a11eb1-0bda-4872-b36b-140247fd5c60",
+      "name": "Long March 2D | Shijian 24",
+      "status": "Launch Successful",
+      "date": "2026-11-19T01:24:25.149Z"
     }
   ]
 }
