@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T06:11:30.411Z",
+  "updated": "2026-11-19T16:21:51.116Z",
   "launches": [
     {
       "id": "76617033-4dc0-4448-b50c-e5b0d5a18539",
@@ -8,7 +8,7 @@
       "mission": "USSF-317",
       "date": "2026-11-20",
       "month": 11,
-      "time": "04:28",
+      "time": "04:32",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
@@ -347,7 +347,7 @@
       "name": "Ariane 62 | Metop-SG B1",
       "rocket": "Ariane 6",
       "mission": "Metop-SG B1",
-      "date": "2026-12-31",
+      "date": "2026-12-17",
       "month": 12,
       "time": null,
       "tentative": true,
