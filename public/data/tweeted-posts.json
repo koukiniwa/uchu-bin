@@ -1,9 +1,5 @@
 [
   {
-    "slug": "2026-08-21-rocket-lab-electron-iqps-launch-8-lightning-god",
-    "date": "2026-08-21"
-  },
-  {
     "slug": "2026-08-24-soyuz-21b-glonass-k1-no19-launch-success",
     "date": "2026-08-24"
   },
@@ -226,5 +222,9 @@
   {
     "slug": "2026-11-19-long-march-2d-shijian-24-launch-success",
     "date": "2026-11-19"
+  },
+  {
+    "slug": "2026-11-21-long-march-8a-satnet-leo-group-30-launch",
+    "date": "2026-11-21"
   }
 ]
