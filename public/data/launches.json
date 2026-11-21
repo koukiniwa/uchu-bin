@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-21T06:37:18.952Z",
+  "updated": "2026-11-21T12:11:10.762Z",
   "launches": [
     {
       "id": "951a341f-236b-42fe-a667-4ab2fcf36eac",
@@ -377,7 +377,8 @@
       "orbit": "太陽同期軌道（SSO）",
       "timezone": "America/Cayenne",
       "descriptionEn": "First dedicated launch for the European Space Agency's IRIDE Earth observation constellation, with six satellites onboard.",
-      "status": "TBD"
+      "status": "TBD",
+      "descriptionJa": "European Space AgencyのIRIDE地球観測衛星群の最初の専用打ち上げで、6つの衛星を搭載している。"
     }
   ],
   "recent": [
