@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-21T19:58:05.095Z",
+  "updated": "2026-11-22T00:12:38.425Z",
   "launches": [
     {
       "id": "951a341f-236b-42fe-a667-4ab2fcf36eac",
@@ -8,7 +8,7 @@
       "mission": "NROL-136",
       "date": "2026-11-22",
       "month": 11,
-      "time": "12:16",
+      "time": "12:23",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
@@ -397,16 +397,6 @@
       "rocket": "Long March 8A",
       "mission": "SatNet LEO Group 30",
       "date": "2026-11-20",
-      "country": "CN",
-      "provider": "China Aerospace Science and Technology Corporation",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "e0a11eb1-0bda-4872-b36b-140247fd5c60",
-      "rocket": "Long March 2D",
-      "mission": "Shijian 24",
-      "date": "2026-11-18",
       "country": "CN",
       "provider": "China Aerospace Science and Technology Corporation",
       "result": "success",
