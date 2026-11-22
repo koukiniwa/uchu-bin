@@ -1,25 +1,6 @@
 {
-  "updated": "2026-11-22T07:48:39.245Z",
+  "updated": "2026-11-22T15:58:24.432Z",
   "launches": [
-    {
-      "id": "951a341f-236b-42fe-a667-4ab2fcf36eac",
-      "name": "Falcon 9 Block 5 | NROL-136",
-      "rocket": "Falcon 9",
-      "mission": "NROL-136",
-      "date": "2026-11-22",
-      "month": 11,
-      "time": "12:23",
-      "tentative": false,
-      "provider": "SpaceX",
-      "country": "",
-      "pad": "Vandenberg SFB, CA, USA",
-      "padDetail": "ヴァンデンバーグ宇宙軍基地 SLC-4E",
-      "orbit": "低軌道（LEO）",
-      "timezone": "America/Los_Angeles",
-      "descriptionEn": "Fifteenth batch of satellites for a reconnaissance satellite constellation built by SpaceX and Northrop Grumman for the National Reconnaissance Office to provide imaging and other reconnaissance capabilities.",
-      "status": "Go",
-      "descriptionJa": "SpaceXとNorthrop Grummanが National Reconnaissance Office のために構築した偵察衛星コンステレーションの15番目のバッチで、画像化およびその他の偵察能力を提供する。"
-    },
     {
       "id": "7bdc412b-c965-4517-a131-f57a01189803",
       "name": "Ariane 64 Block 2 | Amazon Leo (LE-04)",
@@ -114,25 +95,6 @@
       "descriptionEn": "Details TBD.",
       "status": "Go",
       "descriptionJa": "詳細は未定。"
-    },
-    {
-      "id": "dff42a2e-f047-48d7-b260-3888d3a4fe33",
-      "name": "Spectrum | AT-Astra and Others (Spectrum Flight 3)",
-      "rocket": "Spectrum",
-      "mission": "AT-Astra and Others (Spectrum Flight 3)",
-      "date": "2026-11-26",
-      "month": 11,
-      "time": null,
-      "tentative": true,
-      "provider": "Isar Aerospace",
-      "country": "DE",
-      "pad": "Andøya Spaceport",
-      "padDetail": "Orbital Launch Pad",
-      "orbit": "太陽同期軌道（SSO）",
-      "timezone": "Europe/Oslo",
-      "descriptionEn": "Third test flight of the Isar Spectrum launch vehicle. This launch will carry various satellites including R-Space’s AT-Astra/IOD-01, which will perform in-orbit demonstrations for ENPULSION, SUNBOOSTER GmbH, and Synopsis Planet.",
-      "status": "TBC",
-      "descriptionJa": "Isar Spectrumロケットの3番目の試験飛行。このロケットはR-Space社のAT-Astra/IOD-01を含む様々な衛星を搭載し、ENPULSION、SUNBOOSTER GmbH、Synopsis Planetのための軌道上実証を実行する。"
     },
     {
       "id": "2093e4fc-ac8c-4296-a1b5-deececee6a72",
@@ -379,9 +341,57 @@
       "descriptionEn": "First dedicated launch for the European Space Agency's IRIDE Earth observation constellation, with six satellites onboard.",
       "status": "TBD",
       "descriptionJa": "European Space AgencyのIRIDE地球観測衛星群の最初の専用打ち上げで、6つの衛星を搭載している。"
+    },
+    {
+      "id": "548df42c-ae26-4cc9-921a-f0042941911a",
+      "name": "Electron | BlackSky Gen-3 6",
+      "rocket": "Electron",
+      "mission": "BlackSky Gen-3 6",
+      "date": "2026-12-31",
+      "month": 12,
+      "time": null,
+      "tentative": true,
+      "provider": "Rocket Lab",
+      "country": "NZ",
+      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
+      "padDetail": "Unknown Pad",
+      "orbit": "低軌道（LEO）",
+      "timezone": "Pacific/Auckland",
+      "descriptionEn": "BlackSky Gen-3 Earth-imaging satellites",
+      "status": "TBD",
+      "descriptionJa": "BlackSky Gen-3 地球観測衛星"
+    },
+    {
+      "id": "60f4ba6c-4201-4727-94aa-0015a5a0023f",
+      "name": "Spectrum | 1 x Pelican satellite",
+      "rocket": "Spectrum",
+      "mission": "1 x Pelican satellite",
+      "date": "2026-12-31",
+      "month": 12,
+      "time": null,
+      "tentative": true,
+      "provider": "Isar Aerospace",
+      "country": "DE",
+      "pad": "Andøya Spaceport",
+      "padDetail": "Orbital Launch Pad",
+      "orbit": "太陽同期軌道（SSO）",
+      "timezone": "Europe/Oslo",
+      "descriptionEn": "Payload consists of a single Pelican high-resolution imaging satellite for Planet Labs Germany.",
+      "status": "TBD",
+      "descriptionJa": "ペイロードはPlanet Labs Germanyの単一のPelican高解像度撮像衛星で構成されています。"
     }
   ],
   "recent": [
+    {
+      "id": "951a341f-236b-42fe-a667-4ab2fcf36eac",
+      "rocket": "Falcon 9",
+      "mission": "NROL-136",
+      "date": "2026-11-22",
+      "country": "",
+      "provider": "SpaceX",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "76617033-4dc0-4448-b50c-e5b0d5a18539",
       "rocket": "Falcon 9",
