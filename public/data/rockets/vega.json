@@ -27,6 +27,26 @@
   },
   "recentLaunches": [],
   "articles": [],
-  "upcoming": [],
-  "updated": "2026-11-19T22:46:23.919Z"
+  "upcoming": [
+    {
+      "id": "912a8aee-8fc2-47b4-81a5-040fa0e0a36f",
+      "name": "Vega-C | IRIDE 1",
+      "rocket": "Vega-C",
+      "mission": "IRIDE 1",
+      "date": "2026-12-31",
+      "month": 12,
+      "time": null,
+      "tentative": true,
+      "provider": "Avio S.p.A",
+      "country": "FR",
+      "pad": "Guiana Space Centre, French Guiana",
+      "padDetail": "Ariane Launch Area 1 (ELV)",
+      "orbit": "太陽同期軌道（SSO）",
+      "timezone": "America/Cayenne",
+      "descriptionEn": "First dedicated launch for the European Space Agency's IRIDE Earth observation constellation, with six satellites onboard.",
+      "status": "TBD",
+      "descriptionJa": "European Space AgencyのIRIDE地球観測衛星群の最初の専用打ち上げで、6つの衛星を搭載している。"
+    }
+  ],
+  "updated": "2026-11-22T21:11:31.822Z"
 }
