@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-23T23:28:06.039Z",
+  "updated": "2026-11-24T08:41:54.702Z",
   "launches": [
     {
       "id": "8dd5de11-831b-445f-86f0-bffefe0550d9",
@@ -46,7 +46,7 @@
       "mission": "USSF-266",
       "date": "2026-11-24",
       "month": 11,
-      "time": "15:55",
+      "time": "16:08",
       "tentative": false,
       "provider": "SpaceX",
       "country": "",
@@ -387,16 +387,6 @@
       "rocket": "Falcon 9",
       "mission": "NROL-136",
       "date": "2026-11-22",
-      "country": "",
-      "provider": "SpaceX",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "76617033-4dc0-4448-b50c-e5b0d5a18539",
-      "rocket": "Falcon 9",
-      "mission": "USSF-317",
-      "date": "2026-11-21",
       "country": "",
       "provider": "SpaceX",
       "result": "success",
