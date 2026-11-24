@@ -1,13 +1,5 @@
 [
   {
-    "slug": "2026-08-24-soyuz-21b-glonass-k1-no19-launch-success",
-    "date": "2026-08-24"
-  },
-  {
-    "slug": "2026-08-25-long-march-6c-second-flight-7-satellites-taiyuan",
-    "date": "2026-08-25"
-  },
-  {
     "slug": "2026-08-28-ariane-62-mtg-i2-launch-success-2026",
     "date": "2026-08-28"
   },
@@ -234,5 +226,9 @@
   {
     "slug": "2026-11-23-falcon-9-nrol-136-launch-success-2026",
     "date": "2026-11-23"
+  },
+  {
+    "slug": "2026-11-25-falcon-9-ussf-266-ussf-launch-success",
+    "date": "2026-11-25"
   }
 ]
