@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-24T08:41:56.248Z",
+  "updated": "2026-11-24T19:59:51.395Z",
   "featured": [
     {
       "id": "7bdc412b-c965-4517-a131-f57a01189803",
@@ -8,12 +8,12 @@
       "description": "Amazon Leo, formerly known as Project Kuiper, is a mega constellation of satellites in Low Earth Orbit that will offer broadband internet access, this constellation will be managed by Kuiper Systems LLC, a subsidiary of Amazon. This constellation is planned to be composed of 3,276 satellites. The sa",
       "highlight": "AmazonがSpaceXのStarlinkに対抗すべく進める衛星インターネット計画「Project Kuiper（現：Amazon Leo）」の一環で、低軌道に最終的に3,276機もの衛星を展開することを目指している。1回の打ち上げで35〜40機の衛星を軌道に投入するAriane 6の大量輸送能力が、この巨大コンステレーション構築の鍵を握る。世界中に高速ブロードバンドを届けるという壮大な目標に向け、今回の打ち上げがその礎となるかが注目される。",
       "date": "2026-11-24",
-      "time": "10:45",
+      "time": "11:14",
       "tentative": false,
       "provider": "Arianespace",
       "country": "FR",
       "pad": "Guiana Space Centre, French Guiana",
-      "status": "Go",
+      "status": "Success",
       "orbit": "Low Earth Orbit"
     },
     {
@@ -30,6 +30,81 @@
       "pad": "Taiyuan Satellite Launch Center, People's Republic of China",
       "status": "Go",
       "orbit": "Unknown"
+    },
+    {
+      "id": "d3bd7fb2-fac6-49fc-ae52-cee07d2fde67",
+      "rocket": "Falcon Heavy",
+      "mission": "Griffin Mission One",
+      "description": "Demonstration flight of the Astrobotic Griffin lander and its engines, initially contracted for the NASA VIPER (Volatiles Investigating Polar Exploration Rover) mission. The vacated payload spot will now host the FLIP (FLEX Lunar Innovation Platform) lunar rover from Astrolab.",
+      "highlight": "NASAの月探査計画に関わるAstroboticのグリフィン着陸機のデモ飛行で、もともとは月の水氷を調べるVIPERローバーの輸送を担う予定だったミッション。VIPERがキャンセルされたことで搭載ペイロードが変更となり、Astrolabの月面ローバー「FLIP」が代わりに搭載されることになった。民間企業が月着陸技術を実証する重要な一歩として、今後の月面開発を占う注目の飛行だ。",
+      "date": "2027-01-06",
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Kennedy Space Center, FL, USA",
+      "status": "TBD",
+      "orbit": "Lunar Orbit"
+    },
+    {
+      "id": "21561fba-dc41-41b3-9d18-e13339fc3396",
+      "rocket": "H3",
+      "mission": "IGS Optical Diversification 1",
+      "description": "The IGS Optical Diversification 1 is a Japanese optical reconnaissance satellite. The satellite is operated by the Cabinet Satellite Information Center. The satellite serves both Japan's national defense and civil natural disaster monitoring.",
+      "highlight": "日本政府が運用する光学偵察衛星「IGS光学多様化1号」の打ち上げで、国家安全保障と自然災害監視の両面を担う重要な衛星だ。H3ロケットの実用ミッションとしても位置づけられ、日本の宇宙利用の自立性強化という観点からも注目される。安全保障と防災という二つの顔を持つ衛星が、どれだけ実力を発揮するかが見どころだ。",
+      "date": "2027-01-10",
+      "time": "23:00",
+      "tentative": false,
+      "provider": "Mitsubishi Heavy Industries",
+      "country": "JP",
+      "pad": "Tanegashima Space Center, Japan",
+      "status": "Go",
+      "orbit": "Low Earth Orbit"
+    },
+    {
+      "id": "07e945c1-2ec6-4d29-a500-1afbe920440f",
+      "rocket": "Atlas V N22",
+      "mission": "Starliner-1",
+      "description": "Starliner-1 is the first operational flight of a Starliner spacecraft to the International Space Station as part of NASA's Commercial Crew Program. Due to problems with the Starliner spacecraft's RCS attitude control system during the Crew Flight Test mission in 2024, this mission has been re-scoped",
+      "highlight": "ボーイングのスターライナー宇宙船にとって初の「運用フライト」となるはずだったが、2024年の有人テスト飛行で姿勢制御システムに深刻な問題が発覚し、NASAはやむなく無人での飛行に切り替えた。宇宙飛行士を乗せられないまま行われるこの飛行は、スターライナーの信頼回復をかけた正念場であり、商業有人輸送計画におけるボーイングの今後を左右する。改修したシステムが宇宙で本当に機能するかどうかが最大の焦点だ。",
+      "date": "2027-01-14",
+      "time": null,
+      "tentative": true,
+      "provider": "United Launch Alliance",
+      "country": "",
+      "pad": "Cape Canaveral SFS, FL, USA",
+      "status": "TBD",
+      "orbit": "Low Earth Orbit"
+    },
+    {
+      "id": "7149bbf6-bf27-4115-bb19-8c7c7b93fad9",
+      "rocket": "KAIROS",
+      "mission": "JSDF SDA Demonstration satellite",
+      "description": "Demonstration satellite for Space Domain Awareness (SDA) observations of objects in low and high Earth orbits for the Japanese Ministry of Defense.",
+      "highlight": "日本の防衛省が推進する宇宙領域把握（SDA）のためのデモ衛星を、国産小型ロケット「KAIROS」が打ち上げるミッション。低軌道から高軌道まで宇宙空間の物体を監視する能力を実証するもので、宇宙が安全保障の新たな戦場となりつつある現代において、日本の宇宙防衛能力の構築を象徴する打ち上げだ。民間ロケット企業・Space Oneにとっても実績を示す重要な商業ミッションとなる。",
+      "date": "2027-01-22",
+      "time": "06:00",
+      "tentative": false,
+      "provider": "Space One",
+      "country": "JP",
+      "pad": "Spaceport Kii, Japan",
+      "status": "Go",
+      "orbit": "Sun-Synchronous Orbit"
+    },
+    {
+      "id": "d1a3807e-f304-467c-a095-e08b86924347",
+      "rocket": "Firefly Alpha",
+      "mission": "QuickSounder",
+      "description": "QuickSounder is the first satellite mission of the Near Earth Orbit Network (NEON) program of the National Oceanic and Atmospheric Administration (NOAA), which aims to replace the current Joint Polar Satellite System (JPSS) series of polar orbit weather satellites. This pathfinder mission will demon",
+      "highlight": "アメリカの気象衛星網を将来的に刷新するNOAAの「NEON」プログラム第一弾となる小型衛星ミッション。現行の大型極軌道気象衛星JPSSの後継システムを民間小型衛星で代替しようという意欲的な試みで、「小さくても早く、安く打ち上げられるか」を証明する先駆けとなる。搭載されるマイクロ波サウンダー（ATMS）は実績ある観測機器の再利用品であり、コスト削減と実証の両立が問われる注目の飛行だ。",
+      "date": "2027-02-15",
+      "time": null,
+      "tentative": true,
+      "provider": "Firefly Aerospace",
+      "country": "US",
+      "pad": "Vandenberg SFB, CA, USA",
+      "status": "TBD",
+      "orbit": "Sun-Synchronous Orbit"
     }
   ]
 }
