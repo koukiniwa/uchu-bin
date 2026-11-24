@@ -1,24 +1,6 @@
 {
   "launches": [
     {
-      "id": "48c449c2-3c09-4d36-9c2a-d853b3a39289",
-      "name": "Long March 6C | 7 satellites",
-      "status": "Launch Successful",
-      "date": "2026-08-25T05:59:20.588Z"
-    },
-    {
-      "id": "ad501ebd-a357-4305-90c1-c46c6feb2ecf",
-      "name": "Falcon 9 Block 5 | Starlink Group 10-49",
-      "status": "Launch Successful",
-      "date": "2026-08-25T11:56:23.187Z"
-    },
-    {
-      "id": "95653d52-bb77-4860-a815-dd7141778d17",
-      "name": "Falcon 9 Block 5 | Starlink Group 15-22",
-      "status": "Launch Successful",
-      "date": "2026-08-26T11:58:00.842Z"
-    },
-    {
       "id": "a57aed97-b94f-42e1-905e-9421dbd96ac8",
       "name": "Ariane 62 | MTG-I2",
       "status": "Launch Successful",
@@ -419,6 +401,12 @@
       "name": "Falcon 9 Block 5 | NROL-136",
       "status": "Launch Successful",
       "date": "2026-11-22T17:00:55.871Z"
+    },
+    {
+      "id": "460d9db7-eaf6-4cd9-b095-cff433534c09",
+      "name": "Falcon 9 Block 5 | USSF-266",
+      "status": "Launch Successful",
+      "date": "2026-11-24T22:42:15.566Z"
     }
   ]
 }
