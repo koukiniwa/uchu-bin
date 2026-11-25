@@ -29,25 +29,6 @@
   "articles": [],
   "upcoming": [
     {
-      "id": "c9605b67-8a53-4239-a8ae-577fe3b79799",
-      "name": "Long March 2F/G | Shenzhou 24",
-      "rocket": "Long March 2F",
-      "mission": "Shenzhou 24",
-      "date": "2026-11-25",
-      "month": 11,
-      "time": "00:18",
-      "tentative": false,
-      "provider": "CASC（中国航天科技集団）",
-      "country": "CN",
-      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
-      "padDetail": "酒泉衛星発射センター",
-      "orbit": "低軌道（LEO）",
-      "timezone": "Asia/Shanghai",
-      "descriptionEn": "Shenzhou 24 will be the 24th flight of the Shenzhou program.\r\n\r\nThe first astronaut from Pakistan is expected to fly on this on a short duration mission, with another Chinese astronaut to undergo a year long expedition.",
-      "status": "Go",
-      "descriptionJa": "Shenzhou 24はShenzhou計画の24番目のフライトである。\n\nパキスタンからの最初の宇宇宙飛行士がこのミッションで短期間のミッションで飛行することが予想されており、別の中国人宇宙飛行士は1年間の探査に従事することになる。"
-    },
-    {
       "id": "b00f0e9a-48d6-4f26-9cb5-7d19169ff7c4",
       "name": "Long March 2D | Unknown Payload",
       "rocket": "Long March 2D",
@@ -84,7 +65,26 @@
       "descriptionEn": "Details TBD.",
       "status": "Go",
       "descriptionJa": "詳細は未定。"
+    },
+    {
+      "id": "13270554-4bdb-42ae-916f-1bb54492204f",
+      "name": "Long March 6C | Unknown Payload",
+      "rocket": "Long March 6C",
+      "mission": "Unknown Payload",
+      "date": "2026-11-29",
+      "month": 11,
+      "time": "03:50",
+      "tentative": false,
+      "provider": "CASC（中国航天科技集団）",
+      "country": "CN",
+      "pad": "Taiyuan Satellite Launch Center, People's Republic of China",
+      "padDetail": "Launch Complex 9A",
+      "orbit": "Unknown",
+      "timezone": "Asia/Shanghai",
+      "descriptionEn": "Details TBD.",
+      "status": "Go",
+      "descriptionJa": "詳細は未定。"
     }
   ],
-  "updated": "2026-11-22T21:10:26.331Z"
+  "updated": "2026-11-25T23:44:59.910Z"
 }

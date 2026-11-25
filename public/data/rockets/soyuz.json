@@ -27,26 +27,6 @@
   },
   "recentLaunches": [],
   "articles": [],
-  "upcoming": [
-    {
-      "id": "8dd5de11-831b-445f-86f0-bffefe0550d9",
-      "name": "Soyuz 2.1b | Progress MS-36 (97P)",
-      "rocket": "Soyuz 2",
-      "mission": "Progress MS-36 (97P)",
-      "date": "2026-11-24",
-      "month": 11,
-      "time": null,
-      "tentative": true,
-      "provider": "Russian Federal Space Agency (ROSCOSMOS)",
-      "country": "RU",
-      "pad": "Baikonur Cosmodrome, Republic of Kazakhstan",
-      "padDetail": "バイコヌール宇宙基地",
-      "orbit": "低軌道（LEO）",
-      "timezone": "Asia/Qyzylorda",
-      "descriptionEn": "Progress resupply mission to the International Space Station.",
-      "status": "TBC",
-      "descriptionJa": "国際宇宙ステーションへの進捗補給ミッション。"
-    }
-  ],
-  "updated": "2026-11-22T21:09:20.664Z"
+  "upcoming": [],
+  "updated": "2026-11-25T23:43:54.313Z"
 }
