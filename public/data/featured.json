@@ -1,21 +1,6 @@
 {
-  "updated": "2026-11-25T03:30:11.391Z",
+  "updated": "2026-11-25T13:57:06.860Z",
   "featured": [
-    {
-      "id": "7bdc412b-c965-4517-a131-f57a01189803",
-      "rocket": "Ariane 6",
-      "mission": "Amazon Leo (LE-04)",
-      "description": "Amazon Leo, formerly known as Project Kuiper, is a mega constellation of satellites in Low Earth Orbit that will offer broadband internet access, this constellation will be managed by Kuiper Systems LLC, a subsidiary of Amazon. This constellation is planned to be composed of 3,276 satellites. The sa",
-      "highlight": "AmazonがSpaceXのStarlinkに対抗すべく進める衛星インターネット計画「Project Kuiper（現：Amazon Leo）」の一環で、低軌道に最終的に3,276機もの衛星を展開することを目指している。1回の打ち上げで35〜40機の衛星を軌道に投入するAriane 6の大量輸送能力が、この巨大コンステレーション構築の鍵を握る。世界中に高速ブロードバンドを届けるという壮大な目標に向け、今回の打ち上げがその礎となるかが注目される。",
-      "date": "2026-11-24",
-      "time": "11:14",
-      "tentative": false,
-      "provider": "Arianespace",
-      "country": "FR",
-      "pad": "Guiana Space Centre, French Guiana",
-      "status": "Success",
-      "orbit": "Low Earth Orbit"
-    },
     {
       "id": "13270554-4bdb-42ae-916f-1bb54492204f",
       "rocket": "Long March 6C",

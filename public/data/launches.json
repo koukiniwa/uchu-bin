@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-25T05:20:05.093Z",
+  "updated": "2026-11-25T13:57:06.226Z",
   "launches": [
     {
       "id": "b00f0e9a-48d6-4f26-9cb5-7d19169ff7c4",
@@ -214,10 +214,10 @@
       "name": "Ariane 62 | Metop-SG B1",
       "rocket": "Ariane 6",
       "mission": "Metop-SG B1",
-      "date": "2026-12-17",
+      "date": "2026-12-18",
       "month": 12,
-      "time": null,
-      "tentative": true,
+      "time": "00:36",
+      "tentative": false,
       "provider": "Arianespace（アリアンスペース）",
       "country": "FR",
       "pad": "Guiana Space Centre, French Guiana",
@@ -225,7 +225,7 @@
       "orbit": "太陽同期軌道（SSO）",
       "timezone": "America/Cayenne",
       "descriptionEn": "Second of EUMETSAT's second generation of Metop weather satellites.",
-      "status": "TBD",
+      "status": "Go",
       "descriptionJa": "EUMETSAT の第2世代Metop気象衛星の2番目。"
     },
     {
@@ -419,16 +419,6 @@
       "date": "2026-11-24",
       "country": "RU",
       "provider": "Russian Federal Space Agency (ROSCOSMOS)",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "951a341f-236b-42fe-a667-4ab2fcf36eac",
-      "rocket": "Falcon 9",
-      "mission": "NROL-136",
-      "date": "2026-11-22",
-      "country": "",
-      "provider": "SpaceX",
       "result": "success",
       "resultLabel": "成功"
     }
