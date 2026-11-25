@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-25T13:57:06.226Z",
+  "updated": "2026-11-25T22:59:16.555Z",
   "launches": [
     {
       "id": "b00f0e9a-48d6-4f26-9cb5-7d19169ff7c4",
@@ -30,9 +30,9 @@
       "time": "00:05",
       "tentative": false,
       "provider": "Rocket Lab",
-      "country": "NZ",
+      "country": "US",
       "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
-      "padDetail": "Unknown Pad",
+      "padDetail": "Rocket Lab Launch Complex 1B",
       "orbit": "低軌道（LEO）",
       "timezone": "Pacific/Auckland",
       "descriptionEn": "Synthetic aperture radar satellite for Japanese Earth imaging company Synspective.",
@@ -189,6 +189,25 @@
       "descriptionEn": "Sixteenth batch of satellites for a reconnaissance satellite constellation built by SpaceX and Northrop Grumman for the National Reconnaissance Office to provide imaging and other reconnaissance capabilities.",
       "status": "TBC",
       "descriptionJa": "SpaceXとNorthrop Grummanによって構築され、National Reconnaissance Officeのための偵察衛星コンステレーションの16番目のバッチであり、画像化およびその他の偵察能力を提供するためのものである。"
+    },
+    {
+      "id": "8bf5f61e-a7e1-41e6-aede-7b87e4beebab",
+      "name": "Falcon 9 Block 5 | CHORUS",
+      "rocket": "Falcon 9",
+      "mission": "CHORUS",
+      "date": "2026-12-04",
+      "month": 12,
+      "time": "12:55",
+      "tentative": false,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Cape Canaveral SFS, FL, USA",
+      "padDetail": "ケープカナベラル宇宙軍基地 SLC-40",
+      "orbit": "低軌道（LEO）",
+      "timezone": "America/New_York",
+      "descriptionEn": "CHORUS is MDA's next generation Earth observation constellation, consisting of 2 radar satellites (C-band SAR and X-band SAR), in a 53.5 degree 600 km altitude LEO, with the X-band trailing the C-band by 60 minutes. A collaborative multi-sensor constellation, CHORUS will bring together diverse and unique imagery and data sources and provide a new level of near real-time insight and innovative Earth observation services. Operating in a unique mid-inclination orbit, CHORUS will be able to image day or night, regardless of weather conditions, with daily access of up to 95% of the coverage area. From an industry-leading 700km-wide imaging swath down to sub-metre high resolution, CHORUS will provide the most extensive and unrivalled Earth observation radar imaging capacity available on the market in a single mission.\r\n\r\nAlso on board this mission are 2 satellites from ICEYE and PECCY.",
+      "status": "Go",
+      "descriptionJa": "CHORUSはMDAの次世代地球観測衛星群であり、53.5度、高度600 kmの低軌道に配置された2つのレーダー衛星（C帯SARおよびX帯SAR）で構成されており、X帯がC帯より60分後を進行します。多様なセンサーを備いた協調的衛星群として、CHORUSは多様でユニークな画像とデータソースを統合し、新たなレベルのほぼリアルタイムの洞察と革新的な地球観測サービスを提供します。ユニークな中傾斜軌道で運用されるCHORUSは、昼夜を問わず、天候条件に関わらず撮像でき、カバレッジエリアの最大95%への日次アクセスが可能です。業界をリードする700km幅の撮像スワスから準メートル級の高解像度まで、CHORUSは単一のミッションで市場で利用可能な最も広範で比類のない地球観測レーダー撮像能力を提供します。\n\nまた、このミッションにはICEYEおよびPECCYからの2つの衛星も搭載されています。"
     },
     {
       "id": "5ce59e3a-c343-430f-ae4e-e608ba536754",
@@ -360,25 +379,6 @@
       "descriptionEn": "First test launch of i-Space’s Hyperbola-3 rocket.",
       "status": "TBD",
       "descriptionJa": "i-Spaceの極空-3ロケットの最初のテスト打ち上げ。"
-    },
-    {
-      "id": "8d2a11e2-51e3-4841-a616-d41589373025",
-      "name": "Long March 10A | Demo Flight",
-      "rocket": "Long March 10A",
-      "mission": "Demo Flight",
-      "date": "2026-12-31",
-      "month": 12,
-      "time": null,
-      "tentative": true,
-      "provider": "CASC（中国航天科技集団）",
-      "country": "CN",
-      "pad": "Wenchang Space Launch Site, People's Republic of China",
-      "padDetail": "301",
-      "orbit": "Unknown",
-      "timezone": "Asia/Shanghai",
-      "descriptionEn": "First test launch of CASC/CALT’s Long March 10A rocket. Payload is expected to be a prototype of the Low Earth Orbit mission version of the Mengzhou crew spacecraft.",
-      "status": "TBD",
-      "descriptionJa": "CASC/CALTのLong March 10Aロケットの初めてのテスト打ち上げ。ペイロードはMengzhouクルー宇宙船の低軌道ミッション版のプロトタイプであると予想されている。"
     }
   ],
   "recent": [
