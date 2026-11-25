@@ -133,6 +133,26 @@
     }
   ],
   "articles": [],
-  "upcoming": [],
-  "updated": "2026-11-24T02:26:59.357Z"
+  "upcoming": [
+    {
+      "id": "c1bd775a-2fff-45bb-9726-765b69817c19",
+      "name": "Falcon Heavy | USSF-75",
+      "rocket": "Falcon Heavy",
+      "mission": "USSF-75",
+      "date": "2026-12-31",
+      "month": 12,
+      "time": null,
+      "tentative": true,
+      "provider": "SpaceX",
+      "country": "US",
+      "pad": "Kennedy Space Center, FL, USA",
+      "padDetail": "ケネディ宇宙センター LC-39A",
+      "orbit": "静止軌道（GEO）",
+      "timezone": "America/New_York",
+      "descriptionEn": "Classified payload for the United States Space Force",
+      "status": "TBD",
+      "descriptionJa": "米国宇宙軍向けの機密ペイロード"
+    }
+  ],
+  "updated": "2026-11-25T00:00:14.065Z"
 }
