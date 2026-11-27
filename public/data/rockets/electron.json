@@ -175,25 +175,6 @@
   "articles": [],
   "upcoming": [
     {
-      "id": "2093e4fc-ac8c-4296-a1b5-deececee6a72",
-      "name": "Electron | Night Owls Never Sleep (StriX Launch 14)",
-      "rocket": "Electron",
-      "mission": "Night Owls Never Sleep (StriX Launch 14)",
-      "date": "2026-11-27",
-      "month": 11,
-      "time": "00:05",
-      "tentative": false,
-      "provider": "Rocket Lab",
-      "country": "NZ",
-      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
-      "padDetail": "Unknown Pad",
-      "orbit": "低軌道（LEO）",
-      "timezone": "Pacific/Auckland",
-      "descriptionEn": "Synthetic aperture radar satellite for Japanese Earth imaging company Synspective.",
-      "status": "Go",
-      "descriptionJa": "日本の地球観測企業Synspectiveのための合成開口レーダー衛星。"
-    },
-    {
       "id": "548df42c-ae26-4cc9-921a-f0042941911a",
       "name": "Electron | BlackSky Gen-3 6",
       "rocket": "Electron",
@@ -213,7 +194,7 @@
       "descriptionJa": "BlackSky Gen-3 地球観測衛星"
     }
   ],
-  "updated": "2026-11-25T00:02:25.482Z",
+  "updated": "2026-11-27T23:40:01.041Z",
   "_launches": [
     {
       "id": "9f5a4cb6-63f9-47e1-9512-b468bae2a8e6",
