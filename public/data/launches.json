@@ -1,25 +1,6 @@
 {
-  "updated": "2026-11-26T23:31:16.786Z",
+  "updated": "2026-11-27T07:00:14.744Z",
   "launches": [
-    {
-      "id": "2093e4fc-ac8c-4296-a1b5-deececee6a72",
-      "name": "Electron | Night Owls Never Sleep (StriX Launch 14)",
-      "rocket": "Electron",
-      "mission": "Night Owls Never Sleep (StriX Launch 14)",
-      "date": "2026-11-27",
-      "month": 11,
-      "time": "00:05",
-      "tentative": false,
-      "provider": "Rocket Lab",
-      "country": "US",
-      "pad": "Rocket Lab Launch Complex 1, Mahia Peninsula, New Zealand",
-      "padDetail": "Rocket Lab Launch Complex 1B",
-      "orbit": "低軌道（LEO）",
-      "timezone": "Pacific/Auckland",
-      "descriptionEn": "Synthetic aperture radar satellite for Japanese Earth imaging company Synspective.",
-      "status": "Go",
-      "descriptionJa": "日本の地球観測企業Synspectiveのための合成開口レーダー衛星。"
-    },
     {
       "id": "a6421db3-7c8a-4cf7-a659-cec195140f7f",
       "name": "Long March 6A | Unknown Payload",
@@ -97,24 +78,6 @@
       "descriptionJa": "これはOrbital ATKの無人補給宇宙船Cygnusの25回目のフライトであり、NASAとの商業補給サービス契約の下でInternational Space Stationへの24回目のフライトである。"
     },
     {
-      "id": "9e27a1ed-e81a-4918-b32b-0380cf3a9f8f",
-      "name": "Mir | Demo Flight",
-      "rocket": "Mir",
-      "mission": "Demo Flight",
-      "date": "2026-11-30",
-      "month": 11,
-      "time": null,
-      "tentative": true,
-      "provider": "Agency for Defense Development",
-      "country": "KR",
-      "pad": "Sea Launch",
-      "padDetail": "ADD Offshore launch platform",
-      "orbit": "低軌道（LEO）",
-      "descriptionEn": "Note: Launch vehicle name is provisional.\r\n\r\nFirst orbital full version launch of the South Korean military small satellite launch vehicle, after 2 sub-orbital tests of individual stages on 30 March and 30 December 2022, and 1 orbital test flight without the 2nd stage on 4 December 2023. Details TBD.",
-      "status": "TBD",
-      "descriptionJa": "注記：打ち上げ車両の名称は暫定的なものです。\n\n韓国軍の小型衛星打ち上げ車両の初の軌道上フル版打ち上げ。2022年3月30日と12月30日の段階別2回の準軌道試験、および2023年12月4日の第2段階なしの1回の軌道試験飛行の後に行われます。詳細は未定です。"
-    },
-    {
       "id": "8b46d360-6b3b-423f-9036-d5568e485624",
       "name": "Kinetica 1 | Unknown Payload",
       "rocket": "Kinetica 1",
@@ -138,10 +101,10 @@
       "name": "Kuaizhou 11 | Unknown Payload",
       "rocket": "Kuaizhou 11",
       "mission": "Unknown Payload",
-      "date": "2026-12-01",
+      "date": "2026-12-02",
       "month": 12,
-      "time": null,
-      "tentative": true,
+      "time": "11:55",
+      "tentative": false,
       "provider": "ExPace（航天科工火箭技術）",
       "country": "CN",
       "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
@@ -149,7 +112,7 @@
       "orbit": "Unknown",
       "timezone": "Asia/Shanghai",
       "descriptionEn": "Details TBD.",
-      "status": "TBC",
+      "status": "Go",
       "descriptionJa": "詳細は未定。"
     },
     {
@@ -379,9 +342,56 @@
       "descriptionEn": "First test launch of CASC/CALT’s Long March 10A rocket. Payload is expected to be a prototype of the Low Earth Orbit mission version of the Mengzhou crew spacecraft.",
       "status": "TBD",
       "descriptionJa": "CASC/CALTのLong March 10Aロケットの初号機試験打ち上げ。搭載物はMengzhou有人宇宙船の低軌道ミッション版のプロトタイプであると予想されている。"
+    },
+    {
+      "id": "dc570565-4dcf-4ab9-8174-bf88efef477f",
+      "name": "Long March 12A | Flight 2",
+      "rocket": "Long March 12A",
+      "mission": "Flight 2",
+      "date": "2026-12-31",
+      "month": 12,
+      "time": null,
+      "tentative": true,
+      "provider": "CASC（中国航天科技集団）",
+      "country": "CN",
+      "pad": "Jiuquan Satellite Launch Center, People's Republic of China",
+      "padDetail": "酒泉衛星発射センター",
+      "orbit": "低軌道（LEO）",
+      "timezone": "Asia/Shanghai",
+      "descriptionEn": "Second test launch of CASC/SAST’s Long March 12A rocket. Payload identities are TBD.",
+      "status": "TBD",
+      "descriptionJa": "CASC/SASTのLong March 12Aロケットの2番目のテスト打ち上げ。ペイロードのアイデンティティはTBD。"
+    },
+    {
+      "id": "9e27a1ed-e81a-4918-b32b-0380cf3a9f8f",
+      "name": "Mir | Demo Flight",
+      "rocket": "Mir",
+      "mission": "Demo Flight",
+      "date": "2026-12-31",
+      "month": 12,
+      "time": null,
+      "tentative": true,
+      "provider": "Agency for Defense Development",
+      "country": "KR",
+      "pad": "Sea Launch",
+      "padDetail": "ADD Offshore launch platform",
+      "orbit": "低軌道（LEO）",
+      "descriptionEn": "Note: Launch vehicle name is provisional.\r\n\r\nFirst orbital full version launch of the South Korean military small satellite launch vehicle, after 2 sub-orbital tests of individual stages on 30 March and 30 December 2022, and 1 orbital test flight without the 2nd stage on 4 December 2023. Details TBD.",
+      "status": "TBD",
+      "descriptionJa": "注記：打ち上げ車両の名称は暫定的なものです。\n\n韓国軍の小型衛星打ち上げ車両の初の軌道上フル版打ち上げ。2022年3月30日と12月30日の段階別2回の準軌道試験、および2023年12月4日の第2段階なしの1回の軌道試験飛行の後に行われます。詳細は未定です。"
     }
   ],
   "recent": [
+    {
+      "id": "2093e4fc-ac8c-4296-a1b5-deececee6a72",
+      "rocket": "Electron",
+      "mission": "Night Owls Never Sleep (StriX Launch 14)",
+      "date": "2026-11-27",
+      "country": "US",
+      "provider": "Rocket Lab",
+      "result": "success",
+      "resultLabel": "成功"
+    },
     {
       "id": "b00f0e9a-48d6-4f26-9cb5-7d19169ff7c4",
       "rocket": "Long March 2D",
