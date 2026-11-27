@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-27T17:24:31.701Z",
+  "updated": "2026-11-27T20:12:39.130Z",
   "launches": [
     {
       "id": "13270554-4bdb-42ae-916f-1bb54492204f",
@@ -385,7 +385,7 @@
     {
       "id": "a6421db3-7c8a-4cf7-a659-cec195140f7f",
       "rocket": "Long March 6A",
-      "mission": "Unknown Payload",
+      "mission": "Yaogan 50-04",
       "date": "2026-11-27",
       "country": "CN",
       "provider": "China Aerospace Science and Technology Corporation",
