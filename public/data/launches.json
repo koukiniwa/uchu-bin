@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-27T07:00:14.744Z",
+  "updated": "2026-11-27T11:17:14.944Z",
   "launches": [
     {
       "id": "a6421db3-7c8a-4cf7-a659-cec195140f7f",
@@ -419,26 +419,6 @@
       "date": "2026-11-24",
       "country": "",
       "provider": "SpaceX",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "7bdc412b-c965-4517-a131-f57a01189803",
-      "rocket": "Ariane 6",
-      "mission": "Amazon Leo (LE-04)",
-      "date": "2026-11-24",
-      "country": "FR",
-      "provider": "Arianespace",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "8dd5de11-831b-445f-86f0-bffefe0550d9",
-      "rocket": "Soyuz 2",
-      "mission": "Progress MS-36 (97P)",
-      "date": "2026-11-24",
-      "country": "RU",
-      "provider": "Russian Federal Space Agency (ROSCOSMOS)",
       "result": "success",
       "resultLabel": "成功"
     }
