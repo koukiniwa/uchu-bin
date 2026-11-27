@@ -1,9 +1,5 @@
 [
   {
-    "slug": "2026-08-28-ariane-62-mtg-i2-launch-success-2026",
-    "date": "2026-08-28"
-  },
-  {
     "slug": "2026-08-30-falcon-heavy-nancy-grace-roman-space-telescope-launch",
     "date": "2026-08-30"
   },
@@ -237,6 +233,10 @@
   },
   {
     "slug": "2026-11-27-long-march-2d-yaogan-49-group-01-launch-success",
+    "date": "2026-11-27"
+  },
+  {
+    "slug": "2026-11-27-electron-strix-14-synspective-sar-launch-success",
     "date": "2026-11-27"
   }
 ]
