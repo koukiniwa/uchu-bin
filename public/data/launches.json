@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-27T20:12:39.130Z",
+  "updated": "2026-11-28T01:11:37.513Z",
   "launches": [
     {
       "id": "13270554-4bdb-42ae-916f-1bb54492204f",
@@ -407,16 +407,6 @@
       "rocket": "Long March 2D",
       "mission": "Yaogan 49 Group 01",
       "date": "2026-11-26",
-      "country": "CN",
-      "provider": "China Aerospace Science and Technology Corporation",
-      "result": "success",
-      "resultLabel": "成功"
-    },
-    {
-      "id": "c9605b67-8a53-4239-a8ae-577fe3b79799",
-      "rocket": "Long March 2F",
-      "mission": "Shenzhou 24",
-      "date": "2026-11-25",
       "country": "CN",
       "provider": "China Aerospace Science and Technology Corporation",
       "result": "success",
